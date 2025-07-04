@@ -1,0 +1,12 @@
+.dropdown {
+  &.show {
+    .dropdown-menu {
+      display: block;
+    }
+  }
+  //not in our version of bs4. remove when updated.
+  .dropdown-menu.dropdown-menu-right {
+    right: 0;
+    left: auto; // Reset the default from `.dropdown-menu`
+  }
+}

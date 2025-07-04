@@ -1,0 +1,50 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="discussion-item"
+  id="discussion-item-{{ $ctrl.item.id }}"
+  ng-class="{'no-title':!$ctrl.showTitle}"
+>
+  <div
+    class="discussion-item-post"
+    ng-class="$ctrl.item.classes"
+  >
+    <discussion-item-header></discussion-item-header>
+
+    <div
+      class="discussion-item-content-area"
+      ng-if="$ctrl.item.expandBody"
+    >
+      <discussion-item-content></discussion-item-content>
+
+      <discussion-item-footer></discussion-item-footer>
+    </div>
+  </div>
+
+  <div
+    class="discussion-write-reply"
+    ng-if="$ctrl.thread.reply.editing && $ctrl.thread.reply.replyToId === $ctrl.item.id"
+  >
+    <discussion-write-reply
+      reply-to-name="$ctrl.item.user.fullName"
+      state="$ctrl.thread.reply"
+      save-action="$ctrl.replySave"
+      discard-action="$ctrl.replyDiscard"
+    ></discussion-write-reply>
+  </div>
+</div>

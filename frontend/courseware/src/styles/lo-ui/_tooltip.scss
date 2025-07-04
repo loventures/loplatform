@@ -1,0 +1,17 @@
+@each $color, $value in $theme-colors {
+  .tooltip-#{$color} {
+    .tooltip-inner {
+      background-color: theme-color($color);
+    }
+
+    @each $direction in $directions {
+      &.bs-tooltip-#{$direction} .tooltip-arrow:before {
+        border-#{$direction}-color: theme-color($color);
+
+        //@TODO this has been fixed by newer version of BS4, remove after update
+        $orthogonal: direction-orthogonal($direction);
+        margin-#{$orthogonal}: -$tooltip-arrow-width;
+      }
+    }
+  }
+}

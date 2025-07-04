@@ -1,0 +1,132 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="matching-question-play"
+  ng-style="{
+    height: $ctrl.cumulativeHeight + 'px'
+  }"
+>
+  <ul
+    class="matching-list list-unstyled"
+    ng-class="{
+      active: $ctrl.activeColumn === 'terms'
+    }"
+  >
+    <li
+      class="match-term"
+      ng-repeat="term in $ctrl.terms track by term.id"
+      ng-style="{
+        top: $ctrl.tops[term.rowIndex] + 'px',
+        height: $ctrl.heights[term.rowIndex] + 'px'
+      }"
+    >
+      <div
+        class="match-item"
+        ng-class="{
+          'active': $ctrl.activeTerm === term,
+          'matched': !!term.matchedDef
+        }"
+        id="match-term-{{term.id}}"
+        ng-click="$ctrl.setActiveTerm(term)"
+        ng-init="$ctrl.termRendered(term)"
+        translate
+        translate-attr-aria-label="MATCHING_QUESTION_TERM_LABEL"
+        translate-values="{
+          text: term.text,
+          isMatched: !!term.matchedDef,
+          matchedToText: term.matchedDef? term.matchedDef.text : ''
+        }"
+      >
+        <div
+          class="match-item-content btn"
+          ng-bind="term.text"
+        ></div>
+      </div>
+      <!-- extra layer with .match-item-content so styling
+        for margi/padding is directly reflected by the height of .match-item-->
+    </li>
+  </ul>
+
+  <div
+    class="matching-status-list"
+    role="presentation"
+  >
+    <div
+      class="matching-arrow arrow-info"
+      ng-if="$ctrl.highlightedRow !== -1"
+      ng-class="{
+        'arrow-left': $ctrl.activeColumn === 'terms',
+        'arrow-right': $ctrl.activeColumn === 'defs'
+      }"
+      ng-style="{
+        top: 'calc(' + $ctrl.tops[$ctrl.highlightedRow] + 'px + 0.75em)'
+      }"
+    ></div>
+    <ul class="matching-line-list list-unstyled">
+      <li
+        class="matching-line"
+        ng-repeat="row in $ctrl.rows track by row.rowIndex"
+        ng-if="row.isMatched"
+        ng-style="{
+          top: $ctrl.tops[row.rowIndex] + 'px'
+        }"
+      ></li>
+    </ul>
+  </div>
+
+  <ul
+    class="matching-list list-unstyled"
+    ng-class="{
+      active: $ctrl.activeColumn === 'defs'
+    }"
+  >
+    <li
+      class="match-definition"
+      ng-repeat="def in $ctrl.defs track by def.id"
+      ng-style="{
+        top: $ctrl.tops[def.rowIndex] + 'px',
+        height: $ctrl.heights[def.rowIndex] + 'px'
+      }"
+    >
+      <div
+        class="match-item"
+        ng-class="{
+          'active': $ctrl.activeDef === def,
+          'matched': !!def.matchedTerm
+        }"
+        id="match-def-{{def.id}}"
+        ng-click="$ctrl.setActiveDef(def)"
+        ng-init="$ctrl.defRendered(def)"
+        translate
+        translate-attr-aria-label="MATCHING_QUESTION_DEF_LABEL"
+        translate-values="{
+          text: def.text,
+          isMatched: !!def.matchedTerm,
+          matchedToText: def.matchedTerm? def.matchedTerm.text : ''
+        }"
+      >
+        <div
+          class="match-item-content btn"
+          ng-bind="def.text"
+        ></div>
+      </div>
+      <!-- extra layer with .match-item-content so styling
+        for margi/padding is directly reflected by the height of .match-item-->
+    </li>
+  </ul>
+</div>

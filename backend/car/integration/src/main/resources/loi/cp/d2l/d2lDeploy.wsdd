@@ -1,0 +1,20 @@
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+  xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <transport name="http" pivot="java:org.apache.axis.transport.http.HTTPSender"/>
+  <transport name="local" pivot="java:org.apache.axis.transport.local.LocalSender"/>
+  <transport name="java" pivot="java:org.apache.axis.transport.java.JavaSender"/>
+
+  <handler name="log" type="java:com.learningobjects.cpxp.service.external.eCollege.RequestLogger" />
+
+  <globalConfiguration>
+    <parameter name="disablePrettyXML" value="true"/>
+    <parameter name="enableNamespacePrefixOptimization" value="false"/>
+    <requestFlow>
+      <handler type="log" />
+    </requestFlow>
+    <responseFlow>
+      <handler type="log" />
+    </responseFlow>
+  </globalConfiguration>
+</deployment>

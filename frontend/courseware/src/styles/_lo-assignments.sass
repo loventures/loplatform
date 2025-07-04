@@ -1,0 +1,79 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@import assignments-table
+
+.grades-list-col .header-row
+  margin-bottom: .25rem
+
+.student-grades
+  .grades-header
+
+    h2
+      padding: $badge-padding-y 0
+
+    label
+      color: $color-body-text
+      text-align: center
+      font-size: 1rem
+
+  .grade-list-filter
+    float: right
+    padding-left: 0.75em
+    width: calc(100% - 0.75em)
+
+    @media (max-width: $smscreen)
+      padding-left: 0
+      width: 100%
+      margin: -0.75em 0 1em
+
+    .lo-checkbox-label
+      width: calc(100% - 1.5em)
+
+.info-list
+  display: flex
+  flex-wrap: wrap
+
+.access-info
+  .access-info-message
+    border-radius: 0.3em
+    background-color: $color-alert
+    color: $color-white
+    padding: 0.3em 0.5em
+    font-size: 0.75em
+
+.duedate-reminder, .access-info
+  margin: 0.5em 0
+  padding: 0
+  font-size: 1.25em
+
+  @media (max-width: $smscreen)
+    font-size: 1em
+
+  > span
+    display: inline-block
+    vertical-align: middle
+    margin-right: 0.5em
+
+  .date-icon-container
+    width: 2em
+
+    date-icon
+      font-size: 2em
+
+  .reminder-text
+    width: calc(100% - 2em - 1.5em)

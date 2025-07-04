@@ -1,0 +1,81 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.discussion-board
+  .discussion-board-header-row
+    margin: 1.5em 0 .5em
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+    justify-content: space-between
+
+// User Settings
+.discussion-user-settings
+  line-height: 2
+
+  .settings-toggle
+    font-size: 2.5em
+
+  .discussion-user-settings-list
+
+    .discussion-setting
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: space-between
+
+      .setting-label
+        padding: 0.25em
+        white-space: nowrap
+
+      .setting-toggle
+        font-size: 1.5em
+        margin-left: 0.5em
+
+.lo-toggle
+  border-radius: 0.25em
+  cursor: pointer
+  width: 2em
+  height: 1em
+  transition: all .2s ease
+
+  &.off
+    background-color: darken($color-light, 25%)
+
+    .toggle-label-on
+      display: none
+
+    .lo-toggle-knob
+      margin-left: 2px
+
+  &.on
+    background-color: $color-success
+
+    .toggle-label-off
+      display: none
+
+    .lo-toggle-knob
+      margin-left: calc(1em + 2px)
+
+  .lo-toggle-knob
+    background-color: $color-white
+    border-radius: 0.2em
+    height: calc(1em - 4px)
+    width: calc(1em - 4px)
+    margin-top: 2px
+    margin-bottom: 2px
+    transition: all .2s ease

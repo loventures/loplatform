@@ -1,0 +1,15 @@
+//
+// This file is meant to be built with webpack (notice the '~'-prefixed imports)
+// only add webpack-specific things to this file
+//
+// If you _do_ edit this file... be sure to add an equivalent to lo-ui-manual.scss
+// which will allow for building a distribution with node-sass.
+//
+
+// LO custom variables
+@import './custom';
+
+// Bootstrap 4 core
+@import 'bootstrap/scss/bootstrap.scss';
+
+@import './main';

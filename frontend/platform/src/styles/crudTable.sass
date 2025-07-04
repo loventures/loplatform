@@ -1,0 +1,339 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+/* Crud table button bar
+
+/* Fix vertical height of a button that is just a glyphicon.
+
+.glyphButton
+  display: flex
+  align-items: center
+
+  .glyphicon
+    line-height: inherit
+
+.reactTable-buttonBar
+  margin-bottom: 15px
+
+.actionButtons > .btn-group
+  width: 100%
+  height: 100%
+
+  > form
+    margin: 0
+
+    > button
+      height: 100%
+
+  > button:first-child
+    min-width: 3em
+
+.text-lightGrey
+  color: #aaa
+
+@media (max-width: 768px)
+  .react-bs-table
+    overflow-x: auto
+    overflow-y: hidden
+    table
+      table-layout: auto
+
+@media (min-width: 768px)
+  .actionButtons > .btn-group
+    width: auto
+
+    > button:first-child
+      width: auto
+      max-width: 100%
+
+/* Make table borders great again
+
+.reactTable-bsTable
+  .react-bs-container-header th
+    font-weight: 0600
+
+/* Inline progress alignment.
+
+.reactTable-bsTable table
+  > thead > tr:first-child
+    > th
+      border-top: none
+      &:first-child
+        border-top-left-radius: .3rem
+      &:last-child
+        border-top-right-radius: .3rem
+  > tbody > tr:last-child
+    > td
+      border-bottom: none
+      &:first-child
+        border-bottom-left-radius: .3rem
+      &:last-child
+        border-bottom-right-radius: .3rem
+  tr
+    td
+      div.progress
+        margin: .25rem .35rem 0 .35rem
+
+/* Semicompact.
+
+.reactTable-bsTable
+  .react-bs-container-header tr th
+    padding: .4rem .5rem
+
+  .react-bs-container-body tr td
+    padding: .4rem .5rem
+  /* Improve vertical alignment of table headers.
+
+
+
+  .react-bs-container-header tr th.sort-column
+    position: relative
+    padding-right: 2rem
+
+/* React bootstrap table sort icons don't work on bs4.
+.sort-column
+  .caret::after
+    content: '▾'
+    display: inline-block
+  /* because the unicode up triangle has a different size
+
+
+
+  .dropup .caret::after
+    transform: scale(1, -1)
+
+/* Column styles
+td.wrap-text
+  white-space: normal !important
+
+/* Row styles
+
+.row-disabled, .row-preview
+  &:not(:hover)
+    &:not(.table-info)
+      td
+        opacity: 0.65
+
+  td:first-child:before
+    color: #c88
+    display: inline-block
+    width: 1.2rem
+    float: left
+    line-height: 1.3
+
+.row-disabled
+  td:first-child:before
+    content: ' ⃠'
+
+.row-preview
+  td:first-child:before
+    content: ' ⏿'
+
+.row-maintenance
+  &:not(:hover)
+    td
+      opacity: 0.5
+
+  td:first-child:before
+    content: '♺'
+    color: #a65
+    display: inline-block
+    width: 1.2rem
+    float: left
+    line-height: 1.5
+
+.row-active
+  td:first-child:before
+    content: '✓'
+    color: #8c8
+    display: inline-block
+    width: 1.2rem
+    float: left
+    line-height: 1.3
+
+/* Crud table footer
+
+/* Right align pagination.
+.react-bs-table-pagination .pagination
+  float: right
+
+#page-size-select
+  width: 6rem
+  display: inline-block
+  float: right
+  text-align: center
+
+#paging-stats
+  display: inline-block
+  padding: .5rem .75rem
+
+#table-csv
+  vertical-align: bottom
+
+  &.sneaky
+    opacity: 0
+    transition: opacity .5s ease-in-out
+
+    &:hover
+      opacity: 1
+
+/* Funny refresh button.
+
+.actionButtons
+  .btn-group
+    .lastButton
+      border-top-right-radius: .25rem !important
+      border-bottom-right-radius: .25rem !important
+
+    .soloButton
+      border-radius: .25rem !important
+
+    .refreshButton
+      border-radius: .25rem !important
+      border: none
+      background: none
+      color: #222
+
+#react-table-refresh-button
+  img
+    min-height: 20px
+    min-width: 20px
+    max-height: 20px
+    max-width: 20px
+    -webkit-border-radius: 50%
+    border-radius: 50%
+    border: 1px solid black
+
+  i
+    padding-left: 1px
+
+  &.refreshing
+    -webkit-animation: spin 1s linear infinite
+    -moz-animation: spin 1s linear infinite
+    animation: spin 1s linear infinite
+
+.spinning
+  position: absolute
+  top: 11px
+  right: 11px
+  opacity: 0.5
+  z-index: 100
+  vertical-align: middle
+  pointer-events: none
+
+@-moz-keyframes spin
+  from
+    -moz-transform: rotate(0deg)
+  to
+    -moz-transform: rotate(360deg)
+
+@-webkit-keyframes spin
+  from
+    -webkit-transform: rotate(0deg)
+  to
+    -webkit-transform: rotate(360deg)
+
+@keyframes spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+/* Generic edit form
+
+#reactTable-modalForm
+  margin-bottom: 0
+
+  .error-bar, .info-bar
+    background: #dc3545
+    color: white
+    padding: .75rem 1.25rem
+    margin-bottom: 1rem
+    white-space: nowrap
+    overflow: hidden
+    margin-left: -1rem
+    margin-right: -1rem
+
+  .info-bar
+    background: #35a0dc
+
+  .form-group:last-child
+    margin-bottom: 0
+
+.admin-form .form-group
+  label
+    padding-right: 0
+
+  &.is-required > label:after
+    content: '*'
+    color: red
+    line-height: 1
+    vertical-align: middle
+    opacity: .75
+    margin-left: .25rem
+    font-size: 75%
+
+h2.modal-title
+  font-size: 1.25rem
+
+h3.block-header
+  background: #ddd
+  padding: .5rem 1rem
+  margin-left: -1rem
+  margin-right: -1rem
+  font-size: 1.25rem
+
+/* Allow header menus to overflow header.
+
+.header-overflowable
+  overflow: visible !important
+
+.col-header-menu
+  display: inline-block
+  margin-right: .35rem
+  cursor: context-menu
+  vertical-align: text-bottom
+
+/* Vertically align material button.
+
+.btn
+  .material-icons.md-18
+    vertical-align: text-bottom
+
+  .waiting
+    vertical-align: text-top
+    line-height: 16px
+
+/* Vertically align the material add-ons.
+
+.material-icons.md-18.input-group-addon
+  line-height: 1.3
+
+/* PK in edit dialogs
+
+.entity-id
+  position: absolute
+  top: -2.5rem
+  right: 1.5rem
+  font-size: 85%
+  color: gray
+
+  &:before
+    content: '#'
+    font-size: 85%
+    opacity: .75
+    padding-right: .15rem

@@ -1,0 +1,123 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="card-list">
+  <header ng-transclude="headerSlot">
+    <!-- <header-slot> keeps it the same structure as transcluded -->
+    <header-slot>
+      <div class="card-header">
+        <div class="flex-row-content">
+          <span class="circle-badge badge-primary">
+            <span
+              class="icon"
+              ng-class="$ctrl.icon"
+              ng-if="!!$ctrl.icon && !$ctrl.state.status.loading"
+            ></span>
+            <span
+              ng-if="!$ctrl.icon && !$ctrl.state.status.loading"
+              ng-bind="$ctrl.state.data.filterCount"
+            ></span>
+            <loading-spinner ng-if="$ctrl.state.status.loading"></loading-spinner>
+          </span>
+
+          <span
+            class="flex-col-fluid"
+            ng-bind="$ctrl.listTitle | translate"
+          ></span>
+
+          <button
+            class="btn btn-sm btn-primary"
+            ng-if="!!$ctrl.headerButton"
+            ng-click="$ctrl.headerButton.onClick()"
+            translate="{{ $ctrl.headerButton.label }}"
+          ></button>
+        </div>
+      </div>
+    </header-slot>
+  </header>
+
+  <div ng-if="$ctrl.state.data.totalCount !== 0">
+    <div
+      class="card-list-filters"
+      ng-if="::$ctrl.hasSearch || $ctrl.hasSort"
+    >
+      <div class="flex-row-content">
+        <list-search
+          class="flex-col-fluid"
+          ng-if="$ctrl.hasSearch"
+          active-search-string="$ctrl.state.activeOptions.searchString"
+          search-actions="$ctrl.searchActions"
+        ></list-search>
+
+        <list-sort
+          ng-if="$ctrl.hasSort"
+          active-sort-key="$ctrl.state.activeOptions.sortKey"
+          sort-actions="$ctrl.sortActions"
+        ></list-sort>
+      </div>
+    </div>
+
+    <div
+      class="card-body"
+      ng-if="$ctrl.state.status.loading"
+    >
+      <loading-spinner></loading-spinner>
+    </div>
+
+    <div
+      ng-if="!$ctrl.state.status.loading"
+      ng-transclude="listSlot"
+    ></div>
+
+    <div
+      class="card-body"
+      ng-if="!$ctrl.state.status.loading &&
+        $ctrl.state.data.totalCount !== 0 &&
+        $ctrl.state.data.filterCount === 0"
+      ng-transclude="filteredMsgSlot"
+    >
+      <div
+        class="alert alert-warning"
+        translate="{{ $ctrl.filteredMsg || 'SRS_STORE_FILTERED'}}"
+      ></div>
+    </div>
+
+    <div
+      class="card-footer"
+      ng-if="!$ctrl.state.status.loading && $ctrl.state.activeOptions.totalPages > 1"
+    >
+      <list-paginate
+        active-page="$ctrl.state.activeOptions.currentPage"
+        total-items="$ctrl.state.activeOptions.totalItems"
+        page-size="$ctrl.state.activeOptions.pageSize"
+        page-action="$ctrl.pageAction"
+      ></list-paginate>
+    </div>
+  </div>
+
+  <div
+    class="card-body"
+    ng-if="!$ctrl.state.status.loading &&
+      $ctrl.state.data.totalCount === 0"
+    ng-transclude="emptyMsgSlot"
+  >
+    <div
+      class="alert alert-danger"
+      translate="{{ $ctrl.emptyMsg || 'SRS_STORE_EMPTY'}}"
+    ></div>
+  </div>
+</div>

@@ -1,0 +1,170 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-item-footer">
+  <div class="discussion-footer-primary">
+    <span
+      class="footer-text text-button text-reply"
+      ng-show="$ctrl.settings.canWriteReplies() && $ctrl.item.showContent && $ctrl.item.depth <= 20"
+      ng-click="$ctrl.replyStart($ctrl.item.id)"
+    >
+      <span class="icon icon-bubble-plus"></span>
+      <span translate="DISCUSSION_POST_REPLY_BTN"></span>
+    </span>
+
+    <div
+      uib-dropdown
+      ng-if="$ctrl.isThread && $ctrl.thread.repliesCount > 0"
+    >
+      <span
+        class="footer-text text-button text-reply-count"
+        ng-click="$ctrl.toggleExpandReplies()"
+      >
+        <span
+          translate="DISCUSSION_POST_REPLY_COUNT"
+          translate-values="{ count: $ctrl.thread.repliesCount }"
+        ></span>
+        <span ng-show="$ctrl.thread.newRepliesCount && !$ctrl.settings.canMarkUnread">
+          &ndash;
+          <span
+            class="new"
+            translate="DISCUSSION_POST_NEW_REPLY_COUNT"
+            translate-values="{ count: $ctrl.thread.newRepliesCount }"
+          ></span>
+        </span>
+        <span ng-show="$ctrl.thread.unreadRepliesCount && $ctrl.settings.canMarkUnread">
+          &ndash;
+          <span
+            class="unread"
+            translate="DISCUSSION_POST_UNREAD_REPLY_COUNT"
+            translate-values="{ count: $ctrl.thread.unreadRepliesCount }"
+          ></span>
+        </span>
+      </span>
+
+      <button
+        class="footer-text icon-btn replies-dropdown-toggle"
+        uib-dropdown-toggle="dropdown"
+        title="{{ 'DISCUSSION_POST_REPLIES_DROPDOWN' | translate }}"
+      >
+        <span class="icon icon-chevron-down"></span>
+        <span
+          class="sr-only"
+          translate="DISCUSSION_POST_REPLY_BTN"
+        ></span>
+      </button>
+
+      <span
+        class="discussion-replies-dropdown"
+        uib-dropdown-menu
+      >
+        <p
+          class="replies-dropdown-item"
+          ng-if="$ctrl.settings.canMarkUnread"
+          ng-click="$ctrl.setAllViewed(true)"
+          translate="DISCUSSION_POST_READ_ALL"
+        ></p>
+        <p
+          class="replies-dropdown-item"
+          ng-if="$ctrl.settings.canMarkUnread"
+          ng-click="$ctrl.setAllViewed(false)"
+          translate="DISCUSSION_POST_UNREAD_ALL"
+        ></p>
+        <p
+          class="replies-dropdown-item"
+          ng-click="$ctrl.setAllExpansion(true)"
+          translate="DISCUSSION_POST_EXPAND_ALL"
+        ></p>
+        <p
+          class="replies-dropdown-item"
+          ng-click="$ctrl.setAllExpansion(false)"
+          translate="DISCUSSION_POST_COLLAPSE_ALL"
+        ></p>
+      </span>
+    </div>
+    <div ng-if="$ctrl.isThread && $ctrl.item.descendantCount == 0">
+      <span class="footer-text disabled"><span translate="DISCUSSION_POST_NO_REPLIES"></span></span>
+    </div>
+  </div>
+
+  <div
+    class="discussion-footer-dropdown"
+    uib-dropdown-toggle="dropdown"
+  >
+    <span
+      class="footer-text text-button text-dropdown"
+      title="{{ 'DISCUSSION_POST_FOOTER_DROPDOWN' | translate }}"
+    >
+      <span class="icon icon-more-horizontal"></span>
+    </span>
+  </div>
+
+  <div
+    class="discussion-footer-optional"
+    uib-dropdown-menu
+  >
+    <span
+      class="footer-text text-button text-mark-inappropriate"
+      ng-show="$ctrl.isInstructor && !$ctrl.item.removed"
+      ng-click="$ctrl.setInappropriate(!$ctrl.item.inappropriate)"
+      translate="DISCUSSION_POST_TOGGLE_INAPPROPRIATE"
+    ></span>
+
+    <span
+      class="footer-text text-button text-deleted"
+      ng-show="$ctrl.isInstructor && !$ctrl.item.removed"
+      ng-click="$ctrl.setRemoved(true)"
+      translate="DISCUSSION_POST_TOGGLE_DELETED"
+    ></span>
+
+    <span
+      class="footer-text text-button text-restore"
+      ng-show="$ctrl.isInstructor && $ctrl.item.removed"
+      ng-click="$ctrl.setRemoved(false)"
+      translate="DISCUSSION_POST_TOGGLE_RESTORE"
+    ></span>
+
+    <span
+      class="footer-text text-button text-edit"
+      ng-show="$ctrl.item.editable && !$ctrl.item.editInfo.inEditMode"
+      ng-click="$ctrl.editStart()"
+      translate="DISCUSSION_POST_EDIT"
+    ></span>
+
+    <span
+      class="footer-text text-button text-report-inappropriate"
+      ng-show="!$ctrl.isInstructor"
+      ng-click="$ctrl.reportPost()"
+      translate="DISCUSSION_POST_REPORT_INAPPROPRIATE"
+    ></span>
+
+    <span class="footer-text text-post-date">
+      <span
+        class="create-date"
+        translate="DISCUSSION_POST_CREATED_DATE"
+        translate-values="{ createTime: $ctrl.item.createTime }"
+      >
+      </span>
+      <span
+        class="edit-date"
+        translate="DISCUSSION_POST_EDITED_DATE"
+        translate-values="{ editTime: $ctrl.item.lastModified }"
+      >
+      </span>
+    </span>
+  </div>
+</div>

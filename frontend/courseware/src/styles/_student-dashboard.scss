@@ -1,0 +1,183 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#er-student-dashboard {
+  .close-notification {
+    border-radius: 5px 0 0 5px;
+    background-color: $gray-lightest;
+    border: 0;
+    border-right: 1px solid $gray-lightest;
+    transition: background-color 150ms;
+
+    &:hover {
+      background-color: darken($gray-lightest, 5);
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: 0;
+      box-shadow:
+        inset 0 0 0 2px $gray-lightest,
+        0 0 0 2px $brand-primary;
+    }
+  }
+
+  .feedback-nudge {
+    .nudge-header {
+      background-color: $brand-primary;
+    }
+
+    .clamp-feedback {
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+
+    > div {
+      @media (max-width: $smscreen-max) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .btn {
+          margin-top: 0 !important;
+        }
+      }
+    }
+  }
+
+  .message-nudge .nudge-buttons {
+    button,
+    a {
+      @media (max-width: $smscreen-max) {
+        width: 100%;
+      }
+    }
+  }
+
+  .nudge-list-enter {
+    opacity: 0;
+    max-height: 0;
+  }
+
+  .nudge-list-enter-active {
+    opacity: 1;
+    overflow: hidden;
+    max-height: 6rem;
+    transition:
+      max-height $transition-speed ease-in,
+      opacity $transition-speed ease-in;
+  }
+
+  .nudge-list-exit {
+    opacity: 1;
+    overflow: hidden;
+    max-height: 6rem;
+  }
+
+  .nudge-list-exit-active {
+    opacity: 0;
+    max-height: 0;
+    transition:
+      max-height $transition-speed ease-in,
+      opacity $transition-speed ease-in;
+  }
+
+  .card {
+    border-radius: 6px;
+    box-shadow: 4px 4px 8px 0 #21252920;
+
+    &.next-up-card > div {
+      @media (max-width: $mdscreen-max) {
+        min-height: 10rem;
+      }
+      @media (max-width: $smscreen-max) {
+        min-height: 8rem;
+      }
+      @media (max-height: $mdheight-max) {
+        min-height: 8rem;
+      }
+      @media (max-height: $smheight-max) {
+        min-height: 6rem;
+      }
+    }
+
+    &.next-up-card > div:last-of-type {
+      color: $color-white;
+      background-color: $brand-primary;
+      border-radius: 0 6px 6px 0;
+      line-height: 1.75;
+      @media (max-width: $mdscreen-max) {
+        border-radius: 0 0 6px 6px;
+      }
+    }
+
+    .next-activity {
+      line-height: 1.2;
+    }
+  }
+
+  .course-key,
+  .access-code {
+    margin-left: 0.25rem;
+  }
+
+  .er-progress-bar {
+    max-width: 10rem;
+    width: 50%;
+
+    > div,
+    .er-progress-bar-outer {
+      display: flex;
+      height: 0.5rem;
+      background-color: $gray-lighter;
+      box-shadow: inset 0 1px 2px 0 $gray-lighter;
+      border-radius: 4px;
+
+      > div,
+      .er-progress-bar-inner {
+        background-color: $brand-primary;
+        box-shadow: inset 0 1px 2px 0 $gray-lighter;
+        border-radius: 4px 0 0 4px;
+      }
+    }
+  }
+
+  .all-done {
+    position: absolute;
+    left: calc(50% - 4rem);
+    top: calc(50% - 4rem);
+    pointer-events: none;
+    transform-origin: bottom left;
+    transform: scale(0);
+    animation: all-done forwards ease-in-out 0.3s;
+  }
+
+  @keyframes all-done {
+    0% {
+      transform: scale(0);
+    }
+    66% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}

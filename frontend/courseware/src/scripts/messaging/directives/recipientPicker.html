@@ -1,0 +1,100 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="recipient-picker">
+  <div class="d-flex mb-2">
+    <label
+      class="me-2"
+      translate="MESSAGING_RECIPIENT_PICKER_TO"
+    ></label>
+    <ul class="results-list list-unstyled flex-row-content flex-wrap">
+      <li ng-repeat="recipient in message.recipients">
+        <div
+          class="block-badge badge-primary"
+          ng-click="removeSelection(recipient)"
+          ng-disabled="status.selectingEntireClass"
+        >
+          <span ng-bind="recipient.getName()"></span>
+          <span
+            class="lo-icon icon-cross"
+            role="presentation"
+          ></span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="flex-row-content flex-wrap align-items-start mb-2">
+    <div class="picker-input flex-col-fluid">
+      <text-input-decorator
+        error="{{recipientErrorMessage}}"
+        required="!status.selectingEntireClass"
+      >
+        <input
+          class="form-control"
+          type="text"
+          translate
+          translate-attr-aria-label="MESSAGING_RECIPIENT_INPUT"
+          translate-attr-placeholder="MESSAGING_RECIPIENT_PLACEHOLDER"
+          ng-model="typeaheadModel.text"
+          ng-disabled="status.selectingEntireClass"
+          uib-typeahead="recipient as recipient.getName() for recipient in getRecipientPool($viewValue)"
+          typeahead-wait-ms="500"
+          typeahead-on-select="addSelection($item)"
+          typeahead-editable="false"
+          typeahead-loading="typeaheadLoading"
+          typeahead-no-results="typeaheadNoMatch"
+          typeahead-template-url="{{typeaheadTemplateUrl}}"
+          typeahead-select-on-blur="false"
+          ng-keypress="resetRecipientError()"
+        />
+      </text-input-decorator>
+
+      <div
+        class="typeahead-loading-message"
+        ng-show="typeaheadLoading"
+      >
+        <i class="lo-icon lo-icon-refresh"></i>
+        <span translate="MESSAGING_RECIPIENT_TYPEAHEAD_LOADING"></span>
+      </div>
+      <div
+        class="no-match-message"
+        ng-show="typeaheadNoMatch"
+      >
+        <i class="lo-icon lo-icon-remove"></i>
+        <span translate="MESSAGING_RECIPIENT_TYPEAHEAD_NO_MATCH"></span>
+      </div>
+    </div>
+
+    <div class="flex-row-content">
+      <button
+        class="btn btn-primary"
+        ng-disabled="status.selectingEntireClass"
+        ng-click="showUserSelector()"
+        translate="MESSAGING_RECIPIENT_ROSTER"
+      ></button>
+
+      <lo-checkbox
+        ng-if="::isInstructor"
+        checkbox-for="::'recipient-entire-class'"
+        checkbox-label="'MESSAGING_RECIPIENT_ENTIRE_CLASS'"
+        on-toggle="::selectEntireClass"
+        state="status.selectingEntireClass"
+      ></lo-checkbox>
+    </div>
+  </div>
+</div>

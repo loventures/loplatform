@@ -1,0 +1,55 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="$$ Tickets $$" coursestyle="true" bodyClass="administration">
+  <ui:stylesheet>
+    .thead  { display: table-header-group; background-color: #eeeeee }
+    .tbody  { display: table-row-group }
+    .tr     { display: table-row }
+    .td     { display: table-cell; padding: 2px 5px; border: 1px solid black }
+  </ui:stylesheet>
+  <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" />
+  <ui:javascript>
+    $(function () {
+      $('.timestamp').each(function (ix, div) {
+        div.innerHTML = moment.unix($(div).attr('data-ts')).format('dddd, MMMM Do, YYYY [at] h:mm A');
+      });
+    });
+  </ui:javascript>
+
+  <div id="stdHeader"><h1>$$ Recently-merged tickets: $$</h1></div>
+
+  <div style="display: table">
+    <div class="thead">
+      <div class="tr">
+        <div class="td">JIRA Link:</div>
+        <div class="td">Last updated:</div>
+      </div>
+    </div>
+    <div class="tbody">
+      <div class="tr" foreach="row : ${ tickets }">
+        <div class="td link">
+          <a href="${ prefix }${ row.id }">${ row.id }</a>
+        </div>
+        <div class="td timestamp" data-ts="${ row.timestamp }">
+          <!-- -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ui:pageLayout>

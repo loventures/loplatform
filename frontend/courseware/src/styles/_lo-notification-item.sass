@@ -1,0 +1,70 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.notification-item
+  font-size: 0.85em
+  display: flex
+  flex-direction: row
+  overflow: hidden
+  align-items: stretch
+
+  &:not(:last-child)
+    border-bottom: solid 1px $medium
+
+  .notification-icon
+    @extend .flex-center-center
+    font-size: 1rem
+
+  .notification-dismiss
+    @extend .p-2
+    @extend .alert-danger
+    @extend .flex-center-center
+    font-size: 0.75em
+
+  .notification-content
+    flex: 1 1 auto
+    display: flex
+    flex-direction: row
+    align-items: stretch
+
+    .notification-icon
+      flex: 0 0 2em
+
+    .notification-body
+      padding: 0.5em 1em
+      flex: 1 1 auto
+      .notification-title
+        text-align: start
+        display: block
+
+@mixin notification-theme($color)
+  .notification-icon
+    color: $white
+    background-color: theme-color($color)
+  .notification-title
+    color: theme-color($color)
+
+.notification-item
+  &.notification-level-item
+    @include notification-theme(primary)
+  &.notification-level-safe
+    @include notification-theme(success)
+  &.notification-level-warning
+    @include notification-theme(warning)
+  &.notification-level-alert
+    @include notification-theme(danger)

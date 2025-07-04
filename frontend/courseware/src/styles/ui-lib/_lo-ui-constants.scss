@@ -1,0 +1,57 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// lo-ui overrides
+
+//this is $gray-100
+$dark-background: #f8f9fa;
+//this is $gray-800
+$light-text: #343a40;
+
+$gray-lighter: #d5d5d5;
+
+$medium-color: $color-light-text;
+
+//contrasting against deepest bg color
+$brand-primary: fix-contrast($color-primary, $dark-background);
+$brand-accent: fix-contrast($color-accent, $dark-background);
+$brand-success: fix-contrast($color-success, $dark-background);
+$brand-info: fix-contrast($color-info, $dark-background);
+$brand-warning: fix-contrast($color-warning, $dark-background);
+$brand-danger: fix-contrast($color-alert, $dark-background);
+
+//bs4 overrides
+$breadcrumb-bg: transparent;
+
+$navbar-light-color: fix-contrast($brand-primary, $color-white);
+$navbar-inverse-color: fix-contrast($color-white, $brand-primary);
+
+$theme-colors: (
+  primary: $brand-primary,
+  secondary: $brand-accent,
+  success: $brand-success,
+  info: $brand-info,
+  warning: $brand-warning,
+  danger: $brand-danger,
+  light: $dark-background,
+  dark: $light-text,
+  medium: $gray-lighter,
+);
+
+$card-cap-bg: fade-out(map_get($theme-colors, primary), 0.97);
+
+$custom-control-indicator-bg: $color-white;

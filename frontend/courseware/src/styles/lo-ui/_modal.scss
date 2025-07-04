@@ -1,0 +1,79 @@
+//
+// LO Modals
+//
+
+.modal {
+  &.fade .modal-dialog {
+    transition: transform $transition-speed $transition-function;
+  }
+}
+
+.modal-dialog {
+  &.modal-xl {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+}
+
+//
+// FULLSCREEN MODAL
+//
+/**
+* @author owolski
+*/
+
+.fullscreen {
+  .close-btn {
+    @include noselect;
+    cursor: pointer;
+    float: right;
+
+    i {
+      float: right;
+      color: $gray-light;
+    }
+  }
+
+  .modal-backdrop {
+    background-color: $gray-lightest;
+  }
+
+  .modal-backdrop.show {
+    opacity: 1;
+  }
+
+  .modal-content {
+    border: none;
+    background-color: transparent;
+    max-width: $modal-lg;
+    min-height: 100%;
+    margin: 0 auto;
+  }
+
+  .modal-header {
+    font-size: 1.4rem;
+  }
+  .modal-footer,
+  .modal-header {
+    border: none;
+  }
+
+  .modal-header .modal-title {
+    text-align: center;
+    width: 100%;
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  .modal-body {
+    border: none;
+    background-color: transparent;
+  }
+
+  .modal-dialog {
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow: auto;
+  }
+}

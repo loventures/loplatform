@@ -1,0 +1,61 @@
+/*
+  name because flex-row is taken by bootstrap
+  this over normal row/col because those use non-even padding based spacing
+  and have no support for flexible wrapping
+  
+  utility for an evenly row/column with flex elements
+
+  @NOTE: due to it using the negative margin method, it cannot have a filled background
+  
+  example: 
+    <!-- use outer container to specify padding, background, etc -->
+    <div class="some-container">
+      <!-- use other flex utilities like flex-column, flex-wrap as needed -->
+      <div class="flex-row-content">
+        <div>with no classes this will be static size</div> 
+        <div class="flex-col-fluid">with flex-col-fluid it will be growing/shrinking</div>
+        <div class="flex-col-fluid">and this too, with same weighting</div>
+      </div>
+    </div>
+*/
+.flex-row-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  $flex-row-content-gutter: map-get($spacers, 2);
+
+  &:not(.flex-wrap) {
+    margin: 0 #{-$flex-row-content-gutter};
+    > :not(.flex-row-content) {
+      margin: 0 $flex-row-content-gutter;
+    }
+    > .flex-row-content {
+      margin: 0 0;
+    }
+  }
+
+  &.flex-wrap {
+    margin: #{-$flex-row-content-gutter} #{-$flex-row-content-gutter};
+    > :not(.flex-row-content) {
+      margin: $flex-row-content-gutter $flex-row-content-gutter;
+    }
+    > .flex-row-content:not(.flex-wrap) {
+      margin: $flex-row-content-gutter 0;
+    }
+    > .flex-row-content.flex-wrap {
+      margin: 0 0;
+    }
+  }
+
+  > *:not(.flex-col-fluid) {
+    flex: 0 0 auto;
+  }
+
+  > .flex-col-fluid {
+    //50% is not needed in most cases
+    //but if there are multiple fluid items in a row
+    //this helps to make them line up
+    flex: 1 1 50%;
+  }
+}

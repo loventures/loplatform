@@ -1,0 +1,113 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.discussion-no-posts
+  > h3
+    margin: 0.75em 0 1.25em
+    padding: 1em 0
+    display: inline-block
+    width: 100%
+    text-align: center
+    color: $color-contrasted-accent
+    border-top: 1px dashed $color-accent
+    border-bottom: 1px dashed $color-accent
+
+    .icon
+      margin-right: 0.33em
+
+
+.discussion-board-write-post
+  .discussion-reply-controls
+    padding: 0.25em 0
+
+    .discussion-reply-button
+      margin: 0.25em 0.5em
+
+.discussion-thread-list
+  margin: 0
+  padding: 0
+
+  @media (max-width: $mdscreen)
+    font-size: 0.925em
+
+  @media (max-width: $smscreen)
+    font-size: 0.85em
+
+  > li
+    margin: 1.25em 0
+    width: 100%
+    transition: margin ease $trans-speed
+    list-style: none
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.125)
+    border-radius: $border-radius
+
+    &:first-child
+      margin-top: 0
+
+    &.active
+      .discussion-thread.thread-expanded.replies-expanded > discussion-item discussion-item-header
+        display: block
+        height: $discussion-header-unit * 1.33
+
+        .discussion-item-header
+          position: fixed
+          top: 3.5rem
+          width: calc(100% - #{$grid-gutter-width})
+          z-index: 2
+          box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25)
+          border-radius: 0
+
+          @each $grid-breakpoint, $container-max-width in $container-max-widths
+            @include media-breakpoint-up($grid-breakpoint, $grid-breakpoints)
+              max-width: calc($container-max-width - $grid-gutter-width)
+
+          .expansion-toggle
+            border-radius: 0
+
+          .item-blurb
+            opacity: 1
+
+.discussion-reply-list-child
+  list-style: none
+  margin: 0.25rem
+
+.discussion-threads-load-bar,
+.discussion-replies-load-bar
+  display: flex
+  justify-content: center
+
+  .lo-btn
+    margin: 1em 0
+
+.discussion-board
+  .discussion-view-header
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: center
+
+    .dropdown-menu
+      left: auto
+      right: 0
+
+    .view-title
+      flex: 1 1 auto
+
+    .board-control
+      button
+        @extend .btn-sm

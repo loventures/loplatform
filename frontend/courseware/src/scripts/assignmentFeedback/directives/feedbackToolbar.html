@@ -1,0 +1,56 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="attachment-toolbar">
+  <div class="attachment-active-tool">
+    <audio-feedback
+      class="feedback-type"
+      feedback-manager="feedbackManager"
+      ng-if="feedbackManager.activeTool === 'audio'"
+    >
+    </audio-feedback>
+  </div>
+
+  <div
+    class="attachment-all-tools"
+    ng-if="feedbackManager.activeTool !== 'audio'"
+    role="group"
+    translate-attr-aria-label="MEDIA_FEEDBACK_TOOLBAR"
+  >
+    <span
+      class="attachment-tool"
+      id="feedback-upload-{{$id}}"
+      ngf-select="onFileSelect($files)"
+      ng-click="updateActiveTool($event, 'file')"
+    >
+      <span
+        class="icon icon-upload"
+        aria-hidden="true"
+      ></span>
+      <span translate="MEDIA_FEEDBACK_UPLOAD_FILE"></span>
+    </span>
+
+    <span
+      class="attachment-tool"
+      ng-click="updateActiveTool($event, 'audio')"
+      ng-if="audioSupported"
+    >
+      <span class="icon icon-mic"></span>
+      <span translate="MEDIA_FEEDBACK_RECORD_AUDIO"></span>
+    </span>
+  </div>
+</div>

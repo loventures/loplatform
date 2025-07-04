@@ -1,0 +1,51 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-threads-view">
+  <ul
+    class="discussion-thread-list"
+    ng-init="$ctrl.initial()"
+  >
+    <li
+      ng-repeat="thread in $ctrl.threads track by thread.id"
+      id="discussion-thread-item-{{::thread.id}}"
+      du-scrollspy="discussion-thread-item-{{::thread.id}}"
+      du-spy-context
+      offset="40"
+    >
+      <discussion-thread
+        class="discussion-item-wrap"
+        thread="thread"
+        discussion-id="$ctrl.discussionId"
+        settings="$ctrl.settings"
+      ></discussion-thread>
+    </li>
+  </ul>
+
+  <div class="discussion-threads-load-bar">
+    <button
+      class="btn btn-primary"
+      ng-click="$ctrl.loadMoreThreads()"
+      ng-if="$ctrl.threadsRemaining > 0"
+    >
+      <span
+        translate="DISCUSSION_BOARD_LOAD_MORE_THREADS"
+        translate-values="{ count: $ctrl.threadsRemaining }"
+      ></span>
+    </button>
+  </div>
+</div>

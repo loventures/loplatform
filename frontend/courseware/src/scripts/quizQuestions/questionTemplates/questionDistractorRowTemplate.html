@@ -1,0 +1,51 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="question-distractor-row-template">
+  <div class="distractor-with-correctness">
+    <choice-correctness
+      ng-if="($ctrl.hasCorrectness && $ctrl.isSelected) || $ctrl.isInstructor"
+      is-correct="$ctrl.isCorrect"
+    ></choice-correctness>
+    <div
+      class="distractor"
+      ng-transclude="distractorSlot"
+    ></div>
+  </div>
+
+  <div
+    class="d-flex justify-content-end"
+    ng-if="$ctrl.showModalRemediation && $ctrl.choiceFeedback"
+  >
+    <button
+      class="btn btn-primary"
+      ng-click="$ctrl.viewRemediationInModal()"
+      translate="QUESTION_CHOICE_OPEN_REMEDIATION_MODAL"
+    ></button>
+  </div>
+
+  <choice-level-remediation
+    class="inline-remediation"
+    ng-if="$ctrl.showInlineRemediation"
+    index="$ctrl.index"
+    remediation="$ctrl.choiceFeedback"
+    is-choice-correct="$ctrl.choice.correct"
+    is-instructor="$ctrl.isInstructor"
+    is-selected="$ctrl.isSelected"
+    is-multi="$ctrl.isMulti"
+  ></choice-level-remediation>
+</div>

@@ -1,0 +1,37 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$er-page-header-height: 3rem;
+$er-zoomed-page-header-height: 2.5rem;
+$er-banner-header-height: 10rem;
+$er-zoomed-banner-header-height: 4.5rem;
+$er-header-height: 5rem;
+$er-mobile-header-height: 4rem;
+$er-zoomed-header-height: 3rem;
+$er-sidebar-width: 20rem; // lg is 64em which should be the first breakpoint that sees this
+$er-sidebar-width-huge: 22rem; // 80em
+$er-sidebar-width-epic: 28rem; // 94em
+$er-feedback-width: 25rem;
+$er-feedback-width-huge: 28rem;
+$er-feedback-width-epic: 30rem;
+$er-autohide-sidebar-width: 14rem; // 15em screen
+$er-autohide-sidebar-width-xs: 18rem; // 20em screen
+$er-autohide-sidebar-width-xs2: 23rem; // 25em screen
+$er-autohide-sidebar-width-sm: 28rem; // 35em screen
+$er-dim-white: rgb(245 247 250);
+$er-dim-grey: rgb(250 251 252);
+$er-dim-blue: rgb(242 246 249);

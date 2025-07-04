@@ -1,0 +1,135 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="card rubric-section"
+  role="region"
+  translate
+  translate-attr-aria-label="GRADING_RUBRIC_SECTION_REGION"
+>
+  <div class="card-body">
+    <div
+      class="card-title flex-row-content"
+      translate
+      translate-attr-title="GRADING_RUBRIC_SECTION_TITLE_DESC"
+      translate-values="$ctrl.section"
+      ng-click="$ctrl.titleAction($ctrl.section)"
+    >
+      <span class="flex-col-fluid">
+        <span
+          class="h5 word-wrap-all"
+          ng-bind="$ctrl.section.title"
+        ></span>
+        <span
+          class="text-nowrap"
+          translate="RUBRIC_SECTION_POINTS"
+          translate-values="{ points: $ctrl.section.points }"
+        ></span>
+      </span>
+      <span
+        class="h5 icon"
+        ng-class="$ctrl.titleIcon"
+      ></span>
+    </div>
+
+    <small ng-bind="$ctrl.section.description"></small>
+
+    <hr />
+
+    <ol
+      class="rubric-section-levels list-group"
+      role="group"
+      translate
+      translate-attr-aria-label="GRADING_RUBRIC_SECTION_SELECT_SCORE"
+    >
+      <li
+        class="rubric-level flex-row-content"
+        ng-repeat="level in $ctrl.section.levels track by level.index"
+        ng-class="{
+          'selected': $ctrl.section.selectionLevelIndex === level.index
+        }"
+        translate
+        translate-attr-title="GRADING_RUBRIC_SECTION_ROW_DESC"
+        translate-values="level"
+        aria-selected="{{ $ctrl.section.selectionLevelIndex === level.index }}"
+      >
+        <div
+          class="rubric-level-points"
+          ng-bind="level.points"
+        ></div>
+        <div class="rubric-level-name">
+          <div ng-bind="level.name"></div>
+          <small
+            class="rubric-level-desc"
+            ng-if="$ctrl.showLevelDesc && !!level.description"
+            ng-bind="level.description"
+          ></small>
+        </div>
+      </li>
+
+      <li
+        class="rubric-level flex-row-content manual-level selected"
+        ng-if="$ctrl.section.isSelectionManual"
+        translate
+        translate-attr-title="GRADING_RUBRIC_SECTION_MANUAL_LEVEL"
+        aria-selected="true"
+      >
+        <div
+          class="rubric-level-points"
+          ng-bind="$ctrl.section.selectedPoints"
+        ></div>
+        <div
+          class="rubric-level-name"
+          translate="GRADING_RUBRIC_SECTION_MANUAL_GRADE"
+        ></div>
+      </li>
+    </ol>
+
+    <div
+      class="rubric-section-feedback"
+      ng-if="$ctrl.section.feedback && !$ctrl.hideFeedback"
+      role="region"
+      translate
+      translate-attr-aria-label="GRADING_RUBRIC_SECTION_FEEDBACK"
+    >
+      <div class="section-feedback-toggle">
+        <span
+          class="btn btn-link"
+          ng-hide="showingFeedback"
+          ng-click="showingFeedback = true"
+        >
+          <span class="icon icon-bubble-plus"></span>
+          <span translate="RUBRIC_SECTION_FEEDBACK_SHOW"></span>
+        </span>
+        <span
+          class="btn btn-link"
+          ng-show="showingFeedback"
+          ng-click="showingFeedback = false"
+        >
+          <span class="icon icon-minus"></span>
+          <span translate="RUBRIC_SECTION_FEEDBACK_HIDE"></span>
+        </span>
+      </div>
+
+      <div
+        class="rubric-section-feedback-content"
+        ng-show="showingFeedback"
+        ng-bind="$ctrl.section.feedback"
+      ></div>
+    </div>
+  </div>
+</div>

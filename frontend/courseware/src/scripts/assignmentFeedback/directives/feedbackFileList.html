@@ -1,0 +1,65 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul
+  class="list-group list-group-flush list-group-striped"
+  ng-if="files.length"
+>
+  <li
+    class="list-group-item py-1"
+    ng-repeat="file in files"
+  >
+    <div class="file-preview">
+      <div
+        class="d-flex flex-column"
+        ng-show="!file.progress"
+      >
+        <div class="d-flex justify-content-between">
+          <a
+            class="flex-col-fluid"
+            ng-if="file.info.playType === 'file'"
+            href="{{file.info.downloadUrl}}"
+            target="_blank"
+            ng-bind="file.info.displayName"
+          ></a>
+          <button
+            class="icon icon-cross"
+            ng-if="feedbackManager"
+            aria-label="{{ 'UPLOADS_REMOVE_FILE' | translate }}"
+            ng-click="toggleFileRemoval(file)"
+          ></button>
+        </div>
+        <previewer
+          name="file.info.displayName"
+          view-url="file.info.viewUrl"
+        ></previewer>
+      </div>
+
+      <div
+        class="upload-progress-bar-container"
+        ng-if="file.progress"
+      >
+        <uib-progressbar
+          class="progress-striped active"
+          value="file.progress.percent"
+          type="info"
+          >{{file.progress.status}}</uib-progressbar
+        >
+      </div>
+    </div>
+  </li>
+</ul>

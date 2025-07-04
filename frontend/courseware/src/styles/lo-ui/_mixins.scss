@@ -1,0 +1,42 @@
+@mixin card-shadow {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom-color: $gray-lighter;
+  border-bottom-width: 2px;
+}
+
+@mixin transition($transition) {
+  -moz-transition: $transition $transition-speed $transition-function;
+  -o-transition: $transition $transition-speed $transition-function;
+  -webkit-transition: $transition $transition-speed $transition-function;
+  transition: $transition $transition-speed $transition-function;
+}
+
+@mixin noselect {
+  -moz-user-select: none;
+  -khtms-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin list-vertical-line($left-offset, $vertical-adjust: 0em) {
+  position: relative;
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &:not(:last-child):after {
+    content: '';
+    left: $left-offset;
+    top: 50%;
+    height: calc(100% + #{$vertical-adjust * 2});
+    width: 0;
+    border-left: 1px solid #e2e2e2;
+    position: absolute;
+    z-index: 1;
+  }
+}

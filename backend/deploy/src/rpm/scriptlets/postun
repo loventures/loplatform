@@ -1,0 +1,11 @@
+# on upgrade i want wipe its unpacked components so they don't stick around when the
+# new one starts before the old one is uninstalled wtf people.
+
+# see https://fedoraproject.org/wiki/Packaging:Scriptlets
+
+if [ -d /usr/share/detomcat/webapp/WEB-INF/components ]; then
+  echo Wipe unpacked components
+  find /usr/share/detomcat/webapp/WEB-INF/components -depth 1 -type d | xargs rm -fr
+fi
+
+systemctl daemon-reload

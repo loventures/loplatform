@@ -1,0 +1,113 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="full-message-creator"
+  ng-init="init()"
+>
+  <form name="message-form">
+    <div class="form-group">
+      <recipient-picker
+        message="message"
+        user-store="userStore"
+      ></recipient-picker>
+    </div>
+
+    <div class="form-group message-subject">
+      <text-input-decorator
+        error="{{titleErrorMessage}}"
+        required="true"
+      >
+        <input
+          class="form-control"
+          type="text"
+          name="titlefield"
+          ng-model="message.title"
+          placeholder="{{ 'MESSAGING_ENTER_SUBJECT' | translate }}"
+        />
+      </text-input-decorator>
+    </div>
+
+    <div class="form-group">
+      <rich-text-editor
+        content="message.content"
+        on-change="messageChanged"
+      ></rich-text-editor>
+
+      <div class="media-items">
+        <feedback-tools feedback-manager="message.feedbackManager"> </feedback-tools>
+      </div>
+    </div>
+
+    <div class="form-group message-controls">
+      <button
+        class="btn btn-primary"
+        ng-disabled="sendingMessage"
+        ng-click="validateAndSend()"
+      >
+        <span
+          ng-hide="sendingMessage"
+          translate="MESSAGING_SUBMIT"
+        ></span>
+        <span
+          ng-hide="sendingMessage"
+          class="icon icon-envelope"
+          aria-hidden="true"
+        ></span>
+
+        <span
+          ng-show="sendingMessage"
+          translate="MESSAGING_SUBMITING"
+        ></span>
+        <span
+          ng-show="sendingMessage"
+          class="icon icon-circle-right"
+          aria-hidden="true"
+        ></span>
+      </button>
+
+      <div
+        class="status-message text-success"
+        ng-show="sentMessage"
+      >
+        <span class="icon icon-envelope message-success"></span>
+        <span
+          class="message-success"
+          translate="MESSAGING_SENT"
+        >
+        </span>
+      </div>
+
+      <div
+        class="status-message text-danger"
+        ng-show="errorMessage"
+      >
+        <span class="icon icon-warning message-error"></span>
+        <span
+          class="message-error"
+          translate="MESSAGING_ERROR"
+        >
+        </span>
+        <span
+          class="message-error"
+          ng-bind="errorMessageContent | errorMessage"
+        >
+        </span>
+      </div>
+    </div>
+  </form>
+</div>

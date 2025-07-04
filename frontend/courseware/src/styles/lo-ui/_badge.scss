@@ -1,0 +1,47 @@
+.circle-badge {
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+//regular badges are 75%, bold
+.block-badge {
+  @extend .badge;
+  font-size: 100%;
+  font-weight: normal;
+}
+
+// BS5
+
+.badge-primary {
+  background-color: $primary;
+  color: $light;
+}
+
+.badge-warning {
+  background-color: $warning;
+  color: $dark;
+}
+
+.badge-danger {
+  background-color: $danger;
+  color: $light;
+}
+
+.badge-info {
+  background-color: $info;
+  color: $dark;
+}
+
+.badge-success {
+  background-color: $success;
+  color: $light;
+}
+
+.badge-dark {
+  background-color: $dark;
+  color: $light;
+}

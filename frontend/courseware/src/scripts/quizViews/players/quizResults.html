@@ -1,0 +1,41 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul
+  class="list-group list-unstyled"
+  id="quiz-results-questions-anchor"
+>
+  <li ng-repeat="tuple in $ctrl.activeQuestionTuples track by tuple.index">
+    <question-loader
+      index="tuple.index"
+      question="tuple.question"
+      response="tuple.response"
+      assessment="$ctrl.assessment"
+      question-count="$ctrl.questionTuples.length"
+      can-edit-answer="false"
+    ></question-loader>
+    <hr class="question-separator" />
+  </li>
+</ul>
+
+<list-paginate
+  ng-if="$ctrl.questionTuples.length > $ctrl.pageSize"
+  active-page="$ctrl.activePage"
+  total-items="$ctrl.questionTuples.length"
+  page-size="$ctrl.pageSize"
+  page-action="$ctrl.gotoPage"
+></list-paginate>

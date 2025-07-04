@@ -1,0 +1,80 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//stuff in new versions of bootstrap
+.flex-shrink-1
+  flex-shrink: 1 !important
+
+.flex-grow-1
+  flex-grow: 1 !important
+
+.overflow-hidden
+  overflow: hidden !important
+
+//This contains angular-bootstrap specific things
+//that needs to be overridden against lo-ui
+
+//Overrides
+
+//bootstrap version that we use does not provides this,
+//not going to upgrade the whole lib for this
+[uib-typeahead-popup].dropdown-menu
+  display: block
+
+.nav-icon
+  font-size: 1.5em
+  margin: 0 0.5rem
+
+.custom-radio
+  .custom-control-label
+    &:before,
+    &:after
+      border-radius: 50%
+      @extend .border
+      @extend .border-current
+      // We must add 2px to keep it centered after adding the border.
+      width: calc(1rem + 2px)
+      height: calc(1rem + 2px)
+
+.custom-checkbox
+  .custom-control-label
+    &:before,
+    &:after
+      border-radius: 25%
+      @extend .border
+      @extend .border-current
+      width: calc(1rem + 2px)
+      height: calc(1rem + 2px)
+      // fix vertical alignment of custom checkboxes (e.g gradebook page Credit Only check)
+      margin-top: -2px
+
+//these shadows stuff are from bootstrap 4.1
+$box-shadow-sm: 0 .125rem .25rem rgba($black, .075)
+$box-shadow: 0 .5rem 1rem rgba($black, .15)
+$box-shadow-lg: 0 1rem 3rem rgba($black, .175)
+
+.shadow-sm
+  box-shadow: $box-shadow-sm !important
+
+.shadow
+  box-shadow: $box-shadow !important
+
+.shadow-lg
+  box-shadow: $box-shadow-lg !important
+
+.shadow-none
+  box-shadow: none !important

@@ -1,0 +1,26 @@
+/*
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.learningobjects.cpxp.service.site;
+
+public interface SiteConstants {
+    public static final String ITEM_TYPE_SITE = "Component";
+
+    public static final String DATA_TYPE_COMPONENT_CATEGORY = "Component.category";
+
+    public static final String DATA_TYPE_COMPONENT_GENERATION = "Component.generation"; // this is unfortunate but the script "folder" is a component .. TODO: FIXME
+}

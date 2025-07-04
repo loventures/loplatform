@@ -1,0 +1,485 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+/* Feel shame if you add anything here that doesn't belong here.
+
+@use 'sass:color'
+
+$white:    #fff !default
+$gray-100: #f8f9fa !default
+$gray-200: #e9ecef !default
+$gray-300: #dee2e6 !default
+$gray-400: #ced4da !default
+$gray-500: #adb5bd !default
+$gray-600: #6c757d !default
+$gray-700: #495057 !default
+$gray-800: #343a40 !default
+$gray-900: #212529 !default
+$black:    #000 !default
+
+$primary:  #007caa !default
+
+body
+  background-color: #fff
+  > #root
+    min-height: 100dvh
+    position: relative
+  &.naked
+    background: transparent
+    > #root
+      padding: 1em 0 0 0
+
+  font-family: "Open Sans",sans-serif
+  .CodeMirror
+    font-family: "Fira Lorde", "Lucida Console", Monaco, monospace
+
+.domain-image
+  position: fixed
+  z-index: -1
+  max-height: calc(100vh - 8rem)
+  max-width: calc(100vw - 2rem)
+  left: 50vw
+  top: 50svh
+  transform: translate(-50%, -50%)
+  opacity: .15
+  &.fade
+    opacity: 0
+    animation: fadein15 ease-in .5s forwards
+
+@keyframes fadein15
+  0%
+    opacity: 0
+
+  100%
+    opacity: .15
+
+a
+  text-decoration: none
+
+.breadcrumb
+  padding: .75rem 1rem
+
+.navbar
+  background-color: #ffffff
+  box-shadow: 0 4px 7px -2px rgba(38, 50, 56, 0.12)
+  .navbar-brand
+    max-height: 2rem
+    padding: 0
+    &.dark-only
+      display: none
+  ul.nav
+    height: 2.5rem
+  .nav-link
+    color: #343a40
+    transition: color ease-in .1s
+    &:focus,&:hover
+      color: #212529
+  .dropdown.show
+    .nav-link
+      color: #212529
+
+.lo-admin-link.nav-link.active
+  color: black !important
+  position: relative
+
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    bottom: -.5rem
+    left: .25rem
+    right: .25rem
+    border-bottom: 4px solid #495057
+    border-right: 2px solid transparent !important
+    border-left: 2px solid transparent !important
+
+.admin-breadcrumb
+  background-color: #f8f9fa
+
+.admin-breadcrumb, .domain-breadcrumb
+  border: 0
+  border-radius: 0
+  margin-bottom: 1rem
+  white-space: nowrap
+  overflow: hidden
+
+.legacy-admin-page .admin-breadcrumb
+  margin-bottom: 0
+
+.breadcrumbs__separator
+  color: #212529bf
+  margin-right: 8px
+
+.breadcrumbs__crumb
+  margin-right: 8px
+  color: #007caa
+  &:hover
+    text-decoration: underline
+
+.breadcrumbs__section:last-of-type .breadcrumbs__crumb
+  pointer-events: none
+  cursor: default
+  text-decoration: none
+  color: #212529
+
+.lo-admin-link.wut-no
+  animation: stretch 2s forwards
+  animation-delay: 5s
+  transform: scale(1, 1)
+
+@keyframes stretch
+  100%
+    transform: scale(2, 1)
+    padding-left: 3em
+    padding-right: 3em
+
+#announcements
+  margin-top: -1rem
+  margin-bottom: 1rem
+
+  .alert
+    border-top: 0
+    margin-top: 0
+    border-radius: 0
+    margin-bottom: 0
+    position: relative
+    .close
+      position: absolute
+      top: 0
+      right: 0
+
+.announcement-alert-inner-html > :last-child
+  margin-bottom: 0
+
+.group-header
+  font-size: 1.2em
+  font-weight: 500
+  margin: 0 0 1em 0
+  border-bottom: 1px solid gray
+  padding: 2px 0 3px 0
+  margin-right: 2em
+  color: black
+  &:not(:first-child)
+    margin-top: 1em
+
+#adminPortal
+  padding-left: 1rem
+
+#legacy-frame
+  border: none
+  /* courtesy of @wmao, this works. 100% - 102px does not. No one knows why.
+  height: calc(100vh - 102px)
+  width: 100%
+  display: block
+
+.hide-me
+  visibility: hidden
+
+.show-me
+  visibility: visible
+
+.admin-page-image
+  width: 32px
+  height: 32px
+  filter: sepia(90%) hue-rotate(170deg)
+  float: left
+  margin-top: 4px
+  margin-left: 10px
+
+.admin-page-icon
+  width: 32px
+  height: 32px
+  float: left
+  margin-top: 4px
+  margin-left: 10px
+  font-size: 32px
+
+.admin-page-text
+  margin-left: 56px
+
+//  #01202d
+a.admin-page-link-wrapper
+  color: #02445e // color.adjust(#00A1DD, $lightness: -25%)
+
+  .admin-page-link
+    color: $primary
+  &:focus, &:hover
+    text-decoration: none
+  &:focus .admin-page-link, &:hover .admin-page-link
+    text-decoration: underline
+
+.admin-page-description
+  line-height: 120%
+  color: #333333
+  margin-bottom: .5rem
+  padding-bottom: .5rem
+
+.dropdown-item
+  color: #1378bc
+  text-decoration: none
+  display: block
+  text-align: left
+  font-size: 16px
+
+.dropdown-menu
+  background-color: #fff
+  border-radius: 0.4em
+
+#navbar-dropdown
+  padding: 0
+
+  .nav-username
+    display: inline-block
+    padding: .5rem 0 .5rem 1rem
+
+  &:after
+    vertical-align: middle
+    display: none
+
+@media (max-width: 576px)
+  #adminPortal
+    padding-left: 0 !important
+    padding-right: 0 !important
+    > .row
+      margin-left: 0 !important
+      margin-right: 0 !important
+      > .col
+        padding-left: 0 !important
+        padding-right: 0 !important
+    .admin-group
+      border-radius: 0 !important
+      border-left: none !important
+      border-right: none !important
+
+@media (min-width: 576px)
+  #navbar-dropdown:after
+    display: inline-block
+
+  #adminPortal
+    padding-left: 2.5rem
+
+#nav-avatar
+  margin: 0
+  width: 38px
+  height: 38px
+  min-height: 38px
+  min-width: 38px
+  border: 0 solid white
+  box-sizing: border-box
+  border-radius: 50%
+  margin-left: .33rem
+
+#admin-page-alert
+  width: 100%
+
+#reverseProxies-rewriteRules
+  min-height: 8rem
+
+.navbar
+  background-color: white
+
+.flex-row
+  display: flex
+  flex-direction: row
+
+.flex-col
+  display: flex
+  flex-direction: column
+
+.flex-center-vertical-horizontal
+  justify-content: center
+  align-items: center
+
+.text-align-center
+  text-align: center
+
+.bprogress
+  .bar
+    background: #0275d8 !important
+  .peg
+    box-shadow: 0 0 10px #0275d8, 0 0 5px #0275d8 !important
+
+.btn-success
+  background-color: #218739
+  &:hover
+    background-color: #1F7F35
+
+.btn-primary
+  background-color: #0071EB
+
+.line-through
+  text-decoration: line-through
+
+.admin-columns
+  column-count: 1
+
+  .admin-group
+    break-inside: avoid-column
+
+@media (min-width: 768px)
+  .admin-columns
+    column-count: 2
+
+@media (min-width: 1200px)
+  .admin-columns
+    column-count: 3
+
+.config-help
+  cursor: help
+  color: #6c757d
+
+#lo-copyright
+  height: 4rem
+  > div
+    position: absolute
+    bottom: 1.5rem
+    left: 0
+    right: 0
+    text-align: center
+    font-size: .85rem
+    line-height: 1rem
+    color: $gray-600 !important
+    > a
+      &:hover, &:focus
+        text-decoration: underline
+
+@media (prefers-color-scheme: dark)
+  body.admin
+    background-color: $gray-700
+
+  #adminPortal
+    padding-left: 1.5rem
+    padding-right: 1.5rem
+
+    .admin-group
+      background-color: $white
+      border: 1px solid $gray-300
+      padding: .5rem 1rem 0
+      border-radius: .3rem
+      margin-bottom: 1rem
+
+      .group-header
+        margin-right: 1rem
+
+  #paging-stats
+    color: $gray-300
+
+  .refreshButton
+    color: $gray-400 !important
+    &:hover
+      color: $gray-200 !important
+
+  .lo-admin-link.nav-link.active
+    color: white !important
+    &:after, &:focus
+      border-color: #6c757d
+
+  .adminPage-components
+    .form-switch
+      color: $gray-400
+
+  .schema-form, .adminPage-domainSettings, .adminPage-tutorials, .adminPage-analyticBuses, .adminPage-messageBuses
+    color: $gray-200
+
+  .adminPage-domainSettings, .adminPage-tutorials, .adminPage-rights
+    .block-header
+      background-color: color.adjust($gray-700, $lightness: -3%)
+
+  .adminPage-rights
+    color: $gray-300
+
+    .rights-name, .rights-table-role-name
+      color: $gray-200 !important
+
+    .rights-description
+      color: $gray-400
+
+    #rights-table
+      th, td, tr
+        background-color: $gray-700 !important
+        border-color: $gray-800 !important
+
+  .adminPage-tutorials .text-muted
+    color: $gray-300 !important
+
+  .recharts-wrapper
+    background-color: $gray-100
+    border-radius: .3rem
+
+  body.admin
+    .logout-hdr
+      color: $gray-300
+
+    .click-to-login
+      color: $gray-400
+
+  .admin-breadcrumb
+    background-color: #212529
+    border-bottom-color: $gray-800 !important
+
+  .breadcrumbs__separator
+    color: #6c757d
+
+  .breadcrumbs__crumb
+    color: color.adjust($primary, $lightness: +32%)
+
+  .breadcrumbs__section:last-of-type .breadcrumbs__crumb
+    color: #dee2e6
+
+  .navbar
+    background-color: $black
+    border-bottom-color: $black
+    box-shadow: 0 4px 7px -2px rgba(0, 0, 0, 0.13)
+    color: #dee2e6
+
+    .navbar-brand.light-only
+      display: none
+
+    .navbar-brand.dark-only
+      display: block
+
+    .text-muted
+      color: #ced4da !important
+
+    .text-dark
+      color: #dee2e6 !important
+
+    .dropdown-menu
+      background-color: #212529
+      color: #e9ecef
+      border-color: rgba(255, 255, 255, 0.15)
+
+    .dropdown-item
+      color: #e9ecef
+
+      &.disabled
+        color: #6c757d
+
+    .dropdown-item:hover,
+    .dropdown-item:focus
+      background-color: #495057
+      color: #f8f9fa
+
+    .nav-link
+      color: #dee2e6
+      &:focus,&:hover
+        color: #f8f9fa
+    .dropdown.show
+      .nav-link
+        color: #f8f9fa
+  #lo-copyright > div
+    color: $gray-500 !important

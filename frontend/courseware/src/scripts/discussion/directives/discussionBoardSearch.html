@@ -1,0 +1,79 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-board-search my-3 d-print-none">
+  <list-search-triggered
+    search-action="$ctrl.search"
+    search-placeholder="'DISCUSSION_BOARD_SEARCH_PLACEHOLDER'"
+    active-search-string="$ctrl.searchString"
+  ></list-search-triggered>
+
+  <div
+    class="discussion-search-results m-2"
+    ng-if="$ctrl.loaded"
+  >
+    <header class="discussion-board-search-results-header">
+      <h6 class="m-0">
+        <span translate="DISCUSSION_BOARD_SEARCH_RESULTS"></span>
+        <span
+          translate="DISCUSSION_BOARD_SEARCH_COUNTS"
+          translate-values="{ count: $ctrl.searchResultTotal }"
+        ></span>
+      </h6>
+    </header>
+
+    <ul class="discussion-board-search-results list-group">
+      <li
+        class="search-result"
+        title="{{ 'SEARCH_VIEW_RESULTS' | translate }}"
+        ng-repeat="item in $ctrl.searchResultPosts track by item.id"
+        ng-click="$ctrl.viewPost(item)"
+      >
+        <span
+          class="result-column index"
+          ng-bind="($index + 1) + '.'"
+        ></span>
+
+        <span
+          class="result-column user-name"
+          ng-bind="item.user.fullName"
+        ></span>
+
+        <span class="result-column create-time"> ({{ item.createTime | formatDayjs:'lll' }}) </span>
+
+        <span
+          class="result-column content-column"
+          ng-bind="item.contentPreview"
+        >
+        </span>
+
+        <span
+          class="result-column action"
+          role="presentation"
+        >
+          <span translate="SEARCH_VIEW_RESULTS"></span>
+          <span class="icon icon-chevron-right"></span>
+        </span>
+      </li>
+    </ul>
+
+    <span
+      ng-if="$ctrl.searchResultTotal > $ctrl.searchResultPosts.length"
+      translate="DISCUSSION_BOARD_FOUND_TOO_MANY"
+    ></span>
+  </div>
+</div>

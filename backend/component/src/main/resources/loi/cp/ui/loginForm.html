@@ -1,0 +1,643 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="lo-container">
+  <style type="text/css">
+    h3 { font-weight: 300; }
+    #login-dialog {
+    padding: 1em;
+    }
+    #login-dialog form {
+      margin: 0;
+    }
+    .main {
+      padding: 4em 0;
+      margin: 0;
+    }
+    .main .instructions { padding: 0 5%; }
+    .lo-container {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      height: 32em;
+      overflow: hidden;
+      left: 0;
+    }
+    #login-choice, .mechanism {
+      margin: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      transition: left .333s ease-out;
+      -webkit-transition: left .333s ease-out;
+    }
+    #login-choice {
+      left: 0;
+    }
+    .mechanism {
+      left: 100%;
+      display: none;
+    }
+    .mechanisms-n-1 .mechanism, .show-mechanism .mechanism {
+      left: 0;
+    }
+    .mechanisms-n-1 .mechanism {
+      display: block;
+    }
+    .show-mechanism #login-choice {
+      left: -100%;
+    }
+    form fieldset {
+      margin: 4em 8em;
+    }
+    .login-form ul,
+    #login-dialog ul {
+    margin: 0 0 20px 0;
+    list-style-type: none;
+    }
+    #login-dialog .form-group {
+    margin-bottom: 10px;
+    }
+    .login-form label {
+    color: black;
+    display: block;
+    }
+    .login-form label.checkbox {
+    margin: .5em 0 1em 1.5em;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"],
+    .login-form input[type="submit"],
+    .login-form input[type="button"] {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0.5em;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+    border: 1px solid #efefef;
+    border-radius: 0.33em;
+    padding: 0.75em;
+    line-height: 1;
+    height: auto;
+    font-size: 1.15em;
+    }
+    .login-form .lo-btn {
+    background: #58b2e5;
+    display: block;
+    color: #ffffff;
+    border-radius: .33em;
+    font-size: 1.35em;
+    padding: .5em;
+    text-decoration: none;
+    border: 1px solid #bbbbbb;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    }
+    .login-form .lo-btn-alert {
+    background: #e58888;
+    margin-top: .5em;
+    }
+    .login-form .lo-btn-primary:hover {
+    background: #2c9ede;
+    }
+    .login-form .lo-btn-alert:hover {
+    background: #b36666;
+    }
+
+    .login-form a {
+    display: block;
+    text-align: center;
+    }
+    #recover-submit,
+    #reset-submit {
+    margin: .5em 0 0 0;
+    }
+  </style>
+  <script type="text/javascript">
+function show_only(id) {
+    var el = $(id);
+    el.parent().children().hide();
+    el.show();
+}
+
+function show_error(parent, type, reason, specified) {
+    var $msg = $(parent).find('.' + type + 'Reason-' + reason);
+    if (specified) {
+        $msg = $(parent).find('.' + type + 'Reason-Specified').text(specified);
+    } else if (!$msg.length) {
+        $msg =  $(parent).find('.' + type + 'Reason-Error');
+    }
+    show_only($msg);
+    $(parent).find('.' + type + '-error').slideDown();
+}
+
+function show_errors(element, reasons) {
+    if (!reasons || !reasons.length || !reasons[0]) {
+        reasons = [ $('#errorReason-Error').text() ];
+    }
+    var ul = $(element).empty().slideDown();
+    $.each(reasons, function(i, reason) {
+        $('<li>', { text: reason }).appendTo(ul);
+    });
+}
+
+function require_el(id) {
+    $(id).val($.trim($(id).val()));
+    if ($(id).val() === '') {
+        $(id).focus();
+        return false;
+    }
+    return true;
+}
+
+function init_login() {
+    var token = null;
+
+    window.onhashchange = function() {
+        var hash = document.location.hash || '';
+        if (hash.search('#/resetPassword/') >= 0) {
+            token = hash.substring(16);
+            validateResetToken(token)
+                .done(function(reset) {
+                    $('#reset-username').val(reset.username); // type: Recover|Register
+                    $('#reset-form').find('h3').text($('#resetPassword-' + reset.type).text());
+                    show_only('#reset-form');
+                    $('#login-dialog').modal('show');
+                })
+                .fail(function() {
+                    show_only('#reset-invalid');
+                    $('#login-dialog').modal('show');
+                });
+        }
+
+    };
+
+    window.onhashchange();
+
+    $('#login-recover-link').click(function() {
+        show_only('#recover-form');
+        $('#login-dialog').modal('show');
+        return false;
+    });
+
+    $('#login-register-link').click(function() {
+        show_only('#register-form');
+        $('#login-dialog').modal('show');
+        return false;
+    });
+
+    $('#recover-cancel').click(function() {
+        $('#login-dialog').modal('hide');
+    });
+
+    $('#register-cancel').click(function() {
+        $('#login-dialog').modal('hide');
+    });
+
+    $('.login-redirect').val(document.location.pathname + document.location.search + document.location.hash);
+
+    $('#login-dialog')
+        .on('shown', function() { // input:read-write:visible:first fails
+            $(this).children('.modal-dialog').children(':visible').find('input.autofocus').focus();
+        });
+
+    $('.login-form.mechanism')
+        .submit(function(e, submit) {
+            if (submit == 'post') {
+                return true;
+            }
+            var self = this;
+            if (require_el(self.elements.username) && require_el(self.elements.password)) {
+                var username = $(self.elements.username).val();
+                var password = $(self.elements.password).val();
+                var remember = $(self.elements.remember).is(':checked');
+                var mechanism = $(self.elements.mechanism).val();
+                doLogin(username, password, remember, mechanism)
+                    .done(function(response, text, jqxhr) {
+                        $(self).find('.login-error').slideUp();
+                        $(self).trigger('submit', 'post');
+                    })
+                    .fail(function(jqxhr, status, error) {
+                        if (error.reason == 'PasswordExpired') {
+                            token = error.token;
+                            show_only('#change-form');
+                            $('#login-dialog').modal('show');
+                            $(self.elements.password).val('');
+                            $(self).find('.login-error').slideUp();
+                        } else {
+                            show_error(self, 'login', error.reason, error.message);
+                            $(self.elements.password).focus();
+                        }
+                    });
+            }
+            return false;
+        });
+
+    $('#recover-form')
+        .submit(function() {
+            var self = this;
+            $('#recover-form .alert:visible').slideUp();
+            if (require_el('#recover-email')) {
+                var email = $('#recover-email').val();
+                recoverPassword(email, 'emailAddress', null, '/#/resetPassword/')
+                    .done(function(response, text, jqxhr) {
+                        show_only('#recover-message');
+                    })
+                    .fail(function(jqxhr, status, error) {
+                        show_error(self, 'recover', error.reason);
+                        $('#recover-email').focus();
+                    });
+            }
+            return false;
+        });
+
+    $('#reset-form')
+        .submit(function() {
+            var password = $('#reset-password').val();
+            var confirm = $('#reset-confirm').val();
+            if(password != confirm) {
+                var errors = [ $("#errorReason-PasswordMatch").text() ];
+                show_errors("#reset-error", errors);
+                $('#reset-confirm').focus();
+                return false;
+            }
+            resetPassword(token, password)
+                .done(function() {
+                    $('#reset-error').slideUp();
+                    window.location.hash = '';
+                    window.location.reload();
+                })
+                .fail(function(jqxhr, status, error) {
+                    show_errors("#reset-error", error.messages);
+                    $('#reset-password').focus();
+                 });
+            return false;
+        });
+
+    $('#change-form')
+        .submit(function() {
+            var password = $('#change-password').val();
+            var confirm = $('#change-confirm').val();
+            if(password != confirm) {
+                var errors = [ $("#errorReason-PasswordMatch").text() ];
+                show_errors("#change-error", errors);
+                $('#change-confirm').focus();
+                return false;
+            } else if (password === '') {
+                return false;
+            }
+            resetPassword(token, password)
+                .done(function() {
+                    $('#change-error').slideUp();
+                    window.location.reload();
+                })
+                .fail(function(jqxhr, status, error) {
+                    show_errors("#change-error",error.messages);
+                    $('#change-password').focus();
+                 });
+            return false;
+        });
+
+    var emailPattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+
+    $('#register-form')
+        .submit(function() {
+            var state = $('#register-state').val();
+            var given = $.trim($('#register-given').val());
+            var family = $.trim($('#register-family').val());
+            var email = $.trim($('#register-email').val());
+            var password = $('#register-password').val();
+            var confirm = $('#register-confirm').val();
+            if (given === '') {
+                $('#register-error').slideUp();
+                $('#register-given').focus();
+            } else if (family === '') {
+                $('#register-error').slideUp();
+                $('#register-family').focus();
+            } else if ((email === '') || (!emailPattern.test(email) && !email.endsWith("@localmail"))) {
+                if (email === '') {
+                    $('#register-error').slideUp();
+                } else {
+                    var errors = [ $("#errorReason-InvalidEmail").text() ];
+                    show_errors("#register-error", errors);
+                }
+                $('#register-email').focus();
+            } else if ((state != 'Verify') && (password === '')) {
+                $('#register-error').slideUp();
+                $('#register-password').focus();
+            } else if ((state != 'Verify') && (confirm === '')) {
+                $('#register-error').slideUp();
+                $('#register-confirm').focus();
+            } else if (password != confirm) {
+                var errors = [ $("#errorReason-PasswordMatch").text() ];
+                show_errors("#register-error", errors);
+                $('#register-confirm').focus();
+            } else {
+                requestAccount(given, family, email, password, {})
+                    .done(function() {
+                        if (state == 'Automatic') {
+                            $('#register-error').slideUp();
+                            window.location.reload();
+                        } else {
+                            show_only('#register-message-' + state);
+                        }
+                    })
+                    .fail(function(jqxhr, status, e) {
+                    console.log(e);
+                        if ((e.status == 'error') && (e.reason == 'DuplicateUser')) {
+                            var errors = [ $("#errorReason-DuplicateUser").text() ];
+                            show_errors("#register-error", errors);
+                            $('#register-email').focus();
+                        } else if ((e.status == 'error') && (e.reason == 'InvalidPassword')) {
+                            show_errors("#register-error", e.messages);
+                            $('#register-password').focus();
+                        } else {
+                            show_errors("#register-error");
+                        }
+                    });
+            }
+            return false;
+        });
+
+    var activateMechanism = function(el) {
+        if (el.is('.login-form')) {
+            el.find('input[name=username]').select().focus();
+        } else if (el.is('.redirect-form')) {
+            var loc = encodeURIComponent(document.location.href);
+            var url = el.attr('action').replace('{{url}}', encodeURIComponent(loc)); // double escape
+            document.location.href = url.replace('{url}', loc); // single escape
+        }
+    }
+
+    $('.choose-mechanism').click(function() {
+        var el = $('#'+ this.id.substring(7)); // choose-mechanism-1 -> mechanism-1
+        el.css('display', 'block');
+        setTimeout(function() {
+            $('.lo-container').addClass('show-mechanism');
+            setTimeout(function() {
+                $('#login-choice').css('display', 'none');
+                activateMechanism(el);
+            }, 333);
+        }, 1);
+        $(this).blur();
+        return false;
+    });
+
+    if (!$('#login-choice').length) {
+        activateMechanism($('.mechanism'));
+    }
+  }
+
+$(init_login);
+    </script>
+    <set mechanisms="$$api('v2/domain/loginMechanisms')" />
+    <set acreq='Disabled' />
+
+    <div class="mechanism-div mechanisms-n-${ mechanisms.count }">
+        <form id="login-choice" class="login-form" if="${ mechanisms.count > 1 }">
+            <fieldset>
+                <foreach mechanism="${ mechanisms.objects }">
+                    <input id="choose-mechanism-${ mechanism.id }" type="button" class="lo-btn lo-btn-primary choose-mechanism" value="${ mechanism.name }" />
+                </foreach>
+            </fieldset>
+        </form>
+        <foreach mechanism="${ mechanisms.objects }">
+            <set isdirect="${ mechanism.schema == 'directLogin' }"
+                 isldap="${ mechanism.schema == 'ldapLogin' }"
+                 isredirect="${ mechanism.schema == 'redirectLogin' }"
+                 isoidc="${ mechanism.schema == 'oidcLogin' }" />
+            <if test="${ isdirect || isldap }">
+                <form id="mechanism-${ mechanism.id }" class="mechanism login-form form-horizontal" method="POST" action="/api/v2/sessions/loginRedirect">
+                    <fieldset>
+                        <ul class="login-error alert alert-error" style="display: none">
+                            <li class="loginReason-InvalidCredentials">
+                                $$ Invalid username or password. $$
+                            </li>
+                            <li class="loginReason-AccountLocked">
+                                $$ Your account has been locked because of too many failed login attempts. $$
+                            </li>
+                            <li class="loginReason-AccountPending">
+                                $$ Your account has not yet been approved. $$
+                            </li>
+                            <li class="loginReason-AccountUnconfirmed">
+                                $$ Your account has not yet been confirmed. $$
+                            </li>
+                            <li class="loginReason-CookiesBlocked">
+                                $$ Your browser appears to be blocking cookies. $$
+                            </li>
+                            <li class="loginReason-ServerError">
+                                $$ An authentication server error occurred. $$
+                            </li>
+                            <li class="loginReason-Error">
+                                $$ A login error occurred. $$
+                            </li>
+                            <li class="loginReason-Specified"></li>
+                        </ul>
+                        <div class="form-group">
+                            <input type="hidden" name="mechanism" value="${ mechanism.id }" />
+                            <input class="login-redirect" type="hidden" name="redirect" />
+                            <input type="text" name="username" placeholder="$$ Username $$" />
+                            <input type="password" name="password" placeholder="$$ Password $$" />
+                            <label class="checkbox"><input type="checkbox" name="remember" value="true" /> $$ Keep me logged in $$</label>
+                        </div>
+                        <div>
+                            <input class="lo-btn lo-btn-primary" type="submit" value="$$ Login $$" />
+                        </div>
+
+                        <if test="${ isdirect }">
+                            <div if="${ mechanism.passwordRecoveryEnabled }">
+                                <a id="login-recover-link" href="">$$ Forgot password? $$</a>
+                            </div>
+                            <div if="${ mechanism.accountRequests.name != 'Disabled' }">
+                                <set acreq="${ mechanism.accountRequests.name }" />
+                                <a id="login-register-link" href="">$$ Create an account $$</a>
+                            </div>
+                        </if>
+                    </fieldset>
+                </form>
+            </if>
+            <elif test="${ isredirect || isoidc }">
+                <form id="mechanism-${ mechanism.id }" class="mechanism redirect-form" method="GET" action="${ mechanism.redirectUrl }">
+                    <fieldset>
+                        <h3>${ mechanism.name }</h3>
+                        <div class="muted">$$ Your browser should redirect you automatically... $$</div>
+                    </fieldset>
+                </form>
+            </elif>
+            <else>
+                <div>${ mechanism.schema }</div>
+            </else>
+        </foreach>
+    </div>
+
+  <div id="login-dialog" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+
+      <form id="recover-form" class="login-form modal-content form-horizontal" style="display: none" method="POST">
+        <div class="modal-header">
+          <h3>$$ Recover Password $$</h3>
+        </div>
+        <div class="modal-body">
+          <div class="recover-error alert alert-error" style="display: none">
+            <div class="recoverReason-NotFound">
+              $$ Unknown email address. $$
+            </div>
+            <div class="recoverReason-Pending">
+              $$ Your account request is still pending. $$
+            </div>
+            <div class="recoverReason-EmailError">
+              $$ Error sending recovery email. $$
+            </div>
+            <div class="recoverReason-NotEnabled">
+              $$ Password recovery is not enabled. $$
+            </div>
+            <div class="recoverReason-AdminDisallowed">
+              $$ Password recovery is not permitted for administrators. $$
+            </div>
+            <div class="recoverReason-Ambiguous">
+              $$ Your request matched multiple accounts. Please contact your administrator for assistance. $$
+            </div>
+            <div class="recoverReason-Error">
+              $$ Password recovery error. $$
+            </div>
+          </div>
+          <div class="form-group">
+            <input id="recover-email" type="text" name="email" placeholder="Email Address" class="autofocus" />
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-primary" id="recover-submit" type="submit" value="$$ Recover $$" />
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-alert" id="recover-cancel" type="button" value="$$ Cancel $$" />
+          </div>
+        </div>
+      </form>
+
+      <div id="recover-message" style="display: none">
+        <div class="modal-header">
+          <h3>$$ Email Sent $$</h3>
+        </div>
+        <div class="modal-body">
+          $$ A password reset email has been sent to this address. Please check your inbox
+          and follow the instructions provided. $$
+        </div>
+      </div>
+
+      <form id="reset-form" class="login-form modal-content form-horizontal" style="display: none" method="POST">
+        <div class="modal-header">
+          <h3></h3>
+        </div>
+        <div class="modal-body">
+          <ul id="reset-error" class="alert alert-error" style="display: none"></ul>
+          <div class="form-group">
+            <input id="reset-username" type="text" name="username" readonly="readonly" placeholder="$$ Username $$" />
+            <input id="reset-password" type="password" name="password" placeholder="$$ Password $$" class="autofocus" />
+            <input id="reset-confirm" type="password" name="confirm" placeholder=" $$Confirm Password $$" />
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-primary" id="reset-submit" type="submit" value="$$ Submit $$" />
+          </div>
+        </div>
+      </form>
+
+      <div id="reset-invalid" style="display: none">
+        <div class="modal-header">
+          <h3>$$ Invalid Link $$</h3>
+        </div>
+        <div class="modal-body">
+          $$ The reset password link you followed has either expired or
+          already been used. $$
+        </div>
+      </div>
+
+      <form id="change-form" class="login-form modal-content form-horizontal" style="display: none" method="POST">
+        <div class="modal-header">
+          <h3>$$ Change Password $$</h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            $$ Your password has expired and must be changed. $$
+          </div>
+          <ul id="change-error" class="alert alert-error" style="display: none"></ul>
+          <div class="form-group">
+            <input id="change-password" type="password" name="password" placeholder="$$ Password $$" class="autofocus" />
+            <input id="change-confirm" type="password" name="confirm" placeholder="$$ Confirm Password $$" />
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-primary" id="change-submit" type="submit" value="$$ Change $$" />
+          </div>
+        </div>
+      </form>
+
+
+      <form id="register-form" class="login-form modal-content form-horizontal" style="display: none" method="POST" if="${ acreq != 'Disabled' }">
+        <div class="modal-header">
+          <h3>$$ Create Account $$</h3>
+        </div>
+        <div class="modal-body">
+          <ul id="register-error" class="alert alert-error" style="display: none"></ul>
+          <div class="form-group">
+            <input id="register-state" type="hidden" name="state" value="${ acreq }" />
+            <input id="register-given" type="text" name="given" placeholder="$$ Given Name $$" class="autofocus" />
+            <input id="register-family" type="text" name="family" placeholder="$$ Family Name $$" />
+            <input id="register-email" type="text" name="email" placeholder="$$ Email Address $$" />
+            <if test="${ acreq != 'Verify' }">
+              <input id="register-password" type="password" name="password" placeholder="$$ Password $$" />
+              <input id="register-confirm" type="password" name="confirm" placeholder="$$ Confirm Password $$" />
+            </if>
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-primary" id="register-submit" type="submit" value="$$ Register $$" />
+          </div>
+          <div>
+            <input class="lo-btn lo-btn-alert" id="register-cancel" type="button" value="$$ Cancel $$" />
+          </div>
+        </div>
+      </form>
+
+      <div id="register-message-Manual" style="display: none">
+        <div class="modal-header">
+          <h3>$$ Registration Submitted $$</h3>
+        </div>
+        <div class="modal-body">
+          $$ Your account registration was submitted successfully. You will receive an email when your account is confirmed. $$
+        </div>
+      </div>
+
+      <div id="register-message-Verify" style="display: none">
+        <div class="modal-header">
+          <h3>$$ Registration Successful $$</h3>
+        </div>
+        <div class="modal-body">
+          $$ An account activation email has been sent to the email address you entered.
+          Please check your inbox and follow the instructions provided. $$
+        </div>
+      </div>
+
+
+      <div id="errorReason-Error" style="display: none">$$ An error occurred. $$</div>
+      <div id="errorReason-PasswordMatch" style="display: none">$$ The passwords must match. $$</div>
+      <div id="errorReason-InvalidEmail" style="display: none">$$ The email address must be valid. $$</div>
+      <div id="errorReason-DuplicateUser" style="display: none">$$ An account with this email address already exists. $$</div>
+      <div id="resetPassword-Recover" style="display: none">$$ Reset Password $$</div>
+      <div id="resetPassword-Register" style="display: none">$$ Choose Password $$</div>
+
+    </div>
+  </div>
+</div>

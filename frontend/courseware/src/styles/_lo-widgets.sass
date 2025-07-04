@@ -1,0 +1,177 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@import lo-widgets-responsive-table
+
+.half-sized-percent:after
+  content: '%'
+  font-size: 0.5em
+
+.full-sized-percent:after
+  content: '%'
+  font-size: 1em
+
+.loading-spinner
+  width: 1em
+  height: 1em
+  color: inherit
+  vertical-align: middle
+
+  .loading-spinner-path
+    fill: currentColor
+
+.text-bullet
+  line-height: 1.5
+  border-radius: 0.75em
+  background-color: $color-contrasted-accent
+  color: $color-white
+  padding: 0 0.5em
+
+  &.text-bullet-success
+    background-color: $color-success
+
+  &.text-bullet-alert
+    background-color: $color-alert
+
+  &.text-bullet-warning
+    background-color: $color-warning
+
+  &.text-bullet-not-set
+    background-color: gray
+
+.progress-badge,
+.grade-badge,
+.colored-grade-bg,
+.colored-grade
+  @extend .block-badge
+
+table,
+li,
+button
+  .colored-progress-bg,
+  .colored-progress,
+  .colored-grade-bg,
+  .colored-grade
+    /* 3 digits, .75 for the decimal, and 1.25 for % */
+    @include min-width-for-digits(5, $badge-padding-x)
+
+.colored-progress-bg,
+.colored-grade-bg
+  color: $color-body-text
+
+.text-success
+  color: $color-success
+
+.text-alert
+  color: $color-alert
+
+.flex-header
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  align-items: center
+
+  .flex-header-title
+    flex: 1 1 auto
+
+  > *
+    flex: 0 0 auto
+
+    &.title
+      flex: 1 1 auto
+.popout-container
+  position: relative
+  z-index: 1
+
+  &:not(.show) .popout
+    display: none
+
+  .popout
+    position: absolute
+    left: 0
+    width: 100%
+    display: flex
+    justify-content: center
+
+    .popout-content
+      padding: 0.25rem 0.5rem
+      position: relative
+      line-height: 0 //collapse additional spaces
+      border: 1px solid
+      box-shadow: $box-shadow-base
+
+      &:after
+        position: absolute
+        top: 100%
+        left: calc(50% - 0.5em)
+        content: ""
+        border-top: 0.25em solid $color-white
+        border-left: 0.5em solid transparent
+        border-right: 0.5em solid transparent
+
+.truncate-content > *
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+.loading-ellipsis
+  span
+    opacity: 0
+    animation: dot 1.3s infinite
+    animation-delay: 0.0s
+    transition: all ease-in 0.3s
+
+  span+span
+    opacity: 0
+    animation: dot 1.3s infinite
+    animation-delay: 0.2s
+
+  span+span+span
+    opacity: 0
+    animation: dot 1.3s infinite
+    animation-delay: 0.3s
+
+@keyframes dot
+  0%
+    opacity: 0
+  25%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 0
+
+.lo-auto-separator
+  &:first-child,
+  &:last-child,
+  + .lo-auto-separator
+    display: none
+
+
+.layout-grid
+
+  .layout-grid-cell
+    position: relative
+    &.has-focus
+      outline: $primary
+      outline-style: dotted
+      outline-width: 3px
+
+    .cell-focus-explanation
+      position: absolute
+      top: 0
+      left: 50%

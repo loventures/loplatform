@@ -1,0 +1,956 @@
+@CHARSET "UTF-8";
+
+/* Basic */
+
+html, body, ul, ol, ul li, ol li, pre {
+    padding: 0;
+}
+
+html, body {
+    margin: 0 !important;
+}
+
+p, pre {
+    margin: .5em 0;
+}
+
+ul, ol {
+    margin-left: 2em;
+}
+
+body {
+    background-color: white;
+    line-height: 1.5em;
+    color: #303b44;
+}
+
+html, body, td, th, input, .x-panel-mc, .x-tree-node, .x-window-mc, .x-form-field, .cp_normal, textarea {
+    font-family: arial;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.x-form-empty-field {
+    color: gray;
+    font-style: italic;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin: 1em 0;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.4em;
+    margin: .8em 0;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin: .7em 0;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 1em;
+    margin: .6em 0;
+    font-weight: bold;
+}
+
+pre {
+    font-size: 11px;
+}
+
+.x-window-mc {
+    font-size: 11px;
+}
+
+.cp_button {
+    color: #000020;
+}
+
+input.primaryAction {
+    font-weight: bold;
+}
+
+form {
+    margin: 0;
+}
+
+img {
+    border: 0;
+}
+
+hr {
+    border: 0;
+    color: #eeeeee;
+    background-color: #eeeeee;
+    height: 1px;
+}
+
+.separator {
+    margin: 0 .5em;
+}
+
+a,
+a:link,
+a:visited,
+.x-tree-node a span {
+    color: #305099;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus,
+a:active {
+    text-decoration: underline;
+}
+
+/* Content */
+
+html, body {
+    height: 100%;
+}
+
+.cp_page {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -3.5em; /* the bottom margin is the negative value of the footer's height */
+    background: white;
+}
+
+.cp_pageFooter, .cp_footerPush {
+    height: 3.5em; /* .push must be the same height as .footer */
+    clear: both;
+}
+
+.cp_pageBody {
+    outline: none;
+    clear: both;
+}
+
+.cp_pageWithSidebar,
+.cp_pageWithSidebar .cp_pageBody {
+    float: left;
+    min-width: 100%;
+}
+
+.cp_pageWithSidebar .cp_pageBodyInner {
+    margin-right: 16.5em;
+}
+
+.cp_pageSidebar {
+    float: right;
+    margin-left: -16em;
+    width: 16em;
+    margin-bottom: 4em;
+}
+
+.cp_pageBodyInner {
+    word-wrap: break-word;
+}
+
+.cp_pageBodyInnerMost {
+    padding: 0 6px 6px;
+    position: relative;
+}
+
+.cp_contentHeaderMessage,
+.cp_contentHeaderWarning {
+    padding: 4px 4px 4px 25px;
+    margin: 6px;
+}
+
+.cp_contentHeaderMessage a,
+.cp_contentHeaderWarning a {
+    text-decoration: underline;
+}
+
+.cp_contentHeaderWarning {
+    background: white url(../images/warning.png) no-repeat 4px 4px;
+}
+
+.cp_contentHeaderMessage {
+    background: white url(../images/inUse.png) no-repeat 4px 4px;
+}
+
+.contentEntryFooter {
+    background-color: #EEEEEE;
+    color: #181D22;
+}
+
+.cp_navigationBar {
+    background: gray;
+    color: white;
+}
+
+
+.portletHeaderControls a,
+.portletHeaderControls a:link,
+.portletHeaderControls a:visited,
+.cp_navigationBar a,
+.cp_navigationBar a:link,
+.cp_navigationBar a:visited {
+    color: white;
+}
+
+.cp_navigationBar {
+    font-size: .85em;
+    height: 4ex;
+    line-height: 4ex;
+    padding: 0 1ex;
+}
+
+.cp_navigationBar h2 {
+    display: inline;
+}
+
+.cp_navigationBar {
+    margin-bottom: 1ex;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.dirty {
+    margin-left: 0.5em;
+    color: #330000;
+}
+
+.cp_plainPage .cp_pageBodyInner {
+    padding: 1em;
+    border: none;
+}
+
+.cp_pageSidebar {
+    position: relative;
+    z-index: 1; /* for webkit */
+    margin-top: -2px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.mediaProcessingMsg {
+    font-style: italic;
+}
+
+/* Header */
+
+.cp_headerControls {
+    line-height: 26px;
+    /*height: 26px; issue in IE UG-6126*/
+    text-align: right;
+    background: white;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    position: relative;
+    z-index: 2;
+    box-shadow: rgba(0,0,0,.3) 0px 1px 2px;
+}
+
+.meekView .cp_headerControls {
+    border: none;
+}
+
+.cp_headerControls .cp_headerElement {
+    margin: 0 1em;
+}
+
+.cp_headerControls .cp_logoutLink {
+    margin-left: 0;
+}
+
+.cp_backToLink {
+    float: left;
+}
+
+.cp_menuTriangle {
+    font-size: .8em;
+}
+
+#headerSearch {
+    display: inline;
+    line-height: 1;
+}
+
+#headerSearchQuery {
+    width: 10em;
+}
+
+.cp_separator {
+    color: gray;
+    font-size: 1.5em;
+    padding: 0 1ex;
+}
+
+.cp_searchAction {
+    background: lightGray;
+    border-width: 1px;
+    margin: 0 .5ex;
+}
+
+.cp_searchField {
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.cp_searchField,
+.cp_searchAction {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.searchResults,
+#searchResults {
+    padding: 1em;
+}
+
+a.unavailableLink {
+    text-decoration: none !important;
+    color: gray !important;
+    cursor: default !important;
+}
+
+.cp_domainName {
+    float: left;
+    margin: 0 1em;
+    font-weight: bold;
+    line-height: 26px;
+}
+
+.cp_domainImage {
+    background-repeat: no-repeat;
+}
+
+.cp_headerControls .cp_newWindow {
+    float: left;
+    margin-right: 0;
+}
+
+.cp_headerControls .cp_domainImage {
+    float: left;
+    margin-right: 1em;
+}
+
+.cp_domainImage a {
+    outline: none;
+}
+
+.cp_domainImage img,
+.cp_wart img {
+    vertical-align: bottom;
+}
+
+.cp_contentHeader {
+    clear: both;
+}
+
+.cp_pageSidebar,
+.cp_contentHeader {
+    background-color: white;
+}
+
+.cp_assignmentHeader,
+.cp_templateHeader {
+    border-bottom: 1px solid #AAA;
+    padding: 1ex 1em 1em;
+}
+
+.cp_assignmentHeaderStandalone {
+    margin-bottom: 1em;
+}
+
+.cp_assignmentHeaderTitle,
+.cp_templateHeaderTitle {
+  color: gray;
+  font-style: italic;
+}
+
+.cp_contentHeader,
+.cp_pageSidebar,
+.sidelet,
+.cp_headerControls,
+.cp_headerMenu,
+.cp_menu {
+    border-color: darkGray;
+}
+
+.cp_contentHeaderInner {
+    padding: .5em 0 0 .5em;
+}
+.cp_contentHeaderInner h2 {
+    margin: 0;
+}
+
+.cp_profileImage,
+.cp_contentImage,
+.cp_contentIcon {
+    float: left;
+    margin-right: 1em;
+}
+
+.cp_contentImage {
+    max-height: 96px;
+    max-width: 96px;
+}
+
+.cp_contentIcon {
+    max-height: 64px;
+    max-width: 64px;
+}
+
+.cp_assignmentImage {
+    max-height: 75px;
+    max-width: 75px;
+}
+
+.userThumb,
+.cp_contentImage,
+.cp_contentIcon,
+.cp_profileImage {
+    border: 1px solid #E0E0E0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: white;
+}
+.cp_contentImage,
+.cp_contentIcon,
+.cp_profileImage {
+    padding: 3px;
+}
+
+.userThumb {
+    padding: 2px;
+}
+
+.cp_rowControls a,
+.cp_contentControls {
+    margin: .5em;
+    text-align: right;
+}
+
+.cp_contentControls {
+    float: right;
+}
+
+.cp_rowControls a,
+.cp_contentControls a,
+.cp_currentContentControl {
+    margin-left: 2em;
+    white-space: nowrap;
+}
+
+.cp_currentContentControl {
+    color: black;
+}
+
+.cp_contentToolAction {
+    margin-left: 1ex;
+    vertical-align: middle;
+}
+
+.cp_infoLabel {
+    font-style: italic;
+}
+
+.droplet .info,
+.setInformation .info,
+.cp_contentInformation .info {
+    font-size: 0.8em;
+}
+
+.cp_courseContentFrame {
+    min-height: 300px;
+}
+
+.siteNavigation {
+    clear: both;
+}
+
+.revealer .unrevealed {
+    display: none;
+}
+
+a.revealerControl {
+    width: 9px;
+    height: 9px;
+    padding-left: 13px;
+    text-decoration: none;
+    color: black;
+}
+
+a.revealerControl.closed {
+    background: url(../images/revealer-closed.png) no-repeat center left;
+}
+
+a.revealerControl.open {
+    background: url(../images/revealer-open.png) no-repeat center left;
+}
+
+.loginExpired {
+    text-decoration: line-through !important;
+}
+
+.cp_pageLoadingIndicator {
+    position: absolute;
+    top: 1em;
+    left: 50%;
+    z-index: 3;
+    visibility: hidden;
+}
+
+.cp_pageLoadingIndicator div {
+    text-align: center;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    background: #F9EDBE;
+    border: 1px solid #F0C36D;
+    color: #222;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 9px 15px;
+    margin: auto -5em;
+    width: 10em;
+    padding: .75em 0;
+    opacity: 0.8;
+}
+
+.cp_previewIndicator {
+    width: 12em;
+    position: fixed;
+    top: 3px;
+    left: 3px;
+    margin: 0;
+    padding: 4px;
+    font-weight: bold;
+    color: black;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+/* Footer */
+.cp_pageFooter,
+.cp_headerControls,
+.cp_headerMenu,
+.cp_menu {
+    background: white;
+}
+
+.cp_pageFooterInner {
+    border-top: 1px solid gray;
+    padding-top: .5em;
+    font-size: 0.85em;
+}
+
+.cp_pageFooter {
+    float: left;
+    width: 100%;
+}
+
+.cp_wart {
+    float: left;
+    margin-left: 1em;
+    line-height: 8px;
+}
+
+.cp_portlet_instructions {
+    display: block;
+    padding: 1ex 0;
+}
+
+/* Hidden iframe */
+
+.cp_hiddenFrame {
+    visibility: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/* Login dialog */
+
+#loginForm .input-text {
+    height: 18px;
+    width: 172px;
+}
+#loginForm .input-select {
+    height: 20px;
+    width: 180px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Sidelet */
+
+.sidelet {
+    padding-top: 1em;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+}
+
+.sidelet .wiki-page-node {
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+.sidelet .tagCloud {
+    overflow: hidden;
+
+}
+
+.sideletHeader {
+    overflow: visible;
+    text-align: left;
+}
+
+.contentFooterTabActive {
+    font-weight: bold;
+}
+
+.contentFooterTabActive a {
+    color: white;
+}
+
+.sideletBody {
+    padding: .5em 0 1em 0;
+}
+
+.sideletBodyLine {
+    display: block;
+    margin-left: 1em;
+    text-indent: -1em;
+    clear: both;
+}
+
+.standaloneSideletAction .sideletBodyLine {
+    margin-left: 0;
+    text-indent: 0;
+}
+
+.sideletBodyNote {
+    font-size: 85%;
+}
+
+.standaloneSideletAction {
+    margin-top: 2px; /* to make up for the -2px margin-top on the sidebar */
+    padding-bottom: 1em;
+}
+
+.cp_button,
+a.buttonLink {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px 1em;
+    border: 1px solid transparent;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.cp_button,
+a.buttonLink,
+a.buttonLink:visited,
+a.buttonLink:link {
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+}
+
+.cp_button:hover,
+.cp_button:focus,
+a.buttonLink:focus,
+a.buttonLink:hover {
+    background-color: #EEEEEE;
+    border-left: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    color: black;
+    cursor: pointer;
+}
+
+.cp_button:active,
+a.buttonLink:active {
+    border-left: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
+    border-right: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    border-style: inset;
+}
+
+.cp_primaryButton.cp_button,
+.cp_primaryButton.buttonLink,
+[type="submit"].cp_button {
+    padding-left: 3em;
+    padding-right: 3em;
+}
+
+.cp_button.submitting {
+    background-image: url(../images/wait.gif);
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+a[disabled].buttonLink,
+a[disabled].buttonLink:hover,
+a[disabled].buttonLink:focus,
+[disabled].cp_button,
+[disabled].cp_button:hover,
+[disabled].cp_button:focus {
+    background-color: #c9c9c9;
+    color: #808080;
+    cursor: default;
+    border: 1px solid transparent;
+}
+
+.standaloneSideletAction a {
+    display: block;
+    width: 13.5em;
+}
+
+.cp_buttonDiv .cp_button,
+#addComment-form .cp_button,
+.siteContentHeaderControls a {
+    margin-top: 1ex;
+    margin-right: 1em;
+}
+
+.cp_form {
+    margin-top: 1ex;
+}
+
+.cp_formHeaderControls {
+    float: right;
+    margin-top: 1ex;
+}
+
+/* Common */
+
+.normal {
+}
+
+.undisplayed {
+    display: none;
+}
+
+.cp_offScreen {
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.displayChild .displayable {
+    display: none;
+}
+
+.displayChild .displayed {
+    display: block;
+}
+
+.cp_contentHeader .cp_profileImage {
+    float: left;
+}
+
+.profileBanner, .profileBanner img {
+    max-height: 64px;
+}
+
+.profileBanner {
+    margin-bottom: .5em;
+}
+
+.cp_profileImage {
+    max-width: 96px;
+    max-height: 96px;
+}
+
+.cp_popupProfile .cp_profileImage {
+    max-width: 48px;
+    max-height: 48px;
+}
+
+.profileInformation {
+    float: left;
+    padding-top: 1ex;
+    max-width: 50%;
+}
+
+.groupDetailPane {
+    height: 100%;
+    padding: 1em;
+    overflow-y: auto;
+}
+
+.groupMemberInfo {
+    font-size: .9em;
+    padding: .5em;
+}
+
+.groupMemberInfo a {
+    float: right;
+}
+
+.allClear {
+    clear: both;
+    font-size: 1px;
+    height: 1px;
+}
+
+.cause {
+    margin-left: 10px;
+    text-indent: -10px;
+}
+
+/* Don't want drag proxy content overflowing since it would exceed constraint. */
+.x-dd-drag-proxy {
+    overflow: hidden;
+}
+
+/* Don't display actions or description - the latter because it is always displayed on a single over-long line. */
+.x-dd-drag-proxy .folderEntryTitleAction,
+.x-dd-drag-proxy .portletHeaderControls,
+.x-dd-drag-proxy .portletFooterControls,
+.x-dd-drag-proxy .folderEntryDescription {
+    display: none;
+}
+
+.folderEntryTitleAction {
+    float: right;
+    padding-top: 2px;
+    margin-left: 5px;
+}
+
+.deleteSite {
+}
+
+.dragHandle {
+    cursor: move;
+}
+
+.miniProfile,
+.miniRecipient,
+.pickerPanel .cell.message .inner,
+.pickerPanel .cell.loading .inner {
+    float:left;
+    text-align: center;
+    height: 64px;
+    width: 94px;
+    border: 1px dotted #DEDEDE;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 3px;
+    overflow: hidden;
+    background: white;
+}
+
+.pickerPanel .cell.message .inner,
+.pickerPanel .cell.loading .inner {
+    line-height: 64px;
+}
+
+.profileRole {
+    font-style: italic;
+}
+
+.miniRecipient {
+    height: 72px;
+    margin: 0 0 5px 5px;
+}
+
+.miniProfile a:hover {
+    text-decoration: none;
+}
+
+a:hover .miniProfileName {
+    text-decoration: underline;
+}
+
+.miniProfileName,
+.miniProfileRole {
+    text-align: center;
+    font-size: .75em;
+    white-space: nowrap;
+}
+
+.miniProfileRole {
+    font-style: italic;
+}
+
+.miniProfileImage {
+    vertical-align: bottom;
+}
+
+.miniProfileImage, .thumbnail {
+    width: 48px;
+    height: 48px;
+}
+
+.cp_roundedThumbnail {
+    background-color: white;
+    border: 0px solid white;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.microRecipient {
+    white-space: nowrap;
+}
+
+.pagingButtons {
+    margin: 0 2em;
+}
+
+.pagingButtonNext {
+    margin-left: 20em;
+}
+
+.sideletBodyLine .disabled,
+.calendar .cell .disabled,
+.controls .disabled,
+.virtualPanel .cell .disabled,
+.cp_navigationBar .disabled,
+.cp_noLink {
+    color: gray;
+}
+
+/* dialogs */
+
+.dialog {
+    background: white;
+    padding: 5px;
+}
+
+.cp_dialog_body {
+    padding: .5em;
+}

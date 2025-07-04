@@ -1,0 +1,1980 @@
+irrelevant label,English (US)
+IETF language tag,en-us
+lo.authoring,Authoring
+ASSESSMENT_RESULTS,View Results
+Accessibility,Alternative text
+AccessibilityIconDescription,Describe the icon for assistive technology
+ACTIVE_FILE,Active File
+AND,and
+ADD,Add
+ADD_ASSET,Create New
+ENTER_NUMBER_OF_QUESTIONS,Number of Questions
+ADD_A_FILE,Add File
+ADD_ANOTHER,Add another
+UPLOAD_A_FILE,Upload File
+Administration,Administration
+Advanced Edit,Advanced Edit
+ALT_TEXT,Alt Text
+EDIT_IMAGE_ALTTEXT,Alternative text
+Assesses,Assesses
+assesses,Assesses
+assessment,Assessment
+AssessmentShowConfidenceIndicatorTrue,Yes
+AssessmentShowConfidenceIndicatorFalse,No
+AssessmentCreditType,Credit Type
+AssessmentFailExplanation,Click to assign the learner a grade.
+AssessmentFormativeDescription,Question Result Feedback
+AssessmentFormativeLabel,Show results
+asset.assetType,Content Type
+asset.edit.courseSetup.label.structure,Structure
+ASSET_COPY_SUCCESS,Asset copied
+ASSET_COPY_FAILURE,Asset not copied
+ASSET_SAVE_FAIL,The asset was not saved!
+ASSET_SAVE_SUCCESS,The asset was successfully saved!
+ASSET_INVENTORY_COUNT,Count
+ASSET_INVENTORY_TYPES,Types
+ASSET_PROPERTY_TYPE,Content Property Types
+ASSET_SCORE_PERCENT,Score (%)
+AssetDurationPlaceholder,Expected Time in Minutes
+binDropQuestion.1,Classification
+binDropQuestion.1-plural,Classifications
+essayQuestion.1,Essay
+essayQuestion.1-plural,Essays
+fillInTheBlankQuestion.1,Fill In the Blank
+fillInTheBlankQuestion.1-plural,Fill In the Blanks
+likertScaleQuestion.1,Likert Scale
+matchingQuestion.1,Matching
+matchingQuestion.1-plural,Matchings
+multipleChoiceQuestion.1,Multiple Choice
+multipleChoiceQuestion.1-plural,Multiple Choices
+multipleSelectQuestion.1,Multiple Select
+multipleSelectQuestion.1-plural,Multiple Selects
+assetQuestion.openMath,Open Math
+orderingQuestion.1,Ordering
+orderingQuestion.1-plural,Orderings
+ratingScaleQuestion.1,Rating Scale
+surveyEssayQuestion.1,Essay
+surveyChoiceQuestion.1,Multiple Choice
+trueFalseQuestion.1,True or False
+trueFalseQuestion.1-plural,True or Falses
+observationAssessment.1,Observation Assessment
+observationAssessment.1-plural,Observation Assessments
+AUTHORING_DIAGNOSTICS_ATTEMPT_HELP,"NOTE: To ensure proper personalization of a learner's learning path, diagnostics can only be authored with one attempt. Instructors can still reopen the diagnostic for a learner to retake it from the instructor interface."
+Authoring,Authoring
+diagnostic.1,Diagnostic
+diagnostic.1-plural,Diagnostics
+Bin,Category
+Add Bin,Add ``Bin``
+BinDropInstructions,"Create Categories and add corresponding Items in each Category. Use the Distractors Category for unmatched Items. Learners see the full set of Items, randomized, and are prompted to classify them correctly."
+BIN_DESCRIPTION_PLACEHOLDER,Enter ``Bin`` description
+BindropItemLengthAlert,Distractor text cannot be greater than 255 characters.
+CANCEL,Cancel
+CHAT_YOU,you
+CHAT_MESSAGE_OTHER_AUTHORS,Message other authors here...
+CHAT_TITLE,Project Chat
+CHAT_UNREAD_MESSAGES,%{unreadCount} unread messages.
+PRESENCE_OFFLINE,Reconnect presence session.
+EDIT,Edit
+CAPTION,Caption
+CLICK_TO_EDIT_CONTENT,Click to edit content.
+Content,Content
+COPY,Copy
+CLONE,Clone
+LINK,Link
+COPY_EMBED_CODE,Copy Embed Code
+Correct,Correct
+CorrectFeedback,Correct response feedback
+CREATE,Add
+DESCRIPTION,Description
+Disable Confidence,No
+discussion.1,Discussion Board
+discussion.1-plural,Discussion Boards
+discussionPostNotification,Discussion Board Update
+discussions,Discussion Boards
+DONE,Done
+Duration,Duration
+ENTER,Enter
+Error,Error
+ERROR_PAGE_TITLE,We're sorry. An error has occurred.
+ERROR_PAGE_TITLE_CONTACT,"If the problem persists, please contact the system administrator."
+ERROR_PAGE_TITLE_TEXT,Please navigate back home and try again.
+Feedback,Feedback
+file,File
+FILE,File
+FILES,Show/Hide Files
+audio.1,Audio File
+file.1,File Upload
+fileBundle.1,File Bundle
+fileBundle.1-plural,File Bundles
+image.1,Image File
+video.1,Video File
+html.1,HTML Page
+html.1-plural,HTML Pages
+scorm.1,SCORM Activity
+scorm.1-plural,SCORM Activities
+js.1,JS File
+css.1,CSS File
+webDependency.1,Web Package
+fileBundle,File Bundle
+fileBundle.displayFiles,Display Files
+fileBundle.displayFilesInfo,Please select the files you wish to expose directly in the learning path.
+fileBundle.displayName,Display Name
+fileBundle.enterDisplayName,Enter display name...
+fileBundle.loading,Loading
+fileBundle.path,Path
+fileBundle.upload,Upload
+fileBundle.uploadFolderError,A folder is required with this selection type.
+fileBundle.uploadType,Upload Type:
+fileBundle.uploadType.folder,Upload Folder
+fileBundle.uploadType.zip,Upload Zip File
+fileBundle.uploadZip,Upload Zip
+fileBundle.uploadZipError,A zip file is required with this selection type.
+,
+,
+fillInTheBlank,Fill in the Blank
+Filter by assignment name,Filter by Assignment
+FILTER_BY_TYPE,Filter by Type
+Final Answer,Save Answer
+Final Project,Final Project
+final_project_milestone,Final Project Milestone
+assignment.1,Assignment
+assignment.1-plural,Assignments
+FinalProjectGradeAlt,Your final project grade is {{score}}
+FinalProjectPreview,Preview
+FIND,Find
+FIND_ADD,Find & Add
+FIND_ADD_TEXT,Find & Add
+findADDText,Find
+FIND_BY_ID,Find by ID
+FIND_CHILD_BUTTON,Find
+FormativeAssessment,After each question
+FROM,From
+GALLERY_MEDIA,Gallery Media
+GalleryInfo,Gallery Info
+General Result Feedback,Rationale and Remediation
+GeneralResourcesExplanation,Supplemental or Optional Resources
+givenName,First Name
+globalResources,Global Resources
+,
+,
+Gradebook,Gradebook
+gradebookTabCategories,Assignments
+gradebookTabGrades,Grades
+gradebookTabSettings,Settings
+gradeNotification,New Assignment Grade
+cblRubric,Rubric
+rubric,Rubric
+GRADABLE_LABEL,Include in Gradebook
+GRADABLE_YES,Yes
+GRADABLE_NO,No
+html,HTML
+HTML_EDITING_HELP_TEXT,Enter HTML below
+Icon,Icon
+ID,ID
+IMAGE,Image
+image,Image
+ImageGallery,Image Gallery
+IncorrectFeedback,Incorrect response feedback
+Insert blank,Insert blank
+Instructions,Instructions
+INSTRUCTIONS,``Instructions``
+Instructor,Instructor
+items,Items
+LAST_ACTIVE,Last active %{ago}.
+LOGIN_REMEMBER,Keep me logged in
+Loading,Loading
+Log Out,Log Out
+Logged Out,Logged Out
+Login,Login
+Login Required,Login Required
+Login_AccountLocked,Your account has been locked because of too many failed login attempts.
+Login_AccountPending,Your account has not yet been approved.
+Login_AccountUnconfirmed,Your account has not yet been confirmed.
+Login_Error,A login error occurred.
+Login_InvalidCredentials,Either your username or password is incorrect. Please try again or click Forgot password? for help.
+Login_CookiesBlocked,Your Web browser appears to be blocking cookies. Please check your settings or try a different browser.
+LOGIN_REDIRECTING,Redirecting...
+Logout,Log Out
+LogoutErrorModal,Session Expired
+LogoutErrorModalReason,You have been logged out. Click OK to log in again. Click Cancel if you need to first copy in-progress work before logging in again.
+
+MainContentStarts,Now in the main content area
+Manual Grade,Manual Grade
+Many,Many
+matching,Matching
+MERGING,In Progress
+Messaging,Send Email
+MESSAGING_EMAIL_POSTFIX_COURSEINFO,in {0}
+MESSAGING_EMAIL_POSTFIX_USER,Sent by {0} {1}
+milestone,Milestone
+milestones,Milestones
+Minutes,Minutes
+Misleading,Misleading
+module,Module
+MODULE_NO_SCORE,No Score Available
+MODULE_NOT_STARTED,Not Started
+MODULE_OVERALL_GRADE,Overall Module Grade
+MODULE_PROGRESS,{{completedCount}} / {{totalCount}} Activities
+modules,Modules
+MOST_RECENTLY_VISITED,Most recently visited asset
+MoveDown,Move Down
+MoveUp,Move Up
+MultiPageAssessment,1 question per page
+multipleChoice,Multiple Choice
+multipleSelect,Multi Select
+multiSelect,Multi Select
+N_A,Not applicable
+Nailed it,Very Sure
+NAME,Name
+Navigate,Navigate
+NAVIGATE_CONTENT,Use the left-hand side to navigate content.
+NavigationHierarchy,Navigation Hierarchy
+NeedsReview,Ungraded Attempt
+Never,No activity
+NEW,Ready
+NewWindowInstructions,Click link to open in a new window.
+NO_CONTENT,No content added. Use buttons above to add or create the first one.
+NO_PROPERTY_AVAILABLE,Not Set
+NoCredit,Does Not Count for Grade
+NoFiles,No Files
+NONE,None
+NotificationBody_discussionPostNotification,{{time | formatMoment:l LT}}: There are new posts in {{title}}.
+NotificationBody_gradeNotification,{{time | formatMoment:l LT}}: You received a new grade for {{title}}.
+NotificationHeader_discussionPostNotification,New Discussion Board Posts
+NotificationHeader_gradeNotification,New Assignment Grade
+NotificationInformation,New activity in {{title}} on {{time | formatMoment:s}}.
+NOTIFICATION_INSTRUCTIONS,Message the learner
+NotRequired,Not Required
+Number,Number
+OFF,Off
+OK,OK
+ON,On
+One,One
+or,or
+ordering,Ordering
+PARENT,Parent
+picker.Ok,Add Selected
+course.1,Course
+course.1-plural,Courses
+lesson.1,Lesson
+lesson.1-plural,Lessons
+module.1,Module
+module.1-plural,Modules
+unit.1,Unit
+unit.1-plural,Units
+chapter.1,Chapter
+chapter.1-plural,Chapters
+Please describe the issue,Please describe the issue.
+PointsDescription,You scored {{pointsEarned}} out of {{pointsPossible}} points.
+Post Count,Posts
+Posted,Posted
+PostMarkedViewed,Click to show you have viewed this post.
+postTest,Post-Test
+PostTest,Post-Test
+Powered by,Powered by
+Pre Test,Show What You Know
+PRE_TEST_RESULTS,View Results
+PRE_TEST_RESUME,Resume
+PRE_TEST_START,Show What You Know
+PRE_TEST_RESTART,Retry
+Preparing quiz...,Loading
+preTest,Show What You Know
+PreTest,Show What You Know
+PretestResultsNondiscouragingMessage,"Great Job! You've just completed the Show What You Know Activity. No matter what you scored, the learning activities you will engage in will build upon the knowledge and skills you are bringing into the course. Before moving back to your learning path, you may want to take a moment to review the results for each of the questions in this Show What You Know exercise. To review your answers, select a submission timestamp listed above. Above all, keep up the good work! You can do this!"
+PreTestScore,Diagnostic Score
+pretTest,Show What You Know
+PREVIEW,Preview
+PREVIOUS,Previous
+root.1,Root
+root.1-plural,Roots
+program,Program
+program-plural,Programs
+root.1Description,Root Description
+ASSIGNMENT_INSTRUCTIONS,Instructions
+DISCUSSION_INSTRUCTIONS,Instructions
+
+Question,Question
+question,Question
+Question Text,Question Prompt
+QuestionConfidenceBreakdown,Chart Breakdown
+QuestionType,Asset Question
+QuizResultsCorrect,{{correct}} correct out of {{total}} total question(s)
+reading,Reading
+,
+,
+Reading Material,Reading Material
+readingAlt,Reading material
+ReadingInstructions,Content
+ReadingInstructionsLabel,Reading Material
+readingMaterial,Reading Material
+ReadingMaterialLabel,Reading Material Upload
+recipientPicker.Roster,Directory
+recipientPicker.To,Send message to:
+RecoverEmailSent,A password reset message has been sent to your email address. Please check your inbox and follow the instructions provided.
+RecoverPassword_AdminDisallowed,Password recovery is not permitted for administrators.
+RecoverPassword_Ambiguous,Your request matched multiple accounts. Please contact your administrator for assistance.
+RecoverPassword_EmailError,Error sending recovery email.
+RecoverPassword_Error,Password recovery error.
+RecoverPassword_NotEnabled,Password recovery is not enabled.
+RecoverPassword_NotFound,Unknown username or email address.
+RecoverPassword_Pending,Your account request is still pending.
+REFRESH,Refresh
+RELATIONSHIP,Relationship
+Remove,Remove
+RemoveGradebookOverride,Remove Override Grade
+RemoveGradebookOverrideTitle,A gradebook override is present. To grade using the rubric click this button.
+Replies,Replies
+Reply,Reply
+REQUIRED,Required
+RESET,Reset
+ResetLogin,Submit
+ResetPassword_Error,Password reset error.
+ResetPassword_Mismatch,The passwords must match.
+ResetTokenInvalid,The Reset Password link you followed has either expired or has already been used.
+resource,Resource
+resource.1,Legacy Learning Activity
+resource.1-plural,Learning Activities (legacy)
+lti.1,LTI Activity
+lti.1-plural,LTI Activities
+SELECT_LTI_TOOL,LTI Tool
+LTI_TOOL_URL,Tool Url
+LTI_TOOL_KEY,Tool Key
+LTI_TOOL_SECRET,Tool Secret
+LTI_INCLUDE_USERNAME,Include Username
+LTI_INCLUDE_ROLES,Include Roles
+LTI_INCLUDE_ADDRESS,Include Address
+LTI_INCLUDE_CONTEXT_TITLE,Include Context Title
+LTI_INCLUDE_IN_GRADEBOOK,Include In Gradebook
+LTI_LAUNCH_STYLE,Launch Style
+LTI_LAUNCH_DEFAULT_PAGE,Use Connection Default (Embedded Frame)
+LTI_LAUNCH_DEFAULT_WINDOW,Use Connection Default (New Window)
+LTI_LAUNCH_IN_PAGE,Embedded Frame
+LTI_LAUNCH_IN_NEW_WINDOW,New Window
+AddCustomLti,Add custom parameter
+AddNewCustom,Add
+LTI_NEW_CUSTOM_KEY_PLACEHOLDER,Enter a key
+INVALID_CUSTOM_PARAM,Invalid parameter name
+LTI_RESET_CUSTOM_DEFAULT,Reset
+LTI_REMOVE_CUSTOM_PARAM,Remove
+,
+Resource Type,Resource Type
+REPLACE,Replace
+Resources,Resources
+RestartIloTitle,Restart?
+,
+rubric.1,Legacy Rubric
+rubric.1-plural,Rubrics
+RubricLevelIndex,Level {{index + 1}}
+RubricManualGrade,Enter a score between {{min}} and {{max}}.
+rubric.1,Rubric
+rubric.1_DESCRIPTION,Expectations for grading that support competency-aligned criteria
+RUBRIC_POINTS,Points
+RUBRIC_CRITERIA,Criteria
+RUBRIC_CRITERION_HELP_TEXT,"Rubric criteria are the components of an assessment against which a learner will be graded. Add more criteria as needed."
+RUBRIC_CRITERIA_EMPTY,No rubric criteria have been authored yet. Click the Add button to make your first criterion.
+CRITERIA_NAME,Criterion Title
+CRITERIA_NAME_PLACEHOLDER,Criterion Title
+CRITERIA_DESCRIPTION,Criterion Description
+CRITERIA_DESCRIPTION_PLACEHOLDER,Criterion Description
+CRITERIA_POINTS,Points
+RUBRIC_CRITERIA_HELP_TEXT,"Criterion levels are the grading scale for a rubric criterion. Add more levels, as needed."
+CRITERION_LEVELS,Criterion Levels
+CRITERION_LEVEL,Level
+CRITERION_LEVEL_NAME,Level Title
+CRITERION_LEVEL_NAME_PLACEHOLDER,Level Title
+CRITERION_LEVEL_DESCRIPTION,Level Description
+CRITERION_LEVEL_DESCRIPTION_PLACEHOLDER,Level Description
+CRITERION_LEVEL_POINTS,Points
+ADD_CRITERION_LEVEL,Add Level
+CRITERION_LEVEL_POINTS_PLACEHOLDER,Level Points
+CRITERION_POINTS_TOOLTIP,Points
+CRITERION_COMPETENCIES,Competency Associations
+CRITERION_COMPETENCY_DUPLICATE_ERROR,A competency can only be associated with a criterion once
+EXPAND_ALL_COLLAPSE_ALL,Expand/Collapse All
+SafariInstructionsLTI,"- If no popup opened, you must enable popups on this browser. Go to Safari > Preferences > Security and uncheck Block pop-up windows."
+sageIlo,Self Check
+sageResource,Resource
+SameType,The from and to type must be different.
+SAVE,Save
+SAVING,Saving...
+SAVED,Saved
+SAVE_HTML,Save
+SaveResumeAttemptInfo,Attempt {{onAttempt == 0 ? 1 : onAttempt}} {{maxAttempts < 9000 ? 'of ' + maxAttempts : ''}}
+SaveResumeLater,Save and Return to Learning Path
+Saving progress...,Save and Exit
+ScoreSummaryLabel,Score Summary
+ScreenReaderBarChart,In {{xAxis}} there are {{yAxis}} items.
+SEARCH,Search
+SEARCH_FILTERS,Search Filters
+SELECT_QUESTION_TYPE,Select Question Type
+ServerProcessing,Server Processing
+sessionExpiredMessage,"Due to lack of activity, your session has expired."
+sessionExpiringMessage,"Are you still there? Click Stay logged in to keep working. Otherwise, you'll be logged out {{expiresIn}} to protect your security."
+SESSION_TIMEOUT_MESSAGE,"Are you still there? Click Stay logged in to keep working. Otherwise, you'll be logged out soon to protect your security."
+CONTINUE_SESSION,Stay logged in
+Show Compact,Show Compact
+Show Full,Show Full
+Show Mine,Show My Answer
+showAccurateGrades,Show Accurate Grades
+simpleAssessment,Assessment
+SinglePageAssessment,All questions on 1 page
+SinglePageAssessmentLabel,Layout
+String,Text
+Student Preview,Learner Preview
+STUDENT_ASSIGNMENT_OVERALL,Overall
+STUDENT_USER_ONLY,Show My Posts
+StudentAssignmentOverall,Overall Grade
+StudentCount,View Learners ({{count}})
+StudentHasNoSubmission,No Submission
+StudentList,Learners Enrolled in Course
+Students,Learners
+StudyPlan,Learning Path
+structure,Structure
+Submit,Submit
+SUBMIT,Submit
+Submit Submission,Submit
+Submitting...,Submitting
+subtitle,Subtitle
+SUCCEEDED,Success
+SummativeAssessment,After assessment completion
+SyncLibrary,Sync Library
+TakePostTest,Show What You Know
+TakePreTest,Show What You Know
+task.subTask.error,Errors
+task.subTask.info,Info
+task.subTask.warning,Warnings
+Teaches,Teaches
+teaches,Teaches
+Technical Accuracy,Technical Accuracy
+Textbook,Textbook
+textbook,Textbook
+textbook-plural,Textbooks
+Threads,Threads
+TimeExplanation,It should take {{time}} to complete this item
+title,Title
+TITLE,Title
+TITLE_OF_COPY,Title of Copy
+TO,To
+TooManyFailedLogins,You have entered the incorrect login information too many times. Please try again later.
+TOP_LEVEL_TYPE,Top Level Type
+TRUE,Yes
+trueFalse,True/False
+TYPE,Type
+typeahead.loading,Loading Names...
+TYPES,Types
+undefined,undefined
+uniform,Uniform Distribution
+Unread Only,Hide read posts.
+UnreadNotifications,Unread Notifications
+Updated,Updated
+UPLOAD,Upload
+UPLOAD_HTML,Upload HTML
+UPLOAD_HTML_TO_START,HTML Viewer
+UPLOAD_ZIP,Upload Zip
+UploadSuccessful,Upload Successful
+Usages,Usages
+Use Confidence,Yes
+User Only,Current User Only
+UserListInstructionsSR,"The list of users first name, last name if they have pending attempts and then a grade if present."
+LOGIN_FORM_USERNAME,Username
+Users,Users
+UsersCompleted,Submitted
+UsersNotStarted,No Submission
+UserStudyPlan,{{username}}'s Learning Path
+video,Video
+videoAlt,This is a video to watch.
+,
+,
+VideoEmbedLabel,Video Embed Link
+VideoUploadLabel,Video File Upload
+videoEmbedInputLabel,Video URL
+audioEmbedInputLabel,Audio URL
+,
+View All Course Assignments,View All Course Assignments
+View Topics,Show Learning Outcomes
+ViewAllNotifications,View All Notifications
+ViewAssignmentList,My Grades
+ViewPreTest,Show What You Know
+visitation,Visitation
+Weight,Weight
+WRITE_ALT_TEXT,Write alternative text.
+WRITE_CAPTION_HERE,Write a caption.
+WRITE_GALLERY_DESCRIPTION,Write a description.
+WRITE_GALLERY_TITLE,Write a title.
+WRITE_IMAGE_TITLE,Write an image title.
+,
+LOADING_SPINNER_TEXT,Loading...
+,
+ASSET_ITEM_COMPLETED,Done
+ASSET_TIME_EXPLANATION,It should take {{ durationHR }} to complete this item.
+ASSET_TIME_DURATION,{{ durationHR }}
+ASSET_OVERDUE,Overdue
+ASSET_NEARDUE,Nearly due
+PROGRESS_TOTAL,Contains {{total}} Activities
+ASSET_PROGRESS,{{completions}} / {{total}} Activities
+ASSET_PROGRESS_NOT_STARTED,Not Started
+ASSET_VIEW_CARD,View as cards.
+ASSET_VIEW_PREVIEW,View as a list.
+ASSET_GO_UP,Return to Learning Path
+COURSE_CONTENT_AREA_TITLE,Learning Path
+COURSE_ASSIGNMENT_LIST,Assignments
+COURSE_HOME,Learning Path
+COURSE_DISCUSSION_BOARDS,Discussions
+,
+,
+MODULE_GRADE_OVERALL,Overall Module Grade
+MODULE_GRADE_NO_SCORE,No Score Available
+USER_STUDY_PLAN_MESSAGE,{{username}}'s Learning Path
+PLAYLIST_RETAKE,Retake Self Check
+PLAYLIST_CHART_MESSAGE,{{correct}} correct out of {{total}} total question(s)
+PLAYLIST_FAILED_MESSAGE,
+PLAYLIST_GRADABLE_CONCLUSION,Results
+RESOURCE_TYPE,Resource Type
+RESOURCE_DIRECT_LINK,Open in a New Tab
+RESOURCE_NEW_WINDOW,Click link to open in a new window.
+RESOURCE_SAFARI_INSTRUCTIONS,"- If no popup opened, you must enable popups on this browser. Go to Safari > Preferences > Security and uncheck Block pop-up windows."
+,
+,
+NOTIFICATIONS_HEADING,Notifications
+NOTIFICATIONS_DISMISS_EXPLANATION,Click to dismiss event.
+NOTIFICATIONS_DISMISS_BUTTON,Dismiss Notification
+NOTIFICATIONS_GOTO_PAGE,View All Notifications
+NOTIFICATIONS_HEADER,All Notifications
+NOTIFICATIONS_HEADER_discussionPostNotification,New Discussion Board Post
+NOTIFICATIONS_BODY_discussionPostNotification,"{{time | formatMoment:""l LT""}}: There is a new post in ""{{title}}""."
+NOTIFICATIONS_BODY_EXTERN_discussionPostNotification,There is a new post for {discussion.name} in course {course.name}.
+NOTIFICATIONS_EMAIL_SUBJECT_discussionPostNotification,"{course.name} - New Post in ""{discussion.name}"""
+NOTIFICATIONS_EMAIL_BODY_discussionPostNotification_html,"{post.user.fullName} made a new post in ""{discussion.name}"":"
+NOTIFICATIONS_EMAIL_BODY_ANONYMOUS_discussionPostNotification_html,"There is a new post in ""{discussion.name}""."
+NOTIFICATIONS_EMAIL_OUTRO_CAN_REPLY_discussionPostNotification_html,"Please log in to view this on your notifications page. If you no longer wish to receive email notifications, please log in and change your notification settings. You can reply to the discussion post by replying to this message."
+ALERTS_HEADER_discussionPostNotification,Discussion Board Update
+ALERTS_BODY_discussionPostNotification,"{{count}} update(s) in ""{{notification.name}}"", newest on {{notification.time | formatMoment:s}}."
+NOTIFICATIONS_HEADER_gradeNotification,New Assignment Grade
+NOTIFICATIONS_BODY_gradeNotification,"{{time | formatMoment:""l LT""}}: You received a new grade for {{name}}."
+NOTIFICATIONS_BODY_EXTERN_gradeNotification,You received a new grade for {notification.title}.
+NOTIFICATIONS_EMAIL_SUBJECT_gradeNotification,{course.name} - New Assignment Grade
+NOTIFICATIONS_EMAIL_BODY_gradeNotification_html,You received a new grade for {notification.title}.
+ALERTS_HEADER_gradeNotification,New Assignment Grade
+ALERTS_BODY_gradeNotification,{{notification.name}} was graded on {{notification.time | formatMoment:s}}.
+NOTIFICATIONS_HEADER_instructorCreatedNotification,New Instructor Message
+NOTIFICATIONS_BODY_instructorCreatedNotification,{{message}}
+NOTIFICATIONS_BODY_EXTERN_instructorCreatedNotification,{course.name} - Instructor message - {notification.message}
+NOTIFICATIONS_EMAIL_SUBJECT_instructorCreatedNotification,{course.name} - New Instructor Message
+NOTIFICATIONS_EMAIL_BODY_instructorCreatedNotification_html,<blockquote>{notification.message}</blockquote>
+ALERTS_HEADER_instructorCreatedNotification,Instructor Message
+ALERTS_BODY_instructorCreatedNotification,{{notification.message}}
+NOTIFICATIONS_HEADER_contentAvailabilityNotification,Content Now Available
+NOTIFICATIONS_BODY_contentAvailabilityNotification,{{ name }} is now available. Get started now!
+NOTIFICATIONS_BODY_EXTERN_contentAvailabilityNotification,{notification.title} in {course.name} is now available.
+NOTIFICATIONS_EMAIL_SUBJECT_contentAvailabilityNotification,{course.name} - Content Now Available
+NOTIFICATIONS_EMAIL_BODY_contentAvailabilityNotification_html,{notification.title} is now available.
+ALERTS_HEADER_contentAvailabilityNotification,Content Now Available
+ALERTS_BODY_contentAvailabilityNotification,{{ notification.name }} is now available. Get started now!
+NOTIFICATIONS_HEADER_competencyMasteryNotification,Competency Mastered
+NOTIFICATIONS_BODY_competencyMasteryNotification,Congratulations! You have mastered {{competency.data.title}}
+NOTIFICATIONS_BODY_EXTERN_competencyMasteryNotification,Congratulations! You have mastered {notification.competency.data.title}
+NOTIFICATIONS_EMAIL_SUBJECT_competencyMasteryNotification,{domain.name} - Competency Mastered
+NOTIFICATIONS_EMAIL_BODY_competencyMasteryNotification_html,Congratulations! You have mastered {notification.competency.data.title}
+ALERTS_HEADER_competencyMasteryNotification,Competency Mastered
+ALERTS_BODY_competencyMasteryNotification,You have mastered {{count}} new competencies!
+NOTIFICATIONS_HEADER_learnerTransferNotification,Section Transfer
+NOTIFICATIONS_BODY_learnerTransferNotification,You were transferred to a new section.
+NOTIFICATIONS_EMAIL_BODY_learnerTransferNotification_html,You were transferred to a new section.
+NOTIFICATIONS_EMAIL_SUBJECT_learnerTransferNotification_html,Section Transfer
+ALERTS_HEADER_learnerTransferNotification,Section Transfer
+ALERTS_BODY_learnerTransferNotification,You were transferred to a new section.
+NOTIFICATIONS_HEADER_attemptDeletedNotification,Attempt Deleted
+NOTIFICATIONS_BODY_attemptDeletedNotification,"{{time | formatMoment:""l LT""}}: Your instructor deleted a submitted attempt on {{name}}."
+NOTIFICATIONS_BODY_EXTERN_attemptDeletedNotification,{course.name} - Attempt Deleted - {notification.title} - {notification.attemptId}
+NOTIFICATIONS_EMAIL_SUBJECT_attemptDeletedNotification,{course.name} - Attempt Deleted
+NOTIFICATIONS_EMAIL_BODY_attemptDeletedNotification_html,Your instructor deleted a submitted attempt on {notification.title}.
+ALERTS_HEADER_attemptDeletedNotification,Attempt Deleted
+ALERTS_BODY_attemptDeletedNotification,{{time | formatMoment:s}}: Attempt on {{notification.name}}.
+NOTIFICATIONS_HEADER_attemptRestoredNotification,Attempt Restored
+NOTIFICATIONS_BODY_attemptRestoredNotification,"{{time | formatMoment:""l LT""}}: Your instructor restored a submitted attempt on {{name}}."
+NOTIFICATIONS_BODY_EXTERN_attemptRestoredNotification,{course.name} - Attempt Restored - {notification.title} - {notification.attemptId}
+NOTIFICATIONS_EMAIL_SUBJECT_attemptRestoredNotification,{course.name} - Attempt Restored
+NOTIFICATIONS_EMAIL_BODY_attemptRestoredNotification_html,Your instructor restored a submitted attempt on {notification.title}.
+ALERTS_HEADER_attemptRestoredNotification,Attempt Restored
+ALERTS_BODY_attemptRestoredNotification,{{time | formatMoment:s}}: Attempt on {{notification.name}}.
+,
+NOTIFICATIONS_EMAIL_INTRO_html,"Hi {user.givenName}, you have received a new notification:"
+NOTIFICATIONS_EMAIL_INTRO_IN_COURSE_html,"Hi {user.givenName}, you have received a new notification in {course.name}:"
+NOTIFICATIONS_EMAIL_OUTRO_html,"Please log in to view this on your notifications page. If you no longer wish to receive email notifications, please log in and change your notification settings."
+NOTIFICATIONS_EMAIL_NOREPLY,Replies to this email are not supported.
+NOTIFICATIONS_EMAIL_INVALID_DISCUSSION_REPLY,Your discussion board reply was not successful.
+,
+EMAIL_FOOTER_FROM_USER_html,"Sent by {sender.fullName} from <a href=""https://{domain.hostName}/"">{domain.name}</a>."
+EMAIL_FOOTER_FROM_USER_IN_COURSE_html,"Sent by {sender.fullName} from {course.name} ({course.courseId}) in <a href=""https://{domain.hostName}/"">{domain.name}</a>."
+EMAIL_FOOTER_html,"Sent from <a href=""https://{domain.hostName}/"">{domain.name}</a>."
+EMAIL_FOOTER_FROM_COURSE_html,"Sent from {course.name} ({course.courseId}) in <a href=""https://{domain.hostName}/"">{domain.name}</a>."
+,
+UPLOAD_SERVER_PROCESSING,Server Processing
+INCLUDE_ARCHIVED_ASSETS,Include Archived
+INCLUDE_UNUSED_ASSETS,Include Unused
+CONTENT_SEARCH_NO_RESULTS,No results.
+CONTENT_SEARCH_NO_RESULTS_FOR_QUERY,No results for '%{query}'.
+CONTENT_SEARCH_RESULTS_ERROR,A search error occurred.
+CONTENT_SEARCH_DOWNLOAD_CSV,Download CSV
+DOWNLOAD_EXTERNAL_LINKS,External Link Report
+CHECK_EXTERNAL_LINKS,Run External Link Check
+CHECK_EXTERNAL_LINKS_TITLE,External Link Check
+CHECK_EXTERNAL_LINKS_BODY_START,"Run external link check. A report will be available upon completion."
+CHECK_EXTERNAL_LINKS_BODY_GENERATING,"Running external link check. A report will be available upon completion. Please stay on this page, this process may take several minutes."
+CHECK_EXTERNAL_LINKS_BODY_DOWNLOAD,"Report completed successfully."
+CHECK_EXTERNAL_LINKS_BODY_FAILED,"An error has occurred during generation."
+CHECK_EXTERNAL_LINKS_CANCEL,Cancel
+CHECK_EXTERNAL_LINKS_START,Start
+CHECK_EXTERNAL_LINKS_FAILED,Failed
+CHECK_EXTERNAL_LINKS_DOWNLOAD,Download
+CHECK_EXTERNAL_LINKS_GENERATING,Generating
+DOWNLOAD_IP_REPORT,IP Report
+
+REPOSITORY_DOWNLOAD_MENU,Download Reports
+
+HTML_SEARCH_TEXT_PLACEHOLDER,Exact search text.
+ASSET_ARCHIVED,Archived
+ASSET_IS_ARCHIVED,Archived assets will not appear in navigation and will not appear in search results by default.
+ASSET_ARCHIVE_HELP_TEXT,
+SEARCH_TEXT,Text Search
+SEARCH_ASSET_TYPES,Types
+SEARCH_IN_TOP_LEVEL,Only search within this {{type}} ({{title}}).
+SEARCH_BY_ID,Find by ID
+SEARCH_APPLIED_FILTERS,Applied Filters
+SEARCH_TEXT_FILTER,Text
+SEARCH_ASSET_TYPES_FILTER,Types
+SEARCH_RESULTS_LOADING,Loading
+SEARCH_RESULTS_TOTAL,%{smart_count} Result||||%{smart_count} Results
+SEARCH_RESULTS_SHOWING,Showing: %{nowShowing}
+SEARCH_RESULTS_STATS,{{ total }} Results
+SEARCH_RESULTS_PAGE_LIMIT,Show
+SEARCH_RESULTS_NONE,"Sorry, no results were found for your search"
+SEARCH_TEXT_PLACEHOLDER,"Search title, subtitle, keywords, id"
+ELASTIC_SEARCH_TEXT_PLACEHOLDER,"Search all fields and content"
+SEARCH_ID_PLACEHOLDER,ID
+SEARCH_ORDER_BY,Order by
+SEARCH_ORDER_LAST_UPDATED,Date
+SEARCH_FULL_NAME,First Name or Last Name
+SEARCH_BY_NAME,First Name or Last Name
+OVERVIEW,Overview
+USAGES,Usages
+CLOSE,Close
+KEYWORDS,Keywords
+KEYWORDS_PLACEHOLDER,Enter keywords for {{title}}
+ARCHIVE,Archive
+UNARCHIVE,Unarchive
+LAST_UPDATED,Updated
+LAST_UPDATED_BY,Updated by
+CREATED,Created
+SETTINGS_FOR,Preferences for
+ENABLE_LINE_WRAP,Enable line wrap
+ENABLE_LINE_WRAP_SUBTEXT,"Wrap long lines in HTML, JavaScript, and CSS editors"
+USER_PREFERENCES_SAVED,Preferences saved
+AssetLinked,Asset-Linked
+Unlinked,Unlinked
+Basic,Basic
+DropLowest,Drop Lowest Grade
+MORE,More
+MORE_OPTIONS,More options
+ENTER_TITLE,Enter a title
+ASSET_CONNECTIONS_HEADER,Competency Associations
+CONNECTION_TYPE,Verb
+KEYWORDS_LABEL,Keywords
+MATCHES_LABEL,Matches
+NO_TITLE,(No Title)
+NO_CONTENT_EXISTS,No Content
+SUBTITLE,Subtitle
+NO_CONNECTIONS_EXIST,No competency associations have been set.
+SELECT_COMPETENCY_TO_ALIGN,Select competency to align...
+Align,Align
+,
+GRADEBOOK_LINK_TITLE,Gradebook
+,
+GRADEBOOK_CATEGORIES_TITLE,Gradebook Categories
+GRADEBOOK_CATEGORY_LABEL,Category
+GRADEBOOK_CATEGORY_TITLE,Category
+GRADEBOOK_CATEGORY_WEIGHT,Weight
+GRADEBOOK_CATEGORY_ASSIGNMENTS,Activities
+GRADEBOOK_CATEGORY_ADD_PLACEHOLDER,Add category...
+GRADEBOOK_UNCATEGORIZED,Uncategorized
+GRADEBOOK_CATEGORY_WARNING,(%{count} for credit)
+,
+GRADEBOOK_PAGE_NO_CATEGORIES,No ``GRADEBOOK_CATEGORIES_TITLE``
+GRADEBOOK_PAGE_SETUP_CATEGORIES,Set up now.
+,
+GRADEBOOK_ASSIGNMENTS_TITLE,Gradable Activities
+GRADEBOOK_ASSIGNMENT_TITLE,Activity
+GRADEBOOK_ASSIGNMENT_FOR_CREDIT,Credit
+GRADEBOOK_ASSIGNMENT_POINTS,Points
+GRADEBOOK_ASSIGNMENT_CATEGORY,Category
+,
+GRADEBOOK_FILTER_CREDIT_TYPE,Type
+GRADEBOOK_FILTER_ANY_CREDIT,Any Credit
+GRADEBOOK_FILTER_FOR_CREDIT,For Credit
+GRADEBOOK_FILTER_NO_CREDIT,Not for Credit
+,
+GRADEBOOK_FILTER_CATEGORY_TYPE,Category
+GRADEBOOK_FILTER_ANY_CATEGORY,Any Category
+GRADEBOOK_FILTER_UNCATEGORIZED,``GRADEBOOK_UNCATEGORIZED``
+,
+GRADEBOOK_FILTER_NAME,Activity name...
+,
+GRADEBOOK_STRUCTURE_TITLE,Gradebook Structure
+GRADEBOOK_STRUCTURE_POINTS,"%{points} points"
+GRADEBOOK_STRUCTURE_RUBRIC_POINTS,"%{rubricPoints} rubric points"
+GRADEBOOK_STRUCTURE_PERCENT_OF_OVERALL,"%{percent} of overall grade"
+GRADEBOOK_STRUCTURE_PERCENT_OF_CATEGORY,"%{percent} of category grade"
+GRADEBOOK_STRUCTURE_NO_ASSIGNMENTS,No activities
+,
+gradebookCategory.1,Gradebook Category
+,
+TEXT_INPUT_REQUIRED,This field is required.
+TITLE_FIELD_REQUIRED,Title field is required
+TAB_CHOICE,Open in new tab/window (default)
+EMBED_CHOICE,Embed (iframe)
+RESUSE_RATE_BY_ENVIRONMENT,Content Reuse Breakdown
+CONTENT_TYPES_BY_ENVIRONMENT,Content Type Breakdown
+MOST_RECENT_CONTENT,Recently Changed
+MOST_USED_CONTENT,Most Reused Content
+LAST_EDITED,Recently Edited
+KEY_COUNTS,Key Content Type Count
+,
+ASSET_TYPE_CHECKBOXES_ALL_NONE,All / None
+DIALOG_CONFIRM,OK
+DIALOG_CANCEL,Cancel
+MEDIA_FEEDBACK_ONGOING_FEEDBACK,If you proceed the {{ type }} file you created will be cleared and will no longer be available to upload or submit. If you would like to keep the {{ type }} file please click Cancel and accept the file. If not press OK to proceed.
+MEDIA_FEEDBACK_UPLOAD_FILE,Upload File
+MEDIA_FEEDBACK_RECORD_AUDIO,Record Audio
+MEDIA_FEEDBACK_NO_AUDIO_SUPPORT,Audio not supported
+MEDIA_FEEDBACK_NO_AUDIO_SUPPORT_DETAIL,Audio not supported in this browser
+,
+OPEN_IN,Open In
+UPLOAD_SUCCESSFUL,Upload Successful
+
+CONTENT_REPOSITORY_TITLE,Search
+,
+NOTIFICATIONS_EMAIL_SUBJECT_casAvailabilityNotification,{course.name} - Content Now Available
+NOTIFICATIONS_EMAIL_BODY_casAvailabilityNotification_html,{notification.name} is now available.
+ALERTS_HEADER_casAvailabilityNotification,Content Now Available
+ALERTS_BODY_casAvailabilityNotification,{{ notification.name }} is now available. Get started now!
+NOTIFICATIONS_HEADER_casAvailabilityNotification,Content Now Available
+NOTIFICATIONS_BODY_casAvailabilityNotification,{{ name }} is now available. Get started now!
+,
+EXCHANGE_DESCRIPTION,Description
+EXCHANGE_DATE,Date
+EXCHANGE_USER,User
+EXCHANGE_STATUS,Status
+EXCHANGE_REPORT,Report
+EXCHANGE_DOWNLOAD,Download
+EXCHANGE_PREVIEW,Preview
+EXCHANGE_LOADING_REQUESTS,Loading
+EXCHANGE_NO_REQUESTS,No Requests
+EXCHANGE_SHOW_PAGE,Show Most Recent:
+EXPORT_HEADER,Export Content
+EXPORT_REQUESTS,Recent Exports
+EXPORT_FIND,Find Content to Export
+EXPORT_FIND_HELPER,Click on Find and select content to export.
+EXPORT,Export
+EXPORT_DOWNLOAD,Download
+EXPORT_AGAIN,Back to Export
+IMPORT_HEADER,Import Content
+IMPORT_PACKAGE,Import Package
+IMPORT_DESCRIPTION,Description
+IMPORT,Import
+IMPORT_AGAIN,Back to Import
+IMPORT_REQUESTS,Recent Imports
+IMPORTED_ROOTS,Imported
+FULL_SCREEN,View Full Screen
+EMBEDDED,Exit Full Screen
+EXPAND_EMBED,Expand embeddable content
+COLLAPSE_EMBED,Collapse embeddable content
+ADD_EMBEDDABLE,Add embeddable content
+,
+RELATIONSHIP_INFO_RELATIONSHIPS_LABEL,Relationships
+RELATIONSHIP_INFO_PARENTS_LABEL,Used By
+CREATE_ASSET_MODAL_HEADER,Add
+CREATE_ASSET_MODAL_HEADER_WITH_TYPE,Add %{typeId}
+REMOVE_ASSET,Remove {{type}}
+REMOVE_ASSET_REACT,Remove %{type} at index %{index}
+REMOVE_ASSETS,Remove 1 item||||Remove %{smart_count} items
+,
+COPY_AND_INSERT,Copy and Insert
+COPY_PROGRESS,Copy Progress
+COPY_AND_INSERT_DESCRIPTION,Make a copy of %{typeId} %{titleOfOriginal} and add it to the playlist.
+COPY_DESCRIPTION,Make a copy of %{typeId} %{titleOfOriginal}. The copy can be found in the Content Repository and by using the Find button.
+COPY_IN_PROGRESS,Please do not navigate away while the copy is in progress.
+,
+ERROR_LOADING_ERROR_MESSAGE,Error loading
+,
+,
+,
+UNITS_OF_UNITS,{{portion}} of {{total}}
+TIME_DURATION,Duration: {{duration}}
+,
+ASSESSMENT_SETTINGS,Settings
+ASSESSMENT_INSTRUCTIONS_HEADER,Instructions
+GRADING_ASSIGNMENT_DUEDATE_TITLE,Learner due date
+EMBEDDABLE_CONTENT_TITLE,Add Embedded Content
+ASSESSMENT_INSTRUCTIONS,Instructions
+ENTRY_POINT,Entry Point
+LOADING_QUIZ_RESULTS,Loading...
+SORT_ASSIGNMENT_DUEDATE_ASC,Ascending Due Date
+GRADING_ASSIGNMENT_EMPTY_QUEUE,You are all caught up! There are currently no assignments to grade.
+,
+NO_RUBRIC_AUTHORED,Not set
+,
+WEB_FILE_URL,Current reference
+WEB_FILE_URL_REPLACE_LABEL,Replace existing reference with
+WEB_FILE_URL_INVALID,Please refer to a valid .js or .css file
+WEB_FILE_URL_REPLACE_BUTTON,Replace
+,
+ESSAY_QUESITON_TEXT,Question Prompt
+POINTS,Points
+poolAssessment.1,Pool Assessment
+poolAssessment.1-plural,Pool Assessments
+INVALID_NUMBER_OF_QUESTIONS,Not Enough Questions in Pool
+GRADEBOOK_HAS_BEEN_UPDATED,The gradebook has been updated.
+,
+SEARCH_NO_RESULTS,No Matches Found
+firstAttemptScore,First Attempt Score
+mostRecentAttemptScore,Most Recent Attempt Score
+highestScore,Highest Score
+averageScore,Average Score
+fullCreditOnAnyCompletion,Full Credit On Any Completion
+,
+RUBRIC_SECTION_FEEDBACK_SHOW,View Instructor Feedback
+RUBRIC_SECTION_FEEDBACK_HIDE,Hide Instructor Feedback
+,
+,
+,
+RUBRIC_SECTION_POINTS,( {{points}} points )
+RUBRIC_MANUAL_GRADE_PLACEHOLDER,Enter a score between 0 and {{points}}.
+NUMBER_OF_QUESTION_TO_DISPLAY,Enter the number of questions to display to learners. They will be randomly selected from the total pool of questions on this assessment.
+USE_ALL_QUESTIONS,Use All Questions
+ALL,All
+ASSET_HEADER_INPUT_PLACEHOLDER,Enter {{type}} {{field}}
+ASSET_HEADER_INPUT_PLACEHOLDER_REACT,Enter %{type} %{field}
+,
+DUE_DATE_TIME,Due {{ time | formatMoment:'time' }}
+LOADING,Loading
+,
+ASSET_DURATION,Duration
+ASSET_DURATION_HELP_TEXT,Time in minutes
+ASSET_DURATION_ERROR,Duration must be greater than 0.
+ASSET_DURATION_IN_HOURS,Duration (hours)
+ASSET_DURATION_IN_HOURS_HELP_TEXT,Time in hours
+ASSET_DURATION_HOURS_EXTRA_HELP,"Hours, or hours and minutes; e.g. 1, 1.5h, 90m, 1h 30m."
+ASSET_OFFSET_ERROR,Offset is invalid.
+CHILD_AGGREGATE_DURATION_ALERT,Child content has a cumulative duration of %{duration}.
+IMAGE_ASSET_LABEL,Image
+UPLOAD_NEW_IMAGE,Upload New Image
+IMAGE_CAPTION,Caption
+MAX_ATTEMPTS,Max Attempts
+NUMBER_OF_ATTEMPTS,Enter number
+UNLIMITED_ATTEMPTS,Unlimited
+SCORING_OPTION,Scoring Options
+DAY_OFFSET,Day
+,
+DATES,Dates
+DEFAULTS,Defaults
+DROPBOX,Vault
+SEARCH_GATE_DATES_HELP,Search by Title (including Titles in an item's breadcrumb path)
+COURSE_GATED_ITEMS,Gated Content
+COURSE_GATED_ITEMS_HELP,Available Date Offsets can be set at the module level; gradable content within a module inherit the module's Available Date Offset.
+OPEN_GATE_DATE,Available Date Offset
+OPEN_GATE_DATE_HELP,"This is the number of days from the course's start date. A ""0"" equals the course's start date. The default time for authored available dates is 12 midnight {{timeZone}}."
+DUE_DATE,Due Date Offset
+DUE_DATE_HELP,This is the number of days from the module's available date. The default time for authored due dates is 11:59 pm {{timeZone}}.
+,
+CREATE_ASSET_FORM_TITLE_PLACEHOLDER,Enter a title
+CREATE_ASSET_FORM_QUESTION_TEXT_PLACEHOLDER,Enter question text
+QUESTION_TEXT,Question text
+UPLOAD_NEW_PDF,Add or Replace PDF,
+UPLOAD_NEW, Upload New,
+pdf.1,PDF File
+VIEW_PDF,View PDF
+,
+assessments_and_questions,Assessments and Questions
+learningAsset,Learning Asset
+learningAsset-plural,Learning Assets
+learningContent,Learning Content
+competency,Competency
+competency-plural,Competencies
+resource-plural,Resources
+resources,Activity Resources
+REQUIRED_FIELD,This field is required.
+MAX_LENGTH_EXCEEDED,is the maximum length for this field.
+FILE_NAME,Filename
+VIDEO_ASSET_LABEL,Video File
+UPLOAD_NEW_AUDIO,Add or Replace File
+AUDIO_ASSET_LABEL,Audio File
+INSTRUCTOR_ASSIGNMENTS,Assignments
+INSTRUCTOR_ASSIGNMENTS_OVERVIEW,Submissions
+,
+GATING_TIME_LOCK_DATE,Date Available
+GATING_TIME_LOCK_DATE_MESSAGE,Set this item to become available on {{ time | formatMoment:'time' }}
+essayQuestion.1_DESCRIPTION,Submission-based prompts that can optionally include a rubric for scoring
+fillInTheBlankQuestion.1_DESCRIPTION,Use any number of blanks.
+likertScaleQuestion.1_DESCRIPTION,For responses on a five-point Likert scale.
+matchingQuestion.1_DESCRIPTION,Include any number of matches between two columns.
+multipleChoiceQuestion.1_DESCRIPTION,Include any number of choices with one correct answer.
+multipleSelectQuestion.1_DESCRIPTION,Include any number of choices with multiple correct answers.
+orderingQuestion.1_DESCRIPTION,Include any number of list items to be ordered.
+ratingScaleQuestion.1_DESCRIPTION, For responses on a 1 to N scale.
+binDropQuestion.1_DESCRIPTION,Drag and drop list items (and potential distractors) into categories.
+surveyEssayQuestion.1_DESCRIPTION,Submission-based prompt.
+surveyChoiceQuestion.1_DESCRIPTION,Include any number of choices with one correct answer.
+trueFalseQuestion.1_DESCRIPTION,Select either True or False based on the prompt.
+poolAssessment.1_DESCRIPTION,Select and randomize a subset of the total number of questions.
+assessment.1,Assessment
+assessment.1-plural,Assessments
+assessment.1_DESCRIPTION,Select and deliver all questions associated to the assessment.
+checkpoint.1,Checkpoint
+checkpoint.1-plural,Checkpoints
+checkpoint.1_DESCRIPTION,Select and deliver all questions associated to the checkpoint.
+courseLink.1,Course Link
+courseLink.1-plural,Course Links
+discussion.1_DESCRIPTION,Moderated discussions that allow learners to interact with each other and instructors
+fileBundle.1_DESCRIPTION,Self-contained zip sites that can be uploaded
+image.1_DESCRIPTION,"Resources for HTML Page assets (GIF, JPG, PNG)"
+webDependency.1_DESCRIPTION,Packaged stylesheets and JavaScript files that can be referenced by HTML Page assets
+js.1_DESCRIPTION,Custom JavaScript elements that can be reused and included in web package assets
+css.1_DESCRIPTION,Custom stylesheets that can be reused and included in web package assets
+html.1_DESCRIPTION,Custom HTML files that support file dependencies and resources like multimedia
+scorm.1_DESCRIPTION,Activity that uses the SCORM standard,
+audio.1_DESCRIPTION,"Resources for HTML Page assets (MP3, WAV)"
+video.1_DESCRIPTION,"Resources for HTML Page assets (MP4, WEBM)"
+pdf.1_DESCRIPTION,Resources for HTML Page assets (PDF)
+assignment.1_DESCRIPTION,"Submission-based, standalone assignment that optionally includes a rubric for scoring"
+gradablePlaylistIntroduction_DESCRIPTION,Introductory learning material within a gradable playlist
+gradablePlaylistConclusion_DESCRIPTION,Concluding learning material within a gradable playlist
+course.1_DESCRIPTION,Courses you create in the program design environment serve as a blueprint or template that can be used to create one or more sections that instructors and learners will access. Each course can contain multiple modules.
+module.1_DESCRIPTION,"Modules are components of a course that typically focus on specific skills, competencies or learning objectives. Modules can be further broken down  into lessons. They can also contain individual learning activities and assessments."
+lesson.1_DESCRIPTION,Lessons are a more granular unit of content within a given module. They contain individual learning activities and/or assessments.
+playlist.gradablePlaylist_DESCRIPTION,A self-contained learning path that contains an assessment and is graded
+root.1_DESCRIPTION,An offering that is associated to one or more competency sets
+resource.1_DESCRIPTION,Basic unit of instruction
+rubric.1.1_DESCRIPTION,Expectations for grading submission-based assignments broken down by criteria
+diagnostic.1_DESCRIPTION,Use to gauge learner's strengths and weaknesses at the start of a lesson
+lti.1_DESCRIPTION,An activity or assessment based on a third-party LTI tool. You can configure LTI tools from the Administration page.
+observationAssessment.1_DESCRIPTION,An observation-based assessment that optionally includes a rubric for scoring
+
+qtiQuestionImport,QTI Question Import
+qtiQuestionImport_DESCRIPTION,A collection of QTI questions to upload to an existing ``assessment.1``.
+,
+CONFIRM_REMOVE_MODAL.HEADER,Confirm Remove
+CONFIRM_REMOVE_MODAL.BODY,Are you sure you want to remove %{targetType} '%{targetTitle}' from %{sourceType} '%{sourceTitle}'?
+CONFIRM_REMOVE_MULTIPLE_MODAL.BODY,Are you sure you want to remove %{smart_count} items from %{sourceType} '%{sourceTitle}'?
+CONFIRM_REMOVE_MODAL.SIMPLE_BODY,Are you sure you want to remove %{targetTitle}?
+CONFIRM_REMOVE_MODAL.COMPETENCY_BODY,"Are you sure you want to remove competency %{competencyTitle}?",
+CONFIRM_REMOVE_MODAL.CHILD_COMPETENCIES,one child competency||||%{smart_count} child competencies,
+CONFIRM_REMOVE_MODAL.END,"&nbsp;will be deleted as well.",
+TYPE_FROM_TYPE,{{childType}} {{child}} from {{parentType}} {{parent}}
+REMOVE,Remove
+EXPAND_ALL,Expand All
+COLLAPSE_ALL,Collapse All
+LIST_VIEW,List View
+DETAILS_VIEW,Details View
+,
+competencySet.1,Competency Set
+competencySet.1_DESCRIPTION,Manage and organize competencies into sets which can be associated to projects
+SETS,Competency Sets
+COMPETENCY_NAME,Title
+COMPETENCY_STATEMENT,Statement
+COMPETENCY_KEYWORDS,Keywords
+LAST_SAVED,Last Saved Today at
+level1Competency.1,Competency
+level1Competency.1-plural,Competencies
+level1Competency,Competency
+level1Competency-plural,Competencies
+level2Competency.1,Sub-Competency
+level3Competency.1,Sub-Sub-Competency
+COMPETENCY,Competency
+,
+assesses_INVERTED,Assessed By
+teaches_INVERTED,Taught By
+,
+UNTITLED_COMPETENCY_SET,Untitled Competency Set
+UNTITLED_COMPETENCY,Enter Competency Name
+REMEMBER_TO_SAVE,Remember to save changes
+ADD_SIBLING_COMPETENCY,Add Sibling
+ADD_CHILD_COMPETENCY,Add Child
+,
+COURSE_CREATE_DATE,Create Date
+ACTIONS,Actions
+REQUEST_TYPE,Type
+CREATED_BY,Created By
+REQUEST_REPORT,Report
+DEPLOY,New Course
+UPDATE,Updated Course
+FINISHED,Finished
+INSERT,Insert
+NEXT,Next
+CREATING,Creating
+AUDIO,Audio
+VIDEO,Video
+,
+DISCUSSION_POST_NOT_PINNED,Pin Post
+DISCUSSION_POST_PINNED,Post Pinned
+DISCUSSION_POST_NOT_BOOKMARKED,Bookmark Post
+DISCUSSION_POST_BOOKMARKED,Post Bookmarked
+,
+rubricCriterion.1,Rubric Criterion
+RUBRIC_CRITERION_PREVIEW_CRITERION_LABEL,Criterion :
+RUBRIC_CRITERION_PREVIEW_RUBRIC_LABEL,Rubric :
+,
+APP_HEADER_AUTHORING,Authoring
+APP_HEADER_ADMIN,Administration
+APP_HEADER_COMPETENCIES,Learning Objectives
+APP_HEADER_SEND_MESSAGE,Send message
+APP_HEADER_GIVE_FEEDBACK,Feedback
+APP_HEADER_LOGOUT,Log Out
+APP_HEADER_EXIT,Exit
+APP_HEADER_COURSES,Courses
+APP_HEADER_PROFILE,Profile
+APP_HEADER_PREFERENCES,Preferences
+,
+COURSE_BANNER_COVER_PHOTO,Banner Image (minimum resolution 1024px by 480px)
+COURSE_BANNER_WIDTH_TOO_SMALL,Incorrect dimensions. The uploaded image must have a width of at least 1024 pixels.
+COURSE_BANNER_HEIGHT_TOO_SMALL,Incorrect dimensions. The uploaded image must have a height of at least 480 pixels.
+COURSE_BANNER_NOT_AN_IMAGE,Not an image file.
+COURSE_BANNER_ERROR,An error occurred.
+CONFIRM_COURSE_BANNER_REMOVE_HEADER,Reset
+CONFIRM_COURSE_BANNER_REMOVE_BODY,Are you sure you want to use the default banner image?
+CONFIRM_COURSE_BANNER_REMOVE_OK,Reset
+,
+ASSESSMENT_TYPE,Assessment Type
+ASSESSMENT_TYPE_DESCRIPTION,Formative vs. Summative Assessment
+ASSESSMENT_TYPE_LABEL,Type
+ASSESSMENT_TYPE_FORMATIVE,Formative
+ASSESSMENT_TYPE_SUMMATIVE,Summative
+ASSESSMENT_TYPE_CHECKPOINT,Checkpoint
+
+ASSESSMENT_TYPE_NO_MASTERY,Diagnostics are not included as part of the competency mastery calculation but do contribute to a learner's progress through his/her learning path.
+,
+IMAGERY,Course Imagery
+,
+IN_PROGRESS,In Progress
+,
+INVALID_DATE,Please select a valid date.
+,
+USER_MENU,User menu.
+DISCUSSION_NAVBAR_TOGGLE,Toggle discussion navigation.
+PLAYLIST_NAV_OPEN,Open playlist navigation
+PLAYLIST_NAV_CLOSE,Close playlist navigation
+,
+FEEDBACK_SENT_MESSAGE_TITLE,Thank you for your valuable feedback!
+FEEDBACK_SENT_MESSAGE_BODY,Your feedback has been sent to our product team for review.
+,
+COURSE_MENU_TOGGLE,Toggle course navigation.
+PAGE_HEADER_MENU_TOGGLE,Toggle course navigation.
+,
+videoCaption.1,Video Caption File
+videoCaption.1_DESCRIPTION,WebVTT video caption file (.vtt) for captions or subtitles
+VIDEO_CAPTION_LANGUAGE,Select Language
+UPLOAD_NEW_CAPTION,Upload New Caption File
+VIDEO_CAPTION_LABEL,"Label (For example, English)"
+UPLOAD_NEW_FILE,Upload New File
+CAPTION_LANGUAGE,Select Language
+CAPTION_LABEL,"Label (For example, English)"
+VIDEO_CAPTION,Upload New File
+CREATE_VIDEO_CAPTION_LABEL,Enter a label
+VIDEO_CAPTION_LABEL_PLACEDHOLDER,Enter a label
+CLOSE_BANNER_TOOLTIP,Dismiss this notification for the rest of your session.
+SHOW,Show
+HIDE,Hide
+,
+file.1_DESCRIPTION,File uploads that can be downloaded from the learning path by learners
+,
+ADD_DATE,Add date
+,
+EMBED_COPY_SUCCESS,Embed Code Successfully Copied
+,
+NO_USAGES_INFO,No content is currently being reused.
+IMAGE_ASSET_HELP_TEXT,
+AUDIO_ASSET_HELP_TEXT,
+VIDEO_ASSET_HELP_TEXT,
+FILE_UPLOAD_ASSET_HELP_TEXT,
+VIDEO_CAPTION_ASSET_HELP_TEXT,
+PDF_ASSET_HELP_TEXT,
+FILE_INVALID_ERROR,Please use one of the supported file types listed below
+,
+PAGE_SIZE_SELECT,Display {{size}} per page
+,
+ASSIGNMENT_OVERVIEW_TITLE,{{ name }} : Submissions
+DISCUSSION_OVERVIEW_TITLE,{{ name }} : Posts
+AUTHENTIC_ASSESSMENT_OVERVIEW_TITLE,{{ name }} : Authentic Attempts
+,
+IMPORT_CSV_EMPTY,Your file seems to be empty. Use the Competency Set CSV template to get started.
+IMPORT_CSV_MISSING_HEADER,Your file is missing a header row. Use the Competency Set CSV template to get started.
+IMPORT_CSV_MISSING_FIELD,Your file is missing a field. Use the Competency Set CSV template to get started.
+IMPORT_CSV_INVALID_NUMBER_FIELD,Your file has an unexpected number of fields. Use the Competency Set CSV template to get started.
+IMPORT_CSV_INVALID_ASSET_TYPE,"Your file contains types other than Set, Competency, Sub-Competency, and Sub-Sub-Competency."
+IMPORT_CSV_DUPLICATE_INDICES,Your file has more than one Competency or Competency Set with the same index.
+IMPORT_CSV_MISSING_PARENT,Your file has at least one Competency or Sub-Competency without a parent. All Competencies must be included in a Competency Set.
+IMPORT_CSV_REQUIRED_PARENT,"Your file has at least one Competency or Sub-Competency without a parent. Make sure every Competency, Sub-Competency, and Sub-Sub-Competency has a parent index."
+IMPORT_CSV_INVALID_RELATIONSHIP,Competencies must have the following hierarchical relationship: Competency Set - Competency - Sub-Competency - Sub-Sub-Competency. Make sure your index values create the correct heriarchy.
+CONTAINS,Found
+IMPORT_LO_FORMAT,"Courses, and Content"
+IMPORT_LO_FORMAT_DESCRIPTION,"Import courses, and content using the Learning Objects format."
+IMPORT_COMPETENCY_SETS,Competency Sets
+IMPORT_COMPETENCY_SETS_DESCRIPTION,Import Competency Sets and Competencies using a simple CSV format.
+COMPETENCY_IMPORT_TEMPLATE_DOWNLOAD,Download Competency Set CSV template
+,
+LOGIN_TIMED_OUT_TITLE,You've been logged out
+LOGIN_TIMED_OUT_MESSAGE,"For security, we have logged you out of the system since you were inactive for {{duration}} minutes."
+PREVIOUS_ACTIVITY_BUTTON,Previous activity
+NEXT_ACTIVITY_BUTTON,Next activity
+,
+DISCUSSION_NEW_POSTS,New
+DISCUSSION_PREVIEW_POST_COUNT_WITH_NEW,Posts / New
+DISCUSSION_POST_NEW_REPLY_COUNT,{{count}} New
+,
+DISCUSSION_POST_EDIT_FORBIDDEN,You can no longer edit your post.
+DISCUSSION_POST_EDIT_FORBIDDEN_EXPLAINATION,"While you were editing your post, your grade for this assignment has been posted by your instructor. Your will not be able to save your edit."
+DISCUSSION_POST_EDIT_FORBIDDEN_KEEP_WORK,Keep the editor open so I can copy my edits
+DISCUSSION_POST_EDIT_FORBIDDEN_DISCARD_WORK,Close the editor and discard my edits
+,
+GROUP_CHAT,Group chat
+GROUP_CHAT_TITLE,{{name}} group chat
+,
+USER_CHAT_TITLE,Chat with {{fullName}}
+USER_CHAT_USER_OFFLINE,{{fullName}} is currently offline and cannot receive chat messages.
+USER_CHAT_SEND_MESSAGE,Send message to {{givenName}}:
+USER_CHAT_MESSAGE_SENT,Your message has been sent.
+,
+CHAT_SENDER_YOU,you:
+CHAT_SENDER_THEM,{{name}}:
+CHAT_MESSAGE_PLACEHOLDER,Enter a message
+CHAT_NOT_WHEN_INVISIBLE,You can only chat with other people when you are visible to them.
+NO_CHAT_WHEN_INVISIBLE,You can only chat with other people when you are visible to them.
+,
+VIEW_ONLINE_USERS,View online users
+PRESENCE_ONLINE_USERS,Online Users
+PRESENCE_VISIBLE,Visible to others
+,
+CONFIRM_REUSE_SAVE_CHANGES_HEADER,Save changes
+CONFIRM_REUSE_SAVE_CHANGES_BODY,This item is being used in multiple places. Are you sure you want to save these changes?
+,
+AssessmentCorrectOptionLabel,Show answer on results
+AssessmentCorrectOptionDescription,Allow learners to compare actual responses to correct responses
+HideCorrectOptions,For correct responses
+ShowCorrectOptions,Always
+,
+APP_HEADER_HOME,Home
+COMPETENCIES_TITLE,Objectives
+,
+ASSET_RELATIONSHIP_EDITOR-CANNOT_ADD_PARENTS_AS_GATES,Cannot add gate to a parent asset.
+ASSET_RELATIONSHIP_EDITOR-GATE_UNEXPECTED_ERROR,An unexpected error occurred while creating the gate.
+EDITABLE_EDGE_DATA_PROBLEM,There was a problem updating the edge values.
+EDITABLE_EDGE_DATA_INVALID_VALUE,The edge value is invalid. Please set a valid value.
+RELATIONSHIP_INFO_GATES_LABEL,Gated By
+,
+CONTENT_UNSUPPORTED_FOR_REMEDIATION,Content Unsupported For Remediation
+,
+SEARCH_PAGE_TITLE,Search Results
+SEARCH_PAGE_RESULTS_COUNT,Search Results
+COURSE_FILTER_TITLE,Filter by Course
+SEARCH_RESULTS_NO_RESULTS,There are no results matching your query.
+SEARCH_RESULTS_START_SEARCHING,Please enter a query above to search content available to you.
+SEARCH_RESULTS_ERROR,"There is a technical problem performing searches at this time, please try again later."
+GLOBAL_SEARCH_PLACEHOLDER,Search...
+,
+DISCUSSION_BOARD_SEARCH_PLACEHOLDER,Search for posts...
+DISCUSSION_THREADS_VIEW,Discussions
+,
+CONTENT_DESIGNER,Content
+,
+PREPOSED_ACTIVITIES_COUNT,is 1 activity ||||are %{smart_count} activities
+ASSESSMENTS_COUNT,1 assessment||||%{smart_count} assessments
+COURSES_COUNT,1 course||||%{smart_count} courses
+LOADING_ERROR,There was a problem loading this information. Try refreshing or contacting an administrator.
+,
+NOTIFICATIONS_HEADER_inappropriatePostNotification,Inappropriate Discussion Post Report
+NOTIFICATIONS_BODY_inappropriatePostNotification,"Post in ""{{title}}"" reported as inappropriate by {{senderFullName}} on {{time | formatMoment:""l LT""}}."
+NOTIFICATIONS_EMAIL_SUBJECT_inappropriatePostNotification,"{course.name} - Inappropriate Discussion Post Reported in ""{notification.title}"""
+NOTIFICATIONS_EMAIL_BODY_inappropriatePostNotification_html,"Post in ""{notification.title}"" reported as inappropriate by {notification.senderFullName}"
+ALERTS_HEADER_inappropriatePostNotification,Inappropriate Discussion Post Report
+ALERTS_BODY_inappropriatePostNotification,"Post in ""{{notification.title}}"" reported as inappropriate by {{notification.senderFullName}} on {{time | formatMoment:""l LT""}}."
+
+,
+BASIC_BLOCK,Basic Block
+MULTIMEDIA_BLOCK,Multimedia Block
+PDF,PDF
+IMAGE_BLOCK,Image Block
+ALIGNED_IMAGE_AND_TEXT,Text Wrap
+CUSTOM_BLOCK,Custom Block
+INVALID_FILE_EXTENSION,Invalid file extension
+INVALID_FILE_SIZE,File size above %{maxFileSize} MB limit
+SETTINGS,Settings
+DURATION_MINUTES,minutes
+ADD_COMPETENCY,Add competency
+TEXT,Text
+QUOTE,Quote
+CALLOUT,Callout
+TABLE,Table
+DEFINITION,Terms
+LIST,List
+GALLERY,Gallery
+CODE,Code
+reveal,Reveal
+HORIZONTAL_RULE,Break
+TOGGLE,Show / Hide
+IMAGE_BORDER_YES,Yes
+IMAGE_BORDER_NO,No
+ADD_A_BLOCK,Add a block
+LAST_EDIT_BY,Last edit by:
+,
+SEARCH_RESULTS_PAGINATION_HEADER,%{start} - %{end} of %{total}
+,
+,
+BIN_DROP_MISSING_ITEMS,Missing items
+,
+ADD_ITEM_IMAGE_GALLERY,Add image to gallery
+BROWSER_NOT_SUPPORTED,Browser not supported
+,
+LICENSE,License
+CLEAR_LICENSE,Clear License
+,
+PROGRESS_DOWNLOAD,Download CSV file
+,
+AUTHOR,Author
+ATTRIBUTION,Attribution
+,
+ALIGNMENT,Alignment
+,
+CONTENT_DESIGNER_GET_STARTED,Get started by adding a block!
+ACTUAL_IMAGE_SIZE,Actual size
+BLOCK_SETTINGS,Settings
+IMAGE_ALTTEXT,Image alt text
+IMPORT_INCORRECT_FILE_TYPE,We're sorry. This file type is not currently supported.
+,
+REVEAL,Reveal
+EMBED,Embed
+SEARCH_BLOCKS,Search blocks...
+NO_MATCHING_BLOCKS,No matching blocks
+,
+ENTER_EMBED_URL,Enter a URL to embed
+ENTER_URL_TO_EMBED,``ENTER_EMBED_URL``
+NOT_A_VALID_URL,There's something wrong with that URL. Make sure to include the full address (including http).
+URL_NOT_EMBEDDABLE,We don't support that website yet.
+URL_NOT_FOUND,We can't find that URL. Make sure you don't have a typo.
+EMBED_PLACEHOLDER_TEXT,For example
+,
+OPENSTAX_IMPORT,OpenStax import
+QTI_IMPORT,QTI import
+IMSCC_IMPORT,Common Cartridge import
+IMPORT_IMSCC,Import
+TYPE_ID,Type
+COUNT,Count
+,
+DESIGNER_SOURCE_REUSE_WARNING_PREFIX,This %{typeId} is used in
+DESIGNER_SOURCE_REUSE_WARNING_PLACES,%{count} places.
+DESIGNER_LAST_UPDATED,Updated %{date} at %{time} by %{user}
+DESIGNER_SOURCE_REUSE_WARNING_POSTFIX,Changes you make here will apply everywhere the %{typeId} is used.
+,
+INTERACTIVE_BLOCK,Interactive Block
+EDIT_ORIGINAL,Edit Original
+,
+DISTRACTOR_RANDOMIZATION,Randomize answer choice order
+,
+FLIP_CARD,Flip Card
+,
+ACCESS_CODE_TITLE,Protected Resource
+ACCESS_CODE_DESC,Access to the requested resource requires an access code.
+ACCESS_CODE,Access Code
+ACCESS_CODE_ERROR,The code you entered was invalid. Please try again or contact your administrator.
+ACCESS_CODE_ERROR_INVALID,The code you entered was invalid. Please try again or contact your administrator.
+ACCESS_CODE_ERROR_INAPPLICABLE,"The code you entered is valid, but does not provide access to the course you are trying to enter. Please contact your administrator if you have questions."
+,
+ADD_SOFT_LIMIT,Add Soft Limit
+SOFT_LIMIT,Soft Limit
+SOFT_ATTEMPT_LIMIT,Attempts
+SOFT_ATTEMPT_LIMIT_MSG,Provide a message to encourage learners to review the course material.
+SOFT_LIMIT_DEFAULT_MSG,Reviewing the course materials will help if you want to retake the assessment to improve your score!
+,
+COURSE_LIST_EMPTY,You are not currently enrolled in any active courses. Please contact support if you believe you should be enrolled in an active course.
+,
+DISCUSSION_SETTING_CLOSE_DISCUSSION,Close Discussion
+DISCUSSION_SETTING_CLOSE_DISCUSSION_TOOLTIP,Close Discussion
+DISCUSSION_CLOSED_MESSAGE,This discussion has been closed to new posts by learners.
+CONFIRM_CLOSE_DISCUSSION,Are you sure you wish to close this discussion?
+CONFIRM_OPEN_DISCUSSION,Are you sure you wish to re-open this discussion?
+DISCUSSION_CLOSED_EXPLAINATION,Your instructor has closed this discussion to new posts. You will not be able to add your post to the discussion. Please contact your instructor if you have questions.
+DISCUSSION_GENERIC_ERROR_TITLE,Unauthorized
+DISCUSSION_GENERIC_ERROR_DESCRIPTION,You are unauthorized to complete this action.  Please contact your instructor if you have questions.
+DISCUSSION_TRIAL_ACCESS_MESSAGE,This discussion is closed to new posts by trial access learners.
+DISCUSSION_READ_ONLY_MESSAGE,This discussion is closed to new posts by learners.
+RIGHTS_BASED_LOCK_MESSAGE,As a trial learner you are unable to access this content.
+MODAL_ERROR_CANCEL,Cancel
+,
+MATH_EQUATION_PLACEHOLDER,&lt;&lt;equation&gt;&gt;
+,
+PARTIAL_CREDIT_GRADING_STRATEGY,"You must select all correct answers in order to receive full credit, however you will receive partial credit for each individual correct answer you provide."
+NO_PARTIAL_CREDIT_GRADING_STRATEGY,You must select all correct answers in order to receive credit; partial credit is not allowed.
+,
+LOGIN_REDIRECT_MECHANISM,
+LOGIN_REDIRECT_MECHANISM_CONFIRM_INFO,
+LOGIN_REDIRECT_MECHANISM_CONFIRM_ACTION,
+LOGIN_BUTTON,Login
+LOGIN_RECOVER_PASSWORD,Forgot password?
+LOGIN_RECOVER_PASSWORD_TITLE,Recover Password
+LOGIN_RECOVER_PASSWORD_EMAIL_SENT,Email Sent
+LOGIN_RECOVER_PASSWORD_INPUT_LABEL ,Username or Email Address
+LOGIN_RECOVER_PASSWORD_SEND_EMAIL,Recover
+,
+MULTI_SELECT_PICKER_CONFIRM,Add selected
+,
+COURSE_LISTING_LINK_LABEL,Go to this course
+COURSE_LISTING_NEXT_UP_LABEL,Next up in this course
+,
+AUTHORING.TABLE_SHOW_BORDERS,Show borders
+,
+AUTHORING.DISPLAY_PDF_INLINE,Display
+AUTHORING.DISPLAY_PDF_INLINE_YES,Inline
+AUTHORING.DISPLAY_PDF_INLINE_NO,Download link
+,
+WIDTH,Image width
+,
+SEARCH_LEARNERS,Search %{smart_count} learner||||Search %{smart_count} learners
+,
+NO_LEARNERS_FOUND_HEADER,No results
+NO_LEARNERS_FOUND_DESCRIPTION,There are no learners that match the keyword term you have entered.
+,
+Assets,Content
+,
+DATE_NOT_AVAILABLE,N/A
+,
+CREATE_COURSE_BLURB,Design a standalone experience that measures and improves learner ability on specific competencies
+CREATE_COURSE_LABEL,Course
+CREATE_COURSE_BUTTON,Create new course
+CREATE_PROJECT_MODAL_HEADING,Choose a project type
+,
+COURSE_SUSPENDED_TITLE,Course Suspended
+COURSE_SUSPENDED_MESSAGE,Access to this course has been suspended.
+COURSE_NOT_STARTED_TITLE,Course Unavailable
+COURSE_NOT_STARTED_MESSAGE,Access to this course begins {0}.
+COURSE_EXPIRED_TITLE,Access Expired
+COURSE_EXPIRED_MESSAGE,"Your access to this course has expired {0}.  If you have questions or wish to restore access to the course, please contact your administrator."
+COURSE_NOT_ENROLLED_TITLE,Not Enrolled
+COURSE_NOT_ENROLLED_MESSAGE,You are not enrolled in this course.
+COURSE_INSUFFICIENT_RIGHTS_TITLE,Insufficient Rights
+COURSE_INSUFFICIENT_RIGHTS_MESSAGE,You do not have the rights to access this course.
+,
+MANAGE_DISCUSSIONS_MODAL_HEADER,Manage Discussions
+MANAGE_DISCUSSIONS_NAME_COLUMN,Name
+MANAGE_DISCUSSIONS_CLOSE_COLUMN,Closed
+MANAGE_DISCUSSIONS_UPDATE_ACTION,Update selected
+MANAGE_DISCUSSIONS_CANCEL,Cancel
+,
+REVIEW_PERIOD_WARNING,Warning: This course has ended. You will be able to review the course until {{ shutdownDate | formatMoment:'full' }} at which time access will be removed.
+,
+Course_NEW_PROJECT_NAME,Course Name
+Course_NEW_PROJECT_PLACEHOLDER,My New Course
+VERSION_NAME,Version Name
+PROJECT_HOME,Home
+PROJECT_STRUCTURAL,Structure
+,
+IMAGE_SIZE,Image Size
+,
+KeepMeLoggedIn,Keep me logged in
+,
+ALLOW_PARTIAL_CREDIT,Allow partial credit
+GIVE_FULL_CREDIT_FOR_ANY_CORRECT,Give full credit for any correct choice
+
+,
+,
+WARNING,Warning
+,
+TimedOutHeader,You've been logged out
+TimedOutMessage,"For security, we have logged you out of the system since you were inactive for {{duration}} minutes."
+,
+EMPTY_RESULTS_CONTAINER_MSG,Get started by creating your first project
+BACK_TO_PROJECT_LISTINGS,Back to Projects
+PROJECT_NAME,Name
+PROJECT_IMAGE,Image
+EDIT_PROJECT_NAME,Project name
+EDIT_PROJECT_IMAGE,Project image
+SAVE_PROJECT_NAME,Save
+SAVE_PROJECT_IMAGE,Save
+REMOVE_PROJECT_IMAGE,Remove
+ADD_NEW_VERSION_BTN,New version
+CREATE_NEW_VERSION_HEADING,New version
+VERSION_NAME_PLACEHOLDER,"Version name (e.g., Fall 2020)"
+CANCEL_CREATE_VERSION_BTN,``CANCEL``
+FINISH_CREATE_VERSION_BTN,``SAVE``
+VERSION_NAME_TABLE_TH,Name
+DATE_CREATE_TABLE_TH,Created
+CONTRIBUTORS_TABLE_TH,Contributors
+NEW_PROJECT_IMAGE,Project image (PNG or JPG)
+CHOOSE_IMAGE_BUTTON,Choose an Image
+CANCEL_IMAGE_BUTTON,Cancel Upload
+NO_IMG_UPLOADED_MSG,No image selected
+FILE_UPLOAD_TOO_LARGE,Choose an image smaller than 2MB
+FILE_UPLOAD_ERROR,Error uploading file
+Course_NAME,Course Name
+EDIT_Course_NAME,Edit Course Name
+VERSIONS,Versions
+UPDATE_SUCCESS,Update Success
+UPDATE_ERROR,Update Error
+SAVE_CHANGES,Save Changes
+,
+DOWNLOAD,Download
+,
+CONTENT_GRAPH_SAVE_SUCCESS,Saved successfully!
+CONTENT_GRAPH_WARNING.TITLE_REQUIRED,Title is Required
+,
+INVALID_MULTIPLE_FILES,"One file at a time, please"
+,
+SAVE_CONTENT_GRAPH,Save
+SAVED_CONTENT_GRAPH,Saved
+SAVING_CONTENT_GRAPH,Saving...
+,
+EDIT_CALLOUT.INFO_SAMPLE_TEXT,Info,
+EDIT_CALLOUT.WARNING_SAMPLE_TEXT,Warning
+EDIT_CALLOUT.DANGER_SAMPLE_TEXT,Danger
+EDIT_CALLOUT.SUCCESS_SAMPLE_TEXT,Success
+EDIT_CALLOUT.ICON_SIZE_BIG,Big
+EDIT_CALLOUT.ICON_SIZE_SMALL,Small
+EDIT_CALLOUT.ICON_SIZE,Callout Icon Size
+EDIT_CALLOUT.STYLE,Callout Style
+,
+CONTENT_DESIGNER.VIEW_STATIC,Read Only
+CONTENT_DESIGNER.EDIT,Edit,
+CONTENT_DESIGNER.UNKNOWN_USER,Unknown User,
+CONTENT_DESIGNER_SAVE_ERROR,Error: Cannot save content designer
+CONTENT_DESIGNER.TITLE_TOO_LONG,Title must not exceed 255 characters in length
+,
+EDIT_DETAILS.EDIT_DETAILS_BTN,Edit Details
+EDIT_DETAILS.BLOCK_DETAILS,Block Details
+EDIT_DETAILS.SAVE,Save
+EDIT_DETAILS.SAVING,Saving
+EDIT_DETAILS.SAVED,Saved,
+EDIT_DETAILS.BLOCK_DETAILS.TITLE,Title,
+EDIT_DETAILS.BLOCK_DETAILS.KEYWORDS,Keywords
+EDIT_DETAILS.POSTER_IMAGE,Poster Image
+EDIT_DETAILS.REPLACE_VIDEO_POSTER_IMAGE,Replace Poster Image
+EDIT_DETAILS.ADD_VIDEO_POSTER_IMAGE,Add Poster Image
+EDIT_DETAILS.CAPTIONS,Captions
+EDIT_DETAILS.ADD_CAPTION,Add Caption
+EDIT_DETAILS.TRANSCRIPT,Transcript,
+EDIT_DETAILS.REPLACE_TRANSCRIPT,Replace Transcript
+EDIT_DETAILS.ADD_TRANSCRIPT,Add Transcript
+EDIT_DETAILS.VIDEO_CAPTION_LABEL,Label
+EDIT_DETAILS.VIDEO_CAPTION_LANGUAGE,Language
+EDIT_DETAILS.IFRAMELY_SUPPORTED_SITES_LINK,View supported sites
+,
+AUTHORING.REPLACE_PDF,Replace PDF File
+AUTHORING.REPLACE_file.1,Replace File
+AUTHORING.REPLACE_audio.1,Replace Audio File
+AUTHORING.REPLACE_HTML,Replace HTML Page
+AUTHORING.LAUNCH_HTML_EDITOR,Launch HTML Editor
+AUTHORING.REPLACE_IMAGE,Replace Image
+AUTHORING.REPLACE_VIDEO,Replace Video
+AUTHORING.VIDEO_TRANSCRIPT_LABEL,Transcript
+AUTHORING.SHOW_HTML_EDITOR,Show Editor
+AUTHORING.HIDE_HTML_EDITOR,Hide Editor
+AUTHORING.SHOW_HTML_PREVIEW,Show Preview
+AUTHORING.HIDE_HTML_PREVIEW,Hide Preview
+,
+ASSET_SIDE_PANEL.ADD,Add
+ASSET_SIDE_PANEL.SEARCH_PLACEHOLDER,Search...
+ASSET_SIDE_PANEL.NO_RESULTS,No results found.
+ASSET_SIDE_PANEL.TITLE_FIELD,Title
+ASSET_SIDE_PANEL.TITLE_PLACEHOLDER,Title
+ASSET_SIDE_PANEL.MAX_LENGTH,Input is too long. It must be less than 255 characters.
+ASSET_SIDE_PANEL.UPLOAD_FIELD,Upload
+ASSET_SIDE_PANEL.UPLOAD_BUTTON_LABEL,Upload
+ASSET_SIDE_PANEL.REQUIRED_FIELD,* Required
+ASSET_SIDE_PANEL.ADD_NEW_BUTTON,Add New
+ASSET_SIDE_PANEL.INSTRUCTIONAL_CONTENT,Instructional Content
+ASSET_SIDE_PANEL.ASSESSMENTS,Assessments
+ASSET_SIDE_PANEL.INTEGRATION,Integration
+ASSET_SIDE_PANEL.LTI_TOOL_FIELD,Tool
+ASSET_SIDE_PANEL.HTML_RESOURCES,Activity Resources
+ASSET_SIDE_PANEL.ASSESSMENT_QUESTIONS,Question Types
+ASSET_SIDE_PANEL.CONFIRM_CLOSE_HEADER,Confirm Navigation
+ASSET_SIDE_PANEL.CONFIRM_CLOSE_BODY,Are you sure you want to navigate away. Changes will not be saved.
+ASSET_SIDE_PANEL.CONFIRM_CLOSE_LEAVE,Leave the Panel
+ASSET_SIDE_PANEL.CONFIRM_CLOSE_STAY,Stay on the Panel
+,
+STRUCTURE_PANEL.COURSE_SELECTOR_PLACEHOLDER,Select a course...
+
+STRUCTURE_PANEL.FILTER_BY_TYPE,Filter by type
+STRUCTURE_PANEL.FILTER_INSTRUCTIONAL_CONTENT,Instructional Content
+STRUCTURE_PANEL.FILTER_INTEGRATION,Integration
+STRUCTURE_PANEL.FILTER_ASSESSMENTS,Assessment
+STRUCTURE_PANEL.FILTER_BY,Filter by
+STRUCTURE_PANEL.FILTER_RESULTS,%{smart_count} result |||| %{smart_count} results
+STRUCTURE_PANEL.FILTER_CANCEL_BUTTON,Cancel
+STRUCTURE_PANEL.FILTER_APPLY_BUTTON,Apply
+STRUCTURE_PANEL.SHOW,Show Project Structure
+STRUCTURE_PANEL.HIDE,Hide Project Structure
+,
+IS_FOR_CREDIT_LABEL,Count for credit
+IS_FOR_CREDIT_DESCRIPTION,Counts for credit
+IS_FOR_CREDIT_TRUE,Yes
+IS_FOR_CREDIT_FALSE,No
+POINTS_POSSIBLE_LABEL,Points
+POINTS_POSSIBLE_DESCRIPTION,Points Possible
+,
+PROJECT_NAV.SETTINGS,Settings
+PROJECT_NAV.VERSIONS,Publish
+PROJECT_NAV.PROJECT_LABEL,Project: %{projectName}
+PROJECT_NAV.VERSIONS_LABEL,Version: %{projectVersion}
+PROJECT_NAV.CODE,Code:
+PROJECT_NAV.TYPE,Type:
+PROJECT_NAV.LIVE,Status:
+,
+LWC.TEST_SECTION_BUTTON,Test Section
+QUESTION_POINTS,pt
+QUESTION_POINTS_PLURAL,pts
+PREVIEW_BUTTON,Preview
+PREVIEW_ROLE_BUTTON,%{role} Preview
+PREVIEW_BUTTON_ARIA,%{role} Preview (Meta+click opens in a new window)
+PREVIEW_COURSE_BUTTON,%{role} Course Preview
+PREVIEW_COURSE_BUTTON_ARIA,Preview Course as %{role} (Meta+click opens in a new window)
+NEW_UI,New UI
+LEGACY_UI,Classic UI
+
+AUTHOR_VIEW,Preview as Author
+INSTRUCTOR_VIEW,Preview as Instructor
+LEARNER_VIEW,Preview as Learner
+
+COURSE_DEFAULTS.CSS_HEADER,Default CSS for HTML Pages
+COURSE_DEFAULTS.JS_HEADER,Default JS for HTML Pages
+COURSE_DEFAULTS.CSS_PLACEHOLDER,https://assets.example.org/path/to/file.css
+COURSE_DEFAULTS.JS_PLACEHOLDER,https://assets.example.org/path/to/file.js
+COURSE_DEFAULTS.REMOVE,Remove
+COURSE_DEFAULTS.ADD,Add
+COURSE_DEFAULTS.URL_WARNING,The URL you entered does not appear to be valid
+
+ACTION_BAR.GO_TO_PREV,Go to previous asset
+ACTION_BAR.GO_TO_NEXT,Go to next asset
+
+TEMPLATE_IMPORT.DROPZONE_HELP,Add a module or import a structure CSV to get started
+TEMPLATE_IMPORT.CHOOSE_FILE,Choose File...
+
+HTML_DOC_IMPORT.DROPZONE_HELP,Add new content or import an HTML document
+
+TEMPLATE_IMPORT.TOO_MANY_TITLES,Too many titles
+TEMPLATE_IMPORT.NO_TITLE,Missing title
+TEMPLATE_IMPORT.LONG_TITLE,Title value has too many characters (max 255)
+
+TEMPLATE_IMPORT.UNSUPPORTED_ASSET_TYPE,%{typeId} is not a supported asset type
+TEMPLATE_IMPORT.MISSING_ASSET_TYPE,Missing asset type
+TEMPLATE_IMPORT.BAD_LVL,%{typeId} cannot be at %{currentLevel}
+TEMPLATE_IMPORT.NO_MODULE,Content items must be in a Module
+TEMPLATE_IMPORT.LVLX_CANNOT_FOLLOW_LVLY,A %{lvlX} row cannot follow a %{lvlY} row
+TEMPLATE_IMPORT.TYPEX_CANNOT_FOLLOW_TYPEY,%{typeX} row cannot follow %{typeY} row
+TEMPLATE_IMPORT.BAD_GROUP,Competency verb '%{group}' is not valid for type %{typeId}
+TEMPLATE_IMPORT.UNKNOWN_COMPETENCY,Competency '%{competency}' not found
+TEMPLATE_IMPORT.BAD_CATEGORY,Type %{typeId} does not support gradebook category
+TEMPLATE_IMPORT.UNKNOWN_CATEGORY,Category '%{category}' not found
+
+TEMPLATE_IMPORT.SETTINGS_FOR_NON_ASSESSMENT,"Only Assessment, Pool, and Diagnostic can have assessment settings. Found %{typeId}."
+TEMPLATE_IMPORT.POINTS_POSSIBLE_INVALID,'Points Possible' must be a number greater than 0. Found '%{inputValue}'.
+TEMPLATE_IMPORT.SINGLE_PAGE_INVALID,"'Layout' must be blank, '``MultiPageAssessment``', or '``SinglePageAssessment``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.IMMEDIATE_FEEDBACK_SINGLE_PAGE,'Show Results' must be blank or '``SummativeAssessment``' when Layout is '``SinglePageAssessment``'.
+TEMPLATE_IMPORT.IMMEDIATE_FEEDBACK_INVALID,"'Show Results' must be blank, '``SummativeAssessment``', or '``FormativeAssessment``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.CONFIDENCE_INDICATOR_SINGLE_PAGE,'Confidence Level' must be blank or '``Disable Confidence``' when Layout is '``SinglePageAssessment``'.
+TEMPLATE_IMPORT.CONFIDENCE_INDICATOR_INVALID,"'Confidence Level' must be blank, '``Use Confidence``', or '``Disable Confidence``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.HIDE_ANSWER_INVALID,"'Show answer on results' must be blank, '``ShowCorrectOptions``', or '``HideCorrectOptions``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.ASSESSMENT_TYPE_DIAGNOSTIC,'Type' must be blank for Diagnostic assessments.
+TEMPLATE_IMPORT.ASSESSMENT_TYPE_INVALID,"'Type' must be blank, '``ASSESSMENT_TYPE_FORMATIVE``', or '``ASSESSMENT_TYPE_SUMMATIVE``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.MAX_ATTEMPTS_DIAGNOSTIC,'Number of attempts' must be blank for Diagnostic assessments.
+TEMPLATE_IMPORT.MAX_ATTEMPTS_INVALID,"'Number of attempts' must be blank, '``UNLIMITED_ATTEMPTS``', or a number greater than 0. Found '%{inputValue}'."
+TEMPLATE_IMPORT.MAX_MINUTES_CHECKPOINT,'Time Limit' must be blank for checkpoints.
+TEMPLATE_IMPORT.MAX_MINUTES_INVALID,"'Time Limit' must be blank or a number greater than 0. Found '%{inputValue}'."
+TEMPLATE_IMPORT.SCORING_OPTION_DIAGNOSTIC,'Scoring Option' must be blank for Diagnostic assessments.
+TEMPLATE_IMPORT.SCORING_OPTION_ONE_ATTEMPT,'Scoring Option' must be blank if 'Number of attempts' is 1.
+TEMPLATE_IMPORT.SCORING_OPTION_INVALID,"'Scoring Option' must be blank, '``firstAttemptScore``', '``mostRecentAttemptScore``', '``highestScore``', '``averageScore``' or '``fullCreditOnAnyCompletion``'. Found '%{inputValue}'."
+TEMPLATE_IMPORT.NUMBER_OF_QUESTIONS_POOL_ONLY,'Number of questions' must be blank for all types other than Pool assessments. Found %{typeId} instead of Pool.
+TEMPLATE_IMPORT.NUMBER_OF_QUESTIONS_INVALID,"'Number of questions' must be blank, '``USE_ALL_QUESTIONS``', or a number greater than 0. Found '%{inputValue}'."
+TEMPLATE_IMPORT.IS_FOR_CREDIT_INVALID,"'Count for Credit' must be blank, '``IS_FOR_CREDIT_TRUE``', or '``IS_FOR_CREDIT_FALSE``'. Found '%{inputValue}'."
+
+TEMPLATE_IMPORT.LEVEL_ONE,Level One
+TEMPLATE_IMPORT.LEVEL_TWO,Level Two
+TEMPLATE_IMPORT.LEVEL_THREE,Level Three
+TEMPLATE_IMPORT.LEVEL_FOUR,Level Four
+
+TEMPLATE_IMPORT.MODAL_TITLE,Import Course Structure
+TEMPLATE_IMPORT.MODAL_ERRORS,Errors
+TEMPLATE_IMPORT.MODAL_LINE,Line
+TEMPLATE_IMPORT.MANIFEST_TO_THE_COURSE,the course
+TEMPLATE_IMPORT.ITEM,item
+TEMPLATE_IMPORT.ITEM-plural,items
+TEMPLATE_IMPORT.UNKNOWN_ERROR,An unknown error occurred.
+
+IMPORT_MODAL.NO_DATA,The selected file is empty
+IMPORT_MODAL.BAD_COLUMN_HEADERS,Column headers are incorrect. Refer to the user guide for an example file. Incorrect Columns: %{inputValue}
+IMPORT_MODAL.MISSING_COLUMN_HEADERS,Column headers are incorrect. Refer to the user guide for an example file. Missing Columns: %{inputValue}
+IMPORT_MODAL.UNEXPECTED_ERROR,An unexpected error occurred.
+
+COMPETENCY_SET_IMPORT.MODAL_TITLE,Import Competency Set
+COMPETENCY_SET_IMPORT.MANIFEST_TO_THE_SET,the competency set
+COMPETENCY_SET_IMPORT.MANIFEST_FROM_THE_SET,the competency set
+COMPETENCY_SET_IMPORT.MODAL_ERRORS,Errors
+COMPETENCY_SET_IMPORT.ITEM,competency
+COMPETENCY_SET_IMPORT.ITEM-plural,competencies
+
+COMPETENCY_SET_IMPORT.TOO_MANY_COMPETENCIES,Too many competencies on one row
+COMPETENCY_SET_IMPORT.INVALID_LEVEL,Invalid competency level
+COMPETENCY_SET_IMPORT.DUPLICATE_NAME,Duplicate competency name
+COMPETENCY_SET_IMPORT.NAME_TOO_LONG,Competency name has too many characters (max 255)
+
+CONTENT_ALIGNMENT_IMPORT.MODAL_TITLE,Import Content Alignment
+CONTENT_ALIGNMENT_IMPORT.MODAL_ERRORS,Errors
+CONTENT_ALIGNMENT_IMPORT.ADD,Add 1 alignment to||||Add %{smart_count} alignments to
+CONTENT_ALIGNMENT_IMPORT.REMOVE,", and remove 1 alignment from,||||, and remove %{smart_count} alignments from,"
+CONTENT_ALIGNMENT_IMPORT.THE_COURSE,"the course."
+
+CONTENT_ALIGNMENT_IMPORT.TOO_MANY_TITLES,Too many titles on one row
+CONTENT_ALIGNMENT_IMPORT.INVALID_LEVEL,Invalid title level
+CONTENT_ALIGNMENT_IMPORT.UNKNOWN_CONTENT,Content with this title not found
+CONTENT_ALIGNMENT_IMPORT.DUPLICATE_CONTENT,This content was already aligned
+CONTENT_ALIGNMENT_IMPORT.UNKNOWN_COMPETENCY,Unknown competency: %{title}
+CONTENT_ALIGNMENT_IMPORT.INVALID_ALIGNMENT,"%{typeId} content does not support %{group} competency alignment"
+CONTENT_ALIGNMENT_IMPORT.INVALID_TYPE_IDT,"%{typeId} content does not match the import type %{expected}"
+
+IMPORT_HTML_ZIP.MODAL_TITLE,Import HTML Zip
+IMPORT_HTML_ZIP.NO_HTML_CHANGES,No updated HTML was found. Verify that the ZIP file has the expected directory structure.
+IMPORT_HTML_ZIP.HTML_WILL_CHANGE,The following HTML content will be updated: %{changes}.
+IMPORT_HTML_ZIP.HTML_CHANGED,1 asset updated.||||%{smart_count} assets updated.
+
+IMPORT_HTML_DOC.MODAL_TITLE,Import HTML Document
+IMPORT_HTML_DOC.NO_CHANGES,No changes were identified.
+IMPORT_HTML_DOC.HTML_CHANGED,HTML document imported
+IMPORT_HTML_DOC.ADD_ELEMENT,Add %{name}
+IMPORT_HTML_DOC.MODIFY_ELEMENT,Modify %{name}
+IMPORT_HTML_DOC.ALIGN,Add 1 alignment||||Add %{smart_count} competency alignments
+IMPORT_HTML_DOC.UNALIGN,Remove 1 alignment||||Remove %{smart_count} competency alignments
+
+EXPORT_IMPORT,Export and Import
+EXPORT_TEMPLATE,Export Course Structure
+IMPORT_TEMPLATE,Import Course Structure
+IMPORT_QUESTIONS,Import Questions
+EXPORT_LOQI,Export LOQI Assessment
+EXPORT_ASSESSMENTS,Export LOQI Assessments
+IMPORT_HTML_ZIP,Import HTML Zip
+EXPORT_HTML_ZIP,Export HTML Zip
+EXPORT_HTML_DOC,Export HTML Document
+IMPORT_HTML_DOC,Import HTML Document
+
+EXPORT_COMPETENCY_SET,Export Competency Set
+IMPORT_COMPETENCY_SET,Import Competency Set
+EXPORT_CONTENT_ALIGNMENT,Export Content Alignment
+IMPORT_CONTENT_ALIGNMENT,Import Content Alignment
+EXPORT_CONTENT_PLUS_ALIGNMENT,Export Content and Question Alignment
+
+IMPORT_MODAL.QUESTION,question
+IMPORT_MODAL.QUESTION-plural,questions
+IMPORT_MODAL.ADD,Add
+IMPORT_MODAL.TO,to
+IMPORT_MODAL.FROM,from
+IMPORT_MODAL.MODAL_ERROR,Error
+IMPORT_MODAL.MODAL_ERROR-plural,Errors
+IMPORT_MODAL.ASSESSMENT_IMPORT_TITLE,Import questions
+
+IMPORT_MODAL.MODAL_WARNING,Warning
+IMPORT_MODAL.MODAL_WARNING-plural,Warnings
+IMPORT_MODAL.NO_FILE_UPLOADED,Please upload a file
+IMPORT_MODAL.BAD_FILE_TYPE,Unsupported file type (%{fileType}). Please select a valid file type: %{validTypes}
+IMPORT_MODAL.IMPORT_FAILURE,There was a failure during the import
+
+ASSESSMENT_IMPORT.DROPZONE_HELP,Add a question or import a document (QTI .zip or LOQI .docx) to get started
+ASSET_PILL.NAME_TITLE,Content ID
+ASSET_PILL.ARCHIVED_TITLE,Content Archived
+ASSET_PILL.TYPE_TITLE,Content Type
+
+SEARCH_MODAL.THIS_COURSE,This course
+SEARCH_MODAL.THIS_VERSION,This version
+SEARCH_MODAL.SELECT_VERSION,Select a version...
+
+TOAST.SOMETHING_WENT_WRONG,Something went wrong. Contact Learning Objects support for help.
+
+UNSAVED_CHANGES_MODAL.HEADER,Unsaved Changes...
+UNSAVED_CHANGES_MODAL.BODY,You are about to stop editing and there are unsaved changes.
+UNSAVED_CHANGES_MODAL.DISCARD_CHANGES,Discard Changes
+UNSAVED_CHANGES_MODAL.SAVE_CHANGES,Save Changes
+
+DISCARD_CHANGES_MODAL.HEADER,Discard Changes?
+DISCARD_CHANGES_MODAL.BODY,Are you sure you want to discard the changes you have made?
+DISCARD_CHANGES_MODAL.DISCARD_CHANGES,Discard Changes
+DISCARD_CHANGES_MODAL.SAVE_CHANGES,Save Changes
+
+STORY_SAVE_MODAL.HEADER,Save Changes?
+STORY_SAVE_MODAL.BODY,"Do you want to save the changes you have made, or keep editing?"
+STORY_SAVE_MODAL.REMEMBER,Remember my choice
+STORY_SAVE_MODAL.KEEP_EDITING,Keep Editing
+STORY_SAVE_MODAL.SAVE_CHANGES,Save Changes
+
+STORY_SAVE_CANCEL_MODAL.HEADER,Save Changes?
+STORY_SAVE_CANCEL_MODAL.BODY,"In order to continue you need to save the changes you have made."
+STORY_SAVE_CANCEL_MODAL.CANCEL,Cancel
+STORY_SAVE_CANCEL_MODAL.SAVE_CHANGES,Save Changes
+
+STORY_OVERWRITE_MODAL.HEADER,Overwrite Changes?
+STORY_OVERWRITE_MODAL.BODY.0,"Some of the edits you have made will overwrite changes made by other authors to this content:"
+STORY_OVERWRITE_MODAL.BODY.1,"Are you sure you want to overwrite their changes?"
+STORY_OVERWRITE_MODAL.CANCEL,Cancel
+STORY_OVERWRITE_MODAL.OVERWRITE,Overwrite Changes
+
+MERGE_UPDATES_MODAL.HEADER,Merge Updates?
+MERGE_UPDATES_MODAL.BODY,"Changes have been made to this project by other authors and you have not yet merged their updates."
+MERGE_UPDATES_MODAL.CANCEL,Cancel
+MERGE_UPDATES_MODAL.MERGE_UPDATES,Merge Updates
+MERGE_UPDATES_MODAL.SAVE_ANYWAY,Save Anyway
+
+FILL_IN_THE_BLANK_EDIT_BLANK,Edit Blank
+FILL_IN_THE_BLANK_ADD_OPTION,Add Option
+SCORM_TITLE_LABEL,Content Title:
+ZIP_RESOURCES_LABEL,Resources:
+CONTENT_SIZE_HEADER,Content Size
+CONTENT_HEIGHT_LABEL,Height (Pixels)
+CONTENT_HEIGHT_DESCRIPTION,Height in Pixels
+CONTENT_WIDTH_LABEL,Width (Pixels)
+CONTENT_WIDTH_DESCRIPTION,Width in Pixels (only available with New Window)
+LAUNCH_HEADER,Launch
+LAUNCH_NEW_WINDOW_LABEL,New Window
+LAUNCH_NEW_WINDOW_DESCRIPTION,Whether SCORM launches in a new window, or a frameset
+LAUNCH_NEW_WINDOW_TRUE,Yes
+LAUNCH_NEW_WINDOW_FALSE,No
+GRADEBOOK_HEADER,Gradebook
+EXPORT_GRADEBOOK,Export Gradebook
+FILE_ADD.HEADER_TITLE,Add %{fileType}
+FILE_ADD.CHOOSE_FILE,Choose File...
+CONTENT_HAS_BEEN_UPDATED,This content has been updated. Please refresh the page and try again.
+
+PAGINATION.FIRST_PAGE,First Page
+PAGINATION.PREVIOUS_PAGE,Previous Page
+PAGINATION.NEXT_PAGE,Next Page
+PAGINATION.LAST_PAGE,Last Page
+
+survey.1,Survey
+survey.1_DESCRIPTION,A user survey.
+DisabledLabel,Disabled
+DisabledYes,Yes
+DisabledNo,No
+InlineLabel,Inline Survey
+InlineYes,Yes
+InlineNo,No
+ProgrammaticLabel,Programmatic
+ProgrammaticYes,Yes
+ProgrammaticNo,No
+MaxRatingLabel,Max Rating
+LowRatingTextLabel,Low Rating Text
+HighRatingTextLabel,High Rating Text
+SURVEY_RESULTS_BUTTON,Feedback
+SURVEY_RESULTS_HEADER,Survey Responses and Statistics
+SURVEY_NO_RESPONSES,No Responses Available
+SURVEY_EXTRA_RESPONSES,Note: There were responses found for %{smart_count} invalid question||||%{smart_count} invalid questions
+SURVEY_ESSAY_SHOWING_TOTAL,%{count} showing of %{totalCount}
+SURVEY_ESSAY_LOAD_MORE,Load More Responses
+Rating_Scale_Rating_Label,Rating
+Rating_Scale_Responses_Label,Responses
+Likert_Scale_Rating_Label,Rating
+Likert_Scale_Responses_Label,Responses
+Multiple_Choice_Choice_Label,Choice
+Multiple_Choice_Responses_Label,Responses
+PROMPT,Prompt
+SURVEY_ESSAY_PROMPT_HEADER,Essay Question
+SURVEY_CHOICE_PROMPT_HEADER,Multiple Choice Question
+SURVEY_CHOICE_ADD_CHOICE,Add Choice
+SURVEY_CHOICE_PLACEHOLDER,Enter Choice
+
+LIKERT_STRONGLY_AGREE,Strongly agree
+LIKERT_AGREE,Agree
+LIKERT_NEITHER,Neither agree nor disagree
+LIKERT_DISAGREE,Disagree
+LIKERT_STRONGLY_DISAGREE,Strongly disagree
+
+EDGE_REORDER_SUCCESS,Reordering successful.
+EDGE_REORDER_ERROR,There was a problem reordering.
+EDGE_REMOVE_ERROR,There was a problem removing.
+EDGE_ADD_ERROR,There was a problem adding.
+EDGE_MOVE_SUCCESS,Move was successful.
+EDGE_MOVE_ERROR,There was a problem with the move. Please refresh the page.
+PERFORMANCE_GATE_PART_ONE,Must score greater than or equal to:
+PERFORMANCE_GATE_PART_TWO,out of 100
+
+remediationResources,Remediation Resources
+playlist,Playlist
+gates,Gates
+questions,Questions
+captions,Captions
+scripts,Scripts
+stylesheets,Stylesheets
+dependencies,Dependencies
+survey,Survey
+
+TIMELINE_NAV_TITLE,Timeline
+TIMELINE_MODULE_DURATIONS,Course Timeline
+TIMELINE_DURATION_HELP_TEXT,"Content duration can be displayed and edited by expanding the module. These durations can provide context for setting the module duration."
+TIMELINE_OFFSET_HELP_TEXT,"Offset is the number of days the module will be locked beginning from the course's start date. The default time of availability is 12 midnight US/Eastern."
+TIMELINE_ASSET_NAME,Module Name
+TIMELINE_DURATION,Duration
+TIMELINE_MODULE_DATE_OFFSET,Offset
+
+EBOOK_MODAL_TITLE,Insert E-Book Link
+EBOOK_MODAL_ERROR,The value you entered was not a valid eBook document.
+EBOOK_MODAL_COPY_ERROR,There was an error copying the link.
+EBOOK_MODAL_JSON_INSTRUCTIONS,Copy and paste the e-Book structure document in here.
+EBOOK_MODAL_LINK_INSTRUCTIONS,Select the content you wish to link to.
+EBOOK_MODAL_INSERT,Insert
+EBOOK_MODAL_COPY_URL,Copy URL
+EBOOK_MODAL_LINK_COPIED,LTI URL copied to clipboard.
+
+CONTENT_HYPERLINK_MODAL_TITLE,Insert Content Link
+CONTENT_HYPERLINK_MODAL_INSERT,Insert
+
+BRANCH_LINK_MODAL_TITLE,Add Multiverse Project
+BRANCH_LINK_MODAL_SUBMIT,Add
+
+FIND_CONTENT_MODAL_TITLE,Find Content
+FIND_CONTENT_MODAL_TITLE_SEARCH,Search for Content
+FIND_CONTENT_MODAL_TITLE_PROJECTS,Search for Projects
+FIND_CONTENT_MODAL_CLONE,Clone
+FIND_CONTENT_MODAL_LINK,Link
+SEARCH_BAR_PLACEHOLDER,Search all Projects...
+SEARCH_GO,Search
+
+SURVEY_CONTENT_MODAL_TITLE,Add Survey
+SURVEY_CONTENT_MODAL_SUBMIT,Add
+
+ACCESS_RIGHT,Restrictions
+ACCESS_RIGHT_NONE,No Access Restrictions
+ACCESS_RIGHT_INSTRUCTOR,Instructor Access Only
+ACCESS_RIGHT_AUTHOR,Author Access Only
+
+PROJECT_STORIES,Editor
+STORY_undefined,Unknown
+STORY_html.1,Page
+STORY_discussion.1,Discussion
+
+STORY_multiselectScoringOption_allOrNothing,No Partial Credit
+STORY_multiselectScoringOption_allowPartialCredit,Partial Credit
+STORY_multiselectScoringOption_fullCreditForAnyCorrectChoice,Full Credit for Any Correct Choice
+
+STORY_randomized_true,Randomized Distractors
+STORY_randomized_false,Ordered Distractors
+
+STORY_forCredit_true,For Credit
+STORY_forCredit_false,Not for Credit
+
+STORY_ungraded,Ungraded
+
+STORY_caseSensitive_true,Case Sensitive
+STORY_caseSensitive_false,Ignore Case
+
+STORY_scoringOption_onlyAttemptScore,Score from Only Attempt
+STORY_scoringOption_firstAttemptScore,Score from First Attempt
+STORY_scoringOption_mostRecentAttemptScore,Score from Last Attempt
+STORY_scoringOption_highestScore,Highest Score
+STORY_scoringOption_averageScore,Average Score
+STORY_scoringOption_fullCreditOnAnyCompletion,Full Credit on Any Completion
+
+STORY_gradebookCategory_uncategorized,``GRADEBOOK_UNCATEGORIZED``
+
+STORY_singlePage_true,Single Page Assessment
+STORY_singlePage_false,One Question per Page
+
+STORY_displayConfidence_true,Ask for Confidence Level
+STORY_displayConfidence_false,No Confidence Level
+
+STORY_immediateFeedback_true,Show Results After Each Question
+STORY_immediateFeedback_false,Show Results After Submission
+
+STORY_hideAnswerIfIncorrect_true,Show Answers for Correct Responses
+STORY_hideAnswerIfIncorrect_false,Show Answers for All Responses
+
+STORY_disabled_true,Inactive
+STORY_disabled_false,Active
+
+STORY_newWindow_true,Launch in New Tab
+STORY_newWindow_false,Display Inline
+
+STORY_survey_inline,Popup Survey
+STORY_survey_manual,Side Panel Survey
+STORY_survey_programmatic,Programmatic Survey
+
+STORY_TITLE_PLACEHOLDER,%{typeName} title...
+STORY_INSTRUCTIONS,%{typeName} instructions
+STORY_TITLE_SAVED,%{title} title saved.
+STORY_INSTRUCTIONS_SAVED,%{title} instructions saved.
+STORY_PAGE_SAVED,%{title} page saved.
+STORY_SAVE_ERROR,An error occurred while saving.
+STORY_LOS_SAVED,Learning objectives saved.
+STORY_REMOVED,%{title} removed.
+STORY_CUTTED,%{title} cut.
+STORY_UNEDITABLE,This content cannot be edited in the narrative editor.
+STORY_UNVIEWABLE,This content cannot be viewed in the narrative editor.
+
+STORY_QUESTION_SAVED,Question saved.
+
+DROPBOX_LINK_TITLE,Vault
+DROPBOX_UPLOADED_BY,Uploaded by %{name} on %{date}.
+DROPBOX_CREATED_BY,Created by %{name} on %{date}.
+DROPBOX_NO_FILES,No files.
+DROPBOX_NO_FILES_FILTER,No files match your filter.
+DROPBOX_UPLOAD,Upload Files
+DROPBOX_CREATE_FOLDER,Create Folder
+DROPBOX_REFRESH,Refresh
+DROPBOX_PREVIOUS_PAGE,Previous page
+DROPBOX_NEXT_PAGE,Next page
+DROPBOX_UNEXPECTED_ERROR,An unexpected error occurred.
+DROPBOX_UPLOAD_ERROR,An upload error occurred.
+DROPBOX_ARCHIVE,Archive these files.
+DROPBOX_ARCHIVED,Archived %{smart_count} files.
+DROPBOX_UNARCHIVE,Unarchive these files.
+DROPBOX_UNARCHIVED,Unarchived %{smart_count} files.
+DROPBOX_RETRY_UPLOAD,Retrying '%{name}'.
+DROPBOX_UPLOADED,Uploaded one file.||||Uploaded %{smart_count} files.
+DROPBOX_FILE_NAME_CONTAINS,File name contains...
+DROPBOX_FOLDER_NAME,Folder name
+DROPBOX_CREATED_FOLDER,Created folder '%{name}'.
+DROPBOX_FILE_EXISTS,A file '%{name}' already exists.
+DROPBOX_DOWNLOAD,Download Files
+DROPBOX_CONFIRM_OVERWRITE,Confirm Overwrite
+DROPBOX_CONFIRM_OVERWRITE_BODY,There are some existing files with the same name. Do you want to skip or overwrite those %{smart_count} files?
+DROPBOX_CONFIRM_ARCHIVE,Confirm Archive
+DROPBOX_CONFIRM_ARCHIVE_BODY,Are you sure you want to archive these %{smart_count} files?
+DROPBOX_RENAME_FILE,Rename File
+DROPBOX_FILE_NAME,File name
+DROPBOX_RENAMED_TO,Renamed to '%{name}'.
+DROPBOX_INVALID_RENAME,You cannot change the type of a file (%{suffix}).
+DROPBOX_MOVE,Move these files.
+DROPBOX_MOVED,Moved %{smart_count} files.
+DROPBOX_CHOOSE_DIR,Choose Folder
+DROPBOX_MOVE_CONFLICT,There are conflicting files in the target folder.
+DROPBOX_UNARCHIVE_CONFLICT,There are conflicting files in the target folder.
+
+RENAME,Rename
+OVERWRITE,Overwrite
+SKIP,Skip
+MOVE,Move
+
+SIZE.GB,%{size} GB
+SIZE.KB,%{size} KB
+SIZE.MB,%{size} MB
+SIZE.B,%{size} bytes
+
+LWC.FEEDBACK_LINK_TITLE,Feedback
+
+FEEDBACK_POPOVER_TEXT,Add Feedback
+FEEDBACK_DOWNLOAD,Download CSV
+FEEDBACK_ARCHIVE_ALL,Archive all Feedback
+
+CONFIRM_ARCHIVE_FEEDBACK.HEADER,Archive Feedback
+CONFIRM_ARCHIVE_FEEDBACK.BODY,"Archive all feedback in this project, including open and closed items?"
+FEEDBACK_ARCHIVED,Feedback Archived
+
+UPDATE.PUBLISH_PROJECT,Publish Project
+UPDATE.PUBLISH_UPDATE,Publish Update
+UPDATE.ABOUT_TO_PUBLISH,You are about to publish this project. Are you sure you want to proceed?
+UPDATE.ABOUT_TO_UPDATE,You are about to update %{count} course sections. Are you sure you want to proceed?
+UPDATE.CANCEL_BTN,Cancel
+UPDATE.UPDATE_BTN,Publish
+UPDATE.OK_BTN,OK
+
+LAYERED,Layered

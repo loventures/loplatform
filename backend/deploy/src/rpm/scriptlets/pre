@@ -1,0 +1,8 @@
+# on upgrade i want to stop the old detomcat first so weird things don't happen
+# to tomcat with its files changing beneath it
+
+if [ -e /etc/init.d/detomcat ]; then
+  echo Stopping detomcat
+  systemctl daemon-reload
+  service detomcat stop
+fi

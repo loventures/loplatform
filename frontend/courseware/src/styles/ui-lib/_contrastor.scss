@@ -1,0 +1,240 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+////////////////////////////////////////////////////////////////////////////////////
+// The contrastor! Evaluate the button background color for luminance compare contrast
+// values for that color vs white or black text, then choose the higher option
+// Imported into _mixins.sass
+////////////////////////////////////////////////////////////////////////////////////
+
+//AA standard
+$smallContrastThreshold: 4.5;
+$largeContrastThreshold: 3;
+
+$luminance_cache: ();
+@function color_luminance($color) {
+  // Adapted from: https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js
+  // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+  $cached-luminance: map-get($luminance_cache, $color);
+  @if ($cached-luminance) {
+    @return $cached-luminance;
+  } @else {
+    $rgba: red($color), green($color), blue($color);
+    $rgba2: ();
+    @for $i from 1 through 3 {
+      $rgb: nth($rgba, $i);
+      $rgb: calc($rgb / 255);
+      $rgb: if($rgb < 0.03928, calc($rgb / 12.92), ch-pow(calc(($rgb + 0.055) / 1.055), 2.4));
+      $rgba2: append($rgba2, $rgb);
+    }
+    $lum: 0.2126 * nth($rgba2, 1) + 0.7152 * nth($rgba2, 2) + 0.0722 * nth($rgba2, 3);
+    $luminance_cache: map-merge(
+      $luminance_cache,
+      (
+        $color: $lum,
+      )
+    ) !global;
+    @return $lum;
+  }
+}
+
+$contrast_cache: ();
+@function color_contrast2($color1, $color2) {
+  $myKey: ($color1, $color2);
+  $cached_contrast: map_get($contrast_cache, $myKey);
+
+  @if ($cached_contrast) {
+    @return $cached_contrast;
+  } @else {
+    // Adapted from: https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js
+    // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+    $luminance1: color_luminance($color1) + 0.05;
+    $luminance2: color_luminance($color2) + 0.05;
+    //@debug "luminance1 is" $luminance1;
+    //@debug "luminance2 is" $luminance2;
+    $ratio: calc($luminance1 / $luminance2);
+    //@debug "luminance ratio is" $ratio;
+    @if $luminance2 > $luminance1 {
+      $ratio: calc(1 / $ratio);
+    }
+    $ratio: calc(round($ratio * 1000) / 1000);
+    $contrast_cache: map-merge(
+      $contrast_cache,
+      (
+        $myKey: $ratio,
+      )
+    ) !global;
+    @return $ratio;
+  }
+}
+
+// Adjusts color 1 to optimize contrast against color 2
+@function fix-contrast-large($color-1, $color-2) {
+  @return fix-contrast($color-1, $color-2, $largeContrastThreshold);
+}
+
+$fix_cache: ();
+// Adjusts color 1 to optimize contrast against color 2
+@function fix-contrast($color-1, $color-2, $contrastThreshold: $smallContrastThreshold) {
+  $myKey: ($color-1, $color-2);
+  $cached: map-get($fix_cache, $myKey);
+  @if ($cached) {
+    @return $cached;
+  }
+
+  $lighten: color_luminance($color-1) > color_luminance($color-2);
+  $contrast: color_contrast2($color-1, $color-2);
+
+  $iterations: 0;
+  $fixed-color: $color-1;
+
+  //100 is the absolute maximum since it is straight addition/subtraction from current lightnes
+  @while $contrast < $contrastThreshold and $iterations < 100 {
+    @if $lighten {
+      $fixed-color: lighten($fixed-color, 1%);
+    } @else {
+      $fixed-color: darken($fixed-color, 1%);
+    }
+    $contrast: color_contrast2($fixed-color, $color-2);
+    $iterations: $iterations + 1;
+  }
+
+  $fix_cache: map-merge(
+    $fix_cache,
+    (
+      $myKey: $fixed-color,
+    )
+  ) !global;
+
+  @return $fixed-color;
+}
+
+/* Pick white/black text to go with background, and adjust background to have sufficient contrast */
+@function auto-text($color-background) {
+  // Choose black or white text depending on which has higher contrast
+  $darkContrast: color_contrast2($color-background, $color-body-text);
+  $lightContrast: color_contrast2($color-background, $color-white);
+
+  $color: $color-white;
+  $text-shadow: none;
+
+  @if $darkContrast > $lightContrast {
+    $color: $color-body-text;
+  } @else {
+    $color: $color-white;
+    $text-shadow: 0 -1px 0 fade-out($color-black, 0.85);
+  }
+
+  $color-background: fix-contrast($color-background, $color);
+
+  @return (color: $color, bg: $color-background, shadow: $text-shadow);
+}
+
+@mixin apply-auto-text($color-background) {
+  $color: auto-text($color-background);
+  color: map_get($color, 'color');
+  background-color: map_get($color, 'bg');
+  border-color: map_get($color, 'bg');
+  text-shadow: map_get($color, 'shadow');
+}
+////////////////////////////////////////////////////////////////////////////////////
+// Buttons!
+
+@mixin set-button-styles(
+  $color,
+  $color-background,
+  $color-border,
+  $color-shadow,
+  $color-focus,
+  $color-active
+) {
+  color: $color;
+  background: $color-background;
+  border-color: $color-border;
+
+  &:hover,
+  &:focus {
+    background-color: $color-focus;
+  }
+
+  &:active {
+    background-color: $color-active;
+  }
+}
+
+@mixin contrast-button($color-background) {
+  $colors: auto-text($color-background);
+
+  $contrasted-color: map_get($colors, 'color');
+  $contrasted-background: map_get($colors, 'bg');
+  $contrasted-border: map_get($colors, 'bg');
+  $contrasted-shadow: map_get($colors, 'shadow');
+
+  $contrasted-focus: darken($contrasted-background, 15);
+  $contrasted-active: darken($contrasted-background, 10);
+
+  @include set-button-styles(
+    $contrasted-color,
+    $contrasted-background,
+    $contrasted-border,
+    $contrasted-shadow,
+    $contrasted-focus,
+    $contrasted-active
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Labels! - No hover states needed
+
+@mixin contrast-label($color-background) {
+  $colors: auto-text($color-background);
+
+  color: map_get($colors, 'color');
+  background: map_get($colors, 'bg');
+  text-shadow: map_get($colors, 'shadow');
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+@mixin lo-button-outline($color-background) {
+  $colors: auto-text($color-background);
+
+  $contrasted-color: map_get($colors, 'bg');
+  $contrasted-background: rgba(0, 0, 0, 0);
+  $contrasted-border: map_get($colors, 'bg');
+  $contrasted-shadow: map_get($colors, 'shadow');
+
+  $contrasted-focus: lighten($contrasted-color, 45);
+  $contrasted-active: lighten($contrasted-color, 35);
+
+  @include set-button-styles(
+    $contrasted-color,
+    $contrasted-background,
+    $contrasted-border,
+    $contrasted-shadow,
+    $contrasted-focus,
+    $contrasted-active
+  );
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+
+@mixin lo-label-outline($color-background) {
+  background: none;
+  border-color: $color-background;
+  color: $color-background;
+}

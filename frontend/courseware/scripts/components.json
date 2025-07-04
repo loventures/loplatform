@@ -1,0 +1,11 @@
+{
+  "components": [
+    {
+      "identifier": "loi.courseware.Courseware",
+      "name": "Courseware UI",
+      "description": "Courseware UI",
+      "implementation": "loi.cp.course.lightweight.LightweightCourseImpl"
+    }
+  ],
+  "dependencies": ["com.learningobjects.courseware", "com.learningobjects.component"]
+}

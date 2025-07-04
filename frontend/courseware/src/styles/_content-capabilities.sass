@@ -1,0 +1,56 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.content-capabilities
+  border-top: 1px dashed $color-primary
+  padding-bottom: 1em
+
+  .list-title
+    color: $color-contrasted-primary
+
+  .capabilities-list
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+
+    .capability-item
+      font-size: 1.2em
+      color: $color-contrasted-primary
+      margin-right: 1em
+
+
+.er-content-main
+  .activity-competencies
+    margin-left: 1rem
+    margin-right: 1rem
+    margin-top: 2rem
+
+    &.post-html
+      /* matches body 8px + main-paragraph padding 25px... */
+      margin-left: 33px
+      margin-right: 33px
+      margin-bottom: 33px !important
+      /* ontent tends to have 16px (main paragraph) + 8px (body) + random iframe resizer extra padding bottom */
+      margin-top: 9px
+
+      @media only screen and (max-width: 500px)
+        margin-left: 8px
+        margin-right: 8px
+        margin-bottom: 8px !important
+
+    .activity-competencies-title
+      font-weight: 600

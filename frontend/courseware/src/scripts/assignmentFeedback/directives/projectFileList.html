@@ -1,0 +1,91 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul class="project-file-list list-group list-unstyled">
+  <li
+    ng-repeat="file in $ctrl.feedbackManager.files track by $index"
+    ng-init="expanded = $index === $ctrl.feedbackManager.files.length - 1"
+  >
+    <div class="project-file list-group-item mt-2">
+      <div class="flex-row-content">
+        <button
+          class="icon-btn icon-btn-primary"
+          ng-click="expanded = !expanded"
+          ng-disabled="!file.canPreview"
+        >
+          <span
+            class="icon"
+            ng-class="{
+            'icon-chevron-down': expanded,
+            'icon-chevron-right': !expanded
+          }"
+          ></span>
+        </button>
+
+        <div
+          class="flex-col-fluid"
+          ng-bind="file.info.displayName"
+        ></div>
+
+        <a
+          class="icon-btn icon-btn-primary"
+          ng-href="{{file.info.downloadUrl}}"
+          target="_blank"
+          translate
+          translate-attr-title="UPLOADS_DOWNLOAD_FILE"
+          ><span class="icon icon-download"></span
+        ></a>
+
+        <button
+          class="icon-btn icon-btn-danger"
+          ng-if="$ctrl.canEditFiles"
+          ng-click="$ctrl.removeFile(file)"
+          translate
+          translate-attr-title="UPLOADS_REMOVE_FILE"
+        >
+          <span class="icon icon-trash"></span>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="upload-progress-bar-container"
+      ng-if="file.progress"
+    >
+      <uib-progressbar
+        class="progress-striped active"
+        value="file.progress.percent"
+        type="info"
+        ><span ng-bind="file.progress.status"></span
+      ></uib-progressbar>
+    </div>
+
+    <div
+      class="card"
+      ng-if="file.canPreview && expanded"
+    >
+      <div class="card-body">
+        <iframe
+          width="100%"
+          height="600px"
+          ng-src="{{file.info.viewUrl}}"
+          allowfullscreen="allowfullscreen"
+        ></iframe>
+      </div>
+    </div>
+  </li>
+</ul>

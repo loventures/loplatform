@@ -1,0 +1,79 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="d-flex">
+  <span
+    class="presence-widget"
+    id="course-nav-offline"
+    ng-if="$ctrl.presenceState.offline"
+    ng-click="$ctrl.reconnectPresence($event)"
+  >
+    <span
+      class="nav-icon icon"
+      ng-class="{
+        'icon-connection4': !$ctrl.presenceState.started,
+        'icon-connection2': $ctrl.presenceState.started
+      }"
+    ></span>
+  </span>
+
+  <span
+    class="presence-widget"
+    id="course-nav-group-chat"
+    ng-class="{
+      'unread-messages': $ctrl.conversationState.presentSceneUnreadCount
+    }"
+    ng-if="$ctrl.presenceState.online && $ctrl.showGroupChat"
+    ng-click="$ctrl.openCourseChat($event)"
+  >
+    <span
+      class="nav-icon icon icon-bubble"
+      title="{{ 'GROUP_CHAT' | translate }}"
+    ></span>
+    <span
+      class="sr-only"
+      translate="GROUP_CHAT"
+    ></span>
+    <span
+      class="unread-count"
+      ng-bind="$ctrl.conversationState.presentSceneUnreadCount"
+    ></span>
+  </span>
+
+  <span
+    class="presence-widget"
+    id="course-nav-present-users"
+    ng-class="{
+      'unread-messages': !!$ctrl.conversationState.unreadConversationCount
+    }"
+    ng-if="$ctrl.presenceState.online && $ctrl.showPresenceChat"
+    ng-click="$ctrl.toggleUserList($event)"
+  >
+    <span
+      class="nav-icon icon icon-collaboration"
+      title="{{ 'VIEW_ONLINE_USERS' | translate }}"
+    ></span>
+    <span
+      class="sr-only"
+      translate="VIEW_ONLINE_USERS"
+    ></span>
+    <span
+      class="unread-count"
+      ng-bind="$ctrl.conversationState.unreadConversationCount"
+    ></span>
+  </span>
+</div>

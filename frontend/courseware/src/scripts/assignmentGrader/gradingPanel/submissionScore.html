@@ -1,0 +1,83 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="submission-score">
+  <div class="submission-scoring">
+    <span translate="Score"></span>
+    <span role="presentation">&nbsp;:&nbsp;</span>
+
+    <input
+      ng-if="!disableEdit"
+      class="direct-grade-input form-control"
+      type="number"
+      min="0"
+      max="{{grade.pointsPossible}}"
+      ng-model="grade.outgoing.pointsAwarded"
+      aria-label="{{ 'GRADING_PANEL_SCORE_EDIT_AWARDED' | translate: {
+        pointsAwarded: grade.outgoing.pointsAwarded
+      } }}"
+    />
+
+    <span
+      class="points-awarded"
+      ng-if="disableEdit"
+    >
+      <span
+        aria-label="{{ 'GRADING_PANEL_SCORE_NO_GRADE' | translate }}"
+        ng-show="!grade.outgoing.pointsAwarded && grade.outgoing.pointsAwarded !== 0"
+        >--</span
+      >
+      <span
+        aria-label="{{ 'GRADING_PANEL_SCORE_CURRENT_AWARDED' | translate }}"
+        ng-show="grade.outgoing.pointsAwarded || grade.outgoing.pointsAwarded === 0"
+        ng-bind="grade.outgoing.pointsAwarded | grade:'points'"
+      >
+      </span>
+    </span>
+
+    <span ng-switch="grade.displayStyle">
+      <span
+        class="points-possible"
+        ng-switch-when="percent"
+        aria-label="{{ 'GRADING_PANEL_SCORE_PERCENT' | translate:{
+          pointsPossible: grade.pointsPossible
+        } }}"
+        >&nbsp;%&nbsp;</span
+      >
+      <span
+        class="points-possible"
+        ng-switch-when="points"
+        aria-label="{{ 'GRADING_PANEL_SCORE_POINTS' | translate:{
+          pointsPossible: grade.pointsPossible
+        } }}"
+        >&nbsp;/&nbsp;{{ grade.pointsPossible }}</span
+      >
+    </span>
+  </div>
+
+  <div
+    class="block-badge badge-danger"
+    ng-if="invalidated"
+    translate="GRADER_ATTEMPT_DELETED"
+  ></div>
+
+  <div
+    class="block-badge badge-warning"
+    ng-if="late"
+    translate="GRADER_ATTEMPT_LATE"
+  ></div>
+</div>

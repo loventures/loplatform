@@ -1,0 +1,49 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@use 'sass:color';
+
+.toast {
+  @extend .alert;
+  position: fixed;
+  align-items: center;
+  margin: 0;
+  opacity: 0;
+  box-shadow: $box-shadow-raised;
+  z-index: $zindex-popover;
+  transition: all $transition-speed $transition-function;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  &.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-100%);
+  }
+}
+
+.toast-success {
+  background-color: color.adjust($success, $lightness: 50%);
+  border-color: color.adjust($success, $lightness: 40%);
+  color: color.adjust($success, $lightness: -10%);
+}
+
+.toast-danger {
+  background-color: color.adjust($danger, $lightness: 50%);
+  border-color: color.adjust($danger, $lightness: 40%);
+  color: color.adjust($danger, $lightness: -10%);
+}

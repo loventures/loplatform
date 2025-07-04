@@ -1,0 +1,163 @@
+// Bootstrap overrides
+//
+// Copy variables from `_variables.scss` to this file to override default values
+// without modifying source files.
+
+// Box shadow
+
+$box-shadow-flat: 0 0px 1px rgba(0, 0, 0, 0.08);
+$box-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.12);
+$box-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+// Transitions
+
+$transition-speed: 450ms;
+$transition-function: cubic-bezier(0.2, 0.3, 0.175, 0.9);
+
+// Colors
+
+$blue: #0079a8;
+$teal: #68c6e4;
+$yellow: #ffcb05;
+
+$gray-dark: #222;
+$gray: #464a4c;
+$gray-light: #767676;
+$gray-lighter: #d5d5d5;
+$gray-lightest: #f7f7f7;
+
+$brand-primary: $blue !default;
+$brand-warning: $yellow !default;
+
+$highlight-yellow: #f8e71c;
+
+// Fonts
+
+$font-family-sans-serif:
+  'Open Sans',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  'Roboto',
+  'Oxygen',
+  'Ubuntu',
+  'Cantarell',
+  'Fira Sans',
+  'Droid Sans',
+  'Helvetica Neue',
+  Arial,
+  sans-serif;
+$font-family-serif: 'Merriweather', Georgia, serif;
+$font-family-icon: 'Material Icons';
+
+$font-weight-normal: 400;
+
+$headings-font-weight: $font-weight-normal;
+
+$blockquote-font-size: 1;
+$blockquote-border-width: 0.25rem;
+$blockquote-border-color: $brand-primary !default;
+
+// Grid containers
+
+//We don't want the jarring shrinking of content at media breakpoints
+//It's one pixel different so we don't trigger warnings about the sizes being the same
+$container-max-widths: (
+  sm: 958px,
+  md: 959px,
+  lg: 960px,
+  xl: 1140px,
+);
+
+// Components
+$directions: (left, right, top, bottom);
+
+$border-radius: 4px;
+$border-radius-lg: 4px;
+$border-radius-sm: 4px;
+
+$arrow-size: 0.5em;
+
+// Buttons
+
+$input-btn-line-height: 1.5;
+
+$btn-secondary-color: $brand-primary !default;
+$btn-secondary-bg: #fff !default;
+$btn-secondary-border: $gray-lighter !default;
+
+// $btn-success-color: #0e702a !default;
+// $btn-info-color: #05587f !default;
+// $btn-warning-color: #6a3f00 !default;
+// $btn-danger-color: #b60012 !default;
+
+$btn-border-radius: $border-radius !default;
+$btn-border-radius-lg: $border-radius !default;
+$btn-border-radius-sm: $border-radius !default;
+
+// Forms
+
+$input-border-focus: $brand-primary !default;
+
+$input-group-addon-bg: #efefef !default;
+
+// Navbar
+
+$navbar-dark-color: #fff !default;
+$navbar-light-active-color: $brand-primary !default;
+
+// Navs
+
+$nav-tabs-link-active-bg: transparent;
+$nav-tabs-active-link-hover-color: $brand-primary !default;
+$nav-tabs-active-link-hover-bg: transparent !default;
+$nav-tabs-border-color: $gray-lighter !default;
+$nav-tabs-link-hover-border-color: transparent !default;
+
+// Tables
+
+$table-cell-padding: 0.75rem;
+$table-sm-cell-padding: 0.3rem;
+
+$table-bg-inverse: $gray-dark !default;
+
+$table-bg-accent: #f9f9f9 !default;
+$table-bg-hover: $gray-lightest !default;
+$table-bg-active: $table-bg-hover !default;
+
+$table-head-bg: $gray-lighter !default;
+$table-head-color: $gray !default;
+
+$table-border-color: $gray-lighter !default;
+
+// Form states and alerts
+
+// $state-success-bg:               $brand-success !default;
+// $state-success-text:             #fff !default;
+//
+// $state-info-bg:                  $brand-info !default;
+// $state-info-text:                #fff !default;
+//
+// $state-warning-bg:               $brand-warning !default;
+// $state-warning-text:             #fff !default;
+//
+// $state-danger-bg:                $brand-danger !default;
+// $state-danger-text:              #fff !default;
+
+// Progress bars
+
+$progress-bg: $gray-lighter !default;
+$progress-border-radius: $border-radius;
+
+// Layout
+
+// Sidebar
+
+$width-sidebar-lg: 15rem;
+$width-sidebar-mobile: 80%;
+// Header
+
+$height-header: 3.5rem !default;
+$min-height-content: calc(100% - #{$height-header});
+
+$ease-out-max: cubic-bezier(0.19, 1, 0.22, 1);

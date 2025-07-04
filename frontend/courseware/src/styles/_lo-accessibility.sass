@@ -1,0 +1,130 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.btn-link
+  text-decoration: underline
+  /* underline was the visual for focus, need more now they are underlined anyway */
+
+  &:focus
+    box-shadow: $btn-focus-box-shadow
+
+@each $color, $value in $theme-colors
+  .btn-#{$color}
+    &:focus,
+    &:hover:enabled
+      box-shadow: inset 0 0 0 2px $light, 0 0 0 2px theme-color($color)
+
+  .btn-outline-#{$color}
+    &:focus,
+    &:hover:enabled
+      box-shadow: inset 0 0 0 2px theme-color($color), 0 0 0 2px $light
+
+  lo-checkbox
+    .btn-#{$color}
+      &:hover
+        box-shadow: inset 0 0 0 2px $light, 0 0 0 2px theme-color($color)
+
+a.btn-light
+  &:focus,
+  &:hover:not(.disabled)
+    box-shadow: inset 0 0 0 2px darken($primary, 5%), 0 0 0 2px $light
+
+.assignment-title
+  a
+    text-decoration: underline
+
+.content-html
+  a
+    text-decoration: underline
+
+/* Accommodations for 400% zoom. Looked at using
+ * @media (min-resolution: 300dpi) as a surrogate for zoom, or
+ * @media (min-resolution: 4dppx)...
+ * On a Retina display at 100%, the res is ~ 200dpi and 2dppx
+ * but at 400% it is ~ 800dpi and 8dppx. However a Galaxy S8+
+ * is 300dpi x 4dppx at 100%, an old Laptop is 72dpi x 1dppx
+ * at 100% and 288dpi x 4dppx so the Galaxy and old laptop zoomed
+ * are identical in dpi/dppx and so the Galaxy would get the
+ * accommodations, which we don't want.
+ * It turns out that vertical height is a much better surrogate.
+ * Phones have ~700px vertical height, browsers on laptops tend
+ * to have ~800-1200px. But once zoomed in these drop rapidly,
+ * to < 500 at 250%, < 400 at 300%, < 300 at 400%.
+ */
+
+@media (max-height: $mdheight-max)
+  h1, .h1
+    font-size: 2rem !important
+  h2, .h2
+    font-size: 1.75rem !important
+  h3, .h3
+    font-size: 1.5rem !important
+  h4, .h4
+    font-size: 1.25rem !important
+  h5, .h5
+    font-size: 1rem !important
+
+  .page-navbar
+    padding: 0 .25rem
+    height: calc($page-navbar-height - 1rem)
+
+  .page-banner .banner
+    padding-top: 1rem !important
+    padding-bottom: .5rem !important
+
+@media (max-height: $smheight-max)
+  h1, .h1
+    font-size: 1.75rem !important
+  h2, .h2
+    font-size: 1.5rem !important
+  h3, .h3
+    font-size: 1.25rem !important
+  h4, .h4
+    font-size: 1.125rem !important
+  h5, .h5
+    font-size: 1rem !important
+
+  .page-banner .banner
+    padding-top: .5rem !important
+    padding-bottom: .25rem !important
+
+@media (max-height: $xsheight-max)
+  h1, .h1
+    font-size: 1.5rem !important
+  h2, .h2
+    font-size: 1.375rem !important
+  h3, .h3
+    font-size: 1.25rem !important
+  h4, .h4
+    font-size: 1.125rem !important
+  h5, .h5
+    font-size: 1rem !important
+
+  .page-banner .banner
+    padding-top: .25rem !important
+    padding-bottom: 0 !important
+
+.a-background-darkly
+  a, .icon-btn-primary
+    color: $color-primary-against-body-bg
+
+// undo _icon-buttons.css removing the focus outline from these things
+.icon-btn
+  &:focus
+    outline: auto !important
+    text-shadow: none !important
+

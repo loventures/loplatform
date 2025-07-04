@@ -1,0 +1,105 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  id="present-users"
+  class="panel panel-right present-users-panel"
+  ng-class="{ open: $ctrl.isOpen }"
+>
+  <div
+    class="panel-inner"
+    ng-if="$ctrl.isOpen"
+    lo-autofocus="300"
+    tabindex="0"
+    aria-label="{{ 'PRESENCE_ONLINE_USERS' | translate }}"
+  >
+    <header class="panel-header">
+      <h1
+        class="panel-title"
+        translate="PRESENCE_ONLINE_USERS"
+      ></h1>
+      <button
+        class="close-btn btn-close"
+        ng-click="$ctrl.closeUsers($event)"
+        title="{{'MODAL_CLOSE' | translate}}"
+      ></button>
+    </header>
+
+    <div class="panel-block present-users-block">
+      <ul class="present-users list-unstyled">
+        <li
+          class="present-user"
+          ng-repeat="user in $ctrl.presentUsers track by user.handle"
+          ng-class="user.presence"
+        >
+          <div
+            class="present-user-circle"
+            ng-click="$ctrl.openChat($event, user)"
+            title="{{ user.fullName }}"
+          >
+            <div
+              class="present-user-photo"
+              ng-style="{
+                'background-color': user.presenceColour
+              }"
+              role="presentation"
+            >
+              <img
+                class="user-photo"
+                ng-if="!!user.imageUrl"
+                ng-src="{{user.imageUrl}}"
+                err-src="assets/images/Profile.png"
+              />
+              <div
+                class="user-letter"
+                ng-if="!user.imageUrl"
+                ng-bind="user.presenceLetter"
+              ></div>
+            </div>
+
+            <div
+              class="present-user-message-count"
+              ng-class="{
+                'unread-messages': !!$ctrl.conversationsByContext[user.handle].unreadCount
+              }"
+              ng-bind="$ctrl.conversationsByContext[user.handle].unreadCount"
+            ></div>
+
+            <div
+              class="present-user-presence-indicator"
+              role="presentation"
+            ></div>
+          </div>
+
+          <div
+            class="present-user-name"
+            ng-bind="user.givenName || user.fullName"
+          ></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="panel-block">
+      <lo-checkbox
+        checkbox-for="::'presence-visible'"
+        checkbox-label="'PRESENCE_VISIBLE' | translate"
+        on-toggle="::$ctrl.setVisible"
+        state="$ctrl.presenceSession.visibility"
+      ></lo-checkbox>
+    </div>
+  </div>
+</div>

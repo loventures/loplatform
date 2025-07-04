@@ -1,0 +1,171 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Theme Colors
+
+$primary: #007caa;
+$secondary: #337ab7;
+$success: #37753c;
+$info: #0dcaf0;
+$danger: #bd0f1e;
+
+// Colors
+
+$highlight-yellow: #f8e71c;
+$input-group-addon-bg: #efefef;
+$input-focus-border-color: $primary;
+$color-background-dark: #e5e5e5;
+
+// Fonts
+
+$font-family-sans-serif: 'Open Sans';
+// $font-family-icon: 'Material Icons'; // usage??
+$fw-normal: 400;
+$headings-font-weight: $fw-normal;
+
+$blockquote-font-size: 1rem;
+
+// Box shadow
+
+$box-shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+// Transitions
+
+$transition-speed: 450ms;
+$transition-function: cubic-bezier(0.2, 0.3, 0.175, 0.9);
+
+// Grid containers
+
+//We don't want the jarring shrinking of content at media breakpoints
+//It's one pixel different so we don't trigger warnings about the sizes being the same
+$container-max-widths: (
+  sm: 958px,
+  md: 959px,
+  lg: 960px,
+  xl: 1140px,
+);
+
+$smscreen: 35.5em !default;
+$mdscreen: 48em !default;
+$lgscreen: 64em !default;
+$hugescreen: 80em !default;
+$epicscreen: 94em !default;
+$humungousscreen: 128em !default;
+
+$border-radius: 4px;
+$border-radius-lg: 4px;
+$border-radius-sm: 4px;
+
+@import 'bootstrap/scss/bootstrap.scss';
+
+.bg-grey {
+  background-color: #747474;
+}
+
+// Buttons
+
+// Make a button look and behave like a link
+.btn-link {
+  font-weight: $fw-normal;
+  color: $secondary; // custom
+  background-color: transparent;
+
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: none; // custom
+    background-color: transparent;
+    border-color: transparent;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: none; // custom
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $btn-link-disabled-color;
+    pointer-events: none;
+  }
+}
+
+$btn-border-radius: $border-radius;
+$btn-border-radius-lg: $border-radius;
+$btn-border-radius-sm: $border-radius;
+
+.blockquote {
+  background-color: $gray-100;
+  padding: $spacer;
+  border-left: calc(#{$spacer} * 0.25) solid $gray-400;
+  color: $dark;
+}
+
+// Modal
+
+.modal {
+  &.fade .modal-dialog {
+    transition: transform $transition-speed $transition-function;
+  }
+}
+
+.modal-dialog {
+  &.modal-xl:not(.not-100) {
+    max-width: 100%;
+    padding: 0 $spacer;
+  }
+}
+
+// buttons
+
+.btn-secondary {
+  background-color: #ffffff;
+  border-color: $primary;
+  color: $primary;
+
+  &:hover {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+
+// override disabled button styles non button-links
+.btn:not(.btn-link):disabled {
+  background-color: #a7c6d1;
+  border-color: #a7c6d1;
+  color: white;
+  opacity: 1;
+}
+
+// override disabled button styles for outline buttons
+.btn[class*=' btn-outline-']:disabled,
+.btn[class*=' btn-outline-'].disabled {
+  background-color: white;
+  border-color: #a7c6d1;
+  color: #a7c6d1;
+  opacity: 1;
+}
+
+// toggles
+
+.btn-group-toggle {
+  .btn[class*=' btn-'].active {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}

@@ -1,0 +1,49 @@
+$color-lo-green: #67ae3e;
+
+.lo-footer {
+  background-color: #fff;
+  padding: 1em;
+  border-top: 1px solid #ddd;
+  display: block;
+
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  $width-logo: 175px;
+
+  .links {
+    text-align: center;
+    width: calc(100% - #{$width-logo});
+
+    a {
+      border-right: 1px solid #ccc;
+      color: $brand-primary;
+      padding: 0 1.5em;
+      &:last-of-type {
+        margin: 0;
+        border: none;
+      }
+    }
+  }
+
+  .copyright {
+    font-size: 0.9em;
+    color: #737373;
+    margin-top: 1em;
+  }
+
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    flex-direction: column;
+
+    .links {
+      margin: 0 auto;
+    }
+    .links {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+}

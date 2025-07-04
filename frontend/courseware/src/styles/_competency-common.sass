@@ -1,0 +1,138 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.competency-status
+  line-height: 1
+  border-radius: 0.25em
+  background-color: $color-light-text
+  color: $color-white
+  padding: 0.25em 0.5em
+  margin-left: 1em
+  font-size: 0.85em
+
+  &.mastered
+    @include apply-auto-text($color-success)
+
+  &.at-risk
+    @include apply-auto-text($color-alert)
+
+  &.in-progress
+    @include apply-auto-text($color-lo-secondary)
+
+.competency-status-badge
+  padding: 0 0.5em
+  color: $color-light-text
+  padding: 0 0.5em
+
+  &.mastered
+    color: darken($color-success, 5%)
+
+  .icon
+    font-size: 1.5em
+    line-height: 0.5
+    position: relative
+    top: 0.15em
+
+.at-risk-border
+  @media (max-width: $mdscreen)
+    border-left: 10px solid $danger
+
+.at-risk-exclamation
+  color: $color-white
+  background-color: $danger
+  box-shadow: $box-shadow-base
+  border-radius: $border-radius
+  padding: 0.5rem 1rem
+  position: absolute
+  left: -2.5rem
+  margin-top: -0.5rem
+
+  @media (max-width: $lgscreen)
+    padding: 0.5rem 0.5rem
+    left: -1.5rem
+
+  @media (max-width: $mdscreen)
+    display: none
+
+  &:after
+    top: 50%
+    left: 100%
+    border: solid transparent
+    border-left-color: $danger
+    content: ""
+    position: absolute
+    border-width: .333rem
+    transform: translateY(-50%)
+
+.question-mark-button
+  color: $color-contrasted-primary
+
+
+.course-competency-item,
+.root-competency-item
+
+  &:hover
+    background: darken($color-light, 1)
+    .competency-names
+      .competency-rules-info
+        color: fix-contrast($color-contrasted-light-text,  darken($color-light, 1))
+
+    &.disabled
+      background-color: inherit
+      cursor: default
+
+
+  .competency-names
+    > span
+      display: block
+
+    .competency-rules-info
+      font-size: 0.8em
+      color: $color-contrasted-light-text
+
+
+.linked-contents-list
+  background-color: $color-white
+  margin: 0 0.5rem
+  padding: 0.5rem 0
+  border-radius: 0.5rem
+
+  ul,
+  li
+    list-style: none
+    margin: 0
+
+  .content-connection-name
+    margin: 0 0.5rem
+
+.competencies-list
+  list-style: none
+  margin: 0
+  background-color: $color-white
+
+  .competencies-list-item
+    @extend .srs-list-item
+
+    .competency-info
+      flex: 1 1 auto
+
+      .competency-title
+        font-size: 1.5em
+        font-weight: 700
+
+    .list-info
+      flex: 0 0 auto

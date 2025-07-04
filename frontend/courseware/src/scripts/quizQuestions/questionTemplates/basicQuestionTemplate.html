@@ -1,0 +1,87 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="basic-question-template question-container"
+  data-asset-name="{{$ctrl.question.reference.nodeName}}"
+>
+  <div class="question-body mb-2">
+    <div
+      class="question-number-column"
+      ng-if="!$ctrl.hideQuestionNumber"
+    >
+      <h2
+        id="question-label={{$ctrl.index}}"
+        class="question-number"
+        ng-class="{
+          'answered': $ctrl.isAnswered && !$ctrl.response.selection.skip,
+          'skipped': $ctrl.response.selection.skip,
+          'correct': $ctrl.isCorrect && !$ctrl.isCheckpoint,
+          'incorrect': $ctrl.hasScore && !$ctrl.isCorrect && !$ctrl.isCheckpoint,
+          'checkpoint': $ctrl.isCheckpoint
+        }"
+        aria-label="{{$ctrl.questionAriaLabel}}"
+        ng-bind="$ctrl.index + 1"
+      ></h2>
+    </div>
+
+    <div
+      class="question-content-column"
+      ng-class="{'unnumbered': $ctrl.hideQuestionNumber}"
+    >
+      <div ng-transclude="questionTextSlot">
+        <div
+          class="question-text"
+          data-id="prompt"
+          compile="$ctrl.question.questionText"
+        ></div>
+      </div>
+
+      <question-score
+        ng-if="$ctrl.showQuestionPoints"
+        question="$ctrl.question"
+        response="$ctrl.response"
+      >
+      </question-score>
+
+      <question-grading-strategy
+        ng-if="$ctrl.questionTypeHasPartialCredit && !$ctrl.isCheckpoint"
+        question="$ctrl.question"
+      ></question-grading-strategy>
+
+      <div ng-transclude="questionContentSlot"></div>
+    </div>
+  </div>
+
+  <question-level-remediation
+    ng-if="$ctrl.question.remediationText"
+    remediation="$ctrl.question.remediationText"
+  >
+  </question-level-remediation>
+
+  <question-resource-remediation-list
+    ng-if="$ctrl.question.remediationResources.length"
+    resources="$ctrl.question.remediationResources"
+  ></question-resource-remediation-list>
+
+  <question-competencies
+    class="d-block"
+    data-id="alignment"
+    ng-if="$ctrl.question.competencies.length && $ctrl.showCompetencies"
+    competencies="$ctrl.question.competencies"
+  ></question-competencies>
+</div>

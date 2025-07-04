@@ -1,0 +1,189 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<section
+  class="rubric-grid"
+  role="region"
+  translate-attr="{title:'GRADING_RUBRIC_REGION'}"
+>
+  <header
+    class="mt-4 h5"
+    translate="GRADING_RUBRIC"
+  ></header>
+
+  <table
+    role="grid"
+    class="rubric-grid"
+    ng-class="'max-columns-' + $ctrl.maxColumns"
+  >
+    <thead role="rowgroup">
+      <tr role="row">
+        <th
+          role="columnheader"
+          translate="RUBRIC_CRITERIA"
+        ></th>
+        <th
+          role="columnheader"
+          translate="RUBRIC_LEVELS"
+          aria-label="{{'TABLE_COLUMN_SPANS_NUM' | translate:$ctrl.numCriteria }}"
+        ></th>
+      </tr>
+    </thead>
+
+    <tbody role="rowgroup">
+      <tr
+        role="row"
+        ng-repeat="section in $ctrl.rubric.sections track by section.index"
+        ng-init="rowState = { rowCollapsed: true }"
+        ng-class="{
+          'row-collapsed': rowState.rowCollapsed
+        }"
+      >
+        <th role="gridcell">
+          <div class="rubric-grid-cell">
+            <div class="h5 mb-0 flex-row-content align-items-start">
+              <span
+                class="flex-col-fluid word-wrap-all"
+                ng-bind="section.title"
+              ></span>
+              <span
+                class="rubric-criteiria-toggle icon"
+                aria-label="{{'RUBRIC_CRITERIA_TOGGLE' | translate}}"
+                ng-class="{
+                  'icon-chevron-right': rowState.rowCollapsed,
+                  'icon-chevron-down': !rowState.rowCollapsed
+                }"
+                ng-click="rowState.rowCollapsed = !rowState.rowCollapsed"
+              ></span>
+            </div>
+            <small
+              class="description"
+              ng-bind="section.description"
+            ></small>
+
+            <strong
+              class="rubric-criteria-points"
+              ng-if="!(section.selectedPoints >= 0)"
+              translate="RUBRIC_SECTION_POINTS_MAX"
+              translate-values="{
+                pointsPossible: section.points
+              }"
+            ></strong>
+
+            <strong
+              class="rubric-criteria-points"
+              ng-if="section.selectedPoints >= 0"
+              translate="RUBRIC_SECTION_POINTS_SELECTED"
+              translate-values="{
+                pointsAwarded: section.selectedPoints,
+                pointsPossible: section.points
+              }"
+            ></strong>
+
+            <strong
+              class="selected-name-notice"
+              ng-if="section.selectionLevelIndex >= 0"
+              >({{ section.levels[section.selectionLevelIndex].name }})</strong
+            >
+
+            <strong
+              class="manual-entry-notice"
+              ng-if="section.selectionLevelIndex === -1"
+              >({{ 'GRADING_RUBRIC_SECTION_MANUAL_GRADE' | translate }})</strong
+            >
+
+            <small
+              class="section-feedback"
+              ng-if="section.feedback"
+            >
+              <div translate="RUBRIC_SECTION_FEEDBACK"></div>
+              <span ng-bind="section.feedback"></span>
+            </small>
+          </div>
+        </th>
+
+        <td
+          role="gridcell"
+          ng-if="section.isSelectionManual"
+          class="selected"
+        >
+          <div class="rubric-grid-cell">
+            <div
+              class="h6 no-ip mb-0"
+              translate="GRADING_RUBRIC_SECTION_MANUAL_GRADE"
+            ></div>
+            <small class="description"></small>
+            <strong
+              class="rating-points-awarded"
+              translate="RUBRIC_SECTION_POINTS"
+              translate-values="{ points: section.selectedPoints }"
+            ></strong>
+          </div>
+        </td>
+
+        <td
+          role="gridcell"
+          ng-repeat="level in section.levels track by level.index"
+          ng-class="{
+              selected: section.selectionLevelIndex === level.index
+            }"
+        >
+          <div class="rubric-grid-cell">
+            <div
+              class="name h6 no-ip mb-0"
+              ng-bind="level.name"
+            ></div>
+            <small
+              class="description"
+              ng-bind="level.description"
+            ></small>
+            <strong
+              class="rating-points-awarded"
+              translate="RUBRIC_SECTION_POINTS"
+              translate-values="{ points: level.points }"
+            ></strong>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+
+    <tfoot role="rowgroup">
+      <tr role="row">
+        <td
+          role="gridcell"
+          aria-label="{{'TABLE_COLUMN_SPANS_ALL' | translate }}"
+        >
+          <strong
+            ng-if="$ctrl.totalPointsAwarded >= 0"
+            translate="RUBRIC_TOTAL_POINTS_SELECTED"
+            translate-values="{
+              pointsAwarded: $ctrl.totalPointsAwarded,
+              pointsPossible: $ctrl.totalPointsPossible
+            }"
+          ></strong>
+          <strong
+            ng-if="!($ctrl.totalPointsAwarded >= 0)"
+            translate="RUBRIC_TOTAL_POINTS_MAX"
+            translate-values="{
+              pointsPossible: $ctrl.totalPointsPossible
+            }"
+          ></strong>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</section>

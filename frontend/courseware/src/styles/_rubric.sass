@@ -1,0 +1,86 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.old-grader
+  .rubric-section
+    .rubric-section-feedback
+      display: flex
+      flex-direction: column
+      .rubric-section-feedback-content
+        align-self: stretch
+      .toggle-add,
+      .toggle-remove
+        align-self: flex-end
+      .toggle-remove
+        color: $danger
+      .section-feedback-toggle
+        align-self: flex-start
+
+  //For accordion behavior in a modal
+  .rubric-accordion-section:not(.active-section)
+    .card-title
+      margin-bottom: 0
+      .icon-chevron-down:before
+        transform: rotate(-90deg)
+    hr
+      display: none
+    .rubric-section-levels,
+    .rubric-section-feedback
+      overflow: hidden
+      height: 0
+
+  //transition for accordion
+  .rubric-accordion-section *
+    transition: all ease 0.33s
+
+  .rubric-level
+    @include list-vertical-line(1.75em)
+    &:not(:last-child):after
+      top: 1.75em
+
+    align-items: flex-start
+    padding: 0.5em 0
+
+    &.selected .rubric-level-points
+      color: $white
+      background-color: $primary
+
+    .rubric-level-points
+      flex: 0 0 auto
+      @extend .flex-center-center
+      background-color: $white
+      height: 2.5em
+      width: 2.5em
+      border-radius: 50%
+      box-shadow: 0 1px 2px rgba(0,0,0,0.25)
+      transition: all ease .33s
+
+    .rubric-level-name
+      flex: 1 1 auto
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-self: stretch
+      word-break: break-all
+      font-size: 0.9em
+
+      .form-control
+        /*default is 1rem, making this same as text*/
+        font-size: 0.9em
+        &.ng-invalid
+          @extend .form-control, .is-invalid

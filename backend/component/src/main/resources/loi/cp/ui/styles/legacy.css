@@ -1,0 +1,634 @@
+/*
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**** COLORS ****/
+/**** SIZING ****/
+/**** FONTS ****/
+@font-face {
+  font-family: 'robotolight';
+  src: url(fonts/roboto-light-webfont.eot);
+  src: url(fonts/roboto-light-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/roboto-light-webfont.woff) format('woff'), url(fonts/roboto-light-webfont.ttf) format('truetype'), url(fonts/roboto-light-webfont.svg#robotolight) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'robotonormal';
+  src: url(fonts/roboto-regular-webfont.eot);
+  src: url(fonts/roboto-regular-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/roboto-regular-webfont.woff) format('woff'), url(fonts/roboto-regular-webfont.ttf) format('truetype'), url(fonts/roboto-regular-webfont.svg#robotonormal) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'robotomedium';
+  src: url(fonts/roboto-medium-webfont.eot);
+  src: url(fonts/roboto-medium-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/roboto-medium-webfont.woff) format('woff'), url(fonts/roboto-medium-webfont.ttf) format('truetype'), url(fonts/roboto-medium-webfont.svg#robotomedium) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'robotobold';
+  src: url(fonts/roboto-bold-webfont.eot);
+  src: url(fonts/roboto-bold-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/roboto-bold-webfont.woff) format('woff'), url(fonts/roboto-bold-webfont.ttf) format('truetype'), url(fonts/roboto-bold-webfont.svg#robotobold) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'robotoblack';
+  src: url(fonts/roboto-black-webfont.eot);
+  src: url(fonts/roboto-black-webfont.eot?#iefix) format('embedded-opentype'), url(fonts/roboto-black-webfont.woff) format('woff'), url(fonts/roboto-black-webfont.ttf) format('truetype'), url(fonts/roboto-black-webfont.svg#robotoblack) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Page layout styles
+-------------------------------------------------- */
+#header {
+  padding: 4px;
+}
+#headerRight {
+  float: right;
+}
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+}
+/* Application behaviour stuff
+-------------------------------------------------- */
+#stdHeader {
+  border-bottom: solid thin #d5d6d4;
+  margin-bottom: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#stdHeader h1 {
+  max-width: 75%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -ms-text-overflow: ellipsis;
+  display: inline-block;
+}
+#stdHeader h2 {
+  display: inline-block;
+  line-height: 40px;
+  margin: 11px 0 9px 0.5em;
+  vertical-align: top;
+}
+#stdHeader .breadcrumbs {
+  padding: 1em;
+  background-color: #fff;
+}
+#stdHeader .breadcrumbs > .crumb {
+  display: inline-block;
+  margin: 0 .5em;
+  font-weight: bold;
+}
+#stdHeader .breadcrumbs > .crumb:first-child {
+  margin-left: 0;
+}
+#stdHeader .breadcrumbs > span.crumb {
+  color: #999;
+}
+body.shrunken_head header {
+  display: none;
+}
+body.administration {
+  padding: 2em 3em;
+}
+/* Underground.css carryover stuff
+-------------------------------------------------- */
+.undisplayed {
+  display: none;
+}
+.displayChild .displayable {
+  display: none;
+}
+.displayChild .displayed {
+  display: block;
+}
+.uploadIframe {
+  visibility: hidden;
+  border: none;
+  height: 20px;
+}
+input.cp_button,
+a.buttonLink {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 1em;
+  border: 1px solid transparent;
+  margin: 0;
+  white-space: nowrap;
+}
+input.cp_button,
+a.buttonLink,
+a.buttonLink:visited,
+a.buttonLink:link {
+  background-color: gray;
+  color: white;
+  text-decoration: none;
+}
+input.cp_button:hover,
+input.cp_button:focus,
+a.buttonLink:focus,
+a.buttonLink:hover {
+  background-color: #EEEEEE;
+  border-left: 1px solid #DDDDDD;
+  border-top: 1px solid #DDDDDD;
+  border-right: 1px solid #BBBBBB;
+  border-bottom: 1px solid #BBBBBB;
+  color: black;
+  cursor: pointer;
+}
+input.cp_button:active,
+a.buttonLink:active {
+  border-left: 1px solid #BBBBBB;
+  border-top: 1px solid #BBBBBB;
+  border-right: 1px solid #DDDDDD;
+  border-bottom: 1px solid #DDDDDD;
+  border-style: inset;
+}
+.cp_primaryButton.cp_button,
+.cp_primaryButton.buttonLink,
+input[type="submit"].cp_button {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+.cp_button.submitting {
+  background-image: url(../images/wait.gif);
+  background-position: center right;
+  background-repeat: no-repeat;
+}
+a[disabled].buttonLink,
+a[disabled].buttonLink:hover,
+a[disabled].buttonLink:focus,
+input[disabled].cp_button,
+input[disabled].cp_button:hover,
+input[disabled].cp_button:focus {
+  background-color: #c9c9c9;
+  color: #808080;
+  cursor: default;
+  border: 1px solid transparent;
+}
+.cp_dialog_body {
+  padding: .5em;
+}
+.cp_dialog {
+  position: absolute;
+  display: block;
+  z-index: 200;
+  background-color: white;
+}
+.cp_popup {
+  -webkit-box-shadow: -1px 4px 6px #777777;
+  box-shadow: -1px 4px 6px #777777;
+  background-color: white;
+  z-index: 3000;
+  position: absolute;
+  padding: 1ex;
+}
+.cp_dialog_buttons {
+  padding: 1ex;
+  border-top: 1px solid lightGray;
+}
+.cp_dialog_buttons input,
+.cp_popup_buttons input {
+  margin-right: 1em;
+}
+.portletHeader {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  background: gray;
+  color: white;
+  padding: .5em;
+  line-height: 1em;
+  text-align: left;
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px 5px 0 0;
+}
+.portlet {
+  border-width: 0px 1px 1px 0px;
+  border-style: solid;
+  border-color: #AAA !important;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 2px 3px;
+  background-color: white;
+}
+.portletFooter {
+  font-size: .9em;
+}
+.portletBody,
+.portletBodyPart {
+  margin: 1ex;
+}
+.portletMultipart .portletBody {
+  padding: 0;
+}
+.portletPartHeader {
+  height: 1.85em;
+  line-height: 1.85em;
+}
+.portletHeaderTitle {
+  font-weight: bold;
+  cursor: default;
+  white-space: nowrap;
+}
+.x-hidden {
+  display: none;
+}
+.cp_hiddenFrame {
+  visibility: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.cp_frosted {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: gray;
+  z-index: 2000;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.cp_glass {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.submitDiv input {
+  margin-right: 1em;
+}
+/* modified general.less */
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+body {
+  position: relative;
+}
+.bold {
+  font-weight: 700;
+}
+.italic {
+  font-style: italic;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+h1 {
+  letter-spacing: 0.025em;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  cursor: pointer;
+}
+#wrap {
+  height: auto;
+  min-height: 100%;
+  margin: 0 0 -57px 18em;
+  -webkit-transition: margin-left 1s;
+  transition: margin-left 1s;
+}
+.navOn #wrap {
+  margin: 0 0 0 18em;
+}
+.navOff #wrap {
+  margin: 0;
+}
+header {
+    position: relative;
+    height: 3em;
+    line-height: 3em;
+    padding: 0 3rem;
+    background: #fff;
+}
+header a {
+    line-height: 3em;
+}
+body.stock-domain #app > .main {
+    padding: 0;
+}
+.comp-title {
+    padding: 1.25em 5%;
+}
+.comp-head h2 {
+    font-weight: 300;
+}
+header #user-nav {
+    float: right;
+}
+header #user-nav a {
+    color: #555;
+    text-decoration: none;
+}
+header #branding img {
+    max-height: 2em;
+    margin-right: .5em;
+}
+header #branding a {
+    color: #555;
+    text-decoration: none;
+}
+header #branding a span {
+    font-size: 1.25em;
+    vertical-align: middle;
+    font-weight: 0300;
+}
+header .hidden-name {
+    display: none;
+}
+header #header-title {
+  display: block;
+  height: 2.5em;
+  line-height: 2.5em;
+  color: rgba(255, 255, 255, 0.67);
+  text-align: center;
+  background: #104c77;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #104c77), color-stop(100%, #135789));
+  background: -webkit-linear-gradient(top, #104c77 0, #135789 100%);
+  background: -webkit-gradient(linear, top left, bottom left, from(#104c77), to(#135789));
+  background: -webkit-gradient(linear, left top, left bottom, from(#104c77), to(#135789));
+  background: linear-gradient(to bottom, #104c77 0, #135789 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor', GradientType=0);
+}
+#header {
+  color: #fff;
+  background: url(../images/header-grad.png);
+  background: url(../images/headerBG-Noise.png), -webkit-gradient(linear, top left, bottom left, from(#357eb2), to(#4c95ca));
+  background: url(../images/headerBG-Noise.png), -webkit-linear-gradient(top, #357eb2 0, #4c95ca 100%);
+  background: url(../images/headerBG-Noise.png), -webkit-gradient(linear, left top, left bottom, from(#357eb2), to(#4c95ca));
+  background: url(../images/headerBG-Noise.png), linear-gradient(to bottom, #357eb2 0, #4c95ca 100%);
+}
+#header h1 {
+  display: inline-block;
+  font-size: 2.5em;
+  font-weight: 400;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75);
+}
+#header h1 .icon {
+  margin-right: 0.52em;
+}
+#header nav {
+  display: inline-block;
+  float: right;
+  margin-top: 0.95em;
+}
+#header nav li {
+  display: block;
+  float: left;
+  margin: 0 0.85em 0 0;
+}
+#header nav li a {
+  padding: 1em 1.33em;
+  font-size: 1em;
+  font-weight: 700;
+  line-height: 1em;
+  color: #135789;
+  text-shadow: 0 1px 0 #fff;
+  background: #fff;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #ffffff), color-stop(100%, #e5e5e5));
+  background: -webkit-linear-gradient(top, #ffffff 20%, #e5e5e5 100%);
+  background: -webkit-gradient(linear, top left, bottom left, from(#ffffff), to(#e5e5e5));
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e5e5e5));
+  background: linear-gradient(to bottom, #ffffff 20%, #e5e5e5 100%);
+  border: 1px solid #fff;
+  border-radius: .33em;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor', GradientType=0);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#header nav li a .icon {
+  margin-right: 0.75em;
+}
+#header nav li a:hover {
+  background: #efefef;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+#header nav li a.returnToInstructorProgress {
+  padding: 1em 0.75em;
+}
+#header nav li a.returnToInstructorProgress .icon {
+  position: relative;
+  top: .25em;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  font-size: 1.33em;
+  line-height: 0;
+}
+#header nav li:last-child {
+  margin: 0;
+}
+#header nav li.active a {
+  color: #fff;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.75);
+  text-shadow: 0 -1px 0 #000000;
+  background: #0f466e;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #0f466e), color-stop(100%, #135789));
+  background: -webkit-linear-gradient(top, #0f466e 0, #135789 100%);
+  background: -webkit-gradient(linear, top left, bottom left, from(#0f466e), to(#135789));
+  background: -webkit-gradient(linear, left top, left bottom, from(#0f466e), to(#135789));
+  background: linear-gradient(to bottom, #0f466e 0, #135789 100%);
+  border: 1px solid #0c3a5b;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@startColor', endColorstr='@endColor', GradientType=0);
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.33);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.33);
+}
+#header nav .disabled a {
+  cursor: default;
+}
+#header:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+#header > div {
+  position: relative;
+  padding: 2.25em 0;
+  margin: 0 4em;
+}
+#header > div > p {
+  padding: .5em 0 .85em;
+  font-size: 1.85em;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.67);
+}
+#header > div > p.instWelcome {
+  font-size: 2.15em;
+}
+#printCtrls {
+  display: none;
+}
+#loading-tag {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  -webkit-transition: opacity 1s ease 0s;
+  transition: opacity 1s ease 0s;
+}
+#loading-tag p {
+  position: fixed;
+  top: -10%;
+  right: 0;
+  bottom: 0;
+  left: 4em;
+  z-index: 10000;
+  width: 9em;
+  height: 4em;
+  padding: 0;
+  margin: auto;
+  font-size: 1.85em;
+  font-weight: 700;
+  line-height: 4em;
+  color: #a74a30;
+  text-align: center;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #fff;
+  border-radius: .33em;
+  zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+#loading-tag.show {
+  opacity: 1;
+}
+.no-pointerevents #loading-tag {
+  display: none;
+  border: 1px solid #cccccc;
+}
+.no-pointerevents #loading-tag.show {
+  display: block;
+}
+.main {
+  padding: 2.75em 4em 3.25em;
+  background: #f8f8f8;
+}
+.comp-head {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.main section {
+  position: relative;
+}
+.main section:after {
+  display: table;
+  clear: both;
+  content: '';
+}
+.main.plain {
+  padding-bottom: 1.75em;
+  background: #ffffff;
+}
+.main.plain section {
+  line-height: 0;
+}
+footer {
+  padding: 0 1em 0 19em;
+  background: #f9f9f9;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+footer a {
+  margin-top: 1.15em;
+}
+footer img {
+  margin: 1.33em 0 0 0.67em;
+}
+footer div {
+  display: inline-block;
+  margin: 2.15em 0 0 2em;
+  vertical-align: top;
+}
+footer div a {
+  color: #666666;
+}
+footer #de-logo {
+  display: inline-block;
+  float: right;
+  width: 105px;
+  height: 45px;
+  overflow: hidden;
+  background: url(../images/logo-differenceEngine.png) no-repeat;
+}
+footer #de-logo:hover {
+  background-position: 0 -45px;
+}
+.push {
+  height: 57px;
+}
+footer {
+  height: 74px;
+}
+.x-window {
+    background-color: white;
+    border: 1px solid black;
+    padding: 1em;
+}
+.x-window .x-tool {
+    float: right;
+}
+label.required::after {
+    color: red;
+    content: ' *';
+}
+
+/* Bootstrap overrides
+-------------------------------------------------- */
+/**
+ * bootstrap-responsive.css is matching with higher specificity than custom grid
+ *   in cp.css, applying width:auto instead of width:100% (resulting in overflow/overlap)
+ */
+.input-append input.span24 {
+    width: 100%; /* Fill container */
+}
+
+/* Domain overrides
+-------------------------------------------------- */
+/**
+ * Some domains (e.g., PCP) specify min heights/widths for .btn that should not apply
+ */
+.input-append > input + .btn {
+    min-width: auto;
+    min-height: auto;
+}

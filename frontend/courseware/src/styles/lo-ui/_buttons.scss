@@ -1,0 +1,49 @@
+//
+// LO Buttons
+//
+
+.btn-icon {
+  padding: $input-btn-padding-y;
+  i,
+  .icon {
+    display: block;
+  }
+}
+
+button,
+a,
+.btn,
+[role='button'] {
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+/*
+  These mixins will include .btn-sm or .btn-lg styles.
+  They can be used under media query directives, 
+  where you cannot use @extend .btn-sm
+  e.g.
+  @include media-breakpoint-down(md)
+    .btn
+      @include apply-btn-sm()
+*/
+@mixin apply-btn-sm() {
+  @include button-size(
+    $input-btn-padding-y-sm,
+    $input-btn-padding-x-sm,
+    $font-size-sm,
+    $btn-border-radius-sm
+  );
+}
+
+@mixin apply-btn-lg() {
+  @include button-size(
+    $input-btn-padding-y-lg,
+    $input-btn-padding-x-lg,
+    $font-size-lg,
+    $btn-border-radius-lg
+  );
+}

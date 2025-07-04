@@ -1,0 +1,84 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="Lökaal" bodyClass="stock-domain">
+  <@head>
+    <script type="text/javascript">
+      $(function() {
+        $('#submit').click(function(e) {
+          e.preventDefault();
+          var locale = $('#locale').val();
+          if (!$('#fallback').is(':checked')) {
+            locale = locale + "-x-nf";
+          }
+          $.post('/sys/locale?locale=' + locale).always(function() {
+            window.location.reload();
+          });
+        });
+      });
+    </script>
+    <style type="text/css">
+      span.locale-container {
+        font-family: "Fira Lorde", monospace;
+        margin-left: 0.8rem;
+      }
+      form#locale-form input, form#locale-form select {
+        margin-left: 0.8rem !important;
+        margin-right: 0.8rem !important;
+      }
+      form#locale-form label {
+        margin-bottom: 0.5rem;
+      }
+    </style>
+  </@head>
+  <section class="comp-head">
+    <div class="comp-title">
+      <h2>$$ Locale $$</h2>
+    </div>
+  </section>
+  <let
+    currentLocaleRaw="${ WebContext.messages.locale.toLanguageTag }"
+    noFallback="${ currentLocaleRaw.endsWith('x-nf') }"
+    currentLocale="${ noFallback ? currentLocaleRaw.replaceAll('-x-nf', '') : currentLocaleRaw }"
+    locales="$$api('v2/languages/locales')"
+  >
+    <div class="main">
+      <div class="well">
+        <p>
+          $$ Your current locale is: $$ <span class="locale-container">${ currentLocaleRaw }</span>
+        </p>
+      </div>
+      <form id="locale-form">
+        <label>
+          $$ New locale: $$
+          <select id="locale">
+            <foreach locale="${ locales }">
+              <option value="${ locale.id }" selected="$$selected(locale.id == currentLocale)">${ locale.localizedName } [${ locale.id }]</option>
+            </foreach>
+          </select>
+        </label>
+        <label>
+          <input id="fallback" type="checkbox" checked="$$checked(!noFallback)"/>
+          $$ Fallback to English $$
+        </label>
+        <p style="margin-top: 2em">
+          <button id="submit" class="btn btn-primary">$$ Teleport Me $$</button>
+        </p>
+      </form>
+    </div>
+  </let>
+</ui:pageLayout>

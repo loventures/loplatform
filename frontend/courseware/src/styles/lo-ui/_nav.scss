@@ -1,0 +1,23 @@
+//
+// LO Navs
+//
+
+.nav-link {
+  transition: color $transition-speed $transition-function;
+}
+
+.nav-tabs {
+  // Bootstrap 3
+  .active {
+    .nav-link {
+      border-bottom-color: $brand-primary;
+    }
+  }
+
+  .nav-link {
+    &.active {
+      border-color: transparent;
+      border-bottom-color: $brand-primary;
+    }
+  }
+}

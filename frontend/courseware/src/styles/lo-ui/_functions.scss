@@ -1,0 +1,44 @@
+@function direction-opposite($direction) {
+  @if $direction == left {
+    @return right;
+  }
+  @if $direction == right {
+    @return left;
+  }
+  @if $direction == top {
+    @return bottom;
+  }
+  @if $direction == bottom {
+    @return top;
+  }
+}
+
+@function direction-orthogonal($direction) {
+  @if $direction == left {
+    @return top;
+  }
+  @if $direction == right {
+    @return top;
+  }
+  @if $direction == top {
+    @return left;
+  }
+  @if $direction == bottom {
+    @return left;
+  }
+}
+
+@function direction-dimension($direction) {
+  @if $direction == left {
+    @return width;
+  }
+  @if $direction == right {
+    @return width;
+  }
+  @if $direction == top {
+    @return height;
+  }
+  @if $direction == bottom {
+    @return height;
+  }
+}

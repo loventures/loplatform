@@ -1,0 +1,121 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:ui="loi.cp.ui.UI">
+  <head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+
+    <link rel="shortcut icon" href="${ Current.domainDTO.favicon.url }" />
+
+    <title>${ title }</title>
+
+    <out value="${trackingHeader}" />
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="$$static/styles/cp.css" />
+
+    <link href="$$url/styles/legacy.css" rel="stylesheet" media="screen" />
+
+    <link href="${ Current.domainDTO.css.url }" rel="stylesheet" media="screen" if="${ Current.domainDTO.css }" />
+
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-browser/0.1.0/jquery.browser.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-scrollto/1.4.6/jquery-scrollto.min.js"></script>
+
+    <ui:coalesce>
+      <script type="text/javascript" src="$$static/scripts/underground.js"></script>
+      <script type="text/javascript" src="$$static/scripts/sha1.js"></script>
+      <script type="text/javascript" src="$$static/scripts/de.js"></script>
+      <script type="text/javascript" src="$$static/scripts/desvc.js"></script>
+      <script type="text/javascript" src="$$static/scripts/jstz.js"></script>
+    </ui:coalesce>
+
+    <script type="text/javascript" src="$$url/scripts/layout.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            //JavaScript TimeZone plugin (jstz) is necessary because it provides full ids, i.e. "America/New_York"
+            //Abbreviated strings (i.e. EST, CST) are deprecated because they overlap and are ambiguous. CST can
+            //mean both "Central Standard Time" and "China Standard Time". This avoids that conflict.
+            window.timezoneId = jstz.determine().name();
+        });
+    </script>
+
+    <ug:out xmlns:ug="urn:ug:1.0">${ head }</ug:out>
+  </head>
+
+  <body class="page-layout ${ noheader ? 'headerless' : null } ${ coursestyle ? 'footerless' : '' } ${ Session.meekView ? 'shrunken_head' : '' } ${ Current.anonymous ? 'logged-out' : 'logged-in' } ${bodyClass}">
+    <if test="${ !noheader }">
+      <ui:clusterLabel if="${ Current.isRoot }" />
+      <header role="navigation">
+        <div id="user-nav">
+          <span id="user-menu" if="${ !Current.isAnonymous }">
+            <span>${ Current.userDTO.givenName }</span>
+
+            <if test="${ adminLink }">
+              <a href="${ adminLink }">$$ Admin $$</a>
+              |
+            </if>
+            <if test="${ Session.get('ug:sudoer') }">
+              <a id="exit-button" href="#">$$ Exit $$</a>
+            </if>
+            <else>
+              <a id="logout-button" href="#">$$ Logout $$</a>
+            </else>)
+          </span>
+        </div>
+        <div id="branding">
+          <a href="/">
+            <if test="${ Current.domainDTO.logo }">
+              <img src="${ Current.domainDTO.logo.url }" title="${ Current.domainDTO.name }" />
+            </if>
+            <span class="${ Current.domainDTO.logo ? 'hidden-name' : null }">${ Current.domainDTO.name }</span>
+          </a>
+        </div>
+
+      </header>
+    </if>
+
+    <div id="app">
+      <div class="${ !noheader ? 'main' : ''}">
+        <div id="pageLayout-body-inner-most" class="row-fluid">
+          <ug:out xmlns:ug="urn:ug:1.0">${ body }</ug:out>
+        </div>
+      </div>
+    </div>
+
+    <footer if="${ !coursestyle }">
+      <a id="de-logo" style="background:url($$url('images/logo-differenceEngine.png')) no-repeat" class="pull-right" href="http://lo.ventures/" target="_new" title="Difference Engine"></a>
+    </footer>
+
+    <iframe if="${ !Current.anonymous }" name="uploadFrame" class="cp_hiddenFrame"></iframe>
+
+    <out value="${trackingFooter}" />
+
+  </body>
+</html>
+

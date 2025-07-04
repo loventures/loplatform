@@ -1,0 +1,293 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.survey-question-number {
+  @extend .question-number;
+  border: 2px solid $medium;
+  font-weight: 400;
+  color: $color-body-text !important;
+}
+
+.survey-panel {
+  opacity: 1;
+  transition: opacity $trans-speed $trans-type;
+
+  &:not(.open) {
+    opacity: 0;
+
+    > .panel-inner {
+      display: none;
+    }
+  }
+
+  form {
+    margin-left: -0.5rem;
+  }
+
+  .question-body {
+    position: relative;
+  }
+
+  .question-container:not(:last-child) {
+    margin-bottom: 0.75rem;
+  }
+
+  .question-number-column {
+    flex: 0;
+  }
+
+  .question-content-column {
+    margin-top: 2px;
+  }
+
+  &.inline {
+    height: auto !important;
+    bottom: 0 !important;
+    top: auto !important;
+
+    .panel-inner {
+      height: auto;
+      display: block;
+
+      .panel-header {
+        background: $color-primary;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+
+        h5 {
+          color: $color-button-text-white;
+        }
+
+        button {
+          position: inherit;
+          right: auto;
+          margin-right: 0 !important;
+          padding: 0.25rem;
+        }
+      }
+
+      form {
+        margin-bottom: 0.5rem;
+      }
+
+      .panel-buttons {
+        button {
+          padding: 0.5rem 2rem;
+        }
+
+        .btn-link {
+          display: none;
+        }
+      }
+    }
+
+    // switch to inline view on small devices
+    @media (max-width: $smscreen-max) {
+      position: inherit;
+      transform: none !important;
+      max-width: 100% !important;
+      box-shadow: none !important;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      border-right: none;
+      border-left: none;
+      margin-top: 1.5rem;
+
+      .panel-header {
+        display: none !important;
+      }
+
+      .panel-inner {
+        // align buttons and disclaimers left
+        > .justify-content-center {
+          justify-content: start !important;
+        }
+
+        > .text-center {
+          text-align: left !important;
+        }
+
+        // squash vertically a bit
+        > .panel-block {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+
+        // unlarge the buttons
+        .panel-buttons {
+          button {
+            padding: 0.375rem 0.75rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// DCM adds a lot of <p> tags and since we are showing distractors in a
+// simple radio group, the final <p> bottom margin is too ugly to let be
+.survey-question-distractor {
+  display: inline-block;
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.legacy-content .survey-card {
+  border: none;
+  background: none;
+  flex-direction: row;
+
+  > .card-body {
+    flex: inherit;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.feedback-button {
+  @extend .btn;
+  @include button-variant($gray-800, $gray-400);
+
+  position: fixed;
+  right: 0;
+  top: calc(50vh - (7rem / 2));
+  margin-right: 0;
+  border-radius: $border-radius 0 0 $border-radius;
+  border-right-width: 0;
+  width: 3rem;
+  height: 9rem;
+  padding: 1rem 1.2rem 1rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $zindex-dropdown;
+  transform: translate(0, 0);
+  transition: transform $transition-speed $transition-function;
+  line-height: 1.1;
+
+  &:focus,
+  &.focus {
+    box-shadow:
+      0 0 0 0.1rem rgb(213 218 224),
+      0 0 0 0.2rem $gray-800;
+  }
+
+  &.hidden {
+    // when the panel is open, the transform from panel-open overrules this transform value
+    // so the button remains visible until the panel closes, whereupon this translate will
+    // push the button off the viewport
+    transform: translate(3rem, 0);
+  }
+
+  &.panel-open {
+    transform: translate(-400px, 0);
+    transform: translate(#{'max(-400px, -100vw)'}, 0);
+  }
+
+  span,
+  div {
+    transform: rotate(-90deg);
+  }
+}
+
+@media (max-width: $smscreen) {
+  .feedback-button {
+    position: inherit;
+    border-radius: $border-radius;
+    border-right-width: 1px;
+    height: auto;
+    width: auto;
+    margin: 1rem auto;
+    transform: none !important;
+
+    span,
+    div {
+      transform: none;
+    }
+  }
+
+  .er-page-grid .feedback-button {
+    margin-top: 1.5rem;
+  }
+}
+
+.feedback-inline {
+  //10% smaller than the standard .question-content-column, and without the 3em padding
+  width: calc(360px - 3em);
+  overflow: hidden;
+
+  .question-content-column {
+    max-width: 100% !important; //Elsewhere, this is calc(100% - 3em)
+  }
+
+  .question-text {
+    padding-top: 0 !important; //Inline form desires slim form factor, shaves off 0.5em
+  }
+}
+
+.feedback-inline-enter {
+  opacity: 0;
+  max-height: 0;
+}
+
+.feedback-inline-enter-active {
+  opacity: 1;
+  overflow: hidden;
+  max-height: 6rem;
+  transition:
+    max-height $transition-speed ease-in,
+    opacity $transition-speed ease-in;
+}
+
+.feedback-inline-exit {
+  opacity: 1;
+  overflow: hidden;
+  max-height: 6rem;
+}
+
+.feedback-inline-exit-active {
+  opacity: 0;
+  max-height: 0;
+  transition:
+    max-height $transition-speed ease-in,
+    opacity $transition-speed ease-in;
+}
+
+.custom-control-lg {
+  @extend .custom-control;
+  padding-left: 2rem;
+
+  .custom-control-label {
+    padding-top: 0.25rem;
+
+    &::before,
+    &::after {
+      width: calc(1.5rem + 2px);
+      height: calc(1.5rem + 2px);
+    }
+  }
+}
+
+.custom-control-lg + .custom-control-lg {
+  margin-top: 0.5rem;
+}
+
+.survey-panel {
+  z-index: 1399;
+}

@@ -1,0 +1,76 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul class="bin-list bin-list-play">
+  <li
+    class="bin-drop-bin play-bin"
+    ng-repeat="(binIndex, bin) in $ctrl.question.bins track by $index"
+    bin-drop-droppable="$ctrl.moveChoice"
+    bin-index="{{binIndex}}"
+    ng-click="$ctrl.dropToBin(binIndex, $event)"
+    title="{{ BIN_DROP_BIN_INSTRUCTIONS | translate }}"
+  >
+    <div
+      class="bin-header"
+      ng-bind="bin.text"
+    ></div>
+    <ul class="bin-choice-list list-unstyled">
+      <li ng-repeat="choiceIndex in $ctrl.selection.selected[binIndex] track by choiceIndex">
+        <div
+          class="bin-drop-choice play"
+          ng-class="{
+            'active': $ctrl.activeChoiceIndex === choiceIndex
+          }"
+          lo-autofocus
+          autofocus-on="{{$ctrl.focusOnRender && choiceIndex === 0}}"
+          choice-index="{{choiceIndex}}"
+          bin-drop-draggable="$ctrl.activateChoice"
+          ng-click="$ctrl.activateChoice(choiceIndex, $event)"
+          ng-bind="$ctrl.choices[choiceIndex].text"
+        ></div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div
+  class="bin-drop-bin unselected-bin"
+  bin-drop-droppable="$ctrl.moveChoice"
+  bin-index="-1"
+  ng-click="$ctrl.dropToBin(-1, $event)"
+>
+  <div
+    class="bin-label sr-only"
+    translate="BIN_DROP_CHOICES_INSTRUCTIONS"
+  ></div>
+  <ul class="bin-choice-list list-unstyled">
+    <li ng-repeat="choiceIndex in $ctrl.selection.unselected track by choiceIndex">
+      <div
+        class="bin-drop-choice play"
+        ng-class="{
+          'active': $ctrl.activeChoiceIndex === choiceIndex
+        }"
+        lo-autofocus
+        autofocus-on="{{$ctrl.focusOnRender && choiceIndex === 0}}"
+        choice-index="{{choiceIndex}}"
+        bin-drop-draggable="$ctrl.activateChoice"
+        ng-click="$ctrl.activateChoice(choiceIndex, $event)"
+        ng-bind="$ctrl.choices[choiceIndex].text"
+      ></div>
+    </li>
+  </ul>
+</div>

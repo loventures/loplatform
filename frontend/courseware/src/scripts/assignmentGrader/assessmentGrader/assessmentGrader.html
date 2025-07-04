@@ -1,0 +1,70 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<assignment-grader
+  assignment-name="$ctrl.assignmentName"
+  due-date="$ctrl.dueDate"
+>
+  <content-slot>
+    <div ng-if="$ctrl.assignmentType === 'final-project'">
+      <final-project-question-grading-view
+        question="$ctrl.grader.displayedQuestionList[0].question"
+        response="$ctrl.grader.displayedQuestionList[0].response"
+      ></final-project-question-grading-view>
+    </div>
+
+    <ul
+      class="list-group list-unstyled"
+      ng-if="$ctrl.assignmentType !== 'final-project'"
+    >
+      <li ng-repeat="tuple in $ctrl.grader.displayedQuestionList track by tuple.question.id">
+        <question-loader
+          index="tuple.index"
+          question="tuple.question"
+          response="tuple.response"
+          can-edit-answer="false"
+          grading="true"
+        ></question-loader>
+        <hr />
+      </li>
+    </ul>
+  </content-slot>
+  <panel-slot>
+    <grading-panel
+      ng-if="$ctrl.grader"
+      on-exit="$ctrl.onExit()"
+      grader="$ctrl.grader"
+    >
+      <fixed-top></fixed-top>
+      <fixed-bottom></fixed-bottom>
+      <scrollable-sections>
+        <grading-panel-section
+          section-title="::'GRADING_PANEL_SUBMISSION_HEADER'"
+          description="::'GRADING_PANEL_SUBMISSION_HEADER_DESC'"
+        >
+          <assessment-submission-section
+            ng-if="$ctrl.grader.activeUser && $ctrl.grader.activeAttempt"
+            user="$ctrl.grader.activeUser"
+            attempt="$ctrl.grader.activeAttempt"
+            active-questions="$ctrl.grader.gradableQuestionList"
+            grader="$ctrl.grader"
+          ></assessment-submission-section>
+        </grading-panel-section>
+      </scrollable-sections>
+    </grading-panel>
+  </panel-slot>
+</assignment-grader>

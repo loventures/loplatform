@@ -1,0 +1,62 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="input-group">
+  <input
+    class="form-control"
+    type="text"
+    ng-model="searchField"
+    placeholder="{{searchPlaceholder}}"
+    focus-on="{{events.iconCancelClicked}}"
+  />
+
+  <div
+    class="input-group-btn"
+    ng-show="!!searchField"
+  >
+    <button
+      class="btn btn-link"
+      ng-click="search()"
+    >
+      <span translate="SRS_SEARCH_ACTION"></span>
+    </button>
+  </div>
+
+  <div
+    class="input-group-btn"
+    ng-show="!!searchField"
+  >
+    <button
+      class="icon icon-cancel-circle cancel-button"
+      title="{{ SRS_SEARCH_CLEAR | translate }}"
+      ng-show="!!searchField"
+      ng-click="iconCancelClick()"
+    >
+      <span class="icon icon-cancel-circle"></span>
+    </button>
+  </div>
+
+  <div
+    class="input-group-append"
+    ng-show="!searchField"
+  >
+    <span
+      class="input-group-text icon icon-search"
+      role="presentation"
+    ></span>
+  </div>
+</div>

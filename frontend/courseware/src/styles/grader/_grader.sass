@@ -1,0 +1,50 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.assignment-grader
+  display: flex
+  flex-direction: row
+
+  .content-column
+    flex: 1 1 auto
+
+    > *:not(hr)
+      @extend .container
+
+  .panel-column
+    flex: 0 0 auto
+
+  .grading-header
+    .grader-assignment-title
+      margin: 1rem
+
+    .grader-assignment-info
+      margin: 1rem
+
+.preview-image
+  max-width: 100%
+  max-height: calc(100vh - 10rem)
+  border: 1px solid $border-color
+  border-radius: $border-radius
+
+.preview-document
+  width: 100%
+  max-height: calc(100vh - 10rem)
+  aspect-ratio: 8.5 / 11
+  border: 1px solid $border-color
+  border-radius: $border-radius

@@ -1,0 +1,32 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<button
+  class="grading-panel-user-select"
+  ng-if="$ctrl.grader.activeUser"
+  translate-attr-title="GRADING_PANEL_SELECT_USER"
+  translate-values="{
+      name: $ctrl.grader.activeUser.fullName
+  }"
+  ng-click="$ctrl.showStudentListModal()"
+>
+  <span
+    class="name"
+    ng-bind="$ctrl.grader.activeUser.fullName"
+  ></span>
+  <i class="icon icon-triangle-down"></i>
+</button>

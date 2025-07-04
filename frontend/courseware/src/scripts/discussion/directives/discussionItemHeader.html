@@ -1,0 +1,171 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-item-header top-level-header">
+  <div
+    class="discussion-header-column unread-toggle show-when-available d-print-none"
+    ng-if="::$ctrl.markableUnread"
+    ng-click="$ctrl.setViewed(!$ctrl.item.track.viewed)"
+    title="{{ $ctrl.item.track.viewed?
+      'DISCUSSION_POST_TRACKING_VIEWED' :
+      'DISCUSSION_POST_TRACKING_NOT_VIEWED' | translate }}"
+  >
+    <i class="viewed-icon"></i>
+  </div>
+
+  <div
+    class="discussion-header-column new-post-indicator show-when-available d-print-none"
+    ng-if="::$ctrl.markableNew"
+    title="{{ $ctrl.item.isNew ?
+      'DISCUSSION_POST_TRACKING_NEW' :
+      'DISCUSSION_POST_TRACKING_NOT_NEW' | translate }}"
+  >
+    <i class="viewed-icon"></i>
+  </div>
+
+  <div
+    class="discussion-header-column expansion-toggle d-print-none"
+    aria-label="{{'DISCUSSION_THREAD_TOGGLE_EXPAND' | translate }}"
+    ng-click="$ctrl.toggleExpandPost()"
+  >
+    <i class="icon icon-chevron-down hide-when-collapsed"></i>
+    <i class="icon icon-chevron-right show-when-collapsed"></i>
+  </div>
+
+  <div
+    class="discussion-header-column title-column"
+    ng-click="$ctrl.toggleExpandPost()"
+  >
+    <div class="user-info-row font-italic">
+      <span
+        translate="DISCUSSION_POST_POST_BY"
+        translate-values="{ name: $ctrl.item.user.fullName  }"
+      ></span>
+      <span
+        class="instructor-label"
+        ng-if="::$ctrl.item.moderatorPost"
+        translate="DISCUSSION_POST_MODERATOR_TAG"
+      ></span>
+    </div>
+
+    <div
+      class="title-info-row"
+      ng-if="$ctrl.showTitle && $ctrl.item.depth === 0"
+    >
+      <span
+        class="font-weight-bold show-when-available hide-when-reported"
+        ng-if="$ctrl.item.title"
+        ng-bind="$ctrl.item.title"
+      >
+      </span>
+      <span
+        class="no-title-text font-weight-bold show-when-available hide-when-reported"
+        ng-if="!$ctrl.item.title"
+        translate="DISCUSSION_POST_NO_TITLE"
+      >
+      </span>
+    </div>
+
+    <div class="content-info-row">
+      <span
+        class="show-when-inappropriate"
+        translate="DISCUSSION_POST_INAPPROPRIATE_TAG"
+      ></span>
+      <span
+        class="show-when-removed"
+        translate="DISCUSSION_POST_DELETED_TAG"
+      ></span>
+      <span class="show-when-reported">
+        <i class="icon icon-warning"></i>
+        <span translate="DISCUSSION_POST_REPORTED_TAG"></span>
+      </span>
+      <span
+        class="content-preview show-when-available hide-when-reported"
+        ng-if="!$ctrl.showTitle"
+        bind-math="$ctrl.item.contentPreview"
+      >
+      </span>
+    </div>
+  </div>
+
+  <div
+    class="discussion-header-column discussion-item-info"
+    ng-if="::!!$ctrl.isThread"
+    ng-class="{'as-dropdown':$ctrl.statusAsDropdown}"
+    ng-show="!$ctrl.item.expandPost"
+  >
+    <span
+      class="item-info-row info-replies"
+      ng-click="$ctrl.toggleExpandPost()"
+    >
+      <span
+        translate="DISCUSSION_POST_REPLY_COUNT"
+        translate-values="{ count: $ctrl.thread.repliesCount }"
+      ></span>
+      &ndash;
+      <span
+        class="{ new : $ctrl.thread.newRepliesCount }"
+        ng-if="!$ctrl.settings.canMarkUnread"
+        translate="DISCUSSION_POST_NEW_REPLY_COUNT"
+        translate-values="{ count: $ctrl.thread.newRepliesCount }"
+      ></span>
+      <span
+        class="{ unread : $ctrl.thread.unreadRepliesCount }"
+        ng-if="$ctrl.settings.canMarkUnread"
+        translate="DISCUSSION_POST_UNREAD_REPLY_COUNT"
+        translate-values="{ count: $ctrl.thread.unreadRepliesCount }"
+      ></span>
+    </span>
+
+    <span class="item-info-row info-date">
+      <span translate="DISCUSSION_POST_LAST_ACTIVITY_DATE"></span>
+      <span ng-bind="$ctrl.item.lastActivityTime | fromNow"></span>
+    </span>
+  </div>
+
+  <div class="discussion-header-column status-toggles d-print-none">
+    <button
+      class="status-toggle toggle-dropdown icon-btn show-when-collapsed"
+      ng-if="::!!$ctrl.isThread"
+      ng-click="$ctrl.statusAsDropdown = !$ctrl.statusAsDropdown"
+    >
+      <span class="sr-only">{{ DISCUSSION_POST_DROPDOWN | translate }}</span>
+      <i class="icon icon-more-horizontal"></i>
+    </button>
+    <button
+      class="status-toggle toggle-pinned icon-btn icon-btn-primary icon-btn-circle"
+      ng-click="$ctrl.canPinThread && $ctrl.setPinned(!$ctrl.item.pinned)"
+      ng-if="$ctrl.canPinThread || $ctrl.item.pinned"
+      title="{{ $ctrl.item.pinned?
+        'DISCUSSION_POST_PINNED' :
+        'DISCUSSION_POST_NOT_PINNED' | translate }}"
+    >
+      <i class="icon icon-pushpin"></i>
+    </button>
+
+    <button
+      class="status-toggle toggle-bookmark icon-btn icon-btn-primary icon-btn-circle"
+      ng-click="$ctrl.setBookmarked(!$ctrl.item.track.bookmarked)"
+    >
+      <span class="sr-only"
+        >{{ $ctrl.item.track.bookmarked? 'DISCUSSION_POST_BOOKMARKED' :
+        'DISCUSSION_POST_NOT_BOOKMARKED' | translate }}</span
+      >
+      <i class="icon icon-bookmark"></i>
+    </button>
+  </div>
+</div>

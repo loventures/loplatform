@@ -1,0 +1,115 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div ng-if="!$ctrl.ready">
+  <loading-spinner></loading-spinner>
+</div>
+
+<div ng-if="$ctrl.ready && !$ctrl.audioSupported">
+  <span translate="AUDIO_RECORDER_NO_SUPPORT"></span>
+</div>
+
+<div
+  class="audio-recorder m-2"
+  ng-if="$ctrl.ready && $ctrl.audioSupported"
+>
+  <div
+    class="flex-row-content"
+    ng-hide="!$ctrl.recording"
+  >
+    <button
+      class="btn btn-sm btn-success"
+      ng-click="$ctrl.acceptRecording()"
+    >
+      <span class="icon icon-checkmark"></span>
+      <span translate="AUDIO_RECORDER_ACCEPT"></span>
+    </button>
+
+    <button
+      class="btn btn-sm btn-danger"
+      ng-click="$ctrl.clear()"
+      ng-show="$ctrl.recording != null"
+    >
+      <span class="icon icon-cross"></span>
+      <span translate="AUDIO_RECORDER_CLEAR"></span>
+    </button>
+  </div>
+
+  <div
+    class="flex-row-content"
+    ng-show="!$ctrl.recording"
+  >
+    <button
+      class="btn btn-sm btn-info"
+      ng-click="$ctrl.startRecording()"
+      ng-hide="!$ctrl.canRecord()"
+    >
+      <span
+        class="icon icon-controller-record"
+        ng-class="{
+          'recording': $ctrl.isRecording
+        }"
+      ></span>
+      <span translate="Record"></span>
+    </button>
+
+    <button
+      class="btn btn-sm btn-info"
+      ng-click="$ctrl.pauseRecording()"
+      ng-hide="!$ctrl.canPause()"
+      ng-if="$ctrl.supportsPause()"
+    >
+      <span
+        class="icon icon-controller-paus"
+        ng-class="{
+          'paused': $ctrl.isPaused
+        }"
+      ></span>
+      <span translate="AUDIO_RECORDER_PAUSE"></span>
+    </button>
+
+    <button
+      class="btn btn-sm btn-info"
+      ng-click="$ctrl.stopRecording()"
+      ng-disabled="!$ctrl.canStop()"
+    >
+      <span class="icon icon-controller-stop"></span>
+      <span translate="AUDIO_RECORDER_STOP"></span>
+    </button>
+
+    <button
+      class="btn btn-sm btn-danger"
+      ng-if="$ctrl.onCancel"
+      ng-click="$ctrl.onCancel()"
+    >
+      <span class="icon icon-cross"></span>
+      <span translate="AUDIO_RECORDER_CANCEL"></span>
+    </button>
+  </div>
+
+  <span
+    class="m-2"
+    ng-show="!$ctrl.recording"
+    >{{$ctrl.recordingTimeElapsed | formatDuration}}</span
+  >
+
+  <audio
+    class="recording"
+    controls="true"
+    ng-show="$ctrl.recording != null"
+  ></audio>
+</div>

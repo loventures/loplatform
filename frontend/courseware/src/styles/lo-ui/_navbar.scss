@@ -1,0 +1,65 @@
+//
+// LO navbar
+//
+
+.navbar-light {
+  background-color: $white;
+  border-bottom: 1px solid $gray-lighter;
+}
+
+.nav-icon {
+  @extend .navbar-text;
+}
+
+.navbar-toggler-left {
+  margin-right: 1rem;
+}
+
+// this makes the navbar links not turn to vertical orientation when on small screens
+@include media-breakpoint-down(sm) {
+  .navbar-expand-md .navbar-nav {
+    flex-direction: row;
+    .nav-link {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+}
+
+.navbar-nav {
+  // todo: replace this with `.flex-row-content` if/when that gets merged
+  .menu-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-image {
+    height: $height-header - 1rem;
+    width: $height-header - 1rem;
+    border-radius: 100%;
+    background-size: cover;
+    margin-left: calc(#{$spacer} / 2);
+  }
+
+  .header-dropdown-container {
+    .dropdown-menu {
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        > i {
+          flex: 1 1 auto;
+          text-align: right;
+        }
+      }
+
+      &.right {
+        .dropdown-item {
+          justify-content: flex-end;
+          > i {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

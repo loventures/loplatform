@@ -1,0 +1,70 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//TODO: port to lo-ui?
+.icon-btn
+  background: transparent
+  border: 0
+
+.icon-btn-circle
+  border-radius: 50%
+
+%btn-reset
+  background-color: transparent
+  border: none
+  padding: 0
+
+.btn-reset
+  @extend %btn-reset
+
+
+.btn-icon-and-text
+  display: flex
+  align-items: center
+  white-space: normal
+  border: none
+  max-width: 4rem
+  flex-direction: column
+  font-size: .85rem
+
+  i
+    font-size: 2.5rem
+
+
+button, a, .btn
+  &.disabled, &.locked
+    cursor: not-allowed
+
+@media (min-width: $mdscreen)
+  .btn-icon-and-text
+    max-width: none
+    flex-direction: row
+    font-size: 1rem
+
+    i
+      font-size: 1rem
+      margin-right: 0.25rem
+
+
+button.unhover-muted, a.unhover-muted
+  &:not(:hover)
+    color: $text-muted
+
+button, a
+  &:not(:hover)
+    .unhover-muted
+      color: $text-muted

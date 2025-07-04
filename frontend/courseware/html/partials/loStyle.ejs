@@ -1,0 +1,38 @@
+<style>
+    @view-transition {
+        navigation: auto;
+    }
+
+    .splash-logo {
+      color: #6c757d;
+      opacity: 0;
+      animation: splash-fade-in ease-in 0.5s forwards;
+
+      > svg {
+        position: absolute;
+        width: 10rem;
+        height: 10rem;
+        top: calc(50vh - 5rem);
+        left: calc(50vw - 5rem);
+      }
+    }
+
+    @keyframes splash-fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #495057;
+      }
+
+      .splash-logo {
+        color: #f8f9fa;
+      }
+    }
+  </style>

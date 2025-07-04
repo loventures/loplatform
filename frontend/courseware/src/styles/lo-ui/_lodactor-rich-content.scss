@@ -1,0 +1,232 @@
+//This file is to support legacy texas-online authored content.
+//We told authors they could use these classes instead of importing their own css styles
+//and now we have to maintain it ¯\_(ツ)_/¯
+//See this doc for a full list of styles we told them they chould use:
+//https://docs.google.com/document/d/1X3jpe-sQ-SVh3_Hh3mzpPBfL8FUYlvnFPzI_eRhMG7k/edit#
+.lodactor-rich-content {
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+
+  p,
+  blockquote,
+  code {
+    line-height: 1.33em;
+    margin-bottom: 1.25rem;
+
+    img {
+      display: block;
+      margin: 1em 0;
+    }
+  }
+
+  ul,
+  ol {
+    list-style-position: outside;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+
+    li {
+      margin: 0.25em;
+    }
+
+    ol,
+    ul {
+      margin-left: 1em;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  dl {
+    dt {
+      font-weight: 600;
+      padding: 0.5em 0;
+    }
+
+    dd {
+      padding: 0.5em 1em 1.5em;
+    }
+  }
+
+  blockquote {
+    font-size: 1.25rem;
+    padding: 1rem;
+    margin: 0 0 1.5em 1.5em;
+    background: $light;
+    border-left: 4px solid $primary;
+    color: $dark;
+    font-style: italic;
+  }
+
+  aside {
+    font-size: 2.5rem;
+    padding: 1em;
+    margin: 1em 0;
+    border-top: 2px solid $primary;
+    border-bottom: 2px solid $primary;
+    text-align: center;
+    color: $primary;
+    line-height: 1.33em;
+    display: inline-block;
+    width: 100%;
+  }
+
+  article {
+    background: $light;
+    border-radius: $border-radius;
+    margin: 1.5em 0;
+    padding: 1em;
+    width: 100%;
+    font-size: 1.15em;
+  }
+
+  a {
+    color: $primary;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &.lo-btn {
+      min-height: 0;
+      //Otherwise we get odd double height items with lo-btn is stuck on an a tag
+    }
+  }
+
+  cite,
+  em {
+    font-style: italic;
+  }
+
+  code,
+  var {
+    font-family: monospace, serif;
+  }
+
+  // Headings
+  h1 {
+    color: $primary;
+  }
+
+  h2 {
+    color: $accent;
+  }
+
+  h3,
+  h4,
+  h5 {
+    color: $secondary;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    + hr {
+      border: 0;
+      height: 0;
+      border-top: 1px solid $info;
+    }
+  }
+
+  h1 + hr {
+    border-top: 4px solid $info;
+  }
+
+  h2 + hr {
+    border-top: 2px solid $info;
+  }
+
+  h6 {
+    margin-bottom: 1rem;
+  }
+
+  // Tables
+
+  table {
+    border: $table-border-width solid $table-border-color;
+    margin-bottom: 1rem;
+    background: fade-out(#fff, 0.5);
+
+    caption {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    &.content-table-noborder,
+    &.content-table-noborder td,
+    &.content-table-noborder th {
+      border: none;
+    }
+  }
+
+  th {
+    font-weight: 600;
+    background: #fff;
+  }
+
+  th,
+  td {
+    padding: 1rem;
+    border-top: $table-border-width solid $table-border-color;
+    border-bottom: $table-border-width solid $table-border-color;
+    border-left: $table-border-width solid $table-border-color;
+  }
+
+  // ----- Images -----
+
+  // This will create a banner image that negates the content margin
+  .content-img-banner {
+    display: block;
+    margin: -1 * $card-spacer-x -1 * $card-spacer-x 1rem;
+    width: calc(100% + #{2 * $card-spacer-x});
+
+    // An 'important' hack until we can edit the wysiwyg to not put inline styles (height / width in pixels)
+    img {
+      width: 100% !important;
+      margin: 0;
+    }
+  }
+
+  // This will create a centered image
+  .content-img-centered {
+    img {
+      display: block;
+      margin: 1em auto;
+    }
+  }
+
+  // This will allow an image to float to the left of wrapped text
+  .content-img-wrap-left {
+    display: inline-block;
+    width: 100%;
+
+    img {
+      float: left;
+      margin: 0.25em 1em 0.5em 0;
+    }
+  }
+
+  // This will allow an image to float to the right of wrapped text
+  .content-img-wrap-right {
+    display: inline-block;
+    width: 100%;
+
+    img {
+      float: right;
+      margin: 0.25em 0 0.5em 1em;
+    }
+  }
+}

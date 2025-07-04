@@ -1,0 +1,73 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.old-grader
+  .grading-panel-bottom
+    position: relative
+    z-index: 1
+
+  .grading-panel-status
+    background-color: $primary
+    color: $white
+    line-height: 2em
+    width: 100%
+    position: relative
+
+    //this container layer is needed because there are
+    //position: absolute :before and :after in this container
+    //which does not work along with justify-content: space-between
+    //because absolutes creates placeholders
+    //the behavior here is wildly different across browsers
+    .status-flex-container
+      width: 100%
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      align-items: flex-end
+      justify-content: space-between
+      padding: 0.5em 1em
+
+      .submissions-count
+        white-space: nowrap
+      .btn-link
+        padding: 0
+
+    &.all-grades-posted
+      background-color: $success
+      &:after
+        border-top: 0.5em solid $success
+
+    &:after
+      content: ""
+      position: absolute
+      height: 0
+      width: 0
+      border-top: 0.5em solid $primary
+      border-right: 0.5em solid transparent
+      border-bottom: 0.5em solid transparent
+      border-left: 0.5em solid transparent
+      left: calc((100% - 1em)/2)
+      top: 100%
+
+
+  .grading-panel-controls
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: space-between
+    padding: 1rem

@@ -1,0 +1,833 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+:root {
+  --scrollbar-width: 0;
+  --header-offset: 0;
+  --footer-margin: 0;
+  --footer-height: 0;
+  --content-offset: 0;
+}
+
+html {
+  scroll-padding-top: $er-header-height;
+}
+
+a,
+button {
+  --bs-dropdown-link-hover-bg: #e9ecef; // $gray-200
+}
+
+.er-page-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    'nav nav nav'
+    'sidebar content feedback';
+
+  position: relative;
+  background-color: $er-dim-grey;
+  min-height: calc(100vh + $er-page-header-height);
+
+  @media (max-height: $smheight-max) {
+    min-height: calc(100vh + $er-zoomed-page-header-height);
+  }
+
+  @media print {
+    min-height: auto;
+  }
+
+  .er-page-header {
+    grid-area: nav;
+    z-index: 6;
+
+    .app-header {
+      height: $er-page-header-height;
+      background-color: $er-dim-white;
+      border-bottom: none;
+      box-shadow: 0 0 8px 0 #21252920;
+      transition: height 0.1s ease-in;
+
+      @media (max-height: $smheight-max) {
+        height: $er-zoomed-page-header-height;
+      }
+
+      .border-white {
+        border-color: $er-dim-white !important;
+      }
+    }
+  }
+
+  .er-content-main {
+    grid-area: content;
+    position: relative;
+    min-height: 100vh;
+    transition: width 0.1s ease-out;
+
+    .er-content-area {
+      padding-bottom: var(--footer-height);
+    }
+  }
+
+  .feedback-sidebar,
+  .qna-sidebar {
+    grid-area: feedback;
+    position: sticky;
+    top: 0;
+    right: -1 * $er-feedback-width;
+    width: 0;
+    height: calc(100vh - var(--header-offset));
+    opacity: 0;
+    transition: all 0.1s ease-out;
+    z-index: 4;
+    overflow: hidden;
+
+    @media (min-width: $hugescreen) {
+      right: -1 * $er-feedback-width-huge;
+    }
+
+    @media (min-width: $epicscreen) {
+      right: -1 * $er-feedback-width-epic;
+    }
+
+    &.opened {
+      right: 0;
+      opacity: 1;
+      width: $er-feedback-width;
+      @media (min-width: $hugescreen) {
+        width: $er-feedback-width-huge;
+      }
+      @media (min-width: $epicscreen) {
+        width: $er-feedback-width-epic;
+      }
+    }
+
+    @media (max-width: $smscreen-max) {
+      grid-area: auto; // removing from the grid system for mobile
+      width: calc(100vw - var(--scrollbar-width));
+      height: 0;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: auto;
+      position: fixed;
+
+      &.opened {
+        width: calc(100vw - var(--scrollbar-width));
+        height: 70vh;
+      }
+    }
+  }
+
+  &.full-screen {
+    height: 100vh;
+    min-height: 100vh;
+    overflow: hidden;
+
+    .er-expandable-activity {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1050;
+      margin: 0;
+      padding: 1rem;
+      border: none;
+      overflow-y: auto;
+      background-color: #fff;
+    }
+
+    #full-screen-button {
+      position: fixed;
+      z-index: 1056;
+      top: 0;
+      right: 0;
+      border-top-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      border-right: none;
+      border-top: none;
+      border-color: $color-primary !important;
+
+      &:not(:hover):not(:active) {
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.75);
+      }
+    }
+  }
+
+  .er-sidebar {
+    position: sticky;
+    top: 0;
+    transition: all 0.1s ease-out;
+    grid-area: sidebar;
+    height: calc(100vh - var(--header-offset));
+    overflow: visible;
+    background-color: $white;
+    z-index: 5;
+
+    .sidebar-container {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      nav {
+        width: 100%;
+      }
+    }
+  }
+
+  .app-footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: width 0.1s ease-out, right 0.1s ease-out;
+    margin: 0 0 var(--footer-margin);
+    box-shadow: none;
+    background: none;
+    min-height: 3.5rem;
+  }
+
+  .app-header,
+  .content-width,
+  .er-content-title.stuck .content-title {
+    width: calc(100vw - var(--scrollbar-width));
+  }
+
+  .er-sidebar {
+    width: $er-sidebar-width;
+    margin-left: -$er-sidebar-width;
+    @media (min-width: $hugescreen) {
+      width: $er-sidebar-width-huge;
+      margin-left: -$er-sidebar-width-huge;
+    }
+    @media (min-width: $epicscreen) {
+      width: $er-sidebar-width-epic;
+      margin-left: -$er-sidebar-width-epic;
+    }
+  }
+
+  &.feedback-open {
+    .er-content-title.stuck .content-title,
+    .er-footer {
+      right: $er-feedback-width;
+
+      @media (min-width: $hugescreen) {
+        right: $er-feedback-width-huge;
+      }
+
+      @media (min-width: $epicscreen) {
+        right: $er-feedback-width-epic;
+      }
+
+      @media (max-width: $smscreen-max) {
+        right: 0;
+      }
+    }
+  }
+
+  &.feedback-open:not(.sidebar-autohide) {
+    .content-width,
+    .er-content-title.stuck .content-title {
+      width: calc(100vw - $er-feedback-width - var(--scrollbar-width));
+
+      @media (min-width: $hugescreen) {
+        width: calc(100vw - $er-feedback-width-huge - var(--scrollbar-width));
+      }
+
+      @media (min-width: $epicscreen) {
+        width: calc(100vw - $er-feedback-width-epic - var(--scrollbar-width));
+      }
+    }
+  }
+
+  &.er-sidebar-open:not(.sidebar-autohide) {
+    .content-width,
+    .er-content-title.stuck .content-title {
+      width: calc(100vw - $er-sidebar-width - var(--scrollbar-width));
+
+      @media (min-width: $hugescreen) {
+        width: calc(100vw - $er-sidebar-width-huge - var(--scrollbar-width));
+      }
+
+      @media (min-width: $epicscreen) {
+        width: calc(100vw - $er-sidebar-width-epic - var(--scrollbar-width));
+      }
+    }
+
+    &.feedback-open {
+      .content-width,
+      .er-content-title.stuck .content-title {
+        width: calc(100vw - $er-sidebar-width - $er-feedback-width - var(--scrollbar-width));
+
+        @media (min-width: $hugescreen) {
+          width: calc(
+            100vw - $er-sidebar-width-huge - $er-feedback-width-huge - var(--scrollbar-width)
+          );
+        }
+
+        @media (min-width: $epicscreen) {
+          width: calc(
+            100vw - $er-sidebar-width-epic - $er-feedback-width-epic - var(--scrollbar-width)
+          );
+        }
+      }
+    }
+  }
+
+  &.sidebar-autohide {
+    grid-template-areas:
+      'nav nav nav'
+      'content content feedback';
+
+    .er-sidebar {
+      grid-area: 2 / 1 / -1 / -1;
+
+      /** In autohide mode make the sidebar take up much of the available space. */
+      width: $er-autohide-sidebar-width;
+      margin-left: -$er-autohide-sidebar-width;
+
+      @media (min-width: $xsscreen) {
+        width: $er-autohide-sidebar-width-xs;
+        margin-left: -$er-autohide-sidebar-width-xs;
+      }
+
+      @media (min-width: 25em) {
+        width: $er-autohide-sidebar-width-xs2;
+        margin-left: -$er-autohide-sidebar-width-xs2;
+      }
+
+      @media (min-width: calc($er-autohide-sidebar-width-sm + 2rem)) {
+        width: $er-autohide-sidebar-width-sm;
+        margin-left: -$er-autohide-sidebar-width-sm;
+      }
+    }
+
+    &.feedback-open {
+      .content-width,
+      .er-content-title.stuck .content-title {
+        width: calc(100vw - $er-feedback-width - var(--scrollbar-width));
+
+        @media (min-width: $hugescreen) {
+          width: calc(100vw - $er-feedback-width-huge - var(--scrollbar-width));
+        }
+
+        @media (min-width: $epicscreen) {
+          width: calc(100vw - $er-feedback-width-epic - var(--scrollbar-width));
+        }
+
+        @media (max-width: $smscreen-max) {
+          width: calc(100vw - var(--scrollbar-width));
+        }
+      }
+    }
+  }
+
+  &.er-sidebar-open {
+    .er-sidebar {
+      margin-left: 0 !important;
+      box-shadow: 0 10px 10px 0 #21252920;
+    }
+  }
+
+  .content-footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: opacity $trans-speed $trans-type;
+
+    > .finished-up {
+      > .dash {
+        border-top: 1px solid $gray-500;
+        height: 1px;
+        max-width: 4rem;
+      }
+
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @media (max-width: $smscreen-max) {
+        font-size: 0.9rem;
+      }
+    }
+
+    > .next-up {
+      margin: 0 auto;
+      flex-shrink: 1;
+      flex-grow: 0;
+      min-width: 0;
+      max-width: 100%;
+      z-index: 1;
+    }
+  }
+
+  .nav-tabs .nav-link.active {
+    border-bottom-width: 8px;
+    color: $gray-900;
+  }
+
+  .nav-tabs li > a {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .resource-1 > .card-body > .er-expandable-activity {
+    > .card,
+    > .content-instructions > .card {
+      border: none !important;
+    }
+  }
+
+  .content-plain-index {
+    // stops jitter in assessments on mobile device
+    overflow: hidden;
+  }
+
+  .er-content-wrapper {
+    // for containers that were white background, make them a light grey instead against the ER white
+    .submission-competencies.card,
+    .question-choice-content:not(.selected):not(.active),
+    .locked.card,
+    .er-instructions.card,
+    .assignment-info .card {
+      background-color: $gray-lightest;
+    }
+
+    .content-instructions .card {
+      border: none !important;
+      background-color: transparent !important;
+    }
+
+    // more space for the horrible discussion "i read it" circles
+    @media (min-width: $smscreen) {
+      .discussion-threads-view {
+        margin-left: 0.5rem;
+      }
+    }
+
+    @media print {
+      border: none !important;
+      > .card-body {
+        padding: 0 !important;
+      }
+
+      // make it so that hitting browser print doesn't not work for assessments
+      .non-print-only {
+        display: block !important;
+      }
+    }
+
+    // jump bar background
+    .discussion-board-nav-bar .nav-items-container {
+      background-color: $er-dim-grey;
+    }
+
+    .mp-player-questions-nav .page-item .page-link {
+      border-color: $color-primary;
+    }
+
+    .mp-player-questions-nav .page-item .page-link[disabled] {
+      border-color: $gray-400;
+    }
+  }
+
+  @media (max-width: $smscreen-max) {
+    .resource-activity > .card,
+    .er-content-wrapper.card {
+      border-width: 0 0 1px 0; // full bleed
+      border-radius: 0;
+
+      .iframe-content {
+        margin-top: -0.5rem; // accommodate iframe padding padding
+      }
+    }
+
+    .survey-card.card {
+      border-width: 1px 0 1px 0;
+      border-radius: 0;
+    }
+
+    .content-capabilities {
+      padding: 0 1rem 1rem;
+
+      .capability-item {
+        font-size: 1rem;
+      }
+    }
+    h3,
+    .h3 {
+      font-size: 1.2rem;
+    }
+    h4,
+    .h4 {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: $mdscreen-max) {
+    h3,
+    .h3 {
+      font-size: 1.4rem;
+    }
+    h4,
+    .h4 {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media print {
+    min-height: auto;
+
+    .er-page-header,
+    .content-footer-wrapper {
+      display: none !important;
+    }
+    .er-sidebar {
+      display: none !important;
+      width: 0 !important;
+    }
+    .er-content-area {
+      width: 100vw !important;
+    }
+  }
+}
+
+//position: sticky;
+//top: $er-header-height;
+
+.quiz-timer-wrapper {
+  position: sticky;
+  top: $er-header-height;
+  float: right;
+
+  @media (max-width: $smscreen-max) {
+    top: $er-mobile-header-height;
+    float: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    .quiz-timer-gadget {
+      border-color: $gray-300;
+    }
+  }
+
+  @media (max-height: $smheight-max) {
+    top: $er-zoomed-header-height;
+  }
+
+  &.stuck {
+    z-index: 2;
+
+    .quiz-timer-gadget {
+      border-color: $gray-300;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 5%);
+    }
+  }
+}
+
+.quiz-timer-gadget {
+  background-color: $white;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  box-shadow: 0 0 0 transparent;
+  transition: all $transition-function $transition-speed;
+  display: inline-flex;
+  align-items: stretch;
+
+  .quiz-timer-toggle {
+    border: 0;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    transition: all $transition-function $transition-speed;
+
+    &.hidden.seconds-remaining:not(:hover) {
+      background-color: $warning;
+    }
+  }
+}
+
+.instructions-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  line-height: 1;
+
+  @media (max-width: $smscreen-max) {
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.instructions-holder {
+  padding: 0 1rem 0;
+
+  > .content-instructions {
+    > .card {
+      margin-top: 0 !important;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: $smscreen-max) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+// gross and inefficient but the stickiness of the title is unknown to the floating instructions
+.er-content-area:has(.er-content-title.stuck) .floating-instructions {
+  top: $er-header-height;
+
+  @media (max-width: $smscreen-max) {
+    top: $er-mobile-header-height;
+  }
+
+  @media (max-height: $smheight-max) {
+    top: $er-zoomed-header-height;
+  }
+}
+
+.floating-instructions {
+  z-index: 3;
+  position: fixed;
+  top: var(--header-offset);
+  background-color: white;
+  border-bottom: 1px solid $gray-400;
+  box-shadow: 0 0 8px $gray-light;
+
+  > .scroller {
+    max-height: 33vh;
+    overflow-y: auto;
+
+    > .container {
+      > .content-instructions {
+        margin-bottom: 0 !important;
+
+        > .card {
+          margin: 0 0 1.5rem !important;
+          border: none !important;
+          padding: 0 !important;
+        }
+      }
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.full-screen {
+  .quiz-timer-wrapper {
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .quiz-timer-gadget {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-color: $gray-300;
+    }
+  }
+}
+
+.fade-in {
+  animation: fade-in-animation 300ms ease-in forwards;
+  animation-delay: 300ms;
+  opacity: 0;
+}
+
+@keyframes fade-in-animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body,
+  .er-page-grid {
+    background-color: $gray-700;
+  }
+
+  .er-page-grid .er-page-header .app-header {
+    background-color: $black;
+    color: $gray-300;
+    box-shadow: 0 4px 7px -2px rgba(0, 0, 0, 0.13);
+
+    .border-white {
+      border-color: $black !important;
+    }
+
+    .btn-outline-primary {
+      color: $gray-400;
+    }
+
+    .dropdown-menu {
+      background-color: $gray-800;
+      color: $gray-200;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .dropdown-item {
+      color: $gray-200;
+
+      &.disabled {
+        color: $gray-600;
+      }
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+      background-color: $gray-700;
+      color: $gray-100;
+    }
+
+    .nav-link {
+      color: $gray-300;
+
+      &:focus,
+      &:hover {
+        color: $gray-100;
+
+        .dropdown.show .nav-link {
+          color: $gray-100;
+        }
+      }
+    }
+  }
+
+  .er-page-grid .er-sidebar {
+    background-color: $black;
+  }
+
+  .er-page-grid.er-sidebar-open .er-sidebar {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,.5);
+  }
+
+  .er-content-wrapper {
+    border: none !important;
+  }
+
+  .naked {
+    color: $gray-200;
+  }
+
+  .card-body .naked {
+    color: inherit;
+  }
+
+  .app-footer .lo-footer-logo {
+    opacity: 0.7;
+    color: $gray-900;
+  }
+
+  .app-footer .footer-content {
+    a {
+      color: lighten($primary, 35%);
+
+      &:hover {
+        color: lighten($primary, 50%);
+      }
+    }
+
+    .lo-footer-copyright {
+      color: $gray-300;
+    }
+
+    .lo-footer-link:not(:last-of-type) {
+      border-color: $gray-600 !important;
+    }
+  }
+
+  .completion-label,
+  .content-footer-wrapper .finished {
+    color: $gray-300;
+  }
+
+  .completion-undo-btn {
+    color: lighten($primary, 35%);
+
+    &:hover {
+      color: lighten($primary, 50%);
+    }
+
+    &.disabled {
+      color: $gray-500 !important;
+    }
+  }
+
+  a.btn-parent:hover,
+  a.btn-parent:focus {
+    .btn-primary.lighten-when-dark {
+      color: $gray-900;
+      background-color: lighten($primary, 20%) !important;
+      border-color: lighten($primary, 15%);
+    }
+  }
+
+  .btn-primary.lighten-when-dark {
+    color: $gray-900;
+    background-color: lighten($primary, 25%);
+    border-color: lighten($primary, 25%);
+
+    &:hover {
+      color: $gray-900;
+      background-color: lighten($primary, 20%) !important;
+      border-color: lighten($primary, 15%);
+    }
+
+    &:focus {
+      color: $gray-900;
+      background-color: lighten($primary, 20%) !important;
+      border-color: lighten($primary, 15%);
+      box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+    }
+
+    &:disabled,
+    &.disabled {
+      color: $gray-900;
+      background-color: $gray-300;
+      border-color: $gray-300;
+    }
+
+    &:not(:disabled):not(.disabled):active:focus,
+    &:not(:disabled):not(.disabled).active:focus {
+      box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+    }
+  }
+}

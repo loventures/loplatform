@@ -1,0 +1,171 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--suppress CheckEmptyScriptTag, HtmlUnknownAttribute, HtmlUnknownTag -->
+<html xmlns:ui="loi.cp.ui.UI">
+  <head>
+    <title>Storage Browser</title>
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.7/underscore-min.js" />
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js" />
+
+    <ui:javascript src="$$static/scripts/de.js" />
+    <ui:javascript src="$$static/scripts/desvc.js" />
+
+    <ui:stylesheet href="$$static('styles/cp.css')" />
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"  />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"  />
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js" />
+    <ui:stylesheet href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/themes/base/theme.min.css" />
+
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jqtree/1.8.10/tree.jquery.min.js" />
+    <ui:stylesheet href="//cdnjs.cloudflare.com/ajax/libs/jqtree/1.8.10/jqtree.min.css" />
+
+    <ui:javascript src="$$url/storageBrowser.js" />
+    <ui:stylesheet href="$$url/storageBrowser.css" />
+
+    <!-- Köd-Mirror -->
+    <ui:coalesce>
+      <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js" />
+      <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js" />
+    </ui:coalesce>
+
+    <ui:coalesce>
+      <ui:stylesheet href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css" />
+      <ui:stylesheet href="//cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/solarized.min.css" />
+    </ui:coalesce>
+
+    <ui:stylesheet>
+      #ol-buttons {
+          background-color: ${ ServiceMeta.isProduction ? '#c30' : '#ffc10e' };
+          border: 1px solid ${ ServiceMeta.isProduction ? '#a20' : '#dda208' };
+      }
+      .modal-scrollable {
+        position: absolute;
+      }
+    </ui:stylesheet>
+
+    <ui:javascript>
+      rpcBase = "$$rpc('')";
+      isOverlord = ${ isOverlord };
+      window.jsonTypes = ${ jsonTypes };
+    </ui:javascript>
+
+  </head>
+  <body>
+  <ui:clusterLabel if="${ Current.isRoot }" />
+  <div id="ol-buttons"><div><a id="home-button" href="/" title="$$ Home $$"><i class="icon icon-home"></i></a></div><div if="${ Session.get('ug:sudoer') }"><a id="exit-button" href="#" title="$$ Exit $$"><i class="icon icon-minus-sign"></i></a></div><div><a id="logout-button" href="#" title="$$ Logout $$"><i class="icon icon-remove-sign"></i></a></div></div>
+
+  <div id="stdHeader">
+    <h1>$$ Storage Browser $$</h1>
+  </div>
+
+  <div id="bodies" class="container-fluid" style="clear: both; padding: 0">
+    <div class="row-fluid">
+      <div id="query-panel" class="span16">
+        <div id="toolbar">
+          <div class="not-a-btn-group" style="display: inline-block">
+
+            <div class="btn-group" style="display: inline-block">
+            <a class="btn disabled" id="action-download" rel="tooltip" title="$$ Download Item $$"><i class="icon-download-alt"></i></a>
+            <a class="btn disabled" id="action-attachment" rel="tooltip" title="$$ Download Attachment $$"><i class="icon-file"></i></a>
+            </div>
+            <input id="filter" type="text" class="input-xlarge search-query" placeholder="$$ Navigate... $$" />
+            <a class="btn btn-danger disabled" id="action-delete" rel="tooltip" title="$$ Delete Item $$"><i class="icon-trash icon-white"></i></a>
+          </div>
+
+          <a id="prev-history" class="btn btn-small" title="ctrl + alt + ←">◀</a>
+          <a id="next-history" class="btn btn-small" title="ctrl + alt + →">▶</a>
+          <a id="search-help" href="#modal-help" data-toggle="modal" class="gadget">?</a>
+        </div>
+        <div id="storage" data-url="$$rpc('getChildren')"></div>
+      </div>
+      <div id="data-panel" class="span8">
+        <div id="data-head">-</div>
+        <div id="data-body">
+          <div id="data-rows"></div>
+          <div id="data-add" class="form-inline">
+            <input id="add-type" type="text" style="width: 30%" /> =
+            <input id="add-value" type="text" style="width: 50%" />
+            <button id="do-add" class="btn btn-mini">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-wait" class="modal hide" data-backdrop="static" data-keyboard="false">
+    <div class="modal-header">
+      <h3>Deleting...</h3>
+    </div>
+    <div class="modal-body">
+      <div id="bar-wait" class="progress progress-striped active">
+        <span class="bar" style="width: 100%"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-help" class="modal hide">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h3>Navigate Syntax</h3>
+    </div>
+    <div class="modal-body">
+      <dl>
+        <dt>10000005</dt>
+        <dd>Look up an item by ID.</dd>
+        <dt>UpgradeTask:10000006</dt>
+        <dd>Look up a finder by type and ID.</dd>
+        <dt>@user-anonymous</dt>
+        <dd>Look up an item by its id string.</dd>
+        <dt>/Users/bob.dobbs</dt>
+        <dd>Look up an item by URL.</dd>
+        <dt>https://merlin-localhost:8080/Users/bob.dobbs</dt>
+        <dd>Look up an item by hostname and URL.</dd>
+        <dt>//User[@User.userName=bdobbs]</dt>
+        <dd>Look up an item by type and a string data property.</dd>
+      </dl>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+
+  <iframe name="downloadFrame" class="cp_hiddenFrame"></iframe>
+
+  <div id="modal-jsonmirror" class="modal hide">
+    <div class="modal-header">
+      <h4>Edit <span id="modal-jsonmirror-datatype"/> on <span id="modal-jsonmirror-item"/></h4>
+    </div>
+    <div class="modal-body">
+      <textarea id="jsonmirror"><!-- json --></textarea>
+    </div>
+    <div class="modal-footer">
+      <button type="reset" class="btn btn-cancel">Cancel</button>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+  </div>
+
+  </body>
+</html>

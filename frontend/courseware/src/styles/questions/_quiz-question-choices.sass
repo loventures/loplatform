@@ -1,0 +1,130 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+.choice-question
+  .question-distractor-list
+    @extend .list-group
+    align-items: stretch
+    @extend .list-unstyled
+    > .question-distractor-row
+      @extend .my-2
+
+  .question-distractor-row-template
+    .distractor-with-correctness
+      display: flex
+      align-items: center
+      margin-bottom: 0
+      .distractor
+        flex-grow: 1
+      .question-choice-content
+        margin-bottom: 0
+
+    .choice-tooltip
+      width: 2rem
+      margin-left: -2.5rem
+      margin-right: .5rem
+      flex-shrink: 0
+
+      &.correct
+        color: $success
+      &.incorrect
+        color: $danger
+      svg
+        width: 2rem
+        height: 2rem
+
+  .question-choice-content
+    display: flex
+    flex-direction: row
+    padding: 0
+    border-radius: 1.5rem $border-radius $border-radius 1.5rem
+    @extend .border
+    @extend .border-white
+
+    /*
+     * sortable choice are jqueried from out of view into view at cursor position
+     * so we can't have animation for it or it will appeare to have moved from the edge of the window
+     */
+    &:not(.sortable-choice)
+      transition: all math.div($trans-speed, 2) ease-in
+
+    &:not(.selected):not(.active)
+      color: darken($primary, 3%)
+      background-color: $white
+      &:hover:not(.disabled)
+        @include box-shadow-halo($info, 1em)
+
+    &.selected
+      &.disabled
+        color: $white
+        background: $primary
+        &.correct
+          background: $success
+        &.incorrect
+          background: $danger
+        table
+          color: $dark
+      &:not(.disabled)
+        @extend .btn-primary
+        table
+          color: $dark
+      .custom-checkbox .custom-control-label:after,
+      .custom-radio .custom-control-label:after
+        border-color: $white !important
+
+    &.active
+      &.disabled
+        color: $white
+        background: $info
+        table
+          color: $dark
+      &:not(.disabled)
+        @extend .btn-info
+
+    .choice-ordinal
+      align-self: stretch
+      @extend .flex-center-center
+      border-radius: 1.5rem 0 0 1.5rem
+      transition: all math.div($trans-speed, 2) ease-in
+      min-width: 3.75em
+      background-color: transparentize($dark, 0.85)
+
+      .form-check-input
+        margin-top: 0
+        margin-left: .5rem
+
+    .choice-text
+      padding: $list-group-item-padding-y $list-group-item-padding-x
+      flex: 1 1 auto
+      margin: 0
+      /*authored choice text comes inside <p>*/
+      p
+        margin: 0
+
+    .ordering-controls
+      display: flex
+      align-items: center
+      button
+        @extend .mx-2
+
+  .inline-remediation .question-choice-remediation
+    @extend .arrow-top
+    margin: .5rem .5rem 0 1.5rem
+    padding: .5rem 1rem
+    width: calc(100% - 2rem)

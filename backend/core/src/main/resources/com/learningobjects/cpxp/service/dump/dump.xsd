@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ug-d="http://learningobjects.com/schema/ug/1.0/dump"
+        targetNamespace="http://learningobjects.com/schema/ug/1.0/dump"
+        elementFormDefault="qualified">
+
+  <complexType name="DataType">
+    <simpleContent>
+      <extension base="string">
+        <attribute name="Type" type="string" use="required" />
+        <attribute name="String" type="string" use="optional" />
+        <attribute name="Boolean" type="boolean" use="optional" />
+        <attribute name="Number" type="integer" use="optional" />
+        <attribute name="Time" type="string" use="optional" />
+        <attribute name="Item" type="IDREF" use="optional" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <element name="Data" type="ug-d:DataType" />
+
+  <complexType name="LinkType">
+    <attribute name="To" type="IDREF" use="optional" />
+    <attribute name="By" type="IDREF" use="required" />
+    <attribute name="From" type="IDREF" use="optional" />
+  </complexType>
+
+  <element name="Link" type="ug-d:LinkType" />
+
+  <complexType name="ItemType">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <element ref="ug-d:Data" />
+      <element ref="ug-d:Item" />
+      <element ref="ug-d:Link" />
+      <element ref="ug-d:Scratch" />
+      <any namespace="##other" processContents="lax" />
+    </choice>
+    <attribute name="Id" type="ID" use="optional" />
+    <attribute name="LocalId" type="string" use="optional" />
+    <attribute name="Type" type="string" use="required" />
+    <attribute name="URL" type="string" use="optional" />
+    <attribute name="Attachment" type="string" use="optional" />
+  </complexType>
+
+  <element name="Item" type="ug-d:ItemType" />
+
+  <complexType name="ItemRefType">
+    <attribute name="Id" type="ID" use="required" />
+    <attribute name="ItemType" type="string" use="required" />
+    <attribute name="DataType" type="string" use="required" />
+    <attribute name="String" type="string" use="optional" />
+  </complexType>
+
+  <element name="ItemRef" type="ug-d:ItemRefType" />
+
+  <complexType name="CurrentType">
+    <attribute name="User" type="ID" use="optional" />
+  </complexType>
+
+  <element name="Current" type="ug-d:CurrentType" />
+
+  <complexType name="ScratchType">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <element ref="ug-d:Item" />
+      <any namespace="##local" processContents="lax" />
+    </choice>
+  </complexType>
+
+  <element name="Scratch" type="ug-d:ScratchType" />
+
+  <complexType name="DumpType">
+    <choice minOccurs="0" maxOccurs="unbounded">
+      <element ref="ug-d:Item" />
+      <element ref="ug-d:ItemRef" />
+      <element ref="ug-d:Current" />
+      <element ref="ug-d:Scratch" />
+      <any namespace="##local" processContents="lax" />
+    </choice>
+    <attribute name="Version" type="string" use="optional" />
+  </complexType>
+
+  <element name="Dump" type="ug-d:DumpType" />
+
+  <complexType name="TextType">
+    <simpleContent>
+      <extension base="string">
+        <attribute name="Id" type="ID" use="required" />
+      </extension>
+    </simpleContent>
+  </complexType>
+
+  <element name="Text" type="ug-d:TextType" />
+
+  <attribute name="Id" type="ID" />
+  <attribute name="LocalId" type="string" />
+  <attribute name="URL" type="string" />
+  <attribute name="Attachment" type="string" />
+
+</schema>

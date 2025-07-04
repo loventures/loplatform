@@ -1,0 +1,6 @@
+.container {
+  //this is sort of a hack to get around margin collapsing
+  //affecting the border position of the container
+  //without changing container display property
+  padding-top: 0.1px;
+}

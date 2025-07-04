@@ -1,0 +1,37 @@
+@use 'sass:color';
+
+@each $direction in $directions {
+  $opposite: direction-opposite($direction);
+  $orthogonal: direction-orthogonal($direction);
+
+  .arrow-#{$direction} {
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      border: $arrow-size solid transparent;
+      #{$orthogonal}: 50%;
+      margin-#{$orthogonal}: -$arrow-size;
+      #{$opposite}: 100%;
+      border-#{$opposite}-color: currentColor;
+    }
+
+    @each $color, $value in $theme-colors {
+      //allow use with elements already having bg or border classes
+      //duplicating later ones for greater precedence
+      &.bg-#{$color}:before,
+      &.border-#{$color}.border-#{$color}:before,
+      &.arrow-#{$color}.arrow-#{$color}.arrow-#{$color}:before {
+        border-#{$opposite}-color: theme-color($color);
+      }
+      //for alerts, use alert's own variation of border color
+      //lower priority since the other ones will take over the bg if used together
+      &.alert-#{$color}:not(.border-0):before {
+        border-#{$opposite}-color: color.adjust($value, $lightness: 45%);
+      }
+      &.alert-#{$color}.border-0:before {
+        border-#{$opposite}-color: color.adjust($value, $lightness: 45%);
+      }
+    }
+  }
+}

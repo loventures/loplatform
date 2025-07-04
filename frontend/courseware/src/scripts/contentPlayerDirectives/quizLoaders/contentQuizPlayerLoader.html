@@ -1,0 +1,65 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div>
+  <div ng-if="!$ctrl.attempt.questions || $ctrl.attempt.questions.length === 0">
+    <div class="alert alert-warning">
+      <span translate="QUIZ_CONTAINS_NO_QUESTIONS"></span>
+    </div>
+  </div>
+
+  <div
+    ng-if="!$ctrl.attemptSubmissionState.loaded &&
+      !$ctrl.attemptSaveState.loaded &&
+      $ctrl.attempt.questions && $ctrl.attempt.questions.length > 0
+    "
+  >
+    <multi-page-player
+      ng-if="!$ctrl.singlePage"
+      assessment="$ctrl.assessment"
+      attempt-id="$ctrl.attempt.id"
+      on-attempt="$ctrl.onAttempt"
+      print-view="$ctrl.printView"
+    ></multi-page-player>
+
+    <single-page-player
+      ng-if="$ctrl.singlePage"
+      assessment="$ctrl.assessment"
+      attempt-id="$ctrl.attempt.id"
+      on-attempt="$ctrl.onAttempt"
+      print-view="$ctrl.printView"
+    ></single-page-player>
+  </div>
+
+  <div
+    ng-if="$ctrl.attemptSubmissionState.loaded"
+    ng-init="$ctrl.submitted()"
+  >
+    <div class="alert alert-success mb-0">
+      <span translate="ASSESSMENT_PLAYING_SUBMITTED"></span>
+    </div>
+  </div>
+
+  <div
+    ng-if="$ctrl.attemptSaveState.loaded"
+    ng-init="$ctrl.saved()"
+  >
+    <div class="alert alert-success mb-0">
+      <span translate="ASSESSMENT_PLAYING_SAVED"></span>
+    </div>
+  </div>
+</div>

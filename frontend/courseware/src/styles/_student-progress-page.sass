@@ -1,0 +1,63 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.student-progress-header
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  > *
+    flex: 1 1 auto
+
+  .breadcrumb
+    max-width: 100%
+    font-weight: bold
+    color: $color-contrasted-primary
+    padding: 0
+    margin: 1rem 0
+
+  .name-search
+    flex: 1 1 auto
+
+.student-progress-footer
+  .flex-row-content
+    justify-content: flex-end
+
+    .page-size-selector
+      width: auto
+
+.student-progress-table-container
+  .responsive-table-container
+    margin-bottom: 0
+
+  .student-name
+    white-space: nowrap
+
+  &:not(.compact)
+    .content-item-name
+      min-width: 10em
+      display: block
+
+  &.compact
+    .student-name
+      white-space: wrap
+
+    .content-item-name
+      max-width: 5em
+      white-space: nowrap
+      display: block
+      overflow-x: hidden
+      text-overflow: ellipsis

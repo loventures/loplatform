@@ -1,0 +1,99 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<section class="authentic-submission-section grader-panel">
+  <div
+    class="submission-selection-control"
+    ng-if="!$ctrl.hasAttempts"
+  >
+    <div
+      class="alert alert-info"
+      translate="AUTHENTIC_ASSESSMENT_GRADER_NO_ATTEMPTS"
+    ></div>
+  </div>
+
+  <div
+    class="submission-selection-control"
+    ng-if="!$ctrl.hasAttempts"
+  >
+    <button
+      class="btn btn-primary start-attempt"
+      ng-disabled="$ctrl.startingAttempt"
+      ng-click="$ctrl.startAttempt()"
+    >
+      <span translate="AUTHENTIC_ASSESSMENT_GRADER_CREATE_ATTEMPT"></span>
+      <loading-spinner ng-if="$ctrl.startingAttempt"></loading-spinner>
+    </button>
+  </div>
+
+  <div
+    class="submission-selection-control"
+    ng-if="$ctrl.hasAttempts"
+  >
+    <lo-select
+      options="$ctrl.attempts"
+      option-template="$ctrl.attemptOptionTemplate"
+      selected="$ctrl.attempt"
+      selected-template="$ctrl.attemptSelectedTemplate"
+      on-select="$ctrl.changeAttempt"
+    ></lo-select>
+    <button
+      class="btn btn-outline-danger delete-attempt"
+      ng-if="$ctrl.attempt && $ctrl.grader.canInvalidateAttempt()"
+      ng-click="$ctrl.confirmDelete()"
+      translate
+      translate-attr-title="GRADER_DELETE_ATTEMPT_TOOLTIP"
+    >
+      <i class="icon icon-trash"></i>
+    </button>
+  </div>
+
+  <div
+    class="submission-selection-control"
+    ng-if="$ctrl.grader.activeGrade"
+  >
+    <submission-score
+      grade="$ctrl.grader.activeGrade"
+      invalidated="!$ctrl.grader.activeAttempt.valid"
+      late="$ctrl.grader.activeGrade.isLate()"
+      disable-edit="
+        $ctrl.grader.activeGrade.outgoing.rubric ||
+        !$ctrl.grader.canUserEditGrade ||
+        !$ctrl.grader.detailedGradeExists
+      "
+    ></submission-score>
+
+    <button
+      class="btn btn-primary start-attempt"
+      ng-if="!$ctrl.grader.inProgressAttempt"
+      ng-disabled="$ctrl.startingAttempt"
+      ng-click="$ctrl.startAttempt()"
+    >
+      <span translate="AUTHENTIC_ASSESSMENT_GRADER_CREATE_ATTEMPT"></span>
+      <loading-spinner ng-if="$ctrl.startingAttempt"></loading-spinner>
+    </button>
+
+    <button
+      class="btn btn-primary goto-current-attempt"
+      ng-if="$ctrl.grader.inProgressAttempt"
+      ng-disabled="$ctrl.attempt.id === $ctrl.grader.inProgressAttempt.id"
+      ng-click="$ctrl.changeAttempt($ctrl.grader.inProgressAttempt)"
+    >
+      <span translate="AUTHENTIC_ASSESSMENT_GRADER_GOTO_IN_PROGRESS"></span>
+    </button>
+  </div>
+</section>

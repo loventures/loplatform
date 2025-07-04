@@ -1,0 +1,112 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="old-grader grading-panel-container"
+  ng-class="{
+    'panel-open': !$ctrl.panelCollapse()
+  }"
+>
+  <section class="panel panel-right">
+    <button
+      class="grading-panel-expand-btn btn btn-primary p-0"
+      ng-click="$ctrl.togglePanel()"
+      aria-controls="grading-panel-content"
+      aria-expanded="{{!$ctrl.panelCollapse}}"
+    >
+      <span
+        class="icon m-0"
+        ng-class="{
+          'icon-chevron-right': !$ctrl.panelCollapse(),
+          'icon-chevron-left': $ctrl.panelCollapse()
+        }"
+      ></span>
+      <span
+        class="sr-only"
+        ng-if="!$ctrl.panelCollapse()"
+        translate="GRADING_PANEL_COLLAPSE"
+      ></span>
+      <span
+        class="sr-only"
+        ng-if="$ctrl.panelCollapse()"
+        translate="GRADING_PANEL_EXPAND"
+      ></span>
+    </button>
+
+    <div
+      class="grading-panel-content"
+      ng-if="!$ctrl.panelCollapse()"
+      id="grading-panel-content"
+      role="region"
+      aria-label="{{ 'GRADING_PANEL_REGION' | translate }}"
+    >
+      <div class="grading-panel-top">
+        <grading-panel-student-picker grader="$ctrl.grader"></grading-panel-student-picker>
+
+        <div
+          class="grading-panel-top-transcluded"
+          ng-transclude="fixedTop"
+        ></div>
+      </div>
+
+      <div class="grading-panel-scrollable-sections">
+        <div
+          class="grading-panel-scrollable-transcluded"
+          ng-transclude="scrollableSections"
+        ></div>
+
+        <grading-panel-section
+          ng-if="$ctrl.grader.activeGrade.outgoing.rubric"
+          section-title="::'GRADING_PANEL_RUBRIC_HEADER'"
+          description="::'GRADING_PANEL_RUBRIC_HEADER_DESC'"
+        >
+          <rubric-grade-panel
+            grade="$ctrl.grader.activeGrade"
+            disable-edit="!$ctrl.grader.canUserEditGrade"
+          >
+          </rubric-grade-panel>
+        </grading-panel-section>
+
+        <grading-panel-section
+          section-title="::'GRADING_PANEL_COMMENTS_HEADER'"
+          description="::'GRADING_PANEL_COMMENTS_HEADER_DESC'"
+          ng-if="$ctrl.grader.activeGrade && $ctrl.grader.detailedGradeExists"
+        >
+          <grade-feedback-panel
+            grade="$ctrl.grader.activeGrade"
+            disable-edit="!$ctrl.grader.canUserEditGrade"
+          >
+          </grade-feedback-panel>
+        </grading-panel-section>
+      </div>
+
+      <div class="grading-panel-bottom">
+        <div
+          class="grading-panel-top-transcluded"
+          ng-transclude="fixedBottom"
+        ></div>
+
+        <grading-panel-controls
+          on-exit="$ctrl.onExit()"
+          grade="$ctrl.grader.activeGrade"
+          grader="$ctrl.grader"
+        >
+        </grading-panel-controls>
+      </div>
+    </div>
+  </section>
+</div>

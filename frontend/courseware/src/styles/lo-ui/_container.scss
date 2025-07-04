@@ -1,0 +1,22 @@
+//Bigger gutters that get smaller to allow for more content in smaller screens
+//Good For tables where you want to maximize viewable content
+$container-gutters: (
+  sm: calc(#{$grid-gutter-width}/ 2),
+  md: $grid-gutter-width,
+  lg: $grid-gutter-width * 2,
+  xl: $grid-gutter-width * 3,
+);
+
+.container-fluid-gutters {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: calc(#{$grid-gutter-width}/ 3);
+  padding-left: calc(#{$grid-gutter-width}/ 3);
+  width: 100%;
+  @each $breakpoint, $container-gutter in $container-gutters {
+    @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+      padding-right: $container-gutter;
+      padding-left: $container-gutter;
+    }
+  }
+}

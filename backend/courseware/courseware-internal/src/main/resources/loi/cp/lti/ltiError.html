@@ -1,0 +1,65 @@
+<html>
+<head>
+  <title>${ Current.domainDTO.name } - $$lti_error_title</title>
+  <let fav="${ Current.domainDTO.favicon.url }"
+       def="$$static/images/favicon.png">
+    <link rel="shortcut icon" href="${ fav ? fav : def }"/>
+  </let>
+  <script>
+    window.toggleError = function () {
+      document.getElementById('main').classList.toggle('debug');
+    }
+  </script>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+  <link rel="stylesheet" type="text/css" href="$$url/lti.sass"/>
+</head>
+<body>
+<div id="main">
+  <div class="content">
+    <set title="$$lti_error_title"/>
+    <h1 class="depth" style="pointer-events: none">
+      <span class="word" foreach="word: ${ title.split(' ') }">${ word }${ ' ' }</span>
+    </h1>
+  </div>
+  <div class="content ${ msg }">
+    <h3>${ message }</h3>
+  </div>
+  <div class="content">
+    <button class="link-btn" onclick="toggleError()">
+      <span class="show">$$lti_error_show_detail</span>
+      <span class="hide">$$lti_error_hide_detail</span>
+    </button>
+  </div>
+  <div id="details">
+    <div class="content ${ msg }">
+      <p>${ detail }</p>
+    </div>
+    <div if="${ stackTrace && !ServiceMeta.isProduction }">
+      <div class="content">
+        <h5>$$lti_error_stack_trace</h5>
+      </div>
+      <div class="stack">
+        <div foreach="st: ${ stackTrace }">${ st }</div>
+      </div>
+    </div>
+    <div>
+      <div class="content">
+        <h5>$$lti_error_request_label</h5>
+      </div>
+      <div class="params">
+        <div class="param">
+          <span class="left"><b>path info: </b></span><span class="right">${ Request.pathInfo }</span>
+        </div>
+        <foreach param="${ Request.parameterMap }">
+          <foreach value="${ param.value }">
+            <div class="param">
+              <span class="left"><b>${ param.key }: </b></span><span class="right" if="${ value }">${ value }</span>
+            </div>
+          </foreach>
+        </foreach>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

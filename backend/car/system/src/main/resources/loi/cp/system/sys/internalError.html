@@ -1,0 +1,139 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="$$error_error_title" noheader="true" coursestyle="true" bodyClass="stock-domain internal-error">
+  <style type="text/css">
+    .comp-head {
+      background-color: #eee;
+    }
+    .details {
+      font-style: italic;
+      margin: 1em 0;
+    }
+    .subtitle {
+      margin-top: .5em;
+      font-style: italic;
+    }
+    th {
+      white-space: nowrap;
+      padding: 0 1em;
+      text-align: right;
+      vertical-align: top;
+      width: 200px;
+    }
+    .stack-trace div {
+      margin-left: 100px;
+    }
+    .stack-trace div:first-child {
+      margin-left: 50px;
+    }
+    .guid {
+      margin-left: .5em;
+      font-size: 65%;
+      font-weight: normal;
+    }
+    #details {
+      margin-top: 2em;
+    }
+  </style>
+  <section class="comp-head">
+    <div class="comp-title">
+      <h2>$$error_error_title<span class="guid"> ($$error_error_error_id(guid))</span></h2>
+    </div>
+  </section>
+
+  <div class="main">
+    <div>
+      <out value="$$error_error_instructions" />
+    </div>
+
+  <div id="details" if="${ debug }">
+    <div class="subtitle">$$error_error_request</div>
+    <table class="contentParagraph">
+      <tbody>
+        <tr foreach="field: ${ 'method,requestURI,protocol,queryString,contentLength,contentType,serverName,serverPort,requestedSessionId,remoteAddr' }">
+          <th width="33%">$$error_error_request_*(field)</th>
+          <td>${ ComponentUtils.dereference0(Request, field) }</td>
+        </tr>
+        </tbody>
+      </table>
+
+    <if test="${ Request.parameterMap }">
+      <div class="subtitle">$$error_error_requestParameters</div>
+      <table class="contentParagraph">
+        <tbody>
+          <tr foreach="entry: ${ Request.parameterMap }">
+            <th width="33%">${ entry.key }</th>
+            <td>
+              <if test="${ !entry.key.endsWith('assword') }">
+                <div foreach="value: ${ entry.value }">${ value }</div>
+              </if>
+              <else>***</else>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </if>
+
+    <div class="subtitle">$$error_error_requestHeaders</div>
+    <table class="contentParagraph">
+      <tbody>
+        <tr foreach="header: ${ Request.headerNames }">
+          <th width="33%">${ header }</th>
+          <td>
+            <div>${ Request.getHeader(header) }</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subtitle">$$error_error_requestAttributes</div>
+
+    <table class="contentParagraph">
+      <tbody>
+        <foreach attribute="${Request.attributeNames}">
+          <if test="${ !attribute.equals('msg') && !attribute.equals('constant') && !attribute.equals('exception') && !attribute.startsWith('javascript:') && !attribute.startsWith('stylesheet:') }">
+            <tr>
+              <th width="33%">${ attribute }</th>
+              <td>${ Request.getAttribute(attribute) }</td>
+            </tr>
+          </if>
+        </foreach>
+      </tbody>
+    </table>
+
+    <let session="${ Request.getSession(false) }">
+      <if test="${ session }">
+        <div class="subtitle">$$error_error_sessionAttributes</div>
+        <table class="contentParagraph">
+          <tbody>
+            <tr foreach="attribute: ${ session.attributeNames }">
+              <th width="33%">${ attribute }</th>
+              <td>${ session.getAttribute(attribute) }</td>
+            </tr>
+          </tbody>
+        </table>
+      </if>
+    </let>
+
+    <div class="subtitle">$$error_error_exception</div>
+    <div class="contentParagraph stack-trace">
+      <div foreach="cause: ${ ExceptionUtils.getRootCauseStackTrace(exception) }">${ cause }</div>
+    </div>
+  </div>
+  </div>
+</ui:pageLayout>

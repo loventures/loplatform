@@ -1,0 +1,97 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.student-competency-progress-table-page
+
+  .flex-row-content
+    .table-title,
+    .filters-row-inline
+      flex: 1 1 auto
+
+
+  .table
+
+    td
+      vertical-align: middle
+
+    th
+      text-align: center
+
+      &.name-header,
+      &.last-activity-header,
+      &.NAME,
+      &.LAST_ACTIVITY
+        text-align: left
+
+    .sort-icon
+      color: $color-light-text
+      &.last-sort
+        color: $color-body-text
+      &.disabled
+        color: $color-light
+
+    .grade-cell,
+    .progress-cell
+      text-align: center
+      span
+        width: 3.75em
+        text-align: center
+
+    .number-cell
+      text-align: center
+      span
+        width: 3.5em
+        text-align: center
+
+    .checkbox-cell
+      vertical-align: middle
+      .lo-checkbox-label
+        padding: 0
+        box-shadow: none
+        background-color: transparent
+
+.footer-row
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-end
+  align-items: center
+
+  > *
+    padding: 0.5em 0
+
+  srs-paginate
+    margin-left: 0.5em
+
+  .bulk-actions
+    flex: 1 1 50%
+    overflow: hidden
+    text-overflow: ellipsis
+
+    display: flex
+    flex-direction: row
+    align-items: center
+
+    .lo-select-wrap
+      flex: 0 1 auto
+      margin-right: 0.5em
+      overflow: hidden
+      text-overflow: ellipsis
+
+      select
+        max-width: 100%
+        text-overflow: ellipsis

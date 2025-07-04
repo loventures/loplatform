@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="$$Locale">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="x-ua-compatible"
+      content="IE=edge"
+    />
+    <meta
+      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+    />
+
+    <% if(isDev){ %>
+    <link
+      rel="shortcut icon"
+      href="/Domain/Media/favicon.ico"
+    />
+    <% } else { %>
+    <link
+      rel="shortcut icon"
+      href="${ Current.domainDTO.favicon.url }"
+    />
+    <% } %>
+
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      type="text/css"
+    />
+
+    <% if(isDev){ %>
+    <script>
+      window.locale = 'en-US';
+      window.lo_static_url = '';
+      window.lo_base_url = '';
+      window.isDev = true;
+    </script>
+    <% } else { %>
+    <script>
+      window.locale = '$$Locale';
+      window.lo_static_url = '$$url/';
+      window.lo_base_url = '${binding.path}';
+      window.lo_platform = $$json_api('v2/lo_platform');
+    </script>
+    <% } %>
+
+    <title>$$lo.platform</title>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+
+      #admin-loading {
+        font-family: 'Open Sans', Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 100;
+        line-height: 1;
+        position: absolute;
+        width: auto;
+        left: 50%;
+        top: 50%;
+        opacity: 0;
+        transform: translate(-50%, -100%);
+        animation: fade 5s forwards;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #495057;
+        }
+        #admin-loading {
+          color: #f8f9fa;
+        }
+      }
+      @keyframes fade {
+        0% {
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="admin">
+    <div id="admin-loading">$$placeholders.loading</div>
+    <div id="root"></div>
+    <script
+      type="module"
+      src="/src/adminPortal/index.tsx"
+    ></script>
+  </body>
+</html>

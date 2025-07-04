@@ -1,0 +1,101 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//uib3 uses .open instead of .show
+.dropdown.open
+  @extend .dropdown, .show
+.collapse.in
+  @extend .collapse, .show
+.fade.in
+  @extend .fade, .show
+.modal-backdrop.in
+  @extend .modal-backdrop, .show
+.modal.in .modal-dialog
+  transform: translate(0,0)
+
+//Tooltips
+//some of the positioning code has been removed from bs3 -> bs4 since they now rely on a 3rd party Popper.js library.
+//I back ported the positioning code from bs3 for now but if we want extremely accurate arrow positioning for tooltips
+//we need stop using angular-ui and just use bootstrap's component for tooltips.  Then we can probably delete this section.
+.tooltip-arrow
+  @extend .arrow
+
+.tooltip,
+.popover
+  //uib3 uses .in instead of .show
+  &.in
+    @extend .show
+
+  &.top
+    @extend .bs-tooltip-top
+    .tooltip-arrow
+      left: 55%
+
+  &.right
+    @extend .bs-tooltip-right
+    .tooltip-arrow
+       top: 55%
+
+  &.bottom
+    @extend .bs-tooltip-bottom
+    .tooltip-arrow
+       left: 55%
+
+  &.left
+    @extend .bs-tooltip-left
+    .tooltip-arrow
+       top: 55%
+
+//uib3 has different class names for pagination elements
+ul.pagination, ul.pagination-sm
+  @extend .list-unstyled
+  > li
+    @extend .page-item
+    > a
+      @extend .page-link
+
+  //@extend works if either the parent or child has the designated class
+  //but here neither the li nor the a has the class
+  //so no extend :(
+  > li
+    &:first-child a
+      margin-left: 0
+      border-top-left-radius: $border-radius
+      border-bottom-left-radius: $border-radius
+
+    &:last-child a
+      border-top-right-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+
+    &.active a
+      z-index: 2
+      color: $pagination-active-color
+      background-color: $pagination-active-bg
+      border-color: $pagination-active-border-color
+
+    &.disabled a
+      color: $pagination-disabled-color
+      pointer-events: none
+      background-color: $pagination-disabled-bg
+      border-color: $pagination-disabled-border-color
+
+.dropdown-menu.uib-datepicker-popup
+  display: block //bs4 has it at display: none, but datepicker-popup does not supply open/show
+
+
+[uib-typeahead] + ul.dropdown-menu > li
+  @extend .dropdown-item

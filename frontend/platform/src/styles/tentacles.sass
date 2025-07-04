@@ -1,0 +1,291 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+#cluster
+  border-top-width: 0
+  box-shadow: 1px 1px 24px rgba(0, 0, 0, 0.5)
+  cursor: not-allowed
+  z-index: 1000
+  position: fixed
+  left: 50%
+  top: 0
+  transform: translate(-50%, 0)
+  -webkit-transform: translate(-50%, 0)
+  line-height: normal
+
+  body.admin &
+    font-size: 12px
+    font-weight: 0300
+    font-family: sans-serif
+    color: #000
+    padding: 4px 10px 3px 40px
+
+    border-bottom-left-radius: 3px
+    border-bottom-right-radius: 3px
+
+  body.overlord &
+    padding: .5rem .75rem .5rem 60px
+
+    border-bottom-left-radius: .3rem
+    border-bottom-right-radius: .3rem
+
+    transition: all .3s linear
+    opacity: 1
+
+// #cluster
+
+
+#cluster-anchor
+  text-decoration: none
+  body.admin &
+    color: black
+  body.overlord &
+    color: #333333
+
+.dev-cluster
+  body.admin &
+    background-color: #ffc10e
+    border: 1px solid #dda208
+  body.overlord &
+    background-color: #5db32b
+    border: 1px solid #449a12
+
+.prod-cluster
+  background-color: #c30
+  border: 1px solid #a20
+
+.octo-wrapper
+  z-index: 5000
+  position: fixed
+  top: 0
+  width: 100%
+
+  body.admin &
+    transform: scale(0.1)
+    left: calc(-50% + 20px)
+  body.overlord &
+    transform: scale(0.14)
+    //left: calc(-50% + 30px)
+
+.octo-head
+  position: absolute
+  top: 0%
+  left: 50%
+  height: 2.5em
+  width: 5em
+  background: #111311
+  z-index: 5
+  border-radius: 0 0 2.5em 2.5em
+  -webkit-transform: translate(-50%, 0%)
+  -ms-transform: translate(-50%, 0%)
+  transform: translate(-50%, 0%)
+  font-size: 40px
+
+.tentacle
+  font-size: 40px
+  position: absolute
+  top: 0%
+  left: 50%
+  margin-left: -2em
+
+.tentacle-1
+  z-index: 1
+  -webkit-transform: translateY(1.7em) translateX(-2em) rotate(-110deg)
+  -ms-transform: translateY(1.7em) translateX(-2em) rotate(-110deg)
+  transform: translateY(1.7em) translateX(-2em) rotate(-110deg)
+  div
+    -webkit-animation-delay: -2s
+    animation-delay: -2s
+
+.tentacle-2
+  z-index: 2
+  -webkit-transform: translateX(0.5em) translateY(3.1em) rotate(-150deg)
+  -ms-transform: translateX(0.5em) translateY(3.1em) rotate(-150deg)
+  transform: translateX(0.5em) translateY(3.1em) rotate(-150deg)
+  div
+    -webkit-animation-delay: -1.5s
+    animation-delay: -1.5s
+    height: 1.8em
+    div
+      bottom: .75em
+
+.tentacle-3
+  z-index: 3
+  -webkit-transform: translateX(-0.2em) translateY(2.1em) rotate(-130deg)
+  -ms-transform: translateX(-0.2em) translateY(2.1em) rotate(-130deg)
+  transform: translateX(-0.2em) translateY(2.1em) rotate(-130deg)
+  div
+    -webkit-animation-delay: -2.5s
+    animation-delay: -2.5s
+    height: 1.3em
+    div
+      bottom: .5em
+
+.tentacle-4
+  z-index: 4
+  -webkit-transform: translateX(1.75em) translateY(3.3em) rotate(-170deg)
+  -ms-transform: translateX(1.75em) translateY(3.3em) rotate(-170deg)
+  transform: translateX(1.75em) translateY(3.3em) rotate(-170deg)
+  div
+    -webkit-animation-delay: -0.5s
+    animation-delay: -0.5s
+    height: 1.4em
+    div
+      bottom: .55em
+
+.tentacle-5
+  z-index: 1
+  -webkit-transform: translateY(1.7em) translateX(6em) rotateY(180deg) rotate(-110deg)
+  transform: translateY(1.7em) translateX(6em) rotateY(180deg) rotate(-110deg)
+  div
+    -webkit-animation-delay: -0.5s
+    animation-delay: -0.5s
+
+.tentacle-6
+  z-index: 2
+  -webkit-transform: translateX(3.6em) translateY(3.4em) rotateY(180deg) rotate(-150deg)
+  transform: translateX(3.6em) translateY(3.4em) rotateY(180deg) rotate(-150deg)
+  div
+    -webkit-animation-delay: -2.5s
+    animation-delay: -2.5s
+    height: 2.2em
+    div
+      bottom: .85em
+
+.tentacle-7
+  z-index: 3
+  -webkit-transform: translateX(4.5em) rotateY(180deg) translateY(2.4em) rotate(-130deg)
+  transform: translateX(4.5em) rotateY(180deg) translateY(2.4em) rotate(-130deg)
+  div
+    -webkit-animation-delay: -1s
+    animation-delay: -1s
+    height: 2em
+    div
+      bottom: .7em
+
+.tentacle-8
+  z-index: 4
+  -webkit-transform: translateX(2.4em) rotateY(180deg) translateY(3.2em) rotate(-160deg)
+  transform: translateX(2.4em) rotateY(180deg) translateY(3.2em) rotate(-160deg)
+  div
+    -webkit-animation-delay: -2s
+    animation-delay: -2s
+    height: 1.5em
+    div
+      bottom: .6em
+
+.tentacle div
+  font-size: 0.9em
+  height: 3em
+  width: 1em
+  border-radius: 100% 100%
+  background: white
+  position: absolute
+  top: 25%
+  left: 50%
+  -webkit-animation: octorot 3s ease-in-out alternate 8
+  animation: octorot 3s ease-in-out alternate 8
+  div
+    top: auto
+    bottom: 1em
+    left: auto
+    right: 0
+    -webkit-transform: rotate(5deg)
+    -ms-transform: rotate(5deg)
+    transform: rotate(5deg)
+    -webkit-transform-origin: 100% 100%
+    -ms-transform-origin: 100% 100%
+    transform-origin: 100% 100%
+    div
+      -webkit-animation-delay: 0s !important
+      animation-delay: 0s !important
+      div
+        -webkit-animation-delay: -0.2s !important
+        animation-delay: -0.2s !important
+        div
+          -webkit-animation-delay: -0.4s !important
+          animation-delay: -0.4s !important
+          div
+            -webkit-animation-delay: -0.6s !important
+            animation-delay: -0.6s !important
+            div
+              -webkit-animation-delay: -0.8s !important
+              animation-delay: -0.8s !important
+              div
+                -webkit-animation-delay: -1s !important
+                animation-delay: -1s !important
+                div
+                  -webkit-animation-delay: -1.2s !important
+                  animation-delay: -1.2s !important
+                  div
+                    -webkit-animation-delay: -1.4s !important
+                    animation-delay: -1.4s !important
+                    div
+                      -webkit-animation-delay: -1.6s !important
+                      animation-delay: -1.6s !important
+                      div
+                        -webkit-animation-delay: -1.8s !important
+                        animation-delay: -1.8s !important
+                        div
+                          -webkit-animation-delay: -2s !important
+                          animation-delay: -2s !important
+                          div
+                            -webkit-animation-delay: -2.2s !important
+                            animation-delay: -2.2s !important
+                            div
+                              -webkit-animation-delay: -2.4s !important
+                              animation-delay: -2.4s !important
+                              div
+                                -webkit-animation-delay: -2.6s !important
+                                animation-delay: -2.6s !important
+                                div
+                                  -webkit-animation-delay: -2.8s !important
+                                  animation-delay: -2.8s !important
+                                  div
+                                    -webkit-animation-delay: -3s !important
+                                    animation-delay: -3s !important
+                                    div
+                                      -webkit-animation-delay: -3.2s !important
+                                      animation-delay: -3.2s !important
+                                      div
+                                        -webkit-animation-delay: -3.4s !important
+                                        animation-delay: -3.4s !important
+                                        div
+                                          -webkit-animation-delay: -3.6s !important
+                                          animation-delay: -3.6s !important
+                                          div
+                                            -webkit-animation-delay: -3.8s !important
+                                            animation-delay: -3.8s !important
+
+@-webkit-keyframes octorot
+  0%
+    -webkit-transform: rotate(5deg)
+    transform: rotate(5deg)
+
+  100%
+    -webkit-transform: rotate(-5deg)
+    transform: rotate(-5deg)
+
+
+@keyframes octorot
+  0%
+    -webkit-transform: rotate(5deg)
+    transform: rotate(5deg)
+
+  100%
+    -webkit-transform: rotate(-5deg)
+    transform: rotate(-5deg)

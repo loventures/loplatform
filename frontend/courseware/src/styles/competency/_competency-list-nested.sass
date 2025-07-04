@@ -1,0 +1,107 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+ul.competency-list-nested
+  @extend .list-group-flush
+  @extend .list-unstyled
+  position: relative
+
+  > li
+
+    &.first-competency,
+    &.first-competency .competency-item
+      border-top-left-radius: $border-radius
+      border-top-right-radius: $border-radius
+
+    &.last-competency,
+    &.last-competency.root-competency .competency-item
+      border-bottom-left-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+
+    &.last-competency.child-competency .competency-item
+      border-bottom-right-radius: $border-radius
+
+    &.last-competency
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12)
+      margin-bottom: 1em
+
+    @for $i from 1 to 10
+      &.depth-#{$i}
+        .competency-item
+          margin-left: 0em + $i
+
+          .at-risk-exclamation
+            left: -2.75rem - $i
+            @media (max-width: $lgscreen)
+              left: -1.5rem - $i
+
+  > li
+    background-color: $gray-200
+
+  .competency-item
+    @extend .list-group-item
+
+    &:first-child
+      border-radius: 0
+
+    &:last-child
+      border-radius: 0
+
+    &.at-risk-border
+      @media (max-width: $mdscreen)
+        border-left: 10px solid $danger
+
+    button.btn-link:disabled
+      text-decoration: none
+      color: $gray-700
+
+  .root-competency .competency-item
+    background-color: $light
+
+    .competency-name
+      @extend strong
+      flex: 1 1 51%
+    //make sure that the name + at-risk-bar > 100% so they bump to 2 lines
+    //but if only one exists with something else they are the same line
+    .at-risk-bar
+      flex-basis: 51%
+
+  .child-competency .competency-item
+    background-color: $white
+
+  &.list-group-flush > li.child-competency:not(:last-child) .list-group-item.competency-item
+    border-bottom: 1px solid $light
+
+.er-content-main
+  ul.competency-list-nested
+    li
+      background: none
+
+      &:not(:first-child)
+        margin-top: 1rem
+
+        &.depth-0
+          margin-top: 1.5rem
+
+      .competency-item
+        border: none !important
+        background: none
+        padding: 0
+
+        .competency-relations
+          margin-top: .125rem
+

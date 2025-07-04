@@ -1,0 +1,88 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<nav class="discussion-board-nav-bar d-print-none">
+  <ul
+    class="nav-items-container"
+    ng-class="{ compact: compact }"
+  >
+    <button
+      class="icon-btn compact-toggle"
+      title="{{'DISCUSSION_NAVBAR_TOGGLE' | translate}}"
+      ng-click="compact = !compact"
+    >
+      <span
+        class="icon icon-chevron-right"
+        ng-hide="compact"
+      ></span>
+      <span
+        class="icon icon-chevron-left"
+        ng-show="compact"
+      ></span>
+    </button>
+
+    <button
+      class="icon-btn back-to-threads-button"
+      title="{{'DISCUSSION_BACK_TO_THREADS' | translate}}"
+      ng-show="$ctrl.displayingView"
+      ng-click="$ctrl.backAction()"
+    >
+      <span class="lo-icon icon-circle-up-left"></span>
+    </button>
+
+    <li class="nav-item-container">
+      <discussion-board-jumper
+        view-type="::'user-posts'"
+        ng-if="::$ctrl.showJumper('user-posts')"
+        discussion-id="::$ctrl.discussionId"
+        set-in-view="$ctrl.setInView"
+      ></discussion-board-jumper>
+    </li>
+    <li class="nav-item-container">
+      <discussion-board-jumper
+        view-type="::'unread'"
+        ng-if="::$ctrl.showJumper('unread')"
+        discussion-id="::$ctrl.discussionId"
+        set-in-view="$ctrl.setInView"
+      ></discussion-board-jumper>
+    </li>
+    <li class="nav-item-container">
+      <discussion-board-jumper
+        view-type="::'new'"
+        ng-if="::$ctrl.showJumper('new')"
+        discussion-id="::$ctrl.discussionId"
+        set-in-view="$ctrl.setInView"
+      ></discussion-board-jumper>
+    </li>
+    <li class="nav-item-container">
+      <discussion-board-jumper
+        view-type="::'bookmarked'"
+        ng-if="::$ctrl.showJumper('bookmarked')"
+        discussion-id="::$ctrl.discussionId"
+        set-in-view="$ctrl.setInView"
+      ></discussion-board-jumper>
+    </li>
+    <li class="nav-item-container">
+      <discussion-board-jumper
+        view-type="::'unresponded'"
+        ng-if="::$ctrl.showJumper('unresponded')"
+        discussion-id="::$ctrl.discussionId"
+        set-in-view="$ctrl.setInView"
+      ></discussion-board-jumper>
+    </li>
+  </ul>
+</nav>

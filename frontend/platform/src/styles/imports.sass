@@ -1,0 +1,165 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:color';
+
+@use './importer'
+@use './fadein'
+
+/* Stiziles */
+
+$color-primary: #555
+$color-error: #b94a48
+$color-link: #2f96b4
+
+$small-screen: "only screen and (max-width: 768px)"
+$medium-screen: "only screen and (max-width: 1024px)"
+
+$width-main: 90%
+
+/* main */
+.main
+  width: 100%
+  height: 100%
+  color: #222
+  padding: 0
+
+  img
+    width: 103px
+    height: 89px
+    margin-bottom: 10px
+    text-align: center
+
+#import-content
+  width: 80%
+  margin: 1em auto
+  min-height: 30em
+  margin-bottom: 5em
+
+  *
+    box-sizing: border-box
+
+  .title
+    text-align: center
+    a
+      display: inline-block
+      vertical-align: middle
+      text-decoration: none
+      color: $color-link
+      font-size: .75em
+      margin-left: .35em
+      transition: .25s color
+      &:hover
+        color: color.adjust($color-link, $lightness: -15%)
+
+@media #{$small-screen}
+  #import-content
+    width: 100%
+
+/* transitions */
+.fade-enter
+  opacity: 0.01
+  transition: opacity .5s ease-in
+
+  .fade-enter-active
+    opacity: 1
+
+.fade-leave
+  opacity: 1
+  transition: opacity .5s ease-in
+
+  .fade-leave-active
+    opacity: 0.01
+
+.fadeIn
+  opacity: 0
+  transition: opacity 1s ease-out
+  &.visible
+    opacity: 1
+
+.main
+
+  .main-title
+    margin: 0.5em 0 0.5em 0.5em
+    font-size: 5em
+
+  .peer-list
+    margin-top: 1em
+
+  .loading-container
+    text-align: center
+    font-size: 10em
+    color: color.adjust($color-primary, $lightness: +15%)
+
+.empty-imports
+  border: 1px solid #bbbbbb
+  text-align: center
+  background: #eeeeee
+  border-radius: 2px
+  margin: 0 auto
+  padding: 2em
+
+
+.imports a
+  color: $color-primary
+  text-decoration: none
+  &:hover
+    text-decoration: none
+    color: color.adjust($color-primary, $lightness: -25%)
+    cursor: pointer
+
+.box
+  width: $width-main
+  margin: 0 auto
+
+.errors
+  color: $color-error
+
+.errors-list, .message
+  margin-left: 0.5em
+
+.step
+  margin-top: 0.5em
+  font-size: 1.15em
+
+  .step-label
+    font-weight: 700
+    &.middle
+      vertical-align: middle
+
+  .dim
+    color: #999
+
+//todo: remove this, don't commit it
+pre
+  margin-top: 5em
+
+//This stuff is to fix the footer
+footer
+  position: absolute
+  bottom: 0
+  width: 100%
+  box-sizing: border-box
+#app
+  // 116px is header & footer combined
+
+  height: calc(100% - 116px)
+  overflow-y: hidden
+  overflow: auto
+
+.btn-link
+  padding: 0

@@ -1,0 +1,90 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.chat-header
+  .btn-close
+    margin: 0 !important
+
+  .modal-title
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+  &.user-chat
+    padding: .5rem 1rem .5rem .5rem
+
+
+.chat-email-body
+  padding-top: 0
+
+  .chat-direct-message
+
+    .chat-direct-message-subject
+      width: 100%
+      margin-bottom: 1em
+
+.chat-body
+  background-color: white
+  padding: 0
+
+  .chat-output
+    overflow: auto
+    height: 400px
+    max-height: calc(100vh - 7rem)
+    padding: 1rem
+    background-color: #f7f7f7
+
+    .chat-stanza
+      margin-bottom: .75em
+
+      .them
+        color: #a20000
+
+      .you
+        color: #436530
+
+      &:last-child
+        margin-bottom: 0
+
+    .timestamp
+      color: #666
+      font-size: .9rem
+      width: 70%
+      margin: 0 auto
+      overflow: hidden
+      text-align: center
+
+      &:before, &:after
+        content: ""
+        display: inline-block
+        width: 50%
+        vertical-align: middle
+        border-bottom: 1px solid #CCC
+
+      &:before
+        margin: 0 .5em 0 -55%
+
+      &:after
+        margin: 0 -55% 0 .5em
+
+.chat-footer
+
+  .alert
+    flex-grow: 1
+    margin-bottom: 0
+    margin-right: 0
+    text-align: center

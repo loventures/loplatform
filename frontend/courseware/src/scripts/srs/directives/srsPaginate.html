@@ -1,0 +1,31 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="list-pagination">
+  <ul
+    class="pagination"
+    uib-pagination
+    ng-model="store.currentPage"
+    ng-change="gotoPage(store.currentPage)"
+    total-items="store.filterCount"
+    items-per-page="store.pageSize"
+    max-size="store.maxSize"
+    rotate="false"
+    previous-text="&laquo;"
+    next-text="&raquo;"
+  ></ul>
+</div>

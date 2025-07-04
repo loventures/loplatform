@@ -1,0 +1,64 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.srs-search
+  position: relative
+  align-items: center
+  font-size: 1em
+  height: 2.5em
+
+.srs-search
+  .search-text
+    margin: 0
+    width: 100%
+    height: 100%
+    padding-right: 2.5em
+
+.srs-search.search-triggered
+  .search-text
+    padding-right: 4.5em
+
+.srs-search
+  .search-overlay
+    box-sizing: content-box
+    position: absolute
+    right: 0
+    top: 0
+    height: 1.5em
+    padding: 0.5em
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: flex-end
+
+    > *
+      margin-left: 0.5em
+
+  .cancel-button
+    font-size: 1.5em
+    color: $color-alert
+
+  .search-icon
+    font-size: 1.5em
+    color: $color-contrasted-primary
+
+  .search-button
+    $color: fix-contrast($color-primary, $color-white)
+    font-size: 1.5em
+    color: $color
+    background-color: $color-white
+    border-color: $color

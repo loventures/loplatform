@@ -1,0 +1,23 @@
+# Unsure if this is created automatically
+
+logdir=/var/log/detomcat
+if [ ! -d $logdir ]; then
+  echo $logdir
+  mkdir $logdir
+  chown detomcat:detomcat $logdir
+  chmod 700 $logdir
+fi
+
+# I manage these symlinks manually because the sbt-native-packager wipes its own
+# symlinks on upgrade (rpm lifecycle grumble)
+
+if [ ! -e /etc/detomcat ]; then
+  ln -sf /usr/share/detomcat/conf /etc/detomcat
+fi
+
+# This is created as a dir but we don't want that.
+
+rm -fr /usr/share/detomcat/logs
+ln -sf $logdir /usr/share/detomcat/logs
+
+systemctl daemon-reload

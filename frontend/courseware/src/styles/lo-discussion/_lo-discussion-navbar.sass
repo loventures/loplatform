@@ -1,0 +1,192 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//navbar positioning
+.discussion-board-nav-bar
+  position: fixed
+  z-index: $zi-navigation
+  right: 0
+  bottom: 0
+  display: flex
+
+  .nav-item-container
+    margin: 0
+
+//The numbers here are hardcoded from the rubric grader
+.assignment-grader-wrap .discussion-board-nav-bar
+  right: 33vw
+
+  @media (max-width: $lgscreen)
+    right: 1em
+
+.discussion-board-nav-bar
+  .compact-toggle
+    align-self: center
+
+//navbar orientation
+.discussion-board-nav-bar .nav-items-container
+  display: flex
+  justify-content: space-between
+  flex-direction: row
+  align-items: center
+  overflow: hidden
+
+  @media (max-width: $mdscreen-max)
+    flex-direction: column
+    align-items: stretch
+
+//actual navbar styles
+.discussion-board-nav-bar
+  .nav-items-container
+    margin: 0
+    padding: 0.25em
+    background-color: $color-lighter
+    border-radius: 1em 0 0 0
+    box-shadow: -1px -1px 4px rgba(0,0,0,0.2)
+
+    @media (max-width: $mdscreen)
+      font-size: 0.9em
+
+    @media (max-width: $smscreen)
+      font-size: 0.7em
+
+    &.compact
+      .item-label,
+      .item-special,
+      .nav-button
+        display: none
+
+      .nav-bar-item
+        margin: 0.33em
+
+        @media (max-width: $lgscreen)
+          margin: 0.33em 0.5em
+
+      .item-count
+        flex: 1 0 auto
+
+//navbar buttons
+.discussion-board-nav-bar
+  .loading-spinner
+    font-size: 2em
+
+  .compact-toggle
+    font-size: 1.5em
+    color: $color-light-text
+
+    @media (max-width: $lgscreen)
+      margin: 0.33em 0.5em
+
+  .nav-item-container
+    list-style: none
+
+  .nav-bar-item
+    display: flex
+    align-items: center
+    border-radius: 0.5em
+    margin: 0.33em 0.5em
+    overflow: hidden
+    height: 2.3em
+
+    > *
+      box-sizing: border-box
+      height: 100%
+
+    .item-count
+      text-align: center
+
+    .item-label
+      flex: 1 1 auto
+      border-radius: 0
+
+    .nav-button
+      border-radius: 0
+      font-size: 2em
+      padding-top: 0.075em
+
+    .item-count,
+    .item-special,
+    .item-label
+      height: 100%
+      line-height: 2.33
+      padding: 0 0.67em
+      border-radius: 0
+
+    .item-special
+      border-left: 1px solid
+
+    .nav-button,
+    .item-label,
+    .item-special
+      border: 1px dotted transparent
+
+      &:focus
+        border-color: $color-contrasted-secondary
+
+/* colors */
+.discussion-board-nav-bar
+  .item-count,
+  .nav-button,
+  .item-special
+    color: $color-white
+
+  .item-label
+    background-color: $color-white
+
+  .nav-bar-item.unread, .nav-bar-item.new
+    $unread-color: fix-contrast($discussion-color-unread, $color-white)
+
+    .item-count,
+    .nav-button,
+    .item-special
+      background-color: $unread-color
+
+    .item-label
+      color: $unread-color
+
+  .nav-bar-item.bookmarked
+    $bookmark-color: fix-contrast($discussion-color-bookmark, $color-white)
+
+    .item-count,
+    .nav-button,
+    .item-special
+      background: $bookmark-color
+
+    .item-label
+      color: $bookmark-color
+
+  .nav-bar-item.unresponded
+    $unresponded-color: fix-contrast($discussion-color-unresponded, $color-white)
+
+    .item-count,
+    .nav-button,
+    .item-special
+      background: $unresponded-color
+
+    .item-label
+      color: $unresponded-color
+
+  .nav-bar-item.user-posts
+    $current-user-color: fix-contrast($discussion-color-current-user, $color-white)
+
+    .item-count,
+    .nav-button,
+    .item-special
+      background: $current-user-color
+
+    .item-label
+      color: $current-user-color

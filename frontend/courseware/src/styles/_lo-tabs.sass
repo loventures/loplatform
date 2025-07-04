@@ -1,0 +1,100 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.lo-tabs, .nav-tabs
+  border-bottom: 1px solid darken($color-light, 10%)
+  padding: 0
+  display: inline-block
+  width: 100%
+
+  .lo-tabs-header
+    padding: 0 0 0.5rem
+    margin-top: 0
+    margin-bottom: 0
+    height: 3rem
+    float: left
+
+    @media (max-width: $lgscreen)
+      font-size: 2.5em
+
+    @media (max-width: $mdscreen)
+      height: 2.5rem
+      font-size: 2.25em
+
+.lo-tabs-btns
+  float: right
+  margin-top: 0.5rem
+
+.nav-tabs li
+  margin-top: 0
+  float: left
+
+.lo-tabs-btns, .nav-tabs li
+  padding: 0
+  margin-bottom: 0
+  display: inline-block
+  text-align: center
+  list-style: none
+
+  @media (max-width: $mdscreen)
+    height: 2.5rem
+
+.lo-tab-btn, .nav-tabs li > a
+  display: inline-block
+  padding: 0.5rem
+  margin-left: 1em
+  height: 2rem
+  line-height: 1.85rem
+  font-size: 1.15em
+  color: fix-contrast($color-primary, $color-lightest)
+  background: none
+  border: none
+  box-sizing: content-box
+  text-decoration: none
+  transition: color ease $trans-speed
+
+  @media (max-width: $mdscreen)
+    font-size: 1em
+    height: 1.5rem
+    line-height: 1.0rem
+    margin-left: 0.75em
+
+  @media (max-width: $smscreen)
+    font-size: 0.925em
+    line-height: 1.0rem
+    margin-left: 0.5em
+
+  &:first-of-type
+    margin-left: 0
+
+  &:hover, &:focus
+    color: $color-contrasted-accent
+    cursor: pointer
+    background: none
+    text-decoration: none
+
+.lo-tab-btn.lo-tab-active, .nav-tabs li.active > a
+  color: $color-contrasted-accent
+  font-weight: 600
+  box-shadow: 0 1px 0 $color-accent
+  background: none
+  border: none
+
+  &:hover, &:focus
+    color: $color-contrasted-accent
+    background: none
+    border: 0 none

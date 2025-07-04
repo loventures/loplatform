@@ -1,0 +1,193 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Core Variables
+////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////
+// Headers
+$page-navbar-height: 3.5rem
+
+////////////////////////////////////////////////////////////////////////////////////
+// Playlist Layout
+$left-column-wide: 12.5em !default
+$left-column-thin: 3.5em !default
+$right-column-wide: 15em !default
+$right-column-thin: 3.5em !default
+$content-column-padding: 1em !default
+
+////////////////////////////////////////////////////////////////////////////////////
+// Discussion Board Layout
+$discussion-header-unit: 2em
+$icon-column-width: 2.25em
+
+////////////////////////////////////////////////////////////////////////////////////
+// LO branding
+$color-lo-primary: #67ae3e !default
+$color-lo-secondary: #147ec5 !default
+$color-lo-accent: #f8c400 !default
+$color-lo-tertiary: #e2479e !default
+$color-lo-quaternary: #f84b00 !default
+
+// Colors
+$color-white: #ffffff !default
+$color-translucent-white: rgba(255, 255, 255, 0.5) !default
+$color-black: #000000 !default
+$color-primary: #0c6e9e !default
+$color-primary-light: #0c6e9e !default
+$color-primary-dark: #0c6e9e !default
+$color-secondary: #ce6c2f !default
+$color-accent: #cfeed1 !default
+$color-dark: #111111 !default
+$code-color: #cc377b !default
+
+$color-primary-against-body-bg: darken($color-primary, 3%)
+$color-primary-against-alert: darken($color-primary, 11%)
+
+$color-background: #f9f9f9 !default
+$color-background-dark: #e5e5e5 !default
+$color-body-text: #444444 !default
+$color-light-text: #777777 !default
+
+$color-light: #efefef !default
+$color-lighter: #f0f0f0 !default
+$color-lightest: #f9f9f9 !default
+
+$color-info: #147ec5 !default
+$color-warning: #de8c16 !default
+$color-alert: #b23735 !default
+$color-success: #5ea230 !default
+
+$color-bookmark: $color-lo-secondary !default
+
+$color-correct: $color-success !default
+$color-incorrect: $color-alert !default
+
+$color-confident: darken($color-primary, 15%)
+$color-familiar: $color-primary
+$color-guessing: lighten($color-primary, 15%)
+$color-skipped: #888 !default
+
+$color-circle-start: #c23e30 !default
+$color-search-highlight: #c7dbe7 !default
+
+// Box Shadow
+$box-shadow-base: 0 1px 2px rgba(0, 0, 0, 0.08) !default
+$box-shadow-inset-base: 0 1px 2px rgba(0, 0, 0, 0.08) inset !default
+$box-shadow-right-only: 2px 0px 5px -2px rgba(0, 0, 0, 0.08) !default
+$box-shadow-left-only: -2px 0px 5px -2px rgba(0, 0, 0, 0.08) !default
+$box-shadow-halo: 0 0 5px rgba(0, 0, 0, 0.08) !default
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$header-height: 3rem !default
+$footer-height: 5.25rem !default
+$crumb-height: 2.25rem !default
+$banner-alert-height: 2.5rem !default
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$table-border: 1px solid fade-out($color-body-text, 0.75)
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$border-radius: 0.5rem !default
+// bootstrap compat
+$border-radius-base: $border-radius
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$button-padding: 0.75em 1.25em !default
+$button-border-radius: 1.25em !default
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$quiz-left-margin: 3em !default
+$question-choice-tooltip-width: 3em !default
+$question-choice-letter-width: 3.5em !default
+
+////////////////////////////////////////////////////////////////////////////////////
+//
+$page-top-padding: 2em !default
+$page-bottom-padding: $page-top-padding !default
+
+////////////////////////////////////////////////////////////////////////////////////
+// Keepin' the transitions on the same pace
+$trans-speed: 0.33s !default
+$trans-type: ease !default
+$delay-time: 0.33s !default
+$animate-speed: 0.5s !default
+
+////////////////////////////////////////////////////////////////////////////////////
+// Mobile Break points
+$xxsscreen: 15em !default
+$xsscreen: 20em !default
+$smscreen: 35.5em !default
+$mdscreen: 48em !default
+$lgscreen: 64em !default
+$hugescreen: 80em !default
+$epicscreen: 94em !default
+
+////////////////////////////////////////////////////////////////////////////////////
+// Break point max widths - Basically the next size bigger, minus 1px'ish
+$xxsscreen-max: ($xsscreen - calc(1/16))
+$xsscreen-max: ($smscreen - calc(1/16))
+$smscreen-max: ($mdscreen - calc(1/16))
+$mdscreen-max: ($lgscreen - calc(1/16))
+$lgscreen-max: ($hugescreen - calc(1/16))
+$hugescreen-max: ($epicscreen - calc(1/16))
+
+// Vertical break points for zoomed in viewers
+$mdheight-max: 480px
+$smheight-max: 400px
+$xsheight-max: 320px
+
+////////////////////////////////////////////////////////////////////////////////////
+// z-index breakpoints
+
+//things that needs to be visible even for modals and other overlays
+$zi-system: 100000
+
+//modals, full screen modes
+$zi-overlay: 10000
+
+//things that pops over the page and are page agnostic.
+$zi-global: 1000
+
+//mostly for app header and header dropdowns
+//if something has a scroll spy floating header it should be this too
+$zi-header: 100
+
+//e.g. left menu, right menu, grader panel, jumpbar
+$zi-navigation: 10
+
+//content and content specific pop overs like date picker
+$zi-content: 1
+
+//// Bootstrap tooltip variables
+$tooltip-max-width: 200px !default
+$tooltip-color: #fff !default
+$tooltip-bg: #2a6496 !default
+$tooltip-opacity: 0.9 !default
+
+$tooltip-arrow-width: 5px !default
+$tooltip-arrow-color: $tooltip-bg !default
+
+
+//printing
+$printing-page-width: 6.5in

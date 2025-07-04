@@ -1,0 +1,207 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.login-form
+  z-index: 1
+  transition: opacity 0.5s ease-out, margin-top ease-out .1s
+
+  h3
+    font-size: 1.5rem
+    font-weight: normal
+    margin-bottom: .75rem
+
+  .super-label
+    font-size: 90%
+    color: #212529
+    margin-top: .25rem
+    margin-bottom: .125rem
+
+    &:first-child
+      margin-top: 0
+
+  .forgot-link2
+    font-size: 90%
+
+  .forgot-link
+    display: block
+    text-align: center
+    font-size: 90%
+
+  .custom-control-label
+    font-size: 90%
+    padding-top: .05rem
+
+.etc .login-register
+  margin-top: 10rem
+
+.admin-login, .login-required
+  display: flex
+  flex-direction: column
+
+  .admin-logout
+    display: flex
+    flex-direction: column
+    align-items: center
+    animation: fadein .5s ease-out forwards
+    padding-top: 8rem
+    margin-top: calc(50svh - 14.25rem)
+
+  .login-form, #main-nav-bar-base:not(.no-fade)
+    animation: fadein .5s ease-out forwards
+
+  .login-form, .admin-logout
+    &.blur
+      animation: blur .75s linear forwards
+
+  h3
+    align-self: center
+    margin: 1rem 0 2rem
+    &.blur
+      animation: blur .75s linear forwards
+
+  h3.logout-hdr
+    font-size: 1.5rem
+    font-weight: 0400
+    white-space: nowrap
+
+  .click-to-login
+    color: #212529
+    font-size: 1rem
+    white-space: nowrap
+    text-align: center
+
+  .login-form
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+    padding: 0 2rem
+    background-color: #ffffff80
+    backdrop-filter: blur(5px)
+    margin-top: calc(50svh - 10.875rem)
+    &.logged-out
+      margin-top: calc(50svh - 3.5rem)
+      background: transparent
+      backdrop-filter: none
+      h3
+        color: black
+
+    input:not(:focus)
+      background-color: #ffffffc0
+
+    &.dark
+      a
+        color: #343a40
+        outline-color: #6c757d
+
+        &:hover
+          color: #212529
+
+      input:focus, a:focus
+        border-color: #3a4248
+        box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, .3)
+
+.admin-login
+  .login-form
+    margin-top: calc(50svh - 14.5rem)
+    background-color: #fff
+    input:not(:focus)
+      background-color: #fff
+    h3
+      display: none
+
+@keyframes fadein
+  0%
+    opacity: 0
+
+  100%
+    opacity: 1
+
+@keyframes blur
+  0%
+    filter: blur(0px)
+    opacity: 1
+    transform: scale(1)
+
+  100%
+    filter: blur(30px)
+    opacity: 0
+    transform: scale(5)
+    display: none
+
+body.login-page
+  overflow: hidden
+
+@media (max-width: 576px)
+  .login-page
+    .domain-image
+      max-width: 40vw
+      max-height: 40vw
+      top: calc(25svh - 4.25rem) // center
+      transition: top ease-out .1s
+      &.fade
+        animation: fadein75 ease-in .5s forwards
+    .login-form
+      margin-top: calc(50svh - 8.5rem)
+      &.logged-out
+        margin-top: calc(50svh - 5.5rem)
+      &:not(.logged-out) h3
+        display: none
+
+@keyframes fadein75
+  0%
+    opacity: 0
+
+  100%
+    opacity: .75
+
+@media (min-width: 576px)
+  .admin-login, .login-required
+    .login-form
+      align-self: center
+      flex-grow: 0
+      width: 32rem
+      border: 1px solid #ced4da
+      border-radius: .3rem
+      padding: 1rem 3rem 2rem 3rem
+      &.logged-out
+        width: 20rem
+        border: none
+        text-shadow: 0 0 3px white
+      h3
+        margin: 1rem 0
+
+  .admin-login
+    .login-form
+      h3
+        display: block
+        align-self: start
+
+@media (max-width: 576px) and (prefers-color-scheme: dark)
+  body.admin
+    .login-form:not(.modal-body)
+      background-color: transparent !important
+      color: #f8f9fa !important
+
+      .super-label
+        color: #e9ecef !important
+
+      a
+        color: #ced4da !important
+        outline-color: #748490 !important
+
+        &:hover
+          color: #cf4040 !important

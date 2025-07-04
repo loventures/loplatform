@@ -1,0 +1,195 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.crudTable-courseSections
+
+  #react-table-create-button
+    overflow: hidden
+
+    &:after
+      content: ""
+      position: absolute
+      top: -30%
+      left: -150%
+      width: 25px
+      height: 160%
+      opacity: 0
+      transform: rotate(30deg)
+      background: rgba(255, 255, 255, 0.13)
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.13) 15%, rgba(255, 255, 255, 0.5) 66%, rgba(255, 255, 255, 0) 100%)
+
+  &.crudTable-loaded
+    #react-table-create-button
+      &:after
+        opacity: 1
+        left: 110%
+        transition-property: left, opacity
+        transition-duration: .7s, 0.5s
+        transition-timing-function: linear
+
+.rightly
+  position: absolute
+  top: 1rem
+  right: 1rem
+
+label#flame-label
+  font-size: 16px
+  font-weight: 400
+  margin-right: 32px
+
+.flame-container
+  width: 32px
+  height: 32px
+  position: absolute
+  right: 0
+  top: -21px
+  z-index: 6000
+  transform-origin: center bottom
+  animation-duration: 3ms
+  animation-delay: 200ms
+  animation-timing-function: ease-in
+  animation-iteration-count: infinite
+  animation-direction: alternate
+
+  &.fjœr
+    animation-name: flicker
+    .flame
+      opacity: 1
+      transform: rotate(-45deg) scale(1.0, 1.0) translate(0,0)
+    .circle
+      &.blue, &.white
+        opacity: 1
+      &.check
+        background: #333
+        box-shadow: 0px 0px 2px 2px rgba(0,0,255,.5)
+
+  .flame
+    bottom: 0
+    position: absolute
+    border-bottom-right-radius: 50%
+    border-bottom-left-radius: 50%
+    border-top-left-radius: 50%
+    opacity: 0
+    transform: rotate(-45deg) scale(0.0, 0.0) translate(-24px,32px)
+    transition: all ease-in .3s
+
+    &.yellow
+      left: 8px
+      width: 16px
+      height: 16px
+      background: gold
+      box-shadow: 0px 0px 5px 2px gold
+
+    &.orange
+      left: 5px
+      width: 21px
+      height: 21px
+      background: orange
+      box-shadow: 0px 0px 5px 2px orange
+
+    &.red
+      left: 2px
+      width: 26px
+      height: 26px
+      background: OrangeRed
+      box-shadow: 0px 0px 3px 2px OrangeRed
+
+    &.white
+      left: 8px
+      bottom: -2px
+      width: 16px
+      height: 16px
+      background: white
+      box-shadow: 0px 0px 5px 2px white
+
+  .circle
+    border-radius: 50%
+    position: absolute
+    transition: all ease-in .3s
+
+    &.blue
+      width: 4px
+      height: 4px
+      left: 14px
+      bottom: -4px
+      background: SlateBlue
+      box-shadow: 0px 0px 6px 3px SlateBlue
+      opacity: 0
+
+    &.white
+      width: 18px
+      height: 18px
+      left: 7px
+      bottom: -18px
+      background: white
+      box-shadow: 0px 0px 6px 3px white
+      opacity: 0
+      cursor: pointer
+
+    &.check
+      width: 10px
+      height: 10px
+      left: 11px
+      bottom: -11px
+      background: #ccc
+      box-shadow: 0px 0px 2px 2px white
+      cursor: pointer
+
+@keyframes flicker
+  0%
+    transform: rotate(-1deg)
+
+  20%
+    transform: rotate(1deg)
+
+  40%
+    transform: rotate(-1deg)
+
+  60%
+    transform: rotate(1deg) scaleY(1.04)
+
+  80%
+    transform: rotate(-2deg) scaleY(0.92)
+
+  100%
+    transform: rotate(1deg)
+
+.courseSections-lock
+  display: inline-flex
+  vertical-align: text-bottom
+
+#courseSections-uniqueIdentifier-header
+  display: inline
+  width: 75%
+
+#courseSections-user-filter-dropdown
+  width: 100%
+
+#courseSections-user-filter-dropdown-toggle
+  width: 100%
+  background-color: white
+  color: #1378bc
+  border: none
+  padding: .25rem 1.5rem
+  text-align: left
+
+#courseSections-user-filter-dropdown-toggle:focus
+  box-shadow: none
+
+#courseSections-user-filter-input
+  padding-left: 0
+  padding-right: 0

@@ -1,0 +1,95 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="Bounce" bodyClass="stock-domain">
+  <@head>
+    <script type="text/javascript">
+      $(function() {
+        $('#bounce').click(function(e) {
+          e.preventDefault();
+          $.post('/control/bounce').always(function() {
+            window.location = '/control/bounce';
+          });
+        });
+      });
+      function bounceTo(target) {
+        if (target === '${ serviceMeta.localHost }') {
+          return;
+        }
+        var limit = 2 * ${ hosts.size };
+        var bouncer = function(count) {
+          $.post('/control/bounce').always(function() {
+            $.get('/control/mstatus?format=json').done(function(response) {
+              var host = response['cp.Node.Host'];
+              $('.host').removeClass('btn-primary btn-success').addClass('btn-secondary');
+              $('#' + host).addClass('btn-primary').removeClass('btn-secondary');
+              if (host === target) {
+                window.location = '/control/bounce?target=' + host;
+              } else if (count >= limit) {
+                window.alert('Fáilüre!!1!');
+              } else {
+                bouncer(1 + count);
+              }
+            });
+          });
+        };
+        bouncer(0);
+      }
+      function copyToClipboard(value) {
+        var tempInput = document.createElement("input");
+        tempInput.value = value;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+    </script>
+  </@head>
+  <section class="comp-head">
+    <div class="comp-title">
+      <h2>Bounce</h2>
+    </div>
+  </section>
+  <div class="main">
+    <div class="well">
+      <p>
+        You are on host <em>${ serviceMeta.localHost } &lt;${ serviceMeta.node }&gt;</em><if test="${ serviceMeta.das }">&nbsp;(DAS)</if>.
+      </p>
+    </div>
+    <p>
+      Host list:
+    </p>
+    <p foreach="host: ${ hosts }" style="margin-left: 1em">
+      <let self="${ serviceMeta.localHost == host.centralHost }"
+           winner="${ serviceMeta.localHost == Param.target }"
+           cls="${ winner ? 'btn-success' : 'btn-primary' }"
+           das="${ host.centralHost == serviceMeta.centralHost }"
+      >
+          <i class="icon-tags" id="cp-${ host.nodeName }" onclick="copyToClipboard('${ host.nodeName }')"></i>
+          <button style="width: 32em"
+                  class="host btn ${ self ? cls : 'btn-secondary' }"
+                  id="${ host.centralHost }"
+                  onclick="bounceTo('${ host.centralHost }')">
+            ${ host.centralHost } &lt;${ host.nodeName }&gt;<if test="${ das }">&nbsp;(DAS)</if>
+          </button>
+      </let>
+    </p>
+    <p style="margin-top: 2em; text-align: right">
+      <button id="bounce" class="btn btn-primary">I'm feeling lucky!</button>
+    </p>
+  </div>
+</ui:pageLayout>

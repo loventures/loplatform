@@ -1,0 +1,144 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+/////////////////////////////////////////////////////////////////////////////
+// Instructor student/user lists
+// Imported into instructor-home
+/////////////////////////////////////////////////////////////////////////////
+
+.student-list-wrap
+  display: inline-block
+  width: 100%
+  margin: 0.5em 0 1.5em
+
+  header
+    background: transparent
+
+.user-list, .student-list-sorted
+  margin-top: 0.5em
+  margin-bottom: 0.75em
+  width: 100%
+
+  h2, h3
+
+    .icon
+      margin-right: 0.5em
+      font-size: 1.15em
+      line-height: 0.85
+      position: relative
+      top: 0.125em
+
+  .user-row
+    .user-grade
+      min-width: 3em
+      text-align: center
+
+    .comp-percent
+      font-size: 1.15em
+      margin-left: 1.5em
+
+    .user-needs-review,
+    .user-overridden-grade,
+    .user-has-invalidated
+      font-size: 0.85em
+      color: $color-alert
+      margin: 0 0.5em
+
+      &:before
+        font-family: "lo-icons"
+        content: "\e605"
+        margin-right: 0.33em
+        font-size: 1.33em
+        line-height: 0.5
+        position: relative
+        top: 0.067em
+
+  .modal-content &
+    // padding: 0 1.5em
+    // Doesn't need top or bottom - header and pagination item margins take care of it
+
+    margin-top: 0
+
+
+  .user-row
+    display: flex
+    padding: 0.75rem 1.25rem
+    align-items: center
+
+    .comp-percent
+      margin-left: auto
+
+  li
+    margin: 0
+    padding: 0
+
+    &:hover
+
+      .comp-percent,
+      .user-needs-review,
+      .user-overridden-grade,
+      .user-has-invalidated
+        color: $color-white
+        text-shadow: none
+
+  li:first-of-type
+    border-radius: .33rem .33rem 0 0
+
+  li:last-of-type
+    border-radius: 0 0 .33rem .33rem
+
+  li:only-child
+    border-radius: 0.33rem
+
+.user-row.user-list-user-row
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+  .user-name
+    flex: 1 1 auto
+
+/////////////////////////////////////////////////////////////////////////////
+.assignment-overview-list
+  margin-bottom: 1rem
+
+  .list-group-item-action:hover
+    cursor: pointer
+
+.overview-duedate
+  font-size: 1.5em
+  padding-bottom: 1em
+
+.has-submissions
+  h2, h3
+    color: $color-success
+
+.not-started
+  h2, h3
+    color: $color-alert
+
+.manage-discussions-table
+  width: 100%
+  overflow: scroll
+
+  .name-column
+    text-align: start
+
+  .option-column
+    text-align: center
+

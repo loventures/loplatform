@@ -1,0 +1,164 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.courseListTitle
+  font-weight: 400
+  font-size: 2rem
+
+.courseSearch
+  width: 75vw
+  max-width: 40rem
+
+  &.loading
+    > input
+      background-image: repeating-linear-gradient(-45deg, white, white 10px, #f0f0f0 10px, #f0f0f0 20px)
+      background-size: 200% 200%
+      animation: barberpole 60s linear infinite
+      opacity: .75
+      &::placeholder
+        opacity: 0
+    > span
+      color: #ccc
+
+  .form-control
+    padding-left: 1rem
+    border-top-left-radius: calc(1.125rem + 1px) !important
+    border-bottom-left-radius: calc(1.125rem + 1px) !important
+
+  .input-group-text
+    padding-left: .5rem
+    border-top-right-radius: calc(1.125rem + 1px) !important
+    border-bottom-right-radius: calc(1.125rem + 1px) !important
+
+.noMatch
+  color: #777
+
+.noCourses
+  margin-top: calc(50vh - 5rem)
+  font-size: 1.5rem
+  color: #3a4248
+  text-align: center
+
+.courseEntry
+  padding: 1.5rem
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.125)
+  transition: all ease-in .1s
+  position: relative
+  display: flex
+  flex-direction: row
+  gap: 1.5rem
+  align-items: center
+  background-color: #ffffffa0
+  border: 1px solid white
+  backdrop-filter: blur(5px)
+
+  > svg
+    width: 4rem
+    height: 4rem
+    fill: #585858
+
+  &:hover
+    box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.25)
+    background-color: #aee0f9c0
+    border-color: #aee0f9
+
+    .courseLink
+      color: #073d57
+
+  .courseLink
+    color: #0079a8
+    text-decoration: none
+    display: block
+    transition: all ease-in .1s
+
+    &:before
+      content: ' '
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+      z-index: 1
+
+    .courseTitle
+      font-size: 1.75rem
+      line-height: 1.2
+
+  .courseRole
+    position: absolute
+    top: 1rem
+    right: 1rem
+    color: #777
+    z-index: 3
+
+  .prefix
+    color: #333
+
+  .value
+    color: #585858
+
+  a.value
+    color: #0079a8
+
+    &:hover
+      color: #073d57
+
+  .shutdownDate
+    color: #733
+
+    &:before
+      content: '⚠️'
+      padding-right: .25rem
+
+  .nextUp
+    margin-top: .5rem
+
+    .value
+      display: inline-block
+      position: relative
+
+      &:before
+        content: ' '
+        position: absolute
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+        z-index: 2
+
+#loading-courses
+  background-image: repeating-linear-gradient(-45deg, white, white 10px, #f0f0f0 10px, #f0f0f0 20px)
+  background-size: 200% 200%
+  animation: barberpole 60s linear infinite
+  box-shadow: none
+  border-color: #f0f0f0
+  opacity: .75
+  > div, > svg
+    visibility: hidden
+
+@keyframes barberpole
+  100%
+    background-position: 100% 100%
+
+#visibility-sensor
+  height: 1rem
+
+@media (max-width: 576px)
+  .courseEntry
+    .courseLink
+      .courseTitle
+        font-size: 1.25rem

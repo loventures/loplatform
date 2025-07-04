@@ -1,0 +1,121 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>$$msg_loggedOut</title>
+    <link rel="shortcut icon" href="$$static/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="$$static/styles/underground.css" />
+    <link rel="stylesheet" type="text/css" href="$$static/styles/cp.css" />
+    <script type="text/javascript" src="$$cdn/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="$$cdn/paperjs/0.12.18/paper-full.min.js"></script>
+    <script type="text/javascript" src="$$url/scripts/engine.js"></script>
+    <style type="text/css">
+html {
+  height: 100%;
+}
+body {
+  background: #111;
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+#title {
+  font-family: "Helvetica Neue",Arial,sans-serif;
+  font-size: 64px;
+  font-weight: 0100;
+  color: #ffffff;
+  opacity: 0.75;
+  text-align: center;
+  line-height: 128px;
+
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+.wrap-outer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #111;
+}
+.wrap-outer:after {
+  background-image: url($$url/images/background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  content: "";
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  top: 0;
+  left: 0;
+  opacity: 0.75;
+}
+#header {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #3e6cd7;
+  margin-bottom: 15px;
+  font-family: sans-serif;
+  font-weight: 0300;
+  opacity: .1;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+#d-e {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  opacity: 0.85;
+}
+    </style>
+    <script type="text/javascript">
+      $(function() {
+        startTheEngine();
+        setTimeout(function() {
+            $('#title').css('opacity', '0.25');
+            $('#header').css('opacity', '1');
+          }, 1);
+      });
+    </script>
+  </head>
+  <body>
+    <div class="wrap-outer"></div>
+    <div id="title">${ Current.domainDTO.name }</div>
+    <div id="header">$$msg_loggedOut</div>
+    <canvas id="d-e"></canvas>
+  </body>
+</html>

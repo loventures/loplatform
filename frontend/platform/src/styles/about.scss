@@ -1,0 +1,42 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.aboutPony {
+  font-size: 7rem;
+  line-height: 1;
+  color: rgb(0, 0, 0);
+  word-wrap: break-word;
+}
+
+.aboutMeta {
+  color: #777;
+  font-weight: 100;
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .aboutPony {
+    font-size: 5rem;
+  }
+
+  .aboutMeta {
+    font-size: 18px;
+  }
+}

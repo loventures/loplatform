@@ -1,0 +1,123 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+// difference engine recognizing efficient code, warning popup when excessive api/db calls detected
+
+.lo-derec
+  position: fixed
+  bottom: 25px
+  right: 25px
+  pointer-events: none
+  padding: 15px
+  border: 5px solid green
+  color: #333
+  background: #fff
+  -webkit-border-radius: 10px
+  -moz-border-radius: 10px
+  border-radius: 10px
+  z-index: 1000
+  opacity: 0.8
+  transition: all .3s linear
+
+  &.good
+    opacity: 0
+
+  img
+    width: 80px
+    height: 80px
+    margin: 0
+
+  .tint
+    position: absolute
+    left: -120px
+    top: -10px
+    border-radius: 50%
+    border: 3px solid green
+    overflow: hidden
+
+    &:before
+      content: ""
+      display: block
+      position: absolute
+      top: 0
+      bottom: 0
+      left: 0
+      right: 0
+      transition: all .3s linear
+
+  &:before
+    top: 20px
+    bottom: auto
+    left: -30px
+    border-width: 15px 30px 15px 0
+    border-color: transparent green
+    content: ""
+    position: absolute
+    border-style: solid
+    display: block
+    width: 0
+    transition: all .3s linear
+
+  &:after
+    top: 26px
+    bottom: auto
+    left: -21px
+    border-width: 9px 21px 9px 0
+    border-color: transparent #fff
+    content: ""
+    position: absolute
+    border-style: solid
+    display: block
+    width: 0
+
+  &.bad
+    border-color: orange
+
+    &:before
+      border-color: transparent orange
+
+    .tint
+      border-color: orange
+      &:before
+        background: rgba(255, 165, 0, 0.3)
+
+  &.horrible
+    border-color: #bf0000
+
+    &:before
+      border-color: transparent #bf0000
+
+    .tint
+      border-color: #bf0000
+      -webkit-animation: spin 2s linear infinite
+      -moz-animation: spin 2s linear infinite
+      animation: spin 2s linear infinite
+
+      &:before
+        background: rgba(255, 0, 0, 0.4)
+
+@-moz-keyframes spin
+  100%
+    -moz-transform: rotate(-360deg)
+
+@-webkit-keyframes spin
+  100%
+    -webkit-transform: rotate(-360deg)
+
+@keyframes spin
+  100%
+    transform: rotate(-360deg)

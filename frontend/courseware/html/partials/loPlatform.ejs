@@ -1,0 +1,32 @@
+<% if(false && isDev){ %>
+    <script type="text/javascript">
+      window.lo_platform = { header: {} };
+    </script>
+<% } else { %>
+    <script type="text/javascript">
+      if (!window.lo_platform) {
+        var lo_platform = (window.lo_platform = $$json_api('v2/lo_platform'));
+        lo_platform.course_roles = $$json(userRights);
+        lo_platform.features = $$json(componentConfiguration);
+        lo_platform.environment = {
+          isLocal: $$json(ServiceMeta.isLocal),
+          isProdLike: $$json(ServiceMeta.isProdLike),
+        };
+        lo_platform.cdn_url = '$$url/';
+        lo_platform.preferences = $$json(preferences);
+        lo_platform.course = $$json(instance);
+        lo_platform.footer = $$json_api('v2/siteconfiguration/footer');
+        lo_platform.tutorials = $$json_api('v2/tutorials');
+        lo_platform.user.tutorials = $$json_api('v2/tutorials/status');
+
+        ///////// i18n specific //////////
+        lo_platform.i18n = {
+          language: '$$Language',
+          country: '$$Country',
+          extension: '$$Extension',
+          locale: '$$Locale',
+        };
+        lo_platform.identifier = $$json(componentInstance.identifier);
+      }
+    </script>
+<% } %>

@@ -1,0 +1,6 @@
+country-flag-emoji-polyfill
+https://github.com/talkjs/country-flag-emoji-polyfill/tree/master
+MIT License
+The Emoji art in the "Twemoji Country Flags" font comes from Twemoji, and is used and redistributed under the CC-BY-4.0 license terms offered by the Twemoji project.
+
+

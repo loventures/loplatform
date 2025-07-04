@@ -1,0 +1,73 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.mp-player-questions-nav
+  display: flex
+  flex-direction: row
+  align-items: flex-start
+
+  .pagination
+    flex: 1 1 auto
+    overflow-x: auto
+    border-radius: 0
+    height: 3.85rem
+    .page-link
+      border-radius: 0 !important
+
+  .page-item
+    .page-link
+      position: relative
+      @include min-width-for-digits(2, $pagination-padding-x)
+      text-align: center
+      // line-height: $pagination-line-height
+      padding: 0
+
+      color: $primary
+      background-color: $white
+      border-color: $light
+
+      &.answered
+        color: $white
+        background-color: $primary
+        border-color: $primary
+
+      &.correct
+        color: $white
+        background-color: $success
+        border-color: $success
+
+      &.incorrect
+        color: $white
+        background-color: $danger
+        border-color: $danger
+
+      &.active
+        color: $white
+        background-color: $secondary
+        border-color: $secondary
+        
+      .superscript
+        position: absolute
+        z-index: 1
+        top: -0.5rem
+        right: -0.5rem
+        font-size: 0.8rem
+        border: 2px solid $white
+
+    .arrow
+      transform: rotate(180deg) translateY(-0.5rem)

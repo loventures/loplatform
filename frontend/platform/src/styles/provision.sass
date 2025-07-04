@@ -1,0 +1,168 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:color';
+
+$prov-max-width: 500px
+$hot-pink: #ff69b4
+$btn-color: $hot-pink
+$btn-color-light: color.adjust($btn-color, $lightness: +5%)
+$btn-color-dark: color.adjust($btn-color, $lightness: -10%)
+$awesome-btn-color: #ffc107
+
+.provision-container
+  .row
+    @media screen and (min-width: $prov-max-width)
+      width: $prov-max-width
+
+  .btn-primary
+    background-color: $btn-color
+    background-image: linear-gradient(to bottom, $btn-color, $btn-color-dark)
+    border-color: $btn-color
+    font-weight: bold
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+
+    &:hover, &:active
+      background-color: $btn-color-dark !important
+      background-image: none
+      border-color: color.adjust($btn-color-dark, $lightness: -10%) !important
+
+    &:focus
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.25), 0 0 0 0.2rem $btn-color-light !important
+
+.provision-form
+  margin-top: 25%
+
+  h4
+    color: #ffffff
+
+  >div
+    background-color: rgba(255, 255, 255, 0.65)
+    border-radius: 2em
+    opacity: 50%
+    padding: 1.9em 1.9em 1.5em 1.9em
+
+    .upload-file-preview
+      display: inline
+
+    label
+      font-size: 0.9em
+      margin-bottom: 1em
+
+    .color-block
+      margin: 0.2rem 0
+
+      .color-preview
+        border: 1px solid #666
+        border-radius: 0.4rem
+        margin-left: 0.15rem
+    ol
+      color: #555
+      font-size: 1.5rem
+
+      .active
+        color: #059
+        animation: activeAnimation 1s linear infinite
+
+      @keyframes activeAnimation
+        50%
+          color: #070
+
+      .success
+        color: #060
+
+      .failure
+        color: #900
+
+.provision-modal
+
+  .modal-content
+    border-radius: 2em
+    color: #ffffff
+
+    .modal-body
+      padding: 0.25rem
+
+    *
+      border: none
+
+    .close
+      color: #ffffff
+      opacity: 1
+
+.provision-modal.error
+
+  .modal-header
+    padding: 1rem 1.5rem 0 1.2rem
+
+  .modal-content
+    background-color: rgba(26, 26, 26, 0.85)
+    border: 1px solid red
+
+.provision-modal.success
+
+  .modal-header
+    padding: 0
+
+  .modal-title
+    font-size: 1.6em
+    margin-bottom: 0.2em
+
+  .modal-content
+    background-color: $hot-pink
+    border: 1px solid #777
+    padding: 1em 2em 2em 2em
+
+    .sub
+      margin-left: 0.75em
+
+    span
+      margin-left: 0.25em
+
+    .value
+      color: #444
+
+    .success
+      color: #060
+
+    .failure
+      color: #900
+
+
+  .modal-body
+    background-color: rgba(255, 255, 255, 0.65)
+    border: 1px solid #777
+    border-radius: 1em
+    box-shadow: inset 1px 1px 5px #888
+    color: #000
+    padding: 1.5em 2em
+    z-index: 1
+
+  .btn
+    margin-top: 1em
+    background-image: linear-gradient(to bottom, $awesome-btn-color, color.adjust($awesome-btn-color, $lightness: -10%))
+
+  .octo-wrapper
+    transform: rotate(-90deg) scale(0.8)
+    position: absolute
+    top: 50%
+    right: -50%
+    z-index: -1
+
+
+body .provision-error-bd
+  background-color: rgba(193, 19, 19)

@@ -1,0 +1,17 @@
+// Fixes for alerts from v4.0.0-beta.2, delete once we update
+// Provide class for links that match alerts
+.alert {
+  position: relative;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: $alert-padding-y $alert-padding-x;
+  color: inherit;
+}
+
+.alert-link {
+  text-decoration: underline;
+}

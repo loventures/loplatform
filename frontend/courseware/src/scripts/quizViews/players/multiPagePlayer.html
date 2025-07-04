@@ -1,0 +1,88 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="mp-quiz-player">
+  <mp-question-nav
+    ng-if="!$ctrl.printView"
+    question-tuples="$ctrl.questionTuples"
+    current-index="$ctrl.currentQuestionIndex"
+    goto="$ctrl.gotoQuestion"
+    can-go-status="$ctrl.canGoStatus"
+  >
+  </mp-question-nav>
+
+  <div
+    class="alert alert-info my-2"
+    ng-if="!$ctrl.currentQuestion"
+  >
+    <loading-spinner></loading-spinner>
+  </div>
+
+  <div
+    class="alert alert-danger my-2"
+    ng-if="$ctrl.hasError()"
+  >
+    <span ng-bind="$ctrl.getErrorMessage()"></span>
+  </div>
+
+  <div class="quiz-page">
+    <question-loader
+      class="quiz-page-question"
+      ng-if="$ctrl.currentQuestion"
+      index="$ctrl.currentQuestionIndex"
+      focus-on-render="true"
+      question="$ctrl.currentQuestion"
+      response="$ctrl.currentQuestionResponse"
+      assessment="$ctrl.assessment"
+      question-count="$ctrl.questionTuples.length"
+      change-answer="$ctrl.changeAnswer"
+      can-edit-answer="!$ctrl.currentQuestionScore"
+    ></question-loader>
+
+    <mp-controls
+      ng-if="!$ctrl.printView"
+      class="quiz-page-controls"
+      display-confidence-indicators="$ctrl.settings.displayConfidenceIndicators"
+      display-skip="$ctrl.shouldDisplaySkip"
+      selected-confidence="$ctrl.currentQuestionResponse.selection.confidence"
+      has-unsaved-changes="$ctrl.currentQuestionHasUnsavedChanges"
+      is-last-question="$ctrl.isLastQuestion"
+      unanswered-questions="$ctrl.unansweredQuestions"
+      on-attempt="$ctrl.onAttempt"
+      max-attempts="$ctrl.settings.maxAttempts"
+      can-edit-answer="!$ctrl.currentQuestionScore"
+      next-question="$ctrl.nextQuestion"
+      can-submit-question="$ctrl.canSubmitCurrentQuestion"
+      submit-question="$ctrl.submitQuestion"
+      can-submit-quiz="$ctrl.canSaveOrSubmitQuiz && !$ctrl.currentQuestionHasUnsavedChanges && $ctrl.currentQuestionAnswered"
+      submit-quiz="$ctrl.submitQuiz"
+      can-skip-question="$ctrl.canSkipQuestion"
+      skip-question="$ctrl.skipQuestion"
+      is-submitting="$ctrl.questionSubmissionState.loading"
+      is-checkpoint="$ctrl.settings.isCheckpoint"
+    ></mp-controls>
+  </div>
+
+  <quiz-autosave
+    ng-if="$ctrl.enableAutosave"
+    has-changes="$ctrl.currentQuestionHasUnsavedChanges"
+    save="$ctrl.autosaveQuiz"
+    last-change="$ctrl.lastChangeTimestamp"
+    last-save="$ctrl.lastSaveTimestamp"
+    last-save-failed="$ctrl.lastSaveFailed"
+  ></quiz-autosave>
+</div>

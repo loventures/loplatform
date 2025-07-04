@@ -1,0 +1,101 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="discussion-user-settings"
+  uib-dropdown
+>
+  <button
+    class="btn btn-link p-0 d-flex align-items-center"
+    uib-dropdown-toggle="dropdown"
+  >
+    <span
+      class="sr-only"
+      translate="DISCUSSION_USER_SETTINGS"
+    ></span>
+    <span class="icon icon-cog h3 m-0"></span>
+  </button>
+
+  <div
+    class="discussion-user-settings-list dropdown-menu-right"
+    uib-dropdown-menu
+  >
+    <div
+      class="discussion-setting dropdown-item"
+      ng-click="$ctrl.toggleSetting('autoMarkUnread', $event)"
+      title="{{'DISCUSSION_SETTING_MARK_AUTOMATICALLY_TOOLTIP' | translate}}"
+    >
+      <span
+        class="setting-label"
+        translate="DISCUSSION_SETTING_MARK_AUTOMATICALLY"
+      ></span>
+      <span
+        class="setting-toggle lo-toggle"
+        ng-class="{
+          on: $ctrl.settings.autoMarkUnread,
+          off: !$ctrl.settings.autoMarkUnread
+        }"
+      >
+        <label
+          class="sr-only toggle-label-on"
+          role="checkbox"
+          aria-checked="true"
+          >On</label
+        >
+        <label
+          class="sr-only toggle-label-off"
+          role="checkbox"
+          aria-checked="false"
+          >Off</label
+        >
+        <div class="lo-toggle-knob"></div>
+      </span>
+    </div>
+
+    <div
+      class="discussion-setting dropdown-item"
+      ng-click="$ctrl.toggleSetting('closeDiscussion', $event)"
+      title="{{'DISCUSSION_SETTING_CLOSE_DISCUSSION_TOOLTIP' | translate}}"
+    >
+      <span
+        class="setting-label"
+        translate="DISCUSSION_SETTING_CLOSE_DISCUSSION"
+      ></span>
+      <span
+        class="setting-toggle lo-toggle"
+        ng-class="{
+          on: $ctrl.settings.closeDiscussion,
+          off: !$ctrl.settings.closeDiscussion
+        }"
+      >
+        <label
+          class="sr-only toggle-label-on"
+          role="checkbox"
+          aria-checked="true"
+          >On</label
+        >
+        <label
+          class="sr-only toggle-label-off"
+          role="checkbox"
+          aria-checked="false"
+          >Off</label
+        >
+        <div class="lo-toggle-knob"></div>
+      </span>
+    </div>
+  </div>
+</div>

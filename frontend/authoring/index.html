@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="$$Locale">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="x-ua-compatible"
+      content="IE=edge"
+    />
+    <meta
+      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.75"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+    />
+
+    <out value="${trackingHeader}"></out>
+
+    <% if(isDev){ %>
+    <link
+      rel="shortcut icon"
+      href="/Domain/Media/favicon.ico"
+    />
+    <% } else { %>
+    <link
+      rel="shortcut icon"
+      href="${ Current.domainDTO.favicon.url }"
+    />
+    <% } %>
+
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Material+Icons"
+      type="text/css"
+    />
+
+    <script
+      src="//cdn.iframe.ly/embed.js"
+      async
+    ></script>
+
+    <% if(isDev){ %>
+    <script>
+      window.lo_platform = {
+        isDev: true,
+        isLocal: true,
+        isProduction: false,
+        features: { localProxy: true },
+        i18n: {
+          language: 'en',
+          locale: 'US',
+        },
+        static_js_url_prefix: '/',
+        identifier: 'loi.authoring.Authoring',
+        logo: '/Domain/Media/favicon.ico',
+        config: { effective: {} },
+      };
+    </script>
+    <% } else { %>
+    <script>
+      window.MATHJAX_PATH = '$$url/assets/mathjax/tex-mml-chtml.js';
+      window.lo_platform = {
+        isDev: false,
+        isLocal: $$json(ServiceMeta.isLocal),
+        isProduction: $$json(ServiceMeta.isProduction),
+        features: $$json(componentConfiguration), // any component config set on Authoring
+        i18n: {
+          language: '$$Language',
+          locale: '$$Locale',
+        },
+        static_js_url_prefix: "$$localUrl('')",
+        identifier: $$json(componentInstance.identifier),
+        logo: '${Current.domainDTO.logo.url}',
+        config: $$json_api('v2/config/authoring'),
+      };
+    </script>
+    <% } %>
+
+    <title>$$lo.authoring</title>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+
+      .splash-orbitals {
+        color: #6c757d;
+        opacity: 0;
+        animation: splash-fade-in ease-in 0.5s forwards;
+
+        > svg {
+          position: absolute;
+          width: 10rem;
+          height: 10rem;
+          top: calc(50vh - 5rem);
+          left: calc(50vw - 5rem);
+
+          &:nth-child(2) {
+            animation: splash-orbit 7s linear infinite;
+            color: #aae8ff;
+          }
+
+          &:last-child {
+            animation: splash-orbit 15s linear infinite;
+            color: #adb5bd;
+          }
+        }
+      }
+
+      @keyframes splash-fade-in {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes splash-orbit {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #495057;
+        }
+
+        .splash-orbitals {
+          color: #f8f9fa;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dcmApp"></div>
+    <div
+      id="splashOrbitals"
+      class="splash-orbitals fade-in"
+    >
+      <svg
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="m 256.25,20.656 c -129.615,0 -235.438,105.821 -235.438,235.438 0,129.617 105.823,234.72 235.438,234.72 129.615,-0.002 234.72,-105.103 234.72,-234.72 0,-129.618 -105.105,-235.438 -234.72,-235.438 z m 0,19.313 c 119.515,0 216.094,96.607 216.094,216.124 0,119.517 -96.58,216.094 -216.094,216.094 -119.515,0 -216.813,-96.577 -216.813,-216.094 0,-119.517 97.47611,-216.41425 216.813,-216.123 0,0 -119.515,-10e-4 0,-10e-4 z m -0.125,51.81 c -91.3,0 -165.875,74.575 -165.875,165.876 0,91.3 74.576,165.406 165.875,165.406 91.299,0 165.405,-74.106 165.405,-165.406 0,-91.3 -74.106,-165.875 -165.405,-165.875 z m 0,19.126 c 81.2,0 146.78,65.55 146.78,146.75 0,81.2 -65.58,146.749 -146.78,146.749 -81.2,0 -147.22,-65.55 -147.22,-146.75 0,-81.2 66.02,-146.75 147.22,-146.75 z m -1.063,19.625 c -7.462,31.99 -21.767,62.112 -42.906,83.25 -21.14,21.14 -48.73,32.913 -80.72,40.376 31.99,7.462 62.112,21.736 83.25,42.875 21.14,21.14 32.914,48.764 40.376,80.75 7.463,-31.986 19.204,-59.61 40.344,-80.75 21.14,-21.138 51.262,-35.412 83.25,-42.874 -32.236,-7.428 -59.455,-19.11 -80.72,-40.375 -21.262,-21.263 -35.446,-51.013 -42.873,-83.25 z m 0.094,86.564 c 20.498,0 37.125,16.627 37.125,37.125 0,20.496 -16.626,37.124 -37.124,37.124 -20.497,0 -37.125,-16.628 -37.125,-37.125 0,-20.5 16.63,-37.126 37.126,-37.126 z"
+        />
+      </svg>
+      <svg
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <ellipse
+          cx="374.98352"
+          cy="352.2645"
+          rx="37.795502"
+          ry="37.796497"
+        />
+      </svg>
+      <svg
+        fill="currentColor"
+        strokeWidth="0"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <ellipse
+          cx="128.36"
+          cy="66.9375"
+          rx="34.764999"
+          ry="34.7495"
+        />
+      </svg>
+    </div>
+    <script
+      type="module"
+      src="/src/index.tsx"
+    ></script>
+    <out value="${trackingFooter}"></out>
+  </body>
+</html>

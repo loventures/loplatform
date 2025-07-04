@@ -1,0 +1,136 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+/* AdminFormSecret.js
+
+.secret-blur:not(:focus)
+  text-shadow: 0 0 10px rgba(0,0,0,0.5)
+  color: rgba(0,0,0,0)
+
+/* AdminFormSecret.js, AdminFormDateTime.js
+
+.input-group
+  .clickable
+    cursor: pointer
+
+  .input-group-append
+    .material-icons
+      vertical-align: text-bottom
+
+/* AdminFormColor.js
+
+/* let the color picker button be full width
+.col-lg-10 .rc-color-picker-wrap
+  display: block
+
+/* AdminFormFile.js
+
+/* Constraint the upload file image preview.
+
+.upload-file-preview
+  display: block
+  max-width: 640px
+  max-height: 48px
+
+/* When the input is just a reset label, align it with the label on the left.
+
+.upload-file-removeLabel, .upload-file-info
+  display: inline-block
+  padding: calc(.5rem - 1px * 2) 0
+
+/* Better vertical alignment of input in chrome.
+
+.upload-file-new
+  height: 2.5rem
+  padding: .25rem 0
+
+input.upload-file-input
+  width: 100%
+
+/* AdminFormDateTime.js
+
+.clear-date-time
+  position: absolute
+  right: 6.5rem
+  top: 1px
+  z-index: 4
+  font-size: 1rem
+  line-height: 2.25rem
+  padding: 0 .5rem
+  color: #333
+  cursor: default
+  &:hover
+    color: #000
+
+/* react date-time force it not to be static even though we are replacing its input
+
+.admin-form
+  .rdtStatic .rdtPicker
+    position: absolute
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+  /* make read-only fields not offensive.
+  .admin-form-date-time
+    background-color: white
+
+/* AdminFormSection.js
+.tooltip-inner
+  max-width: 400px
+
+/* AdminFormCombo.js
+
+.react-select-full-width
+  flex-grow: 1
+
+  .react-select__control
+    border-bottom-right-radius: 0
+    border-top-right-radius: 0
+
+/* LTI Tools
+
+.admin-form
+  .editable.custom-switch
+    margin-top: .4rem
+    margin-left: 1rem
+    margin-right: -.5rem
+    float: right
+    display: inline-block
+  .custom-checkbox
+    .editable.custom-switch
+      margin-top: 0
+  .ltiToolsEditableField
+    color: #555
+    text-align: right
+    margin-bottom: .5rem
+    font-size: 90%
+  #ltiTools-launchStyle
+    width: calc(100% - 2.75rem)
+    display: inline-block
+  .label-truncate
+    overflow: hidden
+    text-overflow: ellipsis
+  .label-custom
+    padding-top: calc(.75rem + 1px)
+    padding-bottom: 0
+    font-size: .9rem
+    word-break: break-all
+    &:before
+      content: 'custom'
+      display: block
+      position: absolute
+      top: 0
+      font-size: .8rem
+      color: #888

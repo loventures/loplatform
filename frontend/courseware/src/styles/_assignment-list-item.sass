@@ -1,0 +1,116 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.assignment-list-item
+
+  @include media-breakpoint-down(sm)
+    .card-body
+      padding: $spacer
+    .grade-item-icon
+      display: none
+
+  .grade-item-icon
+    color: $primary
+
+  &.submission .grade-item-icon:before,
+  &.final-project .grade-item-icon:before,
+  &.authenticAssessment .grade-item-icon:before
+    content: "\e9cf"
+
+  &.discussion .grade-item-icon:before
+    content: "\eadc"
+
+  &.quiz .grade-item-icon:before,
+  &.lti .grade-item-icon:before
+    content: "\e99b"
+
+.project-file-container.list-group-item
+  border-radius: $border-radius !important
+
+.assignment-list-item .grade-item-content
+
+  .due-date-time
+    font-size: 0.85em
+
+  .grade-submissions
+    font-size: 0.85em
+    display: flex
+
+    @include media-breakpoint-down(sm)
+      flex-direction: column
+      .vertical-separator
+        display: none
+
+    @include media-breakpoint-up(md)
+      > *:not(:first-child)
+        border-left: 1px solid $medium
+        margin-left: 0.5em
+        padding-left: 0.5em
+
+.assignment-list-item .assignment-item-grade
+
+  width: 7rem
+
+  @include media-breakpoint-up(lg)
+    font-size: 1.8rem
+
+  @include media-breakpoint-down(md)
+    font-size: 1.25rem
+
+  @include media-breakpoint-down(sm)
+    font-size: 1rem
+
+  .grade-percent
+    font-size: 1em
+
+  /* rems to maintain minimum font size */
+  .grade-status
+    font-size: 1rem
+
+  .credit-type,
+  .credit-points
+    font-size: 0.75rem
+
+  > *
+    margin-bottom: 0.5em
+
+.assignment-list-item.locked
+  background-color: $light
+  .grade-item-icon, .content-icon
+    color: $dark
+
+  .grade-item-content
+    > .h4
+      color: $dark
+
+.content-lockable-container h2
+  font-size: 1.1rem
+  font-weight: normal
+  color: $link-color
+
+.content-lockable-container a:not(:hover):not(:focus)
+  text-decoration: none !important
+
+.content-lockable-container a
+  &:hover, &:focus
+    h2
+      text-decoration: underline !important
+      color: $link-hover-color
+
+.content-lockable-container.show-lock-icon
+  .lock-popover-hover-area
+    cursor: not-allowed !important

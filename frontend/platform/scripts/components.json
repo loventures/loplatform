@@ -1,0 +1,114 @@
+{
+  "components": [
+    {
+      "identifier": "loi.platform.domain.Domain",
+      "name": "Domain UI",
+      "description": "Domain UI.",
+      "enabled": true,
+      "implementation": "loi.cp.domain.GenericDomain",
+      "annotations": {
+        "com.learningobjects.cpxp.component.site.ItemSiteBinding": {
+          "type": ["Domain"],
+          "subtype": [],
+          "action": "view",
+          "routes": ["Profile"]
+        }
+      }
+    },
+    {
+      "identifier": "loi.platform.admin.Administration",
+      "name": "Administration",
+      "description": "Admin Pages.",
+      "implementation": "loi.cp.generic.GenericServlet",
+      "annotations": {
+        "com.learningobjects.cpxp.component.web.ServletBinding": {
+          "path": "/Administration",
+          "spa": true
+        }
+      }
+    },
+    {
+      "identifier": "loi.platform.analytics.Analytics",
+      "name": "Analytics",
+      "description": "Analytics Pages.",
+      "implementation": "loi.cp.generic.GenericServlet",
+      "annotations": {
+        "com.learningobjects.cpxp.component.web.ServletBinding": {
+          "path": "/analytics",
+          "spa": true
+        }
+      }
+    },
+    {
+      "identifier": "loi.platform.etc.Etcetera",
+      "name": "Etcetera",
+      "description": "Etcetera Pages.",
+      "implementation": "loi.cp.generic.GenericServlet",
+      "annotations": {
+        "com.learningobjects.cpxp.component.web.ServletBinding": {
+          "path": "/etc",
+          "spa": true
+        }
+      }
+    },
+    {
+      "identifier": "loi.platform.sys.Syscetera",
+      "name": "Syscetera",
+      "description": "Syscetera Pages.",
+      "implementation": "loi.cp.generic.GenericServlet",
+      "annotations": {
+        "com.learningobjects.cpxp.component.web.ServletBinding": {
+          "path": "/sys",
+          "spa": true
+        },
+        "com.learningobjects.cpxp.component.annotation.EnforceOverlord": {}
+      }
+    },
+    {
+      "identifier": "loi.platform.errors.Errors",
+      "name": "Errors UI",
+      "description": "Error page overrides.",
+      "implementation": "loi.cp.system.Errors",
+      "alias": ["errors"],
+      "annotations": {
+        "com.learningobjects.cpxp.component.annotation.InheritResources": {
+          "value": "loi.cp.system.Errors"
+        }
+      },
+      "suppresses": ["loi.cp.system.Errors"]
+    },
+    {
+      "identifier": "loi.platform.overlord.Overlord",
+      "name": "Overlord Domain UI",
+      "description": "Overlord domain UI.",
+      "implementation": "loi.cp.domain.GenericDomain",
+      "enabled": false,
+      "annotations": {
+        "com.learningobjects.cpxp.component.site.ItemSiteBinding": {
+          "type": ["Domain"],
+          "subtype": ["overlord"],
+          "action": "view"
+        }
+      }
+    },
+    {
+      "identifier": "loi.platform.overlord.OverlordErrors",
+      "name": "Overlord Errors UI",
+      "description": "Overlord errors page overrides.",
+      "implementation": "loi.cp.system.Errors",
+      "alias": ["errors"],
+      "enabled": false,
+      "annotations": {
+        "com.learningobjects.cpxp.component.annotation.InheritResources": {
+          "value": "loi.cp.system.Errors"
+        }
+      },
+      "suppresses": ["loi.cp.system.Errors"]
+    }
+  ],
+  "dependencies": [
+    "com.learningobjects.api",
+    "com.learningobjects.admin",
+    "com.learningobjects.main"
+  ]
+}

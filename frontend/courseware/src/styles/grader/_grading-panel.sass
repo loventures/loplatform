@@ -1,0 +1,78 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@import grading-panel-section
+@import grading-panel-score
+@import grading-panel-bottom
+@import grading-panel-top
+
+.old-grader.grading-panel-container
+
+  .grading-panel-expand-btn
+    height: 3rem
+    width: 1.6rem
+    position: absolute
+    top: calc(50% - 1.5rem)
+    left: -1.6rem
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+
+  .panel
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    transition: all ease-out 100ms
+    overflow: visible
+    //for the toggle btn
+
+    .grading-panel-content
+      overflow-y: scroll
+
+  &.panel-open .panel-right
+    @extend .panel-right, .open
+
+  width: 0
+
+  .grading-panel-scrollable-sections
+    width: 100%
+    overflow-y: auto
+    flex: 1 1 auto
+
+.er-page-grid
+  .old-grader.grading-panel-container
+
+    &.panel-open
+      .panel.panel-right
+        max-width: $er-feedback-width
+        right: -$er-feedback-width
+
+        @media (min-width: $hugescreen)
+          max-width: $er-feedback-width-huge
+          right: -$er-feedback-width-huge
+
+        @media (min-width: $epicscreen)
+          max-width: $er-feedback-width-epic
+          right: -$er-feedback-width-epic
+
+.cbl-course-page
+  .old-grader.grading-panel-container.panel-open
+    //take up space to push content out of the way
+    @include media-breakpoint-up(md)
+      width: 500px
+      .panel.panel-right
+        max-width: 500px
+        right: -500px

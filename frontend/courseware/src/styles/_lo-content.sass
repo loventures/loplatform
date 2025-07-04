@@ -1,0 +1,69 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//
+// Content styles.
+//
+
+.assignment-info
+  margin-top: 1.5rem
+  margin-bottom: 1.25rem
+
+  .card-body
+    padding: .75rem 1rem
+
+  .card
+    background: white !important
+
+    > ul > li:not(:first-child)
+      margin-top: .25rem
+
+.content-instructions
+  margin-top: 1.5rem
+
+  .card-body
+    padding: 0 1rem
+
+.essay-response-text
+  > div, > div > :last-child
+    > p:last-child
+      @extend .mb-0
+
+.content-html
+  @extend .rich-content
+
+  // Ensures no iframe will overflow the content area
+  iframe
+    max-width: 100%
+
+  [compile], &[compile]
+    > div, > div > :last-child
+      > p:last-child
+        @extend .mb-0
+
+// ER
+@media print
+  .content-plain-index,
+  .content-print-index
+    margin: 0
+  .mt-print-0
+    margin-top: 0 !important
+
+.lo-rich-text-editor
+  .cke_chrome
+    border-radius: 4px
+    overflow: hidden

@@ -1,0 +1,52 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="view-composite-grade">
+  <rubric-grid-view
+    ng-if="grade.rubric"
+    rubric="grade.rubric"
+  ></rubric-grid-view>
+
+  <div
+    class="h2 my-3 alert alert-light flex-center-center"
+    ng-if="!grade.isBlankGrade"
+    translate
+    translate-attr-title="ASSIGNMENT_GRADE_DESCRIPTION"
+  >
+    <span
+      colored-grade="grade"
+      ng-bind="grade | grade:'percentThenPoints'"
+    ></span>
+  </div>
+
+  <div
+    class="card my-3"
+    ng-show="!!grade.feedback || grade.feedbackManager.files.length"
+  >
+    <div
+      class="card-header"
+      translate="ASSIGNMENT_INSTRUCTOR_FEEDBACK"
+    ></div>
+    <div class="card-body">
+      <span
+        class="instructor-feedback"
+        bind-math="formattedFeedback"
+      ></span>
+    </div>
+    <feedback-file-list files="grade.feedbackManager.files"></feedback-file-list>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+////////////////////////////////////////////////////////////////////////////////////
+// Color Calculation
+////////////////////////////////////////////////////////////////////////////////////
+$num-steps: 20
+$progress-spectrum-start: 225
+$progress-spectrum-end: 135
+$progress-step-size: round(math.div($progress-spectrum-end - $progress-spectrum-start, $num-steps - 1))
+
+$grade-spectrum-start: 0
+$grade-spectrum-end: 90
+$grade-step-size: round(math.div($grade-spectrum-end - $grade-spectrum-start, $num-steps - 1))
+
+////////////////////////////////////////////////////////////////////////////////////
+//for done- if a number doesn't get calculated
+//and done-0 for zeroes
+.done-,
+.done-0
+  &.progress-arc
+    stroke: $color-light-text
+  &.colored-progress
+    color: $color-light-text
+  &.colored-progress-bg
+    color: $color-white
+    background-color: $color-light-text
+
+.done-
+  &.colored-grade
+    color: $color-light-text
+  &.colored-grade-bg
+    color: $color-white
+    background-color: $color-light-text
+
+.done-0
+  &.colored-grade
+    color: fix_contrast(hsla($grade-spectrum-start, 100%, 40%, 100%), $color-light)
+  &.colored-grade-bg
+    color: $color-white
+    background-color: fix_contrast(hsla($grade-spectrum-start, 100%, 40%, 100%), $color-light)
+
+////////////////////////////////////////////////////////////////////////////////////
+@for $i from 0 to $num-steps
+
+  $progress-hue: $progress-spectrum-start + ($i * $progress-step-size)
+  $progress-color: fix_contrast(hsla($progress-hue, 65%, 40%, 100%), $color-light)
+
+  $grade-hue: $grade-spectrum-start + ($i * $grade-step-size)
+  $grade-color: fix_contrast(hsla($grade-hue, 100%, 40%, 100%), $color-light)
+
+  .done-#{$i * 5 + 1},
+  .done-#{$i * 5 + 2},
+  .done-#{$i * 5 + 3},
+  .done-#{$i * 5 + 4},
+  .done-#{$i * 5 + 5}
+
+    &.progress-arc
+      stroke: $progress-color
+    &.colored-progress
+      color: $progress-color
+    &.colored-progress-bg
+      color: $color-white
+      background-color: $progress-color
+
+    &.colored-grade
+      color: $grade-color
+    &.colored-grade-bg
+      color: $color-white
+      background-color: $grade-color

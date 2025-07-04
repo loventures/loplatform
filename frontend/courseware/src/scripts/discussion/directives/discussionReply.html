@@ -1,0 +1,87 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-write-reply">
+  <div class="discussion-reply-row">
+    <input
+      class="form-control input-group mb-1"
+      type="text"
+      ng-if="$ctrl.showTitle"
+      ng-disabled="$ctrl.cannotEdit"
+      ng-model="$ctrl.contentTitle"
+      placeholder="{{ 'ENTER_TITLE' | translate }}"
+      maxlength="255"
+    />
+    <rich-text-editor
+      content="$ctrl.contentInEdit"
+      on-change="$ctrl.contentEdited"
+      is-disabled="$ctrl.cannotEdit"
+      min-height="60"
+    ></rich-text-editor>
+
+    <div class="media-items d-print-none">
+      <feedback-tools feedback-manager="$ctrl.feedbackManager"> </feedback-tools>
+    </div>
+
+    <div
+      class="alert alert-danger"
+      ng-show="$ctrl.error"
+      ng-bind="$ctrl.error | errorMessage"
+    ></div>
+  </div>
+
+  <div class="flex-row-content justify-content-end mt-2 d-print-none">
+    <button
+      class="btn btn-outline-dark me-0"
+      ng-click="$ctrl.discard()"
+      ng-if="$ctrl.discardAction"
+    >
+      <span translate="DISCUSSION_CANCEL_REPLY"></span>
+    </button>
+
+    <button
+      class="btn btn-success d-flex align-items-center gap-1"
+      ng-click="$ctrl.submit()"
+      ng-disabled="!$ctrl.canSubmitReply()"
+    >
+      <span
+        translate="DISCUSSION_SUBMIT_REPLY"
+        ng-if="!item"
+        ng-show="!submitting"
+      ></span>
+      <span
+        translate="DISCUSSION_SUBMIT_EDIT"
+        ng-if="item"
+        ng-show="!submitting"
+      ></span>
+      <span
+        class="icon icon-circle-right"
+        ng-show="!submitting"
+        aria-hidden="true"
+      ></span>
+
+      <span
+        translate="DISCUSSION_SUBMITTING_REPLY"
+        ng-show="submitting"
+      ></span>
+      <span
+        class="icon de-spin icon-spinner-dots"
+        ng-show="submitting"
+      ></span>
+    </button>
+  </div>
+</div>

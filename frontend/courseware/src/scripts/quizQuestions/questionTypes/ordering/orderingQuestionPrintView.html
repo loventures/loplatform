@@ -1,0 +1,85 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<print-question-template
+  class="question choice-question ordering-question"
+  index="$ctrl.index"
+  assessment="$ctrl.assessment"
+  question-count="$ctrl.questionCount"
+  question="$ctrl.question"
+  response="$ctrl.response"
+>
+  <question-content-slot>
+    <dl>
+      <dt>
+        <span
+          ng-if="$ctrl.response && $ctrl.question.displayDetail.correctAnswer"
+          translate="MY_ANSWER"
+        >
+        </span>
+      </dt>
+      <dd ng-repeat="choice in $ctrl.displayChoices track by $index">
+        <print-question-distractor-row-template
+          choice="choice"
+          has-correctness="$ctrl.question.displayDetail.correctAnswer"
+          is-correct="$ctrl.question.correctOrder[$index] === $index"
+        >
+          <distractor-slot>
+            <div class="p-2 border">
+              <div class="float-left">
+                <span ng-bind="($index | choiceOrdinal) + '.'"></span>
+              </div>
+
+              <div
+                class="ms-4 choice-text"
+                bind-math="choice.text"
+              >
+                &nbsp;
+              </div>
+            </div>
+          </distractor-slot>
+        </print-question-distractor-row-template>
+      </dd>
+    </dl>
+
+    <dl ng-if="$ctrl.response && $ctrl.question.displayDetail.correctAnswer">
+      <dt translate="CORRECT_ANSWER"></dt>
+      <dd ng-repeat="choice in $ctrl.correctChoices track by $index">
+        <print-question-distractor-row-template
+          choice="choice"
+          has-correctness="$ctrl.question.displayDetail.correctAnswer"
+          is-correct="$ctrl.question.correctOrder[$index] === $index"
+        >
+          <distractor-slot>
+            <div class="p-2 border">
+              <div class="float-left">
+                <span ng-bind="($index | choiceOrdinal) + '.'"></span>
+              </div>
+
+              <div
+                class="ms-4 choice-text"
+                compile="choice.text"
+              >
+                &nbsp;
+              </div>
+            </div>
+          </distractor-slot>
+        </print-question-distractor-row-template>
+      </dd>
+    </dl>
+  </question-content-slot>
+</print-question-template>

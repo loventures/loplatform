@@ -1,0 +1,21 @@
+.table-sticky {
+  th:first-child {
+    position: sticky;
+    left: 0;
+    box-shadow: inset -7px 0 2px -7px rgba(0, 0, 0, 0.4);
+  }
+
+  tbody th {
+    background: inherit;
+  }
+
+  //the default bs4 transparent backgrounds don't work well with sticky
+  &.table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: $gray-lightest;
+    }
+    tbody tr:nth-of-type(even) {
+      background-color: $white;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// main
+.prog-circle {
+  position: relative;
+  box-sizing: border-box;
+  width: 5em;
+  height: 5em;
+  background-color: $color-white;
+  border-radius: 50%;
+  border: 0.25em solid $color-white;
+
+  box-shadow: $box-shadow-halo;
+  transition: all ease 0.33s;
+
+  .icon {
+    display: block;
+    font-size: 2em;
+    color: $color-body-text;
+  }
+}
+
+.er-prog-circle {
+  height: 8rem;
+  width: 8rem;
+  position: relative;
+
+  .prog-circle-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 7.5rem;
+    height: 7.5rem;
+    margin: 0.25rem;
+    border-radius: 50%;
+    color: $gray-900;
+    background-color: rgba(255, 255, 255, .75);
+    transition: background-color ease-in 0.1s;
+
+    p {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  @media (max-width: $mdscreen-max) {
+    height: 6rem;
+    width: 6rem;
+    .prog-circle-content {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+  }
+
+  @media (max-width: $smscreen-max) {
+    height: 4rem;
+    width: 4rem;
+    .prog-circle-content {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+  }
+}
+
+.er-prog-circle,
+.prog-circle {
+  @extend .flex-center-center;
+
+  .prog-circle-circle,
+  .prog-circle-arc {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0em;
+    top: 0em;
+
+    > svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .progress-background {
+      stroke: rgba(216, 223, 225, .5);
+    }
+  }
+}
+
+.prog-circle-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Make the complete portion of the prog circles success color as a graceful fail, if color-calc.sass fails, gets lost etc
+.arc .complete {
+  fill: $success;
+}
+
+.arc .incomplete {
+  fill: $medium;
+}
+
+//////////////////////////////////////////////
+
+.prog-circle {
+  z-index: 0;
+}

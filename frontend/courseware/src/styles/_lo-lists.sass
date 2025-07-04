@@ -1,0 +1,45 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Lists TODO: this can be cleaned up
+////////////////////////////////////////////////////////////////////////////////////
+
+=striped-list($color1: $color-light, $color2: $color-lightest, $color-hover-background: $color-contrasted-primary, $color-hover-text: $color-white, $color-active-background: $color-contrasted-secondary, $color-active-text: $color-white)
+  background: transparent
+
+  > li
+    cursor: pointer
+
+    &:nth-child(even)
+      background: $color1
+
+    &:nth-child(odd)
+      background: $color2
+
+    transition: background $trans-speed $trans-type
+
+    &:hover
+      background: $color-hover-background
+
+      .comp-percent
+        text-shadow: none
+
+    &:active
+      transition: background 0
+      background: $color-active-background
+      color: $color-active-text

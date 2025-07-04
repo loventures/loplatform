@@ -1,0 +1,54 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<srs-list
+  class="active-assignments-list active-discussions-list"
+  store="store"
+  header-text="headerText"
+  empty-msg="emptyMsg"
+  filtered-msg="emptyMsg"
+  empty-is-good="true"
+  header-button="store.hasDiscussions && headerButtonConfig"
+>
+  <li
+    ng-repeat="assignment in store.data track by assignment.id"
+    title="{{assignment.name}}"
+    ng-click="viewOne(assignment)"
+  >
+    <div class="flex-row-content">
+      <span class="icon icon-{{assignment.activityType}}"></span>
+
+      <div
+        class="flex-col-fluid"
+        ng-bind="assignment.name"
+      ></div>
+
+      <span
+        class="badge badge-primary badge-pill"
+        title="{{ 'DISCUSSION_PREVIEW_POST_COUNT_UNREAD' | translate }}"
+        ng-bind="assignment.activeCount"
+      ></span>
+
+      <span
+        class="badge badge-warning badge-pill"
+        title="{{ 'DISCUSSION_PREVIEW_POST_COUNT_UNRESPONDED' | translate }}"
+        ng-if="showUnresponded"
+        ng-bind="assignment.unrespondedCount"
+      ></span>
+    </div>
+  </li>
+</srs-list>

@@ -1,0 +1,109 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.content-views-preview
+  position: relative
+  display: flex
+  flex-direction: row
+  align-items: flex-start
+  padding: 0.5em
+
+  @media (max-width: $mdscreen)
+    font-size: 0.75em
+
+  @media (max-width: $smscreen)
+    font-size: 0.75em
+
+  .progress-column
+    font-size: 0.5em
+    padding: 0.5em 1em
+
+    .comp-item
+      margin: 0 0.33em 0 0
+
+  .icon-column
+    font-size: 2em
+    padding: 0.25em
+    color: $color-contrasted-primary
+
+  .content-column
+    padding: 0.25em
+    flex: 1 1 100%
+    display: flex
+    flex-direction: column
+
+    .content-column-row
+      padding: 0.25em
+      display: flex
+      flex-direction: row
+      align-items: flex-start
+
+      &.flex-row
+        flex: 1 0 auto
+
+      @media (max-width: $smscreen-max)
+        flex-direction: column
+
+      .content-row-title-column
+        //column flex on safari without set height is collapsed
+        @media (min-width: $mdscreen)
+          flex: 1 1 1em
+
+      .content-row-grade-column
+        @media (max-width: $smscreen-max)
+          margin-top: 0.5em
+
+.content-views-preview
+  background: fade-out($color-white, 0.33)
+  border: none
+  border-radius: $border-radius
+  box-shadow: 0 0 2px rgba($color-black, 0.15) inset
+  transition: background ease $trans-speed
+
+  &:hover
+    background: $color-white
+
+  .preview-item-title
+    font-size: 1.5em
+    color: $color-contrasted-primary
+    margin: 0
+
+  .preview-item-progress
+    color: $color-light-text
+    font-size: 0.8em
+
+  .preview-item-description
+    color: $color-light-text
+    margin: 0
+    transition: all ease $trans-speed
+    max-height: 10000em
+
+  .preview-item-grade
+    font-size: 2em
+    margin-left: 0.25em
+    text-align: right
+
+  .icon-checkmark
+    color: $color-success
+
+  &.locked
+    .icon-column
+      color: $color-light-text
+    .preview-item-title
+      color: $color-light-text
+
+

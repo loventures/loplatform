@@ -1,0 +1,48 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<basic-question-template
+  class="question matching-question"
+  index="$ctrl.index"
+  assessment="$ctrl.assessment"
+  question-count="$ctrl.questionCount"
+  question="$ctrl.question"
+  response="$ctrl.response"
+>
+  <question-content-slot>
+    <matching-question-base-view-play
+      ng-if="$ctrl.canEditAnswer && $ctrl.responseReady"
+      index="$ctrl.index"
+      focus-on-render="$ctrl.focusOnRender"
+      question="$ctrl.question"
+      rows="$ctrl.rows"
+      terms="$ctrl.terms"
+      defs="$ctrl.defs"
+      response="$ctrl.response"
+      change-answer="$ctrl.changeAnswer"
+    ></matching-question-base-view-play>
+
+    <matching-question-base-view-results
+      ng-if="!$ctrl.canEditAnswer"
+      question="$ctrl.question"
+      rows="$ctrl.rows"
+      terms="$ctrl.terms"
+      defs="$ctrl.defs"
+      response="$ctrl.response"
+    ></matching-question-base-view-results>
+  </question-content-slot>
+</basic-question-template>

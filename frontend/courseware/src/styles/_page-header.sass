@@ -1,0 +1,107 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.page-navbar
+  width: 100%
+  height: $page-navbar-height
+  //specified for scrollspy
+  padding: 0.5rem
+
+  .nav-link
+    color: $primary !important
+    white-space: nowrap
+    padding: 0.5rem 1rem
+
+    &:hover
+      background-color: map-get($theme-colors, light)
+
+  .navbar-nav
+    width: 100%
+    align-items: center
+    flex-direction: row
+
+    .navbar-toggler
+      font-size: 1.5rem
+
+    .nav-item
+      //for nav items containing multiple items
+      display: flex
+
+    a.direct-message
+      text-decoration: none
+
+    .survey-collector-popover,
+    .ui-upgrader-popover
+      max-width: 100vw
+      width: 20rem
+      box-shadow: rgb(80 80 80 / 60%) 0 0 8px
+
+    breadcrumbs,
+    .page-breadcrumbs,
+    page-header-breadcrumbs
+      flex: 1 1 auto
+      min-width: 0
+
+      .breadcrumb
+        padding-top: 0
+        padding-bottom: 0
+        margin: 0
+        color: $white
+        display: flex
+        flex-wrap: nowrap
+
+        .breadcrumb-item
+          min-width: 0
+          @extend .flex-center-center
+          @media screen and (max-width: $mdscreen)
+            &:not(:first-child)
+              display: none
+
+          + .breadcrumb-item::before
+            color: $light
+
+          > span, > a
+            color: $white
+            flex-shrink: 1
+            min-width: 0
+            @extend .flex-center-center
+            @extend .navbar-text
+
+          span
+            @extend .text-truncate
+
+    .page-navbar-dropdown
+      .dropdown-menu
+        max-height: calc(100vh - #{$page-navbar-height * 2})
+        overflow-y: auto
+
+        .dropdown-item
+          display: flex
+          flex-direction: row
+          align-items: center
+          padding: 0.75rem 1.5rem
+
+          > *
+            &.icon
+              font-size: 1.5em
+              padding: 0
+
+            &:not(.icon)
+              font-weight: 800
+              padding: 0 1rem
+

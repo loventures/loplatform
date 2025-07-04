@@ -1,0 +1,77 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.question-number
+  color: $white
+  background-color: $gray-600
+  border-color: $gray-600
+  font-size: 1rem !important
+  line-height: 1 !important
+  padding-right: .2rem
+  text-align: center
+  position: absolute
+  width: 2.5rem
+  height: 2.5rem
+  left: 0
+  border-radius: 0 1.25rem 1.25rem 0
+  display: flex
+  align-items: center
+  justify-content: center
+  transition: color $transition-function $transition-speed, background-color $transition-function $transition-speed, border-color $transition-function $transition-speed
+
+  &.skipped
+    color: $white
+    background-color: $dark
+    border-color: $dark
+
+  &.answered
+    color: $white
+    background-color: $primary
+    border-color: $primary
+
+  &.correct
+    color: $white
+    background-color: $success
+    border-color: $success
+
+  &.incorrect
+    color: $white
+    background-color: $danger
+    border-color: $danger
+
+  &.active
+    color: $white
+    background-color: $secondary
+    border-color: $secondary
+
+  &.checkpoint
+    color: $white !important
+    background-color: $primary
+    border-color: $primary
+
+hr.question-separator // negate .card
+  margin-top: .25rem
+  margin-left: -1.25rem
+  margin-right: -1.25rem
+  border-top: 1px dashed rgba(0, 0, 0, 0.2)
+
+hr.competencies-separator // negate .card
+  margin-left: -1.25rem
+  margin-right: -1.25rem
+  margin-top: .25rem
+  border-top: 1px solid rgba(0, 0, 0, 0.125)

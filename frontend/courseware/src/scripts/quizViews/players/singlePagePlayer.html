@@ -1,0 +1,89 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="sp-quiz-player">
+  <ul class="sp-quiz-player-questions list-unstyled">
+    <li ng-repeat="tuple in $ctrl.questionTuples track by tuple.index">
+      <div
+        class="sp-question-control-container"
+        id="page-question-{{tuple.index}}"
+      >
+        <question-loader
+          class="quiz-question"
+          index="$index"
+          question="tuple.question"
+          response="tuple.response"
+          assessment="$ctrl.assessment"
+          question-count="$ctrl.questionTuples.length"
+          change-answer="$ctrl.changeAnswer"
+          can-edit-answer="true"
+        >
+        </question-loader>
+      </div>
+      <hr class="question-separator" />
+    </li>
+  </ul>
+
+  <div class="sp-quiz-player-controls d-print-none">
+    <div class="flex-row-content justify-content-md-end flex-wrap justify-content-center">
+      <quiz-autosave
+        has-changes="$ctrl.anyQuestionHasUnsavedChanges"
+        save="$ctrl.autosaveQuiz"
+        last-change="$ctrl.lastChangeTimestamp"
+        last-save="$ctrl.lastSaveTimestamp"
+        last-save-failed="$ctrl.lastSaveFailed"
+      ></quiz-autosave>
+
+      <button
+        class="btn btn-outline-secondary"
+        ng-if="$ctrl.allowSaving"
+        ng-disabled="!$ctrl.canSaveOrSubmitQuiz"
+        ng-click="$ctrl.saveQuiz()"
+      >
+        <span translate="QUIZ_PLAYER_SAVE_EXIT"></span>
+      </button>
+
+      <quiz-submit-button
+        can-submit="$ctrl.canSaveOrSubmitQuiz"
+        unanswered-questions="$ctrl.unansweredQuestions"
+        on-attempt="$ctrl.onAttempt"
+        max-attempts="$ctrl.settings.maxAttempts"
+        submit-quiz="$ctrl.submitQuiz"
+        is-checkpoint="$ctrl.settings.isCheckpoint"
+      ></quiz-submit-button>
+    </div>
+
+    <div
+      class="alert alert-info mt-3 mb-0"
+      ng-if="$ctrl.quizSubmissionState.loading"
+      translate="QUIZ_PLAYER_SAVE_EXIT_IN_PROGRESS"
+    ></div>
+
+    <div
+      class="alert alert-danger mt-3 mb-0 py-2 d-flex align-items-center justify-content-between"
+      ng-if="!$ctrl.quizSubmissionState.loading && $ctrl.quizSubmissionState.error"
+    >
+      <div ng-bind="$ctrl.quizSubmissionState.error | errorMessage"></div>
+      <button
+        class="btn btn-sm btn-outline-danger"
+        ng-click="$ctrl.discardQuiz()"
+      >
+        <span translate="QUIZ_PLAYER_DISCARD_ANSWERS"></span>
+      </button>
+    </div>
+  </div>
+</div>

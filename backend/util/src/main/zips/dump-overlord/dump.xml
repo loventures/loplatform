@@ -1,0 +1,151 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<cpf:Dump xmlns:cpf="http://learningobjects.com/schema/ug/1.0/dump">
+  <Domain cpf:Id="domain"
+          id="domain"
+          name="ovërlord"
+          type="overlord"
+          url="/"
+          image="attachment-image"
+          logo="attachment-logo"
+          Domain.id="overlord"
+          Domain.css="attachment-css"
+          Domain.cssFile="attachment-css"
+          Domain.favicon="attachment-favicon"
+          Domain.loginRequired="true"
+          disabled="false"
+          Domain.securityLevel="SecureAlways"
+          Domain.locale="en_US"
+          Domain.state="Normal">
+    <cpf:Data Type="Relationship.supportedRole" Item="role-overlord"/>
+    <cpf:Data Type="Relationship.supportedRole" Item="role-support"/>
+
+    <Folder cpf:Id="folder-domain" cpf:URL="${overlord_domain.url}"
+            id="folder-domain"
+            type="Domain">
+
+      <Folder cpf:Id="folder-internationalization" cpf:URL="${overlord_internationalization.url}"
+              id="folder-internationalization"
+              type="internationalization" />
+
+      <Component cpf:Id="folder-scripts" cpf:URL="${overlord_scripts.url}"
+              id="folder-scripts"
+              componentId="loi.cp.archive.ArchiveAvailability"
+              componentConfiguration=""
+              ScriptFolder.overlordAvailability="lo.ventures.overlordApi=On&#10;lo.ventures.overlordInternal=on"
+              name="${folder_scripts.name}" />
+
+      <Folder cpf:Id="folder-media" cpf:URL="${overlord_media.url}" id="folder-media">
+
+        <Attachment cpf:Id="attachment-logo" cpf:Attachment="images/overlord.png" cpf:URL="overlord.png"
+                    Attachment.access="Anonymous"
+                    createTime="current"
+                    Attachment.fileName="overlord.png"
+                    Attachment.disposition="inline"
+                    height="64" width="1920" />
+
+        <Attachment cpf:Id="attachment-image" cpf:Attachment="images/biohazard.png" cpf:URL="biohazard.png"
+                    Attachment.access="Anonymous"
+                    createTime="current"
+                    Attachment.fileName="biohazard.png"
+                    Attachment.disposition="inline"
+                    height="128" width="128">
+          <Attachment cpf:Attachment="images/biohazard.png"
+                      Attachment.access="Anonymous"
+                      createTime="current"
+                      Attachment.geometry="128+0+0@128x128"
+                      height="128" width="128" />
+        </Attachment>
+
+        <Attachment cpf:Id="attachment-favicon" cpf:Attachment="images/favicon.ico" cpf:URL="overlord.ico"
+                    Attachment.access="Anonymous"
+                    createTime="current"
+                    Attachment.fileName="overlord.ico"
+                    Attachment.disposition="inline" />
+
+        <Attachment cpf:Id="attachment-css" cpf:Attachment="resources/domain.css" cpf:URL="overlord.css"
+                    Attachment.access="Anonymous"
+                    createTime="current"
+                    Attachment.fileName="overlord.css"
+                    Attachment.disposition="inline" />
+
+        <Attachment cpf:Id="attachment-favicon-ico" cpf:Attachment="images/favicon.ico"
+                    id="favicon"
+                    Attachment.access="Anonymous"
+                    createTime="current"
+                    Attachment.fileName="favicon.ico"
+                    Attachment.disposition="inline"
+                    url="/favicon.ico" />
+      </Folder>
+
+      <Attachment cpf:Attachment="resources/mime.types" cpf:URL="mime.types"
+                  id="mimeTypes"
+                  createTime="current"
+                  Attachment.fileName="mime.types"
+                  Attachment.disposition="attachment" />
+
+      <User cpf:Id="user-anonymous"
+            id="user-anonymous"
+            disabled="false"
+            User.type="Anonymous" />
+
+      <Folder cpf:Id="folder-users" cpf:URL="${overlord_users.url}"
+              id="folder-users"
+              type="user">
+
+        <User cpf:Id="user-root" cpf:URL="${overlord_root.userName}"
+              id="user-root"
+              disabled="false"
+              User.userName="${overlord_root.userName}"
+              User.givenName="${overlord_root.givenName}"
+              User.familyName="${overlord_root.familyName}"
+              User.emailAddress=""
+              User.type="Overlord"
+              User.state="Active"
+              User.password="${overlord_root.password}">
+          <Enrollment cpf:Id="enroll-root"
+                      id="enroll-root"
+                      disabled="false"
+                      startTime="min" stopTime="max">
+            <cpf:Data Type="Enrollment.group" Item="domain"/>
+            <cpf:Data Type="Enrollment.role" Item="role-overlord"/>
+          </Enrollment>
+        </User>
+      </Folder>
+    </Folder>
+
+    <Folder cpf:Id="folder-systems"
+            id="folder-systems" />
+
+    <Folder id="folder-admin" />
+
+    <Folder cpf:Id="folder-role" cpf:URL="${overlord_roles.url}"
+            id="folder-role"
+            type="role"
+            msg="domain_adminPortal_roles">
+      <Role cpf:Id="role-overlord"
+            id="role-overlord"
+            roleId="overlord"
+            msg="domain_role_overlord"/>
+      <Role cpf:Id="role-support"
+            id="role-support"
+            roleId="support"
+            msg="domain_role_support"/>
+    </Folder>
+  </Domain>
+</cpf:Dump>

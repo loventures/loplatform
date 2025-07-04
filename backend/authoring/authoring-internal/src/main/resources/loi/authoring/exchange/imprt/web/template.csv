@@ -1,0 +1,5 @@
+Index,Parent_Index,Type,Title,Description,Keywords
+1,,Set,Competency Set Title,Competency Set Statement,
+2,1,Competency,Competency Title,Competency Statement,Competency Keywords
+3,2,Sub-Competency,Sub-Competency Title,Sub-Competency Statement,Sub-Competency Keywords
+4,3,Sub-Sub-Competency,Sub-Sub-Competency Title,Sub-Sub-Competency Statement,Sub-Sub-Competency Keywords

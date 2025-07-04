@@ -1,0 +1,66 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<section class="assessment-submission-section grader-panel">
+  <div class="submission-selection-control grading-panel-section-input-text-align">
+    <lo-select
+      options="$ctrl.attempts"
+      option-template="$ctrl.attemptOptionTemplate"
+      selected="$ctrl.attempt"
+      selected-template="$ctrl.attemptSelectedTemplate"
+      on-select="$ctrl.changeAttempt"
+    ></lo-select>
+
+    <button
+      class="icon-btn icon-btn-danger mx-1"
+      ng-if="$ctrl.attempt && $ctrl.grader.canInvalidateAttempt()"
+      ng-click="$ctrl.confirmDelete()"
+      title="{{ 'GRADER_DELETE_ATTEMPT_TOOLTIP' | translate }}"
+    >
+      <i class="icon icon-trash"></i>
+    </button>
+  </div>
+
+  <div
+    class="submission-selection-control grading-panel-section-input-text-align"
+    ng-if="$ctrl.showQuestionsSelector()"
+  >
+    <lo-select
+      options="$ctrl.questions"
+      option-template="$ctrl.questionOptionTemplate"
+      selected="$ctrl.activeQuestions[0]"
+      selected-template="$ctrl.questionSelectedTemplate"
+      on-select="$ctrl.changeQuestion"
+    ></lo-select>
+  </div>
+
+  <div class="submission-selection-control">
+    <loading-spinner ng-if="!$ctrl.grader.activeGrade"> </loading-spinner>
+
+    <submission-score
+      ng-if="$ctrl.grader.activeGrade"
+      grade="$ctrl.grader.activeGrade"
+      invalidated="!$ctrl.grader.activeAttempt.valid"
+      late="$ctrl.grader.activeGrade.isLate()"
+      disable-edit="
+        $ctrl.grader.activeGrade.outgoing.rubric ||
+        !$ctrl.grader.canUserEditGrade ||
+        !$ctrl.grader.detailedGradeExists
+      "
+    ></submission-score>
+  </div>
+</section>

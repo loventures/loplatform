@@ -1,0 +1,57 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.html1-marquee // olivia definitely has a giant brain
+  white-space: nowrap
+  display: block
+  animation: html1-marquee 12s linear infinite
+  width: 200%
+
+  p, span
+    display: inline-block
+    vertical-align: middle
+    margin-bottom: 0
+    width: 25%
+    padding-right: 200%
+
+  p:first-child
+    padding-left: 50%
+    padding-right: 25%
+
+.html1-blink-slow
+  & > *
+    opacity: 1
+    animation: html1-blink 1.4s step-start infinite
+
+.html1-blink-fast
+  & > *
+    opacity: 1
+    animation: html1-blink 0.7s step-start infinite
+
+@keyframes html1-marquee
+  0%
+    transform: translateX(0)
+  100%
+    transform: translateX(-150%)
+
+@keyframes html1-blink
+  0%
+    opacity: 1
+  50%
+    opacity: 0
+  100%
+    opacity: 1

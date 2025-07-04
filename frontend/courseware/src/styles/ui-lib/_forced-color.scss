@@ -1,0 +1,78 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// Tweaks to Bootstrap to better support forced-color accessability mode.
+// https://github.com/twbs/bootstrap/issues/35941
+
+@media (forced-colors) {
+  navbar.fixed-top {
+    border-bottom: 1px solid transparent;
+  }
+
+  input[type='submit'],
+  input[type='button'],
+  button {
+    outline: 1px solid LinkText !important;
+  }
+
+  .btn {
+    color: ButtonText !important;
+    background-color: ButtonFace !important;
+  }
+  .btn.btn-link {
+    color: LinkText;
+    background-color: Canvas;
+  }
+
+  .badge,
+  .label {
+    color: CanvasText;
+    background-color: Canvas;
+    outline: 1px solid CanvasText !important;
+  }
+
+  .progress {
+    border: 1px solid Graytext;
+  }
+  .progress-bar {
+    color: HighlightText;
+    background-color: Highlight !important;
+  }
+
+  form-control::placeholder,
+  .text-muted {
+    color: GrayText !important;
+  }
+
+  .custom-control.custom-radio,
+  .custom-control.custom-checkbox {
+    // Remove space left for custom overlap
+    margin-left: 0;
+  }
+
+  .custom-control-label::before,
+  .custom-control-label::after {
+    // Remove custom control overlay.
+    display: none;
+  }
+  .custom-control-input {
+    // Restore standard control visibility.
+    position: relative;
+    z-index: inherit;
+    opacity: 1;
+  }
+}

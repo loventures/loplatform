@@ -1,0 +1,174 @@
+@import variables
+
+$screen-size-small: "only screen and (max-width : 400px)"
+
+//the 'med' value should be reasonably flexible, since most launches occur in an embedded environment
+$screen-size-med: "only screen and (max-width : 900px)"
+
+//$screen-size-lg: "only screen and (max-width : px)"
+
+@function get-contrast-text-color-for-background($color)
+  @if (lightness($color) > 50)
+    @return #000000
+  @else
+    @return #ffffff
+// Darker background, return light color
+
+@mixin text-shadow($text-color)
+  @if (lightness($text-color) > 50)
+    text-shadow: 1px 1px #444
+  @else
+    color: $text-color
+    position: relative
+    &:before, &:after
+      content: attr(title)
+      color: rgba(255, 255, 255, .1)
+      position: absolute
+    &:before
+      top: 1px
+      left: 1px
+    &:after
+      top: 2px
+      left: 2px
+
+$bg-color: $color-primary
+$text-color: get-contrast-text-color-for-background($bg-color)
+
+body
+  margin: 0
+  font-family: sans-serif
+  background-color: $bg-color
+  color: $text-color
+
+  #main
+    margin-top: 3em
+    width: 100%
+    overflow: hidden
+    min-height: 32em
+
+    h1
+      font-size: 3em
+
+    h2
+      font-size: 2em
+
+    .content
+      width: 70%
+      margin: 0 auto
+
+      @media #{$screen-size-small}
+        width: 100%
+
+      @media #{$screen-size-med}
+        width: 75%
+
+    button
+      .hide
+        display: none
+
+    &.debug
+      #details
+        display: initial
+
+      button
+        .hide
+          display: initial
+
+        .show
+          display: none
+
+    #details
+      display: none
+
+  button.link-btn
+    background-color: rgba(0, 0, 0, 0)
+    color: $text-color
+    border: none
+    cursor: pointer
+
+  .btn
+    background-color: #554
+    color: $text-color
+    font-size: 1.5em
+    border-radius: .3rem
+    text-decoration: none
+    padding: .5em
+    display: inline-block
+    margin-top: 1em
+
+.stack
+  > div
+    white-space: nowrap
+
+span.word:last-child
+  display: inline-block
+  transform-origin: bottom left
+  transform: rotate(0deg)
+  animation: falldown 3s ease-in-out 0s 1 normal forwards
+  animation-delay: 15s
+  opacity: 1
+
+@keyframes falldown
+  0%
+    transform: rotate(0deg)
+  15%
+    transform: rotate(120deg)
+  30%
+    transform: rotate(60deg)
+  45%
+    transform: rotate(110deg)
+  60%
+    transform: rotate(70deg)
+  75%
+    transform: rotate(100deg)
+  90%
+    transform: rotate(85deg)
+  100%
+    transform: rotate(90deg)
+
+.params
+  width: 90%
+  margin: 0 auto
+  overflow: hidden
+  overflow-x: auto
+  margin-bottom: 5em
+
+  @media #{$screen-size-med}
+    width: 98%
+
+  .param
+    min-width: 1033px
+    //arbitrary width based on the average long param name
+    width: 100%
+    margin-bottom: 0.25em
+    border-bottom: 1px solid #bbb
+
+    > span
+      display: inline-block
+      width: 50%
+      vertical-align: middle
+      overflow: hidden
+      word-break: break-all
+      white-space: normal
+
+    .left
+      width: 34%
+      text-align: right
+      margin-right: 1%
+
+    .right
+      width: 65%
+
+::-webkit-scrollbar
+  width: 6px
+  height: 6px
+
+::-webkit-scrollbar-track
+  background-color: rgba(0, 0, 0, 0)
+
+::-webkit-scrollbar-thumb
+  border-radius: 3px
+  background: $color-secondary
+
+.depth
+  @include text-shadow($text-color)

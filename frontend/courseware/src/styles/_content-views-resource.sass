@@ -1,0 +1,85 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Resources - Videos, Inline PDF etc
+////////////////////////////////////////////////////////////////////////////////////
+
+.content-view-resource,
+.resource-activity
+
+  .iframe-container
+    position: relative
+
+    //16:9 ratio with respect to 100% height so that embedded videos don't get streched/have black bars
+    padding-bottom: percentage(calc(9 / 16))
+
+    height: 0
+    overflow: hidden
+
+    iframe
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+
+.embedded-content
+  position: relative
+
+  .iframe-content
+    padding: 0.5rem 1rem
+    iframe
+      width: 100%
+
+  .full-screen-controls
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+    @extend .p-1
+
+  &:not(.full-screen)
+
+    .full-screen-controls
+      padding-top: 0 !important
+      padding-right: 0 !important
+
+.embedded-content.full-screen
+  .full-screen-container
+    position: fixed
+    width: 100vw
+    height: 100vh
+    top: 0
+    left: 0
+    z-index: $zindex-modal
+    background-color: $white
+    display: flex
+    flex-direction: column
+
+    .full-screen-controls
+      flex: 0 0 auto
+
+    .iframe-content, .iframe-container
+      flex: 1 1 auto
+      overflow-y: scroll
+      padding: 0
+      -webkit-overflow-scrolling: touch
+
+@media (max-width: $smscreen-max)
+  .embedded-content
+    .iframe-content
+      padding: 0

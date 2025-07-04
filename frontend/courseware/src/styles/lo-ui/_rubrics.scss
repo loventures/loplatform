@@ -1,0 +1,86 @@
+//
+// Rubric component
+//
+
+.rubric {
+}
+
+.rubric-title {
+  border-bottom: 1px dotted $gray-lighter;
+  color: $brand-primary;
+  display: block;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.rubric-criteria {
+  @extend .list-group;
+}
+
+.rubric-score {
+  @extend .list-group-item;
+  @extend .list-group-item-action;
+  @extend .p-0;
+  @extend .border-0;
+  font-family: inherit;
+  transition: all $transition-speed $transition-function;
+
+  &:hover {
+    span {
+      border-color: $brand-primary;
+      color: $brand-primary;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active {
+    background-color: #fff;
+    color: $brand-primary;
+  }
+
+  &:focus,
+  &:active,
+  &.active {
+    span {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+      color: #fff;
+    }
+  }
+
+  span {
+    @extend .me-3;
+    background-color: #fff;
+    display: inline-block;
+    color: $gray;
+    width: 2.5rem;
+    height: 2.5rem;
+    box-shadow: $box-shadow-base;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    transition: all $transition-speed $transition-function;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:not(:last-child) {
+    @extend .mb-2;
+
+    span {
+      &:before {
+        content: ' ';
+        background-color: $gray-lighter;
+        bottom: 0;
+        left: 1.25rem;
+        width: 2px;
+        margin: auto;
+        position: absolute;
+        bottom: -2.75em;
+        height: 2.75em;
+      }
+    }
+  }
+}

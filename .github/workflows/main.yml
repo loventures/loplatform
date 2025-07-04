@@ -1,0 +1,59 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write # for sbt-dependency-submission
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: "sbt"
+
+      - name: Set up SBT
+        uses: sbt/setup-sbt@v1
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "yarn"
+          cache-dependency-path: "./frontend/*/yarn.lock"
+
+      - name: Compile frontend
+        working-directory: ./frontend
+        shell: bash
+        env:
+          CI: true
+          JAVA_OPTS: >
+            -Xms1024M -Xmx1024M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+        run: >
+          sbt "install ; build"
+
+      - name: Compile backend
+        working-directory: ./backend
+        shell: bash
+        env:
+          JAVA_OPTS: >
+            -Xms4096M -Xmx4096M -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+        run: >
+          sbt
+          "set deploy/frontendArchiveDir := Some(file(\"dev/null\"))"
+          compile
+
+      - name: Upload dependency graph
+        uses: scalacenter/sbt-dependency-submission@ab086b50c947c9774b70f39fc7f6e20ca2706c91
+        with:
+          working-directory: ./backend
+          modules-ignore: deploy_3 # missing frontend cars

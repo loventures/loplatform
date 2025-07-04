@@ -1,0 +1,17 @@
+@mixin image-dimensions($height) {
+  height: $height;
+  width: calc(#{$height} * 16 / 9);
+}
+
+.inline-image {
+  display: inline-block;
+  @extend .img-fluid;
+
+  &.along-text {
+    @include image-dimensions(1em * $line-height-base);
+  }
+  &.along-audio {
+    //considering firefox which has the audio player with largest height
+    @include image-dimensions(40px);
+  }
+}

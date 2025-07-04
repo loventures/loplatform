@@ -1,0 +1,249 @@
+/*
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+body {
+    background-color: #004439;
+    background-image:url(overlordDomain.webp);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position: center;
+    padding: 20px 20px 0 20px;
+}
+:focus {
+    outline:none;
+}
+
+#ol-buttons {
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    font-weight: 0300;
+    font-family: sans-serif;
+    color: #000;
+    background-color: red;
+    border: 1px solid red;
+    padding: 4px 4px 4px 6px;
+    border-top-width: 0px;
+    border-bottom-left-radius: 8px;
+    box-shadow: -1px 1px 4px rgba(0,0,0,.5);
+    z-index: 1000;
+    line-height: 1.5em;
+}
+#stdHeader h1 {
+    font-family: sans-serif !important;
+    font-weight: 100 !important;
+    color: #ffe;
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: .5em;
+    padding-right: 20px;
+    font-size: 22px;
+    line-height: 22px;
+}
+#stdHeader h2 {
+    float: left;
+    font-family: sans-serif !important;
+    font-weight: 100 !important;
+    color: #ffe;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 0;
+}
+#storage {
+    border: 1px solid gray;
+    background-color: rgba(0, 43, 54, .85);
+    overflow: auto;
+    padding-left: 12px;
+}
+#data-body {
+    border: 1px solid gray;
+    background-color: rgba(32, 32, 32, .85);
+    overflow: auto;
+    padding: 0.25em;
+}
+#data-head {
+    border: 1px solid gray;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    display: inline-block;
+    border-bottom: 0px;
+    padding: 0 10px;
+    color: white;
+    height: 21px; /* why? */
+}
+#bodies {
+    position: relative;
+}
+#toolbar {
+    height: 40px;
+}
+
+ul.jqtree-tree li.jqtree-folder > .jqtree-element:hover {
+    background: rgba(56, 117, 215, 0.15);
+}
+
+ul.jqtree-tree li.jqtree-selected > .jqtree-element,
+ul.jqtree-tree li.jqtree-selected > .jqtree-element:hover {
+    background: rgba(56, 117, 215, 0.4) !important;
+    text-shadow: none !important;
+}
+.domain-overlord ul.jqtree-tree .jqtree-toggler {
+    color: #ffc;
+}
+ul.jqtree-tree li > .jqtree-element > .jqtree-toggler,
+ul.jqtree-tree li.jqtree-selected > .jqtree-element > .jqtree-toggler,
+ul.jqtree-tree li.jqtree-selected > .jqtree-element > .jqtree-title {
+    color: white !important;
+}
+ul.jqtree-tree .jqtree-title {
+    color: white;
+    font-size: 13px;
+}
+
+ul.jqtree-tree .jqtree-title > .item-type {
+    color: #C8C9FF;
+    margin-right: 0.1em;
+    border: 1px solid #53536B;
+    padding: 0 2px;
+}
+
+ul.jqtree-tree .jqtree-title > .item-id {
+    color: #FFC1C0;
+}
+
+.node-type-more-orphans .jqtree-title {
+    color: gray !important;
+}
+.node-type-more .jqtree-title {
+    color: #ffc !important;
+}
+ul.jqtree-tree i.icon-ban-circle {
+    margin-left: .25em;
+}
+.btn-group a.on-disabled, .selection-disabled a.on-active {
+    display: none;
+}
+.selection-disabled a.on-disabled {
+    display: inline-block;
+}
+.jqtree-title, .jqtree-toggler {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+.jqtree-tree .jqtree-loading > div .jqtree-title {
+    background: url(wait.gif) no-repeat center right;
+    padding-right: 22px;
+}
+.data-row {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 4px;
+}
+.data-row.data-sel {
+    white-space: normal;
+    text-overflow: clip;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.data-key {
+    color: #eea;
+}
+.data-row.data-sel .data-key {
+    color: #ff8;
+}
+.data-key:after {
+    content: '=';
+    margin: 0 4px;
+    color: #aaa;
+}
+.data-value {
+    color: white;
+}
+.data-value a {
+    color: white;
+    text-decoration: underline;
+}
+.data-value.editable a {
+    color: black;
+    text-decoration: none;
+}
+.data-value.editable {
+    border: 1px inset #ccc;
+    background-color: #fff;
+    padding: 0 2px;
+    color: black;
+}
+.data-kill {
+    margin-left: 4px;
+    display: none;
+    text-decoration: none;
+}
+.data-row.data-sel .data-kill {
+  color: red;
+  text-decoration: none;
+  display: inline;
+}
+.searching {
+    background: url(wait.gif) no-repeat center right;
+}
+.cp_hiddenFrame {
+    visibility: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-style: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+#data-add {
+    color: white;
+    padding: .5em;
+    border-top: 1px solid gray;
+    display: none;
+}
+#data-add input {
+    padding: 0 2px;
+    background-color: transparent;
+    color: white;
+    border-color: gray;
+}
+.btn-mini {
+    padding: 3px 6px;
+    font-size: 11px;
+    line-height: 13px;
+}
+.gadget {
+    float: right;
+    color: white !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    border-radius: .5em;
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    margin-left: .5em;
+    text-align: center;
+    line-height: 1em;
+    font-size: 14px;
+    vertical-align: middle;
+    margin-top: 10px;
+}

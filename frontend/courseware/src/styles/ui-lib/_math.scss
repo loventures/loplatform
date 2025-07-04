@@ -1,0 +1,72 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@function ch-max($v1, $v2) {
+  @return if($v1 > $v2, $v1, $v2);
+}
+
+@function ch-min($v1, $v2) {
+  @return if($v1 < $v2, $v1, $v2);
+}
+
+@function ch-gcd($a, $b) {
+  // From: http://rosettacode.org/wiki/Greatest_common_divisor#JavaScript
+  @if ($b != 0) {
+    @return ch-gcd($b, $a % $b);
+  } @else {
+    @return abs($a);
+  }
+}
+
+@function ch-pow($base, $exponent, $prec: 12) {
+  @if (function_exists('pow')) {
+    // see math.js -- the JS-backed implementation of this function is **significantly** faster
+    @return pow($base, $exponent);
+  }
+
+  // Handles decimal exponents by trying to convert them into a fraction and then use a nthRoot-algorithm for parts of the calculation
+  @if (floor($exponent) != $exponent) {
+    $prec2: ch-pow(10, $prec);
+    $exponent: round($exponent * $prec2);
+    $denominator: ch-gcd($exponent, $prec2);
+    @return ch-nth-root(ch-pow($base, $exponent / $denominator), $prec2 / $denominator, $prec);
+  }
+
+  $value: $base;
+  @if $exponent > 1 {
+    @for $i from 2 through $exponent {
+      $value: $value * $base;
+    }
+  } @else if $exponent < 1 {
+    @for $i from 0 through -$exponent {
+      $value: $value / $base;
+    }
+  }
+
+  @return $value;
+}
+
+@function ch-nth-root($num, $n: 2, $prec: 12) {
+  // From: http://rosettacode.org/wiki/Nth_root#JavaScript
+  $x: 1;
+
+  @for $i from 0 through $prec {
+    $x: 1 / $n * (($n - 1) * $x + ($num / ch-pow($x, $n - 1)));
+  }
+
+  @return $x;
+}

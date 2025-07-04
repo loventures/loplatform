@@ -1,0 +1,62 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<nav
+  class="mp-player-questions-nav py-1"
+  translate
+  translate-attr-aria-label="QUIZ_PLAYER_QUESTIONS_NAV"
+>
+  <div class="page-item m-1">
+    <button
+      class="page-link question-number icon icon-arrow-left icon-chevron-left"
+      ng-disabled="!$ctrl.canGoStatus[$ctrl.currentIndex - 1]"
+      aria-label="{{'PREV_QUESTION' | translate}}"
+      ng-click="$ctrl.goto($ctrl.currentIndex - 1)"
+    ></button>
+  </div>
+
+  <ul class="pagination">
+    <li
+      class="page-item m-1"
+      ng-repeat="tuple in $ctrl.questionTuples track by $index"
+    >
+      <button
+        class="page-link question-number"
+        ng-disabled="!$ctrl.canGoStatus[$index]"
+        aria-label="{{$ctrl.getPageLabel($index)}}"
+        ng-click="$ctrl.goto($index)"
+        ng-class="{
+          'active': $index === $ctrl.currentIndex,
+          'answered': tuple.state.answered,
+          'skipped': tuple.state.skipped,
+          'correct': tuple.state.correct,
+          'incorrect': tuple.state.incorrect
+        }"
+        ng-bind="$index + 1"
+      ></button>
+    </li>
+  </ul>
+
+  <div class="page-item m-1">
+    <button
+      class="page-link question-number icon icon-arrow-right icon-chevron-right"
+      ng-disabled="!$ctrl.canGoStatus[$ctrl.currentIndex + 1]"
+      aria-label="{{'NEXT_QUESTION' | translate}}"
+      ng-click="$ctrl.goto($ctrl.currentIndex + 1)"
+    ></button>
+  </div>
+</nav>

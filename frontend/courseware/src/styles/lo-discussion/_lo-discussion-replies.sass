@@ -1,0 +1,94 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.discussion-write-reply,
+.discussion-reply-list
+  margin-left: 0
+  margin-top: -1em
+  padding-top: 1em
+
+  &.top-level-thread
+    border-color: transparent
+
+.discussion-write-reply
+  padding: 1.75em 0.5em 0.5em 0.5em
+
+.discussion-board-write-post
+  margin-top: 1em
+
+  .discussion-write-reply
+    margin-top: 0.5em
+    margin-left: 0
+    border: none
+    padding: 0
+
+  .discussion-reply-controls
+    margin-top: 0.5em
+
+.discussion-reply-list
+  &.top-level-thread
+    margin-bottom: 3em
+    padding-bottom: 0.5em
+    padding-right: 1em
+
+  .discussion-reply-list-child
+    margin: 1em 0 0 0
+    list-style: none
+
+.discussion-write-reply
+  transition: all ease $trans-speed
+
+  .discussion-reply-row
+    display: block
+
+    // Styling the message that appears when a root post is submitted -- circle back on this...
+    // Pretty hacky -- let's see if we can avoid seeing this message at all and just provide a "confirm submitted" message and bring back the lodactor box
+    .pointable-lodactor
+      background: fade-out($color-white, 0.15)
+      border-radius: $border-radius $border-radius 0 0
+      padding: 1.75em 1em
+      font-size: 1.25em
+      text-align: center
+      color: fix-contrast($color-success, fade-out($color-white, 0.15))
+      cursor: pointer
+      @extend .box-shadow
+
+      &:hover
+        background: $color-white
+
+      > span:before
+        font-family: "lo-icons"
+        content: "\eae1"
+        font-size: 2em
+        margin: -1em 0.75em
+        position: relative
+        top: 0.2em
+        display: inline-block
+
+    .lo-rich-text-editor
+      padding: 0rem
+      border: 0rem
+
+    .attachment-all-tools
+      border: 1px solid #d1d1d1 //match ckeditor theme
+      border-top: 0
+
+  .feedback-footer
+    background: $color-lightest
+    font-size: 1.25em
+    &.lo-feedback-toolbar
+      width: 100%

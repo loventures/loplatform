@@ -1,0 +1,75 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@mixin switch($res: 'sm') {
+  $index: 1rem;
+  $mainVal: 1rem;
+  $mt: 0;
+
+  @if $res == 'md' {
+    $index: 2rem;
+    $mainVal: 1.5rem;
+    $mt: -0.2rem;
+  } @else if $res == 'lg' {
+    $index: 3rem;
+    $mainVal: 2rem;
+  } @else if $res == 'xl' {
+    $index: 4rem;
+    $mainVal: 2.5rem;
+  }
+
+  .custom-control-label {
+    padding-left: calc(#{$index} - 0.5rem);
+    padding-bottom: #{$mainVal};
+  }
+
+  .custom-control-label::before {
+    height: $mainVal;
+    width: calc(#{$index} + 0.75rem);
+    border-radius: $mainVal * 2;
+    margin-top: $mt;
+  }
+
+  .custom-control-label::after {
+    width: calc(#{$mainVal} - 4px);
+    height: calc(#{$mainVal} - 4px);
+    border-radius: calc(#{$index} - (#{$mainVal} / 2));
+    margin-top: $mt;
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::after {
+    transform: translateX(calc(#{$mainVal} - 0.25rem));
+  }
+}
+
+// YOU CAN PUT ALL RESOLUTION HERE
+// sm - DEFAULT, md, lg, xl
+.custom-switch.custom-switch-sm {
+  @include switch();
+}
+
+.custom-switch.custom-switch-md {
+  @include switch('md');
+}
+
+.custom-switch.custom-switch-lg {
+  @include switch('lg');
+}
+
+.custom-switch.custom-switch-xl {
+  @include switch('xl');
+}

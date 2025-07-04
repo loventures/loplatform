@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="$$Locale">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="x-ua-compatible"
+      content="IE=edge"
+    />
+    <meta
+      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+    />
+
+    <out value="${trackingHeader}"></out>
+
+    <% if(isDev){ %>
+    <link
+      rel="shortcut icon"
+      href="/Domain/Media/favicon.ico"
+    />
+    <% } else { %>
+    <link
+      rel="shortcut icon"
+      href="${ Current.domainDTO.favicon.url }"
+    />
+    <% } %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open Sans:300,400,600,700|Material+Icons"
+      type="text/css"
+    />
+
+    <script
+      src="//cdn.iframe.ly/embed.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      async
+    ></script>
+
+    <!-- Have to load jquery separately as bundled jquery with angular fails. -->
+    <% if (isDev) { %>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/mathjax/es5/tex-mml-chtml.js"></script>
+    <script src="/src/lo-ckeditor/ckeditor.js"></script>
+    <% } else { %>
+    <link rel="preconnect" href="$$url"/>
+    <script src="$$url/assets/jquery/jquery.min.js"></script>
+    <script src="$$url/assets/mathjax/tex-mml-chtml.js"></script>
+    <script src="$$url/assets/lo-ckeditor/ckeditor.js"></script>
+    <% } %>
+
+    <!-- -->
+    <%- include('html/partials/loPlatform.ejs'); %>
+
+    <title>$$lo.courseware</title>
+
+    <%- include('html/partials/loStyle.ejs'); %>
+  </head>
+  <body class="course-fjœreous <%= role %>">
+    <!-- vite always injects at end of head.. -->
+    <% if (!isDev) { %>
+    <link rel="stylesheet" href="$$url/assets/custom.scss" />
+    <% } %>
+    <div id="course-app"><%- include('html/partials/loSplash.ejs'); %></div>
+    <script
+      type="module"
+      src="/src/index.tsx"
+    ></script>
+    <out value="${trackingFooter}"></out>
+  </body>
+</html>

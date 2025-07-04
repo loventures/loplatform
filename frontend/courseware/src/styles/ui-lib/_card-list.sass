@@ -1,0 +1,41 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.card-list
+  @extend .card
+
+  ul.card-list-body,
+  ul.card-list-striped-body
+    @extend .list-group
+    @extend .list-group-flush
+    > li
+      @extend .list-group-item
+
+  ul.card-list-striped-body
+    @extend .list-group-striped
+
+  .card-list-filters
+    padding: $list-group-item-padding-y $list-group-item-padding-x
+    background-color: fade-out(map_get($theme-colors, primary), 0.97)
+
+  .card-list-body,
+  .card-list-striped-body
+    .badge:not(.colored-grade):not(.colored-grade-bg)
+      min-width: 2.5em
+
+

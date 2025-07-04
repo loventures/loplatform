@@ -1,0 +1,104 @@
+<html>
+<head>
+  <title>$$lti_cookie_check_title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+  <link rel="stylesheet" type="text/css" href="$$url/cookieCheck.css"/>
+  <script>
+    function checkAccessAndLoad() {
+      //we probably don't have the requisite interactions to make safari happy, but in case we do, request access
+      if (document.requestStorageAccess) {
+        document.requestStorageAccess().then(
+          () => checkSession(100)
+        );
+      } else {
+        checkSession(100)
+      }
+      return true;
+    }
+
+    function checkSession(delay) {
+      //we call checkSession a few times where appropriate, so clear out any old ones
+      if (window.timeoutId) {
+        clearTimeout(window.timeoutId);
+      }
+      window.timeoutId = setTimeout(function () {
+        fetch('/api/v0/session').then(r => r.json()).then(d => {
+          //wait for the cookiePass window to register, so we are able to close it
+          if (d.valid && window.cookiePassWindow) {
+            if (!window.cookiePassWindow.closed) {
+              window.cookiePassWindow.close();
+            }
+            document.location.reload();
+          } else {
+            checkSession(delay * 1.5);
+          }
+        })
+      }, delay);
+    }
+
+    window.addEventListener("message", (event) => {
+      //somewhat pedantic correctness, but only accept messages from our own domain
+      if (event.origin !== window.origin) {
+        return;
+      }
+
+      //this seems to be the best way to get hold of this object without using window.open(), which usually gets blocked
+      if (event.data === "cookie_pass_init") {
+        window.cookiePassWindow = event.source;
+        //if it works immediately on window open, close super quickly.
+        //this case only happens if safari is bugged (i.e. with edX) and is forcing clicks for every content
+        checkSession(10);
+      }
+
+      /**
+       * when cookiePass.html fires off a top-level interaction (a non-iframe interaction, required before we can
+       * do a requestStorageAccess call), we process it here
+       */
+      if (event.data === "cookie_pass_clicked") {
+        //this MUST be done on this page, inside this iframe, because we are asking for the iframe to have permission
+        document.requestStorageAccess().then(
+          () => checkSession(100)
+        );
+      }
+    }, false);
+
+  </script>
+</head>
+<body>
+<div class="backdrop">
+  <div class="header">
+    Course overview
+  </div>
+  <div class="content">
+    <h1>Lorem ipsum dolor sit amet</h1>
+    <div class="text">
+      <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, urna consequat felis vehicula class ultricies mollis
+        dictumst, aenean non a in donec nulla. Phasellus ante pellentesque erat cum risus consequat imperdiet aliquam,
+        integer placerat et turpis mi eros nec lobortis taciti, vehicula nisl litora tellus ligula porttitor metus.</p>
+
+      <p> Vivamus integer non suscipit taciti mus etiam at primis tempor sagittis sit, euismod libero facilisi aptent
+        elementum felis blandit cursus gravida sociis erat ante, eleifend lectus nullam dapibus netus feugiat curae
+        curabitur est ad. Massa curae fringilla porttitor quam sollicitudin iaculis aptent leo ligula euismod dictumst,
+        orci penatibus mauris eros etiam praesent erat volutpat posuere hac. Metus fringilla nec ullamcorper odio
+        aliquam lacinia conubia mauris tempor, etiam ultricies proin quisque lectus sociis id tristique, integer
+        phasellus taciti pretium adipiscing tortor sagittis ligula.</p>
+
+      <p> Mollis pretium lorem primis senectus habitasse lectus scelerisque donec, ultricies tortor suspendisse
+        adipiscing fusce morbi volutpat pellentesque, consectetur mi risus molestie curae malesuada cum. Dignissim lacus
+        convallis massa mauris enim ad mattis magnis senectus montes, mollis taciti phasellus accumsan bibendum semper
+        blandit suspendisse faucibus nibh est, metus lobortis morbi cras magna vivamus per risus fermentum. Dapibus
+        imperdiet praesent magnis ridiculus congue gravida curabitur dictum sagittis, enim et magna sit inceptos sodales
+        parturient pharetra mollis, aenean vel nostra tellus commodo pretium sapien sociosqu.</p>
+    </div>
+  </div>
+</div>
+<div class="modalOverlay">
+  <div class="modal">
+    <div class="title">$$lti_cookie_check_start</div>
+    <a id="redirect" href="${ redirect }" target="_blank" rel="opener" class="btn" onclick="checkAccessAndLoad()">
+      $$lti_cookie_check_ready
+    </a>
+  </div>
+</div>
+</body>
+</html>

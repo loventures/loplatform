@@ -1,0 +1,55 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="input-group">
+  <input
+    class="form-control hang-next hang-icon-btn"
+    type="text"
+    role="search"
+    aria-label="{{ $ctrl.searchPlaceholder | translate }}"
+    placeholder="{{ $ctrl.searchPlaceholder | translate }}"
+    ng-model="$ctrl.searchString"
+    ng-blur="$ctrl.focusLost($ctrl.searchString)"
+    focus-on="{{ $ctrl.events.focus }}"
+  />
+
+  <div class="input-hang-end">
+    <button
+      class="icon-btn icon-btn-danger"
+      ng-if="!!$ctrl.searchString"
+      ng-click="$ctrl.clearSearch()"
+    >
+      <span class="sr-only">{{ SRS_SEARCH_CLEAR | translate }}</span>
+      <span
+        class="icon icon-cancel-circle"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+
+  <button
+    class="btn btn-primary d-flex align-items-center"
+    ng-disabled="!$ctrl.searchString"
+    ng-click="$ctrl.search()"
+  >
+    <span class="sr-only">{{ 'SRS_SEARCH_ACTION' | translate }}</span>
+    <span
+      class="icon icon-search"
+      aria-hidden="true"
+    ></span>
+  </button>
+</div>

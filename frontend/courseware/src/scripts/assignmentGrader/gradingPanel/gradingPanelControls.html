@@ -1,0 +1,138 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="grading-panel-bottom">
+  <div
+    class="grading-panel-status"
+    ng-class="{
+      'all-grades-posted': $ctrl.grader.unpostedCount === 0
+    }"
+  >
+    <div class="status-flex-container">
+      <submission-score
+        grade="$ctrl.grade"
+        disable-edit="true"
+      ></submission-score>
+
+      <div
+        class="submissions-count"
+        ng-show="!!$ctrl.grader.unpostedCount"
+      >
+        <div ng-if="$ctrl.grader.unpostedQuestionCount">
+          <strong ng-bind="$ctrl.grader.unpostedQuestionCount"></strong>
+          <span
+            translate="QUESTIONS_REMAINING"
+            translate-values="{ unposted: $ctrl.grader.unpostedQuestionCount }"
+            translate-interpolation="messageformat"
+          >
+          </span>
+        </div>
+
+        <strong ng-bind="$ctrl.grader.unpostedCount"></strong>
+        <span
+          translate="SUBMISSIONS_REMAINING"
+          translate-values="{ unposted: $ctrl.grader.unpostedCount }"
+          translate-interpolation="messageformat"
+        >
+        </span>
+      </div>
+
+      <button
+        class="btn btn-link text-white exit-grader"
+        ng-show="$ctrl.grader.unpostedCount === 0"
+        ng-click="$ctrl.exit()"
+      >
+        <span class="icon icon-check"></span>
+        <span translate="ALL_DONE"></span>
+        <span translate="JUST_RETURN_TO_DASHBOARD"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="grading-panel-controls">
+    <button
+      class="btn btn-outline-primary move-to-previous"
+      title="{{ $ctrl.grader.prevItemToGrade.text | translate }}"
+      ng-disabled="!$ctrl.grader.prevItemToGrade"
+      ng-click="$ctrl.changeToInfo($ctrl.grader.prevItemToGrade)"
+    >
+      <span class="icon icon-angle-left"></span>
+    </button>
+
+    <span ng-if="$ctrl.grader.canUserEditGrade && $ctrl.grade">
+      <span ng-if="$ctrl.grade.isReleased()">
+        <button
+          class="btn btn-danger reset-grade"
+          ng-click="$ctrl.resetGrade()"
+          ng-disabled="$ctrl.isSubmitting()"
+          ng-show="$ctrl.grade.isDirty()"
+        >
+          <span translate="GRADER_STATUS_RESET"></span>
+        </button>
+
+        <button
+          class="btn btn-success update-grade"
+          ng-click="$ctrl.postGrade()"
+          ng-disabled="!$ctrl.canPostGrade()"
+        >
+          <span
+            ng-show="$ctrl.canPostGrade()"
+            translate="GRADER_CONTROL_UPDATE"
+          ></span>
+          <div ng-show="!$ctrl.canPostGrade()">
+            <span translate="GRADER_STATUS_GRADE_RELEASED"></span>
+            <span class="icon icon-check"></span>
+          </div>
+        </button>
+      </span>
+
+      <span ng-if="!$ctrl.grade.isReleased()">
+        <button
+          class="btn btn-primary save-grade"
+          ng-click="$ctrl.saveDraft()"
+          ng-disabled="!$ctrl.canSaveGrade()"
+        >
+          <span
+            ng-if="!$ctrl.grade.isBlankGrade && !$ctrl.canSaveGrade()"
+            translate="GRADER_STATUS_DRAFT_SAVED"
+          ></span>
+          <span
+            ng-if="$ctrl.grade.isBlankGrade || $ctrl.canSaveGrade()"
+            translate="GRADER_CONTROL_DRAFT"
+          ></span>
+        </button>
+
+        <button
+          class="btn btn-success post-grade"
+          ng-disabled="!$ctrl.canPostGrade()"
+          ng-click="$ctrl.postGrade()"
+        >
+          <span translate="GRADER_CONTROL_SUBMIT"></span>
+        </button>
+      </span>
+    </span>
+
+    <button
+      class="btn btn-outline-primary move-to-next"
+      title="{{ $ctrl.grader.nextItemToGrade.text | translate }}"
+      ng-disabled="!$ctrl.grader.nextItemToGrade"
+      ng-click="$ctrl.changeToInfo($ctrl.grader.nextItemToGrade)"
+    >
+      <span class="icon icon-angle-right"></span>
+    </button>
+  </div>
+</div>

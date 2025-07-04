@@ -1,0 +1,67 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.discussion-board-search
+
+  .srs-search .search-text
+    border-color: fade-out($color-primary, 0.5)
+
+  .discussion-board-search-results-header
+    display: flex
+    align-items: center
+
+.discussion-board-search-results
+  .search-result
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding: 0.25em
+
+    .result-column
+      margin: 0 0.5em
+      flex-shrink: 0
+
+    .content-column
+      flex-shrink: 1
+      overflow: hidden
+      text-overflow: ellipsis
+      height: 1.5em
+
+      *
+        margin: 0
+        padding: 0
+        overflow: hidden
+        text-overflow: ellipsis
+
+    .user-name,
+    .action
+      color: $discussion-color-search
+
+    .create-time
+      font-size: 0.8em
+      color: $color-light-text
+
+    .loading-spinner
+      font-size: 1.5em
+
+.search-result
+
+  @media (max-width: $smscreen-max)
+    flex-wrap: wrap
+
+    .result-column.content-column
+      width: 100%

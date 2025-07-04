@@ -1,0 +1,93 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html ng-app="sysInfoApp">
+    <head>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+        <script type="text/javascript" src="$$url('/systemInformation.js')"></script>
+        <style>th { text-align: left }</style>
+    </head>
+    <body>
+        <div class="container main" ng-controller="sysInfoCtrl">
+            <div class="row">
+                <div class="span10 offset1">
+                    <h3>System Information</h3>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <th>Stat</th>
+                    <th>Value</th>
+                </thead>
+                <tr>
+                    <td>Processors</td>
+                    <td>{{msg.processors}}</td>
+                </tr>
+                <tr>
+                    <td>Free Memory</td>
+                    <td>{{msg.freeMem}}</td>
+                </tr>
+                <tr>
+                    <td>Max Memory</td>
+                    <td>{{msg.maxMem}}</td>
+                </tr>
+                <tr>
+                    <td>Total Memory</td>
+                    <td>{{msg.totalMem}}</td>
+                </tr>
+                <tr>
+                    <td>System Time</td>
+                    <td>{{msg.time}}</td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="span10 offset1">
+                    <h3>Cluster Information {{actorSystem}}</h3>
+                </div>
+            </div>
+            <table>
+                <thead>
+                  <th>Stat</th>
+                  <th>Value</th>
+                </thead>
+                <tr>
+                    <td>Members</td>
+                    <td>{{clusterState.members}}</td>
+                </tr>
+                <tr>
+                    <td>Unreachable Members</td>
+                    <td>{{clusterState.unreachable}}</td>
+                </tr>
+                <tr>
+                    <td>Leader</td>
+                    <td>{{clusterState.leader}}</td>
+                </tr>
+                <tr>
+                    <td>Leader By Role</td>
+                    <td>{{clusterState.leaderMap}}</td>
+                </tr>
+                <tr>
+                    <td>All Roles</td>
+                    <td>{{clusterState.allRoles}}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

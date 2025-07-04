@@ -1,0 +1,74 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="flex-row-content">
+  <span
+    class="flex-col-fluid text-start text-truncate"
+    ng-bind="attempt.title"
+  ></span>
+
+  <span
+    class="block-badge badge-danger"
+    ng-if="!attempt.valid"
+    translate="GRADER_ATTEMPT_DELETED"
+  ></span>
+
+  <span
+    class="block-badge badge-dark"
+    ng-if="attempt.valid &&
+      attempt.state && attempt.state === 'Open'"
+    translate="GRADER_STATUS_IN_PROGRESS"
+  ></span>
+
+  <span
+    class="block-badge badge-dark"
+    ng-if="attempt.valid &&
+      attempt.scorableAttemptState.awaitsInstructorInput &&
+      !attempt.scorableAttemptState.requiresInstructorInput"
+    translate="GRADER_STATUS_NOT_REQUIRED"
+  ></span>
+
+  <span
+    class="block-badge badge-warning"
+    ng-if="attempt.valid &&
+      attempt.state && attempt.state !== 'Open' &&
+      attempt.scorableAttemptState.awaitsInstructorInput &&
+      attempt.scorableAttemptState.requiresInstructorInput"
+    translate="GRADER_STATUS_NEEDS_GRADE"
+  ></span>
+
+  <span
+    class="block-badge badge-info"
+    ng-if="attempt.valid &&
+      !attempt.scorableAttemptState.scorePosted &&
+      attempt.scorableAttemptState.hasInstructorInput"
+    translate="GRADER_STATUS_DRAFT_SAVED"
+  ></span>
+
+  <span
+    class="block-badge badge-success"
+    ng-if="attempt.valid &&
+      attempt.scorableAttemptState.scorePosted"
+    translate="GRADER_STATUS_GRADE_RELEASED"
+  ></span>
+
+  <span
+    class="icon"
+    ng-class="icon"
+    role="presentation"
+  ></span>
+</div>

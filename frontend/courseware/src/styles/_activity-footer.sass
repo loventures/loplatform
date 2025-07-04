@@ -1,0 +1,193 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Special footer in learning activities
+////////////////////////////////////////////////////////////////////////////////////
+
+.activity-footer
+  @extend .flex-row-content
+  align-items: flex-start
+  justify-content: space-between
+
+  > content-nav-footer-side,
+  > .activity-footer-side
+    overflow: hidden
+
+    &.next
+      text-align: end
+
+    @include media-breakpoint-up(lg)
+      flex-basis: 33% !important
+
+    @include media-breakpoint-down(md)
+      &.next
+        flex: 1 1 auto
+
+      &.prev
+        text-align: center
+        flex: 0 0 auto
+
+        .activity-title,
+        .activity-info
+          display: none
+
+        .side-arrow
+          display: block
+
+  .activity-footer-side
+    @extend .p-2
+    border-top: 0.33em solid $color-primary-against-body-bg
+    border-radius: 0 0 $border-radius $border-radius
+    transition: background ease $trans-speed, box-shadow ease $trans-speed
+
+    &:hover
+      background: $white
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15)
+
+    .activity-title
+      @extend .text-truncate
+
+    .side-label
+      @extend .mt-1
+      @extend .mb-2
+      font-size: 0.85em
+      font-weight: 600
+
+    .side-arrow
+      @extend .text-primary
+      display: none
+      font-size: 2em
+
+.next-up a
+  max-width: 100%
+  border-radius: $border-radius
+
+  .next-up-activity-name
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+    @media (max-width: $smscreen-max)
+      font-size: .9rem
+
+  .btn-primary
+    z-index: 0 !important
+
+  .btn-light
+    background-color: $white
+    border-color: rgba(0, 0, 0, 0.125)
+
+  &:hover, &:focus
+    .btn-primary:not(.disabled)
+      background: darken($color-primary, 6%)
+
+    .btn-light:not(.disabled)
+      background-color: $gray-200
+      color: darken($color-primary, 15%)
+
+  &:active
+    .btn-primary:not(.disabled)
+      background: darken($color-primary, 12%)
+      border-color: darken($color-primary, 12%)
+
+    .btn-light:not(.disabled)
+      background-color: $gray-300
+      border-color: $gray-300
+      color: darken($color-primary, 25%)
+
+
+$curve: cubic-bezier(0.650, 0.000, 0.450, 1.000)
+
+.completion-checkmark
+  width: 56px
+  height: 56px
+  border-radius: 50%
+  display: block
+  stroke: $white
+  stroke-miterlimit: 10
+  stroke-width: 3
+  box-shadow: inset 0 0 0 $color-success
+  background-color: $gray-lighter
+
+  @media (max-width: $smscreen-max)
+    width: 48px
+    height: 48px
+
+  .checkmark__circle
+    stroke-dasharray: 166
+    stroke-dashoffset: 166
+    stroke-width: 2
+    stroke-miterlimit: 10
+    stroke: $color-success
+    fill: none
+
+  .checkmark__check
+    transform-origin: 50% 50%
+    stroke-dasharray: 48
+    stroke-dashoffset: 48
+
+  &.just-completed
+    animation: completion-fill .4s ease-in-out .4s forwards, completion-scale .3s ease-in-out .9s both
+
+    .checkmark__circle
+      animation: completion-stroke .6s $curve forwards
+
+    .checkmark__check
+      animation: completion-stroke .3s $curve .8s forwards
+
+  &.already-completed
+    box-shadow: inset 0 0 0 30px $color-success
+
+    .checkmark__circle
+      stroke-dashoffset: 0
+
+    .checkmark__check
+      stroke-dashoffset: 0
+
+button.completion-undo-btn
+  padding: 0
+  font-size: .9rem
+
+  &:not(:hover)
+    text-decoration: none
+
+// avoid a size jump when the label changes
+.completion-label
+  width: 8rem
+  white-space: nowrap
+
+.content-plain-index
+  // non-popup inline survey should not fade in
+  @media (max-width: $smscreen-max)
+    .survey-panel:not(.open)
+      opacity: 1
+
+@keyframes completion-stroke
+  100%
+    stroke-dashoffset: 0
+
+@keyframes completion-scale
+  0%, 100%
+    transform: none
+  50%
+    transform: scale3d(1.1, 1.1, 1)
+
+@keyframes completion-fill
+  100%
+    box-shadow: inset 0 0 0 30px $color-success
+

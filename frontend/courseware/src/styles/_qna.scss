@@ -1,0 +1,239 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+$color-remote-user: #dbe5f0;
+$color-local-user: #ffffff;
+$border-local-user: 1px solid $gray-300;
+$bubble-radius: 8px;
+
+.qna-sidebar {
+  background-color: #f4f7fa;
+}
+
+.br-50 {
+  border-radius: 50%;
+}
+
+.chat-body-box {
+  flex-direction: column;
+  background-color: $color-remote-user;
+  border-radius: $bubble-radius;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  display: inline-flex;
+  align-self: start;
+  max-width: calc(100% - 1em);
+
+  &:not(.first) {
+    margin-top: 0;
+  }
+
+  &.local-user {
+    background-color: $color-local-user;
+    display: flex;
+    align-self: end;
+    margin-left: 2rem;
+    border: $border-local-user;
+
+    &:not(.first) {
+      border-top-right-radius: 0;
+    }
+
+    &:not(.last) {
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  &:not(.local-user) {
+    &:not(.first) {
+      border-top-left-radius: 0;
+    }
+
+    &:not(.last) {
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  &.attachment {
+    display: flex;
+    width: 100%;
+
+    .file-preview {
+      padding: 0.5em;
+    }
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .project-file-container {
+    border: none;
+    padding: 0;
+    width: 100%;
+    background: none;
+
+    .file-name {
+      overflow-wrap: break-word;
+      max-width: 60%;
+    }
+  }
+}
+
+.chat-row {
+  display: flex;
+  align-items: center;
+  margin: 0.25rem 0 0 0;
+}
+
+.qna-compose {
+  background-color: $er-dim-white;
+  gap: 0.5em;
+  box-shadow:
+    0 -1px 0 0 $gray-lighter,
+    0 -4px 7px -2px rgb(38 50 56 / 12%);
+
+  .cke {
+    max-height: 25vh;
+  }
+}
+
+.qna-form-control {
+  border: $border-local-user;
+  border-radius: $bubble-radius;
+  resize: none;
+  padding: 0.5rem 0.75rem;
+  background-color: $color-local-user;
+  box-shadow: 0 -2px 4px #f4f7fa;
+}
+
+.qna-attachments {
+  margin-bottom: 0;
+
+  > div {
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  @media (max-width: $smscreen-max) {
+    max-height: 15vh;
+
+    button {
+      display: flex;
+      max-height: 100%;
+    }
+  }
+}
+
+.qna-user-detail {
+  text-decoration: dashed underline;
+}
+
+.staged-file {
+  .qna-attachment-preview {
+    gap: 0.5em;
+    overflow-wrap: break-word;
+  }
+
+  .preview-image {
+    max-width: 25%;
+    object-fit: contain;
+  }
+
+  &.expanded {
+    .qna-attachment-preview {
+      flex-direction: column;
+    }
+
+    .preview-image {
+      max-width: 100%;
+    }
+  }
+}
+
+.qna-close-question {
+  background: $color-white;
+  color: $color-black;
+  border: none;
+  border-radius: $bubble-radius;
+}
+
+.qna-row {
+  transition: all $transition-function $transition-speed;
+
+  h3 {
+    color: $color-primary-against-alert;
+  }
+
+  &:hover {
+    background-color: $gray-100;
+  }
+
+  &.closed {
+    background-color: lighten(#d9edf7, 4%);
+    border-color: #d9edf7;
+
+    &:hover {
+      background-color: #d9edf7;
+    }
+  }
+
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.question-row {
+  &:hover {
+    background-color: #aee0f9 !important;
+  }
+
+  a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+#qna-button:after {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-left: -6px;
+  border-radius: 5px;
+  position: absolute;
+}
+
+#qna-button.has-questions:after {
+  background-color: $gray-600;
+  border: 1px solid $gray-700;
+  content: ' ';
+}
+
+#qna-button.open-question:after {
+  background-color: $color-alert;
+  border: 1px solid darken($color-alert, 0.3);
+  content: ' ';
+}

@@ -1,0 +1,70 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+.fake_thumbnail
+  display: inline-block
+  position: relative
+  overflow: hidden
+  // This is for the use case that we turn off the thumbnailizer
+  .icon
+    display: none
+
+  img
+    max-width: 100%
+    display: block
+
+.fake_thumbnail.expandable
+  cursor: pointer
+
+  .icon
+    display: block
+    position: absolute
+    left: 0
+    top: 0
+    background: $color-white
+    background: $color-translucent-white
+    padding: math.div(1em, 3)
+    border-radius: 0 0 math.div($border-radius, 2) 0
+    transition: background $trans-speed ease, color $trans-speed ease
+    color: $color-contrasted-secondary
+
+  &:hover span, &:active span
+    background: $color-contrasted-secondary
+    color: $color-white
+
+  .icon-minus
+    visibility: hidden
+
+
+  img
+    max-width: 125px
+    margin: 0
+
+.fake_thumbnail.expandable.expanded
+  max-width: 100%
+
+  .icon-plus
+    visibility: hidden
+
+  .icon-minus
+    visibility: visible
+
+  img
+    max-width: inherit
+    max-height: inherit

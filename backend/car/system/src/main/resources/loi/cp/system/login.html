@@ -1,0 +1,227 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>$$action_login</title>
+    <link rel="shortcut icon" href="$$static/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="$$static/styles/underground.css" />
+    <link rel="stylesheet" type="text/css" href="$$static/styles/cp.css" />
+    <script type="text/javascript" src="$$cdn/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="$$cdn/paperjs/0.12.18/paper-full.min.js"></script>
+    <script type="text/javascript" src="$$url/scripts/engine.js"></script>
+    <script type="text/javascript" src="$$static/scripts/de.js"></script>
+    <style type="text/css">
+html {
+  height: 100%;
+}
+body {
+  background: #111;
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+#title {
+  font-family: "Helvetica Neue",Arial,sans-serif;
+  font-size: 64px;
+  font-weight: 0100;
+  color: #ffffff;
+  opacity: 0.5;
+  text-align: center;
+  line-height: 128px;
+
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+.wrap-outer {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #111;
+}
+.wrap-outer:after {
+  background-image: url($$url/images/background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  content: "";
+  min-width: 100%;
+  min-height: 100%;
+  height: auto;
+  width: auto;
+  top: 0;
+  left: 0;
+  opacity: 0.75;
+}
+input {
+  padding: 0 10px !important;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: sans-serif;
+  border: none !important;
+  margin-bottom: 15px;
+}
+input[type=text]:focus, input[type=password]:focus {
+  outline: none;
+}
+input[type=text], input[type=password] {
+  background-color: #454545;
+  color: white;
+  font-weight: 0100;
+  width: 360px;
+  height: 40px;
+}
+input[type=submit] {
+  background-color: #3e6cd7;
+  color: black;
+  font-weight: 0300;
+  margin-left: 15px;
+  height: 95px;
+  transition: background-color .3s;
+}
+form.submitting input[type=submit], input[type=submit]:focus, input[type=submit]:hover {
+  background-color: #6b8bd7;
+  outline: none;
+}
+#login-form {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  padding-left: 60px;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  opacity: .1;
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+#header, #error {
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 0300;
+  color: #eee;
+}
+#header {
+  margin-bottom: 15px;
+}
+#error {
+  display: none;
+  color: #cc3e3e;
+  height: 0;
+}
+#d-e {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  opacity: 0.85;
+}
+    </style>
+    <script type="text/javascript">
+$(function() {
+  startTheEngine();
+
+  $.ajaxSetup({
+    headers: { 'X-CSRF': 'true' }
+  });
+
+  setTimeout(function() {
+      $('#title').css('opacity', '.25');
+      $('#login-form').css('opacity', '1');
+    }, 1);
+
+  function doLogin(username, password, remember) {
+    var q = new $.Deferred();
+    de.ajax({
+        type: 'POST',
+        url: '/api/v2/sessions/login',
+        data: { username: username, password: password, remember: remember },
+        headers: { 'X-Interactive': 'true' }
+    })
+    .done(function(response, text, jqxhr) {
+            q.resolve(response, text, jqxhr);
+        })
+        .fail(function(jqxhr, status, error) {
+            q.reject(jqxhr, status, error);
+        });
+    return q.promise();
+  }
+
+  $('#login-form').submit(function(e, submit) {
+    if (submit == 'post') {
+      return true;
+    }
+    $('#error').hide();
+    $('#login-form').addClass('submitting');
+    var username = $('#username').val();
+    var password = $('#password').val();
+    doLogin(username, password, false)
+    .done(function(response, text, jqxhr) {
+      $('#login-form').trigger('submit', 'post');
+    })
+    .fail(function(jqxhr, status, error) {
+      $('#login-form').removeClass('submitting');
+      $('#error').show();
+      $('#error').addClass('reason-' + (error && error.reason));
+      $('#password').focus();
+    });
+    return false;
+  });
+
+ });
+    </script>
+  </head>
+  <body>
+    <div class="wrap-outer"></div>
+    <div id="title">${ Current.domainDTO.name }</div>
+    <form id="login-form" method="POST" action="/api/v2/sessions/loginRedirect">
+      <div id="header">$$action_login</div>
+      <div>
+        <table cellspacing="0" cellpadding="0">
+          <tr>
+            <td>
+              <input id="username" tabindex="1" type="text" name="username" autocomplete="username" placeholder="$$user_userName" autofocus="autofocus" />
+            </td>
+            <td rowspan="2">
+              <input id="login" tabindex="3" type="submit" value="$$action_ok" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="password" tabindex="2" type="password" name="password" autocomplete="current-password" placeholder="$$user_password" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="error">Invalid username or password.</div>
+    </form>
+
+    <canvas id="d-e"></canvas>
+  </body>
+</html>

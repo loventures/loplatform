@@ -1,0 +1,108 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Results specific items
+// Imported into quiz-common
+////////////////////////////////////////////////////////////////////////////////////
+.quiz-results-with-score-panel
+  @extend .mt-3
+  display: flex
+  flex-direction: column
+  align-items: stretch
+
+  .chart-results-wrap
+    text-align: center
+    display: flex
+    flex-direction: column
+    align-items: center
+
+
+  &.show-side-score-panel
+
+    .chart-results-wrap
+      width: 16em
+      display: block
+      margin: 0 auto
+
+      .chart-quiz-results
+        width: auto
+
+      .results-info
+        width: auto
+
+    @include media-breakpoint-up(lg)
+      flex-direction: row-reverse
+      align-items: flex-start
+      justify-content: space-between
+      column-gap: 1rem
+      > .score-panel
+        flex: 0 0 calc(25% - 2rem)
+
+      > .results-question-list
+        flex: 1 1 75%
+        max-width: 75%
+
+  .score-panel
+    text-align: center
+
+  .chart-results-wrap
+
+    @include media-breakpoint-down(lg)
+      font-size: 0.85em
+
+    @include media-breakpoint-down(md)
+      font-size: 0.75em
+      .btn
+        @include apply-btn-sm()
+
+    .score
+      font-size: 4em
+
+    .horseshoe-chart
+      width: 16em
+      height: 16em
+      position: relative
+      transition: transform $trans-speed $trans-type
+      @extend .flex-center-center
+
+      .horseshoe-svg
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+
+        .horseshoe-arc-correct
+          stroke: $success
+
+        .horseshoe-arc-incorrect
+          stroke: $danger
+
+#quiz-results-questions-anchor
+  > li:last-child
+    > hr:last-child
+      display: none
+
+.new-attempt
+  background: white
+  padding: $list-group-item-padding-y $list-group-item-padding-x
+  white-space: normal
+
+.alert
+  .review-now
+    color: $color-primary-against-alert

@@ -1,0 +1,104 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="mp-player-controls">
+  <div
+    class="mp-player-control-btns"
+    ng-if="$ctrl.displayConfidenceIndicators && $ctrl.canEditAnswer"
+  >
+    <span
+      class="sr-only"
+      translate="Question Answer Confidence Buttons"
+    ></span>
+
+    <button
+      class="btn"
+      ng-repeat="buttonConfig in $ctrl.confidenceButtons"
+      ng-class="{
+        'btn-primary': $ctrl.selectedConfidence === buttonConfig.value,
+        'btn-outline-primary': $ctrl.selectedConfidence !== buttonConfig.value
+      }"
+      ng-disabled="!$ctrl.canSubmitQuestion"
+      ng-click="$ctrl.submitQuestion(buttonConfig.value)"
+      ng-bind="buttonConfig.label | translate"
+    ></button>
+  </div>
+
+  <div
+    class="mp-player-control-btns"
+    ng-if="!$ctrl.displayConfidenceIndicators && $ctrl.canEditAnswer"
+  >
+    <button
+      class="btn btn-primary submit-question"
+      ng-disabled="!$ctrl.canSubmitQuestion"
+      ng-click="$ctrl.submitQuestion()"
+    >
+      <span
+        ng-if="!$ctrl.isSubmitting"
+        translate="QUIZ_MP_SUBMIT_QUESTION"
+      ></span>
+      <loading-spinner ng-if="$ctrl.isSubmitting"></loading-spinner>
+    </button>
+  </div>
+
+  <div
+    class="mp-player-control-btns"
+    ng-if="$ctrl.canSkipQuestion && $ctrl.canEditAnswer"
+  >
+    <button
+      class="btn btn-light skip-question"
+      ng-click="$ctrl.skipQuestion()"
+      translate="QUIZ_MP_SKIP_QUESTION"
+    ></button>
+  </div>
+
+  <div
+    class="mp-player-control-btns"
+    ng-if="!$ctrl.canEditAnswer && !$ctrl.isLastQuestion"
+  >
+    <button
+      class="btn btn-primary next-question"
+      ng-click="$ctrl.nextQuestion()"
+      translate="QUIZ_MP_NEXT_QUESTION"
+    ></button>
+  </div>
+
+  <div
+    class="mp-player-control-btns"
+    ng-if="$ctrl.isLastQuestion"
+  >
+    <quiz-submit-button
+      ng-if="$ctrl.canSubmitQuiz"
+      can-submit="$ctrl.canSubmitQuiz"
+      unanswered-questions="$ctrl.unansweredQuestions"
+      on-attempt="$ctrl.onAttempt"
+      max-attempts="$ctrl.maxAttempts"
+      submit-quiz="$ctrl.submitQuiz"
+      show-warning="$ctrl.showSubmitWarning"
+      enable-autofocus="true"
+      is-checkpoint="$ctrl.isCheckpoint"
+    ></quiz-submit-button>
+  </div>
+
+  <div
+    class="unsaved-warning alert alert-warning"
+    ng-if="$ctrl.warnUnsaved && $ctrl.hasUnsavedChanges"
+  >
+    <i class="icon-warning"></i>
+    <span translate="AssessmentSaveWarningMsg"></span>
+  </div>
+</div>

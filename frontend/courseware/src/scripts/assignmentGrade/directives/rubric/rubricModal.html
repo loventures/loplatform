@@ -1,0 +1,47 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<header class="modal-header">
+  <h1
+    class="modal-title"
+    translate="RUBRIC_MODAL_HEADER"
+  ></h1>
+  <button
+    class="btn-close"
+    ng-click="$ctrl.dismiss()"
+    title="{{'MODAL_CLOSE' | translate}}"
+    aria-label="{{'MODAL_CLOSE' | translate}}"
+  ></button>
+</header>
+
+<div class="modal-body old-grader">
+  <ul class="list-unstyled">
+    <li ng-repeat="section in $ctrl.resolve.rubric.sections track by section.index">
+      <rubric-section-read-only
+        class="rubric-accordion-section"
+        ng-class="{
+          'active-section': section.index === $ctrl.activeIndex
+        }"
+        section="section"
+        title-icon="'icon-chevron-down'"
+        title-action="$ctrl.makeActive"
+        show-level-desc="true"
+        hide-feedback="true"
+      ></rubric-section-read-only>
+    </li>
+  </ul>
+</div>

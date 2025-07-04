@@ -1,0 +1,168 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Matching
+// Imported into quiz-common
+////////////////////////////////////////////////////////////////////////////////////
+.matching-question
+
+  .matching-question-play
+    display: flex
+    flex-direction: row
+    .matching-list
+      flex: 0 0 45%
+    .matching-status-list
+      flex: 0 0 10%
+
+  .matching-question-play .matching-list,
+  .matching-question-play .matching-status-list
+    position: relative
+
+    .match-term,
+    .match-definition,
+    .matching-line
+      width: 100%
+
+    .match-term,
+    .match-definition,
+    .matching-line,
+    .matching-arrow
+      position: absolute
+      transition: top ease $trans-speed
+
+  .matching-question-play
+    .matching-list
+      padding-top: 10px
+      padding-bottom: 10px
+      border-bottom: 3px solid transparent
+      border-top: 3px solid transparent
+      &.active
+        border-color: $info
+    div.matching-list
+      padding-top: 0
+      padding-bottom: 0
+
+  .matching-results-list
+    .match-results-line
+      @extend .mb-3
+      display: flex
+      flex-direction: row
+      align-items: flex-start
+      .match-item
+        flex: 0 0 45%
+      .matching-line
+        flex: 1 1 10%
+
+  .layout-grid-cell.simple-cell
+    &:focus-within
+      outline: 2px dashed $color-primary
+      outline-offset: 2px
+
+  .match-item
+    /*kills margin collapsing*/
+    display: flex
+    overflow: hidden
+
+    .match-item-button:focus
+      box-shadow: none !important
+      outline: none
+
+    .match-item-content
+      flex-basis: 100%
+      @extend .p-2
+      border: 1px solid
+      border-radius: $border-radius
+      word-wrap: break-word
+      overflow: hidden
+
+  .matching-question-play .match-item
+    position: absolute
+    width: 100%
+    &:not(.active).matched
+      .match-item-content
+        @extend .btn-primary
+    &.active
+      .match-item-content
+        @extend .btn-info
+    &:not(.active):not(.matched)
+      .match-item-content
+        @extend .btn-outline-primary
+
+  .matching-results-list
+    .match-results-line
+      justify-content: space-between
+      align-items: center
+      &.answer
+        margin-top: -.5rem
+      .correctness
+        margin-left: -2.5rem
+        margin-right: .5rem
+        width: 2rem
+        flex-shrink: 0
+        display: flex
+        align-items: center
+        svg
+          width: 2rem
+          height: 2rem
+    .match-results-line.correct
+      .match-item-content
+        color: $white
+        background: $success
+        border-color: $success
+      .correctness
+        color: $success
+    .match-results-line.incorrect
+      .match-item-content
+        color: $white
+        background: $danger
+        border-color: $danger
+      .correctness
+        color: $danger
+    .match-results-line.answer
+      .match-item-content
+        color: $white
+        background: $primary
+        border-color: $primary
+
+  .matching-line
+    height: 4px
+    border-bottom: 4px solid transparent
+    width: 100%
+
+  .matching-status-list
+    .matching-line
+      height: calc(1.75em - 2px)
+
+  .matching-arrow
+    font-size: 2em
+    &.arrow-left
+      left: 0.5em
+    &.arrow-right
+      right: 0.5em
+
+
+  /*visibility is dealt with*/
+  .matched .matching-line,
+  .matching-question-play .matching-line
+    border-color: $primary
+
+  .matched.correct .matching-line
+    border-color: $success
+
+  .matched.incorrect .matching-line
+    border-color: $danger

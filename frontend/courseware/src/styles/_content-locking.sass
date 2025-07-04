@@ -1,0 +1,90 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.content-lockable-container
+  position: relative
+
+  .content-lock-icon
+    position: absolute
+    z-index: 1
+
+  .lock-popover-hover-area
+    z-index: 2
+    opacity: 0.2
+    background-color: $dark
+
+  &:not(.card-view)
+    .content-lock-icon
+      top: calc(50% - (1.75rem / 2)) // 1.75 rem is the .h3 font-size
+      right: 1.25rem
+
+  &.card-view
+    .content-lock-icon
+      bottom: 0.5rem
+      left: 0.5rem
+
+  &.show-lock-icon
+    .content-view-top-row
+      padding-right: 2em
+
+.locks-trigger-area
+  position: absolute
+  height: 100%
+  width: 100%
+  cursor: not-allowed
+
+.lock-popover-hover-area
+  position: absolute
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  cursor: pointer
+
+.locked-message
+  margin-bottom: 0.75em
+  &:last-child
+    margin-bottom: 0em
+
+.locked-page-container
+  margin-top: 3em
+  display: flex
+  flex-flow: column
+  align-items: center
+  justify-content: center
+
+  .lock-info-container
+    display: flex
+    flex-flow: column
+
+  .locked-page-title
+    margin-top: 0em
+
+  .lock-info
+    margin-bottom: 1.5em
+    padding: 0 1em
+
+  .icon-lock
+    font-size: 7em
+
+.tooltip-info
+  // a11y requires this to avoid flashy mcseizureface on hover
+  pointer-events: none
+
+  .tooltip-inner
+    width: 16rem

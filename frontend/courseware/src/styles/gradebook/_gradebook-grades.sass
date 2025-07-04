@@ -1,0 +1,256 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.gradebook-grades
+  //////////////////////////////////////////////////
+  //Table arrangements
+  .gradebook-tables-panel
+    display: flex
+    position: relative
+    align-items: flex-start
+
+  .gradebook-tables-panel .grade-tables-scroller
+    flex: 1 1 auto
+    display: flex
+    flex-direction: row
+    align-items: stretch
+    overflow: hidden
+
+    @include media-breakpoint-down(lg)
+      .scroll-left,
+      .scroll-right
+        display: none
+
+  .gradebook-tables-panel .grade-tables
+    flex: 1 1 auto
+    overflow-x: scroll
+    overflow-y: hidden
+    position: relative
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+
+  .gradebook-table
+    border-radius: $border-radius
+    overflow: hidden
+    border: none
+    th, td, tr
+      border: none
+      padding: 0
+
+  .gradebook-tables-panel > .gradebook-table,
+  .gradebook-tables-panel .grade-tables > .gradebook-table
+    flex-shrink: 0
+    flex-grow: 0
+    margin-left: 0.25rem
+    margin-right: 0.25rem
+
+  .gradebook-table-collapsed-button
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    .table-collapse-indicator
+      display: flex
+      flex-direction: row
+      align-items: flex-start
+      .line-in-middle
+        display: block
+        overflow: hidden
+        width: 0
+        height: 10rem
+        border-left: 1px $primary solid
+        border-right: 1px $primary solid
+      .icon
+        margin-top: 0.5rem
+
+  //////////////////////////////////////////////////
+  //Tables animation
+  .gradebook-table
+    transition: all 0.5s
+    transform-origin: left center
+    overflow: hidden
+
+  .gradebook-table-collapsed-button
+    transition: all 0.5s
+    transform-origin: left center
+
+    &.gradebook-table-collapsed-button-enter,
+    &.gradebook-table-collapsed-button-exit-active.gradebook-table-collapsed-button-exit-active
+      width: 0
+
+    &.gradebook-table-collapsed-button-enter-active.gradebook-table-collapsed-button-enter-active,
+    &.gradebook-table-collapsed-button-exit
+      width: 2rem
+
+  //////////////////////////////////////////////////
+  $table-column-width: 8rem //good for NNNN / NNNN for display and NNN / NNN for editing
+  $overall-column-width: 9rem  //good for NNNNN / NNNNN
+  $names-column-width: 10rem
+  $top-row-height: 3rem
+  $second-row-text-height: 6.75rem
+  $second-row-button-height: 1.5rem
+  //////////////////////////////////////////////////
+  //Table headers
+  .gradebook-table thead
+    .category-header
+      background-color: darken($primary, 15%)
+      .header-text, a
+        color: $color-white
+
+    .column-header
+      background-color: $primary
+      .header-text, a, button
+        color: $color-white
+
+    .category-header-cell
+      display: flex
+      flex-direction: row
+      align-items: center
+      height: $top-row-height
+      padding: 0.5rem
+      .header-text
+        flex: 1 1 auto
+
+      .icon-chevron-right,
+      .icon-chevron-left
+        font-weight: 900
+        font-size: 1rem
+
+    .column-header-cell
+      display: flex
+      flex-direction: column
+      align-items: center
+      width: $table-column-width
+
+      .header-text
+        font-size: 0.8rem
+        height: $second-row-text-height
+
+        &:last-child
+          height: $second-row-text-height + $second-row-button-height
+
+      .lti-sync-status-link
+        height: $second-row-button-height
+        padding: 0.125rem
+        .material-icons
+          font-size: 1.25rem
+
+    .names-header-cell
+      height: $top-row-height
+      width: $names-column-width
+      display: flex
+      justify-content: center
+      align-items: center
+      @media (max-width: $lgscreen)
+        max-width: $names-column-width - 2rem
+
+      @media (max-width: $mdscreen)
+        max-width: $names-column-width - 4rem
+
+    .names-header-cell,
+    .column-header-cell,
+    .category-header-cell
+      .header-text
+        text-align: center
+        overflow: hidden
+
+    .category-header-cell
+      .header-text
+        white-space: nowrap
+        text-overflow: ellipsis
+
+
+  .gradebook-table.overall-table
+    .column-header-cell,
+    .grade-body-cell
+      width: $overall-column-width
+
+  .gradebook-table.names-table
+    margin-top: $second-row-text-height + $second-row-button-height
+
+
+  //////////////////////////////////////////////////
+  //Table body cells
+  .gradebook-table
+    tbody
+      tr:nth-child(odd)
+        background-color: $color-white
+      tr:nth-child(even)
+        background-color: $color-lightest
+
+    .grade-body-cell
+      height: 3.5rem
+      display: flex
+      flex-direction: row
+      align-items: center
+      white-space: nowrap
+      width: $table-column-width
+      position: relative
+      padding: 0.25rem
+
+      .grade-cell-edit-button
+        @extend %btn-reset
+
+      .grade-cell-edit-button,
+      .grade-cell-no-edit
+        flex: 1 0 auto
+        align-self: stretch
+        border-radius: $border-radius
+        @extend %flex-center-center
+
+      .lti-sync-status-link
+        width: 1.5rem
+        padding: 0.125rem
+        line-height: 1
+        .material-icons
+          font-size: 1.25rem
+
+      &.late-submission
+        .grade-cell-edit-button,
+        .grade-cell-no-edit
+          box-shadow: 0 0 3px $color-alert inset
+
+    &.names-table
+      .grade-body-cell
+        width: $names-column-width
+        padding: 0.125rem
+        line-height: 1.2
+        a
+          width: 100%
+          overflow: hidden
+          .name-text
+            overflow: hidden
+            text-overflow: ellipsis
+            display: inline-block
+            max-width: 100%
+            text-decoration: underline
+            white-space: nowrap
+          &[aria-disabled=true]
+            pointer-events: none
+            .name-text
+              text-decoration: none
+              color: $gray-600
+
+        @media (max-width: $lgscreen)
+          max-width: $names-column-width - 2rem
+
+        @media (max-width: $mdscreen)
+          max-width: $names-column-width - 4rem
+
+      .show-external-ids
+        font-size: 0.8rem

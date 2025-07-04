@@ -1,0 +1,64 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+.discussion-preview
+  .icon.icon-bubbles
+    align-self: flex-start
+
+  .discussion-stats-box
+    @extend .alert
+    @extend .box-shadow
+    padding: 0.75em 0
+    background-color: $light
+    text-align: center
+    min-width: 6em
+
+    .stats-box-label
+      font-size: 0.75em
+
+    .stats-box-stats
+      color: $secondary
+
+  .title
+    color: $primary
+
+  .discussion-preview-title-row
+    flex: 1 1 auto
+    display: flex
+    flex-direction: row
+    align-items: flex-start
+
+    .tooltip-inner
+      width: 50vw
+
+.discussion-preview.locked
+  background-color: $light
+  .discussion-preview-title-row
+    color: $dark
+    justify-content: space-between
+
+    locks-widget
+      @extend .h3
+  &:hover
+    cursor: not-allowed
+
+.discussion-preview-list
+  @extend .list-unstyled
+  .discussion-preview
+    margin: math.div($grid-gutter-width, 2) 0

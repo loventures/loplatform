@@ -1,0 +1,96 @@
+/*
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/* dark: ${color.dark}
+   medium: ${color.medium}
+   light: ${color.light} */
+
+.portlet,
+.cp_tabs li,
+.cp_tabBodyWrapper,
+.contentFooterBody,
+.contentFooterTabArea,
+.previewIndicator,
+.pageLoadingIndicator div,
+.contentTable,
+.contentItem,
+.contentEntry,
+.cp_contentHeaderWarning,
+.cp_form_inner,
+.cp_table,
+.cp_showAllComments:hover,
+.cp_comment,
+.cp_commentReply .cp_comment,
+.cp_darkBorder,
+.cp_darkBorderHover:hover {
+    border-color: ${color.dark};
+}
+
+th.dataTableHeader,
+input.button,
+a.buttonLink:visited,
+a.buttonLink:link,
+a.buttonLink,
+.contentFooterTabActive,
+.portletHeader,
+.cp_filterBar,
+.darkBackground,
+.cp_navigationBar,
+.cp_darkBackground,
+.cp_darkBackgroundHover:hover {
+    background-color: ${color.dark};
+}
+
+.evenRow,
+.comment .commentHeader,
+.contentEntryHeaderBlock,
+.contentItemHeaderBlock,
+.contentEntryFooter,
+input.button:focus,
+input.button:hover,
+a.buttonLink:focus,
+a.buttonLink:hover,
+.cp_mediumBackground,
+.cp_mediumBackgroundHover:hover {
+    background-color: ${color.medium};
+}
+
+.stepHeader,
+.dataElementLabel,
+.cp_mediumBorder,
+.cp_mediumBorderHover:hover {
+    border-color: ${color.medium};
+}
+
+.oddRow,
+.addContent:hover,
+.addContent-expanded,
+.cp_page,
+.cp_contentHeader,
+.cp_pageSidebar,
+.cp_showAllComments,
+.cp_lightBackground,
+.cp_lightBackgroundHover:hover {
+    background-color: ${color.light};
+}
+
+.cp_showAllComments,
+.cp_lightBorder,
+.cp_lightBorderHover:hover {
+  border-color: ${color.light};
+}
+

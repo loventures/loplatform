@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="$$Locale">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="x-ua-compatible"
+      content="IE=edge"
+    />
+    <meta
+      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="theme-color"
+      content="#000000"
+    />
+
+    <% if(isDev){ %>
+    <link
+      rel="shortcut icon"
+      href="/Domain/Media/favicon.ico"
+    />
+    <% } else { %>
+    <link
+      rel="shortcut icon"
+      href="${ Current.domainDTO.favicon.url }"
+    />
+    <% } %>
+
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Open+Sans:300,400,700"
+      type="text/css"
+    />
+
+    <% if(isDev){ %>
+    <script>
+      window.locale = 'en-US';
+      window.lo_static_url = '';
+      window.lo_base_url = '';
+      window.isDev = true;
+    </script>
+    <% } else { %>
+    <script>
+      window.locale = '$$Locale';
+      window.lo_static_url = '$$url/';
+      window.lo_base_url = '${binding.path}';
+    </script>
+    <% } %>
+
+    <title>$$lo.platform</title>
+    <style type="text/css">
+      .admin-loading {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 48px;
+        font-weight: 100;
+        letter-spacing: 3px;
+        line-height: 1;
+        position: absolute;
+        width: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -100%);
+        -webkit-transform: translate(-50%, -100%);
+        animation: fade 5s forwards;
+        -webkit-animation: fade 5s forwards;
+      }
+      @keyframes fade {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+      @-webkit-keyframes fade {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="admin">
+    <div id="root"><div class="admin-loading">$$placeholders.loading</div></div>
+    <script
+      type="module"
+      src="/src/analytics/index.tsx"
+    ></script>
+  </body>
+</html>

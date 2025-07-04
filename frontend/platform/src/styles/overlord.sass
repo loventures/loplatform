@@ -1,0 +1,768 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+body
+  background-color: #004439 !important
+  background-image: url(../imgs/overlordDomain.webp)
+  background-repeat: no-repeat
+  background-attachment: fixed
+  background-position: center
+  overflow-x: hidden
+
+  &.off
+    animation: turn-off 1s forwards cubic-bezier(0.230, 1.000, 0.320, 1.000)
+
+  .navbar
+    position: fixed
+    top: 0
+    width: 100%
+    z-index: 1020
+    transition: top .3s ease-in
+
+    ol.breadcrumb
+      background: transparent
+      margin-bottom: 0
+
+    .breadcrumb-item
+      a
+        color: #111
+        transition: color .3s ease-in
+
+    .octo-wannabe
+      position: absolute
+      top: -3rem
+      left: calc(50vw - 4.5rem)
+      width: 9rem
+      transition: all linear .3s
+      animation: wannabounce 30s infinite
+      pointer-events: none
+
+    .octo-wrapper
+      cursor: not-allowed
+      z-index: 1000
+      position: absolute
+      left: 0
+      top: 0
+      transform: scale(.1)
+      transition: all .3s linear
+      opacity: 1
+
+      .tentacle
+        div
+          transition: all .5s ease-in
+
+      &:hover
+        .tentacle
+          div
+            bottom: .5em
+            height: 1.5em
+
+    .navbar-brand
+      padding-top: 0
+      padding-bottom: .5rem
+      position: absolute
+      left: 50%
+      transform: translate(-50%, 0)
+      color: white !important
+      text-shadow: 0 0 1px rgba(0,0,0,.5)
+      z-index: 2
+
+  .anonymous .navbar
+    top: -57px
+
+  .react-bs-container-header th
+    background-color: rgba(255,255,255,.9) !important
+
+  .react-bs-container-body td
+    background-color: rgba(255,255,255,.85) !important
+
+  .reactTable-bsTable td, .reactTable-bsTable th
+    border-color: rgba(160,160,160,.5)
+
+  div.eye
+    width: 16px
+    height: 14px
+    opacity: .15
+    border: 0px solid black
+    border-radius: 7px
+    position: fixed
+    z-index: -1
+
+  div.left-eye
+    left: calc(50% - 55px)
+    top: calc(50% - 112px)
+    animation: eyeAnimation 1.2s infinite
+    -webkit-animation: eyeAnimation 1.2s infinite
+
+  div.right-eye
+    left: calc(50% + 40px)
+    top: calc(50% - 112px)
+    animation: eyeAnimation 1.3s infinite
+    -webkit-animation: eyeAnimation 1.3s infinite
+
+  .modal-backdrop.no-backdrop
+    opacity: 0 !important
+
+  .overlorde
+    position: fixed
+    z-index: -100
+    top: calc(50% + 145px)
+    left: calc(50% - 142px)
+
+    > .overimg
+      content: ""
+      position: absolute
+      width: 289px
+      height: 88px
+      top: 0
+      left: 0
+      background-image: url(../imgs/overLorde.png)
+      background-repeat: no-repeat
+      background-position: center
+      opacity: .33
+      transition: opacity 1s ease-in
+
+  .unloaded
+    .overlorde
+      > .overimg
+        opacity: 0
+
+  .anonymous:not(.unloaded)
+    .overlorde
+      > .overimg
+        opacity: 1
+
+  #overlord-portal.singular
+    .portal-card
+      margin-top: calc(50vh - 11rem)
+      height: 16rem
+
+      .portal-card-link
+        height: 16rem
+
+        .portal-card-icon
+          font-size: 192px
+
+        .portal-card-title
+          font-size: 28px
+
+        &:hover
+          .portal-card-icon
+            font-size: 224px
+
+  #overlord-login
+    margin-top: 10rem
+
+    label
+      color: #eee
+      margin-bottom: .25rem
+
+    .modal-body
+      padding: 2rem 2.25rem 1rem 2.25rem
+
+    .modal-footer
+      border: none
+      padding: 1rem 2.25rem 2.75rem 2.25rem
+
+    .modal-content
+      background-color: rgba(255, 255, 255, .3)
+      border-color: rgba(255, 255, 255, .7)
+
+    .invalid-feedback
+      font-size: .9rem
+      text-shadow: 0 0 5px rgba(0,68,57,1)
+
+  .overlord
+    padding-top: calc(1rem + 56px)
+
+    &.Production
+      .bg-charming
+        background-color: #c30
+
+  .bg-charming
+    background-color: #5db32b
+    box-shadow: 1px 1px 24px rgba(0, 0, 0, 0.5)
+
+    .btn
+      transition: color .3s ease-in
+      background: transparent
+      padding: .25rem .375rem
+      margin-top: 0
+      line-height: 1
+
+      &:hover, &:focus
+        color: #555
+
+    .breadcrumb-item.active, .breadcrumb-item+.breadcrumb-item::before
+      color: #444
+
+  .portal-card
+    height: 10rem
+    margin-top: .75rem
+    margin-bottom: .75rem
+    position: relative
+    display: inline-block
+
+  .bottom-right-link
+    position: absolute
+    right: 1.15rem
+    bottom: 0.25rem
+    color: #ccc
+    text-decoration: none !important
+    transition: .3s ease-in
+    background-color: rgba(255,255,255,0)
+    border: 1px solid rgba(255, 255, 255, 0)
+    border-radius: .3em
+    transition: .3s ease-in
+    padding: .25em .5em
+
+    .peter
+      background: transparent
+      border: 1px solid white
+      border-radius: .3em
+      position: absolute
+      top: 0
+      left: 0
+      box-sizing: border-box
+      width: 100%
+      height: 100%
+      opacity: 0
+
+    &:hover, &:focus
+      color: white
+      background-color: rgba(255,255,255,.25)
+      border: 1px solid rgba(255, 255, 255, .5)
+      animation: sql4ever .5s forwards
+      .peter
+        animation: xmlrulz .5s .5s forwards infinite
+
+  .startupTaskFailure
+    .portal-card-link
+      background-color: rgba(255, 160, 160, .2)
+      .portal-card-icon
+        color: rgba(255, 128, 128, .5)
+      &:hover, &:focus
+        background-color: rgba(255, 128, 128, .25)
+        .portal-card-icon
+          color: rgba(255, 64, 64, .6)
+
+  .startupTaskInProgress
+    .portal-card-link
+      background-color: rgba(255, 224, 160, .2)
+      .portal-card-icon
+        color: rgba(255, 192, 128, .5)
+      &:hover, &:focus
+        background-color: rgba(255, 192, 128, .25)
+        .portal-card-icon
+          color: rgba(255, 128, 64, .6)
+
+  .unhealthy
+    .portal-card:nth-child(2n)
+      .portal-card-link
+        transform: translate(-50%, -50%) rotate(-5deg) scale(1)
+      &:hover, &:focus
+        .portal-card-link
+          transform: translate(-50%, -50%) rotate(-7deg) scale(1.1)
+    .portal-card:nth-child(3n)
+      .portal-card-link
+        transform: translate(-50%, -50%) rotate(10deg) scale(1)
+      &:hover, &:focus
+        .portal-card-link
+          transform: translate(-50%, -50%) rotate(13deg) scale(1.1)
+    .portal-card:nth-child(5n)
+      .portal-card-link
+        transform: translate(-50%, -50%) rotate(-7deg) scale(1)
+      &:hover, &:focus
+        .portal-card-link
+          transform: translate(-50%, -50%) rotate(-9deg) scale(1.1)
+    .portal-card:nth-child(7n)
+      .portal-card-link
+        transform: translate(-50%, -50%) rotate(7deg)
+      &:hover, &:focus
+        .portal-card-link
+          transform: translate(-50%, -50%) rotate(9deg) scale(1.1)
+
+  .portal-card-link
+    background-color: rgba(255,255,255,0.1)
+    border: 1px solid rgba(255,255,255,.25)
+    color: white
+    border-radius: .3rem
+    width: 100%
+    height: 10rem
+    display: block
+    position: relative
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%) scale(1)
+    transition: .3s ease-in
+
+    .portal-card-icon
+      font-size: 128px
+      color: rgba(255,255,255,.5)
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      transition: .3s ease-in
+
+    .portal-card-title
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      font-size: 20px
+      text-decoration: none !important
+      white-space: nowrap
+      transition: .3s ease-in
+      color: #eee
+      text-shadow: 0 0 1px rgba(0,0,0,.5)
+
+    &:hover, &:focus
+      background-color: rgba(255,255,255,.25)
+      border-color: rgba(255,255,255,.5)
+      transform: translate(-50%, -50%) scale(1.1)
+
+      .portal-card-icon
+        font-size: 144px
+
+      .portal-card-title
+        color: #fff
+
+  .overHome
+    position: relative
+
+    &:after
+      content: '..'
+      position: absolute
+      left: 50%
+      transform: translate(-50%, -33px)
+      font-size: 32px
+      opacity: 0
+      transition: opacity .3s ease-in
+
+    &:hover:after, &:focus:after
+      opacity: 1
+
+  .modal-backdrop
+    background-color: #004439
+
+  /* configurations overrides */
+
+  .schema-form
+    color: #ccc
+
+  p.field-description
+    color: #999
+
+#session-expired
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  color: white
+  animation: beat .7s linear infinite
+  transform-origin: center
+
+@keyframes beat
+  0%
+    transform: translate(-50%, -50%) scale(1)
+  30%
+    transform: translate(-50%, -50%) scale(1)
+  40%
+    transform: translate(-50%, -50%) scale(1.08)
+  50%
+    transform: translate(-50%, -50%) scale(1)
+  60%
+    transform: translate(-50%, -50%) scale(1)
+  70%
+    transform: translate(-50%, -50%) scale(1.05)
+  80%
+    transform: translate(-50%, -50%) scale(1)
+  100%
+    transform: translate(-50%, -50%) scale(1)
+
+#overlord-page
+  transition: opacity 0.5s ease-out
+
+#overlord-frame
+  border: none
+  margin-top: -1rem
+  height: calc(100vh - 56px)
+  width: 100%
+  display: block
+  background: transparent
+  transition: opacity 0.5s ease-out
+
+@keyframes eyeAnimation
+  0%
+    opacity: .07
+    background-color: #b33d2b
+  50%
+    opacity: .24
+    background-color: #b33d2d
+  100%
+    opacity: .07
+    background-color: #b33d2b
+
+@keyframes turn-off
+  0%
+    transform: scale(1,1.3) translate3d(0,0,0)
+    -webkit-filter: brightness(1)
+    filter: brightness(1)
+    opacity: 1
+
+  60%
+    transform: scale(1.3,0.001) translate3d(0,0,0)
+    -webkit-filter: brightness(10)
+    filter: brightness(10)
+
+  100%
+    transform: scale(0.000,0.0001) translate3d(0,0,0)
+    -webkit-filter: brightness(50)
+    filter: brightness(50)
+
+#portal-card-CacheStatistics a:hover
+  animation: shake 0.41s cubic-bezier(.36,.07,.19,.97) infinite
+
+#portal-card-Configurations
+  >.portal-card-link
+    >.portal-card-icon
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+    &:hover,&:active
+      >.portal-card-icon
+        animation: rotate 60s ease-in infinite
+
+.unhealthy #portal-card-Configurations >.portal-card-link >.portal-card-icon
+  animation: rotate 30s ease-in infinite
+
+#portal-card-LogWatch
+  >.portal-card-link
+    >.portal-card-icon
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+    &:hover,&:active
+      >.portal-card-icon
+        animation: blink 10s linear infinite
+
+.unhealthy #portal-card-LogWatch >.portal-card-link >.portal-card-icon
+  animation: blink 8s linear infinite
+
+.portal-card
+  transform-origin: 50% 0
+  transform-style: preserve-3d
+  opacity: 0
+  animation: falldown .5s ease-in 0s 1 normal forwards
+
+@media (min-width: 576px)
+  .portal-card
+    &:nth-child(1)
+      animation-delay: .1s
+    &:nth-child(2),&:nth-child(3)
+      animation-delay: .2s
+    &:nth-child(4),&:nth-child(5)
+      animation-delay: .3s
+    &:nth-child(6),&:nth-child(7)
+      animation-delay: .4s
+    &:nth-child(8),&:nth-child(9)
+      animation-delay: .5s
+    &:nth-child(10),&:nth-child(11)
+      animation-delay: .6s
+    &:nth-child(12),&:nth-child(13)
+      animation-delay: .7s
+    &:nth-child(14),&:nth-child(15)
+      animation-delay: .8s
+    &:nth-child(16),&:nth-child(17)
+      animation-delay: .9s
+    &:nth-child(18),&:nth-child(19)
+      animation-delay: 1s
+    &:nth-child(20),&:nth-child(21)
+      animation-delay: 1.1s
+    &:nth-child(22),&:nth-child(23)
+      animation-delay: 1.2s
+
+@media (min-width: 768px)
+  .portal-card
+    &:nth-child(1)
+      animation-delay: .1s
+    &:nth-child(2),&:nth-child(4)
+      animation-delay: .2s
+    &:nth-child(3),&:nth-child(5),&:nth-child(7)
+      animation-delay: .3s
+    &:nth-child(6),&:nth-child(8),&:nth-child(10)
+      animation-delay: .4s
+    &:nth-child(9),&:nth-child(11),&:nth-child(13)
+      animation-delay: .5s
+    &:nth-child(12),&:nth-child(14),&:nth-child(16)
+      animation-delay: .6s
+    &:nth-child(15),&:nth-child(17),&:nth-child(19)
+      animation-delay: .7s
+    &:nth-child(18),&:nth-child(20),&:nth-child(22)
+      animation-delay: .8s
+    &:nth-child(21),&:nth-child(23),&:nth-child(25)
+      animation-delay: .9s
+
+@media (min-width: 1200px)
+  .portal-card
+    &:nth-child(1)
+      animation-delay: .1s
+    &:nth-child(2),&:nth-child(5)
+      animation-delay: .25s
+    &:nth-child(6)
+      animation-delay: .31s
+    &:nth-child(3),&:nth-child(9)
+      animation-delay: .4s
+    &:nth-child(7),&:nth-child(10)
+      animation-delay: .43s
+    &:nth-child(11)
+      animation-delay: .52s
+    &:nth-child(4),&:nth-child(13)
+      animation-delay: .55s
+    &:nth-child(8),&:nth-child(14)
+      animation-delay: .56s
+    &:nth-child(12),&:nth-child(15)
+      animation-delay: .64s
+    &:nth-child(17)
+      animation-delay: .7s
+    &:nth-child(18)
+      animation-delay: .72s
+    &:nth-child(16)
+      animation-delay: .73s
+    &:nth-child(19)
+      animation-delay: .77s
+    &:nth-child(20)
+      animation-delay: .85s
+
+#overlord-login .modal-content
+  transform-origin: 50% 0
+  transform-style: preserve-3d
+  opacity: 0
+  animation: falldown .7s ease-in .1s 1 normal forwards
+
+#overlord-login-username
+  transform-origin: 0 50%
+  transform-style: preserve-3d
+  opacity: 0
+  animation: fallin .7s ease-in .2s 1 normal forwards
+  color: #111
+  background-color: rgba(255,255,255,.7)
+
+#overlord-login-password
+  transform-origin: 100% 50%
+  transform-style: preserve-3d
+  opacity: 0
+  animation: fallinii .7s ease-in .4s 1 normal forwards
+  color: #111
+  background-color: rgba(255,255,255,.7)
+
+#overlord-login-submit
+  transform-origin: 0 50%
+  transform-style: preserve-3d
+  opacity: 0
+  animation: fallin .7s ease-in .6s 1 normal forwards
+  color: white
+
+@keyframes falldown
+  0%
+    transform: perspective(800px) rotateX(90deg)
+    opacity: .5
+  100%
+    transform: perspective(800px) rotateX(0deg)
+    opacity: 1
+
+@keyframes fallin
+  0%
+    transform: perspective(800px) rotateY(-90deg)
+    opacity: .7
+  100%
+    transform: perspective(800px) rotateY(0deg)
+    opacity: 1
+
+@keyframes fallinii
+  0%
+    transform: perspective(800px) rotateY(90deg)
+    opacity: .7
+  100%
+    transform: perspective(800px) rotateY(0deg)
+    opacity: 1
+
+@keyframes shake
+  10%, 90%
+    margin-left: -4px
+    margin-top: -4px
+
+  20%, 80%
+    margin-left: -2px
+    margin-top: 2px
+
+  30%, 50%, 70%
+    margin-left: -1px
+    margin-top: -1px
+
+  40%, 60%
+    margin-left: 3px
+    margin-top: -3px
+
+@keyframes sql4ever
+  0%
+    transform: scale(1.1)
+  40%
+    transform: scale(1.7)
+  60%
+    transform: scale(1.3)
+  70%
+    transform: scale(1.5)
+  80%
+    transform: scale(1.35)
+  90%
+    transform: scale(1.45)
+  100%
+    transform: scale(1.4)
+
+@keyframes xmlrulz
+  0%
+    opacity: 0
+    transform: scale(1)
+    border-radius: .3em
+  10%
+    opacity: 1
+    transform: scale(1.1, 1.2)
+  100%
+    opacity: 0
+    transform: scale(1.4, 1.6)
+    border-radius: .5em
+
+@keyframes rotate
+  0%
+    transform: translate(-50%,-50%) rotate(0deg)
+  100%
+    transform: translate(-50%,-50%) rotate(3600deg)
+
+@keyframes blink
+  50%
+    transform: translate(-50%,-50%) scale(1,1)
+  51%
+    transform: translate(-50%,-50%) scale(1,0)
+  52%
+    transform: translate(-50%,-50%) scale(1,1)
+
+
+.domain-provision
+  max-width: 80%
+
+  .modal-content
+    background-color: #ff69b4
+
+  .domain-messages
+    background-color: rgba(255,255,255,.65)
+    padding: .5rem
+    max-height: 32rem
+    overflow: auto
+    border-radius: .3rem
+
+    div
+      white-space: pre-wrap
+
+.sys-script-editor
+  .CodeMirror
+    border: 1px solid #ccc
+    border-radius: .3rem
+    height: calc(100vh - 140px)
+    background: rgba(255,255,255,.8)
+    line-height: 1.2
+
+    .CodeMirror-gutters
+      background-color: rgba(0,255,0,.1)
+      border-right: 1px solid rgba(0,0,0,.1)
+
+.sys-script
+  .actionButtons
+    margin-bottom: 15px
+
+  .cloudy
+    float: right
+    padding: .5rem
+    margin-right: 1.5rem
+    transition: all linear .3s
+    opacity: 1
+
+    &.success
+      color: greenyellow
+    &.busy
+      color: cornflowerblue
+      animation: pulsy 1.3s linear infinite
+    &.failure
+      color: darkred
+
+  .react-console-container
+    border: 1px solid #ccc
+    border-radius: .3rem
+    height: calc(100vh - 140px)
+    width: 100%
+    background: rgba(255,255,255,.8)
+    font-family: "Fira Lorde", "Lucida Console", Monaco, monospace
+    padding: 4px
+    line-height: 1.2
+    .stdlog
+      color: #053
+    .stderr
+      color: #500
+    .stdout
+      color: #057
+    .download
+      color: #750
+    .play
+      color: #444
+
+  .react-console-prompt
+    white-space: pre-wrap
+
+  .font-size
+    width: 6rem
+    margin-left: .5rem
+    padding-bottom: 2px
+
+  #script-domain
+    display: inline-block
+    vertical-align: top
+    width: 16rem
+    margin-left: .5rem
+
+  label
+    margin: 0
+    vertical-align: super
+    color: #ccc
+
+  .custom-switch
+    display: inline-block
+    margin-left: 30px
+
+@keyframes pulsy
+  0%
+    opacity: 1
+  50%
+    opacity: .7
+
+@keyframes wannabounce
+  0%, 4%, 100%
+    top: -3rem
+  2%
+    top: -.5rem

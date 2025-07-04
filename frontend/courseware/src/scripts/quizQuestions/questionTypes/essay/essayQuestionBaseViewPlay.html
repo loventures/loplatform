@@ -1,0 +1,79 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="alert alert-primary d-flex align-items-center mt-3"
+  ng-if="$ctrl.isPendingGrade"
+>
+  <i
+    role="presentation"
+    class="material-icons"
+    >pending_actions</i
+  >
+  <span
+    id="assignment-grade-pending"
+    translate="ASSIGNMENT_GRADE_PENDING"
+  ></span>
+</div>
+
+<rubric-grid-view
+  ng-if="$ctrl.rubric && !$ctrl.grade && !$ctrl.isPendingGrade"
+  rubric="$ctrl.rubric"
+></rubric-grid-view>
+
+<view-composite-grade
+  ng-if="$ctrl.grade"
+  grade="$ctrl.grade"
+></view-composite-grade>
+
+<div ng-if="$ctrl.response">
+  <div
+    class="essay-question-play mt-4"
+    ng-if="$ctrl.canEditAnswer"
+  >
+    <rich-text-editor
+      content="$ctrl.textSelection"
+      on-change="$ctrl.updateResponseText"
+      label="ESSAY_QUESTION_LABEL"
+      focus-on-render="$ctrl.focusOnRender"
+    ></rich-text-editor>
+
+    <feedback-tools feedback-manager="$ctrl.feedbackManager"></feedback-tools>
+  </div>
+
+  <div
+    class="card mt-4"
+    ng-if="!$ctrl.canEditAnswer"
+  >
+    <div
+      class="card-body essay-response-text"
+      ng-if="!!$ctrl.textSelection"
+      bind-math="$ctrl.textSelection"
+    ></div>
+
+    <feedback-file-list
+      ng-if="$ctrl.feedbackManager.files.length"
+      files="$ctrl.feedbackManager.files"
+    ></feedback-file-list>
+
+    <div
+      class="card-body essay-response-text alert-danger"
+      ng-if="!$ctrl.textSelection && !$ctrl.feedbackManager.files.length"
+      translate="ESSAY_NO_RESPONSE"
+    ></div>
+  </div>
+</div>

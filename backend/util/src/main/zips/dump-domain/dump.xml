@@ -1,0 +1,191 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE Dump [
+<!ATTLIST Item Id ID #IMPLIED>
+]>
+<Dump xmlns="http://learningobjects.com/schema/ug/1.0/dump"
+      xmlns:cpf="http://learningobjects.com/schema/ug/1.0/dump"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Item Id="domain" Type="Domain">
+    <Data Type="id" String="domain" />
+    <Data Type="type" String="dump" />
+    <Data Type="url" String="/" />
+    <Data Type="Domain.css" Item="attachment-css" />
+    <Data Type="Domain.cssFile" Item="attachment-css" />
+    <Data Type="Domain.favicon" Item="attachment-favicon" />
+    <Data Type="Domain.userUrlFormat" String="{givenName}.{familyName}" />
+    <Data Type="Domain.internationalization" />
+
+    <!--  upload config -->
+    <Data Type="Domain.uploadSizeLimit" Number="104857600" /> <!-- 100 MB -->
+
+
+    <Item Id="folder-domain" Type="Folder" URL="${domain_domain.url}">
+      <Data Type="id" String="folder-domain" />
+      <Data Type="type" String="Domain" />
+
+      <Item Id="folder-media" Type="Folder" URL="${domain_media.url}">
+        <Data Type="id" String="folder-media" />
+
+        <Item Id="attachment-robots" Type="Attachment" Attachment="resources/robots.txt">
+          <Data Type="Attachment.access" String="Anonymous" />
+          <Data Type="createTime" Time="current" />
+          <Data Type="Attachment.fileName" String="robots.txt" />
+          <Data Type="Attachment.disposition" String="inline" />
+          <Data Type="url" String="/robots.txt" />
+        </Item>
+
+        <Item Id="attachment-favicon" Type="Attachment" Attachment="images/favicon.ico" URL="favicon.ico">
+          <Data Type="Attachment.access" String="Anonymous" />
+          <Data Type="createTime" Time="current" />
+          <Data Type="Attachment.fileName" String="favicon.ico" />
+          <Data Type="Attachment.disposition" String="inline" />
+        </Item>
+
+        <Item Id="attachment-css" Type="Attachment" Attachment="resources/domain.css" URL="domain.css">
+          <Data Type="Attachment.access" String="Anonymous" />
+          <Data Type="createTime" Time="current" />
+          <Data Type="Attachment.fileName" String="domain.css" />
+          <Data Type="Attachment.disposition" String="inline" />
+        </Item>
+
+        <Item Id="attachment-favicon-ico" Type="Attachment" Attachment="images/favicon.ico">
+          <Data Type="id" String="favicon" />
+          <Data Type="Attachment.access" String="Anonymous" />
+          <Data Type="createTime" Time="current" />
+          <Data Type="Attachment.fileName" String="favicon.ico" />
+          <Data Type="Attachment.disposition" String="inline" />
+          <Data Type="url" String="/favicon.ico" />
+        </Item>
+      </Item>
+
+      <!-- Hack: References i18n'ed file in static. -->
+      <Item Id="attachment-missing-resource" Type="Folder">
+        <Data Type="id" String="missing-resource" />
+        <Data Type="url" String="/static/static/scripts/missingResource.html" />
+      </Item>
+
+      <Item Id="folder-nonce" Type="Folder">
+        <Data Type="id" String="folder-nonce" />
+        <Data Type="type" String="nonce" />
+      </Item>
+
+      <Item Id="folder-internationalization" Type="Folder" URL="${domain_internationalization.url}">
+        <Data Type="id" String="folder-internationalization" />
+        <Data Type="type" String="internationalization" />
+      </Item>
+
+      <Item Id="folder-scripts" Type="Component" URL="${domain_scripts.url}">
+        <Data Type="id" String="folder-scripts" />
+        <Data Type="componentId" String="loi.cp.archive.ArchiveAvailability" />
+        <Data Type="componentConfiguration" String="" />
+        <Data Type="name" String="${folder_scripts.name}" />
+      </Item>
+
+      <Item Id="folder-mimeType" Type="Folder" URL="${domain_mimeTypes.url}">
+        <Data Type="id" String="folder-mimeType" />
+        <Data Type="type" String="mimeType" />
+
+        <Item Type="Attachment" Attachment="resources/mime.types" URL="mime.types">
+          <Data Type="id" String="mimeTypes" />
+          <Data Type="createTime" Time="current" />
+          <Data Type="Attachment.fileName" String="mime.types" />
+          <Data Type="Attachment.disposition" String="attachment" />
+        </Item>
+      </Item>
+
+      <!-- TODO: these folder types should be ids I think -->
+      <Item Id="folder-role" Type="Folder" URL="${domain_roles.url}">
+        <Data Type="id" String="folder-role" />
+        <Data Type="type" String="role" />
+        <Data Type="msg" String="domain_adminPortal_roles" />
+      </Item>
+
+      <Item Id="role-unenroll" Type="Role">
+        <Data Type="id" String="role-unenroll" />
+        <Data Type="roleId" String="unenroll" />
+        <Data Type="msg" String="domain_role_unenroll" />
+      </Item>
+
+      <Item Id="user-anonymous" Type="User">
+        <Data Type="id" String="user-anonymous" />
+        <Data Type="disabled" Boolean="false" />
+        <Data Type="User.userName" String="${user_anonymous.userName}" />
+        <Data Type="User.givenName" String="${user_anonymous.givenName}" />
+        <Data Type="User.middleName" String="" />
+        <Data Type="User.familyName" String="${user_anonymous.familyName}" />
+        <Data Type="User.emailAddress" String="" />
+        <Data Type="User.state" String="Active" />
+        <Data Type="User.type" String="Anonymous" />
+      </Item>
+
+      <Item Id="user-unknown" Type="User">
+        <Data Type="id" String="user-unknown" />
+        <Data Type="disabled" Boolean="false" />
+        <Data Type="User.userName" String="${user_unknown.userName}" />
+        <Data Type="User.givenName" String="${user_unknown.givenName}" />
+        <Data Type="User.middleName" String="" />
+        <Data Type="User.familyName" String="${user_unknown.familyName}" />
+        <Data Type="User.emailAddress" String="" />
+        <Data Type="User.state" String="Active" />
+        <Data Type="User.type" String="Unknown" />
+      </Item>
+
+      <Item Id="user-root" Type="User">
+        <Data Type="id" String="user-root" />
+        <Data Type="disabled" Boolean="false" />
+        <Data Type="User.userName" String="${user_root.userName}" />
+        <Data Type="User.givenName" String="${user_root.givenName}" />
+        <Data Type="User.middleName" String="" />
+        <Data Type="User.familyName" String="${user_root.familyName}" />
+        <Data Type="User.emailAddress" String="" />
+        <Data Type="User.state" String="Active" />
+        <Data Type="User.type" String="Overlord" />
+      </Item>
+
+      <Item Id="folder-systems" Type="Folder" URL="${domain_systems.url}">
+        <Data Type="id" String="folder-systems" />
+        <Data Type="type" String="system" />
+        <Data Type="msg" String="domain_adminPortal_externalSystems" />
+        <Item Type="System" URL="Direct">
+          <Data Type="id" String="system-Direct" />
+          <Data Type="disabled" Boolean="false" />
+          <Data Type="System.type" String="Script" />
+          <Data Type="System.id" String="Direct" />
+          <Data Type="System.name" String="Guest or Direct Login" />
+          <Data Type="System.allowLogin" Boolean="true" />
+          <Data Type="componentId" String="loi.cp.login.DirectLoginSystem" />
+        </Item>
+      </Item>
+
+    </Item>
+
+    <Item Id="folder-users" Type="Folder" URL="${users.url}">
+      <Data Type="id" String="folder-users" />
+      <Data Type="type" String="user" />
+      <Data Type="msg" String="domain_adminPortal_users" />
+    </Item>
+
+    <Item Id="folder-groups" Type="Folder" URL="${groups.url}">
+      <Data Type="id" String="folder-groups" />
+      <Data Type="type" String="group" />
+      <Data Type="msg" String="domain_adminPortal_groups" />
+    </Item>
+
+  </Item>
+</Dump>

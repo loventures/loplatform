@@ -1,0 +1,56 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.srs-list-header
+  font-size: 1em
+  display: flex
+  flex-direction: row
+  align-items: center
+  margin: 0
+  overflow: hidden
+  padding: 1.5em
+
+  .header-title
+    font-weight: 600
+    flex: 1 1 50%
+    overflow: hidden
+    text-overflow: ellipsis
+    .title-content
+      max-width: 100%
+      overflow: hidden
+      text-overflow: ellipsis
+
+  .header-icon
+    font-weight: 600
+    flex: 0 0 auto
+    background-color: $color-contrasted-accent
+    color: $color-white
+    border-radius: 50%
+    line-height: 1
+    height: 1em
+    width: 1em
+    text-align: center
+    padding: .5rem
+    margin-right: 1rem
+
+  .header-button
+    flex: 0 0 auto
+    .lo-btn
+      max-width: 100%
+      overflow: hidden
+      text-overflow: ellipsis

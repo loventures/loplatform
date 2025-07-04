@@ -1,0 +1,76 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<html>
+  <body>
+    <h1>Cluster usage report - ${ serviceMeta.cluster } - ${ date }</h1>
+    <p>Report generated on ${ dateTime }</p>
+
+    <h2>Overall statistics</h2>
+
+    <dl>
+      <foreach field="${ totalUsage }">
+        <dt>${ headers.apply(field_i.index) }</dt>
+        <dd>${ field }</dd>
+      </foreach>
+    </dl>
+
+    <h2>Monthly usage by domain</h2>
+
+    <table>
+      <tr>
+        <th>Domain</th>
+        <th>Active Users</th>
+        <th>Average Session Duration</th>
+      </tr>
+      <foreach tuple="${ usages }">
+        <let domain="${ tuple._1 }" usage="${ tuple._2 }">
+          <tr if="${ usage.monthlyActiveUsers }">
+            <td>
+              ${ domain.name }
+            </td>
+            <td>
+              ${ usage.monthlyActiveUsers }
+            </td>
+            <td>
+              ${ usage.sessionDuration }
+            </td>
+          </tr>
+        </let>
+      </foreach>
+    </table>
+
+    <h2>Per-domain statistics</h2>
+
+    <foreach tuple="${ usages }">
+      <let domain="${ tuple._1 }" usage="${ tuple._2 }">
+        <h3>${ domain.name }</h3>
+        <dl>
+          <foreach field="${ usage }">
+            <dt>${ headers.apply(field_i.index) }</dt>
+            <dd>${ field }</dd>
+          </foreach>
+        </dl>
+      </let>
+    </foreach>
+
+    <footer>
+      <hr />
+      Sent by Overlörde on ${ serviceMeta.cluster }.
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Quiz player, controls etc
+// Imported into quiz-common
+////////////////////////////////////////////////////////////////////////////////////
+
+.mp-quiz-player
+  .quiz-page
+    display: flex
+    @extend .pt-4
+
+    @include media-breakpoint-up(lg)
+      flex-direction: row
+      align-items: flex-start
+      justify-content: space-between
+      .quiz-page-question
+        flex: 0 0 75%
+      .quiz-page-controls
+        flex: 0 0 25%
+        max-width: calc(25% - 1rem)
+
+    @include media-breakpoint-down(md)
+      flex-direction: column
+      align-items: stretch
+
+.sp-quiz-player
+  .sp-question-control-container
+    .panel.panel-bottom
+      height: auto
+      max-height: 200px
+
+  .question-focus.has-focus
+    @include box-shadow-halo($primary, 2rem)
+
+.question-competencies
+  header
+    font-weight: 600

@@ -1,0 +1,63 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+$color-contrasted-primary: fix-contrast($color-primary, $color-light)
+$color-contrasted-primary-for-background-dark: fix-contrast($color-primary, $color-background-dark)
+$color-contrasted-primary-light: fix-contrast($color-primary-light, $color-light)
+$color-contrasted-primary-dark: fix-contrast($color-primary-dark, $color-light)
+$color-contrasted-secondary: fix-contrast($color-secondary, $color-light)
+$color-contrasted-accent: fix-contrast($color-accent, $color-light)
+$color-contrasted-light-text: fix-contrast($color-light-text, $color-light)
+
+
+// Buttons colors - A bit verbose, but future proofing for use with the contrast evaluation mixin (contrastor).
+// For example, some colors like Lumens primary blue really can't meet the WCAG contrast threshold
+$color-button-text-white: $color-white !default
+$color-button-text-light: $color-light-text !default
+$color-button-text-dark: $color-body-text !default
+$color-button-white: $color-white !default
+$color-button-black: $color-black !default
+$color-button-primary: $color-primary !default
+$color-button-primary-light: $color-primary-light !default
+$color-button-primary-dark: $color-primary-dark !default
+$color-button-secondary: $color-secondary !default
+$color-button-accent: $color-accent !default
+$color-button-dark: $color-dark !default
+$color-button-light: $color-light !default
+$color-button-lighter: $color-lighter !default
+$color-button-lightest: $color-lightest !default
+$color-button-warning: $color-warning !default
+$color-button-alert: $color-alert !default
+$color-button-success: $color-success !default
+
+$discussion-color-unread: $color-alert
+
+$discussion-color-bookmark: $color-bookmark
+
+$discussion-color-search: $color-lo-secondary
+
+$discussion-color-unresponded: $color-warning
+
+$discussion-color-pinned: $color-lo-secondary
+$discussion-color-pinned-background: lighten($color-lo-secondary, 45%)
+
+$discussion-color-current-user: $color-success
+$discussion-color-current-user-background: lighten($color-success, 33%)
+
+$discussion-color-instructor: $color-lo-secondary
+$discussion-color-instructor-background: lighten($color-lo-secondary, 45%)

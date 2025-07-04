@@ -1,0 +1,170 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.discussion-item-footer
+  font-size: 0.75em
+  border-top: 1px dotted darken($color-light, 4%)
+  padding: 0.5em
+  display: flex
+  position: relative
+  background: $color-white
+  border-radius: 0 0 $border-radius $border-radius
+
+  .footer-text
+    margin: 0 1em
+
+  .discussion-footer-primary,
+  .discussion-footer-optional
+    position: relative
+    display: flex
+    justify-content: flex-start
+    align-items: center
+
+.discussion-item-footer
+  //normal layout, primary is fixed, optional extends to fill width
+  .discussion-footer-primary
+    flex: none
+
+  .discussion-footer-optional
+    flex: 1 1 auto
+    display: flex
+    flex-direction: row
+
+  .discussion-footer-dropdown
+    display: none
+
+  //on smaller screen, reverse that and optinal is toggled by dropdown
+  @media (max-width: $xsscreen-max)
+    .discussion-footer-optional
+      flex: none
+      display: none
+
+    .discussion-footer-dropdown
+      flex: 1 1 auto
+      display: flex
+      flex-direction: row
+      justify-content: flex-end
+      font-size: 1.25em
+
+  //formatting, push buttons to the left
+  .discussion-footer-optional
+    .text-post-date
+      text-align: right
+      flex: 1 1 auto
+
+.discussion-footer-primary
+  .discussion-replies-dropdown
+
+    .replies-dropdown-item
+      color: fix-contrast($color-primary, $color-white)
+      margin: 0.5em
+
+//dropdowns
+.discussion-item-footer
+  &.open .discussion-footer-optional,
+  .discussion-footer-primary.open .discussion-replies-dropdown
+    position: absolute
+    z-index: $zi-content
+    background-color: $color-white
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25)
+    display: flex
+    flex-direction: column
+    padding: 0.5em
+    border-radius: 1em
+    top: 100%
+    right: 0
+    white-space: nowrap
+
+.discussion-item-footer.open
+  .discussion-footer-optional
+    right: 0
+    left: auto
+    top: 3em
+
+    .footer-text
+      margin: 0.5em
+
+//footer text button styles
+.discussion-item-footer
+  .replies-dropdown-toggle
+    border-color: $color-contrasted-primary
+    color: $color-contrasted-primary
+    height: 1.125em
+    width: 1.125em
+    margin-left: -0.5em //to appear as if they are together
+
+    .icon
+      line-height: 1.15
+      padding: 0.085em
+
+  .text-button
+    cursor: pointer
+    text-decoration: underline
+    font-weight: 600
+    transition: color ease $trans-speed
+
+    &:hover
+      text-decoration: none
+
+    .icon
+      font-size: 1.15em
+      position: relative
+      top: 0.15em
+      margin-right: 0.33em
+
+  .text-button
+    &:hover, &:hover *
+      color: fix-contrast($color-primary, $color-white)
+
+  .text-edit,
+  .text-report-inappropriate,
+  .text-mark-inappropriate,
+  .text-deleted,
+  .text-restore
+    color: $color-body-text
+
+  .text-post-date
+    color: $color-light-text
+
+  .text-reply
+    color: $color-contrasted-accent
+
+  .disabled
+    cursor: not-allowed
+
+  .text-reply-count,
+  .replies-dropdown-toggle
+    color: fix-contrast($color-primary, $color-white)
+
+    .unread, .new
+      color: $color-alert
+
+//this is to alternate display of create and edit date
+.discussion-item-post:not(.has-been-edited)
+  .footer-text.text-post-date
+    .edit-date
+      display: none
+
+.discussion-item-post.has-been-edited
+  .footer-text.text-post-date
+    .create-date,
+    .edit-date
+      @media (min-width: $smscreen)
+        margin-left: 1em
+      //dropdown display
+      @media (max-width: $xsscreen-max)
+        display: block

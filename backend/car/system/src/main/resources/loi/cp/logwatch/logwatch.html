@@ -1,0 +1,141 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:ui="loi.cp.ui.UI">
+  <head>
+    <title>Log Watch</title>
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
+    <ui:stylesheet href="$$static('styles/cp.css')" />
+    <ui:stylesheet>
+body {
+  background-color: #004439;
+  background-image:url($$url/overlordDomain.webp);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  background-position: center;
+  padding: 20px;
+}
+#stdHeader h1 {
+  font-family: sans-serif !important;
+  font-weight: 100 !important;
+  color: #ffe;
+  text-align: right;
+  margin-top: 0;
+  margin-bottom: .5em;
+  font-size: 22px;
+  line-height: 22px;
+}
+.container-fluid {
+  background-color: rgba(255, 255, 240, .75);
+  border: 1px solid #ffc;
+  border-radius: 2px;
+  overflow: auto;
+}
+#logs {
+  word-break: break-all;
+  padding: 5px;
+}
+.navbar-inner {
+  padding-left: 20px !important;
+  padding-right: 5px !important;
+}
+#start, .stopped #stop {
+  display: none;
+}
+.stopped #start {
+  display: inline-block;
+}
+    </ui:stylesheet>
+    <script type="text/javascript">
+$.ajaxSetup({ headers: { 'X-CSRF': 'true' } });
+
+$(function() {
+  var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
+
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+      return entityMap[s];
+    });
+  }
+  var msgs = null;
+  function start() {
+    if (msgs) return;
+    msgs = new EventSource("/sys/logwatch/stream");
+    msgs.onmessage = function (event) {
+      var data = '<div>' + escapeHtml(event.data).replace(/\n/g, '<br />').replace(/#\|([^|]*)\|([^|]*)\|([^|]*)\|([^|]*)\|/, '#|<span style="color: #700">$1</span>|<span style="color: #070">$2</span>|<span style="color: #007">$3</span>|<span style="color: #505">$4</span>|') + '</div>'; // [#|2014-03-18T17:02:09.070-0400|INFO|31;Scheduler-1|cpxp.schedule.ScheduledTask|Blah|#]
+      var container = $('#container')[0], logs = $('#logs')[0];
+      var atBottom = (container.offsetHeight + container.scrollTop) >= logs.offsetHeight;
+      $('#logs').append(data);
+      if (atBottom) {
+        container.scrollTop = logs.offsetHeight;
+      }
+    };
+    msgs.onopen = function () {
+      $('#sub').text('Online');
+    };
+    msgs.onerror = function () {
+      $('#sub').text('Offline');
+    };
+    $('#buttons').removeClass('stopped');
+  }
+  function stop() {
+    if (!msgs) return;
+    $('#sub').text('Stopped');
+    msgs.close();
+    msgs = null;
+    $('#buttons').addClass('stopped');
+  }
+  start();
+  $('#clear').click(function() { $('#logs').html(''); });
+  $('#stop').click(stop);
+  $('#start').click(start);
+  $(window).resize(function() {
+          var xtra = parseInt($(document.body).css('padding-bottom'))
+              + parseInt($('#container').css('border-top-width')) +
+              + parseInt($('#container').css('border-bottom-width'));
+          var h = $(window).height() - $('#container').offset().top - xtra;
+          $('#container').css('height', h + 'px');
+          }).resize();
+});
+    </script>
+  </head>
+  <body>
+    <ui:clusterLabel if="${ Current.isRoot }" />
+        <div id="buttons" class="pull-left">
+          <button id="clear" class="btn">Clear</button>
+          <button id="stop" class="btn btn-danger">Stop</button>
+          <button id="start" class="btn btn-success">Start</button>
+          <span class="active"><a id="sub" class="muted"></a></span>
+        </div>
+    <div id="stdHeader">
+      <h1>$$ Log Watch $$</h1>
+    </div>
+
+    <div id="container" class="container-fluid">
+      <div id="logs" class="row row-fluid">
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-item-content-status">
+  <span
+    ng-show="$ctrl.item.inappropriate && !$ctrl.item.removed"
+    translate="DISCUSSION_POST_INAPPROPRIATE_TAG"
+  ></span>
+  <span
+    ng-show="$ctrl.item.removed"
+    translate="DISCUSSION_POST_DELETED_TAG"
+  ></span>
+  <span class="show-when-reported">
+    <i class="icon icon-warning"></i>
+    <span translate="DISCUSSION_POST_REPORTED_TAG"></span>
+  </span>
+</div>
+
+<div
+  class="discussion-item-content"
+  ng-if="$ctrl.item.showContent && !$ctrl.item.edit.editing"
+>
+  <discussion-auto-unread
+    class="hidden-element"
+    ng-if="$ctrl.automarkable &&
+          !$ctrl.item.viewedManuallyToggled &&
+          ($ctrl.isInstructor ? $ctrl.item.isUnread : $ctrl.item.isNew)"
+    post-id="$ctrl.item.id"
+    thread-id="$ctrl.item.threadId"
+    discussion-id="$ctrl.discussionId"
+    item="$ctrl.item"
+  ></discussion-auto-unread>
+
+  <div
+    class="item-rich-content"
+    bind-math="$ctrl.item.content"
+  ></div>
+
+  <feedback-file-list
+    class="item-attachments"
+    raw-files="$ctrl.item.attachments"
+  >
+  </feedback-file-list>
+</div>
+
+<discussion-edit-post
+  ng-if="$ctrl.item.showContent && $ctrl.item.edit.editing"
+  cannot-edit="!$ctrl.item.editable"
+  state="$ctrl.item.edit"
+  post="$ctrl.item"
+  attachments="$ctrl.item.attachments"
+  save-action="$ctrl.editSave"
+  discard-action="$ctrl.editDiscard"
+  show-title="$ctrl.showTitle && $ctrl.item.depth === 0"
+></discussion-edit-post>

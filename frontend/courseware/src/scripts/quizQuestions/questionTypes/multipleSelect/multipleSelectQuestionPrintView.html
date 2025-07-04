@@ -1,0 +1,63 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<print-question-template
+  class="question choice-question multiple-choice-question"
+  index="$ctrl.index"
+  assessment="$ctrl.assessment"
+  question-count="$ctrl.questionCount"
+  question="$ctrl.question"
+  response="$ctrl.response"
+>
+  <question-content-slot>
+    <dl>
+      <dd ng-repeat="choice in $ctrl.question.choices track by $index">
+        <print-question-distractor-row-template
+          choice="choice"
+          has-correctness="$ctrl.question.displayDetail.correctAnswer &&
+            ($index === $ctrl.selectedIndex || choice.correct)"
+          is-correct="choice.correct"
+          is-selected="$ctrl.selection[$index]"
+        >
+          <distractor-slot>
+            <div
+              class="p-2 border"
+              for="question-{{ $ctrl.index }}-choice-{{ $index }}"
+              ng-class="{
+                'border-primary': $ctrl.selection[$index],
+              }"
+            >
+              <div
+                class="float-left"
+                ng-if="!$ctrl.assessment.settings.isCheckpoint"
+              >
+                <span ng-bind="($index | choiceOrdinal) + '.'"></span>
+              </div>
+
+              <div
+                class="ms-4 choice-text"
+                compile="choice.choiceText"
+              >
+                &nbsp;
+              </div>
+            </div>
+          </distractor-slot>
+        </print-question-distractor-row-template>
+      </dd>
+    </dl>
+  </question-content-slot>
+</print-question-template>

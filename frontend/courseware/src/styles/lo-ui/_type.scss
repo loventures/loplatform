@@ -1,0 +1,25 @@
+.blockquote {
+  background-color: $gray-lightest;
+  font-family: $font-family-serif;
+  padding: $spacer;
+}
+
+.word-break-all {
+  word-break: break-all;
+}
+
+.word-wrap-all {
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+//Use these to make containers the same size
+//to accomodate a number of digits
+//use in pagination, rubric numbered circle, etc.
+$max-digit-width: 0.6em;
+@mixin fixed-width-for-digits($number, $px) {
+  width: calc(#{$max-digit-width * $number} + #{$px * 2});
+}
+@mixin min-width-for-digits($number, $px) {
+  min-width: calc(#{$max-digit-width * $number} + #{$px * 2});
+}

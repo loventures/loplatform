@@ -1,0 +1,34 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'codemirror/lib/codemirror.css'
+
+.components-disabled:first-child:before
+  content: ' ⃠' //🚫
+  color: #c88
+  margin-right: .5rem
+  float: left
+  line-height: 1.3
+
+.adminPage-components
+  li
+    svg
+      vertical-align: top
+
+#components-config-modal
+  .CodeMirror
+    min-height: calc(100vh - 14rem)

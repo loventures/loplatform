@@ -1,0 +1,164 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:ui="loi.cp.ui.UI">
+<head>
+  <title>$$ Cluster Status $$</title>
+  <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
+  <ui:stylesheet href="$$static('styles/cp.css')" />
+  <ui:stylesheet>
+    body {
+    background-color: #004439;
+    background-image:url($$static('images/overlordDomain.webp'));
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position: center;
+    padding: 20px;
+    }
+    #stdHeader h1 {
+    font-family: sans-serif !important;
+    font-weight: 100 !important;
+    color: #ffe;
+    text-align: right;
+    margin-top: 0;
+    margin-bottom: .5em;
+    font-size: 22px;
+    line-height: 22px;
+    }
+    .container-fluid {
+    background-color: rgba(255, 255, 240, .75);
+    border: 1px solid #ffc;
+    border-radius: 2px;
+    overflow: auto;
+    }
+    dl {
+      margin-left: 1em;
+    }
+    li.good, div.good {
+      color: green;
+    }
+    li.bad, dd.bad, div.bad {
+      color: red;
+    }
+    #overallStatus {
+      position: fixed;
+      left: calc(50% - 128px);
+      top: calc(50% - 128px);
+      font-size: 256px;
+      line-height: 256px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    #globals {
+      margin-left: 0;
+    }
+  </ui:stylesheet>
+  <script type="text/javascript">
+$.ajaxSetup({ headers: { 'X-CSRF': 'true' } });
+
+$(function() {
+  var memberCount = 0;
+
+  $.get('/api/v2/clusterStatus/members').then(function(data) {
+    memberCount = data.members.length;
+    $.each(data.members.sort(function (a, b) { return a.host.localeCompare(b.host); }), function(i, o) {
+      var li = $('<li>', { id: o.host }).appendTo('#members');
+      var a = $('<a>', { text: o.host + ' <' + o.name + '> (' + o.time + ')' + ((data.current == o.host) ? ' ⟵ you are here' : ''), href: '#status-' + o.host }).appendTo(li);
+    });
+    $('#member-count').text('Member count: ' + memberCount);
+
+    $.get('/api/v2/clusterStatus/clusterStatus').then(function(data) {
+      var leaders = $.unique($.grep($.map(data, function(o) { return o.clusterStatus.leader; }), function(o) { return !!o; }));
+      var aLeader = leaders.length ? leaders[0] : 'no-leader';
+      var singletons = $.unique($.grep($.map(data, function(o) { return o.clusterStatus.singleton; }), function(o) { return !!o; }));
+      var aSingleton = singletons.length ? singletons[0] : 'no-singleton';
+
+      if (leaders.length == 1) {
+        $('<dt>', { text: 'Akka Leader' }).appendTo('#globals');
+        $('<dd>', { text: aLeader }).appendTo('#globals');
+      }
+      if (singletons.length == 1) {
+        $('<dt>', { text: 'Akka Singleton' }).appendTo('#globals');
+        $('<dd>', { text: aSingleton }).appendTo('#globals');
+      }
+
+      $.each(data.sort(function (a, b) { return a.member.host.localeCompare(b.member.host); }), function(i, o) {
+        var member = o.member;
+        var clusterStatus = o.clusterStatus;
+        var pubSub = clusterStatus.pubSub || [];
+        var jGroups = clusterStatus.jGroups || [];
+        var div = $('<div>', { id: 'status-' + member.host }).appendTo('#member-status');
+        var h4 = $('<h4>', { text: member.host + ' <' + member.name + '>' }).appendTo(div);
+        var dl = $('<dl>').appendTo(div);
+        if (leaders.length !== 1) {
+          $('<dt>', { text: 'Akka Leader' }).appendTo(dl);
+          $('<dd>', { text: clusterStatus.leader, 'class': (clusterStatus.leader != aLeader) ? 'bad' : 'good' }).appendTo(dl);
+        }
+        $('<dt>', { text: 'Akka Members' }).appendTo(dl);
+        $('<dd>', { text: $.map(clusterStatus.members, function(m) { return m.host + " (" + m.status + ")"; }).join(", "), 'class': (clusterStatus.members.length != memberCount) ? 'bad' : 'good' }).appendTo(dl);
+        if (singletons.length !== 1) {
+          $('<dt>', { text: 'Akka Singleton' }).appendTo(dl);
+          $('<dd>', { text: clusterStatus.singleton || "-", 'class': (clusterStatus.singleton != aSingleton) ? 'bad' : 'good'  }).appendTo(dl);
+        }
+        $('<dt>', { text: 'Akka Pub/Sub Members' }).appendTo(dl);
+        $('<dd>', { text: pubSub.sort().join(", "), 'class': (pubSub.length != memberCount) ? 'bad' : 'good' }).appendTo(dl);
+        $('<dt>', { text: 'Cluster Cache Members' }).appendTo(dl);
+        $('<dd>', { text: jGroups.sort().join(", "), 'class': (jGroups.length != memberCount) ? 'bad' : 'good' }).appendTo(dl);
+        $('#' + member.host).addClass(dl.find('.bad').length ? 'bad' : 'good');
+      });
+      var bad = $('#member-status').find('.bad').length || (data.length != memberCount);
+      $('#overallStatus').text(bad ? '☹' : '☺').addClass(bad ? 'bad' : 'good');
+    }, function() {
+      $('<li>', { 'class': 'alert alert-error', text: 'An error occurred' }).appendTo('#member-status');
+    }).always(function() {
+      $('#member-status-wait').remove();
+    });
+
+  }, function() {
+    $('<li>', { 'class': 'alert alert-error', text: 'An error occurred' }).appendTo('#members');
+  }).always(function() {
+    $('#members-wait').remove();
+  });
+
+});
+    </script>
+</head>
+  <body>
+    <div id="stdHeader"><h1>$$ Cluster Status $$</h1></div>
+
+
+    <div id="container" class="container-fluid">
+      <div id="overallStatus"></div>
+
+      <h3>Members</h3>
+      <p>Expect to see the cluster members here with a fairly recent report time.</p>
+      <ul id="members">
+        <img id="members-wait" src="$$static/images/wait/64x64.gif" />
+      </ul>
+      <div id="member-count"></div>
+
+      <h3>Member Status</h3>
+      <p>Expect to see the cluster members reporting a coherent status in a few seconds.</p>
+      <dl id="globals"></dl>
+      <div id="member-status">
+        <img id="member-status-wait" src="$$static/images/wait/64x64.gif" />
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<basic-question-template
+  class="question hotspot-question"
+  index="$ctrl.index"
+  assessment="$ctrl.assessment"
+  question-count="$ctrl.questionCount"
+  question="$ctrl.question"
+  response="$ctrl.response"
+>
+  <question-content-slot>
+    <div class="hotspot-question-play">
+      <div
+        class="alert alert-info"
+        ng-if="!$ctrl.imageLoaded"
+        translate="HOTSPOT_IMAGE_LOADING"
+      ></div>
+
+      <div
+        class="hotspot-container mt-3"
+        ng-if="$ctrl.imageLoaded"
+      >
+        <svg
+          class="hotspot-paper"
+          ng:attr:width="{{$ctrl.imageWidth}}"
+          ng:attr:height="{{$ctrl.imageHeight}}"
+          ng-click="$ctrl.clickOnPaper($event)"
+          ng-disabled="$ctrl.canEditAnswer"
+          ng-style="{
+          'background-image': 'url(' + $ctrl.imageUrl + ')'
+        }"
+        >
+          <g
+            class="hotspot-choice"
+            ng-repeat="choice in $ctrl.question.choices track by $index"
+            ng-if="choice.shape"
+            ng-class="{
+            correct: choice.correct === true,
+            incorrect: choice.correct === false,
+            selected: choice.selected,
+            response: choice.response
+          }"
+          >
+            <circle
+              ng-if="::choice.shape.type === 'circle'"
+              ng:attr:cx="{{choice.x}}"
+              ng:attr:cy="{{choice.y}}"
+              ng:attr:r="{{choice.shape.radius}}"
+            ></circle>
+            <rect
+              ng-if="::choice.shape.type === 'rect'"
+              ng:attr:x="{{choice.x}}"
+              ng:attr:y="{{choice.y}}"
+              ng:attr:width="{{choice.shape.width}}"
+              ng:attr:height="{{choice.shape.height}}"
+            ></rect>
+          </g>
+
+          <g
+            class="hotspot-choice selection"
+            ng-if="$ctrl.hasSelection"
+          >
+            <circle
+              ng:attr:cx="{{$ctrl.selection.x}}"
+              ng:attr:cy="{{$ctrl.selection.y}}"
+              ng:attr:r="{{$ctrl.selectionRadius}}"
+            ></circle>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </question-content-slot>
+</basic-question-template>

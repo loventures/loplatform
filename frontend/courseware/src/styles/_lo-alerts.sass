@@ -1,0 +1,67 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//
+// Lo alerts
+//
+
+.system-banner
+  .banner-body
+    padding: .60em 1em
+    text-align: center
+    box-sizing: border-box
+
+.in-page-banner
+  font-size: 1rem
+  width: 100%
+  padding: 1em
+  box-sizing: border-box
+
+.content-top-margin
+  height: 0px
+
+.student-preview-alert
+
+  a
+    color: inherit
+
+    &:hover
+      text-decoration: none
+
+    span
+      white-space: nowrap
+      max-width: calc(100% - 3rem)
+      display: inline-block
+      text-overflow: ellipsis
+      overflow: hidden
+
+  .close
+    position: relative
+    font-size: 1.15rem
+    color: $color-white
+    float: right
+
+  .alert-pick-user
+    .icon
+      position: relative
+      top: -0.1em
+      margin-left: 0.25em
+
+.alert-info
+  a
+    color: $color-primary-against-alert
+    text-decoration: underline

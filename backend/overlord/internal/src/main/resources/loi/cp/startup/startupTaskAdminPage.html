@@ -1,0 +1,225 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="$$ Startup Tasks $$" noheader="true" coursestyle="true" bodyClass="administration">
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" />
+    <ui:javascript src="$$static/scripts/de.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.7/underscore-min.js" />
+    <ui:javascript src="$$url('startupTaskAdminPage.js')" />
+  <ui:stylesheet>
+    body {
+      color: #aaa;
+    }
+    #data-body {
+      border: 1px solid gray;
+      padding: .25em 0.5em;
+      background-color: rgba(32, 32, 32, .85);
+      overflow: auto;
+      position: relative;
+      height: 400px;
+    }
+    #wait {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .task-group {
+      margin: .25em 0;
+    }
+    .task-group .title {
+      font-size: 1.25em;
+      margin: 4px 0;
+    }
+    .task-group .task .title {
+      font-size: 1em;
+    }
+    .task-group .title:hover {
+      background-color: rgba(0,0,0,0.25);
+    }
+    .task, .task-group {
+      margin: 2px 0;
+    }
+    .task-group .status {
+      margin: 0 .5em;
+      color: #777;
+    }
+    .task-group .chevron {
+      cursor: pointer;
+    }
+    .task-group .nochevron {
+      margin-left: 1em;
+    }
+    .task.None .chevron {
+      visibility: hidden;
+    }
+    .task-group .chevron:before, .task-group.open .task .chevron:before {
+      content: '►';
+    }
+    .task-group.open .chevron:before, .task-group .task.open .chevron:before {
+      content: '▼';
+    }
+    .task-group .status.Success {
+      color: #00ff00;
+    }
+    .task-group .status.Skip {
+    color: #ddbb00;
+    }
+    .task-group .status.Retry {
+    color: #ddbb00;
+    }
+    .task-group .status.Failure {
+      color: #ff0000;
+    }
+    .task-group .tasks {
+      margin-left: 1em;
+      display: none;
+    }
+    .task .info {
+      margin: .25em 1em 0 1em;
+      font-size: 85%;
+      font-style: italic;
+    }
+    .task-group.open .tasks {
+      display: block;
+    }
+    .task-group .logs {
+      background-color: rgba(255, 255, 255, .6);
+      font-size: 10px;
+      margin: 0 1em .5em 1em;
+      padding: .25em .5em;
+      white-space: pre;
+      max-height: 200px;
+      overflow: auto;
+    }
+    .task .stuff {
+      display: none;
+    }
+    .task.open .stuff {
+      display: block;
+      margin-left: 1em;
+    }
+    .task .buttons .btn {
+      margin: 0 0 .5em .5em;
+    }
+    #button-bar {
+      margin-bottom: .25em;
+    }
+    #action-execute {
+      color: white;
+    }
+    #action-execute span {
+      margin-left: .5em;
+    }
+
+    #status {
+      display: none;
+      color: #ffc10e;
+      font-size: 12px;
+      font-family: Sans-serif;
+      line-height: 12px;
+      white-space: nowrap;
+      height: 400px;
+      padding: 0;
+      background-color: rgba(0,0,0,.25);
+      border: 1px solid gray;
+      position: fixed;
+      bottom: 0;
+      left: 20px;
+      right: 20px;
+      height: 25%;
+      margin: 0;
+    }
+
+    #status-content {
+      overflow: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 0.5em;
+      z-index: 100;
+      line-height: 1.1em;
+    }
+
+    #status-content div {
+      font-family: monospace;
+    }
+
+    #main.consoleOpen #status {
+      display: block;
+    }
+
+    .closer {
+      position: absolute; top: 0; right: 0; font-size: 2em; cursor: pointer;
+      border: 1px solid gray;
+      border-top: none;
+      border-right: none;
+      background: rgba(0,0,0,0.5);
+      padding: 0.15rem 0.25rem 0.25rem 0.25rem;
+      line-height: 1rem;
+      display: none;
+      z-index: 101;
+    }
+
+    #status:hover .closer {
+      display: block;
+    }
+
+    .throbbing {
+      animation: ledAnimation 1s infinite;
+      -webkit-animation: ledAnimation 1s infinite;
+    }
+    @-webkit-keyframes ledAnimation {
+      0%   { opacity: 1; }
+      50%  { opacity: .1; }
+      100% { opacity: 1; }
+    }
+    @keyframes ledAnimation {
+      0%   { opacity: 1; }
+      50%  { opacity: .1; }
+      100% { opacity: 1; }
+    }
+  </ui:stylesheet>
+    <div>
+      <div id="button-bar">
+        <div class="pull-right" style="margin-top: 5px">
+          <span class="label label-default" id="sub"></span>
+        </div>
+        <div class="btn-group">
+        <a id="action-execute" class="btn btn-primary" href="#"><i class="icon-repeat icon-white"></i><span>$$ Execute $$</span></a>
+        <a id="action-latest" class="btn" href="#" rel="tooltip" title="$$ Latest Run Logs $$"><i class="icon icon-list"></i></a>
+        </div>
+      </div>
+    </div>
+    <div id="main" class="container-fluid" style="clear: both; padding: 0">
+      <div class="row-fluid">
+
+        <div id="data-body" class="span24">
+          <img id="wait" src="$$static/images/wait/32x32.gif" />
+        </div>
+
+        <div id="status">
+          <div id="close-execute" class="closer">&times;</div>
+          <div id="status-content">
+            Foo Bar Baz
+          </div>
+        </div>
+      </div>
+    </div>
+
+</ui:pageLayout>

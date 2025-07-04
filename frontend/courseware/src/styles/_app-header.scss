@@ -1,0 +1,237 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import 'app-header-layering';
+
+/* Styling for Announcements above header */
+
+.announcements-alert {
+  margin-bottom: 0;
+  flex: 1 1 auto;
+}
+
+.announcement-alert-close {
+  background-color: transparent;
+}
+
+.alert-inner-html > :last-child {
+  margin-bottom: 0;
+}
+
+/* End Styling for Announcements above header */
+
+.app-header {
+  @extend .navbar;
+
+  @extend .navbar-light;
+
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-right: 0.25rem;
+  padding-left: 1rem;
+
+  $app-bar-content-height: 2.5rem;
+
+  align-items: center;
+
+  &.er-dash-enabled {
+    z-index: 2;
+    flex-wrap: nowrap;
+
+    .survey-collector,
+    .ui-downgrader {
+      .survey-button svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .downgrade-button {
+        .thin-revert-icon {
+          path,
+          rect {
+            stroke: $color-primary;
+            stroke-width: 1.5;
+          }
+        }
+
+        &:hover,
+        &.active {
+          .thin-revert-icon {
+            path,
+            rect {
+              stroke: $color-white;
+            }
+          }
+        }
+      }
+
+      .popover {
+        max-width: 24rem;
+        box-shadow: 0 0 10px $gray-500;
+
+        .popover-body {
+          padding: 1rem 1.5rem;
+        }
+      }
+    }
+
+    .thin-mail-icon,
+    .thin-leaf-icon,
+    .thin-search-icon {
+      path,
+      rect {
+        stroke-width: 30;
+      }
+    }
+
+    .play-tutorial {
+      .thin-question-icon {
+        path,
+        rect {
+          stroke: $color-primary;
+          stroke-width: 1.5;
+        }
+      }
+
+      &:hover {
+        .thin-question-icon {
+          path,
+          rect {
+            stroke: $color-white;
+          }
+        }
+      }
+
+      &.glow svg {
+        border-radius: 50%;
+        outline: 0 solid white;
+        animation: er-glow-animation 0.5s ease-in forwards;
+        animation-delay: 0.5s;
+      }
+    }
+
+    .presence-widget {
+      display: flex;
+      color: $color-primary;
+
+      > .unread-count {
+        padding: 0.05rem 0.25rem;
+        top: 8px;
+        right: 8px;
+        line-height: 1;
+      }
+
+      .thin-chat-icon {
+        path,
+        rect {
+          stroke-width: 30;
+        }
+      }
+
+      .thin-group-icon {
+        path {
+          stroke: currentColor;
+          transition: stroke $trans-type $trans-speed;
+          stroke-width: 1.5;
+        }
+      }
+
+      &:hover {
+        color: $color-white;
+      }
+    }
+
+    span.menu-user-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 19rem;
+    }
+  }
+
+  .navbar-nav {
+    height: $app-bar-content-height;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .domain-logo img {
+    max-height: 2rem;
+    &.dark-only {
+      display: none;
+    }
+  }
+
+  .menu-avatar {
+    font-size: $app-bar-content-height - 1rem;
+  }
+
+  .alert-bell {
+    position: relative;
+    font-size: $app-bar-content-height - 1rem;
+    line-height: 1;
+
+    .bell-count {
+      position: absolute;
+      background-color: $color-alert;
+      border-radius: 3em;
+      padding: 1px 4px;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      font-size: 0.5em;
+      color: $color-white;
+    }
+  }
+
+  .alert-list {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 50vh;
+    min-width: 20rem;
+    max-width: 100vw;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .menu-user-name {
+      display: none;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .app-header .domain-logo img.dark-only {
+    display: block;
+  }
+  .app-header .domain-logo img.light-only {
+    display: none;
+  }
+}
+
+@keyframes er-glow-animation {
+  0% {
+    outline: 0 solid #6b9fbfcc;
+  }
+
+  33% {
+    outline: 3px solid #6b9fbfaa;
+  }
+
+  100% {
+    outline: 8px solid #6b9fbf00;
+  }
+}

@@ -1,0 +1,60 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.gradebook-editor
+  .card
+    margin-bottom: 1rem
+
+  .card-header
+    &.collapsed
+      .icon-chevron-down
+        transform: rotate(-90deg)
+
+    .category-num
+      font-weight: 600
+      margin-right: 0.25em
+
+      &:after
+        content: "."
+
+    .category-name:hover
+      cursor: pointer
+
+    .lo-btn
+      float: right
+      margin: -0.5em -1em 0 0
+      font-size: 0.75em
+
+    .icon-chevron-down
+      margin-right: 0.5em
+      display: inline-block
+      transition: transform ease $trans-speed
+
+      &:hover
+        cursor: pointer
+
+  .category-weight
+    margin: 0 1em
+    font-weight: bold
+
+  .category-assignment-weight
+    margin: 0 1em
+    font-weight: bold
+
+  .lo-btn .icon-plus-circle
+    margin-right: 0.25em

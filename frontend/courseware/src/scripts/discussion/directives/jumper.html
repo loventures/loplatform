@@ -1,0 +1,68 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="nav-bar-item"
+  ng-class="$ctrl.viewType"
+>
+  <span
+    class="item-count"
+    ng-bind="$ctrl.totalCount"
+  ></span>
+
+  <button
+    class="nav-button nav-button-next icon-btn"
+    ng-if="$ctrl.active"
+    ng-click="$ctrl.changeCurrentPost($ctrl.prevPost)"
+    ng-disabled="!$ctrl.prevPost"
+    title="{{ 'DISCUSSION_NAVBAR_PREVIOUS' | translate }}"
+  >
+    <span class="icon icon-chevron-up"></span>
+    <span class="sr-only">
+      {{ 'DISCUSSION_NAVBAR_PREVIOUS' | translate }} {{ $ctrl.viewType | translate }}
+    </span>
+  </button>
+
+  <button
+    class="nav-button nav-button-previous icon-btn"
+    ng-if="$ctrl.active"
+    ng-click="$ctrl.changeCurrentPost($ctrl.nextPost)"
+    ng-disabled="!$ctrl.nextPost"
+    title="{{ 'DISCUSSION_NAVBAR_NEXT' | translate }}"
+  >
+    <span class="icon icon-chevron-down"></span>
+    <span class="sr-only">
+      {{'DISCUSSION_NAVBAR_NEXT' | translate}} {{ $ctrl.viewType | translate }}
+    </span>
+  </button>
+
+  <button
+    class="item-label"
+    ng-click="$ctrl.setJumperActive($ctrl.currentPost)"
+    ng-disabled="!$ctrl.totalCount"
+    ng-bind="$ctrl.jumperName | translate"
+  ></button>
+
+  <span
+    class="item-special d-flex align-items-center"
+    ng-if="$ctrl.pickUser"
+    ng-click="$ctrl.pickUser()"
+    title="{{ 'DISCUSSION_NAVBAR_CHANGE_USER' | translate }}"
+  >
+    <span class="icon icon-users"></span>
+  </span>
+</div>

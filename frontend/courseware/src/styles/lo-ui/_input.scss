@@ -1,0 +1,61 @@
+/*
+  This is for having an input addon hanging at the inside end of the input.
+  e.g. 
+
+  <div class="input-group">
+    ...more elements, won't be affected
+
+    <input class="hang-next" />
+    <div class="input-hang-end"><div class="icon"></div></div>
+    ...more elements, won't be affected
+  </div>
+
+  this will have an icon hanging inside the input on the end side (right side of ltr)
+
+*/
+.input-group {
+  .input-hang-start,
+  .input-hang-end {
+    position: relative;
+    width: 0;
+    //greater than other things in.input-group
+    z-index: 6;
+    > * {
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  .input-hang-start,
+  [dir='rtl'] & .input-hang-end {
+    > * {
+      left: 0;
+    }
+  }
+
+  .input-hang-end,
+  [dir='rtl'] & .input-hang-start {
+    > * {
+      right: 0;
+    }
+  }
+
+  $icon-btn-width: calc(
+    #{$input-btn-padding-y * 2} + #{1em * $input-btn-line-height} + $input-btn-border-width +
+      $input-btn-border-width
+  );
+
+  .hang-prev,
+  [dir='rtl'] & .hang-next {
+    &.hang-icon-btn {
+      padding-left: $icon-btn-width;
+    }
+  }
+
+  .hang-next,
+  [dir='rtl'] & .hang-prev {
+    &.hang-icon-btn {
+      padding-right: $icon-btn-width;
+    }
+  }
+}

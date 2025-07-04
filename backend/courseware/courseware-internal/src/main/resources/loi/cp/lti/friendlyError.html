@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>${ Current.domainDTO.name } - ${ message }</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+  <link rel="stylesheet" type="text/css" href="$$url/lti.sass"/>
+  <let fav="${ Current.domainDTO.favicon.url }"
+       def="$$static/images/favicon.png">
+    <link rel="shortcut icon" href="${ fav ? fav : def }"/>
+  </let>
+</head>
+<body>
+<div id="main">
+  <div class="content">
+    <h2 class="depth">
+      ${ message }
+    </h2>
+  </div>
+  <div>
+    <div class="content ${ msg }">
+      <p>${ detail }</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

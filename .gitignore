@@ -1,0 +1,90 @@
+*~
+*.bak
+*.swp
+
+node_modules/
+yarn-error.log
+
+deploy-configs.json
+
+settings.json
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*ipr
+*.iml
+*.iws
+
+# VS Code / Metals
+.metals/
+.bloop/
+project/.bloop/
+project/metals.sbt
+project/project/
+
+# Maven
+target/
+
+# Sbt
+user.sbt
+target/
+
+# Generated
+*.class
+
+# Temp
+*.orig
+*~
+.*.swp
+
+.sass-cache
+out/production/
+\.cache
+\.launch
+
+# --OSX--
+.DS_Store
+.AppleDouble
+.LSOverride
+# Icon must end with two \r
+Icon
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Build trash
+.ivy2/
+.staging/
+
+#SBT File caches
+in-cache
+out-cache
+buildinfo.properties
+tomcat.8080/
+
+de.tomcat.custom.conf
+
+work/
+
+.vscode/launch.json
+
+build-sbt/sbt/jfrog.credentials
+*.code-workspace
+.bsp/
+
+.npmrc
+.nvmrc
+.java-version

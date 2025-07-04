@@ -1,0 +1,40 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="grading-question-template question-container"
+  data-asset-name="{{$ctrl.question.reference.nodeName}}"
+>
+  <div class="question-body mb-3">
+    <div class="question-number-column">
+      <div
+        class="question-number"
+        ng-bind="$ctrl.index + 1"
+      ></div>
+    </div>
+
+    <div class="question-content-column">
+      <div ng-transclude="questionTextSlot">
+        <div
+          class="question-text"
+          compile="$ctrl.question.questionText"
+        ></div>
+      </div>
+      <div ng-transclude="questionContentSlot"></div>
+    </div>
+  </div>
+</div>

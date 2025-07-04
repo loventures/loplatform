@@ -1,0 +1,320 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.er-content-title {
+  z-index: 3;
+
+  .content-title {
+    display: flex;
+    align-items: start;
+    transition: width 0.1s ease-out;
+
+    .border-white {
+      border-color: transparent !important;
+    }
+
+    .content-spacer, .content-actions {
+      .px-2 {
+        padding-left: .375rem !important;
+        padding-right: .375rem !important;
+      }
+    }
+
+    .content-spacer {
+      order: 1;
+      width: calc(8.25rem + 6px);
+      height: calc(2.75rem + 2px);
+      display: flex;
+      justify-content: start;
+      float: left;
+    }
+
+    .content-actions {
+      order: 3;
+      width: calc(8.25rem + 6px);
+      height: calc(2.75rem + 2px);
+      justify-content: end;
+      float: right;
+    }
+
+    .title-bits {
+      order: 2;
+      align-items: stretch;
+      flex-grow: 1;
+      min-width: 0;
+      transition: none;
+    }
+
+    .activity-context {
+      font-size: 1rem;
+      justify-content: start;
+      transition: font-size 0.1s ease-out,
+      margin-left 0s;
+      margin-bottom: 1.5rem;
+
+      @media (max-width: $lgscreen-max) {
+        // reduce module titles to just Module 1 when with a lesson
+        .nindex-1 .ancillary {
+          display: none;
+        }
+      }
+
+      @media (max-width: $smscreen-max) {
+        // drop course crumb
+        .course-crumb:not(:only-child) {
+          display: none !important;
+
+          + .er-breadcrumb-segment::before {
+            display: none;
+          }
+        }
+      }
+
+      @media (max-width: $xsscreen-max) {
+        // reduce sole module/lesson titles to just Lesson 1
+        .nindex-0:not(:only-child) .ancillary {
+          display: none;
+        }
+      }
+
+      .er-breadcrumb-segment {
+        white-space: normal;
+        display: inline;
+        color: $text-muted;
+
+        &:not(:first-child)::before {
+          content: ' / '; // spaces add padding and let it break on whitespace
+          color: $text-muted;
+        }
+
+        &.course-crumb {
+          br {
+            display: block !important;
+          }
+
+          + .er-breadcrumb-segment::before {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .activity-title {
+      text-align: left;
+      transition: font-size 0.1s ease-out,
+      margin-left 0s;
+      margin-bottom: 0 !important;
+    }
+  }
+
+  &:not(.stuck) {
+    .content-title {
+      display: block;
+    }
+
+    .content-spacer {
+      justify-content: start;
+    }
+
+    .title-bits {
+      // defeat the sidebar button margin when unstuck
+      margin-left: 0 !important;
+
+      .activity-context {
+        text-align: center;
+        padding-top: 0.75rem;
+        @media (max-width: $smscreen-max) {
+          padding-top: 0;
+        }
+      }
+
+      .activity-title {
+        text-align: center;
+      }
+    }
+
+    @media (max-width: $smscreen-max) {
+      .title-bits {
+        padding-top: 0.25rem;
+      }
+      .content-actions {
+        margin-right: -0.75rem;
+        margin-top: -0.75rem;
+      }
+      .content-spacer {
+        margin-left: -0.75rem;
+        margin-top: -0.75rem;
+      }
+    }
+  }
+
+  .add-bookmark {
+    width: 18rem;
+    max-width: 18rem;
+  }
+
+  @media print {
+    .title-bits {
+      margin-left: 0 !important;
+    }
+  }
+
+  @media (max-width: $smscreen-max) {
+    .content-title {
+      .content-actions, .content-spacer {
+        width: calc(3rem + 2px);
+      }
+    }
+  }
+
+  @media screen {
+    &:not(.stuck) {
+      #instructions-button {
+        display: none !important;
+      }
+    }
+    &.stuck {
+      .content-title {
+        display: flex;
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: $er-header-height;
+        background: $color-white;
+        box-shadow: 0 0 8px $gray-light;
+        z-index: 3;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        align-items: center;
+        transition: box-shadow $transition-function $transition-speed;
+
+        // on small screens don't display the actions
+        @media (max-width: $smscreen-max) {
+          .title-bits {
+            margin-left: 0 !important;
+            // mirror the sidebar button margin for balance.. wastes too much space
+            // margin-right: 2.5rem;
+          }
+        }
+
+        // on medium screens defeat the sidebar button padding
+        @media (min-width: $mdscreen) {
+          .title-bits {
+            // defeat the sidebar button margin when unstuck
+            margin-left: 0 !important;
+          }
+        }
+
+        .title-bits {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .activity-title {
+          text-align: center;
+          font-size: 1.2rem;
+          margin-top: 0;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+          @media (min-width: $mdscreen) {
+            margin-top: 0.25rem;
+          }
+        }
+
+        .activity-context {
+          display: flex;
+          font-size: 0.95rem;
+          color: $gray-dark;
+          font-weight: 300;
+          margin-bottom: 0;
+          padding-top: 0.25rem;
+          justify-content: center;
+
+          .er-breadcrumb-segment {
+            margin-bottom: 0;
+            white-space: nowrap;
+            color: $gray-700;
+
+            &.course-crumb {
+              display: none;
+            }
+
+            &:not(:first-child)::before {
+              // in flex mode the left space is collapsed to 0
+              margin-left: 0.25rem;
+            }
+          }
+        }
+
+        .border-white {
+          border-color: $color-white !important;
+        }
+
+        @media (max-width: $smscreen-max) {
+          height: $er-mobile-header-height;
+          .activity-context {
+            padding-bottom: 0 !important;
+          }
+        }
+
+        @media (max-height: $smheight-max) {
+          height: $er-zoomed-header-height;
+        }
+      }
+    }
+  }
+}
+
+.er-basic-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#announcements .alert {
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding-left: 1.25rem;
+  transition: all $transition-function $transition-speed;
+  opacity: 1 !important;
+
+  .close {
+    padding: 0.75rem;
+  }
+}
+
+.er-sidebar-closed {
+  #announcements .alert {
+    padding-left: 3rem;
+  }
+}
+
+@media (min-width: $mdscreen) {
+  .er-sidebar-closed .er-content-title.stuck .content-title {
+    padding-left: 3.5rem;
+    padding-right: 3.5rem;
+  }
+  .er-sidebar-open .er-content-title.stuck .content-title {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+}

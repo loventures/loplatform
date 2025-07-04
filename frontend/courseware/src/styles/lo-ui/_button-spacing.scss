@@ -1,0 +1,53 @@
+.btn {
+  //0.31em is the grid offset historically used to get rid of inline element gaps.
+  //This has the effect of a perfect square of space around icons
+  //for buttons with icon + text
+  $word-spacing-offset: 0.31em;
+  &:not(.btn-sm):not(.btn-lg) {
+    > i,
+    > .icon {
+      &:first-child:not(:only-child) {
+        margin-right: calc(#{$input-btn-padding-x} - #{$word-spacing-offset});
+      }
+    }
+  }
+
+  &.btn-sm {
+    > i,
+    > .icon {
+      &:first-child:not(:only-child) {
+        margin-right: calc(#{$input-btn-padding-x-sm} - #{$word-spacing-offset});
+      }
+    }
+  }
+
+  &.btn-lg {
+    > i,
+    > .icon {
+      &:first-child:not(:only-child) {
+        margin-right: calc(#{$input-btn-padding-x-lg} - #{$word-spacing-offset});
+      }
+    }
+  }
+
+  &.btn-icon-only {
+    @include button-size(
+      $input-btn-padding-y-sm,
+      $input-btn-padding-x-sm,
+      $font-size-lg,
+      $btn-border-radius-lg
+    );
+  }
+}
+
+//until margin-end works on all browsers
+[dir='rtl'] {
+  .btn {
+    > i,
+    > .icon {
+      &:first-child:not(:only-child) {
+        margin-left: calc(#{$input-btn-padding-x} - 0.31em);
+      }
+    }
+  }
+}

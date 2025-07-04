@@ -1,0 +1,81 @@
+//
+// LO Cards
+//
+
+.card-raised {
+  box-shadow: $box-shadow-raised;
+}
+
+.card-deck,
+.card-group {
+  .card-title,
+  .card-text {
+    word-break: break-all;
+  }
+}
+
+//This has a pr and is scheduled for v4.2. Copying from their pr.
+//@TODO remove after we upgrade to bootstrap 4.2
+.card-horizontal {
+  flex-direction: row;
+}
+
+.card-img-right {
+  height: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  border-top-right-radius: $card-inner-border-radius;
+  border-bottom-right-radius: $card-inner-border-radius;
+}
+
+.card-img-left {
+  height: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  border-top-left-radius: $card-inner-border-radius;
+  border-bottom-left-radius: $card-inner-border-radius;
+}
+//end TODO
+
+.fullscreen h4.card-title {
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.fullscreen .card-text {
+  word-break: break-word;
+  font-size: 0.8rem;
+  color: $gray-light;
+}
+
+// ICON BUBBLES
+
+.bubbleIcon {
+  border: 7px solid #eee;
+  border-radius: 100%;
+  padding: 20%;
+  margin: 15%;
+
+  i {
+    color: $blue;
+    font-family: $font-family-icon;
+    max-width: 250px;
+    max-height: 250px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .bubbleIcon i {
+    font-size: 3rem !important;
+  }
+}
+
+.card-table {
+  margin-bottom: 0;
+
+  th,
+  td {
+    &:first-child {
+      padding-left: 1.25rem;
+    }
+    &:last-child {
+      padding-right: 1.25rem;
+    }
+  }
+}

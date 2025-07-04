@@ -1,0 +1,72 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="mt-3 alert alert-primary h4"
+  ng-if="!$ctrl.linkedAttemptIsComplete"
+>
+  <i
+    role="presentation"
+    class="material-icons"
+    >pending_actions</i
+  >
+  <span translate="QUIZ_RESULTS_COMPETENCIES_PENDING_GRADING"></span>
+</div>
+
+<div class="competency-summary-page">
+  <div
+    class="mt-3"
+    ng-if="$ctrl.competencySplit.mastered.length"
+  >
+    <h2
+      class="h5 mb-3"
+      translate="DEMONSTRATED_SKILLS"
+    ></h2>
+    <div class="alert alert-success mb-0">
+      <p translate="DEMONSTRATED_SKILLS_DESCRIPTION"></p>
+      <ul class="mb-0 list-unstyled">
+        <li
+          class="ms-3 mb-2"
+          ng-repeat="competency in $ctrl.competencySplit.mastered | naturallyOrderBy: 'title' "
+        >
+          <span ng-bind="competency.title"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div
+    class="mt-3"
+    ng-if="$ctrl.competencySplit.remaining.length"
+  >
+    <h2
+      class="h5"
+      translate="UPCOMING_SKILLS"
+    ></h2>
+    <div class="alert alert-dark mb-0">
+      <p translate="UPCOMING_SKILLS_DESCRIPTION"></p>
+      <ul class="mb-0 list-unstyled">
+        <li
+          class="ms-3 mb-2"
+          ng-repeat="competency in $ctrl.competencySplit.remaining | naturallyOrderBy: 'title' "
+        >
+          <span ng-bind="competency.title"></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

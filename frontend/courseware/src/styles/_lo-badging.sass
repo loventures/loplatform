@@ -1,0 +1,117 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//
+// LO badges
+//
+
+.badge-page
+  .flex-header
+    color: $color-contrasted-primary-dark
+
+  .earned-badges
+    @extend .bg-primary
+    color: $color-white
+    padding: 3em 0 1.5em
+    margin-bottom: 1.25em
+
+    .badge-list-message .badge-list-empty-img
+      margin-top: -1em
+
+.badge-share-page
+  h2
+    margin-left: 10px
+
+  .badge-detail-view
+    background-color: $color-white
+
+    &:not(.pop-out-badge-detail)
+      margin-left:  10px
+      margin-right: 10px
+
+      .badge-buttons :first-child
+        padding-top: 10px
+
+.badge-list-container
+  position: relative
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .pop-out-badge-detail
+    position: absolute
+    width: 90%
+    margin-top: -7.5%
+    margin-left: 5%
+    z-index: 1
+
+  .badge-list-brief
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    overflow: hidden
+
+  .badge-list-message
+    padding: 1em 2em
+    margin: 1em 2em
+    color: inherit
+    background: transparent
+
+    .badge-list-empty-img
+      height: 12em
+      margin: -3em auto 0.5em
+      opacity: 0.67
+
+.badge-brief-view
+  position: relative
+  width: 1em
+  height: 1em
+  @extend .flex-center-center
+
+  //at least 3 badges per row
+  font-size: 11em
+
+  @media (max-width: $xsscreen-max)
+    font-size: 9em
+
+  @media (max-width: $xxsscreen-max)
+    font-size: 7em
+
+  .badge-image
+    margin: 0
+    width: 0.95em
+    height: 0.95em
+    transition: all ease $trans-speed
+
+  &:hover
+    .badge-image
+      width: 1em
+      height: 1em
+
+.badge-detail-view
+  @media (max-width: $mdscreen-max)
+    font-size: 0.9em
+
+  @media (max-width: $smscreen-max)
+    font-size: 0.8em
+    .badge-image
+      font-size: 0.6em
+
+  .badge-image
+    flex: 0 0 auto
+    width: 10em
+    height: 10em

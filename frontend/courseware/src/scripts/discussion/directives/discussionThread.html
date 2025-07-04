@@ -1,0 +1,86 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div
+  class="discussion-thread"
+  ng-class="{
+    'replies-expanded': $ctrl.thread.isChildrenVisible,
+    'thread-expanded': $ctrl.thread.isChildrenVisible,
+  }"
+>
+  <discussion-item
+    discussion-id="$ctrl.discussionId"
+    item="$ctrl.thread.rootPost"
+    thread="$ctrl.thread"
+    is-thread="true"
+    set-all-expansion="$ctrl.setAllExpansion"
+    set-all-viewed="$ctrl.setAllViewed"
+    settings="$ctrl.settings"
+  ></discussion-item>
+
+  <ul
+    class="discussion-thread-replies-area"
+    ng-if="$ctrl.thread.isChildrenVisible"
+    ng-init="$ctrl.initReplies()"
+  >
+    <li
+      class="discussion-reply-list-child"
+      ng-repeat="orphan in $ctrl.thread.orphans track by orphan.id"
+      ng-if="$ctrl.showOrphan === orphan.id"
+    >
+      <discussion-item
+        item="orphan"
+        thread="$ctrl.thread"
+        discussion-id="$ctrl.discussionId"
+        settings="$ctrl.settings"
+      ></discussion-item>
+    </li>
+
+    <div
+      class="alert alert-info m-1"
+      ng-if="$ctrl.thread.loadingReplies"
+    >
+      <loading-spinner></loading-spinner>
+    </div>
+    <div
+      class="discussion-replies-load-bar my-3"
+      ng-if="!$ctrl.thread.loadingReplies && $ctrl.thread.repliesRemaining"
+    >
+      <button
+        class="btn btn-secondary"
+        ng-click="$ctrl.loadMoreReplies()"
+      >
+        <span
+          translate="DISCUSSION_BOARD_LOAD_MORE_REPLIES"
+          translate-values="{ count: $ctrl.thread.repliesRemaining }"
+        ></span>
+      </button>
+    </div>
+
+    <li
+      class="discussion-reply-list-child"
+      ng-repeat="child in $ctrl.thread.replies track by child.id"
+    >
+      <discussion-item
+        item="child"
+        thread="$ctrl.thread"
+        discussion-id="$ctrl.discussionId"
+        settings="$ctrl.settings"
+      ></discussion-item>
+    </li>
+  </ul>
+</div>

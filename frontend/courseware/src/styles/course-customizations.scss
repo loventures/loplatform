@@ -1,0 +1,268 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.course-customizer {
+  .content-tree-drop-target {
+    height: 5px;
+    width: 100%;
+    color: black;
+  }
+
+  .content-tree-drop-target-outer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .content-tree-drop-target.is-over {
+    background-color: blue;
+  }
+
+  .header-edit-options {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .content-children {
+    transform: translateZ(0);
+    transition: height 100ms linear;
+    overflow: hidden;
+  }
+
+  .options-header {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .content-node {
+    padding: 1rem;
+    padding-left: 0;
+    box-shadow: 0px 3px 2px 2px #ccc;
+    background-color: #fff;
+
+    &.show-editors {
+      background-color: #ddd;
+    }
+
+    .content-node-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .node-title,
+    .title-editor {
+      flex-grow: 1;
+      display: flex;
+      width: max-content;
+      overflow: hidden;
+      min-width: 50px;
+      align-items: center;
+
+      .node-title-text {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .summary {
+      margin-left: 0.5rem;
+      white-space: nowrap;
+
+      .summary-detail {
+        border-right: 1px solid #666;
+        padding-right: 0.25rem;
+        margin-right: 0.25rem;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    // todo: icon-btn and  remove btn-lnk
+    .right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .points-editor {
+      input {
+        width: 85px;
+        margin-left: 0.5rem;
+      }
+    }
+
+    .due-date-editor {
+      display: flex;
+      align-items: center;
+
+      .input-group {
+        &.day {
+          width: 14rem;
+        }
+
+        &.time {
+          width: 12rem;
+        }
+      }
+    }
+
+    .due-date-inputs {
+      display: flex;
+      flex-direction: row;
+      margin-left: 0.5rem;
+    }
+
+    .delete {
+      padding-left: 0;
+      padding-right: 0;
+      color: $color-alert;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .content-node.hidden {
+    background-color: #bbb;
+    box-shadow: none;
+
+    .node-title-text {
+      text-decoration: line-through;
+    }
+
+    .dropdown-caret {
+      visibility: hidden;
+    }
+  }
+
+  .content-node {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: 1rem;
+
+    .btn-outline-primary {
+      // box-shadow: inset 0 0 10px #aaa;
+      &:hover,
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
+  .icon-btn {
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+
+    &:hover:not([disabled]),
+    &:focus:not([disabled]) {
+      border-bottom: 1px solid #000;
+    }
+  }
+}
+
+.customizations-review {
+  h5 {
+    display: flex;
+    align-items: center;
+  }
+  .module-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0.5em;
+    h5 {
+      margin-bottom: 0;
+    }
+
+    margin-top: 1.5em;
+    &:first-of-type {
+      margin-top: 1em;
+    }
+  }
+  .name {
+    font-weight: 700;
+  }
+  .details {
+    margin-left: auto;
+  }
+  .change {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 1rem;
+
+    .old {
+      text-decoration: line-through;
+      margin-right: 0.5rem;
+    }
+    .new {
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+.customizations-review,
+.reset-review {
+  .content-node {
+    margin-left: 1.5em;
+    padding: 0.25rem;
+    box-shadow: 0px 2px 1px 0px #aaa;
+    background-color: #eee;
+    margin-bottom: 1rem;
+  }
+}
+
+.customizations-problem {
+  padding: 0.25rem;
+  box-shadow: 0px 2px 1px 0px #aaa;
+  background-color: #eee;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.5rem;
+    color: $color-warning;
+  }
+}
+
+#customizations-confirm-hide-modal {
+  .modal-footer {
+    display: flex;
+    flex-direction: row;
+    .options {
+      flex: 1;
+
+      label {
+        margin-bottom: 0rem;
+      }
+    }
+  }
+  .modal-body {
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

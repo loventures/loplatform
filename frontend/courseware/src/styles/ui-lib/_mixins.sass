@@ -1,0 +1,124 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Mixins.
+////////////////////////////////////////////////////////////////////////////////////
+
+@import constants
+@import contrastor
+
+////////////////////////////////////////////////////////////////////////////////////
+
+.box-shadow
+  box-shadow: 0 1px 2px rgba($color-black, 0.08)
+
+.box-shadow-inset
+  box-shadow: 0 0 2px rgba($color-black, 0.15) inset
+
+.question-width
+  width: calc(100% - #{$quiz-left-margin})
+  margin-left: $quiz-left-margin
+
+  @media (max-width: $smscreen-max)
+    margin-left: 1rem
+    width: calc(100% - 1rem)
+
+.text-shadow
+  text-shadow: 0 -1px 0 fade-out($color-black, 0.85)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+.competency-list-container
+  display: inline-block
+  padding: 0
+  font-size: 1em
+  list-style-type: none
+
+  @media (max-width: $lgscreen)
+    margin: 1em calc(3.5% - 0.5em)
+
+  @media (max-width: $smscreen)
+    margin: 1em calc(2.5% - 0.5em)
+
+.competency-list-item
+  width: 100%
+  display: inline-block
+  text-align: center
+  background: $color-light
+  transition: all ease $trans-speed
+  border-radius: $border-radius
+  @extend .box-shadow
+
+.comp-name
+  margin: 0
+  font-size: 0.925em
+  color: $color-contrasted-primary-dark
+  background: $color-white
+  border-radius: calc($border-radius / 1.5) calc($border-radius / 1.5) 0 0
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08)
+  text-overflow: ellipsis
+  position: relative
+
+  @media (max-width: $smscreen)
+    padding: 0.33em
+    font-size: 0.85em
+
+  a
+    color: $color-body-text
+
+.comp-percent
+  font-weight: 200
+  text-shadow: 0 1px 0 $color-white
+  line-height: 1
+
+  > .symbol
+    font-size: 0.5em
+
+////////////////////////////////////////////////////////////////////////////////////
+
+@mixin linear-gradient($fromColor, $toColor)
+  //background-color: $toColor
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor))
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor)
+  background-image:    -moz-linear-gradient(top, $fromColor, $toColor)
+  background-image:     -ms-linear-gradient(top, $fromColor, $toColor)
+  background-image:      -o-linear-gradient(top, $fromColor, $toColor)
+  background-image:         linear-gradient(top, $fromColor, $toColor)
+
+@mixin angle-gradient($fromColor, $toColor)
+  //background-color: $toColor
+  background-image: -webkit-gradient(linear, left top, right bottom, from(50%, $fromColor), to(50%, $toColor))
+  background-image: -webkit-linear-gradient(-45deg, $fromColor 50%, $toColor 50%)
+  background-image:    -moz-linear-gradient(-45deg, $fromColor 50%, $toColor 50%)
+  background-image:     -ms-linear-gradient(-45deg, $fromColor 50%, $toColor 50%)
+  background-image:      -o-linear-gradient(-45deg, $fromColor 50%, $toColor 50%)
+  background-image:         linear-gradient(-45deg, $fromColor 50%, $toColor 50%)
+
+////////////////////////////////////////////////////////////////////////////////////
+
+@keyframes anim-rotate
+  0%
+    transform: rotate(0)
+  100%
+    transform: rotate(360deg)
+
+.de-spin
+  animation: anim-rotate 2s infinite linear
+
+i.de-spin:before
+  animation: anim-rotate 2s infinite linear

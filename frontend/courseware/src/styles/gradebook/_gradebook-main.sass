@@ -1,0 +1,90 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+@import gradebook-grades
+@import gradebook-sync
+@import gradebook-assignments
+
+.gradebook-grades,
+.gradebook-editor
+  display: inline-block
+  width: 100%
+  margin: 1em 0
+
+  section
+    border: 1px solid darken($color-light, 10%)
+    margin-bottom: 1rem
+    padding: 1rem
+
+.gradebook-table
+    &:hover
+      cursor: pointer
+
+    .assignment-name,
+    .category-name
+      box-sizing: border-box
+      padding: 1em
+      display: block
+      overflow-x: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+    .assignment-name
+      width: 10rem
+      font-size: 0.85em
+      font-weight: 400
+
+.grade-block
+  position: relative
+  border-radius: $border-radius
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  .grade-block-span
+    flex: 5
+  .lti-sync-status-link
+    flex: 1
+
+  &.late-submission
+    box-shadow: 0 0 3px $color-alert inset
+
+  > *
+    display: inline-block
+    vertical-align: middle
+
+  $grade-block-inner-width: calc(100% - 1em)
+
+  .grade-block-span
+    width: $grade-block-inner-width
+    padding: 0.5em
+    overflow-x: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
+
+    .grade-paren
+      font-size: 0.925em
+      opacity: 0.85
+      margin-left: 0.5em
+
+  input
+    position: relative
+    z-index: 0
+    margin: 0.15em 0 -0.15em
+    padding: 0.33em 0.25em 0.33em 0.425em
+    width: $grade-block-inner-width

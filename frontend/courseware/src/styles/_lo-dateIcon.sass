@@ -1,0 +1,52 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.date-icon
+    width: 1em
+    height: 1em
+    border-radius: 0.2em
+    text-align: center
+    overflow: hidden
+    box-shadow: 0 1px 1px rgba(0,0,0,0.125)
+
+    .month
+        font-size: 0.3em
+        line-height: 1.3
+        color: $color-white
+        background-color: $color-contrasted-primary
+
+    .date
+        font-size: 0.5em
+        line-height: 1.15
+        color: $color-contrasted-primary
+        background-color: $color-white
+
+.has-duedate.over-due .date-icon
+    .month
+        background-color: $color-alert
+    .date
+        color: $color-alert
+
+.has-duedate.near-due .date-icon
+    .month
+        background-color: $color-warning
+    .date
+        color: $color-warning
+
+
+
+

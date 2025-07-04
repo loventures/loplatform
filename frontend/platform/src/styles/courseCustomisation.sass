@@ -1,0 +1,144 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.treeNode
+  transition: all .3s
+
+  button
+    &:not(:hover):not(:focus)
+      background: transparent
+
+  .treeRow
+    position: absolute
+    transition: all .3s
+    width: calc(100% - 30px)
+    height: 52px
+    display: flex
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)
+    margin-bottom: 4px
+    background-color: #f8f8f8
+    cursor: move
+    &.rowActive
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.19), 0 3px 3px rgba(0, 0, 0, 0.23)
+    &.rowHidden
+      background-color: #d6d6d6
+    &.rowFocused
+      z-index: 100
+    &.rowFocused:not(.dragging)
+      background-color: #cef
+      z-index: 100
+      &.rowHidden
+        background-color: #acd
+    &.searchMatch
+      border: 1px solid #ff4
+    &.dragging
+      opacity: 0.5
+    &.dropping
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.48)
+
+  .treeNode
+    .treeNode
+      margin-left: 30px
+      .treeRow
+        width: calc(100% - 60px)
+      .treeNode
+        .treeRow
+          width: calc(100% - 90px)
+
+  .r-0
+    transition: transform .3s
+    transform: rotate(0deg)
+
+  .r-90
+    transition: transform .3s
+    transform: rotate(90deg)
+
+.node-title-wrapper
+  height: 52px
+  flex: 1
+  display: flex
+  min-width: 0
+
+.node-tool-wrapper
+  height: 52px
+  flex-shrink: 0
+  white-space: nowrap
+  margin-right: .5rem
+  display: flex
+
+  > button
+    margin: auto 0
+
+.node-title-label
+  flex-shrink: 1
+  min-width: 0
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  margin: auto 0
+  padding-left: 2rem
+  font-size: 1.1rem
+  font-weight: 0500
+
+.rowOpenable
+  .node-title-label
+    padding-left: .5rem
+  
+.node-subtitle
+  font-weight: 0300
+  font-size: .75rem
+  padding-top: .25rem
+  margin: auto 0 auto .5rem
+  color: #444
+
+.title-editor-wrapper
+  margin: auto 0
+  padding: 0 .5rem
+  flex: 1
+  display: flex
+
+.customisation-datepickerwrapper
+  position: relative
+  margin: auto 0
+
+  .rdt
+    display: inline-block
+    .rdtPicker
+      right: 0
+
+  input.form-control
+    background: white
+    color: #000
+
+  .cust-clear-date-time
+    position: absolute
+    right: .125rem
+    top: .1rem
+    z-index: 4
+    font-size: 1rem
+    line-height: 2.25rem
+    padding: 0 .5rem
+    color: #333
+    cursor: default
+    &:hover
+      color: #000
+
+.customisation-duedate
+  margin: auto 1rem auto 0
+  color: #555
+

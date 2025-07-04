@@ -1,0 +1,238 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+* Custom rich content styles applied to our WYSIWYG content. Originally found in LO-UI.
+* The class selectors may have been used in client content (i.e. UTexas)
+*
+* WARNING: do not make changes without corresponding changes in dcm (_lodactor.scss)
+* and BaseHtmlService.
+*/
+.rich-content {
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+
+  p, blockquote, h1, h2, h3, h4, h5, pre {
+    margin: 0 0 1rem;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 400;
+    color: black;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  a[href] {
+    color: #006388;
+    text-decoration: underline;
+    &:hover {
+      color: #003144;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid $gray-500;
+    padding-left: .5rem;
+    font-style: italic;
+  }
+
+  img, iframe {
+    max-width: 100%;
+    border-radius: .3rem;
+    display: block;
+    margin: 0 auto;
+  }
+
+  ul,
+  ol {
+    list-style-position: outside;
+    margin: 0 0 1rem;
+
+    li {
+      margin: 0 0 .5rem;
+    }
+
+    ol,
+    ul {
+      margin-left: 1em;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  dl {
+    dt {
+      font-weight: 600;
+      margin-bottom: .5rem;
+    }
+
+    dd {
+      margin: 0 0 1rem;
+    }
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  cite,
+  em,
+  i {
+    font-style: italic;
+  }
+
+  code,
+  var {
+    font-family: monospace, serif;
+  }
+
+  // Tables
+
+  table {
+    table-layout: auto;
+    margin-bottom: 1rem;
+    background: #fff;
+    border: none;
+    border-spacing: 0;
+    border-collapse: separate !important;
+    border-radius: 5px;
+    width: 100%;
+
+    caption {
+      caption-side: bottom;
+      font-weight: 600;
+      padding: 0.75rem;
+      color: inherit;
+    }
+
+    thead,
+    tbody {
+      th,
+      td {
+        border: solid $table-border-color;
+        border-width: $table-border-width $table-border-width 0 0;
+      }
+
+      td:first-child,
+      th:first-child {
+        border-width: $table-border-width $table-border-width 0 $table-border-width;
+      }
+
+      tr:first-child {
+        td:first-child,
+        th:first-child {
+          border-top-left-radius: 5px;
+        }
+        td:last-child,
+        th:last-child {
+          border-width: $table-border-width $table-border-width 0 0;
+          border-top-right-radius: 5px;
+        }
+      }
+      tr:last-child {
+        td,
+        th {
+          border-width: $table-border-width $table-border-width $table-border-width 0;
+        }
+        td:first-child,
+        th:first-child {
+          border-width: $table-border-width;
+          border-bottom-left-radius: 5px;
+        }
+        td:last-child,
+        th:last-child {
+          border-width: $table-border-width $table-border-width $table-border-width 0;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
+
+    thead:has(+ tbody) {
+      tr:last-child {
+        td:first-child,
+        th:first-child {
+          border-bottom-left-radius: 0;
+        }
+
+        td:last-child,
+        th:last-child {
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    thead + tbody {
+      tr:first-child {
+        td,
+        th {
+          border-top-width: 0;
+        }
+        td:first-child,
+        th:first-child,
+        td:last-child,
+        th:last-child {
+          border-top-width: 0;
+          border-radius: 0;
+        }
+      }
+    }
+
+    tr {
+      padding: 1rem;
+      vertical-align: top;
+
+      th {
+        font-weight: 600;
+        padding: 1rem;
+        text-align: left;
+      }
+
+      td {
+        padding: 0.75rem;
+      }
+    }
+  }
+
+}

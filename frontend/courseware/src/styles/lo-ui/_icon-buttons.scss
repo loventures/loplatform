@@ -1,0 +1,80 @@
+.icon-btn {
+  display: inline-block;
+  //make the icon size span the whole line height of normal text
+  font-size: 1em * $input-btn-line-height;
+  //no padding for normal inline use
+  padding: 0;
+  //for btn containers (or specified as used with .btn's), icon-btn have some padding
+  //to make it same box height (+ an equal width) as .btn
+  .input-group &,
+  .btn-group &,
+  &.with-btn {
+    padding: calc(#{$input-btn-padding-y} + #{$input-btn-border-width});
+  }
+
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  @include transition($btn-transition);
+
+  // Share hover and focus styles
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:focus,
+  &.focus {
+    outline: 0;
+    text-shadow: $btn-focus-box-shadow;
+  }
+
+  // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    opacity: 0.65;
+    @include text-shadow-halo($dark);
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+    @include text-shadow-halo($dark);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .icon-btn-#{$color} {
+    color: $value;
+    background-color: transparent;
+    background-image: none;
+
+    &:hover {
+      color: $value;
+      @include text-shadow-halo($value);
+    }
+
+    &:focus,
+    &.focus {
+      color: $value;
+      @include text-shadow-halo($value);
+    }
+
+    &.disabled,
+    &:disabled {
+      color: $value;
+      opacity: 0.65;
+      text-shadow: none;
+    }
+
+    &:active,
+    &.active,
+    .show > &.dropdown-toggle {
+      color: $value;
+      @include text-shadow-halo($value);
+    }
+  }
+}

@@ -1,0 +1,68 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.content-views-preview-lesson
+  background-color: $color-white
+  display: flex
+  flex-direction: row
+  align-items: stretch
+
+  .lesson-preview-right
+    flex: 1 1 auto
+
+    .lesson-preview-header:hover
+      cursor: pointer
+      text-decoration: underline
+
+  .lesson-preview-left
+    @extend .flex-center-center
+    flex: 0 0 auto
+    border-radius: $card-border-radius 0 0 $card-border-radius
+    //the left strip effect, but as bg to preserve color
+    background-image: linear-gradient(-45deg, transparent 50%, transparentize($light, 0.9) 50%)
+    transition: transform ease $trans-speed
+
+    &.done-0
+      background-color: $light
+
+  &:not(.collapsed) .lesson-preview-left
+    @include media-breakpoint-down(md)
+      width: 0.5em
+      padding: 0
+      > *
+        transform: scaleX(0)
+
+.content-views-preview-lesson
+  .inline-locks-container
+    display: flex
+    .inline-locks
+      margin-right: 0
+
+    .asset-info
+      flex: 1 1 auto
+
+  .inline-locks .icon-lock
+      color: $color-body-text
+
+  &.locked
+    .inline-locks-container .asset-title
+      color: $color-light-text
+
+    .prog-circle .icon
+      color: $color-light-text
+
+

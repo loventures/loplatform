@@ -1,0 +1,99 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@use 'sass:color';
+
+.navbar-nav {
+  .dropdown-menu {
+    //bs4 has it at block because it likes the expanding navbar
+    //which we don't like.
+    position: absolute;
+  }
+  .nav-item > .nav-link {
+    flex: 1 1 auto;
+  }
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.no-fluid-xs {
+  @include media-breakpoint-down(xs) {
+    flex: 1 1 100% !important;
+  }
+}
+
+.no-fluid-sm {
+  @include media-breakpoint-down(sm) {
+    flex: 1 1 100% !important;
+  }
+}
+
+.alert.alert-light {
+  color: color.adjust($light, $lightness: -70%);
+  border-color: color.adjust($light, $lightness: -30%);
+  background-color: $light;
+}
+
+.link-always-underline {
+  text-decoration: underline !important;
+}
+
+.panel {
+  overflow: visible;
+}
+
+.panel-left .panel-expand-btn {
+  @extend .btn;
+  @extend .btn-primary;
+  height: 3rem;
+  width: 1.6rem;
+  position: absolute;
+  top: calc(50% - 1.5rem);
+  right: -1.5rem;
+  z-index: -1;
+}
+
+button.page-link {
+  border-radius: 0px;
+}
+
+.panel.panel-right {
+  // if the width of a mobile screen is less than 400px we use vw
+  right: -400px;
+  right: #{'max(-400px, -100vw)'};
+  transform: translate(0, 0);
+  &.open {
+    transform: translate(-100%, 0);
+  }
+}
+
+@each $color, $value in $theme-colors {
+  .icon-btn-#{$color}:not([disabled]) {
+    &:focus,
+    &:hover,
+    &.focus {
+      color: $value;
+      text-shadow: 2px 2px 5px rgba($value, 0.9);
+    }
+  }
+}

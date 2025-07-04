@@ -1,0 +1,49 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.upload-drop-box
+  @extend .px-3
+  @extend .py-3
+  background: fade-out($white, 0.15)
+  color: $primary
+  border: 1px dashed $primary
+  border-radius: $border-radius
+  flex-grow: 1
+  cursor: pointer
+  transition: all $transition-function $trans-speed
+  @extend .flex-center-center
+
+  &.drag-accept
+    background: $primary
+    border-color: $white
+    color: $white
+
+.attachments-viewer,
+.attachments-editor
+  .file-preview
+    margin-left: 0.25rem
+    margin-right: 0.25rem
+    padding-top: 0.25rem
+    padding-bottom: 0.25rem
+    &:not(:first-child)
+      border-top: $border-width solid $border-color
+
+.file-preview
+  .preview-image,
+  .preview-video
+    max-height: calc(100vh - 8rem)

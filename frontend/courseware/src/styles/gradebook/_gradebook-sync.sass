@@ -1,0 +1,117 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.grade-sync-history
+  margin-top: 1rem
+
+ol.grade-sync-histories
+  list-style: none
+  padding-left: 0
+  margin-top: 1rem
+  // font-size: 1.15rem
+
+  li
+    &.Queued
+      color: $color-skipped
+    &.Synced
+      color: $color-success
+    &.Failed
+      color: $color-alert
+
+    .history-status
+      font-weight: bold
+    .history-date
+      font-style: oblique
+
+.btn-sync
+  background-color: $color-success
+  border-color: $color-success
+  color: $color-white
+
+.grade-sync-histories
+  padding: 0
+  margin: 0
+  margin-bottom: 2rem
+
+  li
+    position: relative
+    list-style-type: none
+    text-align: left
+
+    div.history-inner
+      &:after
+        content: ''
+        position: absolute
+        background: $color-light-text
+        z-index: -1
+        top: 1.4rem
+        bottom: 0
+        left: 15px
+        width: 2px
+      &:before
+        content: ''
+        position: absolute
+        background: $color-light-text
+        z-index: -1
+        top: 0
+        bottom: calc(100% - 1.4rem)
+        left: 15px
+        width: 2px
+
+      > span
+        vertical-align: top
+        display: inline-block
+        margin-top: 1.4rem
+
+        &.history-index
+          font-weight: 800
+          width: 2em
+          height: 2em
+          text-align: center
+          line-height: 2em
+          border-radius: 1em
+          color: white
+          position: relative
+          margin: 1.4rem 1rem 1.4rem 0
+
+        &.Queued
+          // color: #ddd
+          background: $color-light-text
+        &.Synced
+          background: $color-success
+        &.Failed
+          background: $color-alert
+        &.Attempted
+          background: $color-warning
+
+    &:last-child div.history-inner:after
+      display: none
+    &:first-child div.history-inner:before
+      display: none
+
+  .history-body
+    width: calc(100% - 3.4em)
+  .history-details
+    margin-top: 0.5rem
+    > *
+      vertical-align: middle
+    .history-details-step
+      > *
+        margin-left: 1rem
+      > h5
+        margin-left: 0

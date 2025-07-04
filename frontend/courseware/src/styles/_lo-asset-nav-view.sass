@@ -1,0 +1,114 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+$nav-height: 4.5em
+
+$nav-border-config: solid 1px $color-light
+
+.base-asset-nav-view
+  //setup
+  box-sizing: border-box
+  *
+    box-sizing: border-box
+
+  display: flex
+  flex-direction: row
+  align-items: stretch
+
+  .icon-column
+    flex: 0 0 $nav-height
+    order: 1
+
+  .text-column
+    flex: 1 1 $nav-height * 4
+    order: 2
+
+//fancy borders
+.base-asset-nav-view
+  border-bottom: $nav-border-config
+
+.nav-view-playlist-children
+  .base-asset-nav-view
+    border-bottom: none
+    .text-column
+      border-bottom: $nav-border-config
+
+  li:last-child
+    .base-asset-nav-view .icon-column
+      border-bottom: $nav-border-config
+
+//spacing and colors
+.base-asset-nav-view
+  cursor: pointer
+  background-color: $color-white
+
+  &.asset-type-playlist\.cblLesson
+    background-color: darken($color-white, 5)
+
+  &:hover
+    background-color: darken($color-white, 9)
+
+  &.title-only
+    background-color: $color-lighter
+    border-top: 1px solid
+    border-bottom: 1px solid
+    border-color: darken($color-light,5%)
+
+  &.title-only:hover
+    background-color: darken($color-lighter, 9)
+
+  &.current-aseet
+      box-shadow: inset 3px 0 0 0 $color-primary
+
+  .icon-column
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $color-contrasted-primary
+
+  &.completed .icon-column
+    color: $color-success
+
+  .icon-column
+    .icon
+      font-size: math.div($nav-height, 3)
+
+    .prog-circle
+      font-size: math.div($nav-height, 10)
+
+  .text-column
+    overflow: hidden
+    $part-size: math.div($nav-height, 8)
+    padding: $part-size 0 $part-size 0
+
+    .nav-asset-title
+      font-size: $part-size * 1.8
+      color: $color-body-text
+
+    .nav-asset-info
+      font-size: $part-size * 1.2
+      color: $color-light-text
+
+    .nav-asset-title,
+    .nav-asset-info
+      display: block
+      width: 100%
+
+      span
+        display: inline

@@ -1,0 +1,20 @@
+//
+// LO Forms
+//
+
+.input-group {
+  [type='time'],
+  [type='date'] {
+    ~ .input-group-btn > .btn {
+      //this is required for btns in the same group of time inputs
+      //because the sizing was aligned to only text input
+      //and is wrong for time input boxes
+      height: 100%;
+    }
+  }
+}
+
+//bs5
+.lo-checkbox .custom-control-label {
+  margin-left: 0.375rem;
+}

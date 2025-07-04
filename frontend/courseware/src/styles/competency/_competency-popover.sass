@@ -1,0 +1,56 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.competency-popover-container
+  position: relative
+
+  .competency-popover-toggle
+    @extend .btn
+    @extend .btn-link
+    font-size: 1.5em
+    padding: 0
+
+  .competency-popover
+    max-width: 20em
+    height: 5em
+    left: unset
+    right: 2em
+    //top is half of height, minus the padding
+    top: -2em
+    padding: 0.5em
+
+    &:after
+      top: 2em
+      left: 100%
+      border: solid transparent
+      border-left-color: $light
+      content: ""
+      position: absolute
+      border-width: 0.5em
+
+    .competency-popover-content
+      @extend .flex-center-center
+      justify-content: flex-start
+      flex-wrap: wrap
+      > *
+        margin: 2px //letter-spacing
+        white-space: nowrap
+      > a
+        @extend .btn
+        @extend .btn-link
+        padding: 0

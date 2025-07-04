@@ -1,0 +1,123 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div class="discussion-board">
+  <discussion-board-jump-bar
+    ng-if="$ctrl.showJumpBar && $ctrl.readyToLoadThreads && !$ctrl.printView"
+    discussion-id="$ctrl.discussionId"
+    set-in-view="$ctrl.setInView"
+    back-action="$ctrl.toThreadsView"
+    displaying-view="$ctrl.displayView"
+    last-visited-time="$ctrl.lastVisitedTime"
+  ></discussion-board-jump-bar>
+
+  <div
+    class="discussion-board-write-post"
+    ng-if="$ctrl.canWritePosts()"
+  >
+    <h2 class="h4 write-post">
+      <i
+        class="icon icon-bubble-plus d-print-none"
+        aria-hidden="true"
+      ></i>
+      <span translate="DISCUSSION_CREATE_THREAD"></span>
+    </h2>
+
+    <div ng-show="$ctrl.canCreateThreads()">
+      <discussion-write-thread
+        state="$ctrl.newThread"
+        save-action="$ctrl.threadSave"
+        discard-action="$ctrl.threadDiscard"
+        keep-working-action="$ctrl.threadKeepWorking"
+        show-title="$ctrl.showTitle"
+      ></discussion-write-thread>
+    </div>
+
+    <div ng-hide="$ctrl.canCreateThreads()">
+      <div class="asset-final-pending">
+        <span translate="DISCUSSION_THREAD_LIMIT_MESSAGE"></span>
+      </div>
+    </div>
+  </div>
+
+  <discussion-board-search
+    discussion-id="$ctrl.discussionId"
+    set-in-view="$ctrl.setInView"
+  ></discussion-board-search>
+
+  <div id="discussion-list-top">
+    <div
+      class="lo-well flash-message"
+      ng-if="$ctrl.loadMessage"
+    >
+      <span
+        class="icon icon-info"
+        aria-hidden="true"
+      ></span>
+      <span translate="$ctrl.loadMessage"></span>
+    </div>
+
+    <header class="discussion-view-header my-2">
+      <button
+        class="icon-btn back-to-threads-button"
+        ng-if="$ctrl.displayView"
+        title="{{'DISCUSSION_BACK_TO_THREADS' | translate}}"
+        ng-click="$ctrl.toThreadsView()"
+      >
+        <span class="lo-icon icon-circle-up-left"></span>
+      </button>
+      <h3 class="h4 m-0 view-title">
+        <span
+          ng-if="!$ctrl.displayView"
+          ng-bind="'DISCUSSION_THREADS_VIEW' | translate"
+        ></span>
+        <span
+          ng-if="$ctrl.displayView"
+          ng-bind=" $ctrl.keyMap[$ctrl.viewInfo.viewType] | translate "
+        ></span>
+      </h3>
+      <list-sort
+        class="board-control mx-1 d-print-none"
+        sort-actions="$ctrl.sortActions"
+        params="{
+            discussionId: $ctrl.discussionId,
+            lastVisitedTime: $ctrl.lastVisitedTime
+          }"
+        disable="$ctrl.displayView"
+      ></list-sort>
+      <discussion-board-settings
+        class="board-control d-print-none"
+        ng-if="$ctrl.settings.canMarkUnread"
+        settings="$ctrl.settings"
+        update-settings="$ctrl.updateSettingsFns"
+      ></discussion-board-settings>
+    </header>
+
+    <discussion-board-threads-view
+      ng-if="$ctrl.readyToLoadThreads && !$ctrl.displayView"
+      discussion-id="$ctrl.discussionId"
+      settings="$ctrl.settings"
+    ></discussion-board-threads-view>
+
+    <discussion-board-single-thread-view
+      ng-if="$ctrl.readyToLoadThreads && $ctrl.displayView"
+      discussion-id="$ctrl.discussionId"
+      settings="$ctrl.settings"
+      back-action="$ctrl.toThreadsView"
+    ></discussion-board-single-thread-view>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+# Config
+user.conf
+/keystore
+# Runtime
+/logs
+/storage

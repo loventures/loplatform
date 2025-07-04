@@ -1,0 +1,54 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+$flags: (collapsed,replies-expanded,thread-expanded,by-moderator,by-current-user,unread,pinned,bookmarked,available,inappropriate,removed,reported)
+
+//show/hide
+@each $flag in $flags
+  .discussion-item-post
+    &:not(.#{$flag})
+      .show-when-#{$flag}
+        display: none
+
+    &.#{$flag}
+      .hide-when-#{$flag}
+        display: none
+
+//special styling other than show/hide
+.discussion-item-post.bookmarked
+  .toggle-bookmark
+    color: $color-white
+    background-color: $discussion-color-bookmark
+
+.discussion-item-post.pinned
+  .toggle-pinned
+    color: $color-white
+    background-color: $discussion-color-pinned
+
+.discussion-item-post.unread
+  .unread-toggle .viewed-icon
+    border-color: $discussion-color-unread
+    background-color: $discussion-color-unread
+
+.discussion-item-post.new
+  .new-post-indicator .viewed-icon
+    border-color: $discussion-color-unread
+    background-color: $discussion-color-unread
+
+.discussion-item-post.reported
+  .show-when-reported
+    color: $color-alert

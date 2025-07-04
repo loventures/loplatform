@@ -1,0 +1,104 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul class="matching-results-list list-unstyled">
+  <li ng-repeat="row in $ctrl.displayRows track by row.rowIndex">
+    <div
+      class="match-results-line"
+      ng-class="{
+        'matched': row.isMatched,
+        'correct': $ctrl.hasScore && row.isCorrect,
+        'incorrect': $ctrl.hasScore && !row.isCorrect,
+      }"
+    >
+      <span
+        ng-if="$ctrl.hasScore"
+        class="correctness"
+        aria-label="{{ row.isCorrect ? 'MATCH_CORRECT' : 'MATCH_INCORRECT' }}"
+      >
+        <svg
+          ng-if="row.isCorrect"
+          aria-hidden="true"
+          stroke="currentColor"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M416 128L192 384l-96-96"
+          ></path>
+        </svg>
+        <svg
+          ng-if="!row.isCorrect"
+          aria-hidden="true"
+          stroke="currentColor"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M368 368L144 144m224 0L144 368"
+          ></path>
+        </svg>
+      </span>
+
+      <div class="match-item">
+        <div
+          class="match-item-content"
+          ng-if="row.term"
+          ng-bind="row.term.text"
+        ></div>
+      </div>
+
+      <div
+        class="matching-line"
+        aria-hidden="true"
+      ></div>
+
+      <div class="match-item">
+        <div
+          class="match-item-content"
+          ng-if="row.def"
+          ng-bind="row.def.text"
+        ></div>
+      </div>
+    </div>
+    <div
+      ng-if="$ctrl.hasScore && !row.isCorrect && $ctrl.question.displayDetail.correctAnswer"
+      class="match-results-line answer"
+    >
+      <div class="flex-grow-1"></div>
+      <div
+        class="me-2 alert alert-info arrow-right mb-0 py-2"
+        translate="MATCH_CORRECT_ANSWER"
+      ></div>
+      <div class="match-item">
+        <div
+          class="match-item-content"
+          ng-if="row.def"
+          ng-bind="$ctrl.correctRows[row.rowIndex].def.text"
+        ></div>
+      </div>
+    </div>
+  </li>
+</ul>

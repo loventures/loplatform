@@ -1,0 +1,352 @@
+{
+  "authoringRoles": {
+    "SME": "SME",
+    "Proofer": "Proofer",
+    "SME2": "SME 2",
+    "Proofer2": "Proofer 2",
+    "SMEReviewer": "SME Reviewer",
+    "LDVendor": "LD Vendor",
+    "MDVendor": "MD Vendor",
+    "PMVendor": "PM Vendor",
+    "TRVendor": "TR Vendor",
+    "IP": "IP",
+    "ProjectPreviewer": "Project Previewer",
+    "Viewer": "Viewer",
+    "Editor": "Editor"
+  },
+  "projectStatuses": {
+    "Dev": "In Development",
+    "TR": "Tech Review",
+    "Complete": "Complete",
+    "Live": "Live",
+    "LiveUpdate": "Live Update"
+  },
+  "contentStatuses": {
+    "LDDev": "LD Development",
+    "Authoring": "Authoring",
+    "Proofing": "Proofing",
+    "Authoring2": "Authoring 2",
+    "Proofing2": "Proofing 2",
+    "MD": "Media Development",
+    "QA": "QA",
+    "SMEQA": "SME QA/IR",
+    "TR": "Tech Review",
+    "Complete": "Complete"
+  },
+  "projectStatusMapping": {
+    "Dev": "Authoring",
+    "TR": "TR",
+    "Complete": "Complete",
+    "Live": "Complete",
+    "LiveUpdate": "Authoring"
+  },
+  "projectStatusColor": {
+    "Dev": "danger",
+    "TR": "warning",
+    "Complete": "info",
+    "Live": "success",
+    "LiveUpdate": "primary"
+  },
+  "accessNames": {
+    "View": "View",
+    "View+History": "View with History",
+    "View+ContentStatus": "View & Set Content Status",
+    "View+Export": "View & Export",
+    "View+Feedback": "View & Give Feedback",
+    "View+AllFeedback": "View & See All Feedback",
+    "Edit": "Edit",
+    "FullEdit": "Full Edit",
+    "Create": "Create Course",
+    "Create+Structural": "Create Course & Structural Editor"
+  },
+  "projectAccesses": {
+    "View": ["ViewObjectives", "ViewGradebook", "ViewTimeline", "FeedbackApp", "Preview"],
+    "View+AllFeedback": [
+      "ViewObjectives",
+      "ViewGradebook",
+      "ViewTimeline",
+      "FeedbackApp",
+      "ViewAllFeedback",
+      "Preview"
+    ],
+    "View+ContentStatus": [
+      "ViewObjectives",
+      "ViewGradebook",
+      "ViewTimeline",
+      "FeedbackApp",
+      "ViewAllFeedback",
+      "Preview",
+      "ContentStatus"
+    ],
+    "Edit": [
+      "ViewObjectives",
+      "EditObjectives",
+      "ViewGradebook",
+      "EditGradebook",
+      "ViewTimeline",
+      "EditTimeline",
+      "ViewProjectHistory",
+      "FeedbackApp",
+      "VaultApp",
+      "Preview"
+    ],
+    "Create": [
+      "ViewObjectives",
+      "EditObjectives",
+      "ViewGradebook",
+      "EditGradebook",
+      "ViewTimeline",
+      "EditTimeline",
+      "ViewMultiverse",
+      "ViewProjectHistory",
+      "ContentRepo",
+      "FeedbackApp",
+      "ViewAllFeedback",
+      "VaultApp",
+      "ProjectSettings",
+      "PublishProject",
+      "ContentStatus",
+      "Preview"
+    ]
+  },
+  "contentAccesses": {
+    "View": ["ViewContent"],
+    "View+History": ["ViewContent", "PageHistory"],
+    "View+Export": ["ViewContent", "Export"],
+    "View+Feedback": ["ViewContent", "ViewFeedback", "AddFeedback"],
+    "Edit": [
+      "ViewContent",
+      "EditContent",
+      "AlignContent",
+      "ViewFeedback",
+      "AddFeedback",
+      "PageHistory"
+    ],
+    "FullEdit": [
+      "ViewContent",
+      "EditContent",
+      "EditSettings",
+      "AddRemoveContent",
+      "AlignContent",
+      "ViewFeedback",
+      "AddFeedback",
+      "PageHistory"
+    ]
+  },
+  "projectAccessByRoleAndStatus": {
+    "SME": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "SME2": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "Proofer": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "Proofer2": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "LDVendor": {
+      "Dev": "Create",
+      "TR": "Create",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "Create"
+    },
+    "MDVendor": {
+      "Dev": "Create+Structural",
+      "TR": "Create+Structural",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "Create+Structural"
+    },
+    "PMVendor": {
+      "Dev": "View+ContentStatus",
+      "TR": "View+ContentStatus",
+      "Complete": "View+ContentStatus",
+      "Live": "View",
+      "LiveUpdate": "View+ContentStatus"
+    },
+    "TRVendor": {
+      "Dev": "Create",
+      "TR": "Create",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "Create"
+    },
+    "IP": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "SMEReviewer": {
+      "Dev": "View",
+      "TR": "View",
+      "Complete": "View",
+      "Live": "View",
+      "LiveUpdate": "View"
+    },
+    "ProjectPreviewer": {
+      "*": "View"
+    },
+    "Viewer": {
+      "*": "View"
+    },
+    "Editor": {
+      "*": "View+AllFeedback"
+    }
+  },
+  "contentAccessByRoleAndStatus": {
+    "SME": {
+      "LDDev": "View",
+      "Authoring": "FullEdit",
+      "Proofing": "Edit",
+      "Authoring2": "View+History",
+      "Proofing2": "View+History",
+      "MD": "View+History",
+      "QA": "View+Feedback",
+      "SMEQA": "View+Feedback",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "SME2": {
+      "LDDev": "View",
+      "Authoring": "View+History",
+      "Proofing": "View+History",
+      "Authoring2": "FullEdit",
+      "Proofing2": "Edit",
+      "MD": "View+History",
+      "QA": "View+Feedback",
+      "SMEQA": "View+Feedback",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "Proofer": {
+      "LDDev": "View",
+      "Authoring": "View+Feedback",
+      "Proofing": "Edit",
+      "Authoring2": "View+History",
+      "Proofing2": "View+History",
+      "MD": "View",
+      "QA": "",
+      "SMEQA": "",
+      "TR": "",
+      "Complete": ""
+    },
+    "Proofer2": {
+      "LDDev": "View",
+      "Authoring": "View+History",
+      "Proofing": "View+History",
+      "Authoring2": "View+Feedback",
+      "Proofing2": "Edit",
+      "MD": "View",
+      "QA": "",
+      "SMEQA": "",
+      "TR": "",
+      "Complete": ""
+    },
+    "LDVendor": {
+      "LDDev": "*",
+      "Authoring": "*",
+      "Proofing": "*",
+      "Authoring2": "*",
+      "Proofing2": "*",
+      "MD": "*",
+      "QA": "*",
+      "SMEQA": "*",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "MDVendor": {
+      "LDDev": "*",
+      "Authoring": "*",
+      "Proofing": "*",
+      "Authoring2": "*",
+      "Proofing2": "*",
+      "MD": "*",
+      "QA": "*",
+      "SMEQA": "*",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "PMVendor": {
+      "LDDev": "View+Feedback",
+      "Authoring": "View+Feedback",
+      "Proofing": "View+Feedback",
+      "Authoring2": "View+Feedback",
+      "Proofing2": "View+Feedback",
+      "MD": "View+Feedback",
+      "QA": "View+Feedback",
+      "SMEQA": "View+Feedback",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "TRVendor": {
+      "LDDev": "",
+      "Authoring": "",
+      "Proofing": "",
+      "Authoring2": "",
+      "Proofing2": "",
+      "MD": "",
+      "QA": "",
+      "SMEQA": "",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "IP": {
+      "LDDev": "View+Feedback",
+      "Authoring": "View+Feedback",
+      "Proofing": "View+Feedback",
+      "Authoring2": "View+Feedback",
+      "Proofing2": "View+Feedback",
+      "MD": "View+Feedback",
+      "QA": "View+Feedback",
+      "SMEQA": "View+Feedback",
+      "TR": "View+Feedback",
+      "Complete": "View+Feedback"
+    },
+    "SMEReviewer": {
+      "LDDev": "View",
+      "Authoring": "View+Feedback",
+      "Proofing": "View+Feedback",
+      "Authoring2": "View+Feedback",
+      "Proofing2": "View+Feedback",
+      "MD": "View",
+      "QA": "View",
+      "SMEQA": "View+Feedback",
+      "TR": "View",
+      "Complete": "View"
+    },
+    "ProjectPreviewer": {
+      "*": "View+Export"
+    },
+    "Viewer": {
+      "*": "View"
+    },
+    "Editor": {
+      "*": "FullEdit"
+    }
+  },
+  "domainRoleMapping": {
+    "Narrative Author": "Editor",
+    "Project Previewer": "ProjectPreviewer"
+  }
+}

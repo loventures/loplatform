@@ -1,0 +1,90 @@
+//
+// LO offcanvas panel
+//
+
+.panel {
+  position: fixed;
+  overflow: hidden;
+  background-color: #fff;
+  transform: translateX(100%);
+  transition: transform $transition-speed $transition-function;
+  z-index: $zindex-fixed;
+}
+
+@function panel-translate($direction) {
+  @if $direction == left {
+    @return translate(-100%, 0);
+  }
+  @if $direction == right {
+    @return translate(100%, 0);
+  }
+  @if $direction == top {
+    @return translate(0, -100%);
+  }
+  @if $direction == bottom {
+    @return translate(0, 100%);
+  }
+}
+
+@each $direction in $directions {
+  $orthogonal: direction-orthogonal($direction);
+  $thick-side: direction-dimension($direction);
+  $full-side: direction-dimension($orthogonal);
+  .panel-#{$direction} {
+    #{$direction}: 0;
+    #{$orthogonal}: 0;
+    #{$thick-side}: 100%;
+    max-#{$thick-side}: 400px;
+    #{$full-side}: 100%;
+    transform: panel-translate($direction);
+    &.open {
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      transform: translate(0, 0);
+    }
+  }
+}
+
+//backwards compat
+//gives existing panels (without direction) a .panel-right
+.panel:not(.panel-left):not(.panel-top):not(.panel-bottom) {
+  @extend .panel-right;
+}
+
+.panel-inner {
+  overflow: auto;
+  height: 100vh;
+}
+
+.panel-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem 0.5rem;
+
+  button {
+    position: absolute;
+  }
+
+  button {
+    &:first-child {
+      left: 0.4rem;
+    }
+
+    &:last-child {
+      right: 0.4rem;
+    }
+  }
+}
+
+.panel-title {
+  display: inline-block;
+  color: $brand-primary;
+  line-height: 1.25;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.panel-block {
+  @extend .card-body;
+}

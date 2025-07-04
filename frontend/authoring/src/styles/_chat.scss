@@ -1,0 +1,146 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.chat-room {
+  display: flex;
+  position: fixed;
+  right: -40rem;
+  top: var(--actionbar-offset);
+  box-sizing: border-box;
+  height: calc(100vh - var(--actionbar-offset));
+  z-index: 1001;
+  width: 40rem;
+  /* transition: right ease-out 0.3s; */
+
+  border-left: 1px solid #d5d5d5;
+  box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
+  background: white;
+
+  &.open {
+    right: 0;
+  }
+}
+
+.chat-hidden {
+  display: none;
+}
+
+.branch-chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .chat-header {
+    display: flex;
+    flex-grow: 0;
+    .chat-title {
+      padding: 0.75rem 0 0.75rem 1rem;
+      flex-grow: 1;
+    }
+    .chat-close {
+      flex-grow: 0;
+      padding: 0.7rem;
+      line-height: 1;
+      color: black !important;
+    }
+    border-bottom: 1px solid #d5d5d5;
+  }
+
+  .chat-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0.75rem 0.75rem 0 0.75rem;
+    white-space: normal;
+
+    .chat-stanza {
+      margin-bottom: 0.75em;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .name {
+      }
+
+      .timestamp {
+        color: #666;
+        font-size: 0.9rem;
+        width: 70%;
+        margin: 0.75rem auto;
+        overflow: hidden;
+        text-align: center;
+
+        &:before,
+        &:after {
+          content: '';
+          display: inline-block;
+          width: 50%;
+          vertical-align: middle;
+          border-bottom: 1px solid #ccc;
+        }
+
+        &:before {
+          margin: 0 0.5em 0 -55%;
+        }
+
+        &:after {
+          margin: 0 -55% 0 0.5em;
+        }
+      }
+    }
+
+    .loading-ellipsis {
+      span {
+        opacity: 0;
+        animation: dot 1.3s infinite;
+        animation-delay: 0s;
+        transition: all ease-in 0.3s;
+      }
+
+      span + span {
+        animation-delay: 0.2s;
+      }
+
+      span + span + span {
+        animation-delay: 0.4s;
+      }
+    }
+  }
+
+  .chat-footer {
+    padding: 0.75rem;
+    flex-grow: 0;
+    .chat-input {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes dot {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,123 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.discussion-item
+  padding: 0
+  position: relative
+  background-color: $color-light
+  border-radius: $border-radius
+  list-style: none
+  display: block
+
+  .lo-btn-text-light.lo-btn-outline
+      color: fix-contrast($color-button-text-light, $color-light)
+      border-color: fix-contrast($color-button-text-light, $color-light)
+
+.discussion-item-post
+  border-radius: $border-radius
+  margin: 0
+  box-shadow: 0 2px 3px rgba(0,0,0,0.075)
+
+  blockquote
+    font-style: italic
+    padding: 2px 0
+    border-style: solid
+    border-color: #ccc
+    border-width: 0
+    padding-left: 20px
+    padding-right: 8px
+    border-left-width: 5px
+
+  &.collapsed
+    box-shadow: none
+
+  &.top-level-thread
+    min-height: $discussion-header-unit * 1.67
+
+    > .discussion-thread-replies-area
+      padding-top: $discussion-header-unit * 1.33
+
+  &.top-level-thread.thread-expanded
+    margin-bottom: 1.75em
+
+    &.replies-expanded
+      margin-bottom: 0.25em
+      box-shadow: 0 1px 2px rgba(0,0,0,0.075)
+
+      .discussion-item-footer
+        border-radius: 0
+
+.discussion-item-content-status
+  font-weight: 900
+  color: $color-alert
+  background: $color-white
+
+  > span
+    padding: 1em
+    display: block
+
+.discussion-item-content
+  background: $color-white
+  //flex as an easy way to avoid padding collapsing
+  display: flex
+  flex-direction: column
+
+  .item-rich-content
+    padding: 0.5rem 1rem 0
+
+  a
+    text-decoration: underline
+
+    &:hover
+      text-decoration: none
+
+  p
+    margin-bottom: 0.75em
+
+  .hidden-element
+    height: 0
+    overflow: hidden
+
+.discussion-item
+
+  .discussion-item-post,
+  .discussion-write-reply
+    color: $color-body-text
+
+  &.flash
+    animation: postFlash 2s 1
+
+  &.flash.flash-user-posts
+    color: $discussion-color-current-user
+
+  &.flash.flash-unread
+    color: $discussion-color-unread
+
+  &.flash.flash-reported-inappropriate-posts
+    color: $color-alert
+
+  &.flash.flash-bookmarked
+    color: $discussion-color-bookmark
+
+  &.flash.flash-unresponded
+    color: $discussion-color-unresponded
+
+  &.flash.flash-search
+    color: $discussion-color-search
+
+
+

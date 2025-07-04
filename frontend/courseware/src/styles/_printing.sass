@@ -1,0 +1,254 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+//Consider using !important to be sure that the styles take precendence
+//but make sure they all exist under @media print or .prepare-print
+
+.prepare-print
+  width: $printing-page-width !important
+
+  .iframe-toggle-btns,
+  .print-icon
+    display: none !important
+
+.print-only
+  @media screen
+    display: none
+
+.non-print-only
+  @media print
+    display: none
+
+.print-bin-drop
+  .bin
+    @extend .border
+    @extend .border-dark
+    @extend .p-2
+    @extend .ms-2
+    @extend .mb-2
+    display: inline-block
+    vertical-align: top
+    min-height: 5em
+    width: calc(33% - 1em)
+    .choice-correctness
+      @extend .border
+      @extend .border-dark
+      @extend .rounded-circle
+      background: $color-white
+      position: absolute
+      top: -0.5em
+      left: -0.5em
+
+  .choices-without-bin
+    width: calc(99% - 2em)
+
+.print-hotspot-question
+  .hotspot-container
+    overflow-x: auto
+    background: transparent
+    text-align: left
+
+    .hotspot-paper
+      margin: 0
+      position: relative
+      z-index: 1
+
+    .hotspot-image
+      position: absolute
+      top: 0
+
+.print-matching-table
+  table-layout: fixed
+  border-collapse: separate
+  border-spacing: 0px 1em
+  width: 100%
+  word-break: break-all
+
+  .dash
+    width: 3em
+
+  .matched
+    td
+      @extend .border-primary
+    .dash
+      @extend .text-primary
+
+  .incorrect
+    td
+      @extend .border-danger
+    .dash
+      @extend .text-danger
+  .correct
+    td
+      @extend .border-success
+    .dash
+      @extend .text-success
+
+.print-view
+  .d-print-none,
+  .inlineVideoPlayer,
+  .inlineAudioPlayer,
+  .designer .reveal-button
+    display: none !important
+  .print-only,
+  .designer .collapse
+    display: inherit !important
+
+@media print
+  body
+    background-color: transparent !important
+
+  [compile] > div > p:last-child
+    margin-bottom: 0 !important
+
+  .designer .collapse
+    display: inherit !important
+
+  maintenance-mode-warning,
+  app-nav-bar,
+  announcements,
+  asset-navigator-buttons,
+  .banner-scrollspy,
+  .review-scrollspy,
+  .page-navbar-container,
+  .lo-footer-bottom,
+  .lo-asset-footer,
+  .activity-footer,
+  .course-navbar-container .overflow-wrapper > *:not(breadcrumbs),
+  .iframe-toggle-btns,
+  .d-print-none-view,
+  .lo-rich-text-editor > .cke,
+  .designer .reveal-button
+    display: none !important
+
+  .lo-asset-layout
+    margin-left: auto
+    margin-right: auto
+    margin-bottom: 0
+
+  .page-scrollspy.active
+    .course-navbar
+      position: relative
+
+  .course-navbar-container
+    background-color: transparent
+
+    .course-navbar
+      color: $color-body-text
+      height: auto
+      box-shadow: none
+      border-bottom: 1px solid
+
+      .overflow-wrapper
+        height: auto
+
+      .breadcrumb
+        color: $color-body-text
+        box-shadow: none
+        flex-wrap: wrap
+
+  .content-carousel-container.content-carousel-container
+    background: transparent
+
+    .carousel-vh-image
+      height: auto
+
+    .carousel-slide
+      display: block
+
+      .carousel-title,
+      .carousel-caption
+        color: $color-body-text
+        text-shadow: none
+
+    .carousel-control,
+    .content-carousel-ctrl
+      display: none
+
+
+  .lo-btn
+    display: none
+
+  .comp-left,
+  .comp-list-item
+    svg
+      display: none !important
+
+  .lock-popover-hover-area
+    background-color: transparent !important
+
+  .cbl-course-page
+    display: block !important
+    min-height: auto !important
+
+  .quiz-results-with-score-panel
+    display: block
+    .chart-results-wrap
+      margin-bottom: 1.5rem
+
+  #quiz-results-questions-anchor
+    display: block
+
+  .mp-quiz-player
+    .quiz-page
+      display: block
+
+  .sp-question-control-container
+    .instructions
+      display: none
+
+  .lo-derec
+    display: none
+
+  .view-composite-grade.view-composite-grade.view-composite-grade
+    *
+      display: block
+    .rubric-criteiria-toggle, thead th:not(:first-child)
+      display: none
+
+  .main-content-header
+    > div.flex-row-content
+      display: block
+      margin-top: 0 !important
+      margin-bottom: 0 !important
+    button
+      display: none
+
+  .content-index-row
+    margin: 0 !important
+    .content-view-resource
+      .card
+        border: none
+        display: block
+        .card-body
+          padding: 0
+
+  .resource-activity .card, .content-instructions .card, .submission-competencies.card
+    border: none !important
+    display: block !important
+    background-color: transparent !important
+    .card-body
+      padding: 0 !important
+
+  .embedded-content
+    .full-screen-controls
+        display: none
+
+  .inlineVideoPlayer,
+  .inlineAudioPlayer
+    display: none
+

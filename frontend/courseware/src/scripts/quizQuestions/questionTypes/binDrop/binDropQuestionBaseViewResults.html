@@ -1,0 +1,88 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ul class="bin-list bin-list-results">
+  <li
+    class="bin-drop-bin results-bin"
+    ng-repeat="bin in $ctrl.displayBins track by bin.id"
+  >
+    <div
+      class="bin-header"
+      ng-bind="bin.text"
+    ></div>
+    <ul class="bin-choice-list list-unstyled">
+      <li ng-repeat="choice in bin.selected track by choice.id">
+        <div
+          class="bin-drop-choice"
+          ng-class="{
+            correct: choice.correct,
+            incorrect: choice.incorrect
+          }"
+        >
+          <span
+            class="bindrop-choice-correctness icon icon-checkmark bg-success"
+            ng-if="choice.correct"
+            translate
+            translate-attr-title="BINDROP_CHOICE_CORRECT"
+          ></span>
+          <span
+            class="bindrop-choice-correctness icon icon-cross bg-danger"
+            ng-if="choice.incorrect"
+            translate
+            translate-attr-title="BINDROP_CHOICE_INCORRECT"
+          ></span>
+          <span ng-bind="choice.text"></span>
+        </div>
+      </li>
+    </ul>
+
+    <div
+      class="bin-label"
+      ng-if="bin.missing.length && !$ctrl.response"
+      translate="BIN_DROP_RESULT_MISSING"
+    ></div>
+
+    <ul
+      class="list-unstyled"
+      ng-if="bin.missing.length"
+    >
+      <li ng-repeat="choice in bin.missing track by choice.id">
+        <div class="bin-drop-choice missing">
+          <span ng-bind="choice.text"></span>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div
+  class="bin-drop-bin binless-bin"
+  ng-if="$ctrl.choicesWithoutBin.length"
+>
+  <div
+    class="bin-label"
+    translate="BIN_DROP_CHOICES_WITHOUT_BIN"
+  ></div>
+  <ul class="bin-choice-list list-unstyled">
+    <li ng-repeat="choice in $ctrl.choicesWithoutBin track by choice.id">
+      <div
+        class="bin-drop-choice missing"
+        ng-bind="choice.text"
+      ></div>
+    </li>
+  </ul>
+</div>

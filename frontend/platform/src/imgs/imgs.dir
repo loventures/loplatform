@@ -1,0 +1,5 @@
+/* This gives us all files in this directory,
+ * as objects of the form { src: '...url...', size: 1234 }. */
+module.exports = {
+  path: '.',
+};

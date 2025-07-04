@@ -1,0 +1,276 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.feedback-enabled {
+  .feedback-context {
+    &::selection,
+    ::selection {
+      background-color: #fff100;
+    }
+  }
+
+  .feedback-gadget-holder {
+    position: absolute;
+    transform: translate(10px, -50%);
+
+    .feedback-gadget {
+      &:hover {
+        box-shadow: 0 0 2px gray;
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        width: 12px;
+        height: 12px;
+        transform: scale(1, 0.75) rotate(-45deg);
+        background-color: inherit;
+        position: absolute;
+        left: -6px;
+        top: calc(50% - 6px);
+      }
+    }
+  }
+}
+
+.feedback-enabled,
+.qna-enabled {
+  .feedback-item {
+    background: $white;
+    margin: 0 0.5rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+
+    &:not(:first-child) {
+      border-top: 1px solid $gray-lighter;
+    }
+
+    .feedback-quote {
+      background: #ff3;
+    }
+
+    .feedback-content {
+      background: $dark-background;
+      overflow: hidden;
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .feedback-reply {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed $gray-lighter;
+    }
+
+    .preview {
+      cursor: pointer;
+      border-radius: $border-radius;
+      border: 2px solid #e9ecef;
+
+      img {
+        max-width: 8rem !important;
+        max-height: 8rem !important;
+        border-radius: 2px;
+      }
+
+      &:hover {
+        border-color: $color-primary;
+      }
+    }
+  }
+
+  .feedback-sidebar,
+  .qna-sidebar {
+    background-color: $er-dim-white;
+    box-shadow: 0 10px 10px 0 #21252920;
+    transition: all 0.1s ease-out;
+
+    .feedback-sidebar-header {
+      transition: box-shadow $transition-function $transition-speed;
+      position: relative;
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      @media (max-width: $smscreen-max) {
+        background: $primary;
+        color: $gray-100;
+        padding: 0.75rem !important;
+        flex-direction: row-reverse;
+
+        .text-muted,
+        .text-primary {
+          color: $white !important;
+        }
+
+        h3 {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    &.scrolled .feedback-sidebar-header {
+      box-shadow:
+        0 1px 0 0 $gray-lighter,
+        0 4px 7px -2px rgb(38 50 56 / 12%);
+    }
+
+    .feedback-container {
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+    }
+
+    .cke {
+      border-radius: 4px;
+      overflow: hidden;
+      // iframe so no chance for a focus outlines
+    }
+
+    .content-img-link {
+      img {
+        max-width: 16rem;
+        max-height: 4rem;
+        border-radius: $border-radius;
+      }
+    }
+  }
+
+  .qna-sidebar,
+  .qna-instructor-message {
+    .feedback-upload {
+      background: fade-out($white, 0.15);
+      color: $text-muted;
+      border: 1px solid #ced4da;
+      border-radius: $border-radius;
+      padding: 0.375rem 0.75rem;
+      box-shadow: none;
+
+      &:focus-within,
+      &:hover {
+        box-shadow: $input-btn-focus-box-shadow;
+      }
+
+      &:focus-within {
+        border-color: $input-focus-border-color;
+      }
+
+      &.accept {
+        border-color: $color-success;
+        border-style: dashed;
+        background-color: fade-out($color-success, 0.75);
+        color: $color-dark;
+      }
+
+      &.reject {
+        border-color: $color-warning;
+        background-color: fade-out($color-warning, 0.75);
+        color: $color-dark;
+      }
+
+      .staged-files {
+        padding: 0.125rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+
+        .staged-file {
+          position: relative;
+
+          .preview {
+            max-width: 8rem;
+            max-height: 4rem;
+            border-radius: $border-radius;
+          }
+
+          &.expanded {
+            background-color: #ffffffa0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: stretch;
+            align-items: stretch;
+            z-index: 1000;
+
+            .image-holder {
+              flex-grow: 1;
+              display: inline-flex;
+              justify-content: center;
+              align-items: center;
+              opacity: 1;
+              cursor: default;
+              border-radius: 0;
+            }
+
+            .preview {
+              max-width: 90vw;
+              max-height: 90vh;
+              transition: all 0.3s linear;
+            }
+          }
+
+          .un-expand {
+            border-radius: 50%;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem;
+          }
+
+          .close-circle {
+            display: none;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 0.125rem;
+            transform: translate(50%, -40%);
+            line-height: 1;
+
+            &.trash {
+              padding: 0.25rem;
+            }
+          }
+
+          &:hover,
+          &:focus-within {
+            .close-circle {
+              display: flex;
+            }
+          }
+
+          @media (max-width: $smscreen-max) {
+            .close-circle {
+              display: flex;
+            }
+          }
+        }
+
+        .CircularProgressbar {
+          width: 4rem;
+          height: 4rem;
+        }
+      }
+    }
+  }
+}

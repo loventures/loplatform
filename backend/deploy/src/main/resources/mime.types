@@ -1,0 +1,118 @@
+# Stock underground mime.types
+
+application/font-woff                           woff
+application/java-archive                        jar war ear
+application/java-serialized-object              ser
+application/java-vm                             class
+application/json                                json
+application/msword                              doc dot
+application/octet-stream                        bin
+application/ogg                                 ogg
+application/pdf                                 pdf
+application/postscript                          ps ai eps
+application/vnd.ms-excel                        xls xlb xlt xlsx xlsm xltx xltm xlsb xlam
+application/vnd.ms-fontobject                   eot
+application/vnd.ms-powerpoint                   ppt pps pptx pptm potx potm ppam ppsx ppsm sldx sldm thmx
+application/vnd.ms-project                      mpp
+application/vnd.ms-word.document.macroEnabled.12                docm dotm
+application/vnd.oasis.opendocument.chart                        odc
+application/vnd.oasis.opendocument.database                     odb
+application/vnd.oasis.opendocument.formula                      odf
+application/vnd.oasis.opendocument.graphics                     odg
+application/vnd.oasis.opendocument.graphics-template            otg
+application/vnd.oasis.opendocument.image                        odi
+application/vnd.oasis.opendocument.presentation                 odp
+application/vnd.oasis.opendocument.presentation-template        otp
+application/vnd.oasis.opendocument.spreadsheet                  ods
+application/vnd.oasis.opendocument.spreadsheet-template         ots
+application/vnd.oasis.opendocument.text                         odt
+application/vnd.oasis.opendocument.text-master                  odm
+application/vnd.oasis.opendocument.text-template                ott
+application/vnd.oasis.opendocument.text-web                     oth
+application/vnd.openxmlformats-officedocument.wordprocessingml.document                docx
+application/vnd.openxmlformats-officedocument.wordprocessingml.template                dotx
+application/vnd.sun.xml.calc                    sxc
+application/vnd.sun.xml.calc.template           stc
+application/vnd.sun.xml.draw                    sxd
+application/vnd.sun.xml.draw.template           std
+application/vnd.sun.xml.impress                 sxi
+application/vnd.sun.xml.impress.template        sti
+application/vnd.sun.xml.math                    sxm
+application/vnd.sun.xml.writer                  sxw
+application/vnd.sun.xml.writer.global           sxg
+application/vnd.sun.xml.writer.template         stw
+application/x-debian-package                    deb udeb
+application/x-director                          dcr
+application/x-font-opentype                     otf
+application/x-font-ttf                          ttf
+application/x-latex                             latex
+application/x-mime-types                        types
+application/x-mplayer2                          avi wmv wm asf asx wmx wvx
+application/x-msdos-program                     com exe bat dll
+application/x-mspublisher                       pub
+application/x-properties                        properties
+application/x-redhat-package-manager            rpm
+application/x-shockwave-flash                   swf swfl
+application/x-tar                               tar
+application/x-x509-ca-cert                      crt
+application/xhtml+xml                           xhtml xht
+application/zip                                 zip
+audio/basic                                     au snd
+audio/mpeg                                      mpga mpega mp2 mp3
+audio/mpegurl                                   m3u
+audio/wav                                       wav
+audio/x-aiff                                    aif aiff aifc
+audio/x-ms-wma                                  wma
+audio/x-pn-realaudio                            ra rm ram
+image/gif                                       gif
+image/jpeg                                      jpeg jpg jpe
+image/png                                       png
+image/svg+xml                                   svg svgz
+image/tiff                                      tiff tif
+image/vnd.microsoft.icon                        ico
+image/x-ms-bmp                                  bmp
+image/x-photoshop                               psd
+image/x-portable-anymap                         pnm
+image/x-portable-bitmap                         pbm
+image/x-portable-graymap                        pgm
+image/x-portable-pixmap                         ppm
+image/x-rgb                                     rgb
+image/x-xbitmap                                 xbm
+image/x-xpixmap                                 xpm
+message/rfc822                                  eml mht
+model/vrml                                      wrl vrml
+text/cache-manifest                             manifest
+text/css                                        css
+text/csv                                        csv
+text/html                                       html htm shtml
+text/javascript                                 js
+text/plain                                      txt
+text/rtf                                        rtf
+text/tsv                                        tsv
+text/vtt                                        vtt
+text/x-c++hdr                                   h++ hpp hxx hh
+text/x-c++src                                   c++ cpp cxx cc
+text/x-chdr                                     h
+text/x-csh                                      csh
+text/x-csrc                                     c
+text/x-csrc                                     c
+text/x-diff                                     diff patch
+text/x-dsrc                                     d
+text/x-haskell                                  hs
+text/x-java                                     java
+text/x-literate-haskell                         lhs
+text/x-pascal                                   p pas
+text/x-perl                                     pl pm
+text/x-python                                   py
+text/x-sh                                       sh
+text/x-tcl                                      tcl tk
+text/x-tex                                      tex ltx sty cls
+text/x-vcalendar                                vcs
+text/x-vcard                                    vcf
+text/xml                                        xml
+video/mp4                                       mp4 f4v f4p f4a f4b m4v m4a
+video/mpeg                                      mpeg mpg mpe
+video/quicktime                                 qt mov
+video/webm                                      webm
+video/x-flv                                     flv
+x-world/x-vrml                                  vrm vrml wrl

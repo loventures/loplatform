@@ -1,0 +1,85 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<basic-question-template
+  class="question choice-question multiple-select-question"
+  index="$ctrl.index"
+  assessment="$ctrl.assessment"
+  question-count="$ctrl.questionCount"
+  question="$ctrl.question"
+  response="$ctrl.response"
+>
+  <question-content-slot>
+    <ol class="question-distractor-list">
+      <li
+        class="question-distractor-row"
+        ng-repeat="choice in $ctrl.question.choices track by $index"
+      >
+        <question-distractor-row-template
+          choice="choice"
+          has-correctness="$ctrl.hasCorrectness(choice)"
+          is-correct="$ctrl.isCorrect($index, choice)"
+          is-selected="$ctrl.response ? $ctrl.selection[$index] : false"
+          is-instructor="!$ctrl.response"
+          is-multi="true"
+          index="$index"
+        >
+          <distractor-slot>
+            <label
+              class="question-choice-content"
+              for="question-{{ $ctrl.index }}-choice-{{ $index }}"
+              ng-class="{
+                disabled: !$ctrl.canEditAnswer,
+                selected: $ctrl.selection[$index] || choice.correct,
+                correct: $ctrl.selection[$index] && $ctrl.isCorrect($index, choice),
+                incorrect: $ctrl.selection[$index] && !$ctrl.isCorrect($index, choice)
+              }"
+              data-id="{{ !$ctrl.response ? 'choice-' + $index : null }}"
+            >
+              <div class="choice-ordinal">
+                <div
+                  id="choice-ordinal-{{$ctrl.index}}-{{$index}}"
+                  class="ordinal-number"
+                  aria-label="{{$ctrl.choiceOrdinalAriaLabel($index, choice)}}"
+                  aria-hidden="true"
+                  ng-if="!$ctrl.assessment.settings.isCheckpoint"
+                  ng-bind="$index | choiceOrdinal"
+                ></div>
+                <input
+                  class="form-check-input"
+                  id="question-{{ $ctrl.index }}-choice-{{ $index }}"
+                  name="choice-group-{{ $index }}"
+                  type="checkbox"
+                  ng-model="$ctrl.selection[$index]"
+                  ng-disabled="!$ctrl.canEditAnswer"
+                  ng-change="$ctrl.toggleChoiceIndex()"
+                  aria-labelledby="choice-ordinal-{{$ctrl.index}}-{{$index}} choice-text-{{$ctrl.index}}-{{$index}}"
+                />
+              </div>
+              <div
+                id="choice-text-{{$ctrl.index}}-{{$index}}"
+                class="choice-text"
+                compile="choice.choiceText"
+                aria-hidden="true"
+              ></div>
+            </label>
+          </distractor-slot>
+        </question-distractor-row-template>
+      </li>
+    </ol>
+  </question-content-slot>
+</basic-question-template>

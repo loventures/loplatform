@@ -1,0 +1,45 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<srs-list store="$ctrl.resolve.store">
+  <li ng-repeat="item in $ctrl.resolve.store.data">
+    <label
+      class="flex-row-content"
+      for="list-item-{{item.id}}"
+    >
+      <input
+        type="checkbox"
+        id="list-item-{{item.id}}"
+        ng-model="$ctrl.selectionStatus[item.id]"
+        ng-change="$ctrl.select(item)"
+      />
+      <span
+        class="flex-col-fluid text-truncate"
+        title="{{item.getName()}}"
+        ng-bind="item.getName()"
+      ></span>
+    </label>
+  </li>
+</srs-list>
+
+<div class="modal-footer">
+  <button
+    class="btn btn-primary"
+    ng-click="$ctrl.closeModal()"
+    translate="MULTI_SELECT_PICKER_CONFIRM"
+  ></button>
+</div>

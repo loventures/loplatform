@@ -1,0 +1,112 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<div id="user-chat">
+  <div
+    id="user-chat-header"
+    class="modal-header chat-header user-chat"
+  >
+    <div class="flex-row-content w-100">
+      <div
+        class="chat-header-present-user present-user"
+        ng-class="$ctrl.context.presence"
+      >
+        <div
+          class="present-user-circle"
+          role="presentation"
+        >
+          <div
+            class="present-user-photo"
+            ng-style="{
+              'background-color': $ctrl.context.presenceColour
+            }"
+          >
+            <img
+              class="user-photo"
+              ng-if="!!$ctrl.context.imageUrl"
+              ng-src="{{$ctrl.context.imageUrl}}"
+              err-src="assets/images/Profile.png"
+            />
+            <div
+              class="user-letter"
+              ng-if="!$ctrl.context.imageUrl"
+              ng-bind="$ctrl.context.presenceLetter"
+            ></div>
+          </div>
+          <div
+            class="present-user-presence-indicator"
+            role="presentation"
+          ></div>
+        </div>
+      </div>
+
+      <h3
+        class="modal-title flex-col-fluid"
+        translate="USER_CHAT_TITLE"
+        translate-values="$ctrl.context"
+      ></h3>
+
+      <button
+        class="btn-close"
+        ng-click="$ctrl.close()"
+        title="{{'MODAL_CLOSE' | translate}}"
+        aria-label="{{'MODAL_CLOSE' | translate}}"
+      ></button>
+    </div>
+  </div>
+
+  <div class="modal-body chat-body flex-row-content m-2">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input
+          class="form-check-input"
+          name="chat-input-radio"
+          type="radio"
+          ng-model="$ctrl.emailView"
+          ng-value="false"
+        />
+        <span translate="CHAT_SEND_MESSAGE"></span>
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <label class="form-check-label">
+        <input
+          class="form-check-input"
+          name="chat-input-radio"
+          type="radio"
+          ng-model="$ctrl.emailView"
+          ng-value="true"
+        />
+        <span translate="CHAT_SEND_EMAIL"></span>
+      </label>
+    </div>
+  </div>
+
+  <div ng-if="!$ctrl.emailView">
+    <chat-messages-react
+      ng-if="$ctrl.roomId"
+      room-id="$ctrl.roomId"
+      chat-to-user="true"
+      is-context-offline="$ctrl.context.presence === 'Offline'"
+      offline-message="$ctrl.offlineMessage"
+    ></chat-messages-react>
+  </div>
+
+  <div ng-if="$ctrl.emailView">
+    <chat-email-react recipient-id="$ctrl.context.handle"></chat-email-react>
+  </div>
+</div>

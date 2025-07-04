@@ -1,0 +1,81 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+.competency-progress-list-flat
+  position: relative
+  margin: 0
+
+  .tree-display
+    margin: 0 0.25em
+
+  .at-risk-exclamation
+    margin-top: 0rem
+
+  .competency-container
+    background-color: $color-light
+    border-bottom: 1px solid $color-light
+
+    .child-competency
+      @for $i from 1 to 10
+        &.depth-#{$i}
+          margin-left: 0em + $i
+
+    .srs-list-item
+      border-top: none
+
+    &.first-competency
+      border-top-left-radius: $border-radius
+      border-top-right-radius: $border-radius
+
+    .root-competency
+      border-top-left-radius: $border-radius
+      border-top-right-radius: $border-radius
+
+    &.last-competency
+      border-bottom-left-radius: $border-radius
+      border-bottom-right-radius: $border-radius
+      box-shadow: $box-shadow-base
+      margin-bottom: 1em
+
+      .root-competency
+        border-bottom-left-radius: $border-radius
+        border-bottom-right-radius: $border-radius
+
+      .child-competency
+        border-bottom-right-radius: $border-radius
+
+    .competency-at-risk-item
+      flex-wrap: wrap
+
+      @media (max-width: $mdscreen)
+        flex: 0 0 100%
+
+  .root-competency
+    background: $color-lightest
+
+    .list-item-name
+      font-weight: 800
+
+    .competency-at-risk-item
+      .list-item-name
+        flex: 0 0 100%
+
+  .child-competency
+    background-color: $color-white
+
+  .disabled
+    color: lighten($color-body-text, 50)

@@ -1,0 +1,66 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<ui:pageLayout xmlns:ui="loi.cp.ui.UI" title="$$ Restore Deleted Items $$" noheader="true" coursestyle="true" bodyClass="administration">
+    <ui:stylesheet href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap.min.css" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/dataTables.bootstrap.min.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/datatables.net-scroller/2.4.3/dataTables.scroller.min.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js" />
+    <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.7/underscore-min.js" />
+    <ui:javascript src="$$static/scripts/de.js" />
+    <ui:javascript src="$$url('trashAdminPage.js')" />
+    <ui:stylesheet>
+        body { color: #aaa; }
+        .table-striped, .modal { color: #333; }
+        .table-striped th { background-color: rgba(160,160,160,.75) !important; }
+        .table-striped tbody tr:nth-child(odd) td { background-color: rgba(255,255,255,.75); }
+        .table-striped tbody tr:nth-child(even) td { background-color: rgba(223,223,223,.75); }
+        /* prevent column resize */
+        #dataTable { table-layout: fixed; color: #333; }
+        /* fix cell overflow */
+        #dataTable td { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        #data-toolbar { margin-bottom: 0.25em; }
+        .modal button {
+          min-height: 0;
+        }
+    </ui:stylesheet>
+    <div>
+        <div id="data-toolbar" class="span24" style="margin-left: 0">
+            <div class="btn-group" style="float: left">
+                <a id="action-restore" style="color: white;" class="btn btn-primary on-selection disabled" href="#"><i class="icon-retweet icon-white"></i> <span style="margin-left: .5em">$$ Restore $$</span></a>
+            </div>
+            <div style="float: right" class="form-inline">
+                <input id="input-search" type="text" class="input-wide search-query" placeholder="$$ Search $$" />
+            </div>
+        </div>
+
+        <table id="dataTable" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered dataTable"></table>
+    </div>
+
+    <div id="modal-wait" class="modal hide" data-backdrop="static" data-keyboard="false">
+        <div class="modal-header">
+            <h3>Processing...</h3>
+        </div>
+        <div class="modal-body">
+            <div id="bar-wait" class="progress progress-striped active">
+                <span class="bar" style="width: 100%"></span>
+            </div>
+        </div>
+    </div>
+
+</ui:pageLayout>

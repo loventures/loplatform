@@ -1,0 +1,21 @@
+{
+  "components": [
+    {
+      "identifier": "loi.authoring.Authoring",
+      "name": "Authoring UI",
+      "description": "Authoring UI",
+      "implementation": "loi.cp.generic.GenericServlet",
+      "annotations": {
+        "com.learningobjects.cpxp.component.web.ServletBinding": {
+          "path": "/Authoring",
+          "spa": true
+        },
+        "loi.cp.admin.right.EnforceAdminRight": {
+          "value": "loi.cp.admin.right.AdminRight",
+          "match": "ANY"
+        }
+      }
+    }
+  ],
+  "dependencies": ["com.learningobjects.component"]
+}

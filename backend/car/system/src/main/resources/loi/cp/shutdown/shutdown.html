@@ -1,0 +1,143 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:ui="loi.cp.ui.UI">
+<head>
+  <title>$$ Shutdown $$</title>
+  <ui:javascript src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js" />
+  <ui:stylesheet href="$$static('styles/cp.css')" />
+  <ui:stylesheet>
+    body {
+      background-color: #000000;
+      padding: 20px;
+    }
+    body.off {
+      animation: turn-off 1s forwards cubic-bezier(0.230, 1.000, 0.320, 1.000);
+    }
+    body.offing, body.offing #btn-off {
+      cursor: wait !important;
+    }
+    .container-fluid {
+      text-align: center;
+      padding: 64px;
+    }
+    .btn-danger {
+      font-size: 48px;
+      font-weight: 0100;
+      padding: 32px;
+      line-height: 1.1;
+    }
+    #bar-wrap {
+      margin-top: 64px;
+    }
+    #bar {
+      transition: width 0.03s linear;
+    }
+    dl {
+      margin-left: 1em;
+    }
+
+    @keyframes turn-off{
+      0%{
+        transform:scale(1,1.3) translate3d(0,0,0);
+        -webkit-filter:brightness(1);
+        filter:brightness(1);
+        opacity:1;
+      }
+      60%{
+        transform:scale(1.3,0.001) translate3d(0,0,0);
+        -webkit-filter:brightness(10);
+        filter:brightness(10);
+      }
+      100%{
+        transform:scale(0.000,0.0001) translate3d(0,0,0);
+        -webkit-filter:brightness(50);
+        filter:brightness(50);
+      }
+    }
+
+  </ui:stylesheet>
+  <script type="text/javascript">
+$.ajaxSetup({ headers: { 'X-CSRF': 'true' } });
+
+$(function() {
+  var count = 0, max = 100;
+  var timer = null;
+  function stop() {
+    if (timer) {
+      window.clearInterval(timer);
+    }
+    timer = null;
+    if (count < max) {
+      count = 0;
+      $('#bar').css('width', '0%');
+    }
+  }
+  function shutdown() {
+    $('#bar-wrap').addClass('progress-striped active');
+    $('#bar').text('Initiating shutdown...');
+    $('#btn-off').attr('disabled', true);
+    $(document.body).addClass('offing');
+    $.post('/control/shutdown').then(function(data) {
+      $.ajax({ url: '/control/shutdown/poll', timeout: 20000 }).always(function() {
+        $(document.body).addClass('off');
+      });
+    });
+  }
+  function ping() {
+    count = count + 1;
+    $('#bar').css('width', parseInt(100 * count / max, 10) + '%');
+    if (count < max / 3) {
+      $('#bar-wrap').addClass('progress-success').removeClass('progress-warning progress-danger');
+    } else if (count < max * 2 / 3) {
+      $('#bar-wrap').addClass('progress-warning').removeClass('progress-success progress-danger');
+    } else {
+      $('#bar-wrap').addClass('progress-danger').removeClass('progress-success progress-warning');
+    }
+    if (count >= max) {
+      window.clearInterval(timer);
+      timer = null;
+      shutdown();
+    }
+  }
+  function start() {
+    if (count < max) {
+      count = 0;
+      if (timer) {
+        window.clearInterval(timer);
+      }
+      timer = window.setInterval(ping, 30);
+    }
+  }
+  $('#btn-off').mousedown(start).mouseout(stop).mouseup(stop);
+});
+    </script>
+</head>
+<body>
+
+  <div id="container" class="container-fluid">
+    <button id="btn-off" class="btn btn-danger">Initiate<br />Full<br />Cluster<br />Shutdown</button>
+
+    <div id="bar-wrap" class="progress">
+      <div id="bar" class="bar" style="width: 0%"></div>
+    </div>
+
+  </div>
+
+</body>
+</html>

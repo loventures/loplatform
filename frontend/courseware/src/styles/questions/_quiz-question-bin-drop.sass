@@ -1,0 +1,113 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+
+.bindrop-question
+  $bin-choice-width: 12em
+  $bin-choice-spacer: map-get($spacers, 2)
+  /* 2 for padding of bins and 2 for margin of choices  */
+  $bin-width: calc(#{ $bin-choice-spacer * 4} + #{$bin-choice-width})
+
+  .bin-drop-choice,
+  .bin-header
+    text-align: center
+    word-wrap: break-word
+
+  .bin-header
+    @extend .h5
+
+  .bin-list
+    @extend .list-unstyled
+    @extend .bg-light
+    display: flex
+    flex-direction: row
+    align-items: stretch
+    border: 1px solid $primary
+    border-radius: $border-radius
+    overflow-x: scroll
+
+    .bin-drop-bin
+      @extend .m-2
+      flex: 0 0 $bin-width
+      width: $bin-width
+
+  .bin-drop-bin
+    padding: $bin-choice-spacer
+    background-color: $white
+    border: 1px dotted $primary
+    border-radius: $border-radius
+    &.bin-hover
+      @include box-shadow-halo($primary, 2rem, true)
+
+    &.play-bin,
+    &.unselected-bin
+      /*
+       * this is rather arbitrary,
+       * just some more whitespace for bins
+       * so it looks like something is supposed to go in
+       */
+      padding-bottom: #{$bin-choice-spacer + 2rem}
+
+    &.unselected-bin,
+    &.binless-bin
+      @extend .w-100
+      @extend .mt-3
+
+    .bin-label
+      @extend .mx-2
+
+  .bin-choice-list
+    display: flex
+
+  .play-bin .bin-choice-list,
+  .results-bin .bin-choice-list
+    flex-direction: column
+
+  .binless-bin .bin-choice-list,
+  .unselected-bin .bin-choice-list
+    flex-direction: row
+    flex-wrap: wrap
+    align-items: center
+
+  .bin-drop-choice
+    margin: $bin-choice-spacer
+    @extend .block-badge
+    @extend .py-3 /* more padding than standard badge for better dragging */
+    @extend .px-2 /* more padding than standard badge for better dragging */
+    white-space: normal
+    width: $bin-choice-width
+
+    @extend .bg-primary
+    &.missing
+      @extend .bg-light
+
+    position: relative
+    .bindrop-choice-correctness
+      position: absolute
+      left: -0.5em
+      top: -0.5em
+      padding: 0.5em
+      border-radius: 50%
+      border: 1px solid $white
+
+    &.active
+      @extend .btn-info
+
+    &.ui-draggable.ui-draggable-dragging
+      @include box-shadow-halo($primary, 2rem)
+      opacity: 0.8
+

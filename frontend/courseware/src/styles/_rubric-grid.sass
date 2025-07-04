@@ -1,0 +1,139 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+@use 'sass:math'
+
+table.rubric-grid
+  @extend .w-100
+  @extend .not-table
+  overflow: hidden
+  border: 1px solid $medium
+  border-radius: $border-radius
+
+  tbody
+    @extend .bg-white
+
+  thead,
+  tfoot
+    @extend .bg-light
+    td,
+    th
+      @extend .p-2
+
+  tr
+    align-items: stretch
+
+  td,
+  th
+    overflow: hidden
+
+  .rubric-criteria-points, .selected-name-notice, .manual-entry-notice
+    color: $color-primary-against-alert
+    font-weight: normal
+
+  .rubric-total-score
+    color: $color-primary-against-alert
+
+/* lg makes sense for our current 5 max levels per criteria*/
+@include media-breakpoint-up(lg)
+  table.rubric-grid
+    td,
+    th
+      border-left: 1px solid $medium
+      border-top: 1px solid $medium
+      &:first-child
+        border-left: none
+
+    thead tr:first-child th
+      border-top: none
+
+    .rubric-grid-cell
+      height: 100%
+      > *
+        padding: math.div($spacer, 4)
+
+    .rubric-criteiria-toggle
+      display: none
+
+  @for $i from 2 to 8
+    .rubric-grid.max-columns-#{$i}
+      $basis: percentage(math.div(1,$i))
+
+      thead th:not(:last-child),
+      tbody th,
+      tbody td:not(:last-child),
+      tfoot th
+        flex: 0 0 $basis
+        max-width: $basis
+
+      thead th:last-child,
+      tbody td:last-child,
+      tfoot td:last-child
+        flex: 1 0 $basis
+
+@include media-breakpoint-down(md)
+  table.rubric-grid
+    thead th:not(:first-child)
+      display: none
+
+    tbody tr
+      flex-direction: column
+      border-top: 1px solid $medium
+
+      th + td
+        border-top: 1px dotted $medium
+        padding-top: math.div($spacer, 2)
+
+      td
+        margin: 0 math.div($spacer, 2)
+
+      td:last-child
+        margin-bottom: math.div($spacer, 2)
+
+    tfoot tr
+      border-top: 1px solid $medium
+
+    tr.row-collapsed td
+      display: none
+
+table.rubric-grid
+  td.selected
+    @extend .alert-info
+
+.rubric-grid-cell
+  @extend .word-wrap-all
+  @extend .p-1
+
+  .section-feedback
+    display: block
+    color: $color-primary-against-alert
+
+  display: flex
+  flex-direction: column
+
+  .rubric-criteiria-toggle
+    font-size: 1.5em
+
+  .description
+    flex: 1 1 auto
+
+@media print
+  table.rubric-grid
+    tr.row-collapsed td
+      display: inherit
+    .rubric-criteiria-toggle
+      display: none

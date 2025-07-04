@@ -1,0 +1,317 @@
+/*!
+ * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+* Rich Text styles. These styles originally came from LO-UI. They should stay in
+* sync with what is displayed in course-lw.
+*
+* WARNING: do not make changes without corresponding changes in course-lw (_rich-content.scss)
+* and BaseHtmlService.
+*/
+.content-block,
+.rich-content,
+.rich-content-preview,
+.narrative-editor .edit-html .note-editable,
+.narrative-editor .view-html .difference {
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  &.clearfix {
+    overflow: hidden;
+
+    &:after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
+  p, blockquote, h1, h2, h3, h4, h5, pre {
+    margin: 0 0 1rem;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 400;
+    color: black;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  a[href] {
+    color: #006388;
+    text-decoration: underline;
+    &:hover {
+      color: #003144;
+    }
+  }
+
+  blockquote {
+    border-left: 4px solid $gray-500;
+    padding-left: .5rem;
+    font-style: italic;
+  }
+
+  img, iframe {
+    max-width: 100%;
+    border-radius: .3rem;
+    display: block;
+    margin: 0 auto;
+  }
+
+  ul,
+  ol {
+    list-style-position: outside;
+    margin: 0 0 1rem;
+
+    li {
+      margin: 0 0 .5rem;
+    }
+
+    ol,
+    ul {
+      margin-left: 1em;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  dl {
+    dt {
+      font-weight: 600;
+      margin-bottom: .5rem;
+    }
+
+    dd {
+      margin: 0 0 1rem;
+    }
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+
+  cite,
+  em,
+  i {
+    font-style: italic;
+  }
+
+  code,
+  var {
+    font-family: monospace, serif;
+  }
+
+  // Tables
+
+  // this first selector option is to overwrite summernote styles
+  .note-editor .note-editing-area .note-editable table,
+  table {
+    table-layout: auto;
+    margin-bottom: 1rem;
+    background: #fff;
+    border: none;
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 5px;
+    width: 100%;
+
+    caption {
+      caption-side: bottom;
+      font-weight: 600;
+      padding: 0.75rem;
+      color: inherit;
+    }
+
+    thead,
+    tbody {
+      th,
+      td {
+        border: solid $table-border-color;
+        border-width: $table-border-width $table-border-width 0 0;
+      }
+
+      td:first-child,
+      th:first-child {
+        border-width: $table-border-width $table-border-width 0 $table-border-width;
+      }
+
+      tr:first-child {
+        td:first-child,
+        th:first-child {
+          border-top-left-radius: 5px;
+        }
+        td:last-child,
+        th:last-child {
+          border-width: $table-border-width $table-border-width 0 0;
+          border-top-right-radius: 5px;
+        }
+      }
+      tr:last-child {
+        td,
+        th {
+          border-width: $table-border-width $table-border-width $table-border-width 0;
+        }
+        td:first-child,
+        th:first-child {
+          border-width: $table-border-width;
+          border-bottom-left-radius: 5px;
+        }
+        td:last-child,
+        th:last-child {
+          border-width: $table-border-width $table-border-width $table-border-width 0;
+          border-bottom-right-radius: 5px;
+        }
+      }
+    }
+
+    thead:has(+ tbody) {
+      tr:last-child {
+        td:first-child,
+        th:first-child {
+          border-bottom-left-radius: 0;
+        }
+
+        td:last-child,
+        th:last-child {
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    thead + tbody {
+      tr:first-child {
+        td,
+        th {
+          border-top-width: 0;
+        }
+        td:first-child,
+        th:first-child,
+        td:last-child,
+        th:last-child {
+          border-top-width: 0;
+          border-radius: 0;
+        }
+      }
+    }
+
+    tr {
+      padding: 1rem;
+      vertical-align: top;
+
+      th {
+        font-weight: 600;
+        padding: 1rem;
+        text-align: left;
+      }
+
+      td {
+        padding: 0.75rem;
+      }
+    }
+  }
+
+  // ----- Images -----
+
+  img {
+    max-width: 100%;
+  }
+
+  // This will create a banner image that negates the content margin
+  .content-img-banner {
+    display: block;
+    margin: -1 * $card-spacer-x -1 * $card-spacer-x 1rem;
+    width: calc(100% + #{2 * $card-spacer-x});
+
+    // An 'important' hack until we can edit the wysiwyg to not put inline styles (height / width in pixels)
+    img {
+      width: 100% !important;
+      margin: 0;
+    }
+  }
+
+  // This will create a full width image
+  .content-img-full {
+    display: block;
+    width: 100%;
+
+    // An 'important' hack until we can edit the wysiwyg to not put inline styles (height / width in pixels)
+    img {
+      width: 100% !important;
+      margin: 0;
+    }
+  }
+
+  // This will create a centered image
+  .content-img-centered {
+    img {
+      display: block;
+      margin: 1em auto;
+    }
+  }
+
+  // This will allow an image to float to the left of wrapped text
+  .content-img-wrap-left {
+    display: inline-block;
+    width: 100%;
+
+    img {
+      float: left;
+      margin: 0.25em 1em 0.5em 0;
+    }
+  }
+
+  // This will allow an image to float to the right of wrapped text
+  .content-img-wrap-right {
+    display: inline-block;
+    width: 100%;
+
+    img {
+      float: right;
+      margin: 0.25em 0 0.5em 1em;
+    }
+  }
+}
+
+.rich-content-preview {
+  padding: 0.75rem 1.25rem;
+}

@@ -1,0 +1,91 @@
+<!--
+  ~ LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<section class="carousel">
+  <!-- Top level class is so angular animate does not screw with the carousel -->
+
+  <!-- The header information -->
+  <header class="content-carousel-header">
+    <h2
+      ng-show="!!content.title"
+      ng-bind="content.title"
+    ></h2>
+    <p
+      ng-show="!!content.description"
+      ng-bind="content.description"
+    ></p>
+  </header>
+
+  <!-- The slides themselves and the thumbs on a black/dark background -->
+  <div class="content-carousel-container">
+    <div
+      class="carousel content-carousel"
+      uib-carousel
+      active="carousel.activeSlide"
+    >
+      <!-- the uib-slide element needs a /carousel/ class name -->
+      <div
+        class="carousel-slide"
+        ng-repeat="slide in slides track by $index"
+        uib-slide
+        index="slide.id"
+      >
+        <a
+          class="carousel-title"
+          ng-href="{{slide.image}}"
+          target="_blank"
+          ng-bind="slide.title"
+        ></a>
+        <div class="carousel-vh-image">
+          <img
+            align="middle"
+            title="{{slide.title}}"
+            alt="{{slide.alt}}"
+            ng-src="{{slide.renderedHtml}}"
+          />
+        </div>
+      </div>
+
+      <div class="carousel-caption-wrap">
+        <span class="carousel-caption content-carousel-caption"> {{getCaption()}} </span>
+      </div>
+    </div>
+
+    <!-- The thumbnails -->
+    <div
+      class="content-carousel-ctrl"
+      ng-if="slides.length > 1"
+    >
+      <div class="content-carousel-thumbs">
+        <span
+          class="content-carousel-thumb"
+          ng-class="{
+            active: slide.id === carousel.activeSlide
+          }"
+          ng-click="selectThumb(slide, $event)"
+          ng-repeat="slide in slides track by $index"
+        >
+          <img
+            class="content-carousel-thumb-img"
+            title="{{slide.title || slide.description}}"
+            ng-src="{{slide.renderedHtml}}"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

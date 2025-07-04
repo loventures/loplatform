@@ -1,0 +1,96 @@
+/*!
+ / LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ /
+ / This program is free software: you can redistribute it and/or modify
+ / it under the terms of the GNU Affero General Public License as published by
+ / the Free Software Foundation, either version 3 of the License, or
+ / (at your option) any later version.
+ /
+ / This program is distributed in the hope that it will be useful,
+ / but WITHOUT ANY WARRANTY; without even the implied warranty of
+ / MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ / GNU Affero General Public License for more details.
+ /
+ / You should have received a copy of the GNU Affero General Public License
+ / along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ /
+
+////////////////////////////////////////////////////////////////////////////////////
+// Footer navigation, seen in ILOs
+// Imported into lo-style-library
+////////////////////////////////////////////////////////////////////////////////////
+
+//Footer information for Legal copy and domain level links.
+.app-footer
+  background: map-get($theme-colors, light)
+  box-shadow: $box-shadow-inset-base
+  text-align: center
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  align-items: stretch
+  justify-content: center
+  padding-bottom: 0.5rem
+  position: relative
+
+  &.transparent-mode
+    background: transparent
+    box-shadow: none
+
+  .footer-content
+    flex: 1 1 auto
+
+    .lo-footer-copyright
+      color: map-get($theme-colors, dark)
+      font-size: 0.75rem
+      margin-bottom: 0.5em
+
+      &:first-child
+        margin-top: 1.25rem
+        margin-bottom: 1.25rem
+
+    .lo-footer-links
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: center
+      margin-bottom: .75em
+
+      @include media-breakpoint-down(md)
+        font-size: 0.925em
+
+      @include media-breakpoint-down(sm)
+        font-size: 0.85em
+
+      .lo-footer-link
+        font-size: 0.85em
+        padding: 0 1.25em
+        color: map-get($theme-colors, primary)
+        transition: color ease $trans-speed
+        white-space: nowrap
+
+        @include media-breakpoint-up(sm)
+          &:not(:last-of-type)
+            border-right: 1px dotted map-get($theme-colors, dark)
+
+        @include media-breakpoint-down(sm)
+          flex-basis: 100%
+
+        &:hover,
+        &:focus
+          color: darken(map-get($theme-colors, primary), 0.1)
+
+  .lo-footer-logo
+    flex: 0 0 105px
+    position: absolute
+    right: 1.5rem
+    bottom: 1.5rem
+    opacity: .3
+    transition: opacity $trans-type $trans-speed
+
+    > svg
+      width: 105px
+      height: 16px
+
+    &:hover
+      opacity: 1
