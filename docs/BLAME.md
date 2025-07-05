@@ -20,7 +20,8 @@ Charles Byrd
 Charles Robertson  
 Chuck Szeto  
 [Conrad Hughes](https://github.com/ConradHughes)  
-Dan Barry  
+Dan Barry
+Dan Rinzel
 Dan Semmel  
 Darrell Gaspar  
 David Win  
