@@ -20,8 +20,8 @@ Charles Byrd
 Charles Robertson  
 Chuck Szeto  
 [Conrad Hughes](https://github.com/ConradHughes)  
-Dan Barry
-Dan Rinzel
+Dan Barry  
+Dan Rinzel  
 Dan Semmel  
 Darrell Gaspar  
 David Win  
@@ -43,7 +43,7 @@ Ian Betts
 Isaac Edwards  
 Jamie Albinson  
 Jasna Blemberg  
-Jason Cragg  
+[Jason Cragg](https://github.com/jcragg)  
 Jay Brooke  
 Jay Magpantay  
 Jeff Sarmiento  
