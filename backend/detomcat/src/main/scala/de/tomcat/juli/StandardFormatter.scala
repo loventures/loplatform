@@ -20,8 +20,7 @@ package de.tomcat.juli
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.logging.{Formatter, LogRecord}
-
-import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3.Strings
 import org.apache.commons.lang3.exception.ExceptionUtils
 
 object StandardFormatter extends Formatter:
@@ -44,10 +43,10 @@ object StandardFormatter extends Formatter:
     sb.append(record.getLevel).append(FIELD_SEPARATOR)
     sb.append(record.getLongThreadID).append(NVPAIR_SEPARATOR)
     sb.append(Thread.currentThread.getName).append(FIELD_SEPARATOR)
-    sb.append(StringUtils.removeStart(record.getLoggerName, "com.learningobjects.")).append(FIELD_SEPARATOR)
+    sb.append(Strings.CS.removeStart(record.getLoggerName, "com.learningobjects.")).append(FIELD_SEPARATOR)
     sb.append(formatMessage(record))
     Option(record.getThrown) foreach { ex =>
-      ExceptionUtils.getRootCauseStackTrace(record.getThrown) foreach { str =>
+      ExceptionUtils.getRootCauseStackTrace(ex) foreach { str =>
         sb.append(LINE_SEPARATOR).append(str)
       }
     }

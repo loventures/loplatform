@@ -16,6 +16,7 @@ Brian Kent
 Bryan Smith  
 Cameron Turner  
 Carlette Odemwinge  
+Cathy Campbell  
 Charles Byrd  
 Charles Robertson  
 Chuck Szeto  
@@ -26,6 +27,7 @@ Dan Semmel
 Darrell Gaspar  
 David Win  
 Derek Hamner  
+Doug Nerad  
 Dylan Byars  
 [Eamonn Hughes](https://github.com/EamonnHughes)  
 Elizabeth Esswein  
@@ -34,6 +36,7 @@ Emory Merryman
 Eric Krupski  
 Filip Sufitchi  
 Grant Voigt  
+Greg Chavez  
 Gustavo Torrico  
 [Hal Herzog](https://github.com/hherzog1)  
 Harpreet Singh  
@@ -41,6 +44,7 @@ Harpreet Singh
 Hunter Savage  
 Ian Betts  
 Isaac Edwards  
+James Martin  
 Jamie Albinson  
 Jasna Blemberg  
 [Jason Cragg](https://github.com/jcragg)  
@@ -68,6 +72,7 @@ Manveer Singh
 Michael Ahlers  
 Michael Huneke  
 Michael Kalish  
+Michael Klug  
 Mike Liu  
 Minh Tieu  
 Nadya Tolstikhin  
@@ -117,3 +122,6 @@ Waldo Ford
 Wesley Cho  
 Wesley Mao  
 [Zack Powers](https://github.com/Milyardo)
+
+Look on thy Works, ye Mighty, and despair!  
+Nothing beside remains.

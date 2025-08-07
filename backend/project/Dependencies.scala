@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.1.4"
+    val pekkoVersion = "1.1.5"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -60,7 +60,7 @@ object Dependencies {
     /** Apache Commons Codec General encoding/decoding algorithms (for example phonetic, base64, URL).
       * https://commons.apache.org/proper/commons-codec/
       */
-    val codec = "commons-codec" % "commons-codec" % "1.18.0"
+    val codec = "commons-codec" % "commons-codec" % "1.19.0"
 
     /** Commons Collections Extends or augments the Java Collections Framework.
       * https://commons.apache.org/proper/commons-collections/
@@ -69,7 +69,7 @@ object Dependencies {
 
     /** Apache Commons Compress API for dealing with compression. https://commons.apache.org/proper/commons-compress/
       */
-    val compress = "org.apache.commons" % "commons-compress" % "1.27.1"
+    val compress = "org.apache.commons" % "commons-compress" % "1.28.0"
 
     /** Apache Commons Exec API for dealing with external process execution and environment management in Java.
       * https://commons.apache.org/proper/commons-exec/
@@ -78,12 +78,12 @@ object Dependencies {
 
     /** Commons IO Collection of I/O utilities. https://commons.apache.org/proper/commons-io/
       */
-    val io = "commons-io" % "commons-io" % "2.19.0"
+    val io = "commons-io" % "commons-io" % "2.20.0"
 
     /** Commons Lang Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-lang/
       */
-    val lang3 = "org.apache.commons" % "commons-lang3" % "3.17.0"
+    val lang3 = "org.apache.commons" % "commons-lang3" % "3.18.0"
 
     /** Commons Math: The Apache Commons Mathematics Library Commons Math is a library of lightweight, self-contained
       * mathematics and statistics components addressing the most common problems not available in the Java programming
@@ -93,16 +93,16 @@ object Dependencies {
 
     /** Commons Net: Apache Commons Net library implements the client side of many basic Internet protocols.
       */
-    val net = "commons-net" % "commons-net" % "3.11.1"
+    val net = "commons-net" % "commons-net" % "3.12.0"
 
     /** Commons Text Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-text/
       */
-    val text = "org.apache.commons" % "commons-text" % "1.13.1"
+    val text = "org.apache.commons" % "commons-text" % "1.14.0"
 
     /** Commons validator: Apache Commons Net validates URLs.
       */
-    val urlValidator = "commons-validator" % "commons-validator" % "1.9.0"
+    val urlValidator = "commons-validator" % "commons-validator" % "1.10.0"
   }
 
   /** Apache HttpComponents The Apache HttpComponents™ project is responsible for creating and maintaining a toolset of
@@ -146,19 +146,19 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.31.63"
-      val core      = "software.amazon.awssdk" % "core"      % "2.31.63"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.31.63"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.31.63"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.31.63"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.31.63"
-      val translate = "software.amazon.awssdk" % "translate" % "2.31.63"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.32.2"
+      val core      = "software.amazon.awssdk" % "core"      % "2.32.2"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.31.78"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.31.78"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.31.78"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.31.78"
+      val translate = "software.amazon.awssdk" % "translate" % "2.31.78"
     }
 
   }
 
   object Cats {
-    val effect = "org.typelevel" %% "cats-effect" % "3.6.1"
+    val effect = "org.typelevel" %% "cats-effect" % "3.6.3"
     val mouse  = "org.typelevel" %% "mouse"       % "1.3.2"
   }
 
@@ -166,7 +166,7 @@ object Dependencies {
 
     /** Configuration library for JVM languages https://typesafehub.github.io/config/
       */
-    val typesafe = "com.typesafe" % "config" % "1.4.3"
+    val typesafe = "com.typesafe" % "config" % "1.4.4"
     val ficus    = "com.iheart"  %% "ficus"  % "1.5.2"
   }
 
@@ -174,7 +174,7 @@ object Dependencies {
     */
   object Databases {
     object Doobie {
-      val doobieVersion = "1.0.0-RC9"
+      val doobieVersion = "1.0.0-RC10"
 
       val core      = "org.tpolecat" %% "doobie-core"      % doobieVersion
       val postgres  = "org.tpolecat" %% "doobie-postgres"  % doobieVersion
@@ -184,7 +184,7 @@ object Dependencies {
 
     /** HikariCP is a Connection Pool. https://github.com/brettwooldridge/HikariCP
       */
-    val hikaricp = "com.zaxxer" % "HikariCP" % "6.3.0"
+    val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.0"
 
     val postgresql = "org.postgresql" % "postgresql" % "42.7.7"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.0.4.Final"
+    val hibernateVersion = "7.0.9.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-70" % "3.10.1"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-70" % "3.10.3"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.8"
+      val tomcatVersion = "11.0.9"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,7 +296,7 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.19.1"
+      val jacksonVersion = "2.19.2"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % jacksonVersion
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -351,7 +351,7 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.0"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.1"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
@@ -398,7 +398,7 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.0"
+    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.1"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
@@ -438,7 +438,7 @@ object Dependencies {
 
     /** https://github.com/classgraph/classgraph
       */
-    val classGraph = "io.github.classgraph" % "classgraph" % "4.8.180"
+    val classGraph = "io.github.classgraph" % "classgraph" % "4.8.181"
 
     /** */
     val opencsv = "net.sf.opencsv" % "opencsv" % "2.3"
@@ -449,7 +449,7 @@ object Dependencies {
 
     /** Scala/Scala.js library for manipulating Fancy Ansi colored strings https://github.com/lihaoyi/fansi
       */
-    val fansi = "com.lihaoyi" %% "fansi" % "0.5.0"
+    val fansi = "com.lihaoyi" %% "fansi" % "0.5.1"
 
     val newType = "io.estatico" %% "newtype" % "0.4.2"
 
@@ -482,7 +482,7 @@ object Dependencies {
     /** Scala ElasticSearch client https://github.com/Philippus/elastic4s
       */
     object Elastic4s {
-      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.0.0"
+      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.1.0"
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */

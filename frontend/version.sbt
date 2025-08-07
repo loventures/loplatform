@@ -1,1 +1,1 @@
-ThisBuild / version := "AppleTragedy_858-SNAPSHOT"
+ThisBuild / version := "AppleTragedy_859-SNAPSHOT"

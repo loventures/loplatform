@@ -112,7 +112,7 @@ object UnitTransactor extends Transactor[Unit]:
     */
   val evalId = new (TxOp ~> Id.Id):
     override def apply[A](fa: TxOp[A]): Id.Id[A] = fa match
-      // case Begin       => unitTx
+      case Begin       => unitTx
       case Commit(_)   => ()
       case Rollback(_) => ()
 

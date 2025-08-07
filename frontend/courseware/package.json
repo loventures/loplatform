@@ -34,13 +34,13 @@
     "angular-ui-bootstrap": "2.5.6",
     "angular2react": "3.0.2",
     "assert": "2.1.0",
-    "axios": "1.10.0",
+    "axios": "1.11.0",
     "bootstrap": "5.3.7",
     "browser-cookies": "1.2.0",
     "classnames": "2.5.1",
     "connected-react-router": "6.9.3",
     "copy-to-clipboard": "3.3.3",
-    "core-js": "3.43.0",
+    "core-js": "3.45.0",
     "dayjs": "1.11.13",
     "es6-promise": "4.2.8",
     "event-stream": "4.0.1",
@@ -79,7 +79,7 @@
     "react-redux": "9.2.0",
     "react-router": "5.3.4",
     "react-router-dom": "5.3.4",
-    "react-select": "5.10.1",
+    "react-select": "5.10.2",
     "react-textarea-autosize": "8.5.9",
     "react-transition-group": "4.4.5",
     "react-use": "17.6.0",
@@ -97,10 +97,10 @@
     "sortablejs": "1.15.6",
     "styled-components": "6.1.19",
     "typesafe-actions": "5.1.0",
-    "yet-another-react-lightbox": "3.24.0"
+    "yet-another-react-lightbox": "3.25.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.30.1",
+    "@eslint/js": "9.32.0",
     "@types/angular": "1.8.9",
     "@types/angular-mocks": "1.7.4",
     "@types/enzyme": "3.10.19",
@@ -112,8 +112,8 @@
     "@types/react-router-dom": "5.3.3",
     "@types/recompose": "0.30.15",
     "@vitejs/plugin-basic-ssl": "2.1.0",
-    "@vitejs/plugin-react": "4.6.0",
-    "eslint": "9.30.1",
+    "@vitejs/plugin-react": "4.7.0",
+    "eslint": "9.32.0",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
     "fs-jetpack": "5.1.0",
@@ -123,14 +123,15 @@
     "prettier": "3.6.2",
     "rollup-plugin-multi-input": "1.5.0",
     "sass-embedded": "1.89.2",
-    "typescript": "5.8.3",
-    "typescript-eslint": "8.35.1",
-    "vite": "7.0.2",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.39.0",
+    "vite": "7.0.6",
     "vite-plugin-ejs": "1.7.0",
-    "vite-plugin-static-copy": "3.1.0"
+    "vite-plugin-static-copy": "3.1.1"
   },
   "$resolutions-comment": {},
   "resolutions": {
+    "brace-expansion": "4.0.1",
     "node-fetch": "3.3.2"
   }
 }
