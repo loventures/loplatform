@@ -53,7 +53,7 @@ Jay Magpantay
 Jeff Sarmiento  
 [Jeremy Dunsworth](https://github.com/freshbreweddesign)  
 Jonathan Bergman  
-Joshua Farrar  
+[Joshua Farrar](https://github.com/joshuakfarrar)
 Justin Carlson  
 Kai Rikhye  
 Kamila Hilches  
