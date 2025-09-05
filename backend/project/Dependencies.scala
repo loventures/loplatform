@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.1.5"
+    val pekkoVersion = "1.2.0"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.32.2"
-      val core      = "software.amazon.awssdk" % "core"      % "2.32.2"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.31.78"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.31.78"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.31.78"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.31.78"
-      val translate = "software.amazon.awssdk" % "translate" % "2.31.78"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.32.22"
+      val core      = "software.amazon.awssdk" % "core"      % "2.32.22"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.32.24"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.32.24"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.32.24"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.32.24"
+      val translate = "software.amazon.awssdk" % "translate" % "2.32.24"
     }
 
   }
@@ -184,7 +184,7 @@ object Dependencies {
 
     /** HikariCP is a Connection Pool. https://github.com/brettwooldridge/HikariCP
       */
-    val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.0"
+    val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
 
     val postgresql = "org.postgresql" % "postgresql" % "42.7.7"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.1.0.33"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.1.0.34"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,7 +212,7 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.0.9.Final"
+    val hibernateVersion = "7.1.0.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.9"
+      val tomcatVersion = "11.0.11"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,9 +296,9 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.19.2"
+      val jacksonVersion = "2.20.0"
 
-      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % jacksonVersion
+      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.20"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
       val csv         = "com.fasterxml.jackson.dataformat" % "jackson-dataformat-csv"  % jacksonVersion
       val databind    = "com.fasterxml.jackson.core"       % "jackson-databind"        % jacksonVersion
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.17.6"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.17.7"
 
     /*
      * Javassist
@@ -398,7 +398,7 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.1"
+    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.2"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
@@ -490,11 +490,11 @@ object Dependencies {
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "7.0.4"
+    val phCss = "com.helger" % "ph-css" % "8.0.0"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */
-    val nashorn = "org.openjdk.nashorn" % "nashorn-core" % "15.6"
+    val nashorn = "org.openjdk.nashorn" % "nashorn-core" % "15.7"
 
     /** SPOIWO (Scala POI Wrapping Objects). https://github.com/norbert-radyk/spoiwo */
     val spoiwo = "com.norbitltd" %% "spoiwo" % "2.2.1"

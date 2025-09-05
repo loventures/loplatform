@@ -28,7 +28,7 @@ description := "Difference Engine Root Project"
 Global / cancelable := true
 
 ThisBuild / Compile / packageDoc / publishArtifact := false
-Global / publishMavenStyle := false
+Global / publishMavenStyle                         := false
 
 // keep the release version the same
 releaseVersion := { ver => sbtrelease.Version(ver).map(_.unapply).getOrElse(versionFormatError(ver)) }
@@ -65,6 +65,9 @@ releaseProcess := Seq[ReleaseStep](
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-java8-compat"       % "always"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml"                % "always"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
+
+// Transitive security issue via aws
+ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2" % "4.2.5.Final"
 
 inThisBuild(
   Seq[Def.Setting[_]](

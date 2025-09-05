@@ -126,6 +126,7 @@ class SessionRoot(val componentInstance: ComponentInstance)(
 
   override def loginRedirect(
     username: String,
+    _password: String,
     pathOpt: String,
     request: HttpServletRequest
   ): ErrorResponse \/ RedirectResponse =

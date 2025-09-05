@@ -18,10 +18,9 @@
 package loi.authoring.branch.web
 
 import com.google.common.net.MediaType
-import com.helger.css.ECSSVersion
 import com.helger.css.decl.visit.{AbstractModifyingCSSUrlVisitor, CSSVisitor, DefaultCSSVisitor}
 import com.helger.css.decl.{CSSSelectorSimpleMember, CSSStyleRule, ECSSSelectorCombinator}
-import com.helger.css.reader.CSSReader
+import com.helger.css.reader.{CSSReader, CSSReaderSettings}
 import com.helger.css.writer.CSSWriter
 import com.learningobjects.cpxp.component.annotation.{Component, Controller, PathVariable, RequestMapping}
 import com.learningobjects.cpxp.component.web.{ApiRootComponent, Method, TextResponse}
@@ -75,7 +74,10 @@ class BranchCssWebController(
       stylesheet = IOUtils.toString(uri, StandardCharsets.UTF_8)
       // Comments break the (advanced, version 6.5) CSS parser so strip them but keep newlines for tracking errors
       noComments = CommentRE.replaceAllIn(stylesheet, m => m.matched.filter(_ == '\n'))
-      aCSS      <- Option(CSSReader.readFromString(noComments, StandardCharsets.UTF_8, ECSSVersion.CSS30))
+      aCSS      <-
+        Option(
+          CSSReader.readFromStringReader(noComments, new CSSReaderSettings().setFallbackCharset(StandardCharsets.UTF_8))
+        )
     yield
       CSSVisitor.visitCSSUrl(aCSS, new ResolveURIs(uri))
       CSSVisitor.visitCSS(aCSS, ScopeCssRules)

@@ -50,6 +50,7 @@ trait SessionRootComponent extends ApiRootComponent:
   @Secured(allowAnonymous = true)
   def loginRedirect(
     @QueryParam username: String,
+    @QueryParam(required = false) password: String,
     @QueryParam(required = false) path: String,
     request: HttpServletRequest,
   ): ErrorResponse \/ RedirectResponse
