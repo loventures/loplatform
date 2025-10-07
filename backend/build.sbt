@@ -66,8 +66,13 @@ ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-java8
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml"                % "always"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
 
-// Transitive security issue via aws
-ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2" % "4.2.5.Final"
+// CVE-2025-55163, CVE-2025-58057 via aws .. show coreApi/dependencyTree
+ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2"             % "4.2.6.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-codec"                   % "4.2.6.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-handler"                 % "4.2.6.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-transport-classes-epoll" % "4.2.6.Final"
+// CVE-2025-58369 via http4s
+ThisBuild / dependencyOverrides += "co.fs2"  %% "fs2-io"                        % "3.12.2"
 
 inThisBuild(
   Seq[Def.Setting[_]](

@@ -22,7 +22,6 @@ import com.learningobjects.cpxp.BaseServiceMeta
 import com.learningobjects.cpxp.service.attachment.AttachmentService
 import com.learningobjects.cpxp.service.domain.DomainFacade
 import com.learningobjects.cpxp.service.overlord.OverlordWebService
-import scalaz.syntax.std.boolean.*
 import software.amazon.awssdk.services.s3.model.{CORSConfiguration, CORSRule, PutBucketCorsRequest}
 
 import scala.jdk.CollectionConverters.*
@@ -63,7 +62,7 @@ object AmazonS3CorsService:
   private def corsConfiguration(
     domain: Option[DomainFacade]
   )(implicit ows: OverlordWebService): CORSConfiguration =
-    val extraHostNames = domain.map(domainUrls).getOrElse(Nil)
+    val extraHostNames = domain.map(BaseServiceMeta.domainUrls).getOrElse(Nil)
     CORSConfiguration
       .builder()
       .corsRules(
@@ -110,17 +109,6 @@ object AmazonS3CorsService:
     *   all domain URLs
     */
   private def allDomainUrls(implicit ows: OverlordWebService): Seq[String] =
-    ows.getAllDomains.asScala.toSeq flatMap domainUrls
+    ows.getAllDomains.asScala.toSeq flatMap BaseServiceMeta.domainUrls
 
-  /** Get the URLs for a domain.
-    * @param domain
-    *   the domain
-    * @return
-    *   the URLs for the domain
-    */
-  private def domainUrls(domain: DomainFacade): Seq[String] =
-    val protocol = domain.getSecurityLevel.getIsSecure.fold("https", "http")
-    domain.getHostNames.asScala.toSeq map { hostname =>
-      s"$protocol://$hostname"
-    }
 end AmazonS3CorsService

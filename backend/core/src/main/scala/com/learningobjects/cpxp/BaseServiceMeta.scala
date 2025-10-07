@@ -22,13 +22,17 @@ import software.amazon.awssdk.services.ec2.model.{DescribeTagsRequest, Filter}
 import com.amazonaws.util.EC2MetadataUtils
 import com.learningobjects.cpxp.BaseServiceMeta.*
 import com.learningobjects.cpxp.scala.cpxp.Summon.summon
+import com.learningobjects.cpxp.service.domain.DomainFacade
+import com.learningobjects.cpxp.service.overlord.OverlordWebService
 import com.learningobjects.cpxp.service.upgrade.{SystemInfo, UpgradeService}
 import com.typesafe.config.Config
 import org.apache.commons.lang3.StringUtils
+import scaloi.syntax.boolean.*
 
 import java.net.{InetAddress, NetworkInterface, URI}
 import java.util.jar.{Attributes, Manifest}
 import _root_.scala.compiletime.uninitialized
+import _root_.scala.collection.mutable
 import _root_.scala.jdk.CollectionConverters.*
 import _root_.scala.util.Try
 
@@ -90,17 +94,18 @@ class BaseServiceMeta extends ServiceMeta:
   override def getJava: String =
     System.getProperty("java.version")
 
-  private var _localName: String      = uninitialized
-  private var _networkLocal: String   = uninitialized
-  private var _networkCentral: String = uninitialized
-  private var _das: Boolean           = uninitialized
-  private var _networkPort: Int       = uninitialized
-  private var _cluster: String        = uninitialized
-  private var _clusterType: String    = uninitialized
-  private var _node: String           = uninitialized
-  private var _staticHost: String     = uninitialized
-  private var _staticSuffix: String   = uninitialized
-  private var _ponyHerd: String       = uninitialized
+  private var _localName: String         = uninitialized
+  private var _networkLocal: String      = uninitialized
+  private var _networkCentral: String    = uninitialized
+  private var _das: Boolean              = uninitialized
+  private var _networkPort: Int          = uninitialized
+  private var _cluster: String           = uninitialized
+  private var _clusterType: String       = uninitialized
+  private var _clusterUrls: List[String] = Nil
+  private var _node: String              = uninitialized
+  private var _staticHost: String        = uninitialized
+  private var _staticSuffix: String      = uninitialized
+  private var _ponyHerd: String          = uninitialized
 
   private var _pekkoSingleton: Boolean = uninitialized
 
@@ -125,6 +130,7 @@ class BaseServiceMeta extends ServiceMeta:
     _staticSuffix = "." + staticConfig.getString("suffix")
     _pekkoSingleton = networkConfig.getBoolean("cluster.singleton")
     _ponyHerd = if isLocal then "local" else getPonyHerdTagValue
+    _clusterUrls = summon[OverlordWebService].getAllDomains.asScala.flatMap(domainUrls).toList
 
     doAcquireCentralHost()
     doHeartbeat()
@@ -173,6 +179,8 @@ class BaseServiceMeta extends ServiceMeta:
 
   override def getClusterType: String = _clusterType
 
+  override def getClusterUrls: List[String] = _clusterUrls
+
   override def isLocal: Boolean = // local laptop, else AWS
     CLUSTER_TYPE_LOCAL.equals(_clusterType)
 
@@ -181,7 +189,6 @@ class BaseServiceMeta extends ServiceMeta:
 
   override def isProdLike: Boolean =
     CLUSTER_TYPE_PRODUCTION.equals(_clusterType) ||
-      CLUSTER_TYPE_PATCH.equals(_clusterType) ||
       CLUSTER_TYPE_CERTIFICATION.equals(_clusterType)
 
   override def getStaticHost: String = _staticHost
@@ -209,8 +216,7 @@ class BaseServiceMeta extends ServiceMeta:
 
       val results = ec2.describeTags(request)
 
-      if results != null then results.tags.asScala.headOption.map(_.value)
-      else None
+      Option(results).flatMap(_.tags.asScala.headOption.map(_.value))
     }
 
     tagValue.toOption.flatten.getOrElse("unknown")
@@ -226,29 +232,25 @@ object BaseServiceMeta:
 
   def configure(loiConfig: Config): Unit           =
     serviceMeta.doConfigure(loiConfig)
+
   /* Ensure that a configured localhost remains valid. */
   def validateLocalhost(localHost: String): String =
-
-    var validLocalHost: String = if StringUtils.isNotEmpty(localHost) then
-      val addrList     = new java.util.HashSet[String]()
-      val ifcs         = NetworkInterface.getNetworkInterfaces
-      while ifcs.hasMoreElements do
-        val ifc = ifcs.nextElement()
-        if ifc.isUp then
-          val addrs = ifc.getInetAddresses
-          while addrs.hasMoreElements do
-            val addr = addrs.nextElement()
-            addrList.add(addr.getHostAddress)
-      val localAddress = InetAddress.getByName(localHost).getHostAddress
-      if !addrList.contains(localAddress) then
-        logger.warn(s"Ignoring invalid Network/localHost, $localHost, $localAddress, $addrList")
-        null
-      else localHost
-    else null
-
-    if StringUtils.isEmpty(validLocalHost) then // may have been nulled by invalidity
-      InetAddress.getLocalHost.getHostName
-    else validLocalHost
+    Option(localHost)
+      .filter: localHost =>
+        val addrList     = mutable.Set.empty[String]
+        val ifcs         = NetworkInterface.getNetworkInterfaces
+        while ifcs.hasMoreElements do
+          val ifc = ifcs.nextElement()
+          if ifc.isUp then
+            val addrs = ifc.getInetAddresses
+            while addrs.hasMoreElements do
+              val addr = addrs.nextElement()
+              addrList.add(addr.getHostAddress)
+        val localAddress = InetAddress.getByName(localHost).getHostAddress
+        addrList.contains(localAddress) <|!
+          logger.warn(s"Ignoring invalid Network/localHost, $localHost, $localAddress, $addrList")
+      .getOrElse:
+        InetAddress.getLocalHost.getHostName
   end validateLocalhost
 
   def acquireCentralHost(): Unit =
@@ -265,4 +267,9 @@ object BaseServiceMeta:
 
   def releaseCentralHost(): Unit =
     serviceMeta.doReleaseCentralHost()
+
+  def domainUrls(domain: DomainFacade): Seq[String] =
+    val protocol = if domain.getSecurityLevel.getIsSecure then "https" else "http"
+    domain.getHostNames.asScala.toSeq map: hostname =>
+      s"$protocol://$hostname"
 end BaseServiceMeta

@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.2.0"
+    val pekkoVersion = "1.2.1"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -83,7 +83,7 @@ object Dependencies {
     /** Commons Lang Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-lang/
       */
-    val lang3 = "org.apache.commons" % "commons-lang3" % "3.18.0"
+    val lang3 = "org.apache.commons" % "commons-lang3" % "3.19.0"
 
     /** Commons Math: The Apache Commons Mathematics Library Commons Math is a library of lightweight, self-contained
       * mathematics and statistics components addressing the most common problems not available in the Java programming
@@ -120,7 +120,7 @@ object Dependencies {
   /** ASM, A Java byecode engineering library. http://asm.ow2.org/
     */
   object ASM {
-    val asmVersion = "9.8"
+    val asmVersion = "9.9"
 
     val asm  = "org.ow2.asm" % "asm"      % asmVersion
     val util = "org.ow2.asm" % "asm-util" % asmVersion
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.32.22"
-      val core      = "software.amazon.awssdk" % "core"      % "2.32.22"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.32.24"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.32.24"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.32.24"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.32.24"
-      val translate = "software.amazon.awssdk" % "translate" % "2.32.24"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.33.10"
+      val core      = "software.amazon.awssdk" % "core"      % "2.33.10"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.32.33"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.32.33"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.32.33"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.32.33"
+      val translate = "software.amazon.awssdk" % "translate" % "2.32.33"
     }
 
   }
@@ -166,7 +166,7 @@ object Dependencies {
 
     /** Configuration library for JVM languages https://typesafehub.github.io/config/
       */
-    val typesafe = "com.typesafe" % "config" % "1.4.4"
+    val typesafe = "com.typesafe" % "config" % "1.4.5"
     val ficus    = "com.iheart"  %% "ficus"  % "1.5.2"
   }
 
@@ -186,7 +186,7 @@ object Dependencies {
       */
     val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
 
-    val postgresql = "org.postgresql" % "postgresql" % "42.7.7"
+    val postgresql = "org.postgresql" % "postgresql" % "42.7.8"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
 
     /** Blocking, simple Redis driver for Scala.
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.0.Final"
+    val hibernateVersion = "7.1.3.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-70" % "3.10.3"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-70" % "3.11.0"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -225,7 +225,7 @@ object Dependencies {
     * http://http4s.org/
     */
   object Http4s {
-    val http4sVersion        = "0.23.30"
+    val http4sVersion        = "0.23.32"
     val http4sServletVersion = "0.25.0-RC1"
     val http4sBlazeVersion   = "0.23.17"
 
@@ -328,7 +328,7 @@ object Dependencies {
     /** Circe - Argonaut for cats https://github.com/circe/circe
       */
     object Circe {
-      val circeVersion = "0.14.14"
+      val circeVersion = "0.14.15"
 
       val core    = "io.circe" %% "circe-core"    % circeVersion
       val generic = "io.circe" %% "circe-generic" % circeVersion
@@ -340,7 +340,7 @@ object Dependencies {
       * https://jwt-scala.github.io/jwt-scala/
       */
     object JWT {
-      val jwtScalaVersion = "11.0.2"
+      val jwtScalaVersion = "11.0.3"
       val scala           = "com.github.jwt-scala" %% "jwt-core" % jwtScalaVersion
     }
 
@@ -351,7 +351,7 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.1"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.2"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
@@ -386,7 +386,7 @@ object Dependencies {
 
     /** Guava: Google Core Libraries for Java https://github.com/google/guava
       */
-    val guava = "com.google.guava" % "guava" % "33.4.8-jre"
+    val guava = "com.google.guava" % "guava" % "33.5.0-jre"
 
     /** IMS Enterprise Specification http://www.imsglobal.org/enterprise/
       */
@@ -398,7 +398,7 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.2"
+    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.3"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
@@ -434,7 +434,7 @@ object Dependencies {
 
     /** Embedded sass compiler. https://github.com/larsgrefer/dart-sass-java
       */
-    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.2.0"
+    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.3.1"
 
     /** https://github.com/classgraph/classgraph
       */
@@ -588,7 +588,7 @@ object Dependencies {
       *
       * https://www.scalacheck.org/
       */
-    val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.18.1"
+    val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.19.0"
 
     /** JUnit is a simple framework to write repeatable tests. http://junit.org/
       */

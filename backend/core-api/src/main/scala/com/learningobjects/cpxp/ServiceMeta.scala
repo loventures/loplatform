@@ -25,11 +25,8 @@ package com.learningobjects.cpxp
 trait ServiceMeta:
   val CLUSTER_NAME_LOCAL         = "local"
   val CLUSTER_TYPE_LOCAL         = "Local"
-  val CLUSTER_TYPE_UNKNOWN       = "Unknown"
   val CLUSTER_TYPE_PRODUCTION    = "Production"
-  val CLUSTER_TYPE_PERFORMANCE   = "Perf"
   val CLUSTER_TYPE_CERTIFICATION = "Cert"
-  val CLUSTER_TYPE_PATCH         = "Patch" // aka pre-prod
 
   def getVersion: String
 
@@ -64,6 +61,8 @@ trait ServiceMeta:
   def getCluster: String
 
   def getClusterType: String
+
+  def getClusterUrls: List[String]
 
   /** Is this a local development environment, probably someone's dev machine. */
   def isLocal: Boolean

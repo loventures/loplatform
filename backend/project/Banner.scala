@@ -29,11 +29,29 @@ import scala.util.Random
 object Bruce {
   import FontData.fonts
 
+  lazy val ack = "y".equalsIgnoreCase(sys.props.getOrElse("agpl.ack", scala.io.StdIn.readLine(
+    """
+      |LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+      |
+      |Released under the terms of the GNU Affero General Public License version 3.
+      |
+      |Your use of this software, including in any derivative work, is subject to
+      |the terms of this license.
+      |
+      |Please enter Y to acknowledge these terms: 
+      |""".stripMargin.dropRight(1))))
+
   val banner = Keys.onLoadMessage in Scope.Global := {
-    val name = sys.props.get("user.name").filterNot(_.isEmpty)
-    val msg  = s"Welcome, $name"
+
     if (sys.env.contains("CI")) ""
-    else fonts.toList(Random.nextInt(fonts.size))._2(msg).concat("\u001b]0;Backend\u0007")
+    else if (!ack) {
+      System.exit(1)
+      ""
+    } else {
+      val name = sys.props.get("user.name").filterNot(_.isEmpty)
+      val msg  = s"Welcome, $name"
+      fonts.toList(Random.nextInt(fonts.size))._2(msg).concat("\u001b]0;Backend\u0007")
+    }
   }
 }
 
