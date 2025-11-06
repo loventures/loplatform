@@ -156,7 +156,7 @@ export const useMagicalStuckness = (ref: React.MutableRefObject<HTMLDivElement>)
 
 const ERFancyContentTitle: React.FC<ERContentTitleProps> = ({ content: contentProp }) => {
   // these should all be memoized, but *everything* changes on every render
-  const ref = useRef<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement | null>(null);
   const viewingAs = useCourseSelector(selectCurrentUser);
   const translate = useTranslation();
   const [addBookmark, setAddBookmark] = useState(false);

@@ -60,7 +60,7 @@ object Dependencies {
     /** Apache Commons Codec General encoding/decoding algorithms (for example phonetic, base64, URL).
       * https://commons.apache.org/proper/commons-codec/
       */
-    val codec = "commons-codec" % "commons-codec" % "1.19.0"
+    val codec = "commons-codec" % "commons-codec" % "1.20.0"
 
     /** Commons Collections Extends or augments the Java Collections Framework.
       * https://commons.apache.org/proper/commons-collections/
@@ -146,20 +146,20 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.33.10"
-      val core      = "software.amazon.awssdk" % "core"      % "2.33.10"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.32.33"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.32.33"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.32.33"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.32.33"
-      val translate = "software.amazon.awssdk" % "translate" % "2.32.33"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.33.13"
+      val core      = "software.amazon.awssdk" % "core"      % "2.33.13"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.35.10"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.35.10"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.35.10"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.35.10"
+      val translate = "software.amazon.awssdk" % "translate" % "2.35.10"
     }
 
   }
 
   object Cats {
     val effect = "org.typelevel" %% "cats-effect" % "3.6.3"
-    val mouse  = "org.typelevel" %% "mouse"       % "1.3.2"
+    val mouse  = "org.typelevel" %% "mouse"       % "1.4.0"
   }
 
   object Config {
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.1.0.34"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.0"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,7 +212,7 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.3.Final"
+    val hibernateVersion = "7.1.6.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
@@ -225,7 +225,7 @@ object Dependencies {
     * http://http4s.org/
     */
   object Http4s {
-    val http4sVersion        = "0.23.32"
+    val http4sVersion        = "0.23.33"
     val http4sServletVersion = "0.25.0-RC1"
     val http4sBlazeVersion   = "0.23.17"
 
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.11"
+      val tomcatVersion = "11.0.13"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,7 +296,7 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.20.0"
+      val jacksonVersion = "2.20.1"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.20"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.17.7"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.17.8"
 
     /*
      * Javassist
@@ -402,7 +402,7 @@ object Dependencies {
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
-    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.5"
+    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.6"
 
     /** IMS Global - LTI™ Utilities https://github.com/IMSGlobal/basiclti-util-java
       */
@@ -426,7 +426,7 @@ object Dependencies {
 
     /** Quartz Job Scheduling Library http://quartz-scheduler.org/
       */
-    val quartz = "org.quartz-scheduler" % "quartz" % "2.5.0"
+    val quartz = "org.quartz-scheduler" % "quartz" % "2.5.1"
 
     /** CSV Reader/Writer for Scala https://github.com/tototoshi/scala-csv
       */
@@ -438,7 +438,7 @@ object Dependencies {
 
     /** https://github.com/classgraph/classgraph
       */
-    val classGraph = "io.github.classgraph" % "classgraph" % "4.8.181"
+    val classGraph = "io.github.classgraph" % "classgraph" % "4.8.184"
 
     /** */
     val opencsv = "net.sf.opencsv" % "opencsv" % "2.3"
@@ -482,7 +482,7 @@ object Dependencies {
     /** Scala ElasticSearch client https://github.com/Philippus/elastic4s
       */
     object Elastic4s {
-      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.1.0"
+      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.1.1"
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */
@@ -490,7 +490,7 @@ object Dependencies {
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "8.0.0"
+    val phCss = "com.helger" % "ph-css" % "8.0.1"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */

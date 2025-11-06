@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, { Ref } from 'react';
 import { useDrop } from 'react-dnd';
 import { Dispatch } from 'redux';
 
@@ -49,7 +49,7 @@ export const Target: React.FC<TargetProps> = ({ parentId, indent, position, disp
 
   return (
     <div
-      ref={dropRef}
+      ref={dropRef as unknown as Ref<HTMLDivElement>}
       id={`drop-target-${parentId}-${position}`}
       className={'content-tree-drop-target-outer'}
       style={{ marginLeft: (indent - 1) * 1.5 + 'em' }}

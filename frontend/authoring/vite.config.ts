@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { ViteEjsPlugin } from 'vite-plugin-ejs';
 import ViteBasicSslPlugin from '@vitejs/plugin-basic-ssl';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
+import dsv from '@rollup/plugin-dsv';
 
 const ProxyConfig = {
   target: 'https://localhost:8181',
@@ -17,6 +18,7 @@ export default defineConfig(() => {
       ViteEjsPlugin(),
       ViteBasicSslPlugin(),
       react(),
+      dsv(),
       viteStaticCopy({
         targets: [
           {

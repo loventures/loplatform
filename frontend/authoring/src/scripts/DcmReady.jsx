@@ -78,18 +78,8 @@ class DcmReady extends Component {
       gretchen
         .get(`/api/v2/i18n/${loPlatform.i18n.locale}/${loPlatform.identifier}`)
         .exec()
-        .then(translations => {
-          if (process.env.NODE_ENV !== 'development') {
-            return translations;
-          } else {
-            return getLocalI18nData(translations, 'en');
-          }
-        })
-        .catch(() => {
-          if (process.env.NODE_ENV === 'development') {
-            return getLocalI18nData({}, 'en');
-          }
-        });
+        .then(translations => getLocalI18nData(translations, 'en'))
+        .catch(() => getLocalI18nData({}, 'en'));
     const branchId = match.params['branchId'];
     const branchPromise = branchId
       ? gretchen.get(`/api/v2/authoring/branches/${branchId}`).exec()
@@ -159,24 +149,22 @@ export default compose(withRouter, connect(mapStateToProps))(DcmReady);
 /* Private translation helper */
 
 export const getLocalI18nData = (serverI18n, locale) => {
-  try {
-    /* Use dynamic imports to not pull this stuff in for the prod build */
-    return Promise.all([
-      require(`!!raw-loader!../../i18n/Authoring_${locale.substring(0, 2)}.csv`),
-      require('csvjson'),
-    ]).then(([{ default: i18nCsv }, csvjson]) => {
-      try {
-        const localI18n = fromPairs(csvjson.toArray(i18nCsv, { quote: '"' }));
+  if (process.env.NODE_ENV === 'development') {
+    return  import(/* @vite-ignore */`../i18n/Authoring_${locale.substring(0, 2)}.csv`)
+      .then((module) =>
+        module.default.map(({key, value}) => [key, value]))
+      .then(rows => {
+        const localI18n = fromPairs(rows);
         const expandedI18n = mapValues(localI18n, val => {
           return val.replace(/``([^`]*)``/g, (m, g) => localI18n[g]).replace(/""/g, '"');
         });
         return { ...serverI18n, ...expandedI18n };
-      } catch (expandError) {
-        console.error(expandError);
-        throw 'Error expanding local translations. There may be incomplete translations';
-      }
-    });
-  } catch (errWhichProbablyMeansOurLanguageIsNotThere) {
+      })
+      .catch(e => {
+        console.log(e);
+        return serverI18n;
+      });
+  } else {
     return serverI18n;
   }
 };

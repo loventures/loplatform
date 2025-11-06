@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -fr dist target",
-    "build": "tsc -b && for f in admin analytics domain etc errors overlord sys ; do APP=$f vite build ; done",
+    "build": "tsc -b && /bin/sh -c 'for f in admin analytics domain etc errors overlord sys ; do APP=$f vite build ; done'",
     "build-only": "tsc -b && sh -c 'APP=${0} npx vite build'",
     "build-car": "node scripts/buildCar.js",
     "package": "yarn build && yarn build-car",
@@ -25,7 +25,7 @@
     "classnames": "2.5.1",
     "color": "5.0.2",
     "connected-react-router": "6.9.3",
-    "csvjson": "5.1.0",
+    "csvtojson": "2.0.13",
     "debounce-promise": "3.1.2",
     "form-serialize": "0.7.2",
     "history": "4.10.1",
@@ -56,7 +56,7 @@
     "react-treebeard": "3.2.4",
     "react-visibility-sensor": "5.1.1",
     "reactstrap": "9.2.3",
-    "recharts": "3.2.1",
+    "recharts": "3.3.0",
     "redux": "5.0.1",
     "redux-logger": "3.0.6",
     "redux-thunk": "3.1.0",
@@ -64,33 +64,34 @@
     "underscore": "1.13.7"
   },
   "devDependencies": {
-    "@eslint/js": "9.36.0",
-    "@types/react": "18.3.24",
+    "@eslint/js": "9.38.0",
+    "@types/react": "18.3.26",
     "@types/react-dom": "18.3.7",
     "@types/react-router-dom": "5.3.3",
     "@types/redux-logger": "3.0.13",
     "@types/underscore": "1.13.0",
-    "@vitejs/plugin-react": "5.0.3",
-    "eslint": "9.36.0",
-    "eslint-plugin-react-hooks": "5.2.0",
-    "eslint-plugin-react-refresh": "0.4.21",
+    "@vitejs/plugin-react": "5.0.4",
+    "eslint": "9.38.0",
+    "eslint-plugin-react-hooks": "7.0.0",
+    "eslint-plugin-react-refresh": "0.4.24",
     "fs-jetpack": "5.1.0",
     "git-rev-sync": "3.0.2",
     "glob": "11.0.3",
     "globals": "16.4.0",
     "prettier": "3.6.2",
-    "rollup-plugin-multi-input": "1.5.0",
-    "sass-embedded": "1.93.1",
-    "typescript": "5.9.2",
-    "typescript-eslint": "8.44.1",
-    "vite": "7.1.7",
+    "rollup-plugin-multi-input": "1.6.0",
+    "sass-embedded": "1.93.2",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.46.2",
+    "vite": "7.1.12",
     "vite-plugin-ejs": "1.7.0"
   },
   "$resolutions-comment": {
     "@babel/plugin-proposal-private-property-in-object": "bad transitive from iframe resizer"
   },
   "resolutions": {
-    "@babel/plugin-proposal-private-property-in-object": "npm:empty-npm-package",
+    "@babel/plugin-proposal-private-property-in-object": "npm:empty-npm-package@*",
     "brace-expansion": "4.0.1"
-  }
+  },
+  "packageManager": "yarn@4.10.3+sha512.c38cafb5c7bb273f3926d04e55e1d8c9dfa7d9c3ea1f36a4868fa028b9e5f72298f0b7f401ad5eb921749eb012eb1c3bb74bf7503df3ee43fd600d14a018266f"
 }

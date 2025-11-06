@@ -16,7 +16,7 @@
  */
 
 import axios from 'axios';
-import csvjson from 'csvjson';
+import csv from 'csvtojson';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
@@ -137,22 +137,27 @@ class ScormPackage extends React.Component {
       this.setState(({ errorCount }) => ({ error, errorCount: 1 + errorCount }));
     const fr = new FileReader();
     fr.onload = () => {
-      try {
-        const rows = csvjson.toArray(fr.result);
-        if (rows.length < 2) return setError(`Only found ${rows.length} rows`);
-        const header = rows[0];
-        const index = header.indexOf('Product Code');
-        if (index < 0) return setError(`No "Product Code" header in: ${header.join(', ')}`);
-        const productCodes = rows
-          .slice(1)
-          .map(row => row[index])
-          .filter(pc => typeof pc === 'string');
-        this.setState({ productCodes });
-        setError(null);
-      } catch (e) {
-        console.log(e);
-        setError('An unknown error occurred');
-      }
+      csv({
+        noheader: true,
+        output: 'csv',
+      })
+        .fromString(fr.result)
+        .then(rows => {
+          if (rows.length < 2) return setError(`Only found ${rows.length} rows`);
+          const header = rows[0];
+          const index = header.indexOf('Product Code');
+          if (index < 0) return setError(`No "Product Code" header in: ${header.join(', ')}`);
+          const productCodes = rows
+            .slice(1)
+            .map(row => row[index])
+            .filter(pc => typeof pc === 'string');
+          this.setState({ productCodes });
+          setError(null);
+        })
+        .catch(e => {
+          console.log(e);
+          setError('An unknown error occurred');
+        });
     };
     fr.onerror = () => setError('Error reading file');
     fr.readAsText(file);

@@ -21,7 +21,7 @@ import { useCourseSelector } from '../../loRedux';
 import dayjs from 'dayjs';
 import { useTranslation } from '../../i18n/translationContext';
 import { getContentDisplayInfo } from '../../utilities/contentDisplayInfo';
-import React from 'react';
+import React, { Ref } from 'react';
 import { useDrag } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { Collapse } from 'reactstrap';
@@ -90,7 +90,7 @@ export const ContentNode: React.FC<ContentNodeProps> = ({
   // eslint-disable-next-line jsx-a11y/no-static-element-interactions
   return (
     <div
-      ref={dragRef}
+      ref={dragRef as unknown as Ref<HTMLDivElement>}
       id={content.id + '-node'}
       className={classnames([
         'py-2 content-node',

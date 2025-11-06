@@ -10,7 +10,7 @@ An authoring, teaching and learning environment: An AGPL-licensed open source LM
 
 ## Install prerequisites
 
-To build, you need Java 21, Node 22, SBT and Yarn.
+To build, you need Java 21, Node 24, SBT and Yarn.
 To run, you need PostgreSQL 17, OpenSearch and Valkey/Redis.
 
 ### MacOS with Homebrew
@@ -22,11 +22,11 @@ required services are all available on their standard ports.
 #### Build tools
 
 ```shell
-% brew install openjdk@21 node@22 yarn sbt
+% brew install openjdk@21 node@24 yarn sbt
 ```
 
 Follow the instructions to add `node` and `java` to your `PATH` (or use
-`nvm` or `jenv` or suchlike). Expect that `node --version` is 22
+`nvm` or `jenv` or suchlike). Expect that `node --version` is 24
 and `java --version` is 21.
 
 #### PostgreSQL

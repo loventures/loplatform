@@ -29,7 +29,7 @@ import classnames from 'classnames';
 const ERSidebarButton: React.FC<{ header?: boolean, dark?: boolean }> = ({ header, dark }) => {
   const translate = useTranslation();
   const [sideNavOpen] = useSidepanelOpen();
-  const ref = useRef<HTMLButtonElement>();
+  const ref = useRef<HTMLButtonElement | null>(null);
 
   const mediumScreen = useMedia('(min-width: 48em)');
 

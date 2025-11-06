@@ -76,7 +76,7 @@ object Yarn extends AutoPlugin {
 
   def doYarnInstall() = Def.task[Set[File]] {
     val verbose = if (yarnVerbose.value) "--verbose" else ""
-    val command = s"yarn install --non-interactive --network-timeout 180000 --prefer-offline --pure-lockfile $verbose ${yarnCacheOpts.value}"
+    val command = s"yarn install --network-timeout 180000 --immutable $verbose ${yarnCacheOpts.value}"
     val baseDir = baseDirectory.value
     val streams = Keys.streams.value
 
