@@ -77,7 +77,7 @@ const edgeRules = {
   },
   'level3Competency.1': {},
   'course.1': {
-    elements: [T.Unit, T.Module],
+    elements: [/*T.Unit,*/ T.Module],
     image: ['image.1'],
     gradebookCategories: ['gradebookCategory.1'],
   },

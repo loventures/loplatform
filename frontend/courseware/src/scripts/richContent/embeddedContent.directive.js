@@ -176,14 +176,8 @@ export default angular.module('cbl.richContent.embeddedContent', []).directive('
           //Fancy resize - adds listeners on the iframe and disables scrolling. Content can trigger/manage resize if it interacts with iFrameResizer.
           //http://davidjbradshaw.github.io/iframe-resizer/
           if (window.iFrameResize) {
-            const heightCalculationMethod =
-              browserType === SAFARI
-                ? // 'lowestElement' is very slow, only use for safari where documentElementOffset doesnt work
-                  'lowestElement'
-                : //default calculation 'bodyOffset' cuts frame off slightly
-                  'documentElementOffset';
             scope.iFrameResizer = window.iFrameResize(
-              { heightCalculationMethod },
+              { heightCalculationMethod: 'documentElementOffset' },
               scope.frame[0]
             )[0].iFrameResizer;
           }

@@ -71,7 +71,7 @@ object DECommonSettings extends AutoPlugin {
     organizationName     := "LO Ventures LLC",
     organizationHomepage := Some(url("https://lo.ventures/")),
     version              := "5.0.0",
-    scalaVersion         := "3.7.3",
+    scalaVersion         := "3.7.4",
     scalacOptions        := Seq(
       "-deprecation",
       "-feature",
@@ -91,7 +91,7 @@ object DECommonSettings extends AutoPlugin {
       "4", // https://xkcd.com/221/
       "-Xkind-projector",
       "-explain-cyclic",
-      "-Xtarget:21",
+      "-Xtarget:25",
     ),
     javacOptions ++= Seq(
       "-g",

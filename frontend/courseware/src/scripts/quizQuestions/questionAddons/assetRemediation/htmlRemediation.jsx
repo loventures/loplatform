@@ -16,6 +16,7 @@
  */
 
 import { getAssetRenderUrl } from '../../../utilities/assetRendering.js';
+import Course from '../../../bootstrap/course.js';
 
 export default angular
   .module('lo.questions.addons.htmlRemediation', [])
@@ -42,6 +43,7 @@ export default angular
       this.$onInit = () => {
         this.url = getAssetRenderUrl(
           this.remediation.reference.nodeName,
+          Course.branch_id,
           this.remediation.reference.commit
         );
         this.loaded = true;

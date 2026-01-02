@@ -29,85 +29,85 @@ import com.typesafe.config.Config
 import org.apache.commons.lang3.StringUtils
 import scaloi.syntax.boolean.*
 
-import java.net.{InetAddress, NetworkInterface, URI}
-import java.util.jar.{Attributes, Manifest}
+import java.io.FileInputStream
+import java.net.{InetAddress, NetworkInterface}
+import java.util.jar.{Attributes, JarInputStream, Manifest}
 import _root_.scala.compiletime.uninitialized
 import _root_.scala.collection.mutable
 import _root_.scala.jdk.CollectionConverters.*
 import _root_.scala.util.Try
+import _root_.scala.util.Using
 
 class BaseServiceMeta extends ServiceMeta:
 
-  final val _manifest: Manifest = readManifest()
-
-  private def readManifest(): Manifest =
+  final val _manifest: Manifest =
     try
-      val clazz        = classOf[BaseServiceMeta]
-      val className    = clazz.getSimpleName + ".class"
-      val classPath    = clazz.getResource(className)
-      val manifestPath = URI.create(classPath.toExternalForm.replaceAll("!.*", "!/META-INF/MANIFEST.MF"))
-      val in           = manifestPath.toURL.openStream()
-      try
-        new Manifest(in)
-      finally
-        in.close()
+      Using.resource(
+        new JarInputStream(
+          new FileInputStream(classOf[BaseServiceMeta].getProtectionDomain.getCodeSource.getLocation.toURI.getPath)
+        )
+      )(_.getManifest)
+    catch case _: Throwable => new Manifest()
+
+  final val _scalaManifest: Manifest =
+    try
+      Using.resource(
+        new JarInputStream(
+          new FileInputStream(classOf[CanEqual[?, ?]].getProtectionDomain.getCodeSource.getLocation.toURI.getPath)
+        )
+      )(_.getManifest)
     catch case _: Throwable => new Manifest()
 
   override def getVersion: String =
-    val version = _manifest.getMainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION)
-    if version == null then "AppleTragedy"
-    else version
+    Option(_manifest.getMainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION)).getOrElse:
+      "AppleTragedy"
 
   override def getBuild: String =
-    val build = _manifest.getMainAttributes.getValue("Implementation-Build")
-    if build == null then "0"
-    else build
+    Option(_manifest.getMainAttributes.getValue("Implementation-Build")).getOrElse:
+      "0"
 
   override def getBranch: String =
-    val branch = _manifest.getMainAttributes.getValue("Implementation-Branch")
-    if branch == null then "0"
-    else branch
+    Option(_manifest.getMainAttributes.getValue("Implementation-Branch")).getOrElse:
+      sys.props.getOrElse("git.branch", "main")
 
   override def getRevision: String =
-    val revision = _manifest.getMainAttributes.getValue("Implementation-Revision")
-    if revision == null then "0"
-    else revision
+    Option(_manifest.getMainAttributes.getValue("Implementation-Revision")).getOrElse:
+      sys.props.getOrElse("git.commit", "HEAD")
 
   override def getRevisionLink: String =
-    val revision = _manifest.getMainAttributes.getValue("Implementation-RevisionLink")
-    if revision == null then "https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/11/torvaldrant.png"
-    else revision
+    Option(_manifest.getMainAttributes.getValue("Implementation-RevisionLink")).getOrElse:
+      "https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/11/torvaldrant.png"
 
   override def getBuildDate: String =
-    val buildDate = _manifest.getMainAttributes.getValue("Implementation-BuildDate")
-    if buildDate == null then "0"
-    else buildDate
+    Option(_manifest.getMainAttributes.getValue("Implementation-BuildDate")).getOrElse:
+      "0"
 
   override def getBuildNumber: String =
-    val buildNumber = _manifest.getMainAttributes.getValue("Implementation-BuildNumber")
-    if buildNumber == null then "0"
-    else buildNumber
+    Option(_manifest.getMainAttributes.getValue("Implementation-BuildNumber")).getOrElse:
+      "0"
 
   override def getJvm: String =
-    System.getProperty("java.vm.version")
+    sys.props("java.vm.version")
 
   override def getJava: String =
-    System.getProperty("java.version")
+    sys.props("java.version")
 
-  private var _localName: String         = uninitialized
-  private var _networkLocal: String      = uninitialized
-  private var _networkCentral: String    = uninitialized
-  private var _das: Boolean              = uninitialized
-  private var _networkPort: Int          = uninitialized
-  private var _cluster: String           = uninitialized
-  private var _clusterType: String       = uninitialized
-  private var _clusterUrls: List[String] = Nil
-  private var _node: String              = uninitialized
-  private var _staticHost: String        = uninitialized
-  private var _staticSuffix: String      = uninitialized
-  private var _ponyHerd: String          = uninitialized
+  override def getScala: String =
+    _scalaManifest.getMainAttributes.getValue(Attributes.Name.IMPLEMENTATION_VERSION)
 
-  private var _pekkoSingleton: Boolean = uninitialized
+  private var _localName: String          = uninitialized
+  private var _networkLocal: String       = uninitialized
+  private var _networkCentral: String     = uninitialized
+  private var _das: Boolean               = uninitialized
+  private var _networkPort: Int           = uninitialized
+  private var _cluster: String            = uninitialized
+  private var _clusterType: String        = uninitialized
+  private var _clusterUrls: Array[String] = Array.empty
+  private var _node: String               = uninitialized
+  private var _staticHost: String         = uninitialized
+  private var _staticSuffix: String       = uninitialized
+  private var _ponyHerd: String           = uninitialized
+  private var _pekkoSingleton: Boolean    = uninitialized
 
   override def pekkoSingleton: Boolean =
     _pekkoSingleton
@@ -130,7 +130,7 @@ class BaseServiceMeta extends ServiceMeta:
     _staticSuffix = "." + staticConfig.getString("suffix")
     _pekkoSingleton = networkConfig.getBoolean("cluster.singleton")
     _ponyHerd = if isLocal then "local" else getPonyHerdTagValue
-    _clusterUrls = summon[OverlordWebService].getAllDomains.asScala.flatMap(domainUrls).toList
+    _clusterUrls = summon[OverlordWebService].getAllDomains.asScala.flatMap(domainUrls).toArray
 
     doAcquireCentralHost()
     doHeartbeat()
@@ -179,7 +179,7 @@ class BaseServiceMeta extends ServiceMeta:
 
   override def getClusterType: String = _clusterType
 
-  override def getClusterUrls: List[String] = _clusterUrls
+  override def getClusterUrls: Array[String] = _clusterUrls
 
   override def isLocal: Boolean = // local laptop, else AWS
     CLUSTER_TYPE_LOCAL.equals(_clusterType)
@@ -230,7 +230,7 @@ object BaseServiceMeta:
 
   def getServiceMeta: BaseServiceMeta = serviceMeta
 
-  def configure(loiConfig: Config): Unit           =
+  def configure(loiConfig: Config): Unit =
     serviceMeta.doConfigure(loiConfig)
 
   /* Ensure that a configured localhost remains valid. */

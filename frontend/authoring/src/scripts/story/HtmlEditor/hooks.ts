@@ -90,6 +90,7 @@ export const useIFrameResizeMachinery = (
         {
           sizeHeight: false, // suppress iframeresizer changing the height itself
           resizedCallback: ({ height }) => setHeight(parseInt(height)),
+          heightCalculationMethod: 'documentElementOffset'
         },
         iFrameRef.current
       )[0].iFrameResizer;

@@ -292,6 +292,7 @@ class ButtonBar extends React.Component {
       popover &&
       (forcePopover || isStandard || btns.find(btn => btn.name === popover)) && (
         <Popover
+          key={popover}
           placement="bottom"
           isOpen={true}
           target={`react-table-${popover}-button`}

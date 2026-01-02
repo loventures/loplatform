@@ -46,6 +46,8 @@ trait ServiceMeta:
 
   def getJava: String
 
+  def getScala: String
+
   def pekkoSingleton: Boolean
 
   def isDas: Boolean
@@ -62,7 +64,7 @@ trait ServiceMeta:
 
   def getClusterType: String
 
-  def getClusterUrls: List[String]
+  def getClusterUrls: Array[String]
 
   /** Is this a local development environment, probably someone's dev machine. */
   def isLocal: Boolean

@@ -220,8 +220,8 @@ class BusChart extends React.Component<BusChartProps, BusChartState> {
 
     const formatTick = (time: number) => inCurrTimeZone(moment(time)).format(timeSpan.tickFormat);
     const formatLabel = (time: number) => inCurrTimeZone(moment(time)).format(timeSpan.labelFormat);
-    const formatTooltip = (value: number, name: keyof DataPoint) => {
-      const formattedValue = name.endsWith('Millis') ? value + ' ms' : value;
+    const formatTooltip = (value: number | undefined, name: undefined | keyof DataPoint) => {
+      const formattedValue = name?.endsWith('Millis') ? value + ' ms' : value;
       return [formattedValue, T.t(`${baseName}.seriesName.${name}`)];
     };
     const formatLegend = (value: unknown) => T.t(`${baseName}.seriesName.${value}`);

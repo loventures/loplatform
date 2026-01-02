@@ -16,7 +16,6 @@
  */
 
 import angular from 'angular';
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import axios from 'axios';
@@ -54,10 +53,8 @@ if (window.lo_platform?.user?.user_type === 'Preview') {
 }
 
 createRoot(document.getElementById('course-app')!).render(
-  <StrictMode>
-    <NgReady
-      ngModuleName={ngApp.name}
-      render={() => <ERAppRoot />}
-    />
-  </StrictMode>
+  <NgReady
+    ngModuleName={ngApp.name}
+    render={() => <ERAppRoot />}
+  />
 );

@@ -153,7 +153,7 @@ const ERModuleNavItem: React.FC<ERModuleNavItemProps> = ({
                       <ERActivityNavItem
                         key={lessonId}
                         content={content.lesson}
-                        className={classnames('module-child', 'lesson', 'current-lesson')}
+                        className={classnames('module-child', 'lesson', 'current-lesson', !isCollapsed && 'lesson-open')}
                         onClick={e => {
                           e.preventDefault();
                           setCollapsedLesson(isCollapsed ? undefined : lessonId);

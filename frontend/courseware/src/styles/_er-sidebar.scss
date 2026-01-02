@@ -139,13 +139,13 @@
           width: 1rem;
           height: 1rem;
           background-color: $primary;
-          transform: translate(-1.41rem, 0) rotate(45deg);
+          transform: translate(-1.41rem, 0) scale(1,.25) rotate(45deg);
           transition: transform 0.1s ease-in;
         }
 
         &.active {
           &::before {
-            transform: translate(-0.6rem, 0) rotate(45deg);
+            transform: translate(-0.6rem, 0)  scale(1,.75) rotate(45deg);
           }
         }
 
@@ -237,17 +237,33 @@
           }
         }
 
-        &.lesson.current-lesson.lesson-open a {
-          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.06);
+        &.lesson a::before {
+          font-family: 'Material Icons';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 16px;
+          line-height: 1;
+          content: 'chevron_right';
+          transform: none;
+          top: .65rem;
+          left: .4rem;
+          background: transparent;
+        }
+        &.lesson.current-lesson a:not(.active)::before {
+          transform: rotate(90deg);
         }
 
-        &.lesson a:not(:hover) {
+        &.lesson.current-lesson.lesson-open a {
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        &:not(.in-lesson) a:not(:hover) {
           background-color: transparentize($color-primary, 0.93);
           color: darken($primary, 2%);
         }
 
         &.lesson + .lesson {
-          border-top: 1px solid transparent;
+          // border-top: 1px solid transparent;
         }
 
         &.in-lesson {
@@ -258,8 +274,8 @@
           }
         }
 
-        &.last-in-lesson {
-          border-bottom: 2px solid transparentize($color-primary, 0.86);
+        &.in-lesson + li:not(.in-lesson) {
+          box-shadow: 0 -2px 2px 0 rgba(0, 0, 0, 0.1);
         }
       }
     }
@@ -306,6 +322,10 @@
         &:hover:not(.locked) {
           background-color: darken($primary, 15%);
           color: lighten($primary, 25%);
+
+          .activity-complete {
+            color: lighten($success, 20%);
+          }
         }
       }
 
@@ -313,7 +333,7 @@
         border-bottom-color: lighten($gray-900, 6%);
       }
 
-      &.module-child.lesson a:not(:hover) {
+      &.module-child:not(.in-lesson) a:not(:hover) {
         background-color: $gray-900 !important;
         color: lighten($primary, 15%);
       }

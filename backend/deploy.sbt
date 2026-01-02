@@ -15,7 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import Dependencies._
+import Dependencies.*
+import com.typesafe.sbt.SbtGit.GitKeys.*
 
 lazy val frontendArchiveDir = settingKey[Option[File]]("directory containing frontend archives")
 lazy val frontendArchives   = TaskKey.local[List[File]]
@@ -121,6 +122,8 @@ lazy val deploy = project
     ),
     // fileDescriptorLimit := Some("65536")
     javaOptions += s"-Dcpxp.home=${(ThisBuild / baseDirectory).value}",
+    javaOptions += s"-Dgit.branch=${gitCurrentBranch.value}",
+    javaOptions ++= gitHeadCommit.value.map(commit => s"-Dgit.commit=$commit")
 )
 
 lazy val webapp = project

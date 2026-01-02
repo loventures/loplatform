@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.2.1"
+    val pekkoVersion = "1.4.0"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -43,8 +43,8 @@ object Dependencies {
 
     /** ec2 tag-based discovery https://pekko.apache.org/docs/pekko-management/current/discovery/aws.html
       */
-    val discoveryAws     = "org.apache.pekko" %% "pekko-discovery-aws-api"            % "1.1.1"
-    val clusterBootstrap = "org.apache.pekko" %% "pekko-management-cluster-bootstrap" % "1.1.1"
+    val discoveryAws     = "org.apache.pekko" %% "pekko-discovery-aws-api"            % "1.2.0"
+    val clusterBootstrap = "org.apache.pekko" %% "pekko-management-cluster-bootstrap" % "1.2.0"
   }
 
   /** Apache Commons is an Apache project focused on all aspects of reusable Java components.
@@ -74,16 +74,16 @@ object Dependencies {
     /** Apache Commons Exec API for dealing with external process execution and environment management in Java.
       * https://commons.apache.org/proper/commons-exec/
       */
-    val exec = "org.apache.commons" % "commons-exec" % "1.5.0"
+    val exec = "org.apache.commons" % "commons-exec" % "1.6.0"
 
     /** Commons IO Collection of I/O utilities. https://commons.apache.org/proper/commons-io/
       */
-    val io = "commons-io" % "commons-io" % "2.20.0"
+    val io = "commons-io" % "commons-io" % "2.21.0"
 
     /** Commons Lang Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-lang/
       */
-    val lang3 = "org.apache.commons" % "commons-lang3" % "3.19.0"
+    val lang3 = "org.apache.commons" % "commons-lang3" % "3.20.0"
 
     /** Commons Math: The Apache Commons Mathematics Library Commons Math is a library of lightweight, self-contained
       * mathematics and statistics components addressing the most common problems not available in the Java programming
@@ -98,11 +98,11 @@ object Dependencies {
     /** Commons Text Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-text/
       */
-    val text = "org.apache.commons" % "commons-text" % "1.14.0"
+    val text = "org.apache.commons" % "commons-text" % "1.15.0"
 
     /** Commons validator: Apache Commons Net validates URLs.
       */
-    val urlValidator = "commons-validator" % "commons-validator" % "1.10.0"
+    val urlValidator = "commons-validator" % "commons-validator" % "1.10.1"
   }
 
   /** Apache HttpComponents The Apache HttpComponents™ project is responsible for creating and maintaining a toolset of
@@ -120,7 +120,7 @@ object Dependencies {
   /** ASM, A Java byecode engineering library. http://asm.ow2.org/
     */
   object ASM {
-    val asmVersion = "9.9"
+    val asmVersion = "9.9.1"
 
     val asm  = "org.ow2.asm" % "asm"      % asmVersion
     val util = "org.ow2.asm" % "asm-util" % asmVersion
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.33.13"
-      val core      = "software.amazon.awssdk" % "core"      % "2.33.13"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.35.10"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.35.10"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.35.10"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.35.10"
-      val translate = "software.amazon.awssdk" % "translate" % "2.35.10"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.39.6"
+      val core      = "software.amazon.awssdk" % "core"      % "2.39.6"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.40.13"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.40.13"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.40.13"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.40.13"
+      val translate = "software.amazon.awssdk" % "translate" % "2.40.13"
     }
 
   }
@@ -174,7 +174,7 @@ object Dependencies {
     */
   object Databases {
     object Doobie {
-      val doobieVersion = "1.0.0-RC10"
+      val doobieVersion = "1.0.0-RC11"
 
       val core      = "org.tpolecat" %% "doobie-core"      % doobieVersion
       val postgres  = "org.tpolecat" %% "doobie-postgres"  % doobieVersion
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.0"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.1"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.6.Final"
+    val hibernateVersion = "7.1.13.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-70" % "3.11.0"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.14.1"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.13"
+      val tomcatVersion = "11.0.15"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -351,7 +351,7 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.2"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.3"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.17.8"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.3"
 
     /*
      * Javassist
@@ -426,7 +426,7 @@ object Dependencies {
 
     /** Quartz Job Scheduling Library http://quartz-scheduler.org/
       */
-    val quartz = "org.quartz-scheduler" % "quartz" % "2.5.1"
+    val quartz = "org.quartz-scheduler" % "quartz" % "2.5.2"
 
     /** CSV Reader/Writer for Scala https://github.com/tototoshi/scala-csv
       */
@@ -434,7 +434,7 @@ object Dependencies {
 
     /** Embedded sass compiler. https://github.com/larsgrefer/dart-sass-java
       */
-    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.3.1"
+    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.4.0"
 
     /** https://github.com/classgraph/classgraph
       */
@@ -475,7 +475,7 @@ object Dependencies {
     /** Apache POI - the Java API for Microsoft Documents https://poi.apache.org/
       */
     object ApachePOI {
-      val poiVersion = "5.4.1"
+      val poiVersion = "5.5.1"
       val ooxml      = "org.apache.poi" % "poi-ooxml" % poiVersion
     }
 
@@ -486,11 +486,11 @@ object Dependencies {
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */
-    val awsSigningRequestInterceptor = "io.github.acm19" % "aws-request-signing-apache-interceptor" % "3.0.0"
+    val awsSigningRequestInterceptor = "io.github.acm19" % "aws-request-signing-apache-interceptor" % "4.0.0"
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "8.0.1"
+    val phCss = "com.helger" % "ph-css" % "8.1.1"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */
@@ -502,12 +502,12 @@ object Dependencies {
     /** Airframe Surface reads type information.. https://github.com/wvlet/airframe/tree/main/airframe-surface
       *   - compile-time, not runtime
       */
-    val airframeSurface = "org.wvlet.airframe" %% "airframe-surface" % "2025.1.6"
+    val airframeSurface = "org.wvlet.airframe" %% "airframe-surface" % "2025.1.21"
 
     /** Runtime reflection of class files via their tasty files. https://github.com/gzoller/scala-reflection
       *   - slow and crashes on our codebase.
       */
-    val scalaReflection = "co.blocke" %% "scala-reflection" % "2.0.12"
+    val scalaReflection = "co.blocke" %% "scala-reflection" % "2.0.16"
   }
 
   object Prometheus {
@@ -530,12 +530,9 @@ object Dependencies {
     val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0"
 
     object Enumeratum {
-      val enumeratumVersion         = "1.9.0"
-      val enumeratumArgonautVersion = "1.9.0"
-
-      val core     = "com.beachape" %% "enumeratum"          % enumeratumVersion
-      val argonaut = "com.beachape" %% "enumeratum-argonaut" % enumeratumArgonautVersion
-      val circe    = "com.beachape" %% "enumeratum-circe"    % enumeratumVersion
+      val core     = "com.beachape" %% "enumeratum"          % "1.9.2"
+      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.2"
+      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.2"
     }
 
     val xml = "org.scala-lang.modules" %% "scala-xml" % "2.4.0"
@@ -543,7 +540,7 @@ object Dependencies {
     /** Scalameta is a modern metaprogramming library for Scala that supports a wide range of language versions and
       * execution platforms. http://scalameta.org/
       */
-    val meta = "org.scalameta" %% "scalameta" % "1.8.0"
+    val meta = "org.scalameta" %% "scalameta" % "4.14.1"
 
     /** Kind Projector - Compiler plugin for making type lambdas (type projections) easier to write
       *

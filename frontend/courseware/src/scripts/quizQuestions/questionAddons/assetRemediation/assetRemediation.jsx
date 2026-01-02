@@ -65,7 +65,7 @@ export default angular
             case CONTENT_TYPE_SCORM:
               return 'scorm-remediation';
             case CONTENT_TYPE_HTML:
-              return 'htms-remediation';
+              return 'html-remediation';
             default:
               return 'div';
           }
@@ -77,7 +77,7 @@ export default angular
           case '.FileBundleAssetRemediation':
             return 'legacy-file-bundle-remediation';
           case '.HtmlAssetRemediation':
-            return 'legacy-htms-remediation';
+            return 'legacy-html-remediation';
           default:
             return 'div';
         }

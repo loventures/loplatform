@@ -111,12 +111,10 @@ public class DescribeServlet extends AbstractComponentServlet {
         map.put("sse", SendFileFilter.isNioAvailable());
         map.put("jvm", serviceMeta.getJvm());
         map.put("java", serviceMeta.getJava());
-        map.put("scala", scala.util.Properties.versionNumberString());
+        map.put("scala", serviceMeta.getScala());
         map.put("local", serviceMeta.isLocal());
         map.put("production", serviceMeta.isProduction());
         map.put("herd", serviceMeta.getPonyHerd());
         return map;
     }
-
-
 }

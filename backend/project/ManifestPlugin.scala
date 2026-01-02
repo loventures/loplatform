@@ -39,12 +39,12 @@ object ManifestPlugin extends AutoPlugin {
       org = (Compile / organization).value,
       orgName = (Compile / organizationName).value,
       version = (Compile / version).value.replace("-SNAPSHOT", ""),
-      gitBranch = sys.env get "GIT_BRANCH" getOrElse (gitCurrentBranch.value),
-      rev = (gitHeadCommit.value).getOrElse("HEAD"),
+      gitBranch = sys.env get "GIT_BRANCH" getOrElse gitCurrentBranch.value,
+      rev = gitHeadCommit.value.getOrElse("HEAD"),
       date = new Date,
       build = "SBT",
-      buildNumber = sys.env get "BUILD_NUMBER" getOrElse (buildInfoBuildNumber.value).toString,
-      revLink = s"https://github.com/loventures/loplatform/commit/${(gitHeadCommit.value).get}"
+      buildNumber = sys.env get "BUILD_NUMBER" getOrElse buildInfoBuildNumber.value.toString,
+      revLink = s"https://github.com/loventures/loplatform/commit/${gitHeadCommit.value.get}"
     )
   )
 

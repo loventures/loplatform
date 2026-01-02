@@ -2570,9 +2570,8 @@
   "ASSESSMENTS_TITLE": "Assessments",
   "LEARNERS_TITLE": "Learners",
 
-  "QUESTION_CHOICE_OPEN_REMEDIATION_MODAL": "Question Remediations",
-  "REMEDIATION_MODAL_RETURN": "Return",
-  "QUESTION_REMEDIATIONS": "Question Remediations",
+  "QUESTION_CHOICE_OPEN_REMEDIATION_MODAL": "Question Remediation",
+  "QUESTION_REMEDIATIONS": "Question Remediation",
   "QUESTION_CHOICE_WAS_CORRECT": "This was the correct answer.",
   "QUESTION_CHOICE_WAS_CORRECT_MULTI": "This was a correct answer.",
 
