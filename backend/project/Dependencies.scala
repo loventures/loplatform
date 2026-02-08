@@ -60,7 +60,7 @@ object Dependencies {
     /** Apache Commons Codec General encoding/decoding algorithms (for example phonetic, base64, URL).
       * https://commons.apache.org/proper/commons-codec/
       */
-    val codec = "commons-codec" % "commons-codec" % "1.20.0"
+    val codec = "commons-codec" % "commons-codec" % "1.21.0"
 
     /** Commons Collections Extends or augments the Java Collections Framework.
       * https://commons.apache.org/proper/commons-collections/
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.39.6"
-      val core      = "software.amazon.awssdk" % "core"      % "2.39.6"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.40.13"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.40.13"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.40.13"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.40.13"
-      val translate = "software.amazon.awssdk" % "translate" % "2.40.13"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.41.10"
+      val core      = "software.amazon.awssdk" % "core"      % "2.41.10"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.40.17"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.40.17"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.40.17"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.40.17"
+      val translate = "software.amazon.awssdk" % "translate" % "2.40.17"
     }
 
   }
@@ -186,7 +186,7 @@ object Dependencies {
       */
     val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
 
-    val postgresql = "org.postgresql" % "postgresql" % "42.7.8"
+    val postgresql = "org.postgresql" % "postgresql" % "42.7.9"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
 
     /** Blocking, simple Redis driver for Scala.
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.1"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.2"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.13.Final"
+    val hibernateVersion = "7.1.16.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.14.1"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.1"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.15"
+      val tomcatVersion = "11.0.18"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,9 +296,9 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.20.1"
+      val jacksonVersion = "2.21.0"
 
-      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.20"
+      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.21"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
       val csv         = "com.fasterxml.jackson.dataformat" % "jackson-dataformat-csv"  % jacksonVersion
       val databind    = "com.fasterxml.jackson.core"       % "jackson-databind"        % jacksonVersion
@@ -344,7 +344,7 @@ object Dependencies {
       val scala           = "com.github.jwt-scala" %% "jwt-core" % jwtScalaVersion
     }
 
-    val jsonDiff = "io.github.deblockt" % "json-diff" % "1.1.0"
+    val jsonDiff = "io.github.deblockt" % "json-diff" % "2.1.0"
   }
 
   /** Various Logging Frameworks
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.3"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.4"
 
     /*
      * Javassist
@@ -530,9 +530,9 @@ object Dependencies {
     val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0"
 
     object Enumeratum {
-      val core     = "com.beachape" %% "enumeratum"          % "1.9.2"
-      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.2"
-      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.2"
+      val core     = "com.beachape" %% "enumeratum"          % "1.9.4"
+      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.4"
+      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.4"
     }
 
     val xml = "org.scala-lang.modules" %% "scala-xml" % "2.4.0"

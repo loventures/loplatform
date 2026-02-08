@@ -92,6 +92,6 @@ object DeclineReason extends Enum[DeclineReason]:
   case object WeExclude                           extends DeclineReason("our project excludes")
   case object DuplicatesTgt                       extends DeclineReason("our project already uses target")
   case object TooManyEdges                        extends DeclineReason(s"too many edges")
-  case class MergeAbort(override val msg: String) extends DeclineReason(msg)
+  sealed case class MergeAbort(override val msg: String) extends DeclineReason(msg)
 
   override lazy val values: IndexedSeq[DeclineReason] = findValues

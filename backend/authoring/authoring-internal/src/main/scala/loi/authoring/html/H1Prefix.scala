@@ -38,6 +38,6 @@ private[html] object H1Prefix extends Enum[H1Prefix]:
   case object Discussion extends H1Prefix(AssetTypeId.Discussion, "DB")
   case object EndLesson  extends H1Prefix(AssetTypeId.Lesson, "/L") // not quite a lesson asset
 
-  final case class TypeIdPrefix(override val typeId: AssetTypeId)
+  sealed case class TypeIdPrefix(override val typeId: AssetTypeId)
       extends H1Prefix(typeId, CourseStructureExportService.assetTypeNameMap(typeId))
 end H1Prefix

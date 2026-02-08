@@ -71,7 +71,7 @@ private[script] object SqlCharState extends Enum[SqlCharState]:
   case object Separator          extends SqlCharState
   case object PreComment         extends SqlCharState
   case object Comment            extends SqlCharState
-  case class StringBody(s: Char) extends SqlCharState
+  sealed case class StringBody(s: Char) extends SqlCharState
   case object StringEnd          extends SqlCharState
   case object Statement          extends SqlCharState
 end SqlCharState

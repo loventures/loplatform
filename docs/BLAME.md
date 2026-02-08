@@ -52,6 +52,7 @@ Jay Brooke
 Jay Magpantay  
 Jeff Sarmiento  
 [Jeremy Dunsworth](https://github.com/freshbreweddesign)  
+[Jon Mott](https://github.com/thejonmott)  
 Jonathan Bergman  
 [Joshua Farrar](https://github.com/joshuakfarrar)  
 Justin Carlson  

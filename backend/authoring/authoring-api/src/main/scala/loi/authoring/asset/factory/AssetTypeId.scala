@@ -83,7 +83,7 @@ object AssetTypeId extends Enum[AssetTypeId] with ArgonautEnum[AssetTypeId]:
   case object VideoCaption           extends AssetTypeId("videoCaption.1")
   case object WebDependency          extends AssetTypeId("webDependency.1")
 
-  case class Unknown(entryName0: String) extends AssetTypeId(entryName0)
+  sealed case class Unknown(entryName0: String) extends AssetTypeId(entryName0)
 
   override def withName(str: String): AssetTypeId = AssetTypeId.withNameOption(str).getOrElse(Unknown(str))
 

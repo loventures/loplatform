@@ -67,7 +67,7 @@ object Group extends Enum[Group] with ArgonautEnum[Group]:
   case object TestsOut             extends Group
   case object Transcript           extends Group(1.some)
 
-  case class Unknown(entryName0: String) extends Group(None)
+  sealed case class Unknown(entryName0: String) extends Group(None)
 
   override def withName(str: String): Group = Group.withNameOption(str).getOrElse(Unknown(str))
 

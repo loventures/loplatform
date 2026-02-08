@@ -190,4 +190,4 @@ private[exchange] object DocxTuple extends Enum[DocxTuple]:
   case object CorrectFeedback   extends DocxTuple
   case object IncorrectFeedback extends DocxTuple
 
-  final case class Blank(override val entryName: String) extends DocxTuple
+  sealed case class Blank(override val entryName: String) extends DocxTuple
