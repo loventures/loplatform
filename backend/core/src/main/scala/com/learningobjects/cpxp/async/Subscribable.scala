@@ -20,7 +20,6 @@ package com.learningobjects.cpxp.async
 import org.apache.pekko.actor.{Actor, ActorRef, PoisonPill, Terminated}
 import com.learningobjects.cpxp.async.messages.subscription.*
 
-import scala.annotation.nowarn
 import scala.collection.mutable
 import scala.concurrent.duration.*
 import scala.language.postfixOps
@@ -58,11 +57,8 @@ trait Subscribable:
   }
 
   // Override these methods to implement callbacks
-  @nowarn // parameter is for subclasses
   def onSubscribe(newSub: ActorRef): Unit = ()
-  @nowarn // parameter is for subclasses
   def onResume(newSub: ActorRef, id: Long): Unit = ()
-  @nowarn // parameter is for subclasses
   def onSubscriberTimeout(): Unit =
     context.self ! PoisonPill
 

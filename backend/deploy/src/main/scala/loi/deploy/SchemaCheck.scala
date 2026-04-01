@@ -21,7 +21,6 @@ import java.util.ServiceLoader
 
 import cats.Parallel
 import cats.effect.{Clock, Sync}
-import scala.annotation.nowarn
 import com.learningobjects.cpxp.util.ClassUtils
 import doobie.*
 import javax.sql.DataSource
@@ -56,7 +55,7 @@ object SchemaCheck:
       Parallel.parMap2(currentSchemaVersion(cg), loadSchemaVersion(ds))(SchemaState.apply)
 
     // refl expresses a shameful logical implicit dependency
-    private def currentSchemaVersion(@nowarn cg: ScanResult): F[Long] = F.delay {
+    private def currentSchemaVersion(cg: ScanResult): F[Long] = F.delay {
       metamodelChecksum
     }
 

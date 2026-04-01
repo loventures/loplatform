@@ -123,7 +123,8 @@ public class RequestMappingIndex {
             /*
              * then `functionDescriptor`'s method probably duplicates `typeValue`'s method
              */
-            if (!typeValue.getMethod().equals(functionDescriptor.getMethod())) {
+            if (!typeValue.getMethod().getName().equals(functionDescriptor.getMethod().getName()) ||
+                !functionDescriptor.getMethod().getDeclaringClass().isAssignableFrom(typeValue.getMethod().getDeclaringClass())) {
                 /*
                  * stop loading the component environment; if we continue loading, then `functionDescriptor`'s method
                  * will not be registered in the component environment.

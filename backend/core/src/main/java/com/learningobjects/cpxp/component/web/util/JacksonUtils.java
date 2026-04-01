@@ -45,6 +45,7 @@ public class JacksonUtils {
 
     static {
         MAPPER = new ObjectMapper();
+        MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
         MAPPER.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
         MAPPER.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);
@@ -65,6 +66,7 @@ public class JacksonUtils {
         MAPPER.registerModule(new JavaTimeModule());
 
         VALIDATING_MAPPER = new ValidatingObjectMapper();
+        VALIDATING_MAPPER.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         VALIDATING_MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
         VALIDATING_MAPPER.enable(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS);
         VALIDATING_MAPPER.enable(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN);

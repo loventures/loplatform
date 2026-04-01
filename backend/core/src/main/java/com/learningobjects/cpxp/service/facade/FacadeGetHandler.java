@@ -35,6 +35,7 @@ import com.learningobjects.cpxp.util.lang.EnumLike;
 import com.learningobjects.cpxp.util.lang.OptionLike;
 import org.apache.commons.lang3.reflect.TypeUtils;
 import scala.collection.Seq;
+import scala.collection.immutable.List$;
 import scala.jdk.javaapi.CollectionConverters;
 import scala.reflect.ClassTag;
 import scala.util.Failure$;
@@ -249,7 +250,7 @@ abstract class FacadeGetHandler implements FacadeMethodHandler {
                 handler.setValue(methodName, value, args);
             }
         } else if (handler.isDummy()) {
-            value = _isList ? Collections.emptyList() : _isSeq ? scala.collection.immutable.Nil.empty() : null;
+            value = _isList ? Collections.emptyList() : _isSeq ? List$.MODULE$.empty() : null;
         } else if (_isList || _isSeq) {
             List<Object> list = new ArrayList<>();
             for (Object object : findValues(handler, args)) {

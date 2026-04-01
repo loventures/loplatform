@@ -97,6 +97,7 @@ lazy val system = (project in file("car/system"))
       Prometheus.simpleclient_common,
       Prometheus.simpleclient_hotspot,
       Scala.compiler(scalaVersion.value),
+      Scala.repl(scalaVersion.value),
     ),
     dependencyUpdatesFilter -= crapCommonsNet,
   )

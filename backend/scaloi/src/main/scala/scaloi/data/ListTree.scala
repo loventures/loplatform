@@ -23,7 +23,6 @@ import scalaz.std.list.listInstance
 import scalaz.syntax.foldable.*
 import scalaz.syntax.std.boolean.*
 
-import scala.annotation.nowarn
 import scala.collection.{BuildFrom, IterableOnce, mutable}
 import scala.language.implicitConversions
 import scala.util.hashing.MurmurHash3
@@ -416,7 +415,7 @@ object ListTree extends ListTreeInstances:
       case (a, bs) => Node(a, unfoldForest(bs)(f))
 
   // Only used for .equals.
-  @nowarn private def badEqInstance[A] = new ListTreeEqual[A]:
+  private def badEqInstance[A] = new ListTreeEqual[A]:
     override def A: Equal[A] = _ `equals` _
 
   /** This implementation is 16x faster than the trampolined implementation for ListTreeTestJVM's scanr test.

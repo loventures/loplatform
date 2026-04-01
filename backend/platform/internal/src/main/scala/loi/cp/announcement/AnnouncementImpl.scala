@@ -20,7 +20,6 @@ package loi.cp.announcement
 import java.util.Date
 
 import org.apache.pekko.actor.ActorSystem
-import scala.annotation.nowarn
 import com.learningobjects.cpxp.component.annotation.{Component, PostCreate}
 import com.learningobjects.cpxp.component.{ComponentImplementation, ComponentInstance}
 import com.learningobjects.cpxp.service.announcement.AnnouncementFinder
@@ -74,7 +73,7 @@ class AnnouncementImpl(val componentInstance: ComponentInstance, self: Announcem
 
   /** Invoked by the app event framework. */
   @OnEvent
-  private def onAnnouncement(@nowarn event: AnnouncementEvent): Option[Date] =
+  private def onAnnouncement(event: AnnouncementEvent): Option[Date] =
     if self.active && ts.date.before(self.endTime) then
       val annEvent = AnnouncementStart(self.id, self.startTime, self.endTime, self.message, self.style)
       ClusterBroadcaster.broadcast(DomainMessage(Option(domain.id), DeliverMessage(annEvent)))

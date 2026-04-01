@@ -27,7 +27,6 @@ import loi.asset.contentpart.{BlockPart, HtmlPart}
 import loi.authoring.asset.Asset
 
 import java.util.UUID
-import scala.annotation.nowarn
 
 @JsonIgnoreProperties(
   Array(
@@ -130,7 +129,7 @@ trait ChoiceContentTrait[C <: ChoiceContentTrait[C]]:
   // noinspection ScalaDeprecation
   def description: HtmlPart =
     choiceContent.getOrElse(
-      HtmlPart.apply(html = choiceText.getOrElse(""): @nowarn, renderedHtml = None)
+      HtmlPart.apply(html = choiceText.getOrElse(""), renderedHtml = None)
     )
 end ChoiceContentTrait
 

@@ -43,8 +43,8 @@ object Dependencies {
 
     /** ec2 tag-based discovery https://pekko.apache.org/docs/pekko-management/current/discovery/aws.html
       */
-    val discoveryAws     = "org.apache.pekko" %% "pekko-discovery-aws-api"            % "1.2.0"
-    val clusterBootstrap = "org.apache.pekko" %% "pekko-management-cluster-bootstrap" % "1.2.0"
+    val discoveryAws     = "org.apache.pekko" %% "pekko-discovery-aws-api"            % "1.2.1"
+    val clusterBootstrap = "org.apache.pekko" %% "pekko-management-cluster-bootstrap" % "1.2.1"
   }
 
   /** Apache Commons is an Apache project focused on all aspects of reusable Java components.
@@ -93,7 +93,7 @@ object Dependencies {
 
     /** Commons Net: Apache Commons Net library implements the client side of many basic Internet protocols.
       */
-    val net = "commons-net" % "commons-net" % "3.12.0"
+    val net = "commons-net" % "commons-net" % "3.13.0"
 
     /** Commons Text Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-text/
@@ -146,19 +146,19 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.41.10"
-      val core      = "software.amazon.awssdk" % "core"      % "2.41.10"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.40.17"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.40.17"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.40.17"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.40.17"
-      val translate = "software.amazon.awssdk" % "translate" % "2.40.17"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.41.34"
+      val core      = "software.amazon.awssdk" % "core"      % "2.41.34"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.42.22"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.42.22"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.42.22"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.42.22"
+      val translate = "software.amazon.awssdk" % "translate" % "2.42.22"
     }
 
   }
 
   object Cats {
-    val effect = "org.typelevel" %% "cats-effect" % "3.6.3"
+    val effect = "org.typelevel" %% "cats-effect" % "3.7.0"
     val mouse  = "org.typelevel" %% "mouse"       % "1.4.0"
   }
 
@@ -166,7 +166,7 @@ object Dependencies {
 
     /** Configuration library for JVM languages https://typesafehub.github.io/config/
       */
-    val typesafe = "com.typesafe" % "config" % "1.4.5"
+    val typesafe = "com.typesafe" % "config" % "1.4.6"
     val ficus    = "com.iheart"  %% "ficus"  % "1.5.2"
   }
 
@@ -174,7 +174,7 @@ object Dependencies {
     */
   object Databases {
     object Doobie {
-      val doobieVersion = "1.0.0-RC11"
+      val doobieVersion = "1.0.0-RC12"
 
       val core      = "org.tpolecat" %% "doobie-core"      % doobieVersion
       val postgres  = "org.tpolecat" %% "doobie-postgres"  % doobieVersion
@@ -186,7 +186,7 @@ object Dependencies {
       */
     val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
 
-    val postgresql = "org.postgresql" % "postgresql" % "42.7.9"
+    val postgresql = "org.postgresql" % "postgresql" % "42.7.10"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
 
     /** Blocking, simple Redis driver for Scala.
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.2"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.5"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.16.Final"
+    val hibernateVersion = "7.1.21.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.1"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.2"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.18"
+      val tomcatVersion = "11.0.20"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,7 +296,7 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.21.0"
+      val jacksonVersion = "2.21.2"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.21"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -351,7 +351,7 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.3"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.4"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.4"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.8"
 
     /*
      * Javassist
@@ -398,11 +398,11 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.2.3"
+    val apacheTika = "org.apache.tika" % "tika-core" % "3.3.0"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
-    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.6"
+    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.7"
 
     /** IMS Global - LTI™ Utilities https://github.com/IMSGlobal/basiclti-util-java
       */
@@ -482,7 +482,7 @@ object Dependencies {
     /** Scala ElasticSearch client https://github.com/Philippus/elastic4s
       */
     object Elastic4s {
-      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.1.1"
+      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.3.0"
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */
@@ -521,6 +521,7 @@ object Dependencies {
     */
   object Scala {
     def compiler(version: String) = "org.scala-lang" %% "scala3-compiler" % version
+    def repl(version: String) = "org.scala-lang" %% "scala3-repl" % version
   }
 
   /** Scala-specific plugins
@@ -530,9 +531,9 @@ object Dependencies {
     val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0"
 
     object Enumeratum {
-      val core     = "com.beachape" %% "enumeratum"          % "1.9.4"
-      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.4"
-      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.4"
+      val core     = "com.beachape" %% "enumeratum"          % "1.9.7"
+      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.7"
+      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.7"
     }
 
     val xml = "org.scala-lang.modules" %% "scala-xml" % "2.4.0"
@@ -575,7 +576,7 @@ object Dependencies {
   object Testing {
     val easymock = "org.easymock" % "easymock" % "5.6.0"
 
-    val scalaTest               = "org.scalatest"     %% "scalatest"       % "3.2.19"
+    val scalaTest               = "org.scalatest"     %% "scalatest"       % "3.2.20"
     val scalaTestPlusEasyMock   = "org.scalatestplus" %% "easymock-4-3"    % "3.2.15.0"
     val scalaTestPlusScalaCheck = "org.scalatestplus" %% "scalacheck-1-17" % "3.2.18.0"
 

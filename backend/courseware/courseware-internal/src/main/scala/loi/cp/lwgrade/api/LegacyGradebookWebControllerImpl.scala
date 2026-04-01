@@ -62,6 +62,7 @@ import scaloi.syntax.ʈry.*
 
 import java.io.StringWriter
 import java.time.Instant
+import scala.annotation.nowarn
 import scala.jdk.CollectionConverters.*
 import scala.util.Try
 
@@ -149,7 +150,7 @@ final class LegacyGradebookWebControllerImpl(
         )
       }
 
-  override def syncExternalGrade(
+  @nowarn("msg=multiple val") override def syncExternalGrade(
     course: Long,
     edgePath: String,
     userId: Long
@@ -364,7 +365,7 @@ object LegacyGradebookWebControllerImpl:
     *
     * TODO: Consider this out to it's own namespace if this gets much larger.
     */
-  def writeGrades[A: CsvSink](sink: A)(
+  @nowarn("msg=multiple val") def writeGrades[A: CsvSink](sink: A)(
     extractor: GradeExtractor,
     gradebooks: Map[UserDTO, StudentGradebook],
     gradeStructure: GradeStructure,

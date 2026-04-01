@@ -44,8 +44,8 @@ object DECommonSettings extends AutoPlugin {
   )
 
   private val notInConsole = Seq[String](
-    "-Wunused:imports",
-    "-Xfatal-warnings"
+    "-Wunused:imports,nowarn",
+    "-Werror"
   )
 
   val pedantry = Seq(
@@ -71,13 +71,13 @@ object DECommonSettings extends AutoPlugin {
     organizationName     := "LO Ventures LLC",
     organizationHomepage := Some(url("https://lo.ventures/")),
     version              := "5.0.0",
-    scalaVersion         := "3.7.4",
+    scalaVersion         := "3.8.3",
     scalacOptions        := Seq(
       "-deprecation",
       "-feature",
       "-unchecked",
       "-source",
-      "3.7",
+      "3.8",
       "-preview",
       "-language:higherKinds",
       "-language:existentials",

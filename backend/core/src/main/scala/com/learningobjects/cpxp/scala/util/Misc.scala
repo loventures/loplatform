@@ -20,7 +20,6 @@ package com.learningobjects.cpxp.scala.util
 import scalaz.Monad
 
 import java.util.{Calendar, Date}
-import scala.annotation.nowarn
 import scala.concurrent.ExecutionContext
 import scala.util.Try
 
@@ -85,9 +84,9 @@ trait Misc:
         Try(a)
 
   /* for use with pure `t` only! */
-  @inline @nowarn final def truly[T](t: T): Boolean        = true
-  @inline @nowarn final def falsely[T](t: T): Boolean      = false
-  @inline @nowarn final def mendaciously[T](t: T): Boolean = false
+  @inline final def truly[T](t: T): Boolean        = true
+  @inline final def falsely[T](t: T): Boolean      = false
+  @inline final def mendaciously[T](t: T): Boolean = false
 end Misc
 
 object Misc extends Misc

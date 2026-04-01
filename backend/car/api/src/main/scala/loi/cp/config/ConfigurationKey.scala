@@ -26,7 +26,7 @@ import scalaz.{Memo, \/, \/-}
 import scaloi.syntax.classTag.*
 
 import java.lang.reflect.{ParameterizedType, Type}
-import scala.annotation.{nowarn, tailrec}
+import scala.annotation.tailrec
 import scala.reflect.ClassTag
 
 /** A key which witnesses and testifies that `Data` can be used to configure either the application or specific
@@ -39,7 +39,7 @@ abstract class ConfigurationKey[Data]:
   val init: Data // I would name this "default" but we do use Java here
 
   /** Validate that `d` conforms to some manner of restriction. */
-  def validate(@nowarn d: Data): Translatable.Any \/ Unit = \/-(())
+  def validate(d: Data): Translatable.Any \/ Unit = \/-(())
 
   /** Get the schema for this. */
   def schema: JsonSchema.Schema
