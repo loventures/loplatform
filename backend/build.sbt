@@ -67,10 +67,10 @@ ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
 
 // CVE-2025-55163, CVE-2025-58057 via aws .. show coreApi/dependencyTree
-ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2"             % "4.2.12.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-codec"                   % "4.2.12.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-handler"                 % "4.2.12.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-transport-classes-epoll" % "4.2.12.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2"             % "4.2.13.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-codec"                   % "4.2.13.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-handler"                 % "4.2.13.Final"
+ThisBuild / dependencyOverrides += "io.netty" % "netty-transport-classes-epoll" % "4.2.13.Final"
 // CVE-2025-58369 via http4s
 ThisBuild / dependencyOverrides += "co.fs2"  %% "fs2-io"                        % "3.13.0"
 

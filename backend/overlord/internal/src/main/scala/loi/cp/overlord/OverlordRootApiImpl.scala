@@ -17,7 +17,7 @@
 
 package loi.cp.overlord
 
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 import java.util.logging.*
 
 import org.apache.pekko.actor.ActorSystem
@@ -47,7 +47,7 @@ object OverlordRootApiImpl:
   val logger                         = Logger.getLogger(classOf[OverlordRootApiImpl].getName)
   val files: Cache[String, FileInfo] = CacheBuilder
     .newBuilder()
-    .expireAfterWrite(5, TimeUnit.MINUTES)
+    .expireAfterWrite(Duration.ofMinutes(5))
     .removalListener[String, FileInfo] { removal =>
       if removal.wasEvicted() then removal.getValue.asInstanceOf[FileInfo].deref()
     }

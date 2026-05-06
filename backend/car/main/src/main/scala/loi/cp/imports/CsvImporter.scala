@@ -50,7 +50,7 @@ import scalaz.{-\/, \/, \/-}
 import scaloi.json.ArgoExtras
 
 import java.io.File
-import java.util.concurrent.TimeUnit
+import java.time.Duration
 import scala.concurrent.ExecutionContext
 import scala.jdk.CollectionConverters.*
 
@@ -259,6 +259,6 @@ object CsvImporter:
 
   private val statuses = CacheBuilder
     .newBuilder()
-    .expireAfterAccess(10, TimeUnit.MINUTES)
+    .expireAfterAccess(Duration.ofMinutes(10))
     .build[String, Throwable \/ CsvValidationStatus]
 end CsvImporter

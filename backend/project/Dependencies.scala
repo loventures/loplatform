@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.4.0"
+    val pekkoVersion = "1.6.0"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -60,7 +60,7 @@ object Dependencies {
     /** Apache Commons Codec General encoding/decoding algorithms (for example phonetic, base64, URL).
       * https://commons.apache.org/proper/commons-codec/
       */
-    val codec = "commons-codec" % "commons-codec" % "1.21.0"
+    val codec = "commons-codec" % "commons-codec" % "1.22.0"
 
     /** Commons Collections Extends or augments the Java Collections Framework.
       * https://commons.apache.org/proper/commons-collections/
@@ -78,7 +78,7 @@ object Dependencies {
 
     /** Commons IO Collection of I/O utilities. https://commons.apache.org/proper/commons-io/
       */
-    val io = "commons-io" % "commons-io" % "2.21.0"
+    val io = "commons-io" % "commons-io" % "2.22.0"
 
     /** Commons Lang Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-lang/
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.41.34"
-      val core      = "software.amazon.awssdk" % "core"      % "2.41.34"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.42.22"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.42.22"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.42.22"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.42.22"
-      val translate = "software.amazon.awssdk" % "translate" % "2.42.22"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.42.41"
+      val core      = "software.amazon.awssdk" % "core"      % "2.42.41"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.42.29"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.42.29"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.42.29"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.42.29"
+      val translate = "software.amazon.awssdk" % "translate" % "2.42.29"
     }
 
   }
@@ -166,7 +166,7 @@ object Dependencies {
 
     /** Configuration library for JVM languages https://typesafehub.github.io/config/
       */
-    val typesafe = "com.typesafe" % "config" % "1.4.6"
+    val typesafe = "com.typesafe" % "config" % "1.4.8"
     val ficus    = "com.iheart"  %% "ficus"  % "1.5.2"
   }
 
@@ -186,7 +186,7 @@ object Dependencies {
       */
     val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
 
-    val postgresql = "org.postgresql" % "postgresql" % "42.7.10"
+    val postgresql = "org.postgresql" % "postgresql" % "42.7.11"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
 
     /** Blocking, simple Redis driver for Scala.
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.5"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.6"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,7 +212,7 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.21.Final"
+    val hibernateVersion = "7.1.25.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
@@ -225,7 +225,7 @@ object Dependencies {
     * http://http4s.org/
     */
   object Http4s {
-    val http4sVersion        = "0.23.33"
+    val http4sVersion        = "0.23.34"
     val http4sServletVersion = "0.25.0-RC1"
     val http4sBlazeVersion   = "0.23.17"
 
@@ -269,7 +269,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.20"
+      val tomcatVersion = "11.0.22"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -296,7 +296,7 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.21.2"
+      val jacksonVersion = "2.21.3"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.21"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -317,7 +317,7 @@ object Dependencies {
       * https://github.com/argonaut-io/argonaut
       */
     object Argonaut {
-      val argonautVersion = "6.3.11"
+      val argonautVersion = "6.3.12"
 
       val argonaut       = "io.github.argonaut-io" %% "argonaut"        % argonautVersion
       val argonautCats   = "io.github.argonaut-io" %% "argonaut-cats"   % argonautVersion
@@ -340,7 +340,7 @@ object Dependencies {
       * https://jwt-scala.github.io/jwt-scala/
       */
     object JWT {
-      val jwtScalaVersion = "11.0.3"
+      val jwtScalaVersion = "11.0.4"
       val scala           = "com.github.jwt-scala" %% "jwt-core" % jwtScalaVersion
     }
 
@@ -378,7 +378,7 @@ object Dependencies {
      * Javassist
      * http://www.javassist.org/
      */
-    val javassist = "org.javassist" % "javassist" % "3.30.2-GA"
+    val javassist = "org.javassist" % "javassist" % "3.31.0-GA"
 
     /** http://findbugs.sourceforge.net/
       */
@@ -386,7 +386,7 @@ object Dependencies {
 
     /** Guava: Google Core Libraries for Java https://github.com/google/guava
       */
-    val guava = "com.google.guava" % "guava" % "33.5.0-jre"
+    val guava = "com.google.guava" % "guava" % "33.6.0-jre"
 
     /** IMS Enterprise Specification http://www.imsglobal.org/enterprise/
       */
@@ -486,11 +486,11 @@ object Dependencies {
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */
-    val awsSigningRequestInterceptor = "io.github.acm19" % "aws-request-signing-apache-interceptor" % "4.0.0"
+    val awsSigningRequestInterceptor = "io.github.acm19" % "aws-request-signing-apache-interceptor" % "4.0.1"
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "8.1.1"
+    val phCss = "com.helger" % "ph-css" % "8.2.0"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */
@@ -521,7 +521,7 @@ object Dependencies {
     */
   object Scala {
     def compiler(version: String) = "org.scala-lang" %% "scala3-compiler" % version
-    def repl(version: String) = "org.scala-lang" %% "scala3-repl" % version
+    def repl(version: String)     = "org.scala-lang" %% "scala3-repl"     % version
   }
 
   /** Scala-specific plugins

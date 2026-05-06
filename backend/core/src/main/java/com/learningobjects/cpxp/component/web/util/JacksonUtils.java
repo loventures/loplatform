@@ -74,7 +74,7 @@ public class JacksonUtils {
         VALIDATING_MAPPER.setDateFormat(new ExtendedISO8601DateFormat());
         VALIDATING_MAPPER.registerModule(new DeScalaModule());
         VALIDATING_MAPPER.registerModule(new JavaTimeModule());
-        VALIDATING_MAPPER.setSerializationInclusion(JsonInclude.Include.NON_ABSENT);
+        VALIDATING_MAPPER.setDefaultPropertyInclusion(JsonInclude.Include.NON_ABSENT);
     }
 
     /**

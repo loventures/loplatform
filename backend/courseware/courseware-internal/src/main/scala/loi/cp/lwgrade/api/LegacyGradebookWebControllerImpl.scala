@@ -150,7 +150,7 @@ final class LegacyGradebookWebControllerImpl(
         )
       }
 
-  @nowarn("msg=multiple val") override def syncExternalGrade(
+  override def syncExternalGrade(
     course: Long,
     edgePath: String,
     userId: Long

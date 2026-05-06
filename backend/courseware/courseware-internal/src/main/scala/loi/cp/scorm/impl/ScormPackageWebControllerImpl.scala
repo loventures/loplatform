@@ -49,8 +49,8 @@ import scaloi.syntax.set.*
 import scaloi.syntax.ʈry.*
 
 import java.io.{FileOutputStream, OutputStream}
+import java.time.Duration
 import java.time.Instant
-import java.util.concurrent.TimeUnit
 import java.util.zip.ZipOutputStream
 
 @Component
@@ -175,7 +175,7 @@ end ScormPackageWebControllerImpl
 object ScormPackageWebControllerImpl:
   // Super dodgy lookup for export files. Ordinarily we would bind them to the user's session but an asynchronous
   // function can't access the session. We have sticky appservers so the user should stay here.
-  private val exportFiles = CacheBuilder.newBuilder.expireAfterWrite(15, TimeUnit.MINUTES).build[String, ExportFile]()
+  private val exportFiles = CacheBuilder.newBuilder.expireAfterWrite(Duration.ofMinutes(15)).build[String, ExportFile]()
 
   private final case class ExportResult(
     success: String,

@@ -20,6 +20,7 @@ import Polyglot from 'node-polyglot';
 import React, { ReactNode } from 'react';
 import { Col, Input, Row } from 'reactstrap';
 import { CartesianGrid, Label, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { AxisDomain } from 'recharts/types/util/types';
 
 import { inCurrTimeZone } from '../services/moment';
@@ -220,8 +221,8 @@ class BusChart extends React.Component<BusChartProps, BusChartState> {
 
     const formatTick = (time: number) => inCurrTimeZone(moment(time)).format(timeSpan.tickFormat);
     const formatLabel = (time: any) => inCurrTimeZone(moment(time)).format(timeSpan.labelFormat);
-    const formatTooltip = (value: number | undefined, name: undefined | keyof DataPoint) => {
-      const formattedValue = name?.endsWith('Millis') ? value + ' ms' : value;
+    const formatTooltip = (value: ValueType | undefined, name: NameType | undefined) => {
+      const formattedValue = typeof name === 'string' && name.endsWith('Millis') ? value + ' ms' : value;
       return [formattedValue, T.t(`${baseName}.seriesName.${name}`)];
     };
     const formatLegend = (value: unknown) => T.t(`${baseName}.seriesName.${value}`);
