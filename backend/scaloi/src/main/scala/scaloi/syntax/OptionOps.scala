@@ -604,11 +604,11 @@ trait ToOptionOps extends Any:
 end ToOptionOps
 
 /** Is something boolean like. */
-private[syntax] trait Booleate[A]:
+trait Booleate[A]:
   def value(a: A): Boolean
   final def unvalue(a: A): Boolean = !value(a)
 
 /** Boolean implicits. */
-private[syntax] object Booleate:
+object Booleate:
   implicit def booleate: Booleate[Boolean]    = b => b
   implicit def jooleate: Booleate[jl.Boolean] = j => j.booleanValue

@@ -120,7 +120,7 @@ object Dependencies {
   /** ASM, A Java byecode engineering library. http://asm.ow2.org/
     */
   object ASM {
-    val asmVersion = "9.9.1"
+    val asmVersion = "9.10.1"
 
     val asm  = "org.ow2.asm" % "asm"      % asmVersion
     val util = "org.ow2.asm" % "asm-util" % asmVersion
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.42.41"
-      val core      = "software.amazon.awssdk" % "core"      % "2.42.41"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.42.29"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.42.29"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.42.29"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.42.29"
-      val translate = "software.amazon.awssdk" % "translate" % "2.42.29"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.44.13"
+      val core      = "software.amazon.awssdk" % "core"      % "2.44.13"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.46.5"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.46.5"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.46.5"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.46.5"
+      val translate = "software.amazon.awssdk" % "translate" % "2.46.5"
     }
 
   }
@@ -166,7 +166,7 @@ object Dependencies {
 
     /** Configuration library for JVM languages https://typesafehub.github.io/config/
       */
-    val typesafe = "com.typesafe" % "config" % "1.4.8"
+    val typesafe = "com.typesafe" % "config" % "1.4.9"
     val ficus    = "com.iheart"  %% "ficus"  % "1.5.2"
   }
 
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.6"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.7"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,12 +212,12 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.25.Final"
+    val hibernateVersion = "7.1.30.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.2"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.3"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -296,9 +296,9 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.21.3"
+      val jacksonVersion = "2.22.0"
 
-      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.21"
+      val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.22"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
       val csv         = "com.fasterxml.jackson.dataformat" % "jackson-dataformat-csv"  % jacksonVersion
       val databind    = "com.fasterxml.jackson.core"       % "jackson-databind"        % jacksonVersion
@@ -351,12 +351,12 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.25.4"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.26.0"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
-      val api   = "org.slf4j" % "slf4j-api"   % "2.0.17"
-      val jdk14 = "org.slf4j" % "slf4j-jdk14" % "2.0.17"
+      val api   = "org.slf4j" % "slf4j-api"   % "2.0.18"
+      val jdk14 = "org.slf4j" % "slf4j-jdk14" % "2.0.18"
     }
 
   }
@@ -372,7 +372,7 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.8"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.10"
 
     /*
      * Javassist
@@ -398,7 +398,7 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.3.0"
+    val apacheTika = "org.apache.tika" % "tika-core" % "3.3.1"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
@@ -490,7 +490,7 @@ object Dependencies {
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "8.2.0"
+    val phCss = "com.helger" % "ph-css" % "8.2.1"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */

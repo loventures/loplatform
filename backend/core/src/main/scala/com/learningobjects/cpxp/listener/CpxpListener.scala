@@ -19,10 +19,7 @@ package com.learningobjects.cpxp.listener
 
 import com.learningobjects.cpxp.service.ServiceContext
 
-import scala.annotation.nowarn
-
 /** A ServiceLoader trait to react to system startup events. */
-@nowarn // all parameters are for subclasses to use
 trait CpxpListener:
 
   /** Runs after services, persistence, and pekko have been initialized. */

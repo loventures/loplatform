@@ -23,7 +23,7 @@ lazy val scaloi = (project in file("scaloi"))
     normalizedName               := "scaloi",
     name                         := "ScaLOI",
     description                  := "Generic Functional Utilities from Learning Objects",
-    scalaVersion                 := "3.8.3",
+    scalaVersion                 := "3.8.4",
     libraryDependencies ++= List(
       JSON.Argonaut.argonaut,
       ScalaExtensions.Enumeratum.core,

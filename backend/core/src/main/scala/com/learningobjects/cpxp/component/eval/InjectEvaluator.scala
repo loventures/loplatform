@@ -30,7 +30,6 @@ import java.lang.reflect.{Field, Type}
 import java.util.concurrent.ConcurrentHashMap
 import javax.ejb.Local
 import javax.inject.{Inject, Named}
-import scala.annotation.nowarn
 import scala.collection.concurrent
 import scala.compat.java8.OptionConverters.*
 import scala.jdk.CollectionConverters.*
@@ -63,7 +62,7 @@ class InjectEvaluator extends AbstractEvaluator:
       val name = info.ann.get[Named].get.value
       (_: ComponentInstance, _: AnyRef) => registry.getOrElse(name, null)
     else if raw.isAnnotationPresent(classOf[Local]) then
-      (_: ComponentInstance, _: AnyRef) => ServiceContext.getContext.getService(raw): @nowarn
+      (_: ComponentInstance, _: AnyRef) => ServiceContext.getContext.getService(raw)
     else if raw.isAnnotationPresent(classOf[Service]) then
       (_: ComponentInstance, _: AnyRef) => ComponentSupport.lookupService(raw)
     else if classOf[ComponentInterface].isAssignableFrom(raw) then

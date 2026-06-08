@@ -20,7 +20,6 @@ package loi.cp.job
 import java.lang.Long as jLong
 import java.text.ParseException
 import java.util.{Date, TimeZone}
-import scala.annotation.nowarn
 import com.learningobjects.cpxp.component.annotation.*
 import com.learningobjects.cpxp.component.query.{ApiQueries, ApiQuery, ApiQueryResults}
 import com.learningobjects.cpxp.component.web.{HtmlResponse, WebResponse}
@@ -142,7 +141,7 @@ abstract class AbstractJob[J <: Job[J]] extends Job[J] with JobObject with Compo
 
   /** Invoked by the app event framework. Returns when to next schedule the event. */
   @OnEvent
-  private def onJob(@nowarn event: JobEvent): Option[Date] =
+  private def onJob(event: JobEvent): Option[Date] =
     schedulable option {
       execute()
       nextTime

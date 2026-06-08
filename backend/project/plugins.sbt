@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-libraryDependencies += "org.slf4j" % "slf4j-simple" % "2.0.17"
+libraryDependencies += "org.slf4j" % "slf4j-simple" % "2.0.18"
 
 //https://github.com/sbt/sbt-multi-jvm
 addSbtPlugin("com.github.sbt" % "sbt-multi-jvm" % "0.6.0")
@@ -24,9 +24,9 @@ addSbtPlugin("com.github.sbt" % "sbt-multi-jvm" % "0.6.0")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.13.1")
 
 //https://github.com/scalameta/scalafmt
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.0")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.1")
 
-addSbtPlugin("com.github.sbt" % "sbt-release" % "1.4.0")
+addSbtPlugin("com.github.sbt" % "sbt-release" % "1.5.0")
 
 //https://github.com/sbt/sbt-native-packager
 addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.11.7")

@@ -71,7 +71,7 @@ object DECommonSettings extends AutoPlugin {
     organizationName     := "LO Ventures LLC",
     organizationHomepage := Some(url("https://lo.ventures/")),
     version              := "5.0.0",
-    scalaVersion         := "3.8.3",
+    scalaVersion         := "3.8.4",
     scalacOptions        := Seq(
       "-deprecation",
       "-feature",
