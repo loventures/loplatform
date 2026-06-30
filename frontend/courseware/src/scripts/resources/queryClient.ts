@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,8 +17,8 @@
 
 import axios from 'axios';
 import { createUrl } from '../bootstrap/loConfig';
-import { QueryClient, QueryClientProvider, QueryObserver } from 'react-query';
-import { EnsuredQueryKey } from 'react-query/types/core/types';
+import { QueryClient, QueryClientProvider, QueryObserver } from '@tanstack/react-query';
+import { EnsuredQueryKey } from './ensuredQueryKey';
 
 /**
  * Top-level query client. We only have one for now. We could have more

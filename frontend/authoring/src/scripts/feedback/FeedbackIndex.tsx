@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,8 +18,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { BsChatLeftText } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
 
 import {
@@ -183,7 +182,7 @@ const FeedbackTable: React.FC<ApiQueryResults<FeedbackDto>> = ({
 
 const FeedbackRow: React.FC<{ feedback: FeedbackDto }> = ({ feedback }) => {
   const branchId = useBranchId();
-  const history = useHistory();
+  const navigate = useNavigate();
   const text = useMemo(() => {
     const temp = document.createElement('span');
     temp.innerHTML = feedback.feedback;
@@ -198,7 +197,7 @@ const FeedbackRow: React.FC<{ feedback: FeedbackDto }> = ({ feedback }) => {
         disabled
           ? undefined
           : () => {
-              history.push(`/branch/${branchId}/feedback/${feedback.id}`);
+              navigate(`/branch/${branchId}/feedback/${feedback.id}`);
               trackFeedbackIndexDetails();
             }
       }

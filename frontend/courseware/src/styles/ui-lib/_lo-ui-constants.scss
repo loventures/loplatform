@@ -1,5 +1,7 @@
+@use 'sass:color';
+@use 'sass:map';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -52,6 +54,6 @@ $theme-colors: (
   medium: $gray-lighter,
 );
 
-$card-cap-bg: fade-out(map_get($theme-colors, primary), 0.97);
+$card-cap-bg: color.adjust(map.get($theme-colors, primary), $alpha: -(0.97));
 
 $custom-control-indicator-bg: $color-white;

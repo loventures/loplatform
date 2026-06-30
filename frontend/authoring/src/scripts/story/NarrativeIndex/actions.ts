@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,9 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { replace } from 'connected-react-router';
-
 import { trackAuthoringEvent } from '../../analytics';
+import { replacePath } from '../../dcmStore';
 import {
   autoSaveProjectGraphEdits,
   beginProjectGraphEdit,
@@ -81,15 +80,13 @@ export const removeAssetAction =
       if (redirect) {
         const next = index < edges.length - 1 ? index + 1 : index - 1;
         if (next >= 0) {
-          dispatch(
-            replace(
-              editorUrl('story', branchId, edges[next].targetName, contextPath, { confirm: false })
-            )
+          replacePath(
+            editorUrl('story', branchId, edges[next].targetName, contextPath, { confirm: false })
           );
         } else {
           const supercontextPath = contextPath.substring(0, contextPath.lastIndexOf('.'));
-          dispatch(
-            replace(editorUrl('story', branchId, parent, supercontextPath, { confirm: false }))
+          replacePath(
+            editorUrl('story', branchId, parent, supercontextPath, { confirm: false })
           );
         }
       }

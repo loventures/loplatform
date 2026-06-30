@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -146,13 +146,13 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.44.13"
-      val core      = "software.amazon.awssdk" % "core"      % "2.44.13"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.46.5"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.46.5"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.46.5"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.46.5"
-      val translate = "software.amazon.awssdk" % "translate" % "2.46.5"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.44.14"
+      val core      = "software.amazon.awssdk" % "core"      % "2.44.14"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.46.17"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.46.17"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.46.17"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.46.17"
+      val translate = "software.amazon.awssdk" % "translate" % "2.46.17"
     }
 
   }
@@ -174,17 +174,17 @@ object Dependencies {
     */
   object Databases {
     object Doobie {
-      val doobieVersion = "1.0.0-RC12"
+      val doobieVersion = "1.0.0-RC13"
 
-      val core      = "org.tpolecat" %% "doobie-core"      % doobieVersion
-      val postgres  = "org.tpolecat" %% "doobie-postgres"  % doobieVersion
-      val hikari    = "org.tpolecat" %% "doobie-hikari"    % doobieVersion
-      val scalatest = "org.tpolecat" %% "doobie-scalatest" % doobieVersion
+      val core      = "org.typelevel" %% "doobie-core"      % doobieVersion
+      val postgres  = "org.typelevel" %% "doobie-postgres"  % doobieVersion
+      val hikari    = "org.typelevel" %% "doobie-hikari"    % doobieVersion
+      val scalatest = "org.typelevel" %% "doobie-scalatest" % doobieVersion
     }
 
     /** HikariCP is a Connection Pool. https://github.com/brettwooldridge/HikariCP
       */
-    val hikaricp = "com.zaxxer" % "HikariCP" % "7.0.2"
+    val hikaricp = "com.zaxxer" % "HikariCP" % "7.1.0"
 
     val postgresql = "org.postgresql" % "postgresql" % "42.7.11"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
@@ -212,11 +212,16 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.1.30.Final"
+    val hibernateVersion = "7.4.3.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
     // https://github.com/vladmihalcea/hypersistence-utils
+    // NB: stay on the -hibernate-71 artifact even on Hibernate 7.4. The
+    // -hibernate-73 artifact (3.15.3 targets 7.4) requires Jackson 3
+    // (tools.jackson), while this codebase is still on Jackson 2
+    // (com.fasterxml.jackson). -71 is built against 7.2 but its UserType SPI
+    // is compatible with 7.4 at runtime.
     val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.3"
   }
 
@@ -269,7 +274,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.22"
+      val tomcatVersion = "11.0.23"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -297,6 +302,7 @@ object Dependencies {
       */
     object Jackson {
       val jacksonVersion = "2.22.0"
+      val jackson3Version = "3.2.0"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.22"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -317,7 +323,7 @@ object Dependencies {
       * https://github.com/argonaut-io/argonaut
       */
     object Argonaut {
-      val argonautVersion = "6.3.12"
+      val argonautVersion = "6.3.13"
 
       val argonaut       = "io.github.argonaut-io" %% "argonaut"        % argonautVersion
       val argonautCats   = "io.github.argonaut-io" %% "argonaut-cats"   % argonautVersion
@@ -328,7 +334,7 @@ object Dependencies {
     /** Circe - Argonaut for cats https://github.com/circe/circe
       */
     object Circe {
-      val circeVersion = "0.14.15"
+      val circeVersion = "0.14.16"
 
       val core    = "io.circe" %% "circe-core"    % circeVersion
       val generic = "io.circe" %% "circe-generic" % circeVersion
@@ -362,7 +368,7 @@ object Dependencies {
   }
 
   object FS2 {
-    val fs2Version = "3.1.1"
+    val fs2Version = "3.13.0"
     val fs2Core    = "co.fs2" %% "fs2-core" % fs2Version
   }
 
@@ -378,7 +384,7 @@ object Dependencies {
      * Javassist
      * http://www.javassist.org/
      */
-    val javassist = "org.javassist" % "javassist" % "3.31.0-GA"
+    val javassist = "org.javassist" % "javassist" % "3.32.0-GA"
 
     /** http://findbugs.sourceforge.net/
       */
@@ -531,9 +537,9 @@ object Dependencies {
     val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0"
 
     object Enumeratum {
-      val core     = "com.beachape" %% "enumeratum"          % "1.9.7"
-      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.7"
-      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.7"
+      val core     = "com.beachape" %% "enumeratum"          % "1.9.8"
+      val argonaut = "com.beachape" %% "enumeratum-argonaut" % "1.9.8"
+      val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.8"
     }
 
     val xml = "org.scala-lang.modules" %% "scala-xml" % "2.4.0"
@@ -564,7 +570,7 @@ object Dependencies {
   /** Scalaz: An extension to the core Scala library for functional programming. https://github.com/scalaz/scalaz
     */
   object ScalaZ {
-    val scalazVersion = "7.3.8"
+    val scalazVersion = "7.3.9"
 
     /** Scalaz: An extension to the core Scala library for functional programming. https://github.com/scalaz/scalaz
       */

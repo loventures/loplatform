@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,11 +16,10 @@
  */
 
 import { useEffect } from 'react';
-import { lojector } from '../loject';
+import navBlockerService from '../services/navBlockerService.ts';
 
 export const useNavBlocker = (condition: () => boolean, message: string): void => {
   useEffect(() => {
-    const NavBlockerService = lojector.get('NavBlockerService') as any;
-    return NavBlockerService.register(condition, message);
+    return navBlockerService.register(condition, message);
   }, [condition, message]);
 };

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -27,7 +27,6 @@ const ResourceActivityAudio: React.FC<ActivityProps<CONTENT_TYPE_RESOURCE>> = ({
   return (
     <div className="card">
       <div className="card-body">
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <audio
           className="w-100"
           src={domainUrl + assetInfo.resourceUrl}

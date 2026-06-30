@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,11 +22,10 @@ import {
   ContentWithNebulousDetails,
   ViewingAs,
 } from '../../../../courseContentModule/selectors/contentEntry';
-import { NGSubmissionActivityAPI } from '../../../../services/SubmissionActivityAPI';
 import { createDataListUpdateMergeAction } from '../../../../utilities/apiDataActions';
 import { loadingActionCreatorMaker } from '../../../../utilities/loadingStateUtils.ts';
 import { gotoLinkActionCreator } from '../../../../utilities/routingUtils';
-import { lojector } from '../../../../loject.ts';
+import { submissionActivityAPI as SubmissionActivityAPI } from '../../../../services/submissionActivityAPI.ts';
 
 const withContentAndUser =
   <T>(contentId: string, userId: number) =>
@@ -64,7 +63,6 @@ const submissionActivityACs = ({
 export const loadSubmissionActivityActionCreator = loadingActionCreatorMaker(
   { sliceName: 'contentActivityLoadingState' },
   (content: ContentWithNebulousDetails, viewingAs: ViewingAs) => {
-    const SubmissionActivityAPI: NGSubmissionActivityAPI = lojector.get('SubmissionActivityAPI');
     const submission = SubmissionActivityAPI.loadSubmissionActivity(
       content.contentId,
       viewingAs.id
@@ -85,7 +83,6 @@ export const loadSubmissionActivityActionCreator = loadingActionCreatorMaker(
 export const createSubmissionAttemptActionCreator = loadingActionCreatorMaker(
   { sliceName: 'submissionOpenAttemptLoadingStateByContent' },
   (content, viewingAsId) => {
-    const SubmissionActivityAPI: NGSubmissionActivityAPI = lojector.get('SubmissionActivityAPI');
     return SubmissionActivityAPI.createAttempt(content.contentId).then(
       withContentAndUser(content.id, viewingAsId)
     ) as Promise<any>;
@@ -104,7 +101,6 @@ const afterSaveAC = ({ contentId, userId }: { contentId: string; userId: number 
 export const saveSubmissionAttemptActionCreator = loadingActionCreatorMaker(
   { sliceName: 'submissionSaveState' },
   (content, attempt, attemptResponse) => {
-    const SubmissionActivityAPI: NGSubmissionActivityAPI = lojector.get('SubmissionActivityAPI');
     return SubmissionActivityAPI.saveAttempt(attempt, attemptResponse).then(
       withContentAndUser(content.id, attempt.subjectId)
     ) as Promise<any>;
@@ -123,7 +119,6 @@ const afterSubmitAC = ({ contentId, userId }: { contentId: string; userId: numbe
 export const submitSubmissionAttemptActionCreator = loadingActionCreatorMaker(
   { sliceName: 'submissionSubmitState' },
   (content, attempt, attemptResponse) => {
-    const SubmissionActivityAPI: NGSubmissionActivityAPI = lojector.get('SubmissionActivityAPI');
     return SubmissionActivityAPI.saveAndSubmitAttempt(attempt, attemptResponse).then(
       withContentAndUser(content.id, attempt.subjectId)
     ) as Promise<any>;

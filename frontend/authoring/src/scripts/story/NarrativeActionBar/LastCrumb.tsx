@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ import {
   useEditedAssetTypeId,
   useGraphEditSelector,
 } from '../../graphEdit';
-import { useDocumentTitle, useRouterPathVariable } from '../../hooks';
+import { useBranchId, useDocumentTitle, useRouterPathVariable } from '../../hooks';
 import { NodeName } from '../../types/asset';
 import AssetDropdownItem from '../components/AssetDropdownItem';
 import { childEdgeGroup, contextPathQuery, subPageNames } from '../story';
@@ -37,6 +37,7 @@ export const LastCrumb: React.FC<{ parentName: NodeName; name: NodeName; context
   name,
   contextPath,
 }) => {
+  const branchId = useBranchId();
   const current = useRouterPathVariable('name');
   const parentTypeId = useEditedAssetTypeId(parentName);
   const edgeGroup = childEdgeGroup(parentTypeId);
@@ -81,7 +82,7 @@ export const LastCrumb: React.FC<{ parentName: NodeName; name: NodeName; context
                 key={sibling.name}
                 tag={Link}
                 disabled={sibling.targetName === name}
-                to={sibling.targetName + cp0}
+                to={`/branch/${branchId}/story/${sibling.targetName}${cp0}`}
                 onClick={trackNarrativeNavHandler('Sibling')}
                 name={questionType ? undefined : sibling.targetName}
                 label={questionType ? `Question ${index + 1}` : undefined}

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,11 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import '../styles/index_overlord.sass';
+import '../styles/index_overlord.scss';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './OverlordPage';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -31,7 +31,7 @@ createRoot(document.getElementById('root')!).render(
 // among domains and having local storage follow them.
 if (window.localStorage) {
   for (let i = localStorage.length - 1; i >= 0; --i) {
-    let key = localStorage.key(i);
+    const key = localStorage.key(i);
     if (key?.indexOf('overlord') !== 0) localStorage.removeItem(key!);
   }
 }

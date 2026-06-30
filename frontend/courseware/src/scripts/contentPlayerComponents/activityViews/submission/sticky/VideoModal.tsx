@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,9 @@ import { humanFileSize } from '../../../../utilities/fileStagingUtils.ts';
 import { selectCurrentUser } from '../../../../utilities/rootSelectors.ts';
 import React, { useEffect, useState } from 'react';
 // @ts-ignore
-import VideoRecorder from 'react-video-recorder';
+// Vite 8 CJS interop: unwrap the default export of this CJS module.
+import VideoRecorderModule from 'react-video-recorder';
+const VideoRecorder = (VideoRecorderModule as any).default ?? VideoRecorderModule;
 import {
   Button,
   Card,

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,9 +23,9 @@ import com.learningobjects.cpxp.component.annotation.Service
 import com.learningobjects.cpxp.service.attachment.AttachmentService
 import com.learningobjects.cpxp.service.mime.MimeWebService
 import com.learningobjects.de.web.MediaType
-import doobie.*
-import doobie.implicits.*
-import doobie.postgres.implicits.*
+import org.typelevel.doobie.*
+import org.typelevel.doobie.implicits.*
+import org.typelevel.doobie.postgres.implicits.*
 import org.apache.commons.io.FilenameUtils
 import org.apache.commons.lang3.StringUtils
 import org.apache.tika.Tika

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,9 @@ import { createSelector } from 'reselect';
 
 export type CourseWithDetails = Course & { isEnded: boolean; name: string; courseName: string };
 
-export const selectCourse = createSelector(
+export const createCourseSelector = createSelector.withTypes<CourseState>();
+
+export const selectCourse = createCourseSelector(
   (state: CourseState) => state.course,
   course => {
     // @ts-ignore
@@ -40,7 +42,7 @@ export const selectCourse = createSelector(
   }
 );
 
-export const selectRouter = createSelector(
+export const selectRouter = createCourseSelector(
   (state: CourseState) => state.router,
   router => {
     const location = router.location;
@@ -59,8 +61,8 @@ export const selectSettings = (state: CourseState) => state.settings;
 
 export const selectPreferences = (state: CourseState) => state.preferences;
 
-export const selectActualUserRights = createSelector(
-  [(state: CourseState) => state.actualUserRights],
+export const selectActualUserRights = createCourseSelector(
+  (state: CourseState) => state.actualUserRights,
   rights => map(rights, right => last(right.split('.'))) as string[]
 );
 
@@ -93,33 +95,33 @@ const withRoleInfo = (
   };
 };
 
-export const selectActualUser = createSelector(
+export const selectActualUser = createCourseSelector(
   [state => state.actualUser, selectActualUserRights],
-  (actualUser, actualUserRights: string[]) => withRoleInfo(actualUser, actualUserRights, actualUser)
+  (actualUser, actualUserRights: string[]): UserWithRoleInfo => withRoleInfo(actualUser, actualUserRights, actualUser)
 );
 
-export const selectActualUserId = createSelector(selectActualUser, user => user && user.id);
+export const selectActualUserId = createCourseSelector(selectActualUser, user => user && user.id);
 
 const userIdIsString = (id: any): id is string => {
   return typeof id === 'string';
 };
 
-export const selectPreviewAsUserId = createSelector(
+export const selectPreviewAsUserId = createCourseSelector(
   selectRouter,
-  router => router.searchParams.previewAsUserId
+  (router): string => router.searchParams.previewAsUserId
 );
 
-export const selectForLearnerId = createSelector(
+export const selectForLearnerId = createCourseSelector(
   selectRouter,
-  router => router.searchParams.forLearnerId
+  (router): string => router.searchParams.forLearnerId
 );
 
-export const selectPreviewAsUser = createSelector(
+export const selectPreviewAsUser = createCourseSelector(
   selectPreviewAsUserId,
   (state: CourseState) => state.api.users,
   selectActualUser,
   selectActualUserRights,
-  (previewAsUserId, users, actualUser, actualUserRights) => {
+  (previewAsUserId, users, actualUser, actualUserRights): UserWithRoleInfo | undefined => {
     if (userIdIsString(previewAsUserId)) {
       const user = users[previewAsUserId];
       return user && withRoleInfo(user, actualUserRights, actualUser);
@@ -127,12 +129,12 @@ export const selectPreviewAsUser = createSelector(
   }
 );
 
-export const selectForLearner = createSelector(
+export const selectForLearner = createCourseSelector(
   selectForLearnerId,
   (state: CourseState) => state.api.users,
   selectActualUser,
   selectActualUserRights,
-  (forLearnerId, users, actualUser, actualUserRights) => {
+  (forLearnerId, users, actualUser, actualUserRights): UserWithRoleInfo | undefined => {
     if (typeof forLearnerId === 'string') {
       const user = users[forLearnerId];
       return user && withRoleInfo(user, actualUserRights, actualUser);
@@ -140,18 +142,18 @@ export const selectForLearner = createSelector(
   }
 );
 
-export const selectCurrentUser = createSelector(
+export const selectCurrentUser = createCourseSelector(
   selectActualUser,
   selectPreviewAsUser,
-  (actualUser, previewAsUser) => {
+  (actualUser, previewAsUser): UserWithRoleInfo => {
     return previewAsUser || actualUser;
   }
 );
 
-export const selectCurrentUserId = createSelector(
+export const selectCurrentUserId = createCourseSelector(
   selectPreviewAsUserId,
   selectActualUserId,
-  (previewAsUserId, actualUserId) => {
+  (previewAsUserId, actualUserId): string => {
     return `${previewAsUserId || actualUserId}`;
   }
 );

@@ -11,6 +11,7 @@
   "about.changelog": "Changelog",
   "about.page.name": "About",
   "adminForm.alert.formError": "There was an error submitting this form. Please correct the issues below and try again.",
+  "adminForm.color.choose": "Choose Color",
   "adminForm.combobox.clear": "Clear",
   "adminForm.combobox.loadingPlaceholder": "Loading...",
   "adminForm.combobox.selectPlaceholder": "Select...",

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,8 +26,8 @@ import { keyBy } from 'lodash';
 import { ProgressUpdates } from '../courseActivityModule/actions/activityActions';
 import { loadedActionsCreator } from '../courseContentModule/actions/contentPageLoadActions';
 import { contentsToContentResponse } from '../utilities/contentResponse';
-import { QueryFunction, QueryKey } from 'react-query';
-import { EnsuredQueryKey } from 'react-query/types/core/types';
+import { QueryFunction, QueryKey } from '@tanstack/react-query';
+import { EnsuredQueryKey } from './ensuredQueryKey';
 import { batchActions } from 'redux-batched-actions';
 import { courseReduxStore } from '../loRedux';
 
@@ -46,7 +46,7 @@ class ContentsResource<TData extends SrsList<Content>> extends Resource<
   pushToRedux(srs: TData, config: Record<string, any> = {}) {
     const intermediateResponse = contentsToContentResponse(srs.objects, config.user || User.id);
     const actions = loadedActionsCreator(intermediateResponse);
-    courseReduxStore.dispatch(batchActions([...actions]));
+    courseReduxStore.dispatch(batchActions([...actions]) as any);
   }
 
   getKey(context: number, user: number): UrlAndParamsKey {
@@ -54,33 +54,40 @@ class ContentsResource<TData extends SrsList<Content>> extends Resource<
   }
 
   fetch(key: UrlAndParamsKey, config: Record<string, any> = {}) {
-    return queryClient.fetchQuery(key, this.fetcher(config));
+    return queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher(config) });
   }
 
   read(courseId: number, userId: number, config?: Record<string, any>) {
     const key = this.getKey(courseId, userId);
     const promise = this.fetch(key, config);
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, fetching, data, key };
   }
 
   async refetch(courseId: number, userId: number) {
     const key = this.getKey(courseId, userId);
-    await queryClient.refetchQueries(key);
+    await queryClient.refetchQueries({ queryKey: key });
     return this.fetch(key);
   }
 
   transform(key: UrlAndParamsKey, data: ProgressUpdates): any {
     queryClient.setQueryData<TData | undefined>(key, old => {
       if (old) {
-        /* do we want to do mutations? */
+        /* do we want to do mutations? mutation is required elsewhere. */
         old.objects = old.objects.map(content => {
           content.progress = data.progress[content.id] ?? content.progress;
           return content;
         });
         return old;
+        /*return {
+          ...old,
+          objects: old.objects.map(content => ({
+            ...content,
+            progress: data.progress[content.id] ?? content.progress,
+          })),
+        }; */
       } else {
         console.log('no previous query data found, this might be an error.');
         // invalidate query??
@@ -89,7 +96,7 @@ class ContentsResource<TData extends SrsList<Content>> extends Resource<
   }
 
   isFetching(courseId: number, userId: number) {
-    return queryClient.isFetching(this.getKey(courseId, userId));
+    return queryClient.isFetching({ queryKey: this.getKey(courseId, userId) });
   }
 
   invalidate(courseId = Course.id, userId = window.lo_platform.user.id): Promise<void> {

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -86,7 +86,7 @@ private[search] class InstructorLinkCheckWebController(
     val ws        = course.getWorkspace
 
     def contentUrl(name: UUID): Option[String] =
-      edgePaths.get(name).map(ep => s"${course.getUrl}/#instructor/content/$ep")
+      edgePaths.get(name).map(ep => s"${course.getUrl}/#/instructor/content/$ep")
 
     out.file.writeCsvWithBom[LinkStatusRow] { csv =>
       linkCheckService.hyperlinkCheck(ws, timer) { (link, status) =>

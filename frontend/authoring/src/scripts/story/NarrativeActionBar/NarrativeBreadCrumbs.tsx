@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -27,7 +27,7 @@ import {
   useEditedAssetTitle,
   useEditedAssetTypeId,
 } from '../../graphEdit';
-import { useDcmSelector, useHomeNodeName } from '../../hooks';
+import { useBranchId, useDcmSelector, useHomeNodeName } from '../../hooks';
 import { setMostRecent } from '../../hooks/useMostRecent';
 import { getIcon } from '../AddAsset';
 import { contextPathQuery, truncateAssetTitle } from '../story';
@@ -38,6 +38,7 @@ import { SimpleLastCrumb } from './SimpleLastCrumb';
 import { SimpleParentCrumb } from './SimpleParentCrumb';
 
 export const NarrativeBreadCrumbs: React.FC = () => {
+  const branchId = useBranchId();
   const name = useCurrentAssetName();
   const contextPath = useCurrentContextPath();
   const contextNames = contextPath?.split('.') ?? [];
@@ -74,7 +75,7 @@ export const NarrativeBreadCrumbs: React.FC = () => {
       {((name !== homeName && contextNames[0] !== homeName) || contextNames.length > 3) && (
         <>
           <Link
-            to={homeName + contextPathQuery('', commit)}
+            to={`/branch/${branchId}/story/${homeName}${contextPathQuery('', commit)}`}
             onClick={trackNarrativeNavHandler('Course')}
             className="minw-0 text-truncate course-crumb"
             title={homeTitle}
@@ -92,9 +93,10 @@ export const NarrativeBreadCrumbs: React.FC = () => {
       {greatGrandparentName ? (
         <>
           <Link
-            to={
-              greatGrandparentName + contextPathQuery(contextNames.slice(0, -3).join('.'), commit)
-            }
+            to={`/branch/${branchId}/story/${greatGrandparentName}${contextPathQuery(
+              contextNames.slice(0, -3).join('.'),
+              commit
+            )}`}
             onClick={trackNarrativeNavHandler('Great Grandparent')}
             className="minw-0 text-truncate great-grandparent-crumb"
             title={greatGrandparentTitle}
@@ -107,7 +109,10 @@ export const NarrativeBreadCrumbs: React.FC = () => {
       {grandparentName ? (
         <>
           <Link
-            to={grandparentName + contextPathQuery(contextNames.slice(0, -2).join('.'), commit)}
+            to={`/branch/${branchId}/story/${grandparentName}${contextPathQuery(
+              contextNames.slice(0, -2).join('.'),
+              commit
+            )}`}
             onClick={trackNarrativeNavHandler('Grandparent')}
             className="minw-0 text-truncate grandparent-crumb"
             title={grandparentTitle}

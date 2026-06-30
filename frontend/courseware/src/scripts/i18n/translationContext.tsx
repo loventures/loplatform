@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 
 import { Omit } from '../types/omit.ts';
 import React, { useContext } from 'react';
-import { lojector } from '../loject.ts';
+import { instant, loadI18n } from './pure/i18n.ts';
 
 export interface Translate {
   (key: string): string;
@@ -38,17 +38,14 @@ export class TranslationProvider extends React.Component<React.PropsWithChildren
     translate: (key: string) => key,
   };
 
-  translateService: {
-    instant: (key?: string, params?: any) => string;
-    onReady(callback: () => void): Promise<any>;
-  } = lojector.get('$translate');
-
   translate = (...args: any[]) => {
-    return this.translateService.instant(...args);
+    return (instant as any)(...args);
   };
 
   componentDidMount() {
-    this.translateService.onReady(() => {
+    // Delay render until the translation table is loaded — the same behaviour the
+    // `$translate.onReady(...)` callback provided.
+    loadI18n().then(() => {
       this.setState({
         isReady: true,
         translate: this.translate,
@@ -65,10 +62,10 @@ export class TranslationProvider extends React.Component<React.PropsWithChildren
   }
 }
 
-export const withTranslation = <P extends WithTranslateProps>(
+export const withTranslation = <P extends object>(
   BaseComponent: React.ComponentType<P>
 ) => {
-  const TranslatedComponent: React.FunctionComponent<Omit<P, keyof WithTranslateProps>> = props => (
+  const TranslatedComponent: React.FunctionComponent<any> = props => (
     <TranslationContext.Consumer>
       {translate => (
         <BaseComponent
@@ -80,32 +77,6 @@ export const withTranslation = <P extends WithTranslateProps>(
   );
 
   TranslatedComponent.displayName = `WithTranslation(${
-    BaseComponent.displayName || BaseComponent.name
-  })`;
-
-  return TranslatedComponent;
-};
-
-//Use this for react2angular components
-//because the layer of angular in between
-//breaks the provider/consumer hierarchy
-export const withTranslationFor2Angular = <P extends WithTranslateProps>(
-  BaseComponent: React.ComponentType<P>
-) => {
-  const TranslatedComponent: React.FunctionComponent<Omit<P, keyof WithTranslateProps>> = props => (
-    <TranslationProvider>
-      <TranslationContext.Consumer>
-        {translate => (
-          <BaseComponent
-            {...(props as P)}
-            translate={translate}
-          />
-        )}
-      </TranslationContext.Consumer>
-    </TranslationProvider>
-  );
-
-  TranslatedComponent.displayName = `WithTranslationFor2Angular(${
     BaseComponent.displayName || BaseComponent.name
   })`;
 

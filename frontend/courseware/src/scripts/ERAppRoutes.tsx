@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,9 +24,9 @@ import { ContentWithRelationships } from './courseContentModule/selectors/assemb
 import { selectPageContent } from './courseContentModule/selectors/contentEntrySelectors';
 import { history } from './utilities/history';
 import { allowDirectMessaging } from './utilities/preferences';
-import { selectCurrentUser } from './utilities/rootSelectors';
+import { selectActualUser, selectCurrentUser } from './utilities/rootSelectors';
 import React, { Suspense, useEffect } from 'react';
-import { Redirect, Route, Switch, useHistory } from 'react-router';
+import { Navigate, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const ERInstructorPageRoutes = React.lazy(
   () =>
@@ -40,7 +40,18 @@ const ERLearnerPageRoutes = React.lazy(
 );
 
 const ERAppRoutes = () => {
-  const currentUser = useCourseSelector(selectCurrentUser);
+  const actualUser = useCourseSelector(selectActualUser);
+  // Source the preview flag from the React Router (deferred) location rather than the eagerly-synced
+  // redux router state. Under v7's startTransition the redux path (synced synchronously via
+  // history.listen) flips before the matched <Routes> location, so a redux-derived role gate fires a
+  // transient RoleRedirect and bounces preview enter/exit. Reading previewAsUserId off useSearchParams
+  // keeps the role decision atomic with the route match below. Role flags reduce to: previewing always
+  // means the student view (see withRoleInfo — a preview user is never the actual user), otherwise the
+  // actual user's role applies.
+  const [searchParams] = useSearchParams();
+  const previewing = !!searchParams.get('previewAsUserId');
+  const isStudent = previewing || actualUser.isStudent;
+  const isInstructor = !previewing && actualUser.isInstructor;
   useEffect(() => {
     // Send the initial loaded page
     // @ts-ignore
@@ -60,64 +71,79 @@ const ERAppRoutes = () => {
         </div>
       }
     >
-      <Switch>
+      <Routes>
         <Route
-          path="/instructor"
-          exact={false}
-          render={({ location }) =>
-            currentUser.isInstructor ? (
+          path="/instructor/*"
+          element={
+            isInstructor ? (
               <ERInstructorPageRoutes />
             ) : (
-              <Redirect
-                to={redirectPreserveParams(
-                  location.pathname.replace('/instructor/', '/student/'),
-                  location
-                )}
+              <RoleRedirect
+                from="/instructor/"
+                to="/student/"
               />
             )
           }
         />
 
         <Route
-          path="/student"
-          exact={false}
-          render={({ location }) =>
-            currentUser.isStudent ? (
+          path="/student/*"
+          element={
+            isStudent ? (
               <ERLearnerPageRoutes />
             ) : (
-              <Redirect
-                to={redirectPreserveParams(
-                  location.pathname.replace('/student/', '/instructor/'),
-                  location
-                )}
+              <RoleRedirect
+                from="/student/"
+                to="/instructor/"
               />
             )
           }
         />
 
         {allowDirectMessaging && (
-          <Route path="/send-message">
-            <ERSendMessagePage />
-          </Route>
+          <Route
+            path="/send-message"
+            element={<ERSendMessagePage />}
+          />
         )}
 
         <Route
-          render={({ location }) => (
-            <Redirect
-              to={redirectPreserveParams(
-                currentUser.isStudent ? '/student/dashboard' : '/instructor/dashboard',
-                location
-              )}
+          path="*"
+          element={
+            <DefaultRedirect
+              to={isStudent ? '/student/dashboard' : '/instructor/dashboard'}
             />
-          )}
+          }
         />
-      </Switch>
+      </Routes>
     </Suspense>
   );
 };
 
+// Role-mismatch and fallback redirects need the current location (for param preservation),
+// which v6 exposes via a hook rather than a render-prop, so they live in small components.
+const RoleRedirect: React.FC<{ from: string; to: string }> = ({ from, to }) => {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={redirectPreserveParams(location.pathname.replace(from, to), location)}
+    />
+  );
+};
+
+const DefaultRedirect: React.FC<{ to: string }> = ({ to }) => {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={redirectPreserveParams(to, location)}
+    />
+  );
+};
+
 const useLoNav = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { hyperlinks } = useCourseSelector(selectPageContent) as ContentWithRelationships;
   const currentUser = useCourseSelector(selectCurrentUser);
   useEffect(() => {
@@ -143,13 +169,13 @@ const useLoNav = () => {
         const to = `/${role}/content/${edgePath}`;
         const url = window.location.href.replace(/#.*/, '');
         if (target) window.open(`${url}#${to}`, target);
-        else history.push(to);
+        else navigate(to);
       }
     };
     return () => {
       delete window.lonav;
     };
-  }, [hyperlinks, currentUser, history]);
+  }, [hyperlinks, currentUser, navigate]);
 };
 
 export default ERAppRoutes;

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,7 +30,7 @@ import { selectCurrentUser } from '../utilities/rootSelectors';
 import React, { useState } from 'react';
 import { FiSend } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Button, FormGroup, Label } from 'reactstrap';
 
 import { ContentLite } from '../api/contentsApi';
@@ -59,7 +59,7 @@ const AskQuestion: React.FC<{
 }> = ({ content, question, firstQuestion, onAddMessage }) => {
   const dispatch = useDispatch();
   const translate = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [messageInput, setMessageInput] = useState('');
   const [attachments, setAttachments] = useState(new Array<IoFile>());
@@ -87,7 +87,8 @@ const AskQuestion: React.FC<{
             prefilter: { property: 'creator', operator: 'eq', value: user.id },
           }).then(summaries => {
             dispatch(setQnaSummaries(summaries));
-            history.push(StudentQnaQuestionLink.toLink(newQuestion.id));
+            const to = StudentQnaQuestionLink.toLink(newQuestion.id);
+            navigate(to, { state: to.state });
           });
         });
       } else if (question) {

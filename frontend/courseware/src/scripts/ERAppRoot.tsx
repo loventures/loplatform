@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ConnectedRouter } from 'connected-react-router';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import { AnnouncementsProvider } from './components/announcements/Announcements';
 import ClientScriptingContext from './components/ClientScriptingContext';
 import StickiesManager from './components/stickies/StickiesManager';
@@ -27,6 +27,8 @@ import { QueryClientProvider, queryClient } from './resources/queryClient';
 import { courseReduxStore } from './loRedux';
 import { TranslationProvider, useTranslation } from './i18n/translationContext';
 import { history } from './utilities/history';
+import { startPresenceBootstrap } from './bootstrap/presenceBootstrap';
+import { startSessionBootstrap } from './bootstrap/sessionBootstrap';
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -41,9 +43,17 @@ import { Alert } from 'reactstrap';
 //
 // window.$ = window.jQuery = $;
 
-const ERAppRoot: React.FC = () => (
-  <ReduxProvider store={courseReduxStore}>
-    <ConnectedRouter history={history}>
+const ERAppRoot: React.FC = () => {
+  // Re-home of the presence bootstrap side-effects formerly in AngularJS `.run` blocks.
+  // Module-level run-once guard inside makes a remount a no-op.
+  React.useEffect(() => {
+    startPresenceBootstrap();
+    startSessionBootstrap();
+  }, []);
+
+  return (
+    <ReduxProvider store={courseReduxStore}>
+    <HistoryRouter history={history as any}>
       <QueryClientProvider client={queryClient}>
         <TranslationProvider>
           <StickiesManager>
@@ -73,9 +83,10 @@ const ERAppRoot: React.FC = () => (
           <LanguageHelmet />
         </TranslationProvider>
       </QueryClientProvider>
-    </ConnectedRouter>
-  </ReduxProvider>
-);
+    </HistoryRouter>
+    </ReduxProvider>
+  );
+};
 
 export default ERAppRoot;
 

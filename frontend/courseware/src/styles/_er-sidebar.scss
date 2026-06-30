@@ -1,5 +1,6 @@
+@use 'sass:color';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -98,7 +99,7 @@
       background-color: transparent;
 
       .activity-complete {
-        color: darken($success, 10%);
+        color: color.adjust($success, $lightness: -(10%));
       }
 
       > a {
@@ -111,7 +112,7 @@
         position: relative;
 
         &.course-navigation-link {
-          border-bottom: 1px solid lighten($gray-lighter, 10%);
+          border-bottom: 1px solid color.adjust($gray-lighter, $lightness: (10%));
         }
 
         &.locked {
@@ -119,11 +120,11 @@
         }
 
         &:hover:not(.locked) {
-          color: darken($color-primary, 15%);
+          color: color.adjust($color-primary, $lightness: -(15%));
           background-color: #aee0f9;
 
           .activity-complete {
-            color: darken($success, 15%);
+            color: color.adjust($success, $lightness: -(15%));
           }
         }
 
@@ -186,7 +187,7 @@
             }
 
             &:hover {
-              background-color: darken($color-primary, 10%);
+              background-color: color.adjust($color-primary, $lightness: -(10%));
               color: #aee0f9;
             }
           }
@@ -258,8 +259,8 @@
         }
 
         &:not(.in-lesson) a:not(:hover) {
-          background-color: transparentize($color-primary, 0.93);
-          color: darken($primary, 2%);
+          background-color: color.adjust($color-primary, $alpha: -(0.93));
+          color: color.adjust($primary, $lightness: -(2%));
         }
 
         &.lesson + .lesson {
@@ -300,11 +301,11 @@
 
     .list-group-item {
       .activity-complete {
-        color: lighten($success, 15%);
+        color: color.adjust($success, $lightness: (15%));
       }
 
       > a {
-        color: lighten($primary, 10%);
+        color: color.adjust($primary, $lightness: (10%));
 
         > svg {
           stroke: $gray-400 !important;
@@ -312,30 +313,30 @@
         }
 
         &::before {
-          background-color: lighten($primary, 10%);
+          background-color: color.adjust($primary, $lightness: (10%));
         }
 
         &.course-navigation-link {
-          border-bottom-color: darken($gray-900, 5%);
+          border-bottom-color: color.adjust($gray-900, $lightness: -(5%));
         }
 
         &:hover:not(.locked) {
-          background-color: darken($primary, 15%);
-          color: lighten($primary, 25%);
+          background-color: color.adjust($primary, $lightness: -(15%));
+          color: color.adjust($primary, $lightness: (25%));
 
           .activity-complete {
-            color: lighten($success, 20%);
+            color: color.adjust($success, $lightness: (20%));
           }
         }
       }
 
       &.module-child.last-in-lesson {
-        border-bottom-color: lighten($gray-900, 6%);
+        border-bottom-color: color.adjust($gray-900, $lightness: (6%));
       }
 
       &.module-child:not(.in-lesson) a:not(:hover) {
         background-color: $gray-900 !important;
-        color: lighten($primary, 15%);
+        color: color.adjust($primary, $lightness: (15%));
       }
 
       &.expanded {
@@ -357,7 +358,7 @@
           a:not(:hover),
           a.locked {
             background-color: $gray-800;
-            color: lighten($primary, 25%);
+            color: color.adjust($primary, $lightness: (25%));
           }
         }
       }

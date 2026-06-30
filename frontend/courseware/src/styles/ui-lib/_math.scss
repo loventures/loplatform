@@ -1,5 +1,5 @@
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,12 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+@use 'sass:math';
+@use 'sass:meta';
+
 @function ch-max($v1, $v2) {
-  @return if($v1 > $v2, $v1, $v2);
+  @if $v1 > $v2 {
+    @return $v1;
+  }
+  @return $v2;
 }
 
 @function ch-min($v1, $v2) {
-  @return if($v1 < $v2, $v1, $v2);
+  @if $v1 < $v2 {
+    @return $v1;
+  }
+  @return $v2;
 }
 
 @function ch-gcd($a, $b) {
@@ -28,22 +37,22 @@
   @if ($b != 0) {
     @return ch-gcd($b, $a % $b);
   } @else {
-    @return abs($a);
+    @return math.abs($a);
   }
 }
 
 @function ch-pow($base, $exponent, $prec: 12) {
-  @if (function_exists('pow')) {
+  @if (meta.function-exists('pow')) {
     // see math.js -- the JS-backed implementation of this function is **significantly** faster
     @return pow($base, $exponent);
   }
 
   // Handles decimal exponents by trying to convert them into a fraction and then use a nthRoot-algorithm for parts of the calculation
-  @if (floor($exponent) != $exponent) {
+  @if (math.floor($exponent) != $exponent) {
     $prec2: ch-pow(10, $prec);
-    $exponent: round($exponent * $prec2);
+    $exponent: math.round($exponent * $prec2);
     $denominator: ch-gcd($exponent, $prec2);
-    @return ch-nth-root(ch-pow($base, $exponent / $denominator), $prec2 / $denominator, $prec);
+    @return ch-nth-root(ch-pow($base, math.div($exponent, $denominator)), math.div($prec2, $denominator), $prec);
   }
 
   $value: $base;
@@ -53,7 +62,7 @@
     }
   } @else if $exponent < 1 {
     @for $i from 0 through -$exponent {
-      $value: $value / $base;
+      $value: math.div($value, $base);
     }
   }
 
@@ -65,7 +74,7 @@
   $x: 1;
 
   @for $i from 0 through $prec {
-    $x: 1 / $n * (($n - 1) * $x + ($num / ch-pow($x, $n - 1)));
+    $x: math.div(1, $n) * (($n - 1) * $x + math.div($num, ch-pow($x, $n - 1)));
   }
 
   @return $x;

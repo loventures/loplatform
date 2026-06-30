@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,10 +19,9 @@ import { CustomisableContent } from '../../api/customizationApi';
 import { CourseState } from '../../loRedux';
 import { LoCheckbox } from '../../directives/LoCheckbox';
 import { WithTranslate } from '../../i18n/translationContext';
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
-import { withStateHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
@@ -152,39 +151,41 @@ const selector = createSelector(
   customizerState => ({ state: customizerState })
 );
 
+type CustomizerHeaderStateHandlerProps = Omit<
+  CustomizerHeaderInnerProps,
+  | 'checkoutIsOpen'
+  | 'openCheckout'
+  | 'closeCheckout'
+  | 'resetIsOpen'
+  | 'openReset'
+  | 'closeReset'
+>;
+
+const CustomizerHeaderStateful: React.FC<CustomizerHeaderStateHandlerProps> = props => {
+  const [resetIsOpen, setResetIsOpen] = useState(false);
+  const [checkoutIsOpen, setCheckoutIsOpen] = useState(false);
+
+  const openCheckout = () => setCheckoutIsOpen(true);
+  const closeCheckout = () => setCheckoutIsOpen(false);
+  const openReset = () => setResetIsOpen(true);
+  const closeReset = () => setResetIsOpen(false);
+
+  return (
+    <CustomizerHeaderInner
+      {...props}
+      resetIsOpen={resetIsOpen}
+      openReset={openReset}
+      closeReset={closeReset}
+      checkoutIsOpen={checkoutIsOpen}
+      openCheckout={openCheckout}
+      closeCheckout={closeCheckout}
+    />
+  );
+};
+
 export const CustomizerHeader = connect(selector, d => ({
   toggleHiddenItemsVisible: () => d(toggleHiddenItemsVisible()),
   undo: () => d(undo()),
   redo: () => d(redo()),
   dispatch: d,
-}))(
-  withStateHandlers(
-    { resetIsOpen: false, checkoutIsOpen: false },
-    {
-      openCheckout:
-        ({ resetIsOpen }) =>
-        () => ({
-          resetIsOpen,
-          checkoutIsOpen: true,
-        }),
-      closeCheckout:
-        ({ resetIsOpen }) =>
-        () => ({
-          resetIsOpen,
-          checkoutIsOpen: false,
-        }),
-      openReset:
-        ({ checkoutIsOpen }) =>
-        () => ({
-          checkoutIsOpen,
-          resetIsOpen: true,
-        }),
-      closeReset:
-        ({ checkoutIsOpen }) =>
-        () => ({
-          checkoutIsOpen,
-          resetIsOpen: false,
-        }),
-    }
-  )(CustomizerHeaderInner)
-);
+}))(CustomizerHeaderStateful);

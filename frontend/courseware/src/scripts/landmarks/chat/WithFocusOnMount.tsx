@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,43 +16,37 @@
  */
 
 import { Omit } from '../../types/omit';
-import { compose, lifecycle, withHandlers } from 'recompose';
+import React, { useEffect, useRef } from 'react';
 
 type FocusableElement = HTMLElement;
-
-const addHandler = withHandlers(() => {
-  let ref: undefined | FocusableElement;
-
-  return {
-    onRef: () => (element: HTMLElement) => (ref = element),
-    focusRef: () => () => {
-      if (ref) {
-        ref.focus();
-      }
-    },
-  };
-});
-
-type LifecycleProps = {
-  focusRef: any;
-};
-
-const addLifeCycle = lifecycle<LifecycleProps, Record<string, unknown>>({
-  componentDidMount() {
-    this.props.focusRef();
-  },
-});
 
 export type WithFocusOnMount = {
   onRef: any;
 };
 
-// const withFocusOnMount = compose<any,any>(addHandler, addLifeCycle);
-
 export const withFocusOnMount = <P extends WithFocusOnMount>(
   BaseComponent: React.ComponentType<P>
 ) => {
-  return compose<P, Omit<P, keyof WithFocusOnMount>>(addHandler, addLifeCycle)(BaseComponent);
+  const WithFocusOnMount = (props: Omit<P, keyof WithFocusOnMount>) => {
+    const ref = useRef<undefined | FocusableElement>(undefined);
+
+    const onRef = (element: HTMLElement) => (ref.current = element);
+
+    useEffect(() => {
+      if (ref.current) {
+        ref.current.focus();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return (
+      <BaseComponent
+        {...(props as P)}
+        onRef={onRef}
+      />
+    );
+  };
+  return WithFocusOnMount;
 };
 
 export default withFocusOnMount;

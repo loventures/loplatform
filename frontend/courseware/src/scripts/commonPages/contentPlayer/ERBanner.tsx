@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,6 +25,7 @@ import { useFlatLearningPathResource } from '../../resources/LearningPathResourc
 import { useCourseSelector } from '../../loRedux';
 import { LearnerAssignmentListPageLink } from '../../utils/pageLinks';
 import { isLoaded } from '../../types/loadable';
+import { grade as gradeFormat, makeGradeDisplayMethods } from '../../filters/pure/grade';
 import { percentFilter } from '../../filters/percent';
 import { useTranslation } from '../../i18n/translationContext';
 import { selectCurrentUserOverallGrade } from '../../selectors/gradeSelectors';
@@ -32,7 +33,6 @@ import { selectCurrentUserOverallProgress } from '../../selectors/progressSelect
 import { isAssignment } from '../../utilities/contentTypes';
 import { selectCurrentUser } from '../../utilities/rootSelectors';
 import React, { useMemo } from 'react';
-import { lojector } from '../../loject';
 import classNames from 'classnames';
 import ERSidebarButton from '../sideNav/ERSidebarButton.tsx';
 import { useMedia } from 'react-use';
@@ -48,8 +48,7 @@ const Circles: React.FC = () => {
   const translate = useTranslation();
   const overallProgress = useCourseSelector(selectCurrentUserOverallProgress);
   const overallGrade = useCourseSelector(selectCurrentUserOverallGrade);
-  const gradeFilter = lojector.get('gradeFilter') as any;
-  const formattedGrade = gradeFilter(overallGrade, 'percentSign');
+  const formattedGrade = gradeFormat(makeGradeDisplayMethods(translate), overallGrade, 'percentSign') as string;
   const screenReaderFormattedGrade =
     formattedGrade === '–' ? translate('ER_CIRCLE_SCORE_NONE') : formattedGrade;
   return (

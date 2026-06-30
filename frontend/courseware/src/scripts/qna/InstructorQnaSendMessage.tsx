@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -29,7 +29,7 @@ import { RecipientPicker } from '../messaging/directives/recipientPicker';
 import { QnaPageLink } from '../utils/pageLinks';
 import { multicast } from './qnaApi';
 import QnaAttachments from './QnaAttachments';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { updateQnaQuery } from '../qna/qnaActions';
 import { useDispatch } from 'react-redux';
 import { QnaSentFilter } from '../qna/qnaReducer';
@@ -107,7 +107,7 @@ class Message {
 
 const InstructorQnaSendMessage: React.FC = () => {
   const translate = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [recipients, setRecipients] = useState<Recipient[]>([]);
@@ -142,7 +142,7 @@ const InstructorQnaSendMessage: React.FC = () => {
         offset: 0,
       })
     );
-    history.push(`/instructor/qna`);
+    navigate(`/instructor/qna`);
   };
 
   const sendMessage = () => {

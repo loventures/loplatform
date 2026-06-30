@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,6 @@ import { InstructionsEditor } from '../../../instructorPages/customization/edito
 import { WithTranslate } from '../../../i18n/translationContext';
 import React, { ChangeEvent } from 'react';
 import { Input } from 'reactstrap';
-import { withHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 
 import { reinstruct, rename } from '../contentEdits';
@@ -152,8 +151,8 @@ class NameEditorInner extends React.Component<NameEditorProps, NameEditorState> 
   }
 }
 
-export const NameEditor = withHandlers({
-  updateName: (props: NameEditorOuterProps) => (name: string) => {
+export const NameEditor = (props: NameEditorOuterProps) => {
+  const updateName = (name: string) => {
     props.dispatch(
       addEdit(
         rename({
@@ -162,9 +161,9 @@ export const NameEditor = withHandlers({
         })
       )
     );
-  },
+  };
   // I hates it, I hates it all
-  updateInstructions: (props: NameEditorOuterProps) => (instructions: string) => {
+  const updateInstructions = (instructions: string) => {
     props.dispatch(
       addEdit(
         reinstruct({
@@ -173,5 +172,12 @@ export const NameEditor = withHandlers({
         })
       )
     );
-  },
-})(NameEditorInner);
+  };
+  return (
+    <NameEditorInner
+      {...props}
+      updateName={updateName}
+      updateInstructions={updateInstructions}
+    />
+  );
+};

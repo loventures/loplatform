@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,8 +18,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { VscHistory } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import VisibilitySensor from 'react-visibility-sensor';
+import { useNavigate } from 'react-router-dom';
+import VisibilitySensor from '../VisibilitySensor';
 import { Spinner } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../../analytics';
@@ -50,7 +50,7 @@ const Limit = 50;
 export const ProjectHistory: React.FC = () => {
   const branchId = useBranchId();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const homeNodeName = useHomeNodeName();
 
   const [more, setMore] = useState(false);
@@ -113,7 +113,9 @@ export const ProjectHistory: React.FC = () => {
             return revertBranch(branchId, commit.first, segments[0].first)
               .then(() => {
                 dispatch(openToast('The project was successfully reverted.', 'success'));
-                history.replace(`/branch/${branchId}/story/history?contextPath=${homeNodeName}`);
+                navigate(`/branch/${branchId}/story/history?contextPath=${homeNodeName}`, {
+                  replace: true,
+                });
                 doReload();
               })
               .catch(e => {

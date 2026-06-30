@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,7 +22,7 @@ import java.util.ServiceLoader
 import cats.Parallel
 import cats.effect.{Clock, Sync}
 import com.learningobjects.cpxp.util.ClassUtils
-import doobie.*
+import org.typelevel.doobie.*
 import javax.sql.DataSource
 import loi.deploy.Benchmark.Bench
 import org.hibernate.boot.MetadataSources

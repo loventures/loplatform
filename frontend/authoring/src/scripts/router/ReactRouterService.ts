@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { push } from 'connected-react-router';
 import { assign } from 'lodash';
 import qs from 'qs';
 import { matchPath } from 'react-router';
@@ -25,7 +24,7 @@ import { useDcmSelector } from '../hooks';
 import { FullEdge } from '../types/edge';
 import allPaths from './routes';
 
-import { dcmStore } from '../dcmStore';
+import { dcmStore, pushPath } from '../dcmStore';
 
 class ReactRouterService {
   getState() {
@@ -46,7 +45,7 @@ class ReactRouterService {
 
   goToHome() {
     const { branchId, project } = this.getState().layout;
-    this.dispatch(push(`/branch/${branchId}/asset/${project.homeNodeName}`));
+    pushPath(`/branch/${branchId}/asset/${project.homeNodeName}`);
   }
 
   goToAsset(asset: { name: string; typeId: string }, params?, clear?) {
@@ -55,15 +54,13 @@ class ReactRouterService {
 
     switch (typeId) {
       case 'competencySet.1':
-        this.dispatch(push(this.buildUrl(`/branch/${branchId}/competencies`, params, clear)));
+        pushPath(this.buildUrl(`/branch/${branchId}/competencies`, params, clear));
         break;
       case 'rubric.1':
-        this.dispatch(
-          push(this.buildUrl(`/branch/${branchId}/rubric-editor/${name}`, params, clear))
-        );
+        pushPath(this.buildUrl(`/branch/${branchId}/rubric-editor/${name}`, params, clear));
         break;
       default:
-        this.dispatch(push(this.buildUrl(`/branch/${branchId}/asset/${name}`, params, clear)));
+        pushPath(this.buildUrl(`/branch/${branchId}/asset/${name}`, params, clear));
     }
   }
 
@@ -94,29 +91,27 @@ class ReactRouterService {
     const params = {
       contextPath: newContext,
     };
-    this.dispatch(
-      push(this.buildUrl(`/branch/${currentParams.branchId}/rubric-editor/${rubricName}`, params))
+    pushPath(
+      this.buildUrl(`/branch/${currentParams.branchId}/rubric-editor/${rubricName}`, params)
     );
   }
 
   goToBranchError(error) {
     console.error(error);
     const { branchId } = this.getState().layout;
-    this.dispatch(
-      push(!branchId || parseInt(branchId) < 0 ? '/error' : `/branch/${branchId}/error`)
-    );
+    pushPath(!branchId || parseInt(branchId) < 0 ? '/error' : `/branch/${branchId}/error`);
   }
 
   goToRootError(error) {
     console.error(error);
-    this.dispatch(push('/error'));
+    pushPath('/error');
   }
 
   logout() {
     window.location.href = '/';
   }
 
-  isRevisionRoute(state?) {
+  isRevisionRoute(state?: any) {
     if (!state) state = this.getState();
     return state.router.location?.pathname.includes('/revision/'); // turd
   }
@@ -138,7 +133,7 @@ class ReactRouterService {
     return url + '?' + qs.stringify(currentParams);
   }
 
-  getCurrentParams<Params extends { [K in keyof Params]?: string }>(state?): Params {
+  getCurrentParams<Params extends { [K in keyof Params]?: string }>(state?: any): Params {
     if (!state) {
       state = this.getState();
     }
@@ -147,8 +142,17 @@ class ReactRouterService {
     }
     const { search, pathname } = state.router.location;
     const searchParams = parseQueryParams(search);
-    const match = matchPath<Params>(pathname, { path: allPaths, exact: true });
-    return Object.assign({}, searchParams, match?.params);
+    // matchPath: (pattern, pathname), `end` replaces `exact`, and no array of patterns. v7 dropped
+    // the ParamKey type arg, so matchPath takes a single Path type param (inferred here from `path`).
+    let params: Params | undefined;
+    for (const path of allPaths) {
+      const match = matchPath({ path, end: true }, pathname);
+      if (match) {
+        params = match.params as Params;
+        break;
+      }
+    }
+    return Object.assign({}, searchParams, params);
   }
 }
 

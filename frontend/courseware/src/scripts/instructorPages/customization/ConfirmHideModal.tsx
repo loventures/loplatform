@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,11 +20,7 @@ import { CourseState } from '../../loRedux';
 import { WithTranslate } from '../../i18n/translationContext';
 import { isPresent } from '../../types/option';
 import * as React from 'react';
-import Button from 'reactstrap/lib/Button';
-import Modal from 'reactstrap/lib/Modal';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 import { Connected } from '../assignments/Connected';
 import { hideChild } from './contentEdits';

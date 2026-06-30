@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -27,7 +27,7 @@ export const SubmenuItem: React.FC<
   } & React.PropsWithChildren
 > = ({ label, className, disabled, checked, children }) => {
   const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLLIElement>();
+  const ref = useRef<HTMLLIElement>(undefined);
   useEffect(() => {
     if (open) {
       const listener = (e: MouseEvent) => {

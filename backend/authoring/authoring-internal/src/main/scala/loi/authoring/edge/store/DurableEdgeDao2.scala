@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -98,7 +98,7 @@ class DurableEdgeDao2(
           |JOIN input USING (sourcename, targetname, "group")
           |WHERE de.project_id = :projectId
           |  AND de.root_id = :rootId
-          |""".stripMargin)
+          |""".stripMargin, classOf[Array[Object]])
       .setParameter("srcNames", srcNames.mkString("{", ",", "}"))
       .setParameter("tgtNames", tgtNames.mkString("{", ",", "}"))
       .setParameter("groups", groups.mkString("{", ",", "}"))

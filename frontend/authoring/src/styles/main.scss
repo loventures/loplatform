@@ -1,5 +1,5 @@
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+@use 'sass:color';
 @use 'react-circular-progressbar/dist/styles.css';
 @use 'summernote/dist/summernote-lite.css';
 @use '../scripts/code/summernote-text-findnreplace-lite.css';
@@ -180,7 +181,7 @@ $color-primary: $primary; // fixes references to color-primary
 
 // @TODO text-hide has been deprecated
 // deprecated bootstrap vars @TODO remove in hackathon ?
-$navbar-inverse-color: lighten($gray-400, 15%);
+$navbar-inverse-color: color.adjust($gray-400, $lightness: (15%));
 $cursor-disabled: not-allowed;
 
 // @TODO what happened to icon buttons from lo-ui?
@@ -648,22 +649,22 @@ span.has-feedback {
     &:first-of-type {
       i {
         top: 45% !important;
-        border-color: transparent transparent transparentize($gray-900, 0.5) !important;
+        border-color: transparent transparent color.adjust($gray-900, $alpha: -(0.5)) !important;
       }
 
       &:hover i {
-        border-color: transparent transparent transparentize($gray-900, 0.25) !important;
+        border-color: transparent transparent color.adjust($gray-900, $alpha: -(0.25)) !important;
       }
     }
 
     &:last-of-type {
       i {
         top: 55% !important;
-        border-color: transparentize($gray-900, 0.5) transparent transparent !important;
+        border-color: color.adjust($gray-900, $alpha: -(0.5)) transparent transparent !important;
       }
 
       &:hover i {
-        border-color: transparentize($gray-900, 0.25) transparent transparent !important;
+        border-color: color.adjust($gray-900, $alpha: -(0.25)) transparent transparent !important;
       }
     }
   }
@@ -714,8 +715,8 @@ span.has-feedback {
 }
 
 .btn-outline-warning {
-  color: darken($warning, 22%);
-  border-color: darken($warning, 22%);
+  color: color.adjust($warning, $lightness: -(22%));
+  border-color: color.adjust($warning, $lightness: -(22%));
 }
 
 .mb-last-p-0 > p:last-child {
@@ -734,7 +735,7 @@ span.has-feedback {
 }
 
 #hdr-project-code .text-warning {
-  color: darken($warning, 22%) !important;
+  color: color.adjust($warning, $lightness: -(22%)) !important;
 }
 
 @media print {

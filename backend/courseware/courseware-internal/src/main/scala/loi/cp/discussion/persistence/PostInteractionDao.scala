@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,21 +18,16 @@
 package loi.cp.discussion.persistence
 
 import com.learningobjects.cpxp.component.annotation.Service
-import com.learningobjects.cpxp.component.discussion.{
-  PostInteractionEntity,
-  PostInteractionValue,
-  PostInteractionValueRaw
-}
+import com.learningobjects.cpxp.component.discussion.{PostInteractionEntity, PostInteractionKey, PostInteractionValue, PostInteractionValueRaw}
 import com.learningobjects.cpxp.service.domain.DomainDTO
 import com.learningobjects.cpxp.service.item.Item
 import com.learningobjects.cpxp.service.user.{UserFinder, UserId}
 import com.learningobjects.cpxp.util.{PersistenceIdFactory, ThreadTerminator}
 import loi.cp.discussion.PostId
-import org.hibernate.{LockMode, Session}
+import org.hibernate.{KeyType, LockMode, Session}
 import scaloi.GetOrCreate
 
 import scala.jdk.CollectionConverters.*
-import scala.compat.java8.OptionConverters.*
 
 @Service
 trait PostInteractionDao:
@@ -79,12 +74,8 @@ class PostInteractionDaoImpl(session: => Session, idFactory: PersistenceIdFactor
     ).result
 
   private def queryInteractions(user: UserId, postId: PostId): Option[PostInteractionEntity] =
-    session
-      .byNaturalId(classOf[PostInteractionEntity])
-      .using(userParam, user.id)
-      .using(postParam, postId)
-      .loadOptional()
-      .asScala
+    Option:
+      session.find(classOf[PostInteractionEntity], PostInteractionKey(user.id, postId), KeyType.NATURAL)
 
   private def createInteraction(user: UserId, postId: PostId, domainDTO: DomainDTO): PostInteractionEntity =
     val domainItem: Item              = session.getReference(classOf[Item], domainDTO.id)

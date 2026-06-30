@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,20 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { withTranslationFor2Angular } from '../../i18n/translationContext';
+import { withTranslation } from '../../i18n/translationContext';
 import React, { useEffect, useRef, useState } from 'react';
-import Alert from 'reactstrap/lib/Alert';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
 
 import ChatOutput from './ChatOutput';
-import { lojector } from '../../loject';
-import { Form, Input } from 'reactstrap';
+import { chatAPI as ChatAPI } from '../../services/chatAPI.ts';
+import { presenceSession } from '../../presence/presenceSessionImpl';
+import { Alert, ModalBody, ModalFooter, Form, Input } from 'reactstrap';
 
 const ChatMessages = ({ roomId, chatToUser, isContextOffline, offlineMessage, translate }: any) => {
-  const ChatAPI = lojector.get<any>('ChatAPI');
-  const PresenceSession = lojector.get<any>('PresenceSession');
-  const visibility = PresenceSession.visibility;
+  const visibility = presenceSession.visibility;
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState(false);
@@ -124,4 +120,4 @@ const ChatMessages = ({ roomId, chatToUser, isContextOffline, offlineMessage, tr
   );
 };
 
-export default withTranslationFor2Angular(ChatMessages);
+export default withTranslation(ChatMessages);

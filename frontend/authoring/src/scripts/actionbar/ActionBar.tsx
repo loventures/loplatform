@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,7 @@
  */
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import DropboxActionBar from '../dropbox/DropboxActionBar';
 import FeedbackDetailActionBar from '../feedback/FeedbackDetailActionBar';
@@ -39,39 +39,36 @@ const ActionBar: React.FC<{ stuck: boolean }> = ({ stuck }) => (
     id="action-bar"
     className="grid-actionbar border-bottom"
   >
-    <Switch>
+    <Routes>
       <Route
         path={rootPath}
-        exact
-      >
-        <ProjectsActionBar />
-      </Route>
-      <Route path={contentSearchPath}>
-        <ProjectsActionBar label="Content Search" />
-      </Route>
-      <Route path={storyPath}>
-        <NarrativeActionBar stuck={stuck} />
-      </Route>
+        element={<ProjectsActionBar />}
+      />
       <Route
-        path={revisionPath}
-        component={RevisionActionBar}
+        path={contentSearchPath}
+        element={<ProjectsActionBar label="Content Search" />}
+      />
+      <Route
+        path={`${storyPath}/*`}
+        element={<NarrativeActionBar stuck={stuck} />}
+      />
+      <Route
+        path={`${revisionPath}/*`}
+        element={<RevisionActionBar />}
       />
       <Route
         path={feedbackPath}
-        exact
-      >
-        <FeedbackIndexActionBar />
-      </Route>
+        element={<FeedbackIndexActionBar />}
+      />
       <Route
         path={feedbackItemPath}
-        exact
-      >
-        <FeedbackDetailActionBar />
-      </Route>
-      <Route path={dropboxPath}>
-        <DropboxActionBar />
-      </Route>
-    </Switch>
+        element={<FeedbackDetailActionBar />}
+      />
+      <Route
+        path={`${dropboxPath}/*`}
+        element={<DropboxActionBar />}
+      />
+    </Routes>
   </div>
 );
 

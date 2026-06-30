@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -64,7 +64,7 @@ const CompetencyRow: React.FC<CompetencyRowProps> = ({
   const polyglot = usePolyglot();
   const dispatch = useDispatch();
   const [active, setActive] = useState(autoFocus ?? false);
-  const buttonRef = useRef<HTMLButtonElement>();
+  const buttonRef = useRef<HTMLButtonElement>(undefined);
   const [addOpen, setAddOpen] = useState(false);
   const titleRef = useRef<HTMLSpanElement>(null);
   const popoverRef = useRef(null);
@@ -140,7 +140,9 @@ const CompetencyRow: React.FC<CompetencyRowProps> = ({
       <div className="d-flex align-items-center flex-grow-1">
         {active ? (
           <textarea
-            ref={e => e?.setSelectionRange(e.value.length, e.value.length)}
+            ref={e => {
+              e?.setSelectionRange(e.value.length, e.value.length);
+            }}
             className="competency-title border-0"
             autoFocus={true}
             defaultValue={title === 'Untitled' ? '' : title}

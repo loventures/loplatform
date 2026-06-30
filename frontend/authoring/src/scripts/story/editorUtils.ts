@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -91,7 +91,7 @@ export const derenderAsset = (
   const derenderValue = (value: any, key: string, object: any) =>
     key === 'html' && object.partType === 'html'
       ? value.replace(RenderedUrlRE, (_match, _project, name) => {
-          let edgeIds = (edgeCache ??= Object.fromEntries(
+          const edgeIds = (edgeCache ??= Object.fromEntries(
             getAllEditedOutEdges(asset.name, projectGraph, graphEdits)
               .filter(edge => edge.group === 'resources')
               .map(edge => [edge.targetName, edge.edgeId])

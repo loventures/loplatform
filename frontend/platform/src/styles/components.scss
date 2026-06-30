@@ -1,0 +1,65 @@
+/*!
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@use 'codemirror/lib/codemirror.css';
+
+.components-disabled:first-child:after {
+  content: ' ⃠'; //🚫
+  color: #c88;
+  margin-left: .5rem;
+  display: inline-block;
+
+}
+.adminPage-components {
+  li {
+    svg {
+      vertical-align: top;
+    }
+  }
+}
+.components-tree {
+  background-color: #fff;
+  user-select: none;
+}
+.components-tree-row {
+  cursor: pointer;
+  line-height: 1.6rem;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+  &.components-tree-active {
+    background-color: #3875d7;
+    color: #fff;
+
+    &:hover {
+      background-color: #3875d7;
+    }
+  }
+}
+.components-tree-toggle {
+  display: inline-block;
+  width: 1rem;
+  text-align: center;
+  color: #111;
+}
+#components-config-modal {
+  .CodeMirror {
+    min-height: calc(100vh - 14rem);
+  }
+}

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,7 +24,11 @@ export interface AdminPage {
 export interface PageInfo {
   identifier: string;
   icon: React.ElementType;
-  link: string;
+  link?: string;
   group: string;
   right: string;
+  entity?: string;
+  replaces?: string;
+  href?: string;
+  enforce?: (lop: any) => boolean;
 }

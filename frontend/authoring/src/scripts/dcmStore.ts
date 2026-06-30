@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { has, omit } from 'lodash';
 import Polyglot from 'node-polyglot';
@@ -25,6 +24,7 @@ import promise from 'redux-promise-middleware';
 import { thunk } from 'redux-thunk';
 
 import { initializeGoogleAnalytics } from './analytics';
+import { createRouterReducer, locationChange, RouterState } from './router/routerReducer';
 import announcementReducer from './announcement/AnnouncementReducer';
 import { INITIALIZE_DCM } from './dcmStoreConstants';
 import dropboxReducer, { DropboxState } from './dropbox/dropboxReducer';
@@ -73,21 +73,40 @@ const configurationReducer: Reducer<ConfigurationState, ConfigurationAction> = (
   }
 };
 
-export const history = createBrowserHistory({
-  basename: window.lo_platform.isDev && +window.location.port < 8080 ? undefined : '/Authoring',
-  getUserConfirmation(dialogKey, callback) {
-    // use "message" as Symbol-based key
-    const dialogTrigger = window[Symbol.for(dialogKey)];
+// history v5 dropped both `basename` and `getUserConfirmation` from createBrowserHistory: the
+// basename now lives on the <HistoryRouter> in DcmRoot, and the unsaved-changes prompt that used
+// getUserConfirmation is handled by PreventNavAndUnsavedChangesPrompt via history.block.
+export const basename =
+  window.lo_platform.isDev && +window.location.port < 8080 ? undefined : '/Authoring';
 
-    if (dialogTrigger) {
-      // delegate to dialog and pass callback through
-      return dialogTrigger(callback);
-    }
+export const history = createBrowserHistory();
 
-    // Fallback to allowing navigation
-    callback(true);
-  },
+// history v5 has no basename, so location.pathname is absolute; strip the router basename to match
+// what connected-react-router/history v4 stored (a basename-relative pathname the routes match on).
+const stripBasename = (pathname: string): string =>
+  basename && (pathname === basename || pathname.startsWith(basename + '/'))
+    ? pathname.slice(basename.length) || '/'
+    : pathname;
+
+const routerLocation = () => ({
+  ...history.location,
+  pathname: stripBasename(history.location.pathname),
 });
+
+// Programmatic navigation helpers. <Link>/useNavigate go through <HistoryRouter basename>, which
+// prepends the basename for us — but a raw `history.push('/branch/…')` would not, so it would escape
+// the app's /Authoring mount. These prepend the basename (no-op in dev / search-only updates) so
+// the connected-react-router `push`/`replace` call sites keep working.
+const withBasename = (to: any) => {
+  if (!basename) return to;
+  if (typeof to === 'string') return basename + to;
+  if (to && typeof to === 'object' && to.pathname != null)
+    return { ...to, pathname: basename + to.pathname };
+  return to;
+};
+
+export const pushPath = (to: any, state?: any) => history.push(withBasename(to), state);
+export const replacePath = (to: any, state?: any) => history.replace(withBasename(to), state);
 
 const probableAdminRights = new Set([
   'loi.cp.admin.right.AdminRight',
@@ -103,11 +122,11 @@ const dcmApplicationReducers = {
   assetEditor: assetEditor as Reducer<AssetEditorState>,
   toast: toast as Reducer<ToastState>,
   presence: presenceReducer as Reducer<PresenceState>,
-  announcement: announcementReducer as Reducer<any>,
+  announcement: announcementReducer as unknown as Reducer<any>,
   projectGraph: projectGraph as Reducer<ProjectGraph>,
   graphEdits: graphEditReducer as Reducer<ProjectGraphEditState>,
   projectStructure: projectStructure as Reducer<any>,
-  router: connectRouter(history),
+  router: createRouterReducer(routerLocation(), history.action) as Reducer<RouterState>,
   feedback: feedbackReducer as Reducer<FeedbackState>,
   story: storyReducer as Reducer<StoryState>,
   data: dataReducer as Reducer<DataState>,
@@ -116,7 +135,7 @@ const dcmApplicationReducers = {
 
 const rootReducer = combineReducers(dcmApplicationReducers);
 
-const middlewares = [routerMiddleware(history), thunk, promise];
+const middlewares = [thunk, promise];
 
 if (process.env.NODE_ENV === 'development') {
   const logger = createLogger({
@@ -128,6 +147,13 @@ if (process.env.NODE_ENV === 'development') {
 const storeEnhancer = compose(applyMiddleware(...middlewares));
 
 export const dcmStore = createStore(rootReducer, storeEnhancer);
+
+// Keep state.router in sync with the history singleton (connected-react-router used to do this).
+history.listen(({ location, action }) =>
+  dcmStore.dispatch(
+    locationChange({ ...location, pathname: stripBasename(location.pathname) }, action)
+  )
+);
 
 export const noBranch = {
   id: -1,

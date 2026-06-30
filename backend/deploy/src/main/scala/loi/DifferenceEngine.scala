@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,7 @@
 package loi
 
 import _root_.de.tomcat.DETomcatServer
-import _root_.doobie.*
+import org.typelevel.doobie.*
 import org.apache.pekko.actor.ActorSystem
 import cats.*
 import cats.effect.Resource.ExitCase.*

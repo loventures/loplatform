@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -63,7 +63,7 @@ export const LtiEditor: NarrativeEditor<'lti.1'> = ({ asset, readOnly }) => {
 
   const typeName = cap(storyTypeName(polyglot, asset.typeId));
   const placeholder = polyglot.t('STORY_INSTRUCTIONS', { typeName });
-  const launchRef = useRef<HTMLDivElement>();
+  const launchRef = useRef<HTMLDivElement>(undefined);
 
   const toolList = useLtiTools();
   const toolOptions = useMemo(

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,12 +26,14 @@ import {
   isLessonWithRelationships,
   isModuleWithRelationships,
   isUnitWithRelationships,
+  selectOnContentPlayerPath,
   selectPageContent,
 } from '../../courseContentModule/selectors/contentEntrySelectors';
 import { selectActualUser, selectCurrentUser } from '../../utilities/rootSelectors';
+import { getRoleSegment } from '../../utils/linkUtils';
 import React from 'react';
 import { useCollapse } from 'react-collapsed';
-import { Redirect } from 'react-router';
+import { Navigate } from 'react-router-dom';
 import { Alert } from 'reactstrap';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -42,6 +44,14 @@ const ERContentPlayer: React.FC<{ search: string; state: any }> = ({ search, sta
 
   const content = useCourseSelector(selectPageContent);
   const actualUser = useCourseSelector(selectActualUser);
+  const onContentPath = useCourseSelector(selectOnContentPlayerPath);
+
+  // Bail out while a route change away from content is mid-flight under v7's deferred transition, so
+  // the still-mounted player can't fire its module→first-child redirect and bounce that navigation
+  // (e.g. print). See selectOnContentPlayerPath.
+  if (!onContentPath) {
+    return null;
+  }
 
   if (isCourseWithRelationships(content) || !content.typeId) {
     /**
@@ -56,7 +66,15 @@ const ERContentPlayer: React.FC<{ search: string; state: any }> = ({ search, sta
   ) {
     const child = content.elements?.[0];
     if (!child) return null;
-    return <Redirect to={{ pathname: child.id, search, state }} />;
+    // v6: navigation state is a separate prop, and a relative pathname would resolve differently
+    // than v5's URL-relative behavior, so build the sibling content path absolutely.
+    return (
+      <Navigate
+        replace
+        to={{ pathname: `${getRoleSegment()}/content/${child.id}`, search }}
+        state={state}
+      />
+    );
   } else
     return (
       <ERContentContainer title={content.name}>

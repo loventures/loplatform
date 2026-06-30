@@ -12,6 +12,7 @@ dist
 dist-ssr
 target
 *.local
+/index.html
 
 # Editor directories and files
 .vscode/*

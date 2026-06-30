@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,13 +18,13 @@
 import axios from 'axios';
 import { createUrl } from '../bootstrap/loConfig';
 import { queryClient } from './queryClient';
-import { QueryFunction, useQuery } from 'react-query';
 import {
-  EnsuredQueryKey,
+  QueryFunction,
   QueryKey,
-  QueryObserverSuccessResult,
-} from 'react-query/types/core/types';
-import { UseQueryOptions } from 'react-query/types/react/types';
+  useSuspenseQuery as useSuspenseQueryBase,
+  UseSuspenseQueryOptions,
+} from '@tanstack/react-query';
+import { EnsuredQueryKey } from './ensuredQueryKey';
 import { StrictParamsObject } from '../api/templateTypes';
 
 export type StrictUrlParamsKey<T extends string> = EnsuredQueryKey<[StrictParamsObject<T>, T]>;
@@ -56,7 +56,7 @@ export abstract class Resource<
   urlTemplate?: string;
 
   fetch(key: TKey, config?: Record<string, any>): Promise<TData> {
-    return queryClient.fetchQuery(key, this.fetcher(config ?? {}));
+    return queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher(config ?? {}) });
   }
 
   pushToRedux?(data: TData, config: Record<string, any>): void;
@@ -120,7 +120,7 @@ export abstract class Resource<
     const key = this.getKey(...args);
     const promise = this.fetch(key);
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, fetching, data, key };
   }
@@ -135,14 +135,16 @@ export const useSuspenseQuery = <
   queryKey: TQueryKey,
   queryFn: QueryFunction<TQueryFnData, TQueryKey>,
   options: Omit<
-    UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+    UseSuspenseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     'queryKey' | 'queryFn'
   > = {}
 ) => {
-  const { data } = useQuery(
+  // react-query v5 removed the `suspense: true` option in favor of a dedicated
+  // useSuspenseQuery hook (which guarantees `data` is defined).
+  const { data } = useSuspenseQueryBase<TQueryFnData, TError, TData, TQueryKey>({
     queryKey,
     queryFn,
-    Object.assign(options, { suspense: true }) // preserving options instance in case it was memoized.
-  ) as QueryObserverSuccessResult<TData>;
+    ...options,
+  });
   return data;
 };

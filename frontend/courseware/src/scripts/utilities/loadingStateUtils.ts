@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -97,7 +97,7 @@ type SuccessACs = Record<string, any> | ((r: any) => Record<string, any>);
 
 export const loadingActionCreatorMaker = (
   configForACM: Record<string, any>,
-  loader: (...args: any[]) => Promise<any>,
+  loader: (...args: any[]) => PromiseLike<any>,
   additionalSuccessACs: SuccessACs[] = [],
   getConfigForAC?: (...args: any[]) => Record<string, any>,
   additionalFailureACS = []
@@ -121,12 +121,12 @@ export const loadingActionCreatorMaker = (
               }
             })
           );
-          dispatch(batchActions([...actions, successAC(configForAC)]));
+          dispatch(batchActions([...actions, successAC(configForAC)]) as any);
         },
         error =>
           dispatch(
             additionalFailureACS && additionalFailureACS.length
-              ? batchActions([...additionalFailureACS, errorAC(configForAC, error)])
+              ? (batchActions([...additionalFailureACS, errorAC(configForAC, error)]) as any)
               : errorAC(configForAC, error)
           )
       );

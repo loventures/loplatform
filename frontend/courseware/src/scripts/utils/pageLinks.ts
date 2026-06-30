@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@ import { UserInfo } from '../../loPlatform';
 import { Content, ContentLite } from '../api/contentsApi';
 import {
   FromApp,
+  LoLocationDescriptor,
   createCompetencyContentLink,
   createContentLink,
   createDashboardLink,
@@ -26,20 +27,41 @@ import {
   createLinkWithRole,
   createPrintLink,
 } from '../utils/linkUtils';
-import { LocationDescriptorObject } from 'history';
-import { match, matchPath } from 'react-router';
+import { PathMatch, matchPath as routerMatchPath } from 'react-router';
+
+/*
+ * react-router v5 → v6 matchPath adapter. Differences handled here so the link builders below stay
+ * close to their original form:
+ *  - v6 reverses the argument order (pattern, pathname) and defaults to an exact match (`end: true`);
+ *    v5's default was a prefix match, so we default `end` to false unless `exact` was set.
+ *  - v6 path patterns can't express regex alternation, so the v5 `/(instructor|student)/...` prefix
+ *    becomes a `:role` param (these matchers are role-agnostic; the captured role is harmless).
+ *  - v5 `strict` has no v6 equivalent (trailing-slash only) and is dropped.
+ */
+const matchPath = (
+  pathname: string,
+  options: string | { path: string; exact?: boolean; strict?: boolean }
+): PathMatch<string> | null => {
+  // v5's matchPath returned null for a non-string pathname; v6's does `pathname.match(...)` and
+  // throws. Callers pass the router path, which can be transiently undefined during a redirect, so
+  // preserve the v5 tolerance to avoid crashing the tree.
+  if (typeof pathname !== 'string') return null;
+  const opts = typeof options === 'string' ? { path: options } : options;
+  const path = opts.path.replace(/\(instructor\|student\)/g, ':role');
+  return routerMatchPath({ path, end: opts.exact ?? false }, pathname);
+};
 
 export type ParameterizedLoLinkBuilder<
   Params,
   FromParams extends { [K in keyof FromParams]?: string } = any,
 > = {
-  match: (path: string) => match<FromParams> | null;
-  toLink: (params: Params) => LocationDescriptorObject<FromApp>;
+  match: (path: string) => PathMatch<string> | null;
+  toLink: (params: Params) => LoLocationDescriptor<FromApp>;
 };
 
 export type LoLinkBuilder = {
-  match: (path: string) => match<any> | null;
-  toLink: () => LocationDescriptorObject<FromApp>;
+  match: (path: string) => PathMatch<string> | null;
+  toLink: (params?: any) => LoLocationDescriptor<FromApp>;
 };
 
 export function isLinkBuilder(to: string | LoLinkBuilder): to is LoLinkBuilder {

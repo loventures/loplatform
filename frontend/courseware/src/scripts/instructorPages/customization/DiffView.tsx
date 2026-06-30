@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,8 +21,7 @@ import localized from 'dayjs/plugin/localizedFormat';
 import { includes, isNumber } from 'lodash';
 import { WithTranslate } from '../../i18n/translationContext';
 import { Option } from '../../types/option';
-import React from 'react';
-import { withState } from 'recompose';
+import React, { useState } from 'react';
 
 import { ContentDiff, CourseDiff, Diff } from './ContentDiff';
 import { Tree, findPath } from './Tree';
@@ -34,7 +33,7 @@ type DiffViewProps = {
   diffs: ContentDiff[];
   module: CustomisableContent;
   open: boolean;
-  setOpen: (b: boolean) => boolean;
+  setOpen: (b: boolean) => void;
 };
 
 /**
@@ -102,7 +101,16 @@ const DiffViewInner = ({ diffs, module, open, setOpen }: DiffViewProps) => (
   </WithTranslate>
 );
 
-const DiffView = withState('open', 'setOpen', true)(DiffViewInner);
+const DiffView = (props: Omit<DiffViewProps, 'open' | 'setOpen'>) => {
+  const [open, setOpen] = useState(true);
+  return (
+    <DiffViewInner
+      {...props}
+      open={open}
+      setOpen={setOpen}
+    />
+  );
+};
 
 /**
  * Renders a computed diff for the user.

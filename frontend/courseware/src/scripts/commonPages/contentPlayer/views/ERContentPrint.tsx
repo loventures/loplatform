@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -33,12 +33,11 @@ import { useTranslation } from '../../../i18n/translationContext';
 import { selectContentItemsWithNebulousDetails } from '../../../selectors/selectContentItemsWithNebulousDetails';
 import { CONTENT_TYPE_LESSON, CONTENT_TYPE_MODULE } from '../../../utilities/contentTypes';
 import { timeoutEffect } from '../../../utilities/effectUtils';
-import { PrintService } from '../../../utilities/print';
+import { printService } from '../../../utilities/printService.ts';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiPrinter, FiX } from 'react-icons/fi';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { Button, Spinner } from 'reactstrap';
-import { lojector } from '../../../loject';
 
 const ERPrintOverlay: React.FC<{ loaded: boolean; printable: boolean; onClose: () => void }> = ({
   loaded,
@@ -81,7 +80,7 @@ const ERPrintOverlay: React.FC<{ loaded: boolean; printable: boolean; onClose: (
           {loaded ? 'Rendering print view...' : 'Preparing print view...'}
           <Spinner
             className="ms-2"
-            bsSize="sm"
+            size="sm"
           />
         </div>
       </div>
@@ -111,7 +110,7 @@ const ERContentPrint: React.FC<{
   const [loaded, setLoaded] = useState(0); // how many content items have loaded
   const [bodyHeight, setBodyHeight] = useState(0); // has the body height stabilised
   const [printable, setPrintable] = useState(false); // are we ready to print
-  const history = useHistory();
+  const navigate = useNavigate();
   const nebulousContents = useCourseSelector(selectContentItemsWithNebulousDetails);
   const contentRelations = useCourseSelector(selectContentItemRelations);
   const learningPath = useLearningPathResource(viewingAs.id);
@@ -176,11 +175,10 @@ const ERContentPrint: React.FC<{
     }
   }, [fullyLoaded, bodyHeight]);
 
-  const closePrintView = () => history.goBack();
+  const closePrintView = () => navigate(-1);
 
   useEffect(() => {
     if (printable) {
-      const printService: PrintService = lojector.get('Print');
       return printService.printViewPrint(undefined, content, closePrintView);
     }
   }, [printable]);

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,6 +22,7 @@ import { DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
 import { trackNarrativeNavHandler } from '../../analytics/AnalyticsEvents';
 import { useAllEditedOutEdges, useEditedAssetTitle, useEditedAssetTypeId } from '../../graphEdit';
+import { useBranchId } from '../../hooks';
 import { NodeName } from '../../types/asset';
 import AssetDropdownItem from '../components/AssetDropdownItem';
 import { childEdgeGroup, contextPathQuery, truncateAssetTitle } from '../story';
@@ -32,6 +33,7 @@ export const ParentCrumb: React.FC<{
   parentName: NodeName;
   contextPath: string;
 }> = ({ grandparentName, parentName, contextPath }) => {
+  const branchId = useBranchId();
   const parentTitle = useEditedAssetTitle(parentName);
   const parentTypeId = useEditedAssetTypeId(parentName);
   const grandparentTypeId = useEditedAssetTypeId(grandparentName);
@@ -47,7 +49,7 @@ export const ParentCrumb: React.FC<{
   return (
     <>
       <Link
-        to={parentName + cp1}
+        to={`/branch/${branchId}/story/${parentName}${cp1}`}
         onClick={trackNarrativeNavHandler('Parent')}
         className="minw-0 text-truncate parent-crumb"
       >
@@ -72,7 +74,7 @@ export const ParentCrumb: React.FC<{
                 key={aunt.name}
                 tag={Link}
                 disabled={aunt.targetName === parentName}
-                to={aunt.targetName + cp1}
+                to={`/branch/${branchId}/story/${aunt.targetName}${cp1}`}
                 onClick={trackNarrativeNavHandler('Aunt')}
                 name={aunt.targetName}
               />

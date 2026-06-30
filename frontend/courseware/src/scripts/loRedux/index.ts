@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,6 +26,8 @@ import middlewares from './middlewares';
 import reducer from './reducer';
 import enhancers from './reduxEnhancers';
 import { createSubscription, getSavedState } from './reduxLocalStorage';
+import { locationChange } from './routerReducer';
+import { history } from '../utilities/history';
 
 export type CourseState = ReturnType<typeof reducer>;
 
@@ -51,10 +53,16 @@ const finalReducer = (state: CourseState | undefined, action: AnyAction) => {
 export const courseReduxStore = createStore(
   enableBatching(finalReducer),
   getInitialState(),
-  compose(applyMiddleware(...middlewares), ...enhancers)
+  compose(applyMiddleware(...middlewares), ...enhancers) as any
 );
 
 createSubscription(courseReduxStore);
+
+// Mirror the router location into redux (replacing connected-react-router) so the
+// reselect selectors that read state.router.location stay reactive to navigation.
+history.listen(({ location, action }) => {
+  courseReduxStore.dispatch(locationChange(location, action) as any);
+});
 
 subcribeDeanToRedux(courseReduxStore);
 

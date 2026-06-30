@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,6 +22,7 @@ import { mapObject } from 'underscore';
 
 import { NoSessionExtensionHdr } from './Headers';
 import { LoginUrl } from './URLs';
+import { LoPlatform } from 'loPlatform.ts';
 
 const isDevelopment = (process.env as any).NODE_ENV === 'development';
 
@@ -46,7 +47,7 @@ const getAdminPages = () => {
 const getPlatform = (force?: boolean) => {
   return window.lo_platform && !force
     ? Promise.resolve({ data: window.lo_platform })
-    : axios.get('/api/v2/lo_platform');
+    : axios.get<LoPlatform>('/api/v2/lo_platform');
 };
 
 const getTranslations = (locale: any) => {
@@ -83,7 +84,7 @@ const addLocalI18nData = (serverI18n: any, _locale: any) => {
   }
 };
 
-const asjax = (url: string, data: any, progress: any, started: () => void) => {
+const asjax = (url: string, data: any, progress?: any, started?: () => void) => {
   return axios.post(url, data).then(response => {
     if (response.status === 202 && response.data.status === 'async') {
       if (started) started();
@@ -101,10 +102,10 @@ const asjax = (url: string, data: any, progress: any, started: () => void) => {
             const eventDate = new Date(data.timestamp);
             if (eventDate > timestamp) {
               timestamp = eventDate;
-              progress(body.description, body.done, body.todo);
+              progress?.(body.description, body.done, body.todo);
             }
           } else if (data.status === 'warning') {
-            progress(body.message);
+            progress?.(body.message);
           } else {
             msgs.close();
             reject(body);

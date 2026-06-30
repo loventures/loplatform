@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -36,13 +36,8 @@ import { thru } from 'lodash';
 import { Translate, WithTranslate } from '../../i18n/translationContext';
 import { isForCredit } from '../../utilities/creditTypes';
 import { equal, move } from '../../types/arrays';
-import React from 'react';
-import Button from 'reactstrap/lib/Button';
-import Modal from 'reactstrap/lib/Modal';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
-import { withState } from 'recompose';
+import React, { useState } from 'react';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Dispatch } from 'redux';
 
 import { computeDiff } from './ContentDiff';
@@ -59,7 +54,7 @@ type CheckoutModalProps = {
   edits: ContentEdit[];
   submitting: boolean;
   dispatch: Dispatch;
-  setSubmitting: (b: boolean) => boolean;
+  setSubmitting: (b: boolean) => void;
 };
 
 function applyEditSingular(
@@ -143,7 +138,7 @@ const submitChanges = (
   courseId: number,
   tree: Tree<CustomisableContent>,
   edits: ContentEdit[],
-  setSubmitting: (b: boolean) => boolean,
+  setSubmitting: (b: boolean) => void,
   dispatch: Dispatch<any>,
   close: () => void
 ) => {
@@ -261,4 +256,13 @@ const CheckoutModalInner: React.FC<CheckoutModalProps> = ({
   </WithTranslate>
 );
 
-export const CheckoutModal = withState('submitting', 'setSubmitting', false)(CheckoutModalInner);
+export const CheckoutModal = (props: Omit<CheckoutModalProps, 'submitting' | 'setSubmitting'>) => {
+  const [submitting, setSubmitting] = useState(false);
+  return (
+    <CheckoutModalInner
+      {...props}
+      submitting={submitting}
+      setSubmitting={setSubmitting}
+    />
+  );
+};

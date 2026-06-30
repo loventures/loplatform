@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useCollapse } from 'react-collapsed';
 import { RiKeyLine } from 'react-icons/ri';
 import { useDispatch } from 'react-redux';
-import VisibilitySensor from 'react-visibility-sensor';
+import VisibilitySensor from './VisibilitySensor';
 import { Spinner } from 'reactstrap';
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -128,7 +128,7 @@ export const NarrativeAsset: React.FC<{
   const parentName = contextNames[contextNames.length - 1];
   const fullPath = contextPath ? `${contextPath}.${name}` : name;
 
-  const innerRef = useRef<HTMLDivElement>();
+  const innerRef = useRef<HTMLDivElement>(undefined);
 
   // scroll all onscreen if just created inline
   useEffect(() => {

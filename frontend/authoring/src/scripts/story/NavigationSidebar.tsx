@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -75,7 +75,7 @@ export const NavigationSidebar: React.FC = () => {
     if (contextPath) setExpanded(e => setAdd(e, contextPath.split('.')));
   }, [contextPath]);
 
-  const divRef = useRef<HTMLDivElement | null>();
+  const divRef = useRef<HTMLDivElement | null>(undefined);
   useEffect(() => {
     if (!loaded || structureHidden) return;
     const timeout = setTimeout(() => {

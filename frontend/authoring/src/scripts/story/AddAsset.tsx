@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,6 @@
  */
 
 import classNames from 'classnames';
-import { push } from 'connected-react-router';
 import gretchen from '../grfetchen/';
 import { mapValues } from 'lodash';
 import qs from 'qs';
@@ -49,6 +48,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import { trackAuthoringEvent } from '../analytics';
 import { trackNarrativeAdd, trackNarrativePaste } from '../analytics/AnalyticsEvents';
+import { pushPath } from '../dcmStore';
 import { reloadAssetEditor } from '../editor/assetEditorActions';
 import edgeRules from '../editor/EdgeRuleConstants';
 import {
@@ -154,7 +154,7 @@ const addContent = (
         dispatch(reloadAssetEditor());
         const last = names[names.length - 1];
         if (last && redirectFindAdd) {
-          dispatch(push(editorUrl('story', branchId, last, contextPath, { confirm: false })));
+          pushPath(editorUrl('story', branchId, last, contextPath, { confirm: false }));
         }
       })
       .catch(e => {
@@ -171,7 +171,7 @@ const addContent = (
     }
     if (last) {
       if (redirectFindAdd) {
-        dispatch(push(editorUrl('story', branchId, last, contextPath, { confirm: false })));
+        pushPath(editorUrl('story', branchId, last, contextPath, { confirm: false }));
       } else {
         dispatch(autoSaveProjectGraphEdits());
       }
@@ -190,7 +190,7 @@ const addContent = (
       const last = results.objects[results.objects.length - 1];
       dispatch(reloadAssetEditor());
       if (last && redirectFindAdd) {
-        dispatch(push(editorUrl('story', branchId, last, contextPath, { confirm: false })));
+        pushPath(editorUrl('story', branchId, last, contextPath, { confirm: false }));
       }
     };
     return remoteCopy();
@@ -272,7 +272,7 @@ const addAssetAction =
       const asset = addAsset(typeId, parent, after, before, group, polyglot, dispatch);
       if (redirect) {
         // suppress autosaving the new asset before navigating
-        dispatch(push(editorUrl('story', branchId, asset, contextPath, { confirm: false })));
+        pushPath(editorUrl('story', branchId, asset, contextPath, { confirm: false }));
       }
       // no autosave because we'll autosave on blur
     };
@@ -365,8 +365,8 @@ export const AddAsset: React.FC<AddAssetProps> = ({
 }) => {
   const polyglot = usePolyglot();
   const dispatch = useDispatch();
-  const divRef = useRef<HTMLDivElement>();
-  const buttonRef = useRef<HTMLButtonElement>();
+  const divRef = useRef<HTMLDivElement>(undefined);
+  const buttonRef = useRef<HTMLButtonElement>(undefined);
   const id = `add-${parent}-${before}-${after}`;
   const parentTypeId = useEditedAssetTypeId(parent) ?? 'course.1';
   const group = childEdgeGroup(parentTypeId);

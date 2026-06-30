@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,16 +24,16 @@ import { presenceChatFeature } from '../utilities/preferences';
 import React, { useEffect } from 'react';
 import { useIdleTimer } from 'react-idle-timer';
 
-import { NgPresenceService } from '../presence/PresenceService';
+import { presenceService } from '../presence/presenceServiceImpl.ts';
+import { idleService } from '../presence/idleServiceImpl.ts';
 import LearnerPreviewHeader from './learnerPreviewHeader/LearnerPreviewHeader';
 import MainContent from './MainContent';
 import PageHeader from './pageHeader/PageHeader';
 import { OnlineUsersPanel } from './presentUsers/presentUsers';
 import ReviewPeriodBanner from './ReviewPeriodBanner';
-import { lojector } from '../loject';
 
 export function setPresence(edgePath?: any, assetId?: any) {
-  const PS: NgPresenceService = lojector.get('PresenceService');
+  const PS = presenceService;
   const context: number = Course.id;
   if (typeof edgePath === 'number' || edgePath === undefined) {
     PS.setScenes([{ context }]);
@@ -43,9 +43,9 @@ export function setPresence(edgePath?: any, assetId?: any) {
 }
 
 export type PageContainerProps = {
-  renderBreadcrumbs?: () => JSX.Element;
-  renderNavPanel?: () => JSX.Element;
-  renderBanner?: () => JSX.Element;
+  renderBreadcrumbs?: () => React.JSX.Element;
+  renderNavPanel?: () => React.JSX.Element;
+  renderBanner?: () => React.JSX.Element;
   wide?: boolean;
   presenceDependency?: Array<number | string>;
 } & React.PropsWithChildren;
@@ -64,12 +64,10 @@ const PageContainer: React.FC<PageContainerProps> = ({
       : setPresence(presenceDependency[0], presenceDependency[1]);
   }, presenceDependency);
 
-  const IdleService: any = lojector.get('IdleService');
-
   useIdleTimer({
     timeout: 1000, // 1 sec
-    onIdle: () => IdleService.onIdleStart(),
-    onActive: () => IdleService.onIdleEnd(),
+    onIdle: () => idleService.onIdleStart(),
+    onActive: () => idleService.onIdleEnd(),
     debounce: 500,
   });
 

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -155,7 +155,7 @@ export const setFeedbackStale = (stale: boolean) => ({
 type UpdateAction = 'create' | 'update' | 'delete' | 'activity' | 'archive';
 
 export const remoteFeedbackUpdate =
-  (_action: UpdateAction, updater: number /*, _id: number | null*/): Thunk =>
+  (_action: UpdateAction, updater: number, _id?: number | null): Thunk =>
   (dispatch, getState) => {
     const { user, feedback } = getState();
     if (updater === user.profile?.id) return; // ignore my own updates. TODO should be tab session id.

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -72,7 +72,7 @@ export const PartSourceEditor: React.FC<{
   // So we detect command F and go to print mode (never to leave). We could just
   // always go to print mode but this seems safer?
   // https://discuss.codemirror.net/t/viewport-issues-with-cm-6/3586/6
-  const editorRef = useRef<any>(); // any because we are poking inside EditorView
+  const editorRef = useRef<any>(undefined); // any because we are poking inside EditorView
   useEffect(() => {
     // on first render this will be null so we won't always default to print mode
     if (editorRef.current) {

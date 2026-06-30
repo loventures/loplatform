@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -32,7 +32,7 @@ import { qnaEnabled, smeFeedbackEnabled } from '../utilities/preferences';
 import { selectPrintView, selectRouter } from '../utilities/rootSelectors';
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouteMatch } from 'react-router';
+import { useMatch } from 'react-router-dom';
 
 import { toggleQnaSideBar } from '../qna/qnaActions';
 
@@ -43,8 +43,8 @@ const ERAppContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
     graderOpenState: { status: graderOpen },
     qna: { open: qnaOpen },
   } = useUiState();
-  const match = useRouteMatch<{ questionId: string }>('/instructor/qna/question/:questionId'); // hack to check if we are using the qna Route
-  const qnaRoute = Boolean(match?.params.questionId) ?? false;
+  const match = useMatch('/instructor/qna/question/:questionId/*'); // hack to check if we are using the qna Route
+  const qnaRoute = Boolean(match?.params.questionId);
   const {
     path,
     searchParams: { qna },

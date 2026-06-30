@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,14 +19,19 @@ import { Translate } from '../../../../i18n/translationContext.tsx';
 import React from 'react';
 // @ts-ignore
 import { VideoActionsProps } from 'react-video-recorder';
+// Vite 8 CJS interop: unwrap the default exports of these deep CJS modules.
 // @ts-ignore
-import Countdown from 'react-video-recorder/lib/defaults/countdown';
+import CountdownModule from 'react-video-recorder/lib/defaults/countdown';
 // @ts-ignore
-import RecordButton from 'react-video-recorder/lib/defaults/record-button';
+import RecordButtonModule from 'react-video-recorder/lib/defaults/record-button';
 // @ts-ignore
-import StopButton from 'react-video-recorder/lib/defaults/stop-button';
+import StopButtonModule from 'react-video-recorder/lib/defaults/stop-button';
 // @ts-ignore
-import Timer from 'react-video-recorder/lib/defaults/timer';
+import TimerModule from 'react-video-recorder/lib/defaults/timer';
+const Countdown = (CountdownModule as any).default ?? CountdownModule;
+const RecordButton = (RecordButtonModule as any).default ?? RecordButtonModule;
+const StopButton = (StopButtonModule as any).default ?? StopButtonModule;
+const Timer = (TimerModule as any).default ?? TimerModule;
 import { Button } from 'reactstrap';
 
 /**

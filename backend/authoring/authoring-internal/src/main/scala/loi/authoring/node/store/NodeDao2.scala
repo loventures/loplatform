@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,7 +30,7 @@ import loi.authoring.asset.service.exception.AssetLoadNoSuchTypeException
 import loi.authoring.asset.store.JsonAndSpecialProps
 import loi.authoring.asset.{Asset, AssetInfo, NodeInfo}
 import org.hibernate.query.NativeQuery
-import org.hibernate.{CacheMode, Session}
+import org.hibernate.{CacheMode, OrderingMode, Session, SessionCheckMode}
 import scaloi.syntax.boxes.*
 
 import java.time.{LocalDateTime, ZoneId}
@@ -92,11 +92,13 @@ class NodeDao2(
   def load(ids: Iterable[Long]): List[NodeEntity2] =
     ThreadTerminator.check()
     session
-      .byMultipleIds(classOf[NodeEntity2])
-      .enableSessionCheck(true)
-      .enableOrderedReturn(false)
-      .`with`(CacheMode.NORMAL)
-      .multiLoad(ids.boxInsideTo[java.util.List]())
+      .findMultiple(
+        classOf[NodeEntity2],
+        ids.boxInsideTo[java.util.List](),
+        OrderingMode.UNORDERED,
+        SessionCheckMode.ENABLED,
+        CacheMode.NORMAL
+      )
       .asScala
       .toList
   end load

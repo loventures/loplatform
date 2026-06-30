@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,7 @@
  */
 
 import * as React from 'react';
-import { lifecycle, withState } from 'recompose';
-import { compose } from 'redux';
+import { useEffect, useState } from 'react';
 
 import LoadingSpinner from './index.tsx';
 
@@ -29,19 +28,11 @@ type FadeInLoaderProps = {
 const DEFAULT_DELAY = 1000;
 const DEFAULT_DURATION = 500;
 
-export const FadeInLoader: React.ComponentType<FadeInLoaderProps> = compose(
-  withState('visible', 'setVisible', false),
-  lifecycle<FadeInLoaderProps, Record<string, unknown>, any>({
-    componentDidMount() {
-      this.timeout = window.setTimeout(() => {
-        (this.props as any).setVisible(true);
-      }, this.props.delay || DEFAULT_DELAY);
-    },
-    componentWillUnmount() {
-      window.clearInterval(this.timeout);
-    },
-  })
-)(({ visible, duration, message }: FadeInLoaderProps & { visible: boolean }) => (
+const FadeInLoaderInner = ({
+  visible,
+  duration,
+  message,
+}: FadeInLoaderProps & { visible: boolean }) => (
   <React.Fragment>
     <LoadingSpinner
       message={message}
@@ -53,4 +44,23 @@ export const FadeInLoader: React.ComponentType<FadeInLoaderProps> = compose(
       }}
     />
   </React.Fragment>
-)) as any; // HOCs are lies;
+);
+
+export const FadeInLoader: React.ComponentType<FadeInLoaderProps> = (
+  props: FadeInLoaderProps
+) => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      setVisible(true);
+    }, props.delay || DEFAULT_DELAY);
+    return () => window.clearInterval(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <FadeInLoaderInner
+      {...props}
+      visible={visible}
+    />
+  );
+};

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,6 @@ import { CustomisableContent } from '../../../api/customizationApi';
 import { LoCheckbox } from '../../../directives/LoCheckbox';
 import { CreditTypes } from '../../../utilities/creditTypes';
 import React from 'react';
-import { withHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 
 import { setForCredit } from '../contentEdits';
@@ -44,8 +43,8 @@ const ForCreditEditorInner: React.FC<ForCreditEditorProps> = ({ content, toggleF
   </span>
 );
 
-export const ForCreditEditor = withHandlers({
-  toggleForCredit: (props: ForCreditEditorOuterProps) => () => {
+export const ForCreditEditor = (props: ForCreditEditorOuterProps) => {
+  const toggleForCredit = () => {
     props.dispatch(
       addEdit(
         setForCredit({
@@ -54,5 +53,11 @@ export const ForCreditEditor = withHandlers({
         })
       )
     );
-  },
-})(ForCreditEditorInner);
+  };
+  return (
+    <ForCreditEditorInner
+      {...props}
+      toggleForCredit={toggleForCredit}
+    />
+  );
+};

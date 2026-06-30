@@ -1,3 +1,4 @@
+@use 'sass:map';
 /*
   name because flex-row is taken by bootstrap
   this over normal row/col because those use non-even padding based spacing
@@ -23,7 +24,7 @@
   flex-direction: row;
   align-items: center;
 
-  $flex-row-content-gutter: map-get($spacers, 2);
+  $flex-row-content-gutter: map.get($spacers, 2);
 
   &:not(.flex-wrap) {
     margin: 0 #{-$flex-row-content-gutter};

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -47,7 +47,7 @@ import { Polyglot } from '../types/polyglot';
 import PreferencesModal from './PreferencesModal';
 import { MdMenu } from 'react-icons/md';
 
-const Navigation: React.FC<{ hidden: boolean }> = () => {
+const Navigation: React.FC<{ hidden?: boolean }> = () => {
   const { chatEnabled } = useDcmSelector(s => s.configuration);
   const title = useDcmSelector(s => s.configuration?.domain?.name);
   const logoUrl = useDcmSelector(s => s.configuration?.domain?.logo?.url);

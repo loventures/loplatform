@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,10 +18,8 @@
 import axios from 'axios';
 import Course from '../../bootstrap/course';
 import { withTranslation } from '../../i18n/translationContext';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Card, CardBody, CardHeader, FormGroup, Input, Label } from 'reactstrap';
-import { withHandlers, withState } from 'recompose';
-import { compose } from 'redux';
 
 const DueDatePolicies = ({
   translate,
@@ -74,32 +72,47 @@ const DueDatePolicies = ({
   </Card>
 );
 
-export default compose<React.ComponentType>(
-  withState('saving', 'setSaving', false),
-  withState('dirty', 'setDirty', false),
-  withState('enforceDueDate', 'setEnforceDueDate', () => {
-    return window.lo_platform.preferences.strictDueDate;
-  }),
-  withHandlers({
-    updateForm: (props: any) => (event: any) => {
-      const value = event.target.value === 'true';
-      props.setEnforceDueDate(value);
-      props.setDirty(true);
-    },
-    updateDueDatePolicies: (props: any) => () => {
-      // loConfig.instructorCustomizations.dueDate
-      const url = `/api/v2/contentConfig/dueDate;context=${Course.id}`;
-      props.setSaving(true);
-      axios
-        .post(url, {
-          strictDueDate: props.enforceDueDate,
-        })
-        .then(() => {
-          window.lo_platform.preferences.strictDueDate = props.enforceDueDate;
-          props.setSaving(false);
-          props.setDirty(false);
-        });
-    },
-  }),
-  withTranslation
-)(DueDatePolicies);
+const DueDatePoliciesWrapper = (props: any) => {
+  const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [enforceDueDate, setEnforceDueDate] = useState(
+    () => window.lo_platform.preferences.strictDueDate
+  );
+
+  const updateForm = (event: any) => {
+    const value = event.target.value === 'true';
+    setEnforceDueDate(value);
+    setDirty(true);
+  };
+
+  const updateDueDatePolicies = () => {
+    // loConfig.instructorCustomizations.dueDate
+    const url = `/api/v2/contentConfig/dueDate;context=${Course.id}`;
+    setSaving(true);
+    axios
+      .post(url, {
+        strictDueDate: enforceDueDate,
+      })
+      .then(() => {
+        window.lo_platform.preferences.strictDueDate = enforceDueDate;
+        setSaving(false);
+        setDirty(false);
+      });
+  };
+
+  return (
+    <DueDatePolicies
+      {...props}
+      saving={saving}
+      setSaving={setSaving}
+      dirty={dirty}
+      setDirty={setDirty}
+      enforceDueDate={enforceDueDate}
+      setEnforceDueDate={setEnforceDueDate}
+      updateForm={updateForm}
+      updateDueDatePolicies={updateDueDatePolicies}
+    />
+  );
+};
+
+export default withTranslation(DueDatePoliciesWrapper as React.ComponentType<any>);

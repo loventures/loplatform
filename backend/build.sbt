@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -67,12 +67,16 @@ ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
 
 // CVE-2025-55163, CVE-2025-58057 via aws .. show coreApi/dependencyTree
-ThisBuild / dependencyOverrides += "io.netty" % "netty-codec-http2"             % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-codec"                   % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-handler"                 % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty" % "netty-transport-classes-epoll" % "4.2.15.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec-http2"             % "4.2.15.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec"                   % "4.2.15.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-handler"                 % "4.2.15.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-transport-classes-epoll" % "4.2.15.Final"
 // CVE-2025-58369 via http4s
-ThisBuild / dependencyOverrides += "co.fs2"  %% "fs2-io"                        % "3.13.0"
+ThisBuild / dependencyOverrides += "co.fs2"                    %% "fs2-io"                        % Dependencies.FS2.fs2Version
+// CVE-2026-54513 etc
+ThisBuild / dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind"              % Dependencies.JSON.Jackson.jacksonVersion
+ThisBuild / dependencyOverrides += "tools.jackson.core"         % "jackson-databind"              % Dependencies.JSON.Jackson.jackson3Version
+ThisBuild / dependencyOverrides += "tools.jackson.module"      %% "jackson-module-scala"          % Dependencies.JSON.Jackson.jackson3Version
 
 inThisBuild(
   Seq[Def.Setting[_]](

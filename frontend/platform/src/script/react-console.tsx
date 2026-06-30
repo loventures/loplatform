@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -80,7 +80,9 @@ class ConsolePrompt extends React.Component<ConsolePromptProps, {}> {
       return [
         this.props.value,
         <span
-          ref={ref => (this.child.cursor = ref)}
+          ref={ref => {
+            (this.child.cursor = ref);
+          }}
           key="cursor"
           className="react-console-cursor"
         >
@@ -91,7 +93,9 @@ class ConsolePrompt extends React.Component<ConsolePromptProps, {}> {
       return [
         this.props.value.substring(0, this.props.point),
         <span
-          ref={ref => (this.child.cursor = ref)}
+          ref={ref => {
+            (this.child.cursor = ref);
+          }}
           key="cursor"
           className="react-console-cursor"
         >
@@ -1287,7 +1291,9 @@ export default class extends React.Component<ConsoleProps, ConsoleState> {
   render() {
     return (
       <div
-        ref={ref => (this.child.container = ref)}
+        ref={ref => {
+          (this.child.container = ref);
+        }}
         className={
           'react-console-container ' +
           (this.state.focus ? 'react-console-focus' : 'react-console-nofocus')
@@ -1328,7 +1334,9 @@ export default class extends React.Component<ConsoleProps, ConsoleState> {
         ) : null}
         <div style={{ overflow: 'hidden', height: 1, width: 1 }}>
           <textarea
-            ref={ref => (this.child.typer = ref)}
+            ref={ref => {
+              (this.child.typer = ref);
+            }}
             className="react-console-typer"
             autoComplete="off"
             autoCorrect="off"
@@ -1350,7 +1358,9 @@ export default class extends React.Component<ConsoleProps, ConsoleState> {
         </div>
         <div
           style={{ lineHeight: '1px' }}
-          ref={ref => (this.child.focus = ref)}
+          ref={ref => {
+            (this.child.focus = ref);
+          }}
         >
           &nbsp;
         </div>

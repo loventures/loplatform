@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,10 @@
  */
 
 import { useContentResource } from '../../resources/ContentsResource';
-import { useContentGatingInfoResource } from '../../resources/GatingInformationResource';
+import {
+  GatingInfoWithComputedProperties,
+  useContentGatingInfoResource,
+} from '../../resources/GatingInformationResource';
 import { useCourseSelector } from '../../loRedux';
 import ContentAvailabilityMessage from '../../contentPlayerComponents/parts/ContentAvailabilityMessage';
 import { useTranslation } from '../../i18n/translationContext';
@@ -24,11 +27,13 @@ import { selectCurrentUser } from '../../utilities/rootSelectors';
 import React, { SyntheticEvent, useState } from 'react';
 import { Tooltip } from 'reactstrap';
 
+const emptyGatingInfo: GatingInfoWithComputedProperties = {} as any; // work around crap data model
+
 const useGatingTooltip = (contentId: string, target?: string) => {
   const currentUser = useCourseSelector(selectCurrentUser);
   const { isInstructor, id: userId } = currentUser;
   const content = useContentResource(contentId, userId);
-  const gatingInfo = useContentGatingInfoResource(contentId, userId);
+  const gatingInfo = useContentGatingInfoResource(contentId, userId) ?? emptyGatingInfo;
   const { isLocked, isGated, selfGated } = gatingInfo;
   const locked = isLocked && !isInstructor;
   const [showTooltip, setShowTooltip] = useState(false);

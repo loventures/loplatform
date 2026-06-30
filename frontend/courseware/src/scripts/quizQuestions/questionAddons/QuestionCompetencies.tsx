@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,7 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ConnectedRouter } from 'connected-react-router';
 import Course from '../../bootstrap/course.ts';
 import CompetencyInfoModal from '../../instructorPages/competencyList/components/CompetencyInfoModal.tsx';
 import competencyResource, {
@@ -23,9 +22,7 @@ import competencyResource, {
   CompetencyWithRelations,
 } from '../../resources/CompetencyResource.ts';
 import { useCourseSelector } from '../../loRedux';
-import { WithTranslateProps, withTranslationFor2Angular } from '../../i18n/translationContext.tsx';
-import { history } from '../../utilities/history';
-import { react2angularWithNgProvider } from '../../utilities/ngReduxProvider';
+import { WithTranslateProps } from '../../i18n/translationContext.tsx';
 import { selectCurrentUser } from '../../utilities/rootSelectors.ts';
 import React, { useEffect, useState } from 'react';
 
@@ -77,28 +74,16 @@ const QuestionCompetencies: React.FC<QuestionCompetenciesProps> = ({ competencie
         })}
       </ul>
       {showCompetency && (
-        <ConnectedRouter history={history}>
-          <CompetencyInfoModal
-            competency={showCompetency}
-            viewingAs={viewingAs}
-            initialFilter="ACTIVITIES_ONLY"
-            toggleModal={() => setShowCompetency(undefined)}
-          />
-        </ConnectedRouter>
+        // No nested Router here: this renders within the app's router (v6 forbids nesting Routers).
+        <CompetencyInfoModal
+          competency={showCompetency}
+          viewingAs={viewingAs}
+          initialFilter="ACTIVITIES_ONLY"
+          toggleModal={() => setShowCompetency(undefined)}
+        />
       )}
     </section>
   );
 };
 
 export default QuestionCompetencies;
-
-export const questionCompetenciesComponent = angular
-  .module('lo.questions.addons.questionCompetencies', [])
-  .component(
-    'questionCompetencies',
-    react2angularWithNgProvider(
-      withTranslationFor2Angular(QuestionCompetencies),
-      ['competencies'],
-      []
-    )
-  );

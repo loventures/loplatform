@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import discussionBoardStateReducer, {
   threadsDataReducer,
   threadsDataSlice,
 } from '../discussion/reducer';
-import { connectRouter, RouterState } from 'connected-react-router';
+import { createRouterReducer } from './routerReducer';
 import { Course, UserInfo } from '../../loPlatform';
 import { Grade, Progress } from '../api/contentsApi';
 import { GradebookColumn } from '../api/gradebookApi';
@@ -46,7 +46,7 @@ import { history } from '../utilities/history';
 import { LoadingState, loadingStateReducer } from '../utilities/loadingStateUtils';
 import { createIdMapReducer, createNamedReducer } from '../utilities/reduxify';
 import { getStatusFlagReducer, getStatusValueReducer } from '../utilities/statusFlagReducer';
-import { combineReducers, Reducer } from 'redux';
+import { combineReducers } from 'redux';
 
 import { surveyReducer } from '../components/survey/contentSurveyReducer';
 import { eventsReducer } from '../events/eventsReducer';
@@ -62,7 +62,6 @@ import { contentOverlayUpdateReducer } from './contentOverlayUpdateReducer';
 import { contentsReducer } from './contentsReducer';
 import { enrollmentCountReducer } from './enrollmentCountReducer';
 import { overallGradeReducer } from './overallGradeByUser';
-import { LocationState } from 'history';
 
 const apiReducer = combineReducers({
   dueDateExemptions: dueDateExemptionsReducer,
@@ -415,7 +414,7 @@ const reducer = combineReducers({
   api: apiReducer,
   ui: uiReducer,
   courseCustomizations: customizationsReducer,
-  router: connectRouter(history) as Reducer<RouterState<LocationState>>,
+  router: createRouterReducer(history.location, history.action),
   events: eventsReducer,
   scorm: scormReducer,
   survey: surveyReducer,

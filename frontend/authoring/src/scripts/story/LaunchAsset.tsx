@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import Loading from '../authoringUi/Loading';
 import { useEditedAssetContextPath, useEditedAssetTypeId } from '../graphEdit';
@@ -29,7 +29,7 @@ import { useRevisionCommit } from './storyHooks';
 
 export const LaunchAsset: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const homeNodeName = useHomeNodeName();
   const name = useRouteParameter('name');
   const nodeName = subPageNames[name] || !name || name === 'home' ? homeNodeName : name;
@@ -53,7 +53,7 @@ export const LaunchAsset: React.FC = () => {
 
   useEffect(() => {
     if (typeId) {
-      history.replace(editorUrl('story', branchId, nodeName, contextPath, { commit }));
+      navigate(editorUrl('story', branchId, nodeName, contextPath, { commit }), { replace: true });
     }
   }, [nodeName, typeId, branchId, contextPath]);
 

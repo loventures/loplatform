@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -138,14 +138,7 @@ const firstNonEmpty = <T>(...args: T[][]) => find(args, a => !isEmpty(a)) || [];
 const mapAttachments = (ids: number[], infos: Record<string, AttachmentInfo>) =>
   map(ids, id => infos[id]);
 
-export const selectSubmissionActivityComponent = createStructuredSelector<
-  CourseState,
-  {
-    content: ContentWithRelationships;
-    submissionActivity: SubmissionActivity;
-    viewingAs: ViewingAs;
-  }
->({
+export const selectSubmissionActivityComponent = createStructuredSelector({
   // NOTE: we have to assume if we're here that pageContent isn't the course. bad typings.
   content: selectPageContent as Selector<CourseState, ContentWithRelationships>,
   submissionActivity: selectSubmissionActivity,

@@ -194,7 +194,7 @@ Preview content using the _Eye of Horus_ menu.
 
 ---
 
-LO Platform copyright &copy; 2007–2025 [LO Ventures LLC](https://lo.ventures/).
+LO Platform copyright &copy; 2007–2026 [LO Ventures LLC](https://lo.ventures/).
 Released under the terms of the [AGPL-3.0](LICENSE.md).
 For custom licensing, contact us at `info` @ `lo.ventures`.
 For culpability, please see the [hall of blame](BLAME.md).

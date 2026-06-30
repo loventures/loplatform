@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,9 +19,7 @@ import { CustomisableContent } from '../../../api/customizationApi';
 import { RichTextEditor } from '../../../contentEditor/directives/richTextEditor';
 import { useTranslation } from '../../../i18n/translationContext';
 import React, { useState } from 'react';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
-import Button from 'reactstrap/lib/Button';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 // DCM editor uses span style, where CKE uses strong.
 const slightlyFixHtml = (html?: string | null) =>

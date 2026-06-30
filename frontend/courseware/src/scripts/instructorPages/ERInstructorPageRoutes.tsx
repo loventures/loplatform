@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -44,133 +44,155 @@ import {
   qnaEnabled,
 } from '../utilities/preferences';
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 
 import InstructorMulticastPage from '../qna/InstructorMulticastPage';
 
+// Paths are relative to the /instructor/* mount in ERAppRoutes. v6 matches exactly by default, so
+// non-leaf routes carry /* to keep v5's prefix-matching (e.g. gradebook/controls/content nest).
+const ContentPlayerRoute: React.FC = () => {
+  const location = useLocation();
+  return (
+    <ERContentPlayer
+      search={location.search}
+      state={location.state}
+    />
+  );
+};
+
+const SearchRoute: React.FC = () => {
+  const location = useLocation();
+  return <ERSearchPage search={location.search} />;
+};
+
+const QnaQuestionRoute: React.FC = () => {
+  const { questionId } = useParams<{ questionId: string }>();
+  return <InstructorQnaQuestionPage questionId={+questionId!} />;
+};
+
+const DashboardRedirect: React.FC = () => {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={redirectPreserveParams('/instructor/dashboard', location)}
+    />
+  );
+};
+
 const ERInstructorPageRoutes = () => {
   return (
-    <Switch>
-      <Route path="/instructor/dashboard">
-        <ERInstructorDashboard />
-      </Route>
-
+    <Routes>
       <Route
-        path="/instructor/content/:contentId"
-        render={({ location }) => (
-          <ERContentPlayer
-            search={location.search}
-            state={location.state}
-          />
-        )}
+        path="dashboard/*"
+        element={<ERInstructorDashboard />}
       />
 
-      <Route path="/instructor/print/:contentId">
-        <ERContentPrinter />
-      </Route>
+      <Route
+        path="content/:contentId/*"
+        element={<ContentPlayerRoute />}
+      />
 
-      <Route path="/instructor/discussions">
-        <ERDiscussionListPage />
-      </Route>
+      <Route
+        path="print/:contentId/*"
+        element={<ERContentPrinter />}
+      />
 
-      <Route path="/instructor/learners">
-        <ERLearnerListPage />
-      </Route>
+      <Route
+        path="discussions/*"
+        element={<ERDiscussionListPage />}
+      />
+
+      <Route
+        path="learners/*"
+        element={<ERLearnerListPage />}
+      />
 
       {progressReportPageEnabled && (
-        <Route path="/instructor/progress-report">
-          <ProgressReportPage />
-        </Route>
+        <Route
+          path="progress-report/*"
+          element={<ProgressReportPage />}
+        />
       )}
 
-      <Route path="/instructor/assignments/:contentId/grader">
-        <ERGraderPage />
-      </Route>
+      <Route
+        path="assignments/:contentId/grader/*"
+        element={<ERGraderPage />}
+      />
 
-      <Route path="/instructor/assignments/:contentId">
-        <ERActivityOverviewPage />
-      </Route>
+      <Route
+        path="assignments/:contentId/*"
+        element={<ERActivityOverviewPage />}
+      />
 
-      <Route path="/instructor/assignments">
-        <ERAssignmentsPage />
-      </Route>
+      <Route
+        path="assignments/*"
+        element={<ERAssignmentsPage />}
+      />
 
-      <Route path="/instructor/gradebook/learner-assignments">
-        <ERGradebookLearnerAssignmentsPage />
-      </Route>
+      <Route
+        path="gradebook/learner-assignments/*"
+        element={<ERGradebookLearnerAssignmentsPage />}
+      />
 
-      <Route path="/instructor/gradebook">
-        <ERGradebookPage />
-      </Route>
+      <Route
+        path="gradebook/*"
+        element={<ERGradebookPage />}
+      />
 
-      <Route path="/instructor/competencies">
-        <ERInstructorCourseCompetenciesPage />
-      </Route>
+      <Route
+        path="competencies/*"
+        element={<ERInstructorCourseCompetenciesPage />}
+      />
 
       {(instructorControlsV2 || instructorLinkChecker || instructorPurgeDiscussions) && (
         <Route
-          key="controls"
-          path="/instructor/controls"
-        >
-          <ERControlsPage />
-        </Route>
+          path="controls/*"
+          element={<ERControlsPage />}
+        />
       )}
 
       <Route
-        key="bookmarks"
-        path="/instructor/bookmarks"
-      >
-        <ERBookmarksPage />
-      </Route>
+        path="bookmarks/*"
+        element={<ERBookmarksPage />}
+      />
 
       {contentSearch && (
         <Route
-          key="search"
-          path="/instructor/search"
-          render={({ location }) => <ERSearchPage search={location.search} />}
+          path="search/*"
+          element={<SearchRoute />}
         />
       )}
 
       {enableAnalyticsPage && (
         <Route
-          key="analytics"
-          path="/instructor/analytics"
-        >
-          <AnalyticsPage />
-        </Route>
+          path="analytics/*"
+          element={<AnalyticsPage />}
+        />
       )}
 
       {qnaEnabled && (
         <>
           <Route
-            key="qna"
-            path="/instructor/qna"
-            exact
-          >
-            <InstructorQnaListPage />
-          </Route>
+            path="qna"
+            element={<InstructorQnaListPage />}
+          />
           <Route
-            key="qnaquestion"
-            path="/instructor/qna/question/:questionId"
-            render={a => <InstructorQnaQuestionPage questionId={+a.match.params.questionId} />}
-          ></Route>
+            path="qna/question/:questionId/*"
+            element={<QnaQuestionRoute />}
+          />
           <Route
-            key="multicast"
-            path="/instructor/qna/send"
-            exact
-          >
-            <InstructorMulticastPage />
-          </Route>
+            path="qna/send"
+            element={<InstructorMulticastPage />}
+          />
         </>
       )}
 
       <Route
-        key="default"
-        render={({ location }) => (
-          <Redirect to={redirectPreserveParams('/instructor/dashboard', location)} />
-        )}
+        path="*"
+        element={<DashboardRedirect />}
       />
-    </Switch>
+    </Routes>
   );
 };
 

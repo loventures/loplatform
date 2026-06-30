@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -34,7 +34,7 @@ import com.learningobjects.cpxp.component.{BaseComponent, ComponentInstance}
 import com.learningobjects.cpxp.service.exception.{BusinessRuleViolationException, ResourceNotFoundException}
 import com.learningobjects.cpxp.service.user.UserDTO
 import com.learningobjects.de.authorization.Secured
-import doobie.implicits.*
+import org.typelevel.doobie.implicits.*
 import loi.asset.question.{EssayQuestion, LikertScaleQuestion1, MultipleChoiceQuestion, RatingScaleQuestion1}
 import loi.asset.survey.{SurveyChoiceQuestion1, SurveyEssayQuestion1}
 import loi.authoring.asset.Asset

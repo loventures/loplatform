@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -43,7 +43,8 @@ import { useTranslation } from '../../i18n/translationContext';
 import * as preferences from '../../utilities/preferences';
 import React, { useEffect, useReducer } from 'react';
 import ERNonContentTitle from '../../commonPages/contentPlayer/ERNonContentTitle';
-import { lojector } from '../../loject';
+import { progressService } from '../../services/progressService.ts';
+import { gradebookAPI } from '../../services/gradebookAPI.ts';
 
 type Grade = {
   user_id: number;
@@ -72,7 +73,7 @@ const ERLearnerListPage: React.FC = () => {
       if (state.allGrades != null) {
         _dispatch(setGrades(students, state.allGrades));
       } else if (state.grades == null) {
-        (lojector.get('GradebookAPI') as any)
+        gradebookAPI
           .getOverallGrades(
             students.map(student => student.id),
             undefined
@@ -96,7 +97,7 @@ const ERLearnerListPage: React.FC = () => {
       if (state.allProgress != null) {
         _dispatch(setProgress(students, state.allProgress));
       } else if (state.progress == null) {
-        (lojector.get('ProgressService') as any)
+        progressService
           .getOverallProgressReportForLearners(
             students.map(student => student.id),
             undefined
@@ -111,7 +112,7 @@ const ERLearnerListPage: React.FC = () => {
   // Load all grades when sorting by grade
   useEffect(() => {
     if (!state.allGrades && state.filters.sort.column === 'GRADE')
-      (lojector.get('GradebookAPI') as any)
+      gradebookAPI
         .getOverallGrades(undefined, undefined)
         .then((grades: SrsArray<Grade>) => {
           _dispatch(setAllGrades(numericKeyBy(grades, grade => grade.user_id)));
@@ -124,7 +125,7 @@ const ERLearnerListPage: React.FC = () => {
       !state.allProgress &&
       (state.filters.sort.column === 'PROGRESS' || state.filters.sort.column === 'ACTIVITY')
     )
-      (lojector.get('ProgressService') as any)
+      progressService
         .getOverallProgressReportForLearners(undefined, undefined)
         .then((progress: Record<number, OverallProgress>) => {
           _dispatch(setAllProgress(progress));

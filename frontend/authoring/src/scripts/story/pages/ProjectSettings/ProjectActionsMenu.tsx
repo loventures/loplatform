@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../../../analytics';
@@ -68,7 +68,7 @@ export const ProjectActionsMenu: React.FC<{
   dirty: boolean;
 }> = ({ dirty }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const editMode = useIsStoryEditMode();
   const project = useDcmSelector(s => s.layout.project);
   const user = useDcmSelector(s => s.configuration.user);
@@ -114,7 +114,7 @@ export const ProjectActionsMenu: React.FC<{
         <DropdownItem
           id="project-settings-delete-button"
           onClick={() => {
-            dispatch(deleteProjectAction(project, () => history.push('/')));
+            dispatch(deleteProjectAction(project, () => navigate('/')));
           }}
           disabled={!editMode || !canDelete}
           className="text-danger"

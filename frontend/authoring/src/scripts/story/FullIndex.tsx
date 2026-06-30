@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,15 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { replace } from 'connected-react-router';
 import qs from 'qs';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 import { VscListTree } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
-import VisibilitySensor from 'react-visibility-sensor';
+import VisibilitySensor from './VisibilitySensor';
 import { Input, InputGroup, InputGroupText, Spinner } from 'reactstrap';
 
+import { replacePath } from '../dcmStore';
 import edgeRuleConstants from '../editor/EdgeRuleConstants';
 import { useFeedbackCounts } from '../feedback/feedbackHooks';
 import { useCurrentContextPath, useEditedAsset, useFilteredContentList } from '../graphEdit';
@@ -52,7 +52,7 @@ export const FullIndex: React.FC<{ name: NodeName; contextPath: string | undefin
 
   useEffect(() => {
     const params = { commit, search: search || undefined, contextPath: contextPath || undefined };
-    dispatch(replace({ search: qs.stringify(params) }));
+    replacePath({ search: qs.stringify(params) });
   }, [search, commit, contextPath]);
 
   const regex = useMemo(() => toMultiWordRegex(search), [search]);
@@ -63,7 +63,7 @@ export const FullIndex: React.FC<{ name: NodeName; contextPath: string | undefin
 
   const contentList = useFilteredContentList(asset, [], questions, search);
 
-  const searchField = useRef<HTMLInputElement>();
+  const searchField = useRef<HTMLInputElement>(undefined);
 
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {

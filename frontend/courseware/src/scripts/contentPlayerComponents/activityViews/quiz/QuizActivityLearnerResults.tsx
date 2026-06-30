@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,7 +30,6 @@ import {
 import { CourseWithDetails, UserWithRoleInfo } from '../../../utilities/rootSelectors.ts';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
 
 import InstructorNotifications from '../../../components/InstructorNotifications.tsx';
 import InstructionsTab from './parts/attemptHistoryTabs/InstructionsTab';
@@ -192,8 +191,9 @@ const QuizActivityLearnerResults: React.FC<ConnectedQuizActivityLearnerResultsPr
   );
 };
 
-// We have to use compose because the garbage selectors otherwise don't work inside a function component
-// in lesson print mode because they look to the browser URL content id, not the parameter content id
-export default compose<ConnectedQuizActivityLearnerResultsProps, QuizActivityLearnerResultsProps>(
-  connect(selectQuizActivityComponent)
-)(QuizActivityLearnerResults);
+// We connect with a wrapper component because the garbage selectors otherwise don't work inside a
+// function component in lesson print mode because they look to the browser URL content id, not the
+// parameter content id
+export default connect(selectQuizActivityComponent)(
+  QuizActivityLearnerResults as any
+) as React.ComponentType<QuizActivityLearnerResultsProps>;

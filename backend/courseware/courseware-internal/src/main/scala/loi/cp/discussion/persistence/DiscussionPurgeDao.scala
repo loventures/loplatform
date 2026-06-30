@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,7 +41,8 @@ class DiscussionPurgeDao(
            |      AND date_trunc('day', descendantactivity AT TIME ZONE :timezoneOffset) <= :purgeBefore
            |      AND pinnedon IS NULL
            |      AND purged IS NULL
-         """.stripMargin)
+         """.stripMargin,
+         classOf[Array[Object]])
       .setParameter("sectionId", sectionId)
       .setParameter("timezoneOffset", timezoneOffset)
       .setParameter("purgeBefore", purgeBefore)
@@ -65,7 +66,7 @@ class DiscussionPurgeDao(
          |UPDATE discussionpost
          |SET purged = :delGuid
          |WHERE id = ANY (cast (:postIds AS BIGINT[]))
-         """.stripMargin)
+         """.stripMargin, classOf[Object])
       .unwrap(classOf[NativeQuery[PostEntity]])
       .addSynchronizedEntityClass(classOf[PostEntity])
       .setParameter("delGuid", delGuid)

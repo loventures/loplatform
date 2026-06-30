@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,27 +16,28 @@
  */
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 
-import { dropboxFolderPath, dropboxPath } from '../router/routes';
 import Dropbox from './Dropbox';
+
+// Descendant routes (mounted under DcmApp's `dropbox/*`), so paths are relative to dropboxPath.
+const DropboxFolder: React.FC = () => {
+  const { folder } = useParams<{ folder: string }>();
+  return <Dropbox folder={parseInt(folder!)} />;
+};
 
 const DropboxRoutes: React.FC = () => {
   return (
-    <Switch>
+    <Routes>
       <Route
-        exact
-        path={dropboxPath}
-      >
-        <Dropbox folder={null} />
-      </Route>
-      <Route
-        path={dropboxFolderPath}
-        render={({ match }) => {
-          return <Dropbox folder={parseInt(match.params['folder'])} />;
-        }}
+        index
+        element={<Dropbox folder={null} />}
       />
-    </Switch>
+      <Route
+        path=":folder"
+        element={<DropboxFolder />}
+      />
+    </Routes>
   );
 };
 

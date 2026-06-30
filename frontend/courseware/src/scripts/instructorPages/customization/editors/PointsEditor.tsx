@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,6 @@ import { CustomisableContent } from '../../../api/customizationApi';
 import { WithTranslate } from '../../../i18n/translationContext';
 import React, { ChangeEvent } from 'react';
 import { Input } from 'reactstrap';
-import { withHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 
 import { changePointsPossible } from '../contentEdits';
@@ -64,8 +63,8 @@ const PointsEditorInner: React.FC<PointsEditorProps> = ({ content, updatePoints 
   </WithTranslate>
 );
 
-export const PointsEditor = withHandlers({
-  updatePoints: (props: PointsEditorOuterProps) => (points: number) => {
+export const PointsEditor = (props: PointsEditorOuterProps) => {
+  const updatePoints = (points: number) => {
     props.dispatch(
       addEdit(
         changePointsPossible({
@@ -74,5 +73,11 @@ export const PointsEditor = withHandlers({
         })
       )
     );
-  },
-})(PointsEditorInner);
+  };
+  return (
+    <PointsEditorInner
+      {...props}
+      updatePoints={updatePoints}
+    />
+  );
+};

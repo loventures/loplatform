@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import GradeBadge from '../../../directives/GradeBadge';
 import { useTranslation } from '../../../i18n/translationContext';
 import React from 'react';
 import { Button, UncontrolledTooltip } from 'reactstrap';
-import { lojector } from '../../../loject';
+import { gradebookAPI } from '../../../services/gradebookAPI.ts';
 import ERNonContentTitle from '../../contentPlayer/ERNonContentTitle.tsx';
 
 type ERLearnerAssignmentsPageHeader = {
@@ -50,10 +50,7 @@ const ERLearnerAssignmentsPageHeader: React.FC<ERLearnerAssignmentsPageHeader> =
           color="primary"
           target="_blank"
           id="StudentGradebookDownload"
-          href={(lojector.get('GradebookAPI') as any).downloadStudentGrades(
-            course.id,
-            viewingAs.id
-          )}
+          href={gradebookAPI.downloadStudentGrades(course.id, viewingAs.id)}
         >
           <span>{translate('DOWNLOAD_STUDENT_GRADEBOOK')}</span>
         </Button>

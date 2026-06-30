@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -70,7 +70,7 @@ const SimpleFilePreview: React.FC<SimpleFilePreviewProps> = ({
         )}
 
         {playType === 'audio' ? (
-          <audio //eslint-disable-line jsx-a11y/media-has-caption
+          <audio
             className="flex-col-fluid"
             controls={true}
             src={audioSrc}

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,10 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import * as angular from 'angular';
 import { useTranslation } from '../../i18n/translationContext.tsx';
 import * as React from 'react';
-import { react2angular } from 'react2angular';
 
 type LoadingSpinnerProps = {
   message?: string;
@@ -65,10 +63,3 @@ const LoadingSpinner = ({ message, className, style }: LoadingSpinnerProps) => {
 };
 
 export default LoadingSpinner;
-
-export const ng = angular
-  .module('lo.directives.loadingSpinner', [])
-  .component(
-    'loadingSpinner',
-    react2angular(LoadingSpinner, ['message', 'className', 'style'], [])
-  );

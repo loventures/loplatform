@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,7 +41,8 @@ object DECommonSettings extends AutoPlugin {
   def baseProjectSettings: Seq[Def.Setting[_]] = Seq(
     updateOptions ~= { _.withCachedResolution(true) },
     Compile / console / scalacOptions --= notInConsole,
-  )
+    Test / console / scalacOptions --= notInConsole,
+  ) ++ Seq(Test).flatMap(testSettings)
 
   private val notInConsole = Seq[String](
     "-Wunused:imports,nowarn",
@@ -61,6 +62,29 @@ object DECommonSettings extends AutoPlugin {
 //    "-Xlint:all",
     "-werror"
   )
+
+  def testSettings(cfg: Configuration) = Seq[Def.Setting[_]](
+    libraryDependencies ++= List(
+      // exclusion because Intellij will pick up the 4.11 version of junit and love it over the 4.13
+      ("com.github.sbt" % "junit-interface" % "0.13.3").exclude("junit", "junit")
+    ) map (_ % cfg),
+    cfg / scalacOptions --= pedantry,
+  )
+
+  lazy val itSettings: Seq[Def.Setting[_]] = inConfig(IntegrationTest)(
+    Defaults.testSettings ++ List(
+      parallelExecution := false,
+      logBuffered       := false // see Buffered Output at https://www.scalatest.org/user_guide/using_scalatest_with_sbt
+    )
+  ) ++ testSettings(IntegrationTest) ++ org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings(IntegrationTest)
+
+  lazy val DbTest: Configuration               = config("dbtest") extend Test
+  lazy val dbTestSettings: Seq[Def.Setting[_]] = inConfig(DbTest)(
+    Defaults.testSettings ++ List(
+      parallelExecution := false,
+      logBuffered       := false // see Buffered Output at https://www.scalatest.org/user_guide/using_scalatest_with_sbt
+    )
+  ) ++ testSettings(DbTest) ++ org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings(DbTest)
 
   override def projectSettings: Seq[Def.Setting[_]] =
     baseProjectSettings

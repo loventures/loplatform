@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,8 +19,7 @@ import classNames from 'classnames';
 import React, { useEffect, useMemo } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { HiArrowUturnLeft, HiArrowUturnRight } from 'react-icons/hi2';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { CONTAINER_AND_ELEMENT_TYPES } from '../editor/EdgeRuleConstants';
 import {
@@ -152,7 +151,7 @@ const PageNumberNavigation: React.FC<{
   const lagTitle = useEditedAssetTitle(lag);
   const lead = siblings[siblingIndex + 1]?.targetName;
   const leadTitle = useEditedAssetTitle(lead);
-  const history = useHistory();
+  const navigate = useNavigate();
   const commit = useRevisionCommit();
   const commitQuery = commit ? `&commit=${commit}` : '';
 
@@ -177,7 +176,7 @@ const PageNumberNavigation: React.FC<{
         const dstContext = e.shiftKey ? spacePrevContext : spaceNextContext;
         e.preventDefault();
         if (dst) {
-          history.push(`/branch/${branchId}/story/${dst}?contextPath=${dstContext}${commitQuery}`);
+          navigate(`/branch/${branchId}/story/${dst}?contextPath=${dstContext}${commitQuery}`);
         }
       }
     };
@@ -190,7 +189,11 @@ const PageNumberNavigation: React.FC<{
   return siblingIndex < 0 && !nextUp ? null : (
     <div className="page-number-cluster">
       <Link
-        to={prevUp ? `${prevUp}?contextPath=${prevUpContext}${commitQuery}` : ''}
+        to={
+          prevUp
+            ? `/branch/${branchId}/story/${prevUp}?contextPath=${prevUpContext}${commitQuery}`
+            : ''
+        }
         className={classNames(
           'btn btn-transparent text-primary border-0 d-flex p-2 br-50 me-2 prev-up',
           (!prevUp || prevUp === lag) && 'disabled'
@@ -225,7 +228,11 @@ const PageNumberNavigation: React.FC<{
         <FiArrowRight />
       </Link>
       <Link
-        to={nextUp ? `${nextUp}?contextPath=${nextUpContext}${commitQuery}` : ''}
+        to={
+          nextUp
+            ? `/branch/${branchId}/story/${nextUp}?contextPath=${nextUpContext}${commitQuery}`
+            : ''
+        }
         className={classNames(
           'btn btn-transparent text-primary border-0 d-flex p-2 br-50 ms-2 next-up',
           !nextUp && 'disabled'

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,7 @@ package loi.cp.analytics.redshift
 import cats.effect.unsafe.implicits.global
 import com.learningobjects.cpxp.component.annotation.Service
 import com.typesafe.config.ConfigFactory
-import doobie.implicits.*
+import org.typelevel.doobie.implicits.*
 import loi.cp.analytics.bus.{AnalyticBusConfiguration, AnalyticBusService, AnalyticBusState}
 import loi.cp.bootstrap.Bootstrap
 import loi.db.Redshift

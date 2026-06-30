@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -32,6 +32,7 @@ import {
 } from '../story/contentStatus';
 import { DataState } from '../story/dataReducer';
 import { StoryState } from '../story/storyReducer';
+import { RouterState } from '../router/routerReducer';
 import { ProjectGraph } from '../structurePanel/projectGraphReducer';
 import { ProjectStructure } from '../structurePanel/projectStructureReducer';
 import { ToastState } from '../toast/reducer';
@@ -72,7 +73,7 @@ export interface DcmState {
   projectStructure: ProjectStructure;
   projectGraph: ProjectGraph;
   graphEdits: ProjectGraphEditState;
-  router: any;
+  router: RouterState;
   user: UserState;
   feedback: FeedbackState;
   story: StoryState;

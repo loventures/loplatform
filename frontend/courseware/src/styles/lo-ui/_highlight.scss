@@ -1,3 +1,4 @@
+@use 'sass:color';
 .highlight {
-  background-color: transparentize($highlight-yellow, 0.5);
+  background-color: color.adjust($highlight-yellow, $alpha: -(0.5));
 }

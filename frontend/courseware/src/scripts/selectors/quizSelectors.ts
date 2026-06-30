@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -169,7 +169,7 @@ export const quizAttemptsSelectorCreator = (assessmentId: string, userId: number
     }
   );
 
-export const attemptDetailsSelectorCreator = (attemptId: number, userId: number) => {
+export const attemptDetailsSelectorCreator = (attemptId: number, userId?: number) => {
   const userAttemptsSelector = userAttemptsSelectorCreator(userId);
 
   const attemptSelector = idMapSelectorCreator(attemptId, userAttemptsSelector);

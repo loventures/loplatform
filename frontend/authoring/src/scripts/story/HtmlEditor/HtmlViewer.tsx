@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import htmldiff from 'node-htmldiff';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { FiCode, FiEdit } from 'react-icons/fi';
 import { IoCodeSlash } from 'react-icons/io5';
-import VisibilitySensor from 'react-visibility-sensor';
+import VisibilitySensor from '../VisibilitySensor';
 import { Button } from 'reactstrap';
 
 import { useGraphEditSelector, useIsAdded } from '../../graphEdit';
@@ -102,7 +102,7 @@ export const HtmlViewer: React.FC<
   const iFrameId = `html-iframe-${stagedGuid ?? html.name}`;
   const iframeActive = iFrameId === activeIFrame;
 
-  const iFrameRef = useRef<HTMLIFrameElement>();
+  const iFrameRef = useRef<HTMLIFrameElement>(undefined);
   const height = useIFrameResizeMachinery(iFrameRef, htmlSrc);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -260,7 +260,6 @@ class QnaService(implicit
       threadId = question.thread.getId,
       questionId = question.getId,
       userId = question.creator.getId,
-      actualUserId = None,
       sectionId = question.section.getId,
       edgePath = question.edgePath,
       // assetId = 0L,

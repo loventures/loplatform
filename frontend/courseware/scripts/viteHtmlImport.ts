@@ -17,7 +17,7 @@ export const htmlImportBuild = (): PluginOption => ({
   apply: 'build',
   async resolveId(id: string, importer: string | undefined, options: any) {
     if (htmlFileRegex.test(id) && !options.isEntry) {
-      let res = await this.resolve(id, importer, {
+      const res = await this.resolve(id, importer, {
         skipSelf: true,
         ...options,
       });
@@ -30,7 +30,7 @@ export const htmlImportBuild = (): PluginOption => ({
 
   async load(id: string) {
     if (!id.endsWith(postfix)) return;
-    let htmlContent = await fsp.readFile(cleanUrl(id));
+    const htmlContent = await fsp.readFile(cleanUrl(id));
     return `export default ${JSON.stringify(htmlContent.toString('utf-8'))}`;
   },
 });

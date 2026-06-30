@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -34,7 +34,6 @@ const ReviewPeriodBanner: React.FC = () => {
   // TODO: fix the a11y errors from making a div clickable.
   return showBanner ? (
     <div className="review-period-banner">
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
       <div
         className={classnames({ 'truncate-content': status.truncate })}
         onClick={() => setStatus({ truncate: !status.truncate })}

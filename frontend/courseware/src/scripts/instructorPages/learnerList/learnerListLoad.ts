@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,7 +24,7 @@ import {
 } from '../../instructorPages/learnerList/learnerListStore';
 import { OverallGrade } from '../../loRedux/overallGradeByUser';
 import * as preferences from '../../utilities/preferences';
-import { lojector } from '../../loject';
+import { enrolledUserService } from '../../services/enrolledUserService.ts';
 
 const cmpGrade = (g1?: OverallGrade, g2?: OverallGrade) =>
   (g1?.grade ?? Number.MIN_VALUE) - (g2?.grade ?? Number.MIN_VALUE);
@@ -114,7 +114,7 @@ export const loadLearnerListStudents = (
   allGrades?: Record<number, OverallGrade>,
   allProgress?: Record<number, OverallProgress>
 ): Promise<SrsArray<UserInfo>> => {
-  return (lojector.get('enrolledUserService') as any)
+  return enrolledUserService
     .getStudents(getLearnerListFilters(filters, allGrades, allProgress), undefined, true)
     .then((students: SrsArray<UserInfo>) => {
       // if we fetched students by PKs because sorting by overall grade/progress

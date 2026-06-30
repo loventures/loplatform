@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,11 +21,9 @@ import Course from '../../bootstrap/course';
 import { CourseState } from '../../loRedux';
 import { map } from 'lodash';
 import { withTranslation } from '../../i18n/translationContext';
-import React from 'react';
+import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { Button } from 'reactstrap';
-import { withHandlers, withState } from 'recompose';
-import { compose } from 'redux';
 
 import { ConnectedLoader } from '../assignments/ConnectedLoader';
 import { ExemptLearner, fetchDueDateExemptionsAction } from './dueDateAccommodationsReducer';
@@ -70,35 +68,48 @@ const ExemptLearnerFormInner = ({
   </React.Fragment>
 );
 
-const ExemptLearnerForm = compose<React.ComponentType<ExemptLearnerFormProps>>(
-  withTranslation,
-  withState('saving', 'setSaving', false),
-  withState('dirty', 'setDirty', false),
-  withState('selectedLearners', 'setSelectedLearners', ({ exemptLearners }) => exemptLearners),
-  withHandlers<any, any>({
-    onChange:
-      ({ setSelectedLearners, setDirty }: any) =>
-      (learners: any) => {
-        setSelectedLearners(learners);
-        setDirty(true);
-      },
-    updateDueDateAccommodations:
-      ({ setSaving, setDirty, selectedLearners }: any) =>
-      () => {
-        // loConfig.instructorCustomization.dueDateAccommodation
-        const url = `/api/v2/contentConfig/dueDateAccommodation;context=${Course.id}`;
-        setSaving(true);
-        axios
-          .post(url, {
-            exemptLearners: map(selectedLearners, 'id'),
-          })
-          .then(() => {
-            setSaving(false);
-            setDirty(false);
-          });
-      },
-  })
-)(ExemptLearnerFormInner);
+const ExemptLearnerFormWrapper = (props: ExemptLearnerFormProps) => {
+  const [saving, setSaving] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const [selectedLearners, setSelectedLearners] = useState(() => props.exemptLearners);
+
+  const onChange = (learners: any) => {
+    setSelectedLearners(learners);
+    setDirty(true);
+  };
+
+  const updateDueDateAccommodations = () => {
+    // loConfig.instructorCustomization.dueDateAccommodation
+    const url = `/api/v2/contentConfig/dueDateAccommodation;context=${Course.id}`;
+    setSaving(true);
+    axios
+      .post(url, {
+        exemptLearners: map(selectedLearners, 'id'),
+      })
+      .then(() => {
+        setSaving(false);
+        setDirty(false);
+      });
+  };
+
+  return (
+    <ExemptLearnerFormInner
+      {...props}
+      saving={saving}
+      setSaving={setSaving}
+      dirty={dirty}
+      setDirty={setDirty}
+      selectedLearners={selectedLearners}
+      setSelectedLearners={setSelectedLearners}
+      onChange={onChange}
+      updateDueDateAccommodations={updateDueDateAccommodations}
+    />
+  );
+};
+
+const ExemptLearnerForm = withTranslation(
+  ExemptLearnerFormWrapper as any
+) as React.ComponentType<{ exemptLearners: ExemptLearner[] }>;
 
 const LoadedExemptLearnerForm = () => (
   <ConnectedLoader

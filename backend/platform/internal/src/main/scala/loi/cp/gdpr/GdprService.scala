@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,10 +30,10 @@ import com.learningobjects.cpxp.service.attachment.AttachmentService
 import com.learningobjects.cpxp.service.domain.{DomainDTO, DomainFacade}
 import com.learningobjects.cpxp.service.facade.FacadeService
 import com.learningobjects.cpxp.util.EntityContext
-import doobie.*
-import doobie.implicits.*
-import doobie.postgres.implicits.*
-import doobie.util.meta.Meta.Basic
+import org.typelevel.doobie.*
+import org.typelevel.doobie.implicits.*
+import org.typelevel.doobie.postgres.implicits.*
+import org.typelevel.doobie.util.meta.Meta.Basic
 import loi.cp.analytics.event.UserObfuscateEvent1
 import scalaz.std.list.*
 import scalaz.syntax.std.boolean.*
@@ -454,7 +454,7 @@ object GdprService:
 
   type AnalyticsEvent = (Long, ObjectNode, UUID, Instant, Long)
 
-  import doobie.enumerated.JdbcType.*
+  import org.typelevel.doobie.enumerated.JdbcType.*
 
   // per https://www.postgresql.org/docs/11/datatype-datetime.html#DATATYPE-INTERVAL-OUTPUT
   // parsing an interval response only works if `SET intervalstyle iso_8601` but we don't parse

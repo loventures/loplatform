@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -214,19 +214,27 @@ const EssayQuestionFeedback: React.FC<{
   return (
     <div>
       <TransitionGroup>
-        {stats.responses.map((response, i) => (
-          <CSSTransition
-            key={i + '2'}
-            timeout={500}
-            classNames="item"
-          >
-            <Card className="my-1">
-              <div className="p-2">
-                <span>{response}</span>
+        {stats.responses.map((response, i) => {
+          // React 19 removed findDOMNode; give react-transition-group an explicit
+          // nodeRef pointing at the transitioning DOM node.
+          const nodeRef = React.createRef<HTMLDivElement>();
+          return (
+            <CSSTransition
+              key={i + '2'}
+              nodeRef={nodeRef}
+              timeout={500}
+              classNames="item"
+            >
+              <div ref={nodeRef}>
+                <Card className="my-1">
+                  <div className="p-2">
+                    <span>{response}</span>
+                  </div>
+                </Card>
               </div>
-            </Card>
-          </CSSTransition>
-        ))}
+            </CSSTransition>
+          );
+        })}
       </TransitionGroup>
       <div className="d-flex justify-content-between align-items-center ms-1 mt-2 ">
         <button

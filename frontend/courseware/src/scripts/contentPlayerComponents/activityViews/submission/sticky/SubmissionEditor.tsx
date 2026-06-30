@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { ErrorMessageFilter } from '../../../../ng';
+import { errorMessage } from '../../../../filters/pure/errorMessage.ts';
 import Tutorial from '../../../../tutorial/Tutorial.tsx';
 import dayjs from 'dayjs';
 import advanced from 'dayjs/plugin/advancedFormat';
@@ -47,14 +47,13 @@ import {
 } from '../../../../courseContentModule/selectors/contentEntry';
 import { FormatDayjsSetFormats } from '../../../../filters/formatDayjs';
 import { useTranslation } from '../../../../i18n/translationContext.tsx';
-import { NGNavBlockerService } from '../../../../services/NavBlockerService';
+import navBlockerService from '../../../../services/navBlockerService.ts';
 import { LoadingState } from '../../../../utilities/loadingStateUtils.ts';
 import { enableVideoRecording } from '../../../../utilities/preferences.ts';
 import React, { useCallback, useEffect, useState } from 'react';
 import { IoVideocamOutline } from 'react-icons/io5';
 import { ConnectedProps, connect } from 'react-redux';
 import { Button } from 'reactstrap';
-import { lojector } from '../../../../loject.ts';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -70,9 +69,13 @@ export const canSubmit = ({ essay, attachments, uploads, staging }: SubmissionIn
 export const hasError = (saveState: LoadingState, submitState: LoadingState) =>
   (!saveState.loading && saveState.error) || (!submitState.loading && submitState.error);
 
-export const getError = (saveState: LoadingState, submitState: LoadingState) => {
+export const getError = (
+  saveState: LoadingState,
+  submitState: LoadingState,
+  translate: (key: string, params?: object) => string
+) => {
   const error = saveState.error || submitState.error;
-  return (lojector.get('errorMessageFilter') as ErrorMessageFilter)(error);
+  return errorMessage(error, translate);
 };
 
 const connector = connect(selectSubmissionActivityEditComponent, {
@@ -131,8 +134,7 @@ const SubmissionEditor: React.FC<StickySubmissionEditorProps & PropsFromRedux> =
 
   // we could be more subtle than just the video modal open but why bother.
   useEffect(() => {
-    const NavBlockerService: NGNavBlockerService = lojector.get('NavBlockerService');
-    return NavBlockerService.register(
+    return navBlockerService.register(
       () => !!inEdit.lastUpdated || videoModalOpen,
       'QUIZ_CONFIRM_MOVE_UNSAVED_CHANGES'
     );
@@ -219,7 +221,7 @@ const SubmissionEditor: React.FC<StickySubmissionEditorProps & PropsFromRedux> =
         </div>
         {hasError(saveState, submitState) && (
           <div className="alert alert-danger my-2">
-            <span>{getError(saveState, submitState)}</span>
+            <span>{getError(saveState, submitState, translate)}</span>
           </div>
         )}
       </div>

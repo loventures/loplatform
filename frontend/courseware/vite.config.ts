@@ -21,29 +21,35 @@ export default defineConfig(() => {
       htmlImportBuild(),
       htmlImportServe(),
       viteStaticCopy({
+        // vite-plugin-static-copy v4 always preserves the matched path's directory
+        // structure under `dest`; a string `rename` only replaces a file's basename.
+        // So to land each source tree at `assets/<name>/…` we strip the leading source
+        // segments with `rename: { stripBase: N }` (N = depth of the source directory).
         targets: [
           {
             src: './node_modules/mathjax/es5',
-            dest: 'assets/',
-            rename: 'mathjax',
+            dest: 'assets/mathjax',
+            rename: { stripBase: 3 }, // strip node_modules/mathjax/es5
           },
           {
             src: './node_modules/jquery/dist',
-            dest: 'assets/',
-            rename: 'jquery',
+            dest: 'assets/jquery',
+            rename: { stripBase: 3 }, // strip node_modules/jquery/dist
           },
           {
             src: './src/lo-ckeditor/',
-            dest: 'assets/',
+            dest: 'assets/lo-ckeditor',
+            rename: { stripBase: 2 }, // strip src/lo-ckeditor
           },
           {
             src: './src/custom.scss',
-            dest: 'assets/',
+            dest: 'assets',
+            rename: { stripBase: 1 }, // strip src/
           },
           {
             src: './node_modules/bootstrap/scss/',
-            dest: 'assets/',
-            rename: 'bootstrap',
+            dest: 'assets/bootstrap',
+            rename: { stripBase: 3 }, // strip node_modules/bootstrap/scss
           },
         ],
       }),
@@ -52,6 +58,16 @@ export default defineConfig(() => {
         configureServer: () => console.log('\x1b]0;Courseware\x07'),
       },
     ],
+
+    css: {
+      preprocessorOptions: {
+        // quietDeps silences deprecation warnings from dependencies (e.g. bootstrap);
+        // silenceDeprecations: ['import' as const] silences the @import deprecation, which we
+        // are deliberately keeping for now.
+        scss: { quietDeps: true, silenceDeprecations: ['import' as const] },
+        sass: { quietDeps: true, silenceDeprecations: ['import' as const] },
+      },
+    },
 
     server: {
       port: 5174,
@@ -72,6 +88,9 @@ export default defineConfig(() => {
     },
 
     build: {
+      // Set DEBUG=1 for a readable, source-mapped build (local debugging).
+      minify: !process.env.DEBUG,
+      sourcemap: !!process.env.DEBUG,
       rollupOptions: {
         input: ['index.html', 'instructor.html'],
       },

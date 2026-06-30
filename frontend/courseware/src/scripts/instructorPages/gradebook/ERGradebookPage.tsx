@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -35,7 +35,7 @@ import { useTranslation } from '../../i18n/translationContext';
 import GradebookColumnsLoader from '../../loaders/GradebookColumnsLoader';
 import { editGatingPolicies, gradebookSync } from '../../utilities/preferences';
 import React from 'react';
-import { Route, Switch, useParams } from 'react-router';
+import { Route, Routes, useParams } from 'react-router-dom';
 import ERNonContentTitle from '../../commonPages/contentPlayer/ERNonContentTitle';
 
 const GradebookNav: React.FC = () => {
@@ -140,26 +140,54 @@ const AccommodationsEditorPage: React.FC = () => {
   );
 };
 
+// Paths below are relative to the /instructor/gradebook/* mount in ERInstructorPageRoutes.
 const GradebookHeader: React.FC = () => {
   const translate = useTranslation();
   return (
-    <Switch>
+    <Routes>
       <Route
-        exact={true}
-        path="/instructor/gradebook/grades"
-      >
-        <ERNonContentTitle label={translate('GRADEBOOK_HEADER')} />
-        <div className="d-flex justify-content-center align-items-center gap-3">
-          {gradebookSync && <GradebookSyncButton />}
-          <GradebookDownloadButton />
-        </div>
-      </Route>
-      <Route>
-        <ERNonContentTitle label={translate('GRADEBOOK_HEADER')} />
-      </Route>
-    </Switch>
+        path="grades"
+        element={
+          <>
+            <ERNonContentTitle label={translate('GRADEBOOK_HEADER')} />
+            <div className="d-flex justify-content-center align-items-center gap-3">
+              {gradebookSync && <GradebookSyncButton />}
+              <GradebookDownloadButton />
+            </div>
+          </>
+        }
+      />
+      <Route
+        path="*"
+        element={<ERNonContentTitle label={translate('GRADEBOOK_HEADER')} />}
+      />
+    </Routes>
   );
 };
+
+const GradesBody: React.FC = () => (
+  <Routes>
+    <Route
+      path="syncHistory/:columnId/:userId"
+      element={<LtiGradeSyncHistoryPage />}
+    />
+    <Route
+      path="syncHistory/:columnId"
+      element={<LtiColumnSyncHistoryPage />}
+    />
+    <Route
+      path=""
+      element={
+        <GradebookColumnsLoader>
+          <div className="col px-4 py-3">
+            <GradebookNav />
+            <GradebookGradesPage />
+          </div>
+        </GradebookColumnsLoader>
+      }
+    />
+  </Routes>
+);
 
 const ERGradebookPage: React.FC = () => {
   const translate = useTranslation();
@@ -169,46 +197,33 @@ const ERGradebookPage: React.FC = () => {
         <div className="card er-content-wrapper mb-2 m-md-3 m-lg-4">
           <div className="card-body">
             <GradebookHeader />
-            <Route
-              path="/instructor/gradebook/grades"
-              render={() => (
-                <Switch>
-                  <Route path="/instructor/gradebook/grades/syncHistory/:columnId/:userId">
-                    <LtiGradeSyncHistoryPage />
-                  </Route>
-                  <Route path="/instructor/gradebook/grades/syncHistory/:columnId">
-                    <LtiColumnSyncHistoryPage />
-                  </Route>
-                  <Route>
-                    <GradebookColumnsLoader>
-                      <div className="col px-4 py-3">
-                        <GradebookNav />
-                        <GradebookGradesPage />
-                      </div>
-                    </GradebookColumnsLoader>
-                  </Route>
-                </Switch>
+            <Routes>
+              <Route
+                path="grades/*"
+                element={<GradesBody />}
+              />
+              <Route
+                path="assignments/*"
+                element={
+                  <GradebookColumnsLoader>
+                    <div className="col px-4 py-3">
+                      <GradebookNav />
+                      <GradebookAssignments />
+                    </div>
+                  </GradebookColumnsLoader>
+                }
+              />
+              {editGatingPolicies && (
+                <Route
+                  path="gating/*"
+                  element={<GatingEditorPage />}
+                />
               )}
-            />
-            <Route
-              path="/instructor/gradebook/assignments"
-              render={() => (
-                <GradebookColumnsLoader>
-                  <div className="col px-4 py-3">
-                    <GradebookNav />
-                    <GradebookAssignments />
-                  </div>
-                </GradebookColumnsLoader>
-              )}
-            />
-            {editGatingPolicies && (
-              <Route path="/instructor/gradebook/gating">
-                <GatingEditorPage />
-              </Route>
-            )}
-            <Route path="/instructor/gradebook/accommodations">
-              <AccommodationsEditorPage />
-            </Route>
+              <Route
+                path="accommodations/*"
+                element={<AccommodationsEditorPage />}
+              />
+            </Routes>
           </div>
         </div>
       </div>

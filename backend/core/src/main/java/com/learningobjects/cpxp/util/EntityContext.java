@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -29,6 +29,7 @@ import jakarta.persistence.EntityTransaction;
 import org.hibernate.CacheMode;
 import org.hibernate.Session;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.id.IdentifierGenerator;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.Duration;
@@ -131,11 +132,9 @@ public class EntityContext {
      */
     public static Long generateId() {
         SessionImplementor implementor = ManagedUtils.getEntityContext().getEntityManager().unwrap(SessionImplementor.class);
-        return (Long) implementor.getFactory().getMappingMetamodel()
+        return (Long) ((IdentifierGenerator) implementor.getFactory().getMappingMetamodel()
           .getEntityDescriptor(Data.class)
-          .getEntityMetamodel()
-          .getIdentifierProperty()
-          .getIdentifierGenerator()
+          .getGenerator())
           .generate(implementor, null);
     }
 

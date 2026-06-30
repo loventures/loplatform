@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -29,10 +29,9 @@ import { ConnectedProps, connect } from 'react-redux';
 import { openModalActionCreator } from '../actions/modalActions';
 import { LearnerTableRecord, NameFormat, NameFormatter } from '../learnerListStore';
 import LearnerNameWithPreview from './LearnerNameWithPreview';
-import { lojector } from '../../../loject';
+import { formatDayjs } from '../../../filters/pure/formatDayjs.ts';
 
-const formatLastActivity = (time?: string) =>
-  time && (lojector.get('formatDayjsFilter') as any)(time, 'M/D/YYYY h:mm A z');
+const formatLastActivity = (time?: string) => time && formatDayjs(time, 'M/D/YYYY h:mm A z');
 
 const nameFormatter =
   (nameFormat: NameFormat): NameFormatter =>

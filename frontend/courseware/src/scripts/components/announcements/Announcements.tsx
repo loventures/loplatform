@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ import { useTranslation } from '../../i18n/translationContext';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { IoAlertCircleOutline, IoClose } from 'react-icons/io5';
 import { Alert } from 'reactstrap';
-import { lojector } from '../../loject';
+import { presenceService } from '../../presence/presenceServiceImpl';
 
 type AnnouncementsContext = {
   announcements: Announcement[];
@@ -44,8 +44,7 @@ export const AnnouncementsProvider: React.FC<React.PropsWithChildren> = ({ child
   useEffect(() => {
     getActiveAnnouncements().then(announcements => setAnnouncements(announcements));
 
-    const PresenceService = lojector.get<any>('PresenceService');
-    return PresenceService.on('Control', (event: PresenceEvent) => {
+    return presenceService.on('Control', (event: PresenceEvent) => {
       if (isAnnouncementEvent(event)) {
         const { type, ...newAnnouncement } = event;
         setAnnouncements(existingAnnouncements => [...existingAnnouncements, newAnnouncement]);

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,41 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { uniqueId } from 'lodash';
+import { Location } from 'history';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Prompt } from 'react-router-dom';
 import { Dispatch } from 'redux';
 
 import { trackAuthoringEvent } from '../analytics';
+import { history } from '../dcmStore';
 import { safeSaveProjectGraphEdits } from '../graphEdit';
 import { openModal } from '../modals/modalActions';
 import { ModalIds } from '../modals/modalIds';
 import { narrativeSaveAndContinue } from '../story/storyHooks';
-
-/* FC version:
-
- const SaveOnNavigate: React.FC<{ saves: Array<() => Promise<void>> }> = ({ saves }) => {
-  const trigger = useMemo(() => Symbol.for(`__SaveOnNavigate_${uniqueId()}`), []);
-
-  useEffect(() => {
-    window[trigger] = allowTransitionCallback => {
-      ...
-    };
-    return () => {
-      delete window[trigger];
-    };
-  }, [trigger, saves]);
-
-  return (
-    <Prompt
-      when={true}
-      message={Symbol.keyFor(trigger)}
-    />
-  );
-};
-
- */
 
 interface PreventNavAndUnsavedChangesPromptProps {
   pathname: string;
@@ -58,73 +34,75 @@ interface PreventNavAndUnsavedChangesPromptProps {
   dispatch: Dispatch<any>;
 }
 
-//https://kamranicus.com/posts/2018-07-26-react-router-custom-transition-ui
+/*
+ * react-router v6 removed <Prompt> and history v5 removed `getUserConfirmation`, so the unsaved-work
+ * guard is reimplemented with `history.block`. The original Prompt's `message` callback (which
+ * returned a Symbol key resolved by getUserConfirmation to a save-modal trigger) is inlined here as
+ * `confirmNav`. We stay a class so `this.props` is always current inside the long-lived blocker (a
+ * hook + useEffect would capture stale props). On confirm we unblock, retry the navigation, and
+ * reinstall the block so it keeps guarding subsequent transitions.
+ */
 class PreventNavAndUnsavedChangesPrompt extends React.Component<PreventNavAndUnsavedChangesPromptProps> {
-  private __trigger: symbol;
-  private __trigger2: symbol;
-
-  constructor(props) {
-    super(props);
-    this.__trigger = Symbol.for(`__PreventNavAndUnsavedChangesModal_${uniqueId()}`);
-    this.__trigger2 = Symbol.for(`__StorySaveModal_${uniqueId()}`);
-  }
+  private unblock?: () => void;
 
   componentDidMount() {
-    window[this.__trigger] = allowTransitionCallback => {
-      const { dispatch, projectGraphDirty, realTime } = this.props;
-
-      if (projectGraphDirty) {
-        if (realTime) {
-          trackAuthoringEvent('Narrative Editor - Save', 'Autosave');
-          dispatch(safeSaveProjectGraphEdits(() => allowTransitionCallback(true)));
-        } else {
-          const unsavedChangesConfig = {
-            callback: save => {
-              if (save) {
-                trackAuthoringEvent(`Narrative Editor - Save`, 'Continue');
-                trackAuthoringEvent('Project Graph - Dirty', 'Save');
-                dispatch(safeSaveProjectGraphEdits(() => allowTransitionCallback(true)));
-              } else {
-                allowTransitionCallback(false);
-              }
-            },
-          };
-          dispatch(openModal(ModalIds.StorySaveCancel, unsavedChangesConfig));
-        }
-      } else {
-        allowTransitionCallback(true);
-      }
-    };
-    window[this.__trigger2] = allowTransitionCallback => {
-      const { dispatch } = this.props;
-      dispatch(narrativeSaveAndContinue(() => allowTransitionCallback(true)));
-    };
+    this.install();
   }
 
   componentWillUnmount() {
-    delete window[this.__trigger];
-    delete window[this.__trigger2];
+    this.unblock?.();
+  }
+
+  // Decide whether a pending navigation may proceed; calls `allow(true)` to continue (possibly after
+  // saving) or `allow(false)` to cancel. Mirrors the v5 <Prompt message> + getUserConfirmation flow.
+  private confirmNav(location: Location, allow: (ok: boolean) => void) {
+    const { dispatch, projectGraphDirty, realTime } = this.props;
+    if (location.pathname.includes('/story/') && this.props.pathname.includes('/story/')) {
+      // Navigation within the narrative editor: low-key save-and-continue. Skip the transient
+      // 'Untitled' add-next route (which passes &confirm=false).
+      if (projectGraphDirty && !realTime && !location.search.includes('&confirm=false')) {
+        dispatch(narrativeSaveAndContinue(() => allow(true)));
+      } else {
+        allow(true);
+      }
+    } else if (projectGraphDirty) {
+      if (realTime) {
+        trackAuthoringEvent('Narrative Editor - Save', 'Autosave');
+        dispatch(safeSaveProjectGraphEdits(() => allow(true)));
+      } else {
+        dispatch(
+          openModal(ModalIds.StorySaveCancel, {
+            callback: (save: boolean) => {
+              if (save) {
+                trackAuthoringEvent('Narrative Editor - Save', 'Continue');
+                trackAuthoringEvent('Project Graph - Dirty', 'Save');
+                dispatch(safeSaveProjectGraphEdits(() => allow(true)));
+              } else {
+                allow(false);
+              }
+            },
+          })
+        );
+      }
+    } else {
+      allow(true);
+    }
+  }
+
+  private install() {
+    this.unblock = (history as any).block((tx: { location: Location; retry: () => void }) => {
+      this.confirmNav(tx.location, ok => {
+        if (ok) {
+          this.unblock?.();
+          tx.retry();
+          this.install();
+        }
+      });
+    });
   }
 
   render() {
-    return (
-      <Prompt
-        when={true}
-        message={location => {
-          if (location.pathname.includes('/story/') && this.props.pathname.includes('/story/')) {
-            // Navigation within the narrative editor has a low-key save modal
-            // Navigating through the add next route should not autosave the transient 'Untitled' page..
-            return this.props.projectGraphDirty &&
-              !this.props.realTime &&
-              !location.search.includes('&confirm=false')
-              ? Symbol.keyFor(this.__trigger2)
-              : true;
-          } else {
-            return Symbol.keyFor(this.__trigger);
-          }
-        }}
-      />
-    );
+    return null;
   }
 }
 

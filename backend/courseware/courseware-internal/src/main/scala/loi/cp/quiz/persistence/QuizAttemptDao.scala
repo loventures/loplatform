@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,7 @@ import com.learningobjects.cpxp.service.domain.DomainDTO
 import com.learningobjects.cpxp.service.user.UserDTO
 import com.learningobjects.cpxp.util.HibernateSessionOps.*
 import com.learningobjects.cpxp.util.{PersistenceIdFactory, ThreadTerminator}
-import jakarta.persistence.LockModeType
+import jakarta.persistence.{FindOption, LockModeType}
 import loi.cp.assessment.attempt.UserAttemptCounts
 import loi.cp.assessment.persistence.{AttemptStateCountRow, Baroquitechture}
 import loi.cp.assessment.{AssessmentGradingPolicy, AssessmentParticipation, AttemptId}
@@ -179,7 +179,9 @@ class QuizAttemptDaoImpl(session: => Session, idFactory: PersistenceIdFactory) e
 
   override def load(id: AttemptId, pessimisticLock: Boolean): Option[QuizAttemptEntity] =
     ThreadTerminator.check()
-    val lockMode =
+    // LockModeType is a FindOption in JPA 3.2 / Hibernate 7.3, so find(Class, id, lockMode)
+    // is ambiguous in Scala; ascribe to FindOption to select the varargs overload.
+    val lockMode: FindOption =
       if pessimisticLock then LockModeType.PESSIMISTIC_WRITE
       else LockModeType.NONE
 

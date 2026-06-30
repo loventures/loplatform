@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -50,7 +50,7 @@ export const ERLandmarkProvider: React.FC<React.PropsWithChildren> = ({ children
   // intent is to focus main content on every react-router route change
   // so that screen readers immediately start reading new main content
   // after up next nav or sidebar nav.
-  const location = useLocation<FromApp>();
+  const location = useLocation();
   useEffect(() => {
     if (location.state?.fromApp) {
       landmarks.mainHeader?.focus({ preventScroll: true });

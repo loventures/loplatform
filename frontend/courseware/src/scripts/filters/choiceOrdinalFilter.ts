@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,22 +15,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import angular from 'angular';
-
-/**
- * @ngdoc filter
- * @alias choiceOrdinalFilter
- * @memberOf lo.filters
- *
- * @description
- *  Showing the ordinal label for choices based on index
- */
-export const ordinalLabels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-
-export const choiceOrdinal = (index: number) => ordinalLabels[index];
-
-angular.module('lo.filters').filter('choiceOrdinal', function () {
-  return ($index: number) => {
-    return choiceOrdinal($index);
-  };
-});
+// Behaviour lives in the pure, unit-tested ./pure/choiceOrdinal.ts module.
+// Re-exported here so existing importers of this path keep working.
+export { choiceOrdinal, ordinalLabels } from './pure/choiceOrdinal.ts';

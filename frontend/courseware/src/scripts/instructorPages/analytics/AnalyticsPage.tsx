@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import { selectForLearner } from '../../utilities/rootSelectors';
 import { useCourseSelector } from '../../loRedux';
 import { useTranslation } from '../../i18n/translationContext';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
 
@@ -35,11 +35,11 @@ const AnalyticsPage: React.FC = () => {
   const translate = useTranslation();
 
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
   const learner = useCourseSelector(selectForLearner);
 
   const selectLearner = (selectedLearner?: SingleValue<{ value: number }>) => {
-    history.push(
+    navigate(
       `/instructor/analytics?${
         selectedLearner?.value ? `forLearnerId=${selectedLearner.value}` : ''
       }`

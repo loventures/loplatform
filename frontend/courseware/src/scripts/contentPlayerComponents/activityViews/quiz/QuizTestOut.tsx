@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,10 +23,10 @@ import {
 } from '../../../resources/LearningPathResource.ts';
 import { isEmpty } from 'lodash';
 import { QuizActivity } from './parts/QuizActivityInfo.tsx';
+import { grade as gradeFormat, makeGradeDisplayMethods } from '../../../filters/pure/grade.ts';
 import { useTranslation } from '../../../i18n/translationContext.tsx';
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, Spinner } from 'reactstrap';
-import { lojector } from '../../../loject.ts';
 
 // The typescript types are a complete lie
 const isActualScore = (score: BasicScore | RubricScore | null): score is BasicScore =>
@@ -35,7 +35,6 @@ const isActualScore = (score: BasicScore | RubricScore | null): score is BasicSc
 const QuizTestOut: React.FC<{ quiz: QuizActivity; attempt: QuizAttempt }> = ({ quiz, attempt }) => {
   const testsOut = quiz.assessment.settings.testsOut;
   const score = attempt.score;
-  const gradeFilter = lojector.get('gradeFilter') as any;
   const grade = isActualScore(score) ? score.pointsAwarded / score.pointsPossible : 0;
   const learningPath = useLearningPathResource();
   const translate = useTranslation();
@@ -117,7 +116,9 @@ const QuizTestOut: React.FC<{ quiz: QuizActivity; attempt: QuizAttempt }> = ({ q
           ) : (
             <>
               <div className="mb-1">
-                {translate('TEST_OUT_FOR_CREDIT', { percent: gradeFilter(score, 'percentSign') })}
+                {translate('TEST_OUT_FOR_CREDIT', {
+                  percent: gradeFormat(makeGradeDisplayMethods(translate), score, 'percentSign') as string,
+                })}
               </div>
               <div className="mb-2 ps-4">{testedOutFCContent.map(c => c.name).join(', ')}</div>
               <div>{translate('TEST_OUT_COME_BACK')}</div>

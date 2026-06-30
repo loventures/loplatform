@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -56,20 +56,20 @@ class FileBundleDisplayFilesResource<TData extends SrsList<DisplayFile>> extends
   }
 
   fetch(key: UrlAndParamsKey, config: Record<string, any> = {}) {
-    return queryClient.fetchQuery(key, this.fetcher(config));
+    return queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher(config) });
   }
 
   read(commit: number, name: string, config?: Record<string, any>) {
     const key = this.getKey(commit, name);
     const promise = this.fetch(key, config);
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, fetching, data, key };
   }
 
   isFetching(courseId: number, name: string) {
-    return queryClient.isFetching(this.getKey(courseId, name));
+    return queryClient.isFetching({ queryKey: this.getKey(courseId, name) });
   }
 }
 

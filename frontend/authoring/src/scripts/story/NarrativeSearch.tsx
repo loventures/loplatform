@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,6 @@
  */
 
 import classNames from 'classnames';
-import { replace } from 'connected-react-router';
 import gretchen from '../grfetchen/';
 import qs from 'qs';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -41,6 +40,7 @@ import {
 } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../analytics';
+import { replacePath } from '../dcmStore';
 import { useCurrentContextPath, useGraphEditSelector } from '../graphEdit';
 import { useBranchId, useDcmSelector, useRouterQueryParam } from '../hooks';
 import { SearchWebHit } from '../modals/narrative/types';
@@ -108,7 +108,7 @@ export const NarrativeSearch: React.FC = () => {
       page: undefined,
       contextPath,
     };
-    dispatch(replace({ search: qs.stringify(params) }));
+    replacePath({ search: qs.stringify(params) });
   };
 
   useEffect(() => {

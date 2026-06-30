@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -68,7 +68,7 @@ export const Aligner: React.FC<{
 }> = ({ name, typeId, group, multi }) => {
   const dispatch = useDispatch();
   const editMode = useIsEditable(name, 'AlignContent');
-  const divRef = useRef<HTMLDivElement>();
+  const divRef = useRef<HTMLDivElement>(undefined);
   const [editing, setEditing] = useState(false);
   const trailing = isQuestion(typeId);
   const remoteEditor = useRemoteEditor(name, group, editing);

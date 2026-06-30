@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,7 @@ import { Resource, StrictUrlParamsKey, useSuspenseQuery } from './Resource';
 import { sortCompetencyListActionCreator } from '../studentPages/courseCompetenciesPage/actions/listActions';
 import { indexOf, keyBy, map, mapValues } from 'lodash';
 import { createDataListUpdateMergeAction } from '../utilities/apiDataActions';
-import { QueryFunction } from 'react-query';
+import { QueryFunction } from '@tanstack/react-query';
 import { courseReduxStore } from '../loRedux';
 
 import User from '../bootstrap/user';
@@ -90,24 +90,24 @@ class MasteryResource<
   }
 
   fetch(key: TKey, config: Record<string, any> = {}) {
-    return queryClient.fetchQuery(key, this.fetcher(config));
+    return queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher(config) });
   }
 
   read(contextId: number, userId: number, config?: Record<string, any>) {
     const key = this.getKey(contextId, userId);
     const promise = this.fetch(key, config);
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, fetching, data, key };
   }
 
   isFetching(contextId: number, userId: number) {
-    return queryClient.isFetching(this.getKey(contextId, userId));
+    return queryClient.isFetching({ queryKey: this.getKey(contextId, userId) });
   }
 
   prefetch(key: TKey, fetcher: QueryFunction<TData, TKey>) {
-    return queryClient.prefetchQuery(key, fetcher);
+    return queryClient.prefetchQuery({ queryKey: key, queryFn: fetcher });
   }
 }
 

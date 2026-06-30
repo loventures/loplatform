@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,7 @@ import {
 } from '../../resources/LearningPathResource';
 import qs from 'qs';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 export type SearchHighlights = Record<string, string[]>;
 
@@ -85,7 +85,7 @@ export const useSearchContents = (): Record<EdgePath, ContentWithAncestors> => {
 export const SearchLimit = 10;
 
 export const useSearchStuff = (search: string) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const params = qs.parse(search.substring(1));
   const query = params.q as string | undefined;
   const page = params.p as string | undefined;
@@ -115,22 +115,22 @@ export const useSearchStuff = (search: string) => {
       })
       .catch(e => {
         console.log(e);
-        history.push({ search: '' });
+        navigate({ search: '' });
         setError(true);
       })
       .finally(() => setSearching(false));
   }, [query, offset, searching, results]);
 
   useEffect(() => {
-    if (!value.trim()) history.push({ search: '' });
+    if (!value.trim()) navigate({ search: '' });
   }, [value]);
 
   const onSearch = () => {
-    history.push({ search: !value.trim() ? '' : '?q=' + encodeURIComponent(value.trim()) });
+    navigate({ search: !value.trim() ? '' : '?q=' + encodeURIComponent(value.trim()) });
   };
 
   const setOffset = (offset: number) => {
-    history.push({
+    navigate({
       search: !query
         ? ''
         : '?q=' + encodeURIComponent(query) + '&p=' + Math.floor(offset / SearchLimit),

@@ -1,0 +1,53 @@
+/*
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import Polyglot from 'node-polyglot';
+import React from 'react';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
+
+interface DomainLinkHelpProps {
+  close: () => void;
+  section: string;
+  T: Polyglot;
+}
+
+const DomainLinkHelp: React.FC<DomainLinkHelpProps> = ({ close, section, T }) => (
+  <Modal
+    isOpen={true}
+    backdrop="static"
+    size="lg"
+  >
+    <ModalHeader tag="h2">{T.t(`adminPage.${section}.helpModal.header`)}</ModalHeader>
+    <ModalBody>
+      <p>{T.t(`adminPage.${section}.helpModal.prompt`)}</p>
+      <ul>
+        <li>{T.t(`adminPage.${section}.helpModal.params.sectionId`)}</li>
+        <li>{T.t(`adminPage.${section}.helpModal.params.userId`)}</li>
+      </ul>
+    </ModalBody>
+    <ModalFooter>
+      <Button
+        color="secondary"
+        onClick={close}
+      >
+        {T.t(`adminPage.${section}.helpModal.close`)}
+      </Button>
+    </ModalFooter>
+  </Modal>
+);
+
+export default DomainLinkHelp;

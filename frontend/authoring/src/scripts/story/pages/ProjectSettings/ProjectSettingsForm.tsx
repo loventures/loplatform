@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,7 @@
 import { sortBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import CreatableSelect from 'react-select/creatable';
 import { Button, Col, Input, Label, Row, Spinner } from 'reactstrap';
 
@@ -56,7 +56,7 @@ export const ProjectSettingsForm: React.FC<{
   doCancel?: () => void;
 }> = ({ create, copy, dirty, setDirty, doCancel }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const editMode = useIsStoryEditMode() || create;
   const [saving, setSaving] = useState(false);
   const [dirty0, setDirty0] = useState(false);
@@ -198,7 +198,7 @@ export const ProjectSettingsForm: React.FC<{
         .then(res => {
           dispatch(openToast('Project copied.', TOAST_TYPES.SUCCESS));
           dispatch(reloadProjects());
-          history.push(`/branch/${res.branchId}/story/${res.homeNodeName}`);
+          navigate(`/branch/${res.branchId}/story/${res.homeNodeName}`);
         })
         .catch(e => {
           console.log(e);
@@ -213,7 +213,7 @@ export const ProjectSettingsForm: React.FC<{
           const branchId = receipts[0].data.targetBranchId;
           dispatch(openToast('Project imported.', TOAST_TYPES.SUCCESS));
           dispatch(reloadProjects());
-          history.push(`/branch/${branchId}/launch/home`);
+          navigate(`/branch/${branchId}/launch/home`);
         })
         .catch(e => {
           console.log(e);
@@ -226,7 +226,7 @@ export const ProjectSettingsForm: React.FC<{
         .then(({ projects: [branch] }) => {
           dispatch(openToast('Project created.', TOAST_TYPES.SUCCESS));
           dispatch(reloadProjects());
-          history.push(`/branch/${branch.branchId}/story/${branch.project.homeNodeName}`);
+          navigate(`/branch/${branch.branchId}/story/${branch.project.homeNodeName}`);
         })
         .catch(e => {
           console.log(e);
@@ -253,7 +253,7 @@ export const ProjectSettingsForm: React.FC<{
               .then(({ projects: [{ project }] }) =>
                 dispatch({ type: UPDATE_BRANCH, layout: { project } })
               )
-              .catch(() => history.push('/')) // 404: no longer have access
+              .catch(() => navigate('/')) // 404: no longer have access
         )
         .then(() => {
           dispatch(openToast('Settings saved.', TOAST_TYPES.SUCCESS));

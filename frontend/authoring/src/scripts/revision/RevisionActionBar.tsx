@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,8 +21,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { BsClock } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../analytics';
@@ -69,7 +68,7 @@ const ProjectGraphEdgeGroups = new Set<EdgeGroup>([
 
 const RevisionActionBar: React.FC = () => {
   const polyglot = usePolyglot();
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const contextPath = useCurrentContextPath();
   const asset = useEditedCurrentAsset();
@@ -180,7 +179,7 @@ const RevisionActionBar: React.FC = () => {
         }
       }
       dispatch(autoSaveProjectGraphEdits());
-      history.push(editorUrl('story', branchId, asset, contextPath));
+      navigate(editorUrl('story', branchId, asset, contextPath));
     });
   };
 

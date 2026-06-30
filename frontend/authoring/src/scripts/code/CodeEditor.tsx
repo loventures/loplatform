@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,9 +18,9 @@
 // Summernote and our plugins
 import 'summernote/dist/summernote-lite';
 
-import './summernote-cleaner.js';
-import './summernote-image-title.js';
-import './summernote-text-findnreplace.js';
+import './summernote-cleaner';
+import './summernote-image-title';
+import './summernote-text-findnreplace';
 import './customTagsPlugin';
 import './customUploadPlugin';
 import './customLinkPlugin';

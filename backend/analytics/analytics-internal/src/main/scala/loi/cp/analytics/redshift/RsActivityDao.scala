@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,8 +23,8 @@ import argonaut.{EncodeJson, Json}
 import cats.data.{Kleisli, NonEmptyList}
 import clots.data.Cleisli
 import com.learningobjects.cpxp.component.annotation.Service
-import doobie.ConnectionIO
-import doobie.syntax.string.*
+import org.typelevel.doobie.ConnectionIO
+import org.typelevel.doobie.syntax.string.*
 
 import java.sql.Timestamp
 import java.util.UUID

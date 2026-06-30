@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,21 +16,39 @@
  */
 
 import { processMathHtml, queueMathTypeset, wrapMath } from '../utilities/mathml';
+import { applyResponsiveImagePlaceholders } from '../utilities/responsiveImages';
 import React, { useEffect, useRef } from 'react';
 
 import RichTextFailureErrorBoundary from '../directives/RichTextFailureErrorBoundary';
 
-export const HtmlWithMathJax = ({ html, className }: any) => {
+// Opt-in extras (off by default so the many other callers are unaffected):
+//  - `responsiveImages` ports the old `contentHtml` directive's image-placeholder
+//    sizing;
+//  - `onRendered(renderedData)` fires once the content is in the DOM — the React
+//    analogue of the `ng-init` "this content rendered" signals (e.g. the ordering
+//    question's `choiceRendered` drag-drop positioning).
+export const HtmlWithMathJax = ({ html, className, responsiveImages, onRendered, renderedData }: any) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!window.MathJax || !wrapperRef.current) {
+    const el = wrapperRef.current;
+    if (!el) {
       return;
     }
 
-    processMathHtml(wrapperRef.current);
-    queueMathTypeset(wrapperRef.current);
-  }, [html]);
+    if (responsiveImages) {
+      applyResponsiveImagePlaceholders(el);
+    }
+
+    if (window.MathJax) {
+      processMathHtml(el);
+      queueMathTypeset(el);
+    }
+
+    if (onRendered) {
+      onRendered(renderedData);
+    }
+  }, [html, responsiveImages, onRendered, renderedData]);
 
   return (
     <RichTextFailureErrorBoundary>

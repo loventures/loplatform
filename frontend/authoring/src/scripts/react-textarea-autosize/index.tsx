@@ -48,7 +48,7 @@ const TextareaAutosize: React.ForwardRefRenderFunction<
   const libRef = React.useRef<HTMLTextAreaElement | null>(null);
   const ref = useComposedRef(libRef, userRef);
   const heightRef = React.useRef(0);
-  const measurementsCacheRef = React.useRef<SizingData>();
+  const measurementsCacheRef = React.useRef<SizingData>(undefined);
 
   const resizeTextarea = () => {
     const node = libRef.current!;

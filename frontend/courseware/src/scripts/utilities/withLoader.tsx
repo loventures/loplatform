@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -42,9 +42,9 @@ import { Selector } from 'reselect';
 
 type LoaderProps = {
   loadingState: {
-    loading: boolean;
-    loaded: boolean;
-    error: any;
+    loading?: boolean;
+    loaded?: boolean;
+    error?: any;
   };
   loadAction: (props: any) => any;
   useOverlay?: boolean;
@@ -141,8 +141,8 @@ export class LoaderComponent extends React.Component<LoaderProps> {
         A LoaderComponent. All props it receives will be given to the action creator.
 */
 export const createLoaderComponent = (
-  loadingStateSelector: Selector<CourseState, LoadingState>,
-  loadPageActionCreator: () => ThunkAction<any, any, any, any>,
+  loadingStateSelector: Selector<any, any>,
+  loadPageActionCreator: (...args: any[]) => any,
   displayName: string,
   alwaysRefresh = false
 ) => {

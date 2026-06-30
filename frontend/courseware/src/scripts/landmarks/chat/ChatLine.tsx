@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,12 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { get } from 'lodash';
+import User from '../../bootstrap/user';
 import { TranslationContext } from '../../i18n/translationContext';
 import React, { useContext } from 'react';
 
 import LoadingEllipsis from './LoadingEllipsis';
-import { lojector } from '../../loject';
+import { presentUsers } from '../../presence/presentUsersImpl.ts';
 
 export type ChatLineProps = {
   userHandle?: string;
@@ -34,12 +34,12 @@ const ChatLine: React.FunctionComponent<ChatLineProps> = ({
   line,
 }) => {
   const translate = useContext(TranslationContext);
-  const isMyself = userHandle === get(window, 'lo_platform.user.handle', null);
+  const isMyself = userHandle === User.handle;
   const getUserName = (handle: string) => {
     if (!handle) {
       return;
     }
-    const profile = get<any>(lojector.get('PresentUsers'), `presentUsers[${handle}]`, null);
+    const profile = presentUsers.presentUsers[handle] ?? null;
     if (profile) {
       return displayFullName ? profile.fullName : profile.givenName;
     }

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import { INITIALIZE_DCM } from '../dcmStoreConstants';
 import { ProjectResponse } from '../story/NarrativeMultiverse';
 import { AssetNode, EdgeName, NodeName } from '../types/asset';
 import { SlimEdge } from '../types/edge';
-import { UPDATE_ASSET_NODES } from './contentProjectGraphActions.js';
+import { UPDATE_ASSET_NODES } from './contentProjectGraphActions';
 import {
   MODIFY_PROJECT_GRAPH,
   RECEIVE_NODES,

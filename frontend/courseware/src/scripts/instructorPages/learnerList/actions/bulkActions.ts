@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import { createDataItemInvalidateAction } from '../../../utilities/apiDataAction
 import { b64Encode } from '../../../utilities/b64Utils';
 import { gotoLinkActionCreator } from '../../../utilities/routingUtils';
 import { Dispatch } from 'redux';
-import { lojector } from '../../../loject';
+import enrolledUserService from '../../../services/enrolledUserService.ts';
 
 export const learnerTableGotoMessagingActionCreator = (
   entireClass: boolean,
@@ -37,7 +37,11 @@ export const learnerTableGotoMessagingActionCreator = (
 export const learnerTableDropLearnerActionCreator =
   (selectedLearners: UserInfo[], reloadTable: () => void) => (dispatch: Dispatch<any>) => {
     const userIds = selectedLearners.map(u => u.id);
-    (lojector.get('enrolledUserService') as any).dropUsers(userIds, undefined).then(() => {
+    // The native DELETE (with X-CSRF, added to axiosConfig) commits the drop server-side before resolving, so the
+    // `reloadTable()` refetch sees the updated list — the old NB about a digest-reload race was actually the
+    // missing-CSRF 403 (the drop never happened, so the reload showed stale rows). The React table reload is a
+    // useEffect refetch, not digest-driven, so it works fine off the native promise.
+    enrolledUserService.dropUsers(userIds, undefined).then(() => {
       reloadTable();
       userIds.forEach(id => dispatch(createDataItemInvalidateAction('users', id)));
     });

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,10 +21,9 @@ import FileAttachment from '../../../../components/fileViews/FileAttachment.tsx'
 import FilePendingStaging from '../../../../components/fileViews/FilePendingStaging';
 import FileStaged from '../../../../components/fileViews/FileStaged';
 import { map } from 'lodash';
-import { NGSubmissionActivityAPI } from '../../../../services/SubmissionActivityAPI';
+import { submissionActivityAPI as SubmissionActivityAPI } from '../../../../services/submissionActivityAPI.ts';
 import { FileStagingState } from '../../../../utilities/fileStagingUtils.ts';
 import React from 'react';
-import { lojector } from '../../../../loject.ts';
 
 interface SubmissionFilesProps {
   attemptId?: number;
@@ -45,7 +44,6 @@ const SubmissionFiles: React.FC<SubmissionFilesProps> = ({
   filesPendingStaging,
   previewFirst,
 }) => {
-  const SubmissionActivityAPI: NGSubmissionActivityAPI = lojector.get('SubmissionActivityAPI');
   return attachments.length || uploads.length || filesPendingStaging?.unstagedFiles.length ? (
     <ul className="list-group list-unstyled mt-2 mt-first-0">
       {map(attachments, (file, index) => (

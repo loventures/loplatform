@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,9 +23,8 @@ import { courseReduxStore } from '../../loRedux';
 import { updatePointsPossibleAction } from '../../loRedux/columnsReducer';
 import { withTranslation } from '../../i18n/translationContext';
 import * as React from 'react';
+import { useState } from 'react';
 import { Button } from 'reactstrap';
-import { withState } from 'recompose';
-import { compose } from 'redux';
 
 type PointsEditorProps = {
   canEdit: boolean;
@@ -118,12 +117,21 @@ class InnerPointsEditor extends React.Component<InnerPointsEditorProps> {
   }
 }
 
-export const PointsEditor = compose<React.ComponentType<PointsEditorProps>>(
-  withTranslation,
-  withState('state', 'setState', (props: PointsEditorProps) => ({
+const StatefulPointsEditor: React.FC<Omit<InnerPointsEditorProps, 'state' | 'setState'>> = props => {
+  const [state, setState] = useState<EditingState>(() => ({
     editing: false,
     saving: false,
     errored: false,
     staged: props.column.maximumPoints,
-  }))
-)(InnerPointsEditor);
+  }));
+  return (
+    <InnerPointsEditor
+      {...props}
+      state={state}
+      setState={setState}
+    />
+  );
+};
+
+export const PointsEditor: React.ComponentType<PointsEditorProps> =
+  withTranslation(StatefulPointsEditor);

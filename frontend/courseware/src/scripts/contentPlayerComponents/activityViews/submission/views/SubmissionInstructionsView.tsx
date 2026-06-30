@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,6 @@
 import RubricGrid from '../../../../components/rubric/RubricGrid.tsx';
 import { SubmissionActivity } from '../submissionActivity';
 import React from 'react';
-import { react2angular } from 'react2angular';
 
 import ContentInstructions from '../../../parts/ContentInstructions';
 
@@ -38,10 +37,3 @@ const SubmissionInstructionsView: React.FC<{
 );
 
 export default SubmissionInstructionsView;
-
-export const submissionInstructionsViewComponent = angular
-  .module('lo.contentPlayer.submissionInstructionsView', [])
-  .component(
-    'submissionInstructionsView',
-    react2angular(SubmissionInstructionsView, ['submissionActivity'], [])
-  );

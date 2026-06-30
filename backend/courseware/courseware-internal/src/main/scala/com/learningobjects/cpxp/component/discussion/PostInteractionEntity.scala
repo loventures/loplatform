@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,14 +18,17 @@
 package com.learningobjects.cpxp.component.discussion
 
 import jakarta.persistence.{Column, Entity, Index, Table}
-
 import com.learningobjects.cpxp.entity.DomainEntity
 import com.learningobjects.cpxp.scala.util.JTypes.{JBoolean, JLong}
 import com.learningobjects.cpxp.service.user.UserId
 import loi.cp.discussion.PostId
 import org.apache.commons.lang3.BooleanUtils
-import org.hibernate.annotations.{Cache as HCache, NaturalId}
+import org.hibernate.annotations.{NaturalId, NaturalIdClass, Cache as HCache}
 import org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE
+
+import scala.beans.BeanProperty
+
+case class PostInteractionKey(@BeanProperty userId: JLong, @BeanProperty postId: JLong)
 
 @Entity
 @Table(
@@ -33,6 +36,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE
   indexes = Array(new Index(name = "postinteration_user_post_idx", columnList = "userId,postId"))
 )
 @HCache(usage = READ_WRITE)
+@NaturalIdClass(value = classOf[PostInteractionKey])
 class PostInteractionEntity extends DomainEntity:
 
   @NaturalId

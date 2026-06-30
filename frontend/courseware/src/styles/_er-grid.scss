@@ -1,5 +1,6 @@
+@use 'sass:color';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -758,10 +759,10 @@ button {
 
   .app-footer .footer-content {
     a {
-      color: lighten($primary, 35%);
+      color: color.adjust($primary, $lightness: (35%));
 
       &:hover {
-        color: lighten($primary, 50%);
+        color: color.adjust($primary, $lightness: (50%));
       }
     }
 
@@ -780,10 +781,10 @@ button {
   }
 
   .completion-undo-btn {
-    color: lighten($primary, 35%);
+    color: color.adjust($primary, $lightness: (35%));
 
     &:hover {
-      color: lighten($primary, 50%);
+      color: color.adjust($primary, $lightness: (50%));
     }
 
     &.disabled {
@@ -795,26 +796,26 @@ button {
   a.btn-parent:focus {
     .btn-primary.lighten-when-dark {
       color: $gray-900;
-      background-color: lighten($primary, 20%) !important;
-      border-color: lighten($primary, 15%);
+      background-color: color.adjust($primary, $lightness: (20%)) !important;
+      border-color: color.adjust($primary, $lightness: (15%));
     }
   }
 
   .btn-primary.lighten-when-dark {
     color: $gray-900;
-    background-color: lighten($primary, 25%);
-    border-color: lighten($primary, 25%);
+    background-color: color.adjust($primary, $lightness: (25%));
+    border-color: color.adjust($primary, $lightness: (25%));
 
     &:hover {
       color: $gray-900;
-      background-color: lighten($primary, 20%) !important;
-      border-color: lighten($primary, 15%);
+      background-color: color.adjust($primary, $lightness: (20%)) !important;
+      border-color: color.adjust($primary, $lightness: (15%));
     }
 
     &:focus {
       color: $gray-900;
-      background-color: lighten($primary, 20%) !important;
-      border-color: lighten($primary, 15%);
+      background-color: color.adjust($primary, $lightness: (20%)) !important;
+      border-color: color.adjust($primary, $lightness: (15%));
       box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
     }
 

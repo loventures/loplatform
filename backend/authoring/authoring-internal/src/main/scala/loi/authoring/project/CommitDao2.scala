@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +23,7 @@ import com.learningobjects.cpxp.util.HibernateSessionOps.*
 import loi.authoring.CommitId
 import org.hibernate.graph.RootGraph
 import org.hibernate.query.NativeQuery
-import org.hibernate.{CacheMode, Session}
+import org.hibernate.{CacheMode, OrderingMode, Session, SessionCheckMode}
 import scaloi.syntax.boxes.*
 
 import java.util.UUID
@@ -49,12 +49,13 @@ class CommitDao2(
     val rootGraph = session.getEntityGraph("commit.docs").asInstanceOf[RootGraph[CommitEntity2]]
 
     session
-      .byMultipleIds(classOf[CommitEntity2])
-      .enableSessionCheck(true)
-      .enableOrderedReturn(false)
-      .`with`(CacheMode.NORMAL)
-      .withLoadGraph(rootGraph)
-      .multiLoad(ids.boxInsideTo[java.util.List]())
+      .findMultiple(
+        rootGraph,
+        ids.boxInsideTo[java.util.List](),
+        OrderingMode.UNORDERED,
+        SessionCheckMode.ENABLED,
+        CacheMode.NORMAL
+      )
       .asScala
       .view
       .map(c => c.id.toLong -> c)
@@ -144,16 +145,16 @@ class CommitDao2(
           |  JOIN ancestor ON parent.id = ancestor.parent_id
           |)
           |SELECT * FROM ancestor
-          |WHERE jsonb_path_exists(ops, '$[*].name ? (@ == $tgt)', :vars)
-          |   OR jsonb_path_exists(ops, '$[*].sourceName ? (@ == $tgt)', :vars)
-          |   OR jsonb_path_exists(ops, '$[*].narrativelyUpdatedNodeNames[*] ? (@ == $tgt)', :vars)
+          |WHERE jsonb_path_exists(ops, '$[*].name ? (@ == $tgt)', CAST(:vars AS jsonb))
+          |   OR jsonb_path_exists(ops, '$[*].sourceName ? (@ == $tgt)', CAST(:vars AS jsonb))
+          |   OR jsonb_path_exists(ops, '$[*].narrativelyUpdatedNodeNames[*] ? (@ == $tgt)', CAST(:vars AS jsonb))
           |""".stripMargin,
         classOf[CommitEntity2]
       )
       .unwrap(classOf[NativeQuery[CommitEntity2]])
       .addSynchronizedEntityClass(classOf[CommitEntity2])
       .setParameter("commitId", commitId)
-      .setParameter("vars", vars)
+      .setParameter("vars", vars.toString)
       .getResultList
       .asScala
       .toList

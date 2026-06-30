@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,6 @@
  */
 
 import axios from 'axios';
-import { Loader } from '../api/commonTypes';
 import { createUrl, loConfig } from '../bootstrap/loConfig';
 import { mapValues } from 'lodash';
 
@@ -27,7 +26,7 @@ export type I18n = Record<string, string>;
  *  we must ask the translations themselves to tell us who they are.
  *  i.e. translations.data['IETF language tag']
  * */
-const getI18n = (locale: string, component: string): Promise<I18n> => {
+export const getI18n = (locale: string, component: string): Promise<I18n> => {
   return axios
     .get<I18n>(createUrl(loConfig.i18n, { locale, component }))
     .then(response => {
@@ -42,15 +41,6 @@ const getI18n = (locale: string, component: string): Promise<I18n> => {
       console.warn(`Translation file was not found for locale ${locale}`);
       return {};
     });
-};
-
-export const loaderForAngularTranslate = (): Loader<I18n> => {
-  const lo_platform = window.lo_platform;
-  const locale = lo_platform.i18n.locale;
-  const component = lo_platform.identifier;
-  return function () {
-    return getI18n(locale, component);
-  };
 };
 
 export const getLocalI18nData = (serverI18n: I18n, locale: string): Promise<I18n> => {

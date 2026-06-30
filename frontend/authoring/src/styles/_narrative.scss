@@ -1,5 +1,6 @@
+@use 'sass:color';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -217,7 +218,7 @@
     background: $input-btn-focus-color;
 
     a:not(:hover) {
-      color: darken($color-primary, 5%);
+      color: color.adjust($color-primary, $lightness: -(5%));
     }
 
     .depther {
@@ -304,7 +305,7 @@
   .btn-link {
     color: $secondary !important; // override tampermonkey
     &:hover {
-      color: darken($secondary, 20%) !important;
+      color: color.adjust($secondary, $lightness: -(20%)) !important;
     }
   }
 
@@ -611,7 +612,7 @@
       }
 
       .previewing {
-        color: darken($warning, 15%);
+        color: color.adjust($warning, $lightness: -(15%));
         opacity: 0;
         z-index: 1;
 
@@ -859,7 +860,7 @@
         border: 1px solid $gray-300 !important;
 
         &:hover {
-          color: darken($primary, 15%);
+          color: color.adjust($primary, $lightness: -(15%));
         }
 
         //        &:not(:hover),:not(:active) {
@@ -1347,7 +1348,7 @@
     &:hover,
     &:active,
     &:focus {
-      color: darken($danger, 10%) !important;
+      color: color.adjust($danger, $lightness: -(10%)) !important;
     }
   }
 
@@ -1512,7 +1513,7 @@
     }
 
     &:has(.delete-rubric:hover) {
-      background-color: transparentize($danger, 0.9);
+      background-color: color.adjust($danger, $alpha: -(0.9));
     }
 
     &:hover,
@@ -1595,7 +1596,7 @@
       transition: background-color $transition-function $transition-speed;
 
       &:has(.delete-criterion:hover) {
-        background-color: transparentize($danger, 0.9);
+        background-color: color.adjust($danger, $alpha: -(0.9));
       }
     }
 
@@ -1615,14 +1616,14 @@
       transition: background-color $transition-function $transition-speed;
 
       &:has(.delete-level:hover) {
-        background-color: transparentize($danger, 0.9);
+        background-color: color.adjust($danger, $alpha: -(0.9));
       }
     }
   }
 
   .gater {
     color: #856404;
-    background-color: lighten(#fff3cd, 5%);
+    background-color: color.adjust(#fff3cd, $lightness: (5%));
     border-color: #ffeeba;
     border-radius: $border-radius;
     margin: 1.5rem 0.5rem 0;
@@ -1673,7 +1674,7 @@
       color: #856404 !important;
 
       &:hover {
-        color: darken(#847404, 10%) !important;
+        color: color.adjust(#847404, $lightness: -(10%)) !important;
       }
     }
 
@@ -1836,7 +1837,7 @@
       background-color: rgba($component-active-bg, 0.5) !important;
 
       .a {
-        color: darken($primary, 20%) !important;
+        color: color.adjust($primary, $lightness: -(20%)) !important;
       }
 
       + .selected {
@@ -1956,7 +1957,7 @@
       &:hover,
       &:focus-within {
         .leader {
-          background-color: darken($primary, 5%);
+          background-color: color.adjust($primary, $lightness: -(5%));
         }
 
         .content {
@@ -2055,13 +2056,13 @@
     }
 
     &.selected .a {
-      color: darken($primary, 15%);
+      color: color.adjust($primary, $lightness: -(15%));
     }
   }
 
   .drop-active {
     box-shadow: 0 0 2px 1px $color-primary;
-    background-color: transparentize($color-primary, 0.9);
+    background-color: color.adjust($color-primary, $alpha: -(0.9));
   }
 
   .drop-able {
@@ -2132,7 +2133,7 @@
 
     &.active .plus {
       color: white !important;
-      background-color: darken($color-primary, 5%) !important;
+      background-color: color.adjust($color-primary, $lightness: -(5%)) !important;
     }
 
     &:focus-within .rule,
@@ -2148,7 +2149,7 @@
     color: $color-primary !important;
 
     &:hover {
-      color: darken($color-primary, 5%) !important;
+      color: color.adjust($color-primary, $lightness: -(5%)) !important;
     }
   }
 
@@ -2364,7 +2365,7 @@
   &:hover {
     .go-arrow,
     .a {
-      color: darken($color-primary, 10%) !important;
+      color: color.adjust($color-primary, $lightness: -(10%)) !important;
     }
   }
 }
@@ -2395,11 +2396,11 @@
   }
 
   &:hover {
-    background-color: darken($gray-100, 2%);
+    background-color: color.adjust($gray-100, $lightness: -(2%));
 
     .go-arrow,
     .a {
-      color: darken($color-primary, 10%) !important;
+      color: color.adjust($color-primary, $lightness: -(10%)) !important;
     }
   }
 }
@@ -2415,7 +2416,7 @@
       color: $gray-600;
 
       &.course-context {
-        color: darken($color-primary, 10%);
+        color: color.adjust($color-primary, $lightness: -(10%));
       }
     }
   }
@@ -2550,7 +2551,7 @@
 
 // _custom.css turns this into a rotten inaccessible colour
 .narrative-action-bar .btn-warning:disabled {
-  color: transparentize($gray-900, 0.33);
+  color: color.adjust($gray-900, $alpha: -(0.33));
   background-color: #fcdd96;
   border-color: #fcdd96;
 }
@@ -2560,11 +2561,11 @@
   transition: color $transition-function $transition-speed;
 
   &.text-warning {
-    color: darken($warning, 15%) !important;
+    color: color.adjust($warning, $lightness: -(15%)) !important;
   }
 
   &.text-muted {
-    color: lighten($gray-600, 15%) !important;
+    color: color.adjust($gray-600, $lightness: (15%)) !important;
   }
 }
 
@@ -3018,7 +3019,7 @@ a.regular-block-link::after {
 
     &:nth-child(2) {
       animation: orbit 7s linear infinite;
-      color: lighten($primary, 50%);
+      color: color.adjust($primary, $lightness: (50%));
     }
   }
 }
@@ -3036,7 +3037,7 @@ a.regular-block-link::after {
   animation: flicker 3s linear infinite;
   animation-delay: 3s;
   margin-left: -1.75rem;
-  color: lighten($primary, 33%);
+  color: color.adjust($primary, $lightness: (33%));
 }
 
 @keyframes flicker {
@@ -3113,7 +3114,7 @@ a.regular-block-link::after {
 
   &:hover,
   &:focus {
-    color: darken($primary, 20%);
+    color: color.adjust($primary, $lightness: -(20%));
     //background-color: $gray-600;
   }
 
@@ -3159,7 +3160,7 @@ button {
     border-bottom-color: $gray-900 !important;
 
     .present-user .present-user-circle .present-user-photo {
-      border-color: transparentize($gray-900, 0.75);
+      border-color: color.adjust($gray-900, $alpha: -(0.75));
     }
   }
 
@@ -3169,7 +3170,7 @@ button {
     box-shadow: 0 4px 7px -2px rgba(0, 0, 0, 0.13);
 
     .present-user .present-user-circle .present-user-photo {
-      border-color: transparentize($black, 0.75);
+      border-color: color.adjust($black, $alpha: -(0.75));
     }
   }
 
@@ -3186,7 +3187,7 @@ button {
     }
 
     .text-danger {
-      color: lighten($danger, 15%) !important;
+      color: color.adjust($danger, $lightness: (15%)) !important;
     }
 
     .dropdown-menu {
@@ -3215,10 +3216,10 @@ button {
 
   .narrative-action-bar {
     a {
-      color: lighten($primary, 15%);
+      color: color.adjust($primary, $lightness: (15%));
 
       &:hover {
-        color: lighten($primary, 30%);
+        color: color.adjust($primary, $lightness: (30%));
       }
     }
 
@@ -3263,11 +3264,11 @@ button {
 
   #graph-edit-status {
     &.status-unsaved {
-      color: lighten($primary, 10%) !important;
+      color: color.adjust($primary, $lightness: (10%)) !important;
     }
 
     &.status-saved {
-      color: lighten($success, 15%) !important;
+      color: color.adjust($success, $lightness: (15%)) !important;
     }
 
     &.status-saving {
@@ -3275,7 +3276,7 @@ button {
     }
 
     &.status-offline {
-      color: lighten($danger, 15%) !important;
+      color: color.adjust($danger, $lightness: (15%)) !important;
     }
   }
 
@@ -3302,7 +3303,7 @@ button {
   .navigation-icon {
     background-color: $gray-900;
     border-color: $gray-800;
-    color: lighten($primary, 5%);
+    color: color.adjust($primary, $lightness: (5%));
 
     &.nice:disabled {
       background-color: $gray-900;
@@ -3321,13 +3322,13 @@ button {
     border-color: $gray-800;
 
     a {
-      color: lighten($primary, 10%) !important;
+      color: color.adjust($primary, $lightness: (10%)) !important;
 
       &:hover,
       &:focus {
         background: $gray-800;
 
-        color: lighten($primary, 30%) !important;
+        color: color.adjust($primary, $lightness: (30%)) !important;
       }
     }
 
@@ -3346,7 +3347,7 @@ button {
 
       &.scrolled {
         box-shadow: 0 4px 7px -2px rgba(0, 0, 0, 0.13);
-        border-bottom-color: darken($gray-900, 5%);
+        border-bottom-color: color.adjust($gray-900, $lightness: -(5%));
       }
 
       .btn.disabled {
@@ -3356,18 +3357,18 @@ button {
     }
 
     a {
-      color: lighten($primary, 15%);
+      color: color.adjust($primary, $lightness: (15%));
 
       &:not(.btn) {
         &:hover,
         &:focus {
-          color: lighten($primary, 30%);
+          color: color.adjust($primary, $lightness: (30%));
         }
       }
     }
 
     .active a:not(:hover) {
-      color: lighten($primary, 30%) !important;
+      color: color.adjust($primary, $lightness: (30%)) !important;
     }
 
     .active a.btn-transparent {
@@ -3454,11 +3455,11 @@ button {
     }
 
     .btn-outline-primary {
-      color: lighten($primary, 15%);
+      color: color.adjust($primary, $lightness: (15%));
     }
 
     .btn-outline-danger {
-      color: lighten($danger, 15%);
+      color: color.adjust($danger, $lightness: (15%));
     }
   }
 
@@ -3471,11 +3472,11 @@ button {
   }
 
   .present-user.Idle .present-user-circle .present-user-photo .user-mask {
-    background-color: transparentize($gray-900, 0.25);
+    background-color: color.adjust($gray-900, $alpha: -(0.25));
   }
 
   .present-user.Away .present-user-circle .present-user-photo .user-mask {
-    background-color: transparentize($gray-900, 0.5);
+    background-color: color.adjust($gray-900, $alpha: -(0.5));
   }
 
   .projects-search-pager {
@@ -3485,11 +3486,11 @@ button {
 
     #search-next,
     #search-prev {
-      color: lighten($primary, 15%);
+      color: color.adjust($primary, $lightness: (15%));
 
       &:hover,
       &:focus {
-        color: lighten($primary, 40%);
+        color: color.adjust($primary, $lightness: (40%));
         background-color: $gray-600;
       }
 
@@ -3501,8 +3502,8 @@ button {
 
   #new-project:disabled {
     color: $gray-500 !important;
-    background-color: darken($primary, 15%) !important;
-    border-color: darken($primary, 15%) !important;
+    background-color: color.adjust($primary, $lightness: -(15%)) !important;
+    border-color: color.adjust($primary, $lightness: -(15%)) !important;
   }
 
   .narrative-editor #lo-copyright {

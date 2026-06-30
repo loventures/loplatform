@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,13 +18,11 @@
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
 import { RichTextEditor } from '../../contentEditor/directives/richTextEditor';
-import { withTranslationFor2Angular } from '../../i18n/translationContext';
-import React from 'react';
-import { withHandlers, withState } from 'recompose';
-import { compose } from 'redux';
+import { withTranslation } from '../../i18n/translationContext';
+import React, { useState } from 'react';
 
 import withFocusOnMount from './WithFocusOnMount';
-import { lojector } from '../../loject';
+import messagingService from '../../services/messagingService.ts';
 
 /** Length of time to display sent message banner. */
 const SentMessageDisplayTime = 5000;
@@ -41,31 +39,7 @@ export type ChatEmailProps = {
   recipientId: number;
 };
 
-const ChatEmail = compose<React.ComponentType<ChatEmailProps>>(
-  withTranslationFor2Angular,
-  withFocusOnMount,
-  withState('state', 'setState', initialState),
-  withHandlers<any, any>({
-    sendEmail:
-      ({ state, setState, recipientId }: any) =>
-      () => {
-        const { subject, body } = state;
-        const MessagingService: any = lojector.get('MessagingService');
-        setState({ ...state, sending: true });
-        MessagingService.sendMessage({
-          subject,
-          body,
-          recipients: [{ _type: 'user', user: recipientId }],
-          uploads: [],
-        }).then(() => {
-          setState({ ...initialState, sent: true });
-          window.setTimeout(() => {
-            setState({ ...initialState, sent: false });
-          }, SentMessageDisplayTime);
-        });
-      },
-  })
-)(({ translate, onRef, state, setState, sendEmail }: any) => {
+const ChatEmailInner = ({ translate, onRef, state, setState, sendEmail }: any) => {
   const { subject, body, sending, sent, valid } = state;
   return (
     <React.Fragment>
@@ -120,6 +94,41 @@ const ChatEmail = compose<React.ComponentType<ChatEmailProps>>(
       </div>
     </React.Fragment>
   );
-});
+};
+
+const ChatEmailWithState = (props: any) => {
+  const [state, setState] = useState(initialState);
+
+  const sendEmail = () => {
+    const { subject, body } = state;
+    setState({ ...state, sending: true });
+    messagingService
+      .sendMessage({
+        subject,
+        body,
+        recipients: [{ _type: 'user', user: props.recipientId }],
+        uploads: [],
+      })
+      .then(() => {
+        setState({ ...initialState, sent: true });
+        window.setTimeout(() => {
+          setState({ ...initialState, sent: false });
+        }, SentMessageDisplayTime);
+      });
+  };
+
+  return (
+    <ChatEmailInner
+      {...props}
+      state={state}
+      setState={setState}
+      sendEmail={sendEmail}
+    />
+  );
+};
+
+const ChatEmail: React.ComponentType<ChatEmailProps> = withTranslation(
+  withFocusOnMount(ChatEmailWithState)
+);
 
 export default ChatEmail;

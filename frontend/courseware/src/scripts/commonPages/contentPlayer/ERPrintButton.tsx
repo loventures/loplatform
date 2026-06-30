@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import { useTranslation } from '../../i18n/translationContext';
 import { allowPrintingEntireLesson } from '../../utilities/preferences';
 import React, { useState } from 'react';
 import { FiPrinter } from 'react-icons/fi';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import {
   UncontrolledDropdown as Dropdown,
   DropdownItem,
@@ -33,7 +33,7 @@ import {
   DropdownToggle,
   UncontrolledTooltip,
 } from 'reactstrap';
-import { lojector } from '../../loject';
+import { printService } from '../../utilities/printService.ts';
 
 type ERPrintButtonProps = {
   viewingAs: ViewingAs;
@@ -43,7 +43,9 @@ type ERPrintButtonProps = {
 
 const ERPrintButton: React.FC<ERPrintButtonProps> = ({ viewingAs, content, module }) => {
   const translate = useTranslation();
-  const history = useHistory();
+  const navigate = useNavigate();
+  // history v5 / v6 take navigation state separately from the path target.
+  const go = (to: any) => navigate(to, { state: to?.state });
 
   const moduleNameLower = module?.name.toLowerCase();
   const printAllKey = moduleNameLower?.startsWith('lesson')
@@ -57,8 +59,7 @@ const ERPrintButton: React.FC<ERPrintButtonProps> = ({ viewingAs, content, modul
   const [unprintable, setUnprintable] = useState(false);
 
   const checkPrintable = () => {
-    const PrintService: any = lojector.get('Print');
-    setUnprintable(PrintService.isUnprintable());
+    setUnprintable(printService.isUnprintable());
   };
 
   // The DropdownMenu should be `right` but there is a horrid bug that causes it to then
@@ -105,7 +106,7 @@ const ERPrintButton: React.FC<ERPrintButtonProps> = ({ viewingAs, content, modul
         ) : (
           <DropdownItem
             id="print-page"
-            onClick={() => history.push(ContentPrinterPageLink.toLink({ content }))}
+            onClick={() => go(ContentPrinterPageLink.toLink({ content }))}
           >
             {translate('PRINT_THIS_PAGE')}
           </DropdownItem>
@@ -115,29 +116,30 @@ const ERPrintButton: React.FC<ERPrintButtonProps> = ({ viewingAs, content, modul
             <DropdownItem
               id="print-module-no-questions"
               onClick={() =>
-                history.push(ContentPrinterPageLink.toLink({ content: module, questions: false }))
+                go(ContentPrinterPageLink.toLink({ content: module, questions: false }))
               }
             >
               {translate(printAllKey, { name: module.name })}
               <div className="text-muted small">{translate('PRINT_WITHOUT_QUESTIONS')}</div>
             </DropdownItem>
-            {module && null && (
-              /* Disabled because without randomization, answers are probably obvious. */ <DropdownItem
+            {/* Disabled because without randomization, answers are probably obvious.
+            {module && (
+              <DropdownItem
                 id="print-module-no-answers"
                 onClick={() =>
-                  history.push(ContentPrinterPageLink.toLink({ content: module, answers: false }))
+                  go(ContentPrinterPageLink.toLink({ content: module, answers: false }))
                 }
               >
                 {translate(printAllKey, { name: module.name })}{' '}
                 <div className="text-muted small">{translate('PRINT_WITHOUT_ANSWERS')}</div>
               </DropdownItem>
-            )}
+            )} */}
           </>
         )}
         {module && allowPrintingEntireLesson && (
           <DropdownItem
             id="print-module"
-            onClick={() => history.push(ContentPrinterPageLink.toLink({ content: module }))}
+            onClick={() => go(ContentPrinterPageLink.toLink({ content: module }))}
           >
             {translate(printAllKey, { name: module?.name })}
             {viewingAs.isInstructor && (

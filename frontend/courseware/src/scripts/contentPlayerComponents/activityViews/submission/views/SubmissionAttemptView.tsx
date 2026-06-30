@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,6 @@ import {
 } from '../../../../courseContentModule/selectors/contentEntry';
 import { isScoreFinalized } from '../../../../utilities/attemptStates';
 import React from 'react';
-import { react2angular } from 'react2angular';
 
 import GraderJumpButton from '../parts/GraderJumpButton.tsx';
 import SubmissionFiles from '../parts/SubmissionFiles.tsx';
@@ -33,11 +32,12 @@ import SubmissionPendingGrade from '../parts/SubmissionPendingGrade.tsx';
 import SubmissionScore from '../parts/SubmissionScore.tsx';
 
 interface SubmissionAttemptViewProps {
-  content: ContentWithNebulousDetails;
-  viewingAs: ViewingAs;
-  assessment: SubmissionAssessment;
   attempt: DisplaySubmissionAttempt;
   isGrading?: boolean;
+  // Learner-only — used solely under `!isGrading` (the instructor grader passes just attempt + isGrading).
+  content?: ContentWithNebulousDetails;
+  viewingAs?: ViewingAs;
+  assessment?: SubmissionAssessment;
 }
 
 const SubmissionAttemptView: React.FC<SubmissionAttemptViewProps> = ({
@@ -86,10 +86,3 @@ const hasScore = (score: BasicScore | RubricScore | null) =>
   score?.scoreType === 'basic' || (score?.scoreType === 'rubric' && score.nullableCriterionScores);
 
 export default SubmissionAttemptView;
-
-export const submissionAttemptViewComponent = angular
-  .module('lo.contentPlayer.submissionAttemptView', [])
-  .component(
-    'submissionAttemptView',
-    react2angular(SubmissionAttemptView, ['attempt', 'isGrading'], [])
-  );

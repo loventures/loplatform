@@ -1,7 +1,8 @@
 /// <reference types="vite/client" />
 
-var process: {
+declare const process: {
   env: {
     APP: string;
+    DEBUG?: string;
   };
 };

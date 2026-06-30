@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -87,6 +87,7 @@ lazy val frontend = (project in file("."))
     platform,
   )
   .settings(
+    scalaVersion := "3.8.4",
     publishArtifact := false,
     publish := Def.task(()),
     addCommandAlias("install", "authoring/yarnInstall; courseware/yarnInstall; platform/yarnInstall"),

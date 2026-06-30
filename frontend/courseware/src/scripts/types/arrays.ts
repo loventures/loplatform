@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -136,7 +136,7 @@ export function toggle<A>(array: A[], element: A): A[] {
 }
 
 /**
- * Compares two arrays using the supplied equals function. returns true if
+ * Compares two arrays using the supplied equals function. returns true if
  *   the arrays are the same length, and every value in the left array
  *   is found in the right array, using the supplied equality function
  * @param eq function to use to check equality

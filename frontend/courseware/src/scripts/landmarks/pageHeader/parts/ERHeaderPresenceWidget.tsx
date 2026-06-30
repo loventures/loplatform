@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,15 +17,14 @@
 
 import classnames from 'classnames';
 import PresentScene from '../../../bootstrap/course';
+import { openGroupChatModal } from '../../../chat/groupChatModal.tsx';
 import { useTranslation } from '../../../i18n/translationContext';
-import { NgPresenceService } from '../../../presence/PresenceService';
-import NgPresentConversations from '../../../presence/PresentConversations';
+import { presenceService } from '../../../presence/presenceServiceImpl.ts';
+import { presentConversations } from '../../../presence/presentConversationsImpl.ts';
 import React from 'react';
 import { GrGroup } from 'react-icons/gr';
 import { IoChatboxOutline, IoWifi, IoWifiOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { NgUibModal } from '../../../ng';
-import { lojector } from '../../../loject';
 
 const ERHeaderPresenceWidget: React.FC<{ showGroupChat: boolean; showPresenceChat: boolean }> = ({
   showGroupChat,
@@ -34,25 +33,17 @@ const ERHeaderPresenceWidget: React.FC<{ showGroupChat: boolean; showPresenceCha
   const translate = useTranslation();
   const dispatch = useDispatch();
 
-  const PresenceService: NgPresenceService = lojector.get('PresenceService');
+  const PresenceService = presenceService;
   const presenceState = PresenceService.state;
-  const PresentConversations: NgPresentConversations = lojector.get('PresentConversations');
+  const PresentConversations = presentConversations;
   const conversationStatus = PresentConversations.status;
-  const $uibModal: NgUibModal = lojector.get('$uibModal');
 
   const reconnectPresence = () => {
     PresenceService.reconnectPresence();
   };
 
   const openCourseChat = () => {
-    $uibModal.open({
-      component: 'groupChatModal',
-      resolve: {
-        scene: () => PresentScene,
-      },
-      size: 'lg',
-      backdrop: 'static',
-    });
+    openGroupChatModal(PresentScene);
   };
 
   const toggleUserList = () => {

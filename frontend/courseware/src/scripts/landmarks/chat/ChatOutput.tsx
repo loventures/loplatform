@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,12 +18,11 @@
 import { CourseState } from '../../loRedux';
 import dayjs from 'dayjs';
 import { map } from 'lodash';
-import NgPresentConversations from '../../presence/PresentConversations';
+import { presentConversations } from '../../presence/presentConversationsImpl.ts';
 import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ChatLine from './ChatLine';
-import { lojector } from '../../loject';
 
 /** Show a timestamps if there is at least a 2 minute delta from the next stanza. */
 const ShowTimestampDelta = 120000;
@@ -66,7 +65,7 @@ export type ChatOwnProps = {
 export type ChatOutputProps = ChatOutputStateProps & ChatOwnProps;
 
 const ChatOutput = ({ lastUpdated, roomId, showFullName }: any) => {
-  const PresentConversations: NgPresentConversations = lojector.get('PresentConversations');
+  const PresentConversations = presentConversations;
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const [, setUpdateTime] = useState(lastUpdated); // todo: remove?

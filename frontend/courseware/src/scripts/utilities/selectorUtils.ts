@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,16 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import type { CourseState } from '../loRedux';
 import { isFunction } from 'lodash';
 import { Selector } from 'reselect';
 import { createSelector } from 'reselect';
 
-export const idMapSelectorCreator = (idOrSelector, sliceSelector) => {
-  const idSelector = isFunction(idOrSelector) ? idOrSelector : () => idOrSelector;
+export const idMapSelectorCreator = (idOrSelector: any, sliceSelector: any) => {
+  const idSelector = isFunction(idOrSelector) ? idOrSelector : (_state: any) => idOrSelector;
 
   return createSelector([idSelector, sliceSelector], (id, slice = {}) => {
     return slice[id];
-  });
+  }) as unknown as (state: CourseState) => any;
 };
 
 export const createSelectAsProp = <State, Result, Prop extends string>(

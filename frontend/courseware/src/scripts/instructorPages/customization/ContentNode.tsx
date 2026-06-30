@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -87,7 +87,6 @@ export const ContentNode: React.FC<ContentNodeProps> = ({
   const showEditors = beingEdited || isActive;
   const setFocus = activeContentEditor ? isActive && activeContentEditor.setFocus : false;
 
-  // eslint-disable-next-line jsx-a11y/no-static-element-interactions
   return (
     <div
       ref={dragRef as unknown as Ref<HTMLDivElement>}

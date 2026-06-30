@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ import com.learningobjects.cpxp.util.ThreadTerminator
 import loi.authoring.asset.Asset
 import loi.authoring.edge.{AssetEdge, Group}
 import loi.cp.asset.edge.EdgeData
-import org.hibernate.{CacheMode, Session}
+import org.hibernate.{CacheMode, OrderingMode, Session, SessionCheckMode}
 import scaloi.syntax.boxes.*
 
 import java.sql.Timestamp
@@ -79,11 +79,13 @@ class EdgeDao2(
   def load(ids: Iterable[Long]): List[EdgeEntity2] =
     ThreadTerminator.check()
     session
-      .byMultipleIds(classOf[EdgeEntity2])
-      .enableSessionCheck(true)
-      .enableOrderedReturn(false)
-      .`with`(CacheMode.NORMAL)
-      .multiLoad(ids.boxInsideTo[java.util.List]())
+      .findMultiple(
+        classOf[EdgeEntity2],
+        ids.boxInsideTo[java.util.List](),
+        OrderingMode.UNORDERED,
+        SessionCheckMode.ENABLED,
+        CacheMode.NORMAL
+      )
       .asScala
       .toList
   end load

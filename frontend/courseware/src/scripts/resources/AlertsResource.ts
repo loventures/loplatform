@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,7 +22,7 @@ import { UrlAndParamsKey } from './ContentsResource';
 import { queryClient } from './queryClient';
 import { Resource, useSuspenseQuery } from './Resource';
 import UrlBuilder from '../utilities/UrlBuilder';
-import { QueryFunction, useMutation } from 'react-query';
+import { QueryFunction, useMutation } from '@tanstack/react-query';
 
 import { SrsList } from '../api/commonTypes';
 import { QnaAttachment } from '../qna/qnaApi';
@@ -168,14 +168,14 @@ class AlertsResource<TData extends SrsList<AlertNotification>> extends Resource<
     };
 
   fetch(key: UrlAndParamsKey, config: Record<string, any> = {}) {
-    return queryClient.fetchQuery(key, this.fetcher(config));
+    return queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher(config) });
   }
 
   read(limit: number, offset: number, contextId: number, config?: Record<string, any>) {
     const key = this.getKey(limit, offset, contextId);
     const promise = this.fetch(key, config);
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, fetching, data, key };
   }
@@ -217,21 +217,17 @@ export const useUnviewedAlerts = (limit = 5, offset = 0, contextId: number = Cou
 };
 
 export const useAlertViewedMutation = (alertId: number) =>
-  useMutation(() => alertsResource.markAsViewed(alertId), {
+  useMutation({
+    mutationFn: () => alertsResource.markAsViewed(alertId),
     onSuccess: async () => {
       // update the cache since our endpoint returns a 204.
       const key = alertsResource.getKey(5, 0, Course.id);
       const oldData = alertsResource.getData(key);
 
       if (oldData) {
-        const newObjects = oldData.objects.map(alert => {
-          if (alert.id === alertId) {
-            alert.viewed = true;
-            return alert;
-          } else {
-            return alert;
-          }
-        });
+        const newObjects = oldData.objects.map(alert =>
+          alert.id === alertId ? { ...alert, viewed: true } : alert
+        );
         alertsResource.setData(key, {
           ...oldData,
           objects: newObjects ?? [],

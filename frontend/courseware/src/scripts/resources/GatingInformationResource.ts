@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,8 @@ import Course from '../bootstrap/course';
 import contentsResource, { UrlAndParamsKey } from './ContentsResource';
 import { queryClient } from './queryClient';
 import { LOCKED_STATUS, OPEN_STATUS, READ_ONLY_STATUS } from '../utilities/gatingPolicyConstants';
-import { EnsuredQueryKey, QueryFunctionContext } from 'react-query/types/core/types';
+import { QueryFunctionContext } from '@tanstack/react-query';
+import { EnsuredQueryKey } from './ensuredQueryKey';
 
 import { Resource, useSuspenseQuery } from './Resource';
 
@@ -70,9 +71,9 @@ class GatingInformationResource<TData extends GatingInformationMap> extends Reso
 
   read(courseId: number, userId: number) {
     const key = this.getKey(courseId, userId);
-    const promise = queryClient.fetchQuery(key, this.fetcher({}));
+    const promise = queryClient.fetchQuery({ queryKey: key, queryFn: this.fetcher({}) });
     const data = queryClient.getQueryData<TData>(key);
-    const fetching = queryClient.isFetching(key);
+    const fetching = queryClient.isFetching({ queryKey: key });
 
     return { promise, data, fetching, key };
   }

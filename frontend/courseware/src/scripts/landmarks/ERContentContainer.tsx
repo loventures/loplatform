@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -39,7 +39,7 @@ import { useIdleTimer } from 'react-idle-timer';
 import LearnerPreviewHeader from './learnerPreviewHeader/LearnerPreviewHeader';
 import { OnlineUsersPanel } from './presentUsers/presentUsers';
 import ReviewPeriodBanner from './ReviewPeriodBanner';
-import { lojector } from '../loject';
+import { idleService } from '../presence/idleServiceImpl.ts';
 
 export type ERContentContainerProps = {
   className?: string;
@@ -62,12 +62,10 @@ const ERContentContainer: React.FC<ERContentContainerProps> = ({ children, class
       : setPresence(presenceDependency[0], presenceDependency[1]);
   }, [presenceDependency.join()]);
 
-  const IdleService: any = lojector.get('IdleService');
-
   useIdleTimer({
     timeout: 1000, // 1 sec
-    onIdle: () => IdleService.onIdleStart(),
-    onActive: () => IdleService.onIdleEnd(),
+    onIdle: () => idleService.onIdleStart(),
+    onActive: () => idleService.onIdleEnd(),
     debounce: 500,
   });
 

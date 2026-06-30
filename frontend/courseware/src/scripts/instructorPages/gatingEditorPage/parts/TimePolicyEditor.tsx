@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -36,7 +36,7 @@ import { Form } from 'reactstrap';
 import React, { useContext, useRef, useState } from 'react';
 
 import GatingEditorContext from './GatingEditorContext';
-import { lojector } from '../../../loject';
+import { temporalPolicyUpdatedAC } from '../gatingActions';
 
 const TimePolicyEditor: React.FC<{
   contentId: ContentId;
@@ -150,9 +150,7 @@ const TimePolicyEditor: React.FC<{
                   );
 
                   //this is still needed for content view which uses custom modified subslices of api data
-                  const payload = lojector
-                    .get<any>('GatingActions')
-                    .temporalPolicyUpdatedAC(contentId, customization.gateDate);
+                  const payload = temporalPolicyUpdatedAC(contentId, customization.gateDate);
                   courseReduxStore.dispatch(payload);
                 });
             }}

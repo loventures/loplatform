@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -82,7 +82,7 @@ object Baroquitechture:
   ): Map[EdgePath, Int] =
     edgePaths ?? {
       session
-        .createNativeQuery(policyQuery[T](policy))
+        .createNativeQuery(policyQuery[T](policy), classOf[Array[Object]])
         .setParameter("contextId", Long.box(contextId))
         .setParameter("edgePaths", edgePaths.map(_.toString).asJavaCollection)
         .getResultList

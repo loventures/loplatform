@@ -24,6 +24,16 @@ export default defineConfig(() => {
       },
     ],
 
+    css: {
+      preprocessorOptions: {
+        // quietDeps silences deprecation warnings from dependencies (e.g. bootstrap);
+        // silenceDeprecations: ['import' as const] silences the @import deprecation, which we
+        // are deliberately keeping for now.
+        scss: { quietDeps: true, silenceDeprecations: ['import' as const] },
+        sass: { quietDeps: true, silenceDeprecations: ['import' as const] },
+      },
+    },
+
     server: {
       port: 5171,
       strictPort: true,
@@ -37,6 +47,9 @@ export default defineConfig(() => {
     },
 
     build: {
+      // Set DEBUG=1 for a readable, source-mapped build (local debugging).
+      minify: !process.env.DEBUG,
+      sourcemap: !!process.env.DEBUG,
       rollupOptions: {
         input: globSync(`html/${app}/**/*.html`),
       },

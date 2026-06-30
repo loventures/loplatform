@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,10 +17,9 @@
 
 import { StagedFile } from '../api/fileUploadApi.ts';
 import { findIndex, flatten, map, without } from 'lodash';
-import { NGAttachmentService } from '../services/AttachmentService';
+import { attachmentService } from '../services/pure/attachmentService.ts';
 import { Dispatch, Reducer } from 'redux';
 import { batchActions } from 'redux-batched-actions';
-import { lojector } from '../loject.ts';
 
 export const FILE_STAGING_SELECTED = 'FILE_STAGING_SELECTED';
 export const FILE_STAGING_PROGRESS = 'FILE_STAGING_PROGRESS';
@@ -69,7 +68,7 @@ export const fileStagingActionCreatorMaker = (
 
       const onSuccess = (stagedFile: StagedFile) => {
         const actions = flatten(map(additionalSuccessACs, ac => ac(stagedFile, ...args)));
-        dispatch(batchActions([stagingSuccessActionCreator(configForAC, objectUrl), ...actions]));
+        dispatch(batchActions([stagingSuccessActionCreator(configForAC, objectUrl), ...actions]) as any);
       };
 
       const onError = (error: any) => {
@@ -80,9 +79,7 @@ export const fileStagingActionCreatorMaker = (
         dispatch(stagingProgressActionCreator(configForAC, objectUrl, progress));
       };
 
-      const AttachmentService: NGAttachmentService = lojector.get('AttachmentService');
-
-      AttachmentService.uploadStaging(file).then(onSuccess, onError, onProgress);
+      attachmentService.uploadStaging(file).then(onSuccess, onError, onProgress);
     };
   };
 };
@@ -118,7 +115,7 @@ export const fileStagingInitialState: FileStagingState = {
   errors: [],
 };
 
-export const fileStagingReducer: Reducer<FileStagingState> = function (
+export const fileStagingReducer: Reducer<FileStagingState, any> = function (
   state = fileStagingInitialState,
   action
 ) {

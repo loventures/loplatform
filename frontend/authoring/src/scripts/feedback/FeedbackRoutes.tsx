@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,28 +16,29 @@
  */
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 
-import { feedbackItemPath, feedbackPath } from '../router/routes';
 import FeedbackDetail from './FeedbackDetail';
 import FeedbackIndex from './FeedbackIndex';
 
+// Descendant routes (mounted under DcmApp's `feedback/*`), so paths are relative to feedbackPath.
+const FeedbackDetailRoute: React.FC = () => {
+  const { feedback } = useParams<{ feedback: string }>();
+  return <FeedbackDetail id={parseInt(feedback!)} />;
+};
+
 const FeedbackRoutes: React.FC = () => {
   return (
-    <Switch>
+    <Routes>
       <Route
-        exact
-        path={feedbackPath}
-      >
-        <FeedbackIndex />
-      </Route>
-      <Route
-        path={feedbackItemPath}
-        render={({ match }) => {
-          return <FeedbackDetail id={parseInt(match.params['feedback'])} />;
-        }}
+        index
+        element={<FeedbackIndex />}
       />
-    </Switch>
+      <Route
+        path=":feedback"
+        element={<FeedbackDetailRoute />}
+      />
+    </Routes>
   );
 };
 

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,31 +15,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import Polyglot from 'node-polyglot';
+
+import { LoPlatform } from '../../types/loPlatform';
 import {
   SET_LO_PLATFORM,
   SET_PORTAL_ALERT_STATUS,
   SET_TRANSLATIONS,
 } from '../actions/MainActions.js';
 
-type State = {
-  lo_platform: any;
-  translations: Record<string, string>;
+export type MainState = {
+  lo_platform: LoPlatform;
+  translations: Polyglot;
   adminPageError: boolean;
   adminPageSuccess: boolean;
   adminPageMessage: string;
   session: boolean;
-}
+};
 
-const initialState: State = {
+const initialState: MainState = {
   lo_platform: window.lo_platform ?? { domain: {} },
-  translations: {},
+  translations: new Polyglot(),
   adminPageError: false,
   adminPageSuccess: false,
   adminPageMessage: '',
   session: true,
 };
 
-export default function main(state = initialState, action: any) {
+export default function main(state = initialState, action: any): MainState {
   switch (action.type) {
     case SET_LO_PLATFORM:
       return { ...state, lo_platform: action.lo_platform };

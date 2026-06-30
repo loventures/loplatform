@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -27,68 +27,94 @@ import ERStudentDashboard from '../studentPages/ERStudentDashboard';
 import { redirectPreserveParams } from '../utils/linkUtils';
 import { contentSearch } from '../utilities/preferences';
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+
+// Paths are relative to the /student/* mount in ERAppRoutes. The content-player and search
+// routes need location.search/state, which v6 exposes via useLocation rather than a render prop.
+const ContentPlayerRoute: React.FC = () => {
+  const location = useLocation();
+  return (
+    <ERContentPlayer
+      search={location.search}
+      state={location.state}
+    />
+  );
+};
+
+const SearchRoute: React.FC = () => {
+  const location = useLocation();
+  return <ERSearchPage search={location.search} />;
+};
+
+const DashboardRedirect: React.FC = () => {
+  const location = useLocation();
+  return (
+    <Navigate
+      replace
+      to={redirectPreserveParams('/student/dashboard', location)}
+    />
+  );
+};
 
 const ERLearnerPageRoutes: React.FC = () => (
-  <Switch>
+  <Routes>
     <Route
-      path="/student/dashboard"
-      exact={true}
-    >
-      <ERStudentDashboard />
-    </Route>
-
-    <Route
-      path="/student/content/:contentId"
-      render={({ location }) => (
-        <ERContentPlayer
-          search={location.search}
-          state={location.state}
-        />
-      )}
+      path="dashboard"
+      element={<ERStudentDashboard />}
     />
 
-    <Route path="/student/print/:contentId">
-      <ERContentPrinter />
-    </Route>
+    <Route
+      path="content/:contentId/*"
+      element={<ContentPlayerRoute />}
+    />
 
-    <Route path="/student/discussions">
-      <ERDiscussionListPage />
-    </Route>
+    <Route
+      path="print/:contentId/*"
+      element={<ERContentPrinter />}
+    />
 
-    <Route path="/student/assignments">
-      <ERLearnerAssignmentsListPage />
-    </Route>
+    <Route
+      path="discussions/*"
+      element={<ERDiscussionListPage />}
+    />
 
-    <Route path="/student/competencies">
-      <ERStudentCourseCompetenciesPage />
-    </Route>
+    <Route
+      path="assignments/*"
+      element={<ERLearnerAssignmentsListPage />}
+    />
 
-    <Route path="/student/bookmarks">
-      <ERBookmarksPage />
-    </Route>
+    <Route
+      path="competencies/*"
+      element={<ERStudentCourseCompetenciesPage />}
+    />
 
-    <Route path="/student/qna/:questionId">
-      <LearnerQnaPage />
-    </Route>
+    <Route
+      path="bookmarks/*"
+      element={<ERBookmarksPage />}
+    />
 
-    <Route path="/student/qna">
-      <LearnerQnaPage />
-    </Route>
+    <Route
+      path="qna/:questionId/*"
+      element={<LearnerQnaPage />}
+    />
+
+    <Route
+      path="qna/*"
+      element={<LearnerQnaPage />}
+    />
 
     {contentSearch && (
       <Route
-        path="/student/search"
-        render={({ location }) => <ERSearchPage search={location.search} />}
+        path="search/*"
+        element={<SearchRoute />}
       />
     )}
 
     <Route
-      render={({ location }) => (
-        <Redirect to={redirectPreserveParams('/student/dashboard', location)} />
-      )}
+      path="*"
+      element={<DashboardRedirect />}
     />
-  </Switch>
+  </Routes>
 );
 
 export default ERLearnerPageRoutes;

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -157,7 +157,7 @@ export type Course = {
   noHeader?: boolean;
   // Added for headers
   isEnded?: boolean;
-  // Added by course.ts and used only by logoutRedirects.js
+  // Added by course.ts and used only by bootstrap/sessionBootstrap.ts
   LTI?: boolean;
   // Added by course.ts and used only by debugBear
   effectiveStartDate?: Date;
@@ -190,6 +190,7 @@ declare global {
         isLocal: boolean;
         isProdLike: boolean;
         isMock?: boolean;
+        isRemoteTest?: boolean;
       };
       binding_path: string;
       cdn_url: string;

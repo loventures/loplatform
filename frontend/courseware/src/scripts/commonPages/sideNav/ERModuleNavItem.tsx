@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -134,7 +134,7 @@ const ERModuleNavItem: React.FC<ERModuleNavItemProps> = ({
       {expanded && (
         <ListGroup flush>
           {
-            elements.reduce<[boolean, Array<JSX.Element>]>(
+            elements.reduce<[boolean, Array<React.JSX.Element>]>(
               ([inLesson, items], content, index) => {
                 const lessonId = content.lesson?.id;
                 // If either there are multiple lessons in this module or a lesson is not the first module

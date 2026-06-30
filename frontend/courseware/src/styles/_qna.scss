@@ -1,5 +1,6 @@
+@use 'sass:color';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -184,7 +185,7 @@ $bubble-radius: 8px;
   }
 
   &.closed {
-    background-color: lighten(#d9edf7, 4%);
+    background-color: color.adjust(#d9edf7, $lightness: (4%));
     border-color: #d9edf7;
 
     &:hover {
@@ -234,6 +235,6 @@ $bubble-radius: 8px;
 
 #qna-button.open-question:after {
   background-color: $color-alert;
-  border: 1px solid darken($color-alert, 0.3);
+  border: 1px solid color.adjust($color-alert, $lightness: -(0.3%));
   content: ' ';
 }

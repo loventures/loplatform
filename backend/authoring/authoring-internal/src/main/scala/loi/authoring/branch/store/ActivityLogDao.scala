@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -102,7 +102,7 @@ class ActivityLogDao(
 
     val logItems = session
       .createNativeQuery(s"""$ctes
-                            |$selectFragment""".stripMargin)
+                            |$selectFragment""".stripMargin, classOf[Array[Object]])
       .setParameter("branchId", branch.id)
       .tap(qf)
       .getResultList
@@ -134,7 +134,7 @@ class ActivityLogDao(
            |    JOIN assetnode course ON pe.target_id = course.id and course.name = :courseName
            |WHERE c.id = ANY(CAST(:commitIds AS BIGINT[]))
            |  AND node.name = :programName
-           |""".stripMargin)
+           |""".stripMargin, classOf[Array[Object]])
       .setParameter("commitIds", commitIds.mkString("{", ",", "}"))
       .setParameter("courseName", project.homeNodeName.toString)
       .setParameter("programName", project.rootNodeName.toString)

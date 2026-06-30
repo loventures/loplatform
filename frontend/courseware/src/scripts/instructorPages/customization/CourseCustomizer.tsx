@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -42,7 +42,6 @@ export const CourseCustomizer = () => (
     selector={selector}
   >
     {([{ course, customizationsState }, dispatch]) => (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         className="course-customizer"
         onMouseMove={() => {

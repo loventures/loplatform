@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -46,9 +46,14 @@ import {
 import React from 'react';
 import { BsChatRightQuote, BsTrash } from 'react-icons/bs';
 import { SlLink, SlMagnifier } from 'react-icons/sl';
-import { Redirect, Route } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import ERNonContentTitle from '../../commonPages/contentPlayer/ERNonContentTitle';
+
+// Paths are relative to the /instructor/controls/* mount in ERInstructorPageRoutes.
+const ContentSearchRoute: React.FC = () => {
+  const location = useLocation();
+  return <ContentSearchPagelet search={location.search} />;
+};
 
 const ERControlsPage: React.FC = () => {
   const translate = useTranslation();
@@ -164,69 +169,77 @@ const ERControlsPage: React.FC = () => {
               ) : null}
             </ul>
 
-            {instructorControlsV2 ? (
-              <>
+            <Routes>
+              {instructorControlsV2 ? (
                 <Route
-                  path="/instructor/controls/customize"
-                  component={CourseCustomizer}
+                  path="customize/*"
+                  element={<CourseCustomizer />}
                 />
+              ) : null}
+              {instructorControlsV2 ? (
                 <Route
-                  path="/instructor/controls/policies"
-                  component={PoliciesPage}
+                  path="policies/*"
+                  element={<PoliciesPage />}
                 />
-              </>
-            ) : null}
+              ) : null}
 
-            {instructorLinkChecker ? (
+              {instructorLinkChecker ? (
+                <Route
+                  path="link-checker/*"
+                  element={<LinkCheckerPagelet />}
+                />
+              ) : null}
+
+              {contentSearch ? (
+                <Route
+                  path="content-search/*"
+                  element={<ContentSearchRoute />}
+                />
+              ) : null}
+
+              {enableInstructorFeedback ? (
+                <Route
+                  path="content-feedback/*"
+                  element={<ContentFeedbackPagelet />}
+                />
+              ) : null}
+
+              {instructorPurgeDiscussions ? (
+                <Route
+                  path="purge-posts/*"
+                  element={<DiscussionPurgePagelet />}
+                />
+              ) : null}
+
+              {ltiCourseKey ? (
+                <Route
+                  path="course-key/*"
+                  element={<CourseKeyPagelet />}
+                />
+              ) : null}
+
               <Route
-                path="/instructor/controls/link-checker"
-                component={LinkCheckerPagelet}
+                path="home/*"
+                element={
+                  <div className="instructor-tools-page mt-3">
+                    Instructor Tools are designed to support you as the instructor. Here you will
+                    find tools that help you as you manage your students and provide learner
+                    assistance. Additionally, you will find tools to assist you with reviewing and
+                    updating the course content.
+                  </div>
+                }
               />
-            ) : null}
 
-            {contentSearch ? (
               <Route
-                path="/instructor/controls/content-search"
-                render={({ location }) => <ContentSearchPagelet search={location.search} />}
+                path=""
+                element={
+                  <Navigate
+                    to="/instructor/controls/home"
+                    replace
+                  />
+                }
               />
-            ) : null}
-
-            {enableInstructorFeedback ? (
-              <Route
-                path="/instructor/controls/content-feedback"
-                component={ContentFeedbackPagelet}
-              />
-            ) : null}
-
-            {instructorPurgeDiscussions ? (
-              <Route
-                path="/instructor/controls/purge-posts"
-                component={DiscussionPurgePagelet}
-              />
-            ) : null}
-
-            {ltiCourseKey ? (
-              <Route
-                path="/instructor/controls/course-key"
-                component={CourseKeyPagelet}
-              />
-            ) : null}
-
-            <Route path="/instructor/controls/home">
-              <div className="instructor-tools-page mt-3">
-                Instructor Tools are designed to support you as the instructor. Here you will find
-                tools that help you as you manage your students and provide learner assistance.
-                Additionally, you will find tools to assist you with reviewing and updating the
-                course content.
-              </div>
-            </Route>
-
-            <Route
-              exact
-              path="/instructor/controls/"
-            >
-              <Redirect to="/instructor/controls/home" />
-            </Route>
+            </Routes>
           </div>
         </div>
       </div>

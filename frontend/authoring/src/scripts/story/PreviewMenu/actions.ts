@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,9 +15,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { push } from 'connected-react-router';
-
 import { trackAuthoringEvent } from '../../analytics';
+import { pushPath } from '../../dcmStore';
 import edgeRules from '../../editor/EdgeRuleConstants';
 import {
   confirmSaveProjectGraphEdits,
@@ -91,7 +90,7 @@ export const revisionHistoryAction = (name: NodeName, typeId: TypeId, contextPat
     // click on View Revision History, it prompts me to save, I choose Discard, then
     // it prompts me again by way of the PreventNavAndUCP because the above dispatch
     // has not yet hit the store.
-    setTimeout(() => dispatch(push(editorUrl('revision', branchId, name, contextPath))), 0);
+    setTimeout(() => pushPath(editorUrl('revision', branchId, name, contextPath)), 0);
   });
 
 // This is disabled at the course level because it tends to esplode the browser.
@@ -131,7 +130,7 @@ export const expandParentAction =
     };
     const scrollTo = contextPath ? `${contextPath}.${name}` : name;
     dispatch(setNarrativeState({ inlineView: true, assetStates, scrollTo }));
-    dispatch(push(editorUrl('story', projectGraph.branchId, parentName, parentContext)));
+    pushPath(editorUrl('story', projectGraph.branchId, parentName, parentContext));
   };
 
 export const expandDescendantAction =

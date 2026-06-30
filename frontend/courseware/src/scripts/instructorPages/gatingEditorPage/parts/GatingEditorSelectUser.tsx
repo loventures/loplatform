@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,9 +19,7 @@ import { UserInfo } from '../../../../loPlatform';
 import StudentPickerModal from '../../../components/StudentPickerModal';
 import { TranslationContext } from '../../../i18n/translationContext';
 import React, { useContext, useState } from 'react';
-import Button from 'reactstrap/lib/Button';
-import ButtonGroup from 'reactstrap/lib/ButtonGroup';
-import FormGroup from 'reactstrap/lib/FormGroup';
+import { Button, ButtonGroup, FormGroup } from 'reactstrap';
 
 type GatingEditorSelectUserProps = {
   i18nKey: string;

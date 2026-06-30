@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -50,7 +50,7 @@ import { createSelector, createStructuredSelector } from 'reselect';
 
 import { CourseWithRelationships, assembleCourseRelations } from './assembleCourseRelations.ts';
 
-const contentIdSelectorFromProps = (_: CourseState, ownProps: any) => {
+const contentIdSelectorFromProps = (_: CourseState, ownProps?: any) => {
   if (ownProps?.content) {
     return ownProps.content.id;
   }
@@ -178,14 +178,23 @@ export const selectNavToPageContent = createSelector(
     !!ContentPlayerPageLink.match(path) && nav !== 'none'
 );
 
-export const selectContentPlayerComponent = createStructuredSelector<
-  CourseState,
-  {
-    viewingAs: ViewingAs;
-    actualUser: UserInfo;
-    content: ActiveContent;
-  }
->({
+/**
+ * Is the current (eagerly-synced) router path still an actual content-player path? ERContentPlayer is
+ * the element of the `content/:contentId/*` route and, for a module/unit/lesson, redirects to the
+ * first child. Under react-router v7's default startTransition the route change *away* from content
+ * (e.g. to `print/:contentId`) is deferred, so the player lingers mounted for a frame while redux —
+ * synced synchronously via history.listen — already reflects the destination. Without this guard the
+ * lingering player fires its module→first-child redirect and bounces the outgoing navigation (broke
+ * PrintModuleTest). The role-gate skew in ERAppRoutes is the opposite case and is fixed there by
+ * reading the *deferred* location; here we deliberately read the *eager* path so the player knows it
+ * is leaving and stands down.
+ */
+export const selectOnContentPlayerPath = createSelector(
+  [selectRouter],
+  ({ path }): boolean => !!ContentPlayerPageLink.match(path)
+);
+
+export const selectContentPlayerComponent = createStructuredSelector({
   content: selectPageContent,
   viewingAs: selectCurrentUser,
   actualUser: selectActualUser,

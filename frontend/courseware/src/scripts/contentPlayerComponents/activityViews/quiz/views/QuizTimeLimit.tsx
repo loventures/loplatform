@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -53,7 +53,7 @@ export const QuizTimeLimit: React.FC<{ attempt: QuizAttempt }> = ({ attempt }) =
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined = undefined;
+    let timeout: ReturnType<typeof setTimeout> | undefined = undefined;
     const updateTimeout = () => {
       const [minutes, delay] = computeRemaining();
       setMinutes(minutes);

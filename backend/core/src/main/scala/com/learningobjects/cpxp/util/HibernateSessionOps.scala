@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -24,9 +24,10 @@ import jakarta.persistence.Table
 import org.hibernate.cache.spi.DomainDataRegion
 import org.hibernate.cache.spi.access.{CollectionDataAccess, EntityDataAccess}
 import org.hibernate.engine.spi.{SessionFactoryImplementor, SessionImplementor}
+import org.hibernate.id.IdentifierGenerator
 import org.hibernate.internal.SessionImpl
 import org.hibernate.metamodel.model.domain.NavigableRole
-import org.hibernate.{Hibernate, LockMode, Session, SessionEventListener}
+import org.hibernate.{BatchSize, Hibernate, LockMode, OrderingMode, Session, SessionCheckMode, SessionEventListener}
 import scalaz.std.string.*
 import scaloi.syntax.`class`.*
 import scaloi.syntax.boxes.*
@@ -95,11 +96,13 @@ final class HibernateSessionOps(val session: Session) extends AnyVal:
 
     val (bulkLoaded, bulkLoadDur) = Stopwatch.profiled {
       val entities = session
-        .byMultipleIds(clasz)
-        .withBatchSize(toLoad.size min 8192)
-        .enableSessionCheck(false)
-        .enableOrderedReturn(true) // true is default, but this is important
-        .multiLoad(toLoad.boxInside().asJava)
+        .findMultiple(
+          clasz,
+          toLoad.boxInside().asJava,
+          BatchSize(toLoad.size min 8192),
+          SessionCheckMode.DISABLED,
+          OrderingMode.ORDERED // ordered is default, but this is important
+        )
         .asScala
 
       // zip is correct because of enabledOrderedReturn
@@ -144,9 +147,8 @@ final class HibernateSessionOps(val session: Session) extends AnyVal:
     val implementor = session.unwrap(classOf[SessionImplementor])
     implementor.getSessionFactory.getMappingMetamodel
       .getEntityDescriptor(EntityNameWithGenerator)
-      .getEntityMetamodel
-      .getIdentifierProperty
-      .getIdentifierGenerator
+      .getGenerator
+      .asInstanceOf[IdentifierGenerator]
       .generate(implementor, null)
       .asInstanceOf[Long]
 

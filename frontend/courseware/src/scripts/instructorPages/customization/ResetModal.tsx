@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,13 +21,8 @@ import { refreshContentActionCreator } from '../../courseContentModule/actions/c
 import { CourseState } from '../../loRedux';
 import { WithTranslate } from '../../i18n/translationContext';
 import { Option, isPresent } from '../../types/option';
-import React from 'react';
-import Button from 'reactstrap/lib/Button';
-import Modal from 'reactstrap/lib/Modal';
-import ModalBody from 'reactstrap/lib/ModalBody';
-import ModalFooter from 'reactstrap/lib/ModalFooter';
-import ModalHeader from 'reactstrap/lib/ModalHeader';
-import { withState } from 'recompose';
+import React, { useState } from 'react';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { Dispatch } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
@@ -40,13 +35,13 @@ type ResetModalProps = {
   resetting: boolean;
   isOpen: boolean;
   close: () => void;
-  setResetting: (b: boolean) => boolean;
+  setResetting: (b: boolean) => void;
   dispatch: Dispatch;
 };
 
 const resetCourse = (
   courseId: number,
-  setResetting: (b: boolean) => boolean,
+  setResetting: (b: boolean) => void,
   dispatch: ThunkDispatch<CourseState, any, any>,
   close: () => void
 ) => {
@@ -128,4 +123,13 @@ const ResetModalInner: React.FC<ResetModalProps> = ({
   </WithTranslate>
 );
 
-export const ResetModal = withState('resetting', 'setResetting', false)(ResetModalInner);
+export const ResetModal = (props: Omit<ResetModalProps, 'resetting' | 'setResetting'>) => {
+  const [resetting, setResetting] = useState(false);
+  return (
+    <ResetModalInner
+      {...props}
+      resetting={resetting}
+      setResetting={setResetting}
+    />
+  );
+};

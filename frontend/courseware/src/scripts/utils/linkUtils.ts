@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -17,8 +17,9 @@
 
 import { ContentLite } from '../api/contentsApi';
 import { courseReduxStore } from '../loRedux';
-import { Location, LocationDescriptorObject } from 'history';
+import { Location } from 'history';
 import { pick } from 'lodash';
+import { history } from '../utilities/history';
 import { selectRouter } from '../utilities/rootSelectors';
 import qs from 'qs';
 
@@ -35,14 +36,24 @@ export type FromApp = {
   fromApp?: boolean;
 };
 
+// Replacement for history v4's removed `LocationDescriptorObject<S>`. react-router v6 / history v5
+// keep navigation `state` separate from the path target, but our link builders still bundle it here;
+// LoLink and the imperative nav helpers split `state` back out when handing off to v6.
+export type LoLocationDescriptor<S = FromApp> = {
+  pathname?: string;
+  search?: string;
+  hash?: string;
+  state?: S;
+};
+
 export const getSearchParams = () => {
   return selectRouter(courseReduxStore.getState()).searchParams;
 };
 
 export const getRoleSegment = () => {
-  return selectRouter(courseReduxStore.getState()).path.match(/\/instructor\//)
-    ? '/instructor'
-    : '/student';
+  // Read the current path from the history singleton, which is always defined and current —
+  // the redux router mirror can lag (or be momentarily undefined) during a redirect.
+  return /\/instructor\//.test(history.location.pathname) ? '/instructor' : '/student';
 };
 
 export const redirectPreserveParams = (pathname: string, location: Location) => {
@@ -54,7 +65,7 @@ export const createLink = (
   path: string,
   searchParams = {},
   hash = ''
-): LocationDescriptorObject<FromApp> => {
+): LoLocationDescriptor<FromApp> => {
   const newSearch = qs.stringify({
     ...pick(getSearchParams(), searchParamsToPreserve),
     ...searchParams,
@@ -105,5 +116,5 @@ export const createDashboardLink = () => {
   return createLink(prefix, { anchor: undefined });
 };
 
-export const location2String = (location: LocationDescriptorObject): string =>
+export const location2String = (location: LoLocationDescriptor): string =>
   `${location.pathname}${location.search}${location.hash}`;

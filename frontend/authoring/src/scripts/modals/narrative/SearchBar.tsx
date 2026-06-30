@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -31,7 +31,7 @@ const SearchBar: React.FC<{
   onSearch: () => void;
   disabled?: boolean;
   placeholder: string;
-  append?: React.ReactElement;
+  append?: React.ReactElement<any>;
 }> = ({ value, size, style, className, setValue, onSearch, disabled, placeholder, append }) => {
   const polyglot = usePolyglot();
   return (

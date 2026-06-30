@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,8 @@ import {
 import { statusFlagToggleActionCreatorMaker } from '../../../utilities/statusFlagReducer';
 import { AnyAction, Dispatch } from 'redux';
 import { BatchAction, batchActions } from 'redux-batched-actions';
-import { lojector } from '../../../loject';
+import { instant } from '../../../i18n/pure/i18n.ts';
+import { SimpleMessage } from '../../../messaging/SimpleMessage.ts';
 
 const modalActionConfig = {
   sliceName: 'learnerTableModal',
@@ -47,9 +48,8 @@ export const toggleModalActionCreator = (): ModalAction => modalStatusActionCrea
 export const resetMessageStateActionCreator = loadingResetActionCreatorMaker(modalActionConfig);
 
 const sendMessage = (learner: UserInfo, content: string): Promise<void> => {
-  const SimpleMessage = lojector.get('SimpleMessage') as any;
-  const message = new SimpleMessage();
-  message.title = (lojector.get('$translate') as any).instant('STUDENT_AT_RISK_MESSAGE_TITLE', {
+  const message = new (SimpleMessage as any)();
+  message.title = instant('STUDENT_AT_RISK_MESSAGE_TITLE', {
     course: Course.title,
   });
   message.recipients = [learner];

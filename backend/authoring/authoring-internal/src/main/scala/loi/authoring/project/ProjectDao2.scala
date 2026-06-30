@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -29,7 +29,7 @@ import loi.authoring.workspace.ProjectWorkspace
 import loi.cp.i18n.BundleMessage
 import mouse.boolean.*
 import org.hibernate.query.NativeQuery
-import org.hibernate.{CacheMode, LockMode, Session}
+import org.hibernate.*
 import scalaz.ValidationNel
 import scalaz.syntax.validation.*
 import scaloi.syntax.boxes.*
@@ -61,11 +61,13 @@ class ProjectDao2(
   def load(ids: Iterable[Long]): List[Project2] =
     ThreadTerminator.check()
     session
-      .byMultipleIds(classOf[ProjectEntity2])
-      .enableSessionCheck(true)
-      .enableOrderedReturn(false)
-      .`with`(CacheMode.NORMAL)
-      .multiLoad(ids.boxInsideTo[java.util.List]())
+      .findMultiple(
+        classOf[ProjectEntity2],
+        ids.boxInsideTo[java.util.List](),
+        OrderingMode.UNORDERED,
+        SessionCheckMode.ENABLED,
+        CacheMode.NORMAL
+      )
       .asScala
       .filter(_.del == null)
       .map(_.toProject2)
@@ -174,6 +176,7 @@ class ProjectDao2(
          |  WHERE NOT cycle
          |)
          |SELECT project_id FROM project_dep""".stripMargin,
+        classOf[java.lang.Long],
       )
       .unwrap(classOf[NativeQuery[Number]])
       .addSynchronizedEntityClass(classOf[ProjectEntity2])
@@ -199,6 +202,7 @@ class ProjectDao2(
            |JOIN authoringcommitdoc kfdoc ON kfdoc.id = c.kfdoc_id
            |CROSS JOIN jsonb_object_keys(kfdoc.deps) AS depproject_id
            |WHERE CAST(depproject_id AS BIGINT) = :projectId""".stripMargin,
+        classOf[java.lang.Long],
       )
       .unwrap(classOf[NativeQuery[Number]])
       .addSynchronizedEntityClass(classOf[ProjectEntity2])

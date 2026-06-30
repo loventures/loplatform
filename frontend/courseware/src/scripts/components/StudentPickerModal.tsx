@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -23,8 +23,7 @@ import BasicLoList from '../components/list/presets/BasicLoList';
 import { TranslationContext } from '../i18n/translationContext';
 import { map } from 'lodash';
 import React, { useContext } from 'react';
-import Button from 'reactstrap/lib/Button';
-import Modal from 'reactstrap/lib/Modal';
+import { Button, Modal } from 'reactstrap';
 
 import { LazyRender } from './LazyRender';
 
@@ -113,9 +112,8 @@ const StudentPickerModal: React.FC<StudentPickerModalProps> = ({
         {(learners: UserInfo[]) => (
           <ul className="card-list-striped-body">
             {map(learners, learner => (
-              <li // eslint-disable-line jsx-a11y/click-events-have-key-events
+              <li
                 key={learner.id}
-                // eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role
                 role="button"
                 tabIndex={0}
                 onClick={() => {

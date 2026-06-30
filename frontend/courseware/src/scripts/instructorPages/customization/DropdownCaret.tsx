@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,6 @@
 import { CustomisableContent } from '../../api/customizationApi';
 import { WithTranslate } from '../../i18n/translationContext';
 import React from 'react';
-import { withHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 
 import { toggleContentOpen } from './courseCustomizerReducer';
@@ -63,8 +62,14 @@ const DropdownCaretInner: React.FC<
   </WithTranslate>
 );
 
-export const DropdownCaret = withHandlers({
-  toggleOpen: (props: DropdownCaretOuterProps) => () => {
+export const DropdownCaret = (props: DropdownCaretOuterProps) => {
+  const toggleOpen = () => {
     props.dispatch(toggleContentOpen(props.content.id));
-  },
-})(DropdownCaretInner);
+  };
+  return (
+    <DropdownCaretInner
+      {...props}
+      toggleOpen={toggleOpen}
+    />
+  );
+};

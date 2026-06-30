@@ -1,5 +1,9 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:math';
 /*!
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,24 +29,40 @@
 $smallContrastThreshold: 4.5;
 $largeContrastThreshold: 3;
 
+// Equivalent to legacy lighten()/darken(): additive HSL lightness adjustment that
+// CLAMPS to [0%, 100%]. color.adjust() alone does not clamp, which would change the
+// result of the iterative contrast loop below. A unitless $delta is treated as a
+// percentage, matching legacy lighten()/darken().
+@function adjust-lightness($color, $delta) {
+  @if math.is-unitless($delta) {
+    $delta: $delta * 1%;
+  }
+  $lightness: color.channel($color, 'lightness', $space: hsl);
+  @return color.change($color, $lightness: math.clamp(0%, $lightness + $delta, 100%));
+}
+
 $luminance_cache: ();
 @function color_luminance($color) {
   // Adapted from: https://github.com/LeaVerou/contrast-ratio/blob/gh-pages/color.js
   // Formula: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
-  $cached-luminance: map-get($luminance_cache, $color);
+  $cached-luminance: map.get($luminance_cache, $color);
   @if ($cached-luminance) {
     @return $cached-luminance;
   } @else {
-    $rgba: red($color), green($color), blue($color);
+    $rgba: math.round(color.channel($color, "red", $space: rgb)), math.round(color.channel($color, "green", $space: rgb)), math.round(color.channel($color, "blue", $space: rgb));
     $rgba2: ();
     @for $i from 1 through 3 {
-      $rgb: nth($rgba, $i);
+      $rgb: list.nth($rgba, $i);
       $rgb: calc($rgb / 255);
-      $rgb: if($rgb < 0.03928, calc($rgb / 12.92), ch-pow(calc(($rgb + 0.055) / 1.055), 2.4));
-      $rgba2: append($rgba2, $rgb);
+      @if $rgb < 0.03928 {
+        $rgb: calc($rgb / 12.92);
+      } @else {
+        $rgb: ch-pow(calc(($rgb + 0.055) / 1.055), 2.4);
+      }
+      $rgba2: list.append($rgba2, $rgb);
     }
-    $lum: 0.2126 * nth($rgba2, 1) + 0.7152 * nth($rgba2, 2) + 0.0722 * nth($rgba2, 3);
-    $luminance_cache: map-merge(
+    $lum: 0.2126 * list.nth($rgba2, 1) + 0.7152 * list.nth($rgba2, 2) + 0.0722 * list.nth($rgba2, 3);
+    $luminance_cache: map.merge(
       $luminance_cache,
       (
         $color: $lum,
@@ -55,7 +75,7 @@ $luminance_cache: ();
 $contrast_cache: ();
 @function color_contrast2($color1, $color2) {
   $myKey: ($color1, $color2);
-  $cached_contrast: map_get($contrast_cache, $myKey);
+  $cached_contrast: map.get($contrast_cache, $myKey);
 
   @if ($cached_contrast) {
     @return $cached_contrast;
@@ -72,7 +92,7 @@ $contrast_cache: ();
       $ratio: calc(1 / $ratio);
     }
     $ratio: calc(round($ratio * 1000) / 1000);
-    $contrast_cache: map-merge(
+    $contrast_cache: map.merge(
       $contrast_cache,
       (
         $myKey: $ratio,
@@ -91,7 +111,7 @@ $fix_cache: ();
 // Adjusts color 1 to optimize contrast against color 2
 @function fix-contrast($color-1, $color-2, $contrastThreshold: $smallContrastThreshold) {
   $myKey: ($color-1, $color-2);
-  $cached: map-get($fix_cache, $myKey);
+  $cached: map.get($fix_cache, $myKey);
   @if ($cached) {
     @return $cached;
   }
@@ -105,15 +125,15 @@ $fix_cache: ();
   //100 is the absolute maximum since it is straight addition/subtraction from current lightnes
   @while $contrast < $contrastThreshold and $iterations < 100 {
     @if $lighten {
-      $fixed-color: lighten($fixed-color, 1%);
+      $fixed-color: adjust-lightness($fixed-color, (1%));
     } @else {
-      $fixed-color: darken($fixed-color, 1%);
+      $fixed-color: adjust-lightness($fixed-color, -(1%));
     }
     $contrast: color_contrast2($fixed-color, $color-2);
     $iterations: $iterations + 1;
   }
 
-  $fix_cache: map-merge(
+  $fix_cache: map.merge(
     $fix_cache,
     (
       $myKey: $fixed-color,
@@ -136,7 +156,7 @@ $fix_cache: ();
     $color: $color-body-text;
   } @else {
     $color: $color-white;
-    $text-shadow: 0 -1px 0 fade-out($color-black, 0.85);
+    $text-shadow: 0 -1px 0 color.adjust($color-black, $alpha: -(0.85));
   }
 
   $color-background: fix-contrast($color-background, $color);
@@ -146,10 +166,10 @@ $fix_cache: ();
 
 @mixin apply-auto-text($color-background) {
   $color: auto-text($color-background);
-  color: map_get($color, 'color');
-  background-color: map_get($color, 'bg');
-  border-color: map_get($color, 'bg');
-  text-shadow: map_get($color, 'shadow');
+  color: map.get($color, 'color');
+  background-color: map.get($color, 'bg');
+  border-color: map.get($color, 'bg');
+  text-shadow: map.get($color, 'shadow');
 }
 ////////////////////////////////////////////////////////////////////////////////////
 // Buttons!
@@ -179,13 +199,13 @@ $fix_cache: ();
 @mixin contrast-button($color-background) {
   $colors: auto-text($color-background);
 
-  $contrasted-color: map_get($colors, 'color');
-  $contrasted-background: map_get($colors, 'bg');
-  $contrasted-border: map_get($colors, 'bg');
-  $contrasted-shadow: map_get($colors, 'shadow');
+  $contrasted-color: map.get($colors, 'color');
+  $contrasted-background: map.get($colors, 'bg');
+  $contrasted-border: map.get($colors, 'bg');
+  $contrasted-shadow: map.get($colors, 'shadow');
 
-  $contrasted-focus: darken($contrasted-background, 15);
-  $contrasted-active: darken($contrasted-background, 10);
+  $contrasted-focus: adjust-lightness($contrasted-background, -(15));
+  $contrasted-active: adjust-lightness($contrasted-background, -(10));
 
   @include set-button-styles(
     $contrasted-color,
@@ -203,9 +223,9 @@ $fix_cache: ();
 @mixin contrast-label($color-background) {
   $colors: auto-text($color-background);
 
-  color: map_get($colors, 'color');
-  background: map_get($colors, 'bg');
-  text-shadow: map_get($colors, 'shadow');
+  color: map.get($colors, 'color');
+  background: map.get($colors, 'bg');
+  text-shadow: map.get($colors, 'shadow');
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -213,13 +233,13 @@ $fix_cache: ();
 @mixin lo-button-outline($color-background) {
   $colors: auto-text($color-background);
 
-  $contrasted-color: map_get($colors, 'bg');
+  $contrasted-color: map.get($colors, 'bg');
   $contrasted-background: rgba(0, 0, 0, 0);
-  $contrasted-border: map_get($colors, 'bg');
-  $contrasted-shadow: map_get($colors, 'shadow');
+  $contrasted-border: map.get($colors, 'bg');
+  $contrasted-shadow: map.get($colors, 'shadow');
 
-  $contrasted-focus: lighten($contrasted-color, 45);
-  $contrasted-active: lighten($contrasted-color, 35);
+  $contrasted-focus: adjust-lightness($contrasted-color, (45));
+  $contrasted-active: adjust-lightness($contrasted-color, (35));
 
   @include set-button-styles(
     $contrasted-color,

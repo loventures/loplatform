@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,8 +20,7 @@ import React from 'react';
 import { GiNinjaVelociraptor, GiQuillInk } from 'react-icons/gi';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { useRouteMatch } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import {
   Button,
   DropdownItem,
@@ -69,13 +68,13 @@ export const QuillMenu: React.FC = () => {
       : homeNodeName;
 
   const storyUrl = `/branch/${branchId}/story/${assetPath}`;
-  const storyMatch = useRouteMatch(storyPath);
+  const storyMatch = useMatch(`${storyPath}/*`);
 
   const feedbackUrl = `/branch/${branchId}/feedback`;
-  const feedbackMatch = useRouteMatch(feedbackPath);
+  const feedbackMatch = useMatch(`${feedbackPath}/*`);
 
   const dropboxUrl = `/branch/${branchId}/dropbox`;
-  const dropboxMatch = useRouteMatch(dropboxPath);
+  const dropboxMatch = useMatch(`${dropboxPath}/*`);
 
   const anyExtraAccess = projectAccess.FeedbackApp || projectAccess.VaultApp;
 

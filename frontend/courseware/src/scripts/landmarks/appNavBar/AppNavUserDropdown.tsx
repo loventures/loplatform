@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -187,7 +187,7 @@ const AppNavUserDropdown: React.FC<{ authoringUrl: string }> = ({ authoringUrl }
         {contentSearch && (
           <DropdownItem
             tag={Link}
-            to={SearchLink.toLink}
+            to={SearchLink.toLink()}
             className="d-md-none"
           >
             {translate('PAGE_HEADER_SEARCH')}

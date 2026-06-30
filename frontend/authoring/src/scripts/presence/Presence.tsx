@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,7 +16,6 @@
  */
 
 import classNames from 'classnames';
-import { History } from 'history';
 import qs from 'qs';
 import React, { CSSProperties, MouseEventHandler, useCallback, useEffect, useState } from 'react';
 import { BsWifiOff } from 'react-icons/bs';
@@ -50,7 +49,7 @@ import {
   TbQuestionMark,
 } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Button, Tooltip } from 'reactstrap';
 
 import { fromNow } from '../dateUtil';
@@ -98,7 +97,7 @@ const Letters = {
 };
 
 const gotoLocation =
-  (handle: string, history: History): Thunk =>
+  (handle: string, navigate: NavigateFunction): Thunk =>
   (_dispatch, getState) => {
     const { presence, projectGraph, graphEdits } = getState();
     const profile = presence.profiles[handle];
@@ -111,7 +110,7 @@ const gotoLocation =
         ? homeNodeName
         : graphEdits.contentTree.contextPaths[name];
       const search = qs.stringify({ contextPath });
-      history.push({ pathname: `/branch/${branchId}/story/${name}`, search });
+      navigate({ pathname: `/branch/${branchId}/story/${name}`, search });
     }
   };
 
@@ -128,7 +127,7 @@ const Face: React.FC<{
 }) => {
   const polyglot = usePolyglot();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [brokenImage, setBrokenImage] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const tooltipId = `present-${handle}`;
@@ -186,7 +185,7 @@ const Face: React.FC<{
             color="link"
             className="text-primary-light"
             onClick={() => {
-              dispatch(gotoLocation(handle, history));
+              dispatch(gotoLocation(handle, navigate));
               setTooltipOpen(false);
             }}
           >

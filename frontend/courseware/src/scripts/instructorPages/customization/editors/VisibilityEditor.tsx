@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,6 @@ import { LoCheckbox } from '../../../directives/LoCheckbox';
 import { AssetTypeId } from '../../../utilities/assetTypes';
 import React from 'react';
 import { connect } from 'react-redux';
-import { withHandlers } from 'recompose';
 import { Dispatch } from 'redux';
 
 import { hideChild } from '../contentEdits';
@@ -71,35 +70,33 @@ const VisibilityEditorInner: React.FC<VisibilityEditorProps> = ({
   </>
 );
 
+const VisibilityEditorHandlers: React.FC<VisibilityEditorOuterProps> = props => {
+  const { dispatch, content, parentId, hidden, skipHideConfirmation, nextVisibleNodeId } = props;
+  const toggleHidden = () => {
+    if (hidden) {
+      dispatch(addEdit(hideChild({ id: parentId, childId: content.id, hidden: false })));
+    } else if (contentShouldPromptModal(content) && !skipHideConfirmation) {
+      dispatch(
+        openHideConfirmModal({
+          id: parentId,
+          childId: content.id,
+          nextVisibleNodeId: nextVisibleNodeId,
+        })
+      );
+    } else {
+      dispatch(addEdit(hideChild({ id: parentId, childId: content.id, hidden: true })));
+    }
+  };
+  return (
+    <VisibilityEditorInner
+      {...props}
+      toggleHidden={toggleHidden}
+    />
+  );
+};
+
 export const VisibilityEditor = connect((state: CourseState) => {
   return {
     skipHideConfirmation: state.courseCustomizations.customizerState.skipHiddenConfirmation,
   };
-})(
-  withHandlers({
-    toggleHidden:
-      ({
-        dispatch,
-        content,
-        parentId,
-        hidden,
-        skipHideConfirmation,
-        nextVisibleNodeId,
-      }: VisibilityEditorOuterProps) =>
-      () => {
-        if (hidden) {
-          dispatch(addEdit(hideChild({ id: parentId, childId: content.id, hidden: false })));
-        } else if (contentShouldPromptModal(content) && !skipHideConfirmation) {
-          dispatch(
-            openHideConfirmModal({
-              id: parentId,
-              childId: content.id,
-              nextVisibleNodeId: nextVisibleNodeId,
-            })
-          );
-        } else {
-          dispatch(addEdit(hideChild({ id: parentId, childId: content.id, hidden: true })));
-        }
-      },
-  })(VisibilityEditorInner)
-);
+})(VisibilityEditorHandlers);

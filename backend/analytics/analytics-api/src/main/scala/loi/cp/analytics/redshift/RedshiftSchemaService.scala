@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,7 @@ package loi.cp.analytics.redshift
 
 import cats.effect.IO
 import com.learningobjects.cpxp.component.annotation.Service
-import doobie.util.transactor.Transactor
+import org.typelevel.doobie.util.transactor.Transactor
 
 @Service
 trait RedshiftSchemaService:

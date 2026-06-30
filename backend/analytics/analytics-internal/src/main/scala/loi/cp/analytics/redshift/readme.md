@@ -112,7 +112,7 @@ Upgrading schema is a manual process. There is one schema per bus. Here is a sam
 script that adds a table
 
 ```scala
-import doobie.implicits._
+import org.typelevel.doobie.implicits._
 import cats.syntax.functor._
 import com.learningobjects.cpxp.scala.cpxp.Summon.summon
 import loi.cp.analytics.redshift.RedshiftSchemaServiceImpl

@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,7 @@ import cookies from 'browser-cookies';
 import Course from '../../bootstrap/course';
 import { FadeInLoader } from '../../directives/loadingSpinner/FadeInLoader';
 import { withTranslation } from '../../i18n/translationContext';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Button,
   Card,
@@ -33,8 +33,6 @@ import {
   Label,
   Row,
 } from 'reactstrap';
-import { lifecycle, withHandlers, withState } from 'recompose';
-import { compose } from 'redux';
 
 import NumberField from '../../components/forms/NumberField';
 
@@ -161,61 +159,69 @@ const AssessmentPolicies = (props: any) => (
   </Card>
 );
 
-export default compose<React.ComponentType>(
-  withTranslation,
-  withState('loading', 'setLoading', true),
-  withState('policies', 'setPolicies', []),
-  lifecycle({
-    componentDidMount() {
-      const { setPolicies, setLoading } = this.props as any;
-      // loConfig.instructorCustomization.assessmentPolicies
-      axios
-        .get(`/api/v2/contentConfig/${Course.id}/assessmentPolicies`, {
-          headers: { 'X-CSRF': cookies.get('CSRF')! },
-        })
-        .then(policies => {
-          setPolicies(
-            policies.data.objects.map((raw: any) => {
-              return {
-                ...raw,
-                unlimited: raw.attemptLimit === null,
-                attemptLimit: raw.attemptLimit || 1,
-              };
-            })
-          );
-          setLoading(false);
-        });
-    },
-  }),
-  withHandlers({
-    saveUpdatedPolices:
-      () =>
-      (policies: any, { setSubmitting, resetForm }: any) => {
-        const policyDto = policies.map((p: any) => {
-          return {
-            assessmentGradingPolicy: p.assessmentGradingPolicy,
-            attemptLimit: p.unlimited ? null : p.attemptLimit,
-            assessmentType: p.assessmentType,
-          };
-        });
-        axios
-          .put(`/api/v2/contentConfig/${Course.id}/assessmentPolicies`, policyDto, {
-            headers: { 'X-CSRF': cookies.get('CSRF')! },
+const AssessmentPoliciesWrapper = (props: any) => {
+  const [loading, setLoading] = useState(true);
+  const [policies, setPolicies] = useState<any[]>([]);
+
+  useEffect(() => {
+    // loConfig.instructorCustomization.assessmentPolicies
+    axios
+      .get(`/api/v2/contentConfig/${Course.id}/assessmentPolicies`, {
+        headers: { 'X-CSRF': cookies.get('CSRF')! },
+      })
+      .then(policies => {
+        setPolicies(
+          policies.data.objects.map((raw: any) => {
+            return {
+              ...raw,
+              unlimited: raw.attemptLimit === null,
+              attemptLimit: raw.attemptLimit || 1,
+            };
           })
-          .then(() => {
-            resetForm(
-              policyDto.map((raw: any) => {
-                return {
-                  ...raw,
-                  unlimited: raw.attemptLimit === null,
-                  attemptLimit: raw.attemptLimit || 1,
-                };
-              })
-            );
+        );
+        setLoading(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const saveUpdatedPolices = (policies: any, { setSubmitting, resetForm }: any) => {
+    const policyDto = policies.map((p: any) => {
+      return {
+        assessmentGradingPolicy: p.assessmentGradingPolicy,
+        attemptLimit: p.unlimited ? null : p.attemptLimit,
+        assessmentType: p.assessmentType,
+      };
+    });
+    axios
+      .put(`/api/v2/contentConfig/${Course.id}/assessmentPolicies`, policyDto, {
+        headers: { 'X-CSRF': cookies.get('CSRF')! },
+      })
+      .then(() => {
+        resetForm(
+          policyDto.map((raw: any) => {
+            return {
+              ...raw,
+              unlimited: raw.attemptLimit === null,
+              attemptLimit: raw.attemptLimit || 1,
+            };
           })
-          .catch(() => {
-            setSubmitting(false);
-          });
-      },
-  })
-)(AssessmentPolicies);
+        );
+      })
+      .catch(() => {
+        setSubmitting(false);
+      });
+  };
+
+  return (
+    <AssessmentPolicies
+      {...props}
+      loading={loading}
+      setLoading={setLoading}
+      policies={policies}
+      setPolicies={setPolicies}
+      saveUpdatedPolices={saveUpdatedPolices}
+    />
+  );
+};
+
+export default withTranslation(AssessmentPoliciesWrapper as React.ComponentType<any>);

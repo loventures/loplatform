@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,8 +25,8 @@ import com.learningobjects.cpxp.service.data.DataTypes
 import com.learningobjects.cpxp.service.domain.{DomainConstants, DomainState}
 import com.learningobjects.cpxp.service.item.ItemService
 import com.learningobjects.cpxp.service.query.{Comparison, QueryService}
-import doobie.*
-import doobie.implicits.*
+import org.typelevel.doobie.*
+import org.typelevel.doobie.implicits.*
 import loi.cp.analytics.bus.{AnalyticBusFacade, AnalyticBusService}
 import loi.db.Redshift
 import loi.doobie.log.*

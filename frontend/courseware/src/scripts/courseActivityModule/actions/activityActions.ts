@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,13 +22,9 @@ import { ContentWithNebulousDetails } from '../../courseContentModule/selectors/
 import { createDataListUpdateMergeAction } from '../../utilities/apiDataActions';
 import { COURSE_ROOT } from '../../utilities/courseRootType';
 import { Dispatch } from 'redux';
-import { lojector } from '../../loject.ts';
+import { progressService } from '../../services/progressService.ts';
 
 type ProgressReason = IncrementType | 'UNVISIT';
-
-interface NgProgressService {
-  setProgress: (id: string, visited: boolean, reason?: ProgressReason) => Promise<ProgressUpdates>;
-}
 
 export type ProgressUpdates = {
   userId: number;
@@ -42,8 +38,7 @@ export const reportProgressActionCreator =
       // not always booleans
       return;
     }
-    const ProgressService = lojector.get('ProgressService') as NgProgressService;
-    ProgressService.setProgress(content.id, isVisited, reason)
+    progressService.setProgress(content.id, isVisited, reason)
       .then(progressUpdates => {
         dispatch(
           createDataListUpdateMergeAction('progressByContentByUser', {

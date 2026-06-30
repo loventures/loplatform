@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,11 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { replace } from 'connected-react-router';
 import qs from 'qs';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { replacePath } from '../dcmStore';
 import { escapeProjectGraphEdit, pollForHeadCommit, useCurrentAssetName } from '../graphEdit';
 import { useDcmSelector, useRouterPathVariable } from '../hooks';
 import PresenceService from '../presence/services/PresenceService';
@@ -54,12 +54,10 @@ const NarrativeHooks: React.FC = () => {
     const { failure, success, ...rest } = parseQueryParams(search ?? '');
     if (success || failure) {
       dispatch(openToast((failure ?? success) as string, failure ? 'danger' : 'success'));
-      dispatch(
-        replace({
-          pathname,
-          search: qs.stringify(rest),
-        })
-      );
+      replacePath({
+        pathname,
+        search: qs.stringify(rest),
+      });
     }
   }, [pathname, search]);
 

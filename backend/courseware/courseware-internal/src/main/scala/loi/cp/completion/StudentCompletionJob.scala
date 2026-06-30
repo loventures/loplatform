@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -33,8 +33,8 @@ import com.learningobjects.cpxp.service.enrollment.EnrollmentWebService.Enrollme
 import com.learningobjects.cpxp.service.facade.FacadeService
 import com.learningobjects.cpxp.service.user.{UserConstants, UserFacade, UserFolderFacade}
 import com.learningobjects.cpxp.web.ExportFile
-import doobie.*
-import doobie.implicits.*
+import org.typelevel.doobie.*
+import org.typelevel.doobie.implicits.*
 import kantan.csv.rfc
 import kantan.csv.ops.*
 import loi.cp.course.{CourseEnrollmentService, CourseSectionService}

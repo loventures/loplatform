@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -71,7 +71,7 @@ export const createUrl = <T extends string = string>(
   }
 
   const filteredParams = allowedParams.reduce<Record<string, any>>((acc, param) => {
-    if (queryParams.hasOwnProperty(param)) {
+    if (Object.prototype.hasOwnProperty.call(queryParams, param)) {
       acc[param] = queryParams[param];
       return acc;
     }

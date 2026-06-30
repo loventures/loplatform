@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.node.{ArrayNode, ObjectNode, TextNode}
 import com.fasterxml.jackson.databind.{JsonNode, ObjectMapper}
 import com.learningobjects.cpxp.component.web.util.JacksonUtils
 import com.learningobjects.cpxp.scala.json.ArgoParseException
-import doobie.*
-import doobie.util.invariant.{NullableCellRead, NullableCellUpdate}
+import org.typelevel.doobie.*
+import org.typelevel.doobie.util.invariant.{NullableCellRead, NullableCellUpdate}
 import org.postgresql.util.PGobject
 import scaloi.syntax.AnyOps.*
 import scaloi.syntax.ClassTagOps.*
@@ -73,8 +73,8 @@ trait DoobieMetas:
 
   private val jnArrayTypes = boxedPair[JsonNode]("jsonb", "_jsonb")
 
-  implicit val unliftedJsonNodeArrayType: doobie.Meta[Array[JsonNode]]       = jnArrayTypes._1
-  implicit val liftedJsonNodeArrayType: doobie.Meta[Array[Option[JsonNode]]] = jnArrayTypes._2
+  implicit val unliftedJsonNodeArrayType: Meta[Array[JsonNode]]       = jnArrayTypes._1
+  implicit val liftedJsonNodeArrayType: Meta[Array[Option[JsonNode]]] = jnArrayTypes._2
 
   private def jacksonMeta[A <: JsonNode: ClassTag]: Meta[A] =
     // this works on columns with "json" type too /shrug

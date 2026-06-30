@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ import com.learningobjects.cpxp.component.annotation.{Component, Schema}
 import com.learningobjects.cpxp.controller.upload.UploadInfo
 import com.learningobjects.cpxp.service.email.EmailService
 import com.learningobjects.cpxp.service.facade.FacadeService
-import doobie.Transactor
+import org.typelevel.doobie.Transactor
 import loi.cp.analytics.redshift.InstructorMetricsService
 import loi.cp.job.{AbstractEmailJob, EmailJob, GeneratedReport, JobUtils}
 import org.log4s.Logger

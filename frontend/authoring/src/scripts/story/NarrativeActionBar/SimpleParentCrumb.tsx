@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 
 import { trackNarrativeNavHandler } from '../../analytics/AnalyticsEvents';
 import { useEditedAssetTitle, useEditedAssetTypeId } from '../../graphEdit';
+import { useBranchId } from '../../hooks';
 import { NodeName } from '../../types/asset';
 import { contextPathQuery, truncateAssetTitle } from '../story';
 import { useRevisionCommit } from '../storyHooks';
@@ -28,6 +29,7 @@ export const SimpleParentCrumb: React.FC<{
   parentName: NodeName;
   contextPath: string;
 }> = ({ parentName, contextPath }) => {
+  const branchId = useBranchId();
   const parentTitle = useEditedAssetTitle(parentName);
   const parentTypeId = useEditedAssetTypeId(parentName);
   const commit = useRevisionCommit();
@@ -36,7 +38,7 @@ export const SimpleParentCrumb: React.FC<{
   return (
     <>
       <Link
-        to={parentName + cp1}
+        to={`/branch/${branchId}/story/${parentName}${cp1}`}
         onClick={trackNarrativeNavHandler('Parent')}
         className="minw-0 text-truncate parent-crumb"
       >

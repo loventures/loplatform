@@ -1,5 +1,5 @@
 /*
- * LO Platform copyright (C) 2007–2025 LO Ventures LLC.
+ * LO Platform copyright (C) 2007–2026 LO Ventures LLC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -15,11 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import angular from 'angular';
 import axios from 'axios';
 import { useTranslation } from '../../i18n/translationContext';
 import React, { useEffect, useState } from 'react';
-import { react2angular } from 'react2angular';
 import { Alert } from 'reactstrap';
 
 type PreviewerFC = React.FC<{
@@ -105,7 +103,6 @@ const AudioPreviewer =
   (mimeType?: string): PreviewerFC =>
   ({ viewUrl }) => {
     return (
-      // eslint-disable-next-line jsx-a11y/media-has-caption
       <audio
         controls
         className="w-100"
@@ -122,7 +119,6 @@ const VideoPreviewer =
   (mimeType?: string): PreviewerFC =>
   ({ viewUrl }) => {
     return (
-      // eslint-disable-next-line jsx-a11y/media-has-caption
       <video
         controls
         className="w-100 preview-video"
@@ -172,9 +168,5 @@ const Previewer: PreviewerFC = ({ name, viewUrl, getSignedUrl }) => {
     />
   );
 };
-
-export const ng = angular
-  .module('lo.directives.previewer', [])
-  .component('previewer', react2angular(Previewer, ['name', 'viewUrl', 'getSignedUrl'], []));
 
 export default Previewer;
