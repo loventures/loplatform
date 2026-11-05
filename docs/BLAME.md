@@ -113,7 +113,7 @@ Steve Berglie
 Steve Burt  
 Steven Vickers  
 Sujana Gurajala  
-Syed Jafri  
+[Syed Jafri](http://github.com/psilospore)  
 Tarun Suneja  
 Thomas Gideon  
 Umesh Prajapati  
