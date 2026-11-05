@@ -17,7 +17,6 @@
 
 package com.learningobjects.cpxp.component.registry;
 
-import com.google.common.base.Throwables;
 import com.learningobjects.cpxp.component.BaseComponentDescriptor;
 
 import javax.annotation.Nonnull;
@@ -71,7 +70,7 @@ public class BaseResourceRegistryContainer implements ResourceRegistryContainer 
             final ResourceRegistry<T> registry = (ResourceRegistry<T>) registryClass.newInstance();
             return registry;
         } catch (InstantiationException | IllegalAccessException ex) {
-            throw Throwables.propagate(ex);
+            throw new RuntimeException(ex);
         }
     }
 

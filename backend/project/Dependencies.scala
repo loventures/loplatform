@@ -26,7 +26,7 @@ object Dependencies {
     * applications on the JVM. https://github.com/apache/pekko
     */
   object Pekko {
-    val pekkoVersion = "1.6.0"
+    val pekkoVersion = "1.7.1"
 
     val actor        = "org.apache.pekko" %% "pekko-actor"              % pekkoVersion
     val cluster      = "org.apache.pekko" %% "pekko-cluster"            % pekkoVersion
@@ -60,12 +60,12 @@ object Dependencies {
     /** Apache Commons Codec General encoding/decoding algorithms (for example phonetic, base64, URL).
       * https://commons.apache.org/proper/commons-codec/
       */
-    val codec = "commons-codec" % "commons-codec" % "1.22.0"
+    val codec = "commons-codec" % "commons-codec" % "1.23.0"
 
     /** Commons Collections Extends or augments the Java Collections Framework.
       * https://commons.apache.org/proper/commons-collections/
       */
-    val collections4 = "org.apache.commons" % "commons-collections4" % "4.5.0"
+    val collections4 = "org.apache.commons" % "commons-collections4" % "4.6.0"
 
     /** Apache Commons Compress API for dealing with compression. https://commons.apache.org/proper/commons-compress/
       */
@@ -83,7 +83,7 @@ object Dependencies {
     /** Commons Lang Provides extra functionality for classes in java.lang.
       * https://commons.apache.org/proper/commons-lang/
       */
-    val lang3 = "org.apache.commons" % "commons-lang3" % "3.20.0"
+    val lang3 = "org.apache.commons" % "commons-lang3" % "3.21.0"
 
     /** Commons Math: The Apache Commons Mathematics Library Commons Math is a library of lightweight, self-contained
       * mathematics and statistics components addressing the most common problems not available in the Java programming
@@ -102,7 +102,7 @@ object Dependencies {
 
     /** Commons validator: Apache Commons Net validates URLs.
       */
-    val urlValidator = "commons-validator" % "commons-validator" % "1.10.1"
+    val urlValidator = "commons-validator" % "commons-validator" % "1.11.0"
   }
 
   /** Apache HttpComponents The Apache HttpComponents™ project is responsible for creating and maintaining a toolset of
@@ -120,7 +120,7 @@ object Dependencies {
   /** ASM, A Java byecode engineering library. http://asm.ow2.org/
     */
   object ASM {
-    val asmVersion = "9.10.1"
+    val asmVersion = "9.11.1"
 
     val asm  = "org.ow2.asm" % "asm"      % asmVersion
     val util = "org.ow2.asm" % "asm-util" % asmVersion
@@ -146,19 +146,19 @@ object Dependencies {
     object AWS {
       // val awsVersion = "2.31.21" // https://github.com/scala-steward-org/scala-steward/issues/3297
 
-      val auth      = "software.amazon.awssdk" % "auth"      % "2.44.14"
-      val core      = "software.amazon.awssdk" % "core"      % "2.44.14"
-      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.46.17"
-      val s3        = "software.amazon.awssdk" % "s3"        % "2.46.17"
-      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.46.17"
-      val sts       = "software.amazon.awssdk" % "sts"       % "2.46.17"
-      val translate = "software.amazon.awssdk" % "translate" % "2.46.17"
+      val auth      = "software.amazon.awssdk" % "auth"      % "2.55.16"
+      val core      = "software.amazon.awssdk" % "core"      % "2.55.16"
+      val ec2       = "software.amazon.awssdk" % "ec2"       % "2.55.16"
+      val s3        = "software.amazon.awssdk" % "s3"        % "2.55.16"
+      val sqs       = "software.amazon.awssdk" % "sqs"       % "2.55.16"
+      val sts       = "software.amazon.awssdk" % "sts"       % "2.55.16"
+      val translate = "software.amazon.awssdk" % "translate" % "2.55.6"
     }
 
   }
 
   object Cats {
-    val effect = "org.typelevel" %% "cats-effect" % "3.7.0"
+    val effect = "org.typelevel" %% "cats-effect" % "3.7.1"
     val mouse  = "org.typelevel" %% "mouse"       % "1.4.0"
   }
 
@@ -186,7 +186,7 @@ object Dependencies {
       */
     val hikaricp = "com.zaxxer" % "HikariCP" % "7.1.0"
 
-    val postgresql = "org.postgresql" % "postgresql" % "42.7.11"
+    val postgresql = "org.postgresql" % "postgresql" % "42.7.14"
     val hsqldb     = "org.hsqldb"     % "hsqldb"     % "2.7.4"
 
     /** Blocking, simple Redis driver for Scala.
@@ -197,7 +197,7 @@ object Dependencies {
       .cross(CrossVersion.for3Use2_13)
     // try jedis
 
-    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.2.7"
+    val redshift = "com.amazon.redshift" % "redshift-jdbc42" % "2.3.0"
   }
 
   /** Hamcrest Matchers that can be combined to create flexible expressions of intent http://hamcrest.org/
@@ -212,7 +212,7 @@ object Dependencies {
   /** Hibernate. Everything data. http://hibernate.org/
     */
   object Hibernate {
-    val hibernateVersion = "7.4.3.Final"
+    val hibernateVersion = "7.4.14.Final"
 
     val core = "org.hibernate" % "hibernate-core" % hibernateVersion
 
@@ -222,7 +222,7 @@ object Dependencies {
     // (tools.jackson), while this codebase is still on Jackson 2
     // (com.fasterxml.jackson). -71 is built against 7.2 but its UserType SPI
     // is compatible with 7.4 at runtime.
-    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.15.3"
+    val types = "io.hypersistence" % "hypersistence-utils-hibernate-71" % "3.16.0"
   }
 
   /** A typeful, purely functional, streaming library for HTTP clients and servers in Scala.
@@ -230,9 +230,9 @@ object Dependencies {
     * http://http4s.org/
     */
   object Http4s {
-    val http4sVersion        = "0.23.34"
+    val http4sVersion        = "0.23.38"
     val http4sServletVersion = "0.25.0-RC1"
-    val http4sBlazeVersion   = "0.23.17"
+    val http4sBlazeVersion   = "0.23.18"
 
     val circe       = "org.http4s" %% "http4s-circe"        % http4sVersion
     val client      = "org.http4s" %% "http4s-client"       % http4sVersion
@@ -274,7 +274,7 @@ object Dependencies {
     val simpleJndi = "simple-jndi" % "simple-jndi" % "0.11.4.1"
 
     object Tomcat {
-      val tomcatVersion = "11.0.23"
+      val tomcatVersion = "11.0.27"
 
       val servletApi = "org.apache.tomcat" % "tomcat-servlet-api" % tomcatVersion
 
@@ -301,8 +301,8 @@ object Dependencies {
     /** Jackson JSON Processor http://wiki.fasterxml.com/JacksonHome
       */
     object Jackson {
-      val jacksonVersion = "2.22.0"
-      val jackson3Version = "3.2.0"
+      val jacksonVersion  = "2.22.4"
+      val jackson3Version = "3.2.4"
 
       val annotations = "com.fasterxml.jackson.core"       % "jackson-annotations"     % "2.22"
       val core        = "com.fasterxml.jackson.core"       % "jackson-core"            % jacksonVersion
@@ -313,7 +313,7 @@ object Dependencies {
       val jdk8        = "com.fasterxml.jackson.datatype"   % "jackson-datatype-jdk8"   % jacksonVersion
       val jsr310      = "com.fasterxml.jackson.datatype"   % "jackson-datatype-jsr310" % jacksonVersion
       val mrBean      = "com.fasterxml.jackson.module"     % "jackson-module-mrbean"   % jacksonVersion
-      val scala       = "com.fasterxml.jackson.module"    %% "jackson-module-scala"    % jacksonVersion
+      val scala       = "com.fasterxml.jackson.module"    %% "jackson-module-scala"    % "2.22.4"
       val xml         = "com.fasterxml.jackson.dataformat" % "jackson-dataformat-xml"  % jacksonVersion
     }
 
@@ -334,7 +334,7 @@ object Dependencies {
     /** Circe - Argonaut for cats https://github.com/circe/circe
       */
     object Circe {
-      val circeVersion = "0.14.16"
+      val circeVersion = "0.14.17"
 
       val core    = "io.circe" %% "circe-core"    % circeVersion
       val generic = "io.circe" %% "circe-generic" % circeVersion
@@ -346,7 +346,7 @@ object Dependencies {
       * https://jwt-scala.github.io/jwt-scala/
       */
     object JWT {
-      val jwtScalaVersion = "11.0.4"
+      val jwtScalaVersion = "12.0.0"
       val scala           = "com.github.jwt-scala" %% "jwt-core" % jwtScalaVersion
     }
 
@@ -357,18 +357,18 @@ object Dependencies {
     */
   object Logging {
     // ALL OF THEM
-    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.26.0"
+    val log4jCore = "org.apache.logging.log4j" % "log4j-core" % "2.26.1"
     val log4s     = "org.log4s"               %% "log4s"      % "1.10.0"
 
     object Slf4j {
-      val api   = "org.slf4j" % "slf4j-api"   % "2.0.18"
-      val jdk14 = "org.slf4j" % "slf4j-jdk14" % "2.0.18"
+      val api   = "org.slf4j" % "slf4j-api"   % "2.0.20"
+      val jdk14 = "org.slf4j" % "slf4j-jdk14" % "2.0.20"
     }
 
   }
 
   object FS2 {
-    val fs2Version = "3.13.0"
+    val fs2Version = "3.14.0"
     val fs2Core    = "co.fs2" %% "fs2-core" % fs2Version
   }
 
@@ -378,13 +378,13 @@ object Dependencies {
 
     /** Bytecode buddy https://bytebuddy.net/
       */
-    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.10"
+    val byteBuddy = "net.bytebuddy" % "byte-buddy" % "1.18.17"
 
     /*
      * Javassist
      * http://www.javassist.org/
      */
-    val javassist = "org.javassist" % "javassist" % "3.32.0-GA"
+    val javassist = "org.javassist" % "javassist" % "3.33.0-GA"
 
     /** http://findbugs.sourceforge.net/
       */
@@ -392,7 +392,7 @@ object Dependencies {
 
     /** Guava: Google Core Libraries for Java https://github.com/google/guava
       */
-    val guava = "com.google.guava" % "guava" % "33.6.0-jre"
+    val guava = "com.google.guava" % "guava" % "33.8.0-jre"
 
     /** IMS Enterprise Specification http://www.imsglobal.org/enterprise/
       */
@@ -404,11 +404,11 @@ object Dependencies {
 
     /** Detects file types https://tika.apache.org/
       */
-    val apacheTika = "org.apache.tika" % "tika-core" % "3.3.1"
+    val apacheTika = "org.apache.tika" % "tika-core" % "4.2.0"
 
     /** Parse PDFs. https://pdfbox.apache.org/
       */
-    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.7"
+    val apachePdfBox = "org.apache.pdfbox" % "pdfbox" % "3.0.8"
 
     /** IMS Global - LTI™ Utilities https://github.com/IMSGlobal/basiclti-util-java
       */
@@ -440,11 +440,11 @@ object Dependencies {
 
     /** Embedded sass compiler. https://github.com/larsgrefer/dart-sass-java
       */
-    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.4.0"
+    val sassEmbeddedHost = "de.larsgrefer.sass" % "sass-embedded-host" % "4.7.0"
 
     /** https://github.com/classgraph/classgraph
       */
-    val classGraph = "io.github.classgraph" % "classgraph" % "4.8.184"
+    val classGraph = "io.github.classgraph" % "classgraph" % "6.0.1"
 
     /** */
     val opencsv = "net.sf.opencsv" % "opencsv" % "2.3"
@@ -476,19 +476,19 @@ object Dependencies {
 
     /** Java port of universalchardet https://github.com/albfernandez/juniversalchardet
       */
-    val jUniversalCharDet = "com.github.albfernandez" % "juniversalchardet" % "2.5.0"
+    val jUniversalCharDet = "com.github.albfernandez" % "juniversalchardet" % "2.5.2"
 
     /** Apache POI - the Java API for Microsoft Documents https://poi.apache.org/
       */
     object ApachePOI {
-      val poiVersion = "5.5.1"
+      val poiVersion = "6.0.0"
       val ooxml      = "org.apache.poi" % "poi-ooxml" % poiVersion
     }
 
     /** Scala ElasticSearch client https://github.com/Philippus/elastic4s
       */
     object Elastic4s {
-      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.3.0"
+      val clientEsJava = "nl.gn0s1s" %% "elastic4s-client-esjava" % "9.5.0"
     }
 
     /** https://github.com/acm19/aws-request-signing-apache-interceptor */
@@ -496,7 +496,7 @@ object Dependencies {
 
     /** CSS parsing and manipulation. https://github.com/phax/ph-css
       */
-    val phCss = "com.helger" % "ph-css" % "8.2.1"
+    val phCss = "com.helger" % "ph-css" % "8.4.0"
 
     /** Nashorn Javascript interpreter. https://github.com/openjdk/nashorn
       */
@@ -517,10 +517,16 @@ object Dependencies {
   }
 
   object Prometheus {
-    val prometheusVersion    = "0.16.0"
-    val simpleclient         = "io.prometheus" % "simpleclient"         % prometheusVersion
-    val simpleclient_hotspot = "io.prometheus" % "simpleclient_hotspot" % prometheusVersion
-    val simpleclient_common  = "io.prometheus" % "simpleclient_common"  % prometheusVersion
+    val prometheusVersion  = "1.10.0"
+    val metricsCore        = "io.prometheus" % "prometheus-metrics-core"                   % prometheusVersion
+    val metricsJvm         = "io.prometheus" % "prometheus-metrics-instrumentation-jvm"    % prometheusVersion
+    val metricsTextFormat  = "io.prometheus" % "prometheus-metrics-exposition-textformats" % prometheusVersion
+    val simpleclientBridge = "io.prometheus" % "prometheus-metrics-simpleclient-bridge"    % prometheusVersion
+
+    /** The legacy 0.x client. HikariCP's Prometheus metrics tracker is still written against it, so it stays on the
+      * classpath and its registry is bridged into the 1.x registry by [[loi.cp.prometheus.PrometheusServlet]].
+      */
+    val simpleclient = "io.prometheus" % "simpleclient" % "0.16.0"
   }
 
   /** Scala a object-functional programming language. http://scala-lang.org
@@ -534,7 +540,7 @@ object Dependencies {
     */
   object ScalaExtensions {
     val java8Compat       = "org.scala-lang.modules" %% "scala-java8-compat"       % "1.0.2"
-    val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0"
+    val parserCombinators = "org.scala-lang.modules" %% "scala-parser-combinators" % "2.5.0"
 
     object Enumeratum {
       val core     = "com.beachape" %% "enumeratum"          % "1.9.8"
@@ -542,7 +548,7 @@ object Dependencies {
       val circe    = "com.beachape" %% "enumeratum-circe"    % "1.9.8"
     }
 
-    val xml = "org.scala-lang.modules" %% "scala-xml" % "2.4.0"
+    val xml = "org.scala-lang.modules" %% "scala-xml" % "2.5.0"
 
     /** Scalameta is a modern metaprogramming library for Scala that supports a wide range of language versions and
       * execution platforms. http://scalameta.org/
@@ -580,11 +586,11 @@ object Dependencies {
   /** Various Testing frameworks and libraries.
     */
   object Testing {
-    val easymock = "org.easymock" % "easymock" % "5.6.0"
+    val easymock = "org.easymock" % "easymock" % "5.7.0"
 
     val scalaTest               = "org.scalatest"     %% "scalatest"       % "3.2.20"
     val scalaTestPlusEasyMock   = "org.scalatestplus" %% "easymock-4-3"    % "3.2.15.0"
-    val scalaTestPlusScalaCheck = "org.scalatestplus" %% "scalacheck-1-17" % "3.2.18.0"
+    val scalaTestPlusScalaCheck = "org.scalatestplus" %% "scalacheck-1-19" % "3.2.20.0"
 
     /** ScalaCheck is a library written in Scala and used for automated property-based testing of Scala or Java
       * programs. ScalaCheck was originally inspired by the Haskell library QuickCheck, but has also ventured into its
@@ -592,7 +598,7 @@ object Dependencies {
       *
       * https://www.scalacheck.org/
       */
-    val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.19.0"
+    val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.20.0"
 
     /** JUnit is a simple framework to write repeatable tests. http://junit.org/
       */

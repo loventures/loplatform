@@ -20,7 +20,7 @@ import React from 'react';
 import { AiOutlineUndo } from 'react-icons/ai';
 import { MdHistory, MdHistoryToggleOff } from 'react-icons/md';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Badge, Button } from 'reactstrap';
 
 import { formatFullDate } from '../../../dateUtil';

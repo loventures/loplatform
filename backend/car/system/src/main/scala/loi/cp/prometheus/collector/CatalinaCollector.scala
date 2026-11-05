@@ -17,77 +17,82 @@
 
 package loi.cp.prometheus.collector
 
-import io.prometheus.client.Collector.MetricFamilySamples
-import io.prometheus.client.{Collector, CounterMetricFamily, GaugeMetricFamily}
+import io.prometheus.metrics.model.registry.MultiCollector
+import io.prometheus.metrics.model.snapshots.CounterSnapshot.CounterDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.GaugeSnapshot.GaugeDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.{CounterSnapshot, GaugeSnapshot, Labels, MetricSnapshots}
 
 import java.lang.management.ManagementFactory
-import java.util
-import java.util.Collections
 import javax.management.ObjectName
 import scala.jdk.CollectionConverters.*
 
-object CatalinaCollector extends Collector:
+object CatalinaCollector extends MultiCollector:
 
   private val mbs             = ManagementFactory.getPlatformMBeanServer
   private val catalinaManager = new ObjectName("*:type=Manager,context=/,host=localhost")
   private val threadPools     = new ObjectName("*:type=ThreadPool,name=*")
 
-  override def collect(): util.List[MetricFamilySamples] =
+  override def collect(): MetricSnapshots =
 
-    val catalinaCurrentThreadCount = new CounterMetricFamily(
-      "catalina_total_threads_total",
-      "The total number of threads for connector",
-      Collections.singletonList("connector")
-    )
+    val catalinaCurrentThreadCount = CounterSnapshot.builder
+      .name("catalina_total_threads_total")
+      .help("The total number of threads for connector")
 
-    val catalinaBusyThreadCount = new CounterMetricFamily(
-      "catalina_busy_threads_total",
-      "The number of busy threads for connector",
-      Collections.singletonList("connector")
-    )
+    val catalinaBusyThreadCount = CounterSnapshot.builder
+      .name("catalina_busy_threads_total")
+      .help("The number of busy threads for connector")
 
-    val catalinaMaxThreadCount = new CounterMetricFamily(
-      "catalina_maximum_threads_total",
-      "The maximum number of threads for connector",
-      Collections.singletonList("connector")
-    )
+    val catalinaMaxThreadCount = CounterSnapshot.builder
+      .name("catalina_maximum_threads_total")
+      .help("The maximum number of threads for connector")
 
     for threadPool <- mbs.queryNames(threadPools, null).asScala do
-      val prefix = threadPool
-        .getKeyProperty("name")
-        .replaceAll("\"", "")
-      catalinaCurrentThreadCount.addMetric(
-        Collections.singletonList(prefix),
-        mbs.getAttribute(threadPool, "currentThreadCount").asInstanceOf[Number].doubleValue()
+      val connector = Labels.of(
+        "connector",
+        threadPool
+          .getKeyProperty("name")
+          .replaceAll("\"", "")
       )
-      catalinaBusyThreadCount.addMetric(
-        Collections.singletonList(prefix),
-        mbs.getAttribute(threadPool, "currentThreadsBusy").asInstanceOf[Number].doubleValue()
+      catalinaCurrentThreadCount.dataPoint(
+        counter(connector, mbs.getAttribute(threadPool, "currentThreadCount"))
       )
-      catalinaMaxThreadCount.addMetric(
-        Collections.singletonList(prefix),
-        mbs.getAttribute(threadPool, "maxThreads").asInstanceOf[Number].doubleValue()
+      catalinaBusyThreadCount.dataPoint(
+        counter(connector, mbs.getAttribute(threadPool, "currentThreadsBusy"))
+      )
+      catalinaMaxThreadCount.dataPoint(
+        counter(connector, mbs.getAttribute(threadPool, "maxThreads"))
       )
     end for
 
-    val gaugeMetricFamilies = mbs
-      .queryNames(catalinaManager, null)
-      .asScala
-      .flatMap(catalina =>
-        List[MetricFamilySamples](
-          new GaugeMetricFamily(
-            "catalina_active_sessions",
-            "the number of currently active sessions",
-            mbs.getAttribute(catalina, "activeSessions").asInstanceOf[Number].doubleValue()
-          ),
-          new CounterMetricFamily(
-            "catalina_session_total",
-            "the total number of sessions created by this manager",
-            mbs.getAttribute(catalina, "sessionCounter").asInstanceOf[Number].doubleValue()
-          )
-        )
-      )
+    val snapshots = MetricSnapshots.builder
+      .metricSnapshot(catalinaCurrentThreadCount.build)
+      .metricSnapshot(catalinaBusyThreadCount.build)
+      .metricSnapshot(catalinaMaxThreadCount.build)
 
-    (gaugeMetricFamilies.toSet + catalinaCurrentThreadCount + catalinaBusyThreadCount + catalinaMaxThreadCount).toList.asJava
+    // there is at most one manager for the root context of the localhost host
+    for catalina <- mbs.queryNames(catalinaManager, null).asScala.headOption do
+      snapshots
+        .metricSnapshot(
+          GaugeSnapshot.builder
+            .name("catalina_active_sessions")
+            .help("the number of currently active sessions")
+            .dataPoint(gauge(mbs.getAttribute(catalina, "activeSessions")))
+            .build
+        )
+        .metricSnapshot(
+          CounterSnapshot.builder
+            .name("catalina_session_total")
+            .help("the total number of sessions created by this manager")
+            .dataPoint(counter(Labels.EMPTY, mbs.getAttribute(catalina, "sessionCounter")))
+            .build
+        )
+
+    snapshots.build
   end collect
+
+  private def counter(labels: Labels, value: AnyRef): CounterDataPointSnapshot =
+    CounterDataPointSnapshot.builder.labels(labels).value(value.asInstanceOf[Number].doubleValue()).build
+
+  private def gauge(value: AnyRef): GaugeDataPointSnapshot =
+    GaugeDataPointSnapshot.builder.value(value.asInstanceOf[Number].doubleValue()).build
 end CatalinaCollector

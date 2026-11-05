@@ -19,7 +19,7 @@ import classnames from 'classnames';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useIdleTimer } from 'react-idle-timer';
 import { connect } from 'react-redux';
-import { Route, Routes, useMatch } from 'react-router-dom';
+import { Route, Routes, useMatch } from 'react-router';
 import { Alert } from 'reactstrap';
 import { compose } from 'redux';
 

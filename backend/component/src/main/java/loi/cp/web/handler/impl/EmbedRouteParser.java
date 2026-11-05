@@ -23,6 +23,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.learningobjects.cpxp.util.StringUtils;
 import com.learningobjects.cpxp.util.net.URLUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.util.*;
 
@@ -96,7 +97,7 @@ public class EmbedRouteParser {
     }
 
     private boolean isDivisible(final String expression) {
-        return StringUtils.contains(expression, ".");
+        return Strings.CS.contains(expression, ".");
     }
 
 }

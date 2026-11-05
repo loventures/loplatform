@@ -25,7 +25,7 @@ import { useTranslation } from '../../i18n/translationContext';
 import { allowPrintingEntireLesson } from '../../utilities/preferences';
 import React, { useState } from 'react';
 import { FiPrinter } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import {
   UncontrolledDropdown as Dropdown,
   DropdownItem,

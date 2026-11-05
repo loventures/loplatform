@@ -41,7 +41,7 @@ object Yarn extends AutoPlugin {
   override def projectSettings: Seq[Setting[_]] = Seq(
     yarnPackageJson := baseDirectory.value / "package.json",
     yarnCachePerProject := sys.props.get("yarn.cache").exists(_.trim == "per-project"),
-    yarnInstall := doYarnInstall().value,
+    yarnInstall := Def.uncached(doYarnInstall().value),
     yarnRun := doYarnScript().evaluated,
     yarnCommand := "yarn",
     yarnVerbose := false,

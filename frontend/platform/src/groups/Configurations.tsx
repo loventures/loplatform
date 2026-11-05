@@ -18,7 +18,7 @@
 import axios from 'axios';
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router';
 import { Alert } from 'reactstrap';
 
 import ConfigApp from '../config/components/ComponentsPage';

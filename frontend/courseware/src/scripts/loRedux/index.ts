@@ -28,6 +28,7 @@ import enhancers from './reduxEnhancers';
 import { createSubscription, getSavedState } from './reduxLocalStorage';
 import { locationChange } from './routerReducer';
 import { history } from '../utilities/history';
+import { registerGraderDispatch } from '../assignmentGrader/notifyGraderChanged';
 
 export type CourseState = ReturnType<typeof reducer>;
 
@@ -57,6 +58,10 @@ export const courseReduxStore = createStore(
 );
 
 createSubscription(courseReduxStore);
+
+// Let the grading panel's mutable model signal in-place changes without importing the store (issue
+// #1512) — keeps the model + grader-leaf unit tests free of the store's window.lo_platform import.
+registerGraderDispatch(courseReduxStore.dispatch);
 
 // Mirror the router location into redux (replacing connected-react-router) so the
 // reselect selectors that read state.router.location stay reactive to navigation.

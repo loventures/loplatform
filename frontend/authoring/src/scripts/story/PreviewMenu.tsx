@@ -37,7 +37,7 @@ import {
 } from './PreviewMenu/actions';
 import { editorUrl, NarrativeMode, trackNarrativeEventHandler } from './story';
 import { useRevisionCommit } from './storyHooks';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const childBearing = (typeId: TypeId): boolean =>
   !!edgeRules[typeId]?.elements || !!edgeRules[typeId]?.questions;

@@ -15,21 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext } from 'react';
+
+import { useCourseSelector } from '../loRedux';
+import { selectGraderTick } from '../loRedux/graderTickReducer';
 
 /**
- * B3 Phase 3 — the grader's single React re-render source.
+ * The grader's single React re-render source (issue #1512).
  *
- * The grader (`QuizGrader`/`SubmissionGrader`) stays an Angular service mutated in place. Previously each
- * React grader component (panel, controls, score, student-picker, rubric/feedback panels, submission
- * sections, the question list) carried its own `$rootScope.$watch` or `setInterval` poll to notice those
- * mutations — digest-dependent and scattered. This provider replaces all of them with ONE digest-
- * independent poll over a comprehensive signature of the displayed grader state; on any change it bumps a
- * `version` in context. `GradingPanel` and the quiz content consume it (via `useGrader`) and re-render,
- * which cascades to every child leaf — so the leaves are plain components again (no per-component sync).
+ * The grader (`QuizGrader`/`SubmissionGrader`) and its grade model stay MUTABLE objects mutated in place.
+ * React can't observe an in-place mutation of an object it didn't own, so the leaves (panel, controls,
+ * score, student-picker, rubric/feedback panels, submission sections, the question list) read the model
+ * directly and rely on this provider re-rendering them. Every grade/grader mutation calls
+ * `notifyGraderChanged()`, which bumps the `graderTick` Redux slice; the provider subscribes to it and
+ * exposes it as `version`. When it changes the context value identity changes, so every `useGrader`
+ * consumer re-renders, cascading to every child leaf — so the leaves stay plain components.
  *
- * (A future full refactor would move the grader state into Redux and subscribe instead of polling; this
- * consolidates the workaround into one place without rewriting the Angular grader service.)
+ * This replaces the former single `setInterval(150ms)` signature poll (B3 Phase 3): mutations now push a
+ * re-render through the store instead of a timer pulling one. See `notifyGraderChanged` for the (now
+ * exhaustive, by construction) set of mutation sites that signal.
  */
 interface GraderContextValue {
   grader: any;
@@ -40,61 +44,11 @@ const GraderContext = createContext<GraderContextValue>({ grader: null, version:
 
 export const useGrader = (): GraderContextValue => useContext(GraderContext);
 
-// Comprehensive signature: the union of every field the React grader components display. Missing a field
-// here means that component won't update when only that field changes — keep it exhaustive.
-const graderSignature = (grader: any): string => {
-  if (!grader) return '';
-  const g = grader.activeGrade;
-  const a = grader.activeAttempt;
-  const sas = a?.scorableAttemptState ?? {};
-  return [
-    grader.activeUser?.id,
-    grader.activeUser?.fullName,
-    a?.id,
-    a?.valid,
-    a?.state,
-    sas.scorePosted,
-    sas.hasInstructorInput,
-    sas.awaitsInstructorInput,
-    sas.requiresInstructorInput,
-    g ? 1 : 0,
-    g && g.isReleased(),
-    g && g.isDirty(),
-    g && g.isComplete(),
-    g && g.isSubmitting,
-    g && g.isBlankGrade,
-    g?.outgoing?.pointsAwarded,
-    g?.outgoing?.rubric ? 1 : 0,
-    grader.detailedGradeExists,
-    grader.canUserEditGrade,
-    grader.unpostedCount,
-    grader.unpostedQuestionCount,
-    grader.prevItemToGrade?.text,
-    grader.nextItemToGrade?.text,
-    grader.inProgressAttempt?.id,
-    a ? grader.canInvalidateAttempt() : false,
-    (grader.displayedQuestionList ?? []).map((t: any) => t.question?.id).join(','),
-    (grader.gradableQuestionList ?? []).map((q: any) => q.question?.id).join(','),
-  ].join('|');
-};
-
 export const GraderProvider: React.FC<{ grader: any; children: React.ReactNode }> = ({
   grader,
   children,
 }) => {
-  const [version, bump] = useReducer((c: number) => c + 1, 0);
-
-  useEffect(() => {
-    let last = graderSignature(grader);
-    const id = window.setInterval(() => {
-      const next = graderSignature(grader);
-      if (next !== last) {
-        last = next;
-        bump();
-      }
-    }, 150);
-    return () => window.clearInterval(id);
-  }, [grader]);
+  const version = useCourseSelector(selectGraderTick);
 
   return <GraderContext.Provider value={{ grader, version }}>{children}</GraderContext.Provider>;
 };

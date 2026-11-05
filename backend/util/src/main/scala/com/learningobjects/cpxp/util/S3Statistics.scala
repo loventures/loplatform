@@ -19,10 +19,11 @@ package com.learningobjects.cpxp.util
 
 import org.apache.commons.collections4.queue.CircularFifoQueue
 import java.util
-import java.util.Collections
 
-import io.prometheus.client.{Collector, CounterMetricFamily, GaugeMetricFamily}
-import io.prometheus.client.Collector.MetricFamilySamples
+import io.prometheus.metrics.model.registry.MultiCollector
+import io.prometheus.metrics.model.snapshots.CounterSnapshot.CounterDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.GaugeSnapshot.GaugeDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.{CounterSnapshot, GaugeSnapshot, Labels, MetricSnapshots}
 
 import scala.jdk.CollectionConverters.*
 import scala.concurrent.duration.*
@@ -138,46 +139,35 @@ object S3Statistics:
     }
   }
 
-  val collector = new Collector:
-    override def collect(): util.List[MetricFamilySamples] =
-      val mfs = new util.ArrayList[MetricFamilySamples]
+  val collector = new MultiCollector:
+    override def collect(): MetricSnapshots =
+      val errorCount = CounterSnapshot.builder
+        .name("s3_errors_total")
+        .help("The maximum number of errors for provider")
 
-      val errorCount = new CounterMetricFamily(
-        "s3_errors_total",
-        "The maximum number of errors for provider",
-        Collections.singletonList("provider")
-      )
+      val errorRate = GaugeSnapshot.builder
+        .name("s3_error_rate")
+        .help("Error rate for provider")
 
-      val errorRate = new GaugeMetricFamily(
-        "s3_error_rate",
-        "Error rate for provider",
-        Collections.singletonList("provider")
-      )
+      val operationCount = CounterSnapshot.builder
+        .name("s3_operations_total")
+        .help("The number of s3 operations for the provider")
 
-      val operationCount = new CounterMetricFamily(
-        "s3_operations_total",
-        "The number of s3 operations for the provider",
-        Collections.singletonList("provider")
-      )
-
-      val responseTime = new GaugeMetricFamily(
-        "s3_average_response_millis",
-        "the average response time over recent transactions",
-        Collections.singletonList("provider")
-      )
-
-      mfs.add(errorCount)
-      mfs.add(errorRate)
-      mfs.add(operationCount)
-      mfs.add(responseTime)
+      val responseTime = GaugeSnapshot.builder
+        .name("s3_average_response_millis")
+        .help("the average response time over recent transactions")
 
       instances forEach { case (key: String, stats: S3Statistics) =>
-        errorCount.addMetric(Collections.singletonList(s"${key}"), stats.errors.toDouble)
-        errorRate.addMetric(Collections.singletonList(s"${key}"), stats.errorRate)
-        operationCount.addMetric(Collections.singletonList(s"${key}"), stats.operations.toDouble)
-        responseTime.addMetric(Collections.singletonList(s"${key}"), stats.responseTime)
+        val provider = Labels.of("provider", key)
+        errorCount.dataPoint(CounterDataPointSnapshot.builder.labels(provider).value(stats.errors.toDouble).build)
+        errorRate.dataPoint(GaugeDataPointSnapshot.builder.labels(provider).value(stats.errorRate).build)
+        operationCount.dataPoint(
+          CounterDataPointSnapshot.builder.labels(provider).value(stats.operations.toDouble).build
+        )
+        responseTime.dataPoint(GaugeDataPointSnapshot.builder.labels(provider).value(stats.responseTime).build)
       }
-      mfs
+
+      MetricSnapshots.of(errorCount.build, errorRate.build, operationCount.build, responseTime.build)
     end collect
 end S3Statistics
 

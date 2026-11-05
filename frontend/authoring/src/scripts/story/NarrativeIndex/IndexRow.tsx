@@ -20,7 +20,7 @@ import React from 'react';
 import { BsCalendarX } from 'react-icons/bs';
 import { IoBookmarkOutline, IoCopyOutline, IoCutOutline, IoTrashOutline } from 'react-icons/io5';
 import { RiKeyLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Badge, Button } from 'reactstrap';
 
 import { accessRightI18n, accessRightsMap } from '../../components/AccessRightEditor';

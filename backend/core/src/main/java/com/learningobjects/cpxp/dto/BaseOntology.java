@@ -18,6 +18,7 @@
 package com.learningobjects.cpxp.dto;
 
 import argonaut.Json;
+import com.learningobjects.cpxp.CpxpClasspath;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.learningobjects.cpxp.entity.EntityUtils;
 import com.learningobjects.cpxp.entity.IndexType;
@@ -213,23 +214,9 @@ public class BaseOntology implements Ontology {
      * Analyze the service package for all item and data type definitions.
      */
     private void analyzeClasses() {
-        var entityTypes = _classGraph.getClassesWithAnnotation(Entity.class).loadClasses();
-        var itemTypeFields = new ArrayList<Field>();
-        _classGraph.getClassesWithFieldAnnotation(ItemTypedef.class).forEach(ci ->
-            ci.getFieldInfo().forEach(fi -> {
-                if (fi.hasAnnotation(ItemTypedef.class)) {
-                    itemTypeFields.add(fi.loadClassAndGetField());
-                }
-            })
-        );
-        var dataTypeFields = new ArrayList<Field>();
-        _classGraph.getClassesWithFieldAnnotation(DataTypedef.class).forEach(ci ->
-            ci.getFieldInfo().forEach(fi -> {
-                if (fi.hasAnnotation(DataTypedef.class)) {
-                    dataTypeFields.add(fi.loadClassAndGetField());
-                }
-            })
-        );
+        var entityTypes = CpxpClasspath.loadClasses(_classGraph.getClassesWithAnnotation(Entity.class));
+        var itemTypeFields = annotatedFields(ItemTypedef.class);
+        var dataTypeFields = annotatedFields(DataTypedef.class);
 
         logger.info("entity types: " + entityTypes.size() + ", item typedefs: " + itemTypeFields.size() + ", data typedefs; " + dataTypeFields.size());
 
@@ -242,6 +229,22 @@ public class BaseOntology implements Ontology {
           field -> mapMetadata(DataTypedef.class, _constantDataTypes, field));
 
         updateMaps();
+    }
+
+    /**
+     * Find the fields bearing an annotation. Only declared fields are considered, so inherited constants are not
+     * found again on every subclass.
+     */
+    private List<Field> annotatedFields(Class<? extends Annotation> annotation) {
+        var fields = new ArrayList<Field>();
+        _classGraph.getClassesWithFieldAnnotation(annotation).forEach(ci -> {
+            for (Field field : CpxpClasspath.loadClass(ci).getDeclaredFields()) {
+                if (field.isAnnotationPresent(annotation)) {
+                    fields.add(field);
+                }
+            }
+        });
+        return fields;
     }
 
     @Override

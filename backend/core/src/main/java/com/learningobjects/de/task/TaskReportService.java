@@ -20,13 +20,13 @@ package com.learningobjects.de.task;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+import java.time.Duration;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 public class TaskReportService {
 
     private static final Cache<String, TaskReport> taskReports =
-            CacheBuilder.newBuilder().expireAfterAccess(30, TimeUnit.MINUTES).build();
+            CacheBuilder.newBuilder().expireAfterAccess(Duration.ofMinutes(30)).build();
 
     public static void track(TaskReport taskReport) {
         taskReports.put(taskReport.getId(), taskReport);

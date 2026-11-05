@@ -1135,7 +1135,7 @@ public class ItemServiceBean implements ItemService {
             descriptor.getEntityType(), item.getId());
         assert finder != null : "Null finder for item: " + item;
         assert finder.getPath() != null : "Finder should have a materialized path.";
-        assert ObjectUtils.equals(item.getDeleted(), finder.getDel()) : "Item/finder deletion should match: " + item.getDeleted() + " / " + finder.getDel();
+        assert Objects.equals(item.getDeleted(), finder.getDel()) : "Item/finder deletion should match: " + item.getDeleted() + " / " + finder.getDel();
 
         finder.setOwner(item);
         item.setFinder(finder);

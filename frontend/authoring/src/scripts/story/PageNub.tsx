@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import { FiArrowLeft, FiArrowRight, FiArrowUp } from 'react-icons/fi';
 import { HiArrowUturnRight } from 'react-icons/hi2';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { useAllEditedOutEdges, useEditedAssetTitle, useEditedAssetTypeId } from '../graphEdit';
 import { useBranchId } from '../hooks';

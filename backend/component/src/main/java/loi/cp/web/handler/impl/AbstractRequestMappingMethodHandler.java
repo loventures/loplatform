@@ -36,6 +36,7 @@ import com.learningobjects.de.authorization.decision.UniformDecisionManager;
 import loi.cp.web.handler.SequencedMethodHandler;
 import loi.cp.web.handler.SequencedMethodResult;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import scala.compat.java8.OptionConverters;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -93,7 +94,7 @@ public abstract class AbstractRequestMappingMethodHandler
         final String transactionName;
         final java.lang.reflect.Method jlrMethod = method.getFunction().getMethod();
         if (StringUtils.isEmpty(sequenceContext.getTransactionName())) {
-            final String className = StringUtils.removeEnd(jlrMethod.getDeclaringClass().getSimpleName(), "Component");
+            final String className = Strings.CS.removeEnd(jlrMethod.getDeclaringClass().getSimpleName(), "Component");
             transactionName = className + "#" + jlrMethod.getName();
         } else {
             transactionName = "#" + jlrMethod.getName();

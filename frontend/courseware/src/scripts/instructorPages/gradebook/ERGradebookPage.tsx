@@ -35,7 +35,7 @@ import { useTranslation } from '../../i18n/translationContext';
 import GradebookColumnsLoader from '../../loaders/GradebookColumnsLoader';
 import { editGatingPolicies, gradebookSync } from '../../utilities/preferences';
 import React from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router';
 import ERNonContentTitle from '../../commonPages/contentPlayer/ERNonContentTitle';
 
 const GradebookNav: React.FC = () => {

@@ -22,7 +22,6 @@ import com.learningobjects.cpxp.service.ServiceContext;
 import com.learningobjects.cpxp.service.data.Data;
 import com.learningobjects.cpxp.service.data.DataUtil;
 import com.learningobjects.cpxp.service.item.Item;
-import com.learningobjects.cpxp.util.ObjectUtils;
 import de.mon.DeMonitor;
 import de.mon.StatisticType;
 
@@ -68,7 +67,7 @@ public abstract class DataTransfer {
     // TODO: handle multiplicate values
     public static boolean isUpdate(Item item, Collection<Data> data) {
         for (Data datum: data) {
-            if (!ObjectUtils.equals(datum.getValue(BaseOntology.getOntology()), getDataValue(item, datum.getType()))) {
+            if (!Objects.equals(datum.getValue(BaseOntology.getOntology()), getDataValue(item, datum.getType()))) {
                 return true;
             }
         }

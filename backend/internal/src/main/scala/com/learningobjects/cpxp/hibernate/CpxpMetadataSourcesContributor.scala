@@ -46,9 +46,8 @@ class CpxpMetadataSourcesContributor extends MetadataSourcesContributor:
     coreClasses ++ finderClasses
 
   private def finderClasses =
-    CpxpClasspath.classGraph // barbar
-      .getClassesWithAnnotation(classOf[Entity])
-      .loadClasses()
+    CpxpClasspath
+      .loadClasses(CpxpClasspath.classGraph.getClassesWithAnnotation(classOf[Entity])) // barbar
       .asScala
       .filter(classOf[Finder].isAssignableFrom)
 

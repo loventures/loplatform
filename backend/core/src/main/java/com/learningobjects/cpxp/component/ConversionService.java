@@ -26,11 +26,11 @@ import com.learningobjects.cpxp.component.web.converter.StringConverterComponent
 import scala.Option;
 import scala.Some;
 
+import java.time.Duration;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
@@ -52,7 +52,7 @@ public final class ConversionService {
     private final Map<TypeToken<?>, StringConverter<?>> internal;
 
     private ConversionService() {
-        cache = CacheBuilder.newBuilder().expireAfterAccess(CACHE_TIMEOUT_MINUTES, TimeUnit.MINUTES).build();
+        cache = CacheBuilder.newBuilder().expireAfterAccess(Duration.ofMinutes(CACHE_TIMEOUT_MINUTES)).build();
 
         internal = Map.of(
           TypeToken.of(String.class), input -> Option.apply(input.value()),

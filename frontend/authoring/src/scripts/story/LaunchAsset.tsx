@@ -17,7 +17,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import Loading from '../authoringUi/Loading';
 import { useEditedAssetContextPath, useEditedAssetTypeId } from '../graphEdit';

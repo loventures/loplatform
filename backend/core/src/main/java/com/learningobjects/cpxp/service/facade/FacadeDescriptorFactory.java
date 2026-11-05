@@ -24,6 +24,7 @@ import com.learningobjects.cpxp.dto.*;
 import com.learningobjects.cpxp.service.data.DataFormat;
 import com.learningobjects.cpxp.service.facade.FacadeUtils.MethodCategory;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 import com.learningobjects.cpxp.util.lang.OptionLike;
 import com.learningobjects.de.web.jackson.JacksonReflectionUtils;
 import scaloi.GetOrCreate;
@@ -448,7 +449,7 @@ public class FacadeDescriptorFactory {
             String type = facadeData.value();
             if ("".equals(type)) {
                 if (isId) {
-                    singular = StringUtils.removeEnd(singular, "Id");
+                    singular = Strings.CS.removeEnd(singular, "Id");
                 }
                 type = itemType + '.' + StringUtils.toLowerCaseFirst(singular);
             }

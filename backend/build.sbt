@@ -21,8 +21,10 @@ import ReleaseTransformations._
 
 enablePlugins(GitPlugin, DERepositories)
 
-name        := "de"
-description := "Difference Engine Root Project"
+// sbt 2 applies bare settings in build.sbt to every subproject, so scope the root's identity to the root project;
+// otherwise every subproject without its own name becomes module "de" and their output directories collide.
+LocalRootProject / name        := "de"
+LocalRootProject / description := "Difference Engine Root Project"
 
 /* Enable Ctrl-C */
 Global / cancelable := true
@@ -66,11 +68,11 @@ ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-java8
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml"                % "always"
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-parser-combinators" % "always"
 
-// CVE-2025-55163, CVE-2025-58057 via aws .. show coreApi/dependencyTree
-ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec-http2"             % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec"                   % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty"                   % "netty-handler"                 % "4.2.15.Final"
-ThisBuild / dependencyOverrides += "io.netty"                   % "netty-transport-classes-epoll" % "4.2.15.Final"
+// CVE-2025-55163, CVE-2025-58057 via aws .. coreApi/Compile/dependencyTree (built in to sbt 2)
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec-http2"             % "4.2.20.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-codec"                   % "4.2.20.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-handler"                 % "4.2.20.Final"
+ThisBuild / dependencyOverrides += "io.netty"                   % "netty-transport-classes-epoll" % "4.2.20.Final"
 // CVE-2025-58369 via http4s
 ThisBuild / dependencyOverrides += "co.fs2"                    %% "fs2-io"                        % Dependencies.FS2.fs2Version
 // CVE-2026-54513 etc

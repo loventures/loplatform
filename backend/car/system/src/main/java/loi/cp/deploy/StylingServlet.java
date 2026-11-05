@@ -32,6 +32,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -119,7 +120,7 @@ public class StylingServlet extends AbstractComponentServlet {
 
         pw.println("Installing attachment: " + name + " (" + fileName + ")");
 
-        if ("css".equals(name) && StringUtils.endsWithIgnoreCase(fileName, ".zip")) {
+        if ("css".equals(name) && Strings.CI.endsWith(fileName, ".zip")) {
             _domainWebService.setCssZip(fileName, file);
         } else {
             _domainWebService.setImage(dataType, fileName, width, height, file);

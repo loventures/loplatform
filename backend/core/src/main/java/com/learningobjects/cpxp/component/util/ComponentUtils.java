@@ -159,7 +159,7 @@ public class ComponentUtils {
                 }
             }
         }
-        return StringUtils.defaultString(message, msg);
+        return Objects.toString(message, msg);
     }
 
     public static String formatMessage(String msg, ComponentDescriptor scope, Object... parameters) {

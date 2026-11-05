@@ -18,7 +18,7 @@
 import axios from 'axios';
 import Polyglot from 'node-polyglot';
 import React, { useEffect } from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router';
 
 import Crumb from '../components/crumbRoute';
 import CourseRightsTree from './CourseRightsTree';

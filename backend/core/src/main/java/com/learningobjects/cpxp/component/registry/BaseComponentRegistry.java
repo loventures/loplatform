@@ -77,8 +77,7 @@ public class BaseComponentRegistry implements ComponentRegistry,ComponentRegistr
      * Bind all function registries now so BaseComponentDescriptor#linkComponent works.
      */
     private void initFunctionRegistry() {
-        CpxpClasspath.classGraph().getClassesWithAnnotation(FunctionBinding.class)
-          .loadClasses()
+        CpxpClasspath.loadClasses(CpxpClasspath.classGraph().getClassesWithAnnotation(FunctionBinding.class))
           .forEach(fn -> {
               FunctionBinding fb = fn.getAnnotation(FunctionBinding.class);
               registerClass(FunctionInstance.class, fb, fn);

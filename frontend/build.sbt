@@ -49,8 +49,9 @@ releaseProcess := Seq[ReleaseStep](
   pushChanges // Push origin/develop
 )
 
+// frontend/target/cars, where CI and deploy pick the cars up; sbt 2 relocates target.value under target/out/...
 Global / carAggregationDirectory := {
-  (LocalProject("frontend") / target).value / "cars"
+  (LocalProject("frontend") / baseDirectory).value / "target" / "cars"
 }
 
 ThisBuild / organization := "lo.ventures"
@@ -94,6 +95,6 @@ lazy val frontend = (project in file("."))
     addCommandAlias("build", "compile"),
   )
 
-Keys.onLoadMessage in Scope.Global := {
+Global / onLoadMessage := {
   if (sys.env.contains("CI")) "" else "\u001b]0;Frontend\u0007"
 }

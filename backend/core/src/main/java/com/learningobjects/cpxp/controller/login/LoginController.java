@@ -34,6 +34,7 @@ import com.learningobjects.cpxp.util.ObjectUtils;
 import com.learningobjects.cpxp.util.SessionUtils;
 import com.learningobjects.cpxp.util.StringUtils;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang3.Strings;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -128,7 +129,7 @@ public class LoginController extends AbstractController {
 
         JsonMap response = new JsonMap();
 
-        if (StringUtils.equalsIgnoreCase(embedType,
+        if (Strings.CI.equals(embedType,
                 CurrentFilter.EMBED_TYPE_NEW)) {
             response.put("close", true);
         }

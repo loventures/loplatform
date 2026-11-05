@@ -21,6 +21,7 @@ import com.learningobjects.cpxp.component.ComponentArchive;
 import com.learningobjects.cpxp.component.ComponentRing;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,7 +141,7 @@ public final class BaseComponentClassLoader extends ClassLoader implements Compo
     @Override
     public InputStream getResourceAsStream(final String name) {
         if (name.endsWith(".class")) { // TODO: Is this necessary? Shouldn't I ask parent first?
-            String qualifiedClassName = StringUtils.removeEnd(name, ".class").replace('/', '.');
+            String qualifiedClassName = Strings.CS.removeEnd(name, ".class").replace('/', '.');
             JavaFileObject file = _classFiles.get(qualifiedClassName);
             if (file != null) {
                 try {

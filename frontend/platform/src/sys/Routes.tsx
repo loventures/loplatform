@@ -19,7 +19,7 @@ import classnames from 'classnames';
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 
 import Error from '../components/Error';
 import Crumb from '../components/crumbRoute';

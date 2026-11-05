@@ -45,7 +45,7 @@ public class ChallengeGuard extends AbstractComponent implements SecurityGuard {
         byte[] shaChallenge = (byte[]) request.getSession(true).getAttribute(ATTR_CHALLENGE);
         if (response == null) {
             String challenge = GuidUtil.guid();
-            request.getSession(true).setAttribute(ATTR_CHALLENGE, DigestUtils.sha(challenge));
+            request.getSession(true).setAttribute(ATTR_CHALLENGE, DigestUtils.sha1(challenge));
             throw new ChallengeException(challenge);
         } else if ((shaChallenge == null) || !MessageDigest.isEqual(Base64.decodeBase64(response), shaChallenge)) {
             throw new AccessForbiddenException("Invalid response");

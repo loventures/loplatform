@@ -19,24 +19,20 @@ package loi.cp.prometheus.collector
 
 import com.learningobjects.cpxp.scala.cpxp.Summon.summon
 import com.learningobjects.cpxp.service.session.SessionService
-import io.prometheus.client.Collector.MetricFamilySamples
-import io.prometheus.client.{Collector, CounterMetricFamily}
+import io.prometheus.metrics.model.registry.MultiCollector
+import io.prometheus.metrics.model.snapshots.CounterSnapshot.CounterDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.{CounterSnapshot, MetricSnapshots}
 
-import java.util
-
-object SessionServiceCollector extends Collector:
+object SessionServiceCollector extends MultiCollector:
 
   val sessionService = summon[SessionService]
 
-  override def collect(): util.List[Collector.MetricFamilySamples] =
-    val mfs            = new util.ArrayList[MetricFamilySamples]
-    val cpSessionCount = new CounterMetricFamily(
-      "cp_sessions_total",
-      "the number of cp sessions",
-      sessionService.getActiveSessionCount.toDouble
+  override def collect(): MetricSnapshots =
+    MetricSnapshots.of(
+      CounterSnapshot.builder
+        .name("cp_sessions_total")
+        .help("the number of cp sessions")
+        .dataPoint(CounterDataPointSnapshot.builder.value(sessionService.getActiveSessionCount.toDouble).build)
+        .build
     )
-
-    mfs.add(cpSessionCount)
-    mfs
-  end collect
 end SessionServiceCollector

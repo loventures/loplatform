@@ -20,8 +20,8 @@ package com.learningobjects.sbt
 import java.text.SimpleDateFormat
 import java.util.Date
 
-import com.typesafe.sbt.GitPlugin
-import com.typesafe.sbt.SbtGit.GitKeys._
+import com.github.sbt.git.GitPlugin
+import com.github.sbt.git.SbtGit.GitKeys._
 import sbt.Keys._
 import sbt.plugins.JvmPlugin
 import sbt.{AutoPlugin, Package, PluginTrigger, Plugins, TaskKey, _}

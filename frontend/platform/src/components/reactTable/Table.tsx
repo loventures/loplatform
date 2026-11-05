@@ -18,8 +18,9 @@
 import React from 'react';
 
 import {
-  useReactTable,
-  getCoreRowModel,
+  useTable,
+  tableFeatures,
+  metaHelper,
   flexRender,
   ColumnDef,
   AccessorKeyColumnDef,
@@ -47,6 +48,26 @@ type Id = {
   id: number;
 };
 
+/** Per-column presentation metadata carried on `columnDef.meta`. */
+type TableColumnMeta = {
+  hidden?: boolean;
+  sortable?: boolean;
+  defaultSort?: 'asc' | 'desc';
+  tdStyle?: React.CSSProperties;
+  thStyle?: React.CSSProperties;
+  width?: string;
+  prepend?: React.ReactNode;
+};
+
+/* Only the core feature set is needed: sorting and paging are server-side (see onSortChange and
+ * onPageChange), and hidden columns are collapsed with CSS rather than the column visibility feature.
+ * The columnMeta slot is type-only; it types `columnDef.meta` without global declaration merging. */
+const features = tableFeatures({
+  columnMeta: metaHelper<TableColumnMeta>(),
+});
+
+type Features = typeof features;
+
 type TableProps<T extends Id = Id> = {
   entity: string;
   pageSize: number;
@@ -72,11 +93,11 @@ type TableProps<T extends Id = Id> = {
   tdClassFormat?: (value: any, col: string, t: T) => string;
 };
 
-function getColumns<T extends Id>(props: TableProps<T>): ColumnDef<T>[] {
+function getColumns<T extends Id>(props: TableProps<T>): ColumnDef<Features, T>[] {
   const { columns, entity, T } = props;
   const baseName = `adminPage.${entity}.fieldName`;
 
-  const cols = columns.map((col): ColumnDef<T> => {
+  const cols = columns.map((col): ColumnDef<Features, T> => {
     const { prepend, dataField, dataFormat } = col;
     return {
       accessorKey: dataField,
@@ -134,10 +155,10 @@ function Table<T extends Id>(props: TableProps<T>): React.ReactNode {
   } = props;
 
   const columns = getColumns(props);
-  const table = useReactTable({
+  const table = useTable({
+    features,
     data: currentData,
-    columns: columns,
-    getCoreRowModel: getCoreRowModel(),
+    columns,
   });
 
   const isSelected = (row: T) => selectedRows.includes(row);
@@ -145,8 +166,8 @@ function Table<T extends Id>(props: TableProps<T>): React.ReactNode {
   const trClassName = (row: T) =>
     `${trClassFormat?.(row) ?? ''} data ${isSelected(row) ? 'table-info table-active' : ''}`;
 
-  const columnKey = (col: ColumnDef<T>): string =>
-    (col as AccessorKeyColumnDef<T>).accessorKey as string;
+  const columnKey = (col: ColumnDef<Features, T, unknown>): string =>
+    (col as AccessorKeyColumnDef<Features, T, unknown>).accessorKey as string;
 
   const rowHeight = document
     .getElementById(`crudTable-${entity}`)
@@ -259,7 +280,7 @@ function Table<T extends Id>(props: TableProps<T>): React.ReactNode {
                 }
                 onDoubleClick={() => openRow?.(row.original)}
               >
-                {row.getVisibleCells().map(cell => (
+                {row.getAllCells().map(cell => (
                   <td
                     key={cell.id}
                     style={cell.column.columnDef.meta?.tdStyle}

@@ -6,6 +6,7 @@ import com.learningobjects.cpxp.component.{BaseHtmlWriter, ComponentEnvironment,
 import com.learningobjects.cpxp.component.annotation.Service
 import com.learningobjects.cpxp.component.template.{LohtmlTemplate, RenderContext}
 import com.learningobjects.cpxp.component.web.{StreamResponse, TextResponse, WebResponse}
+import com.learningobjects.cpxp.service.mime.MimeWebService
 import com.learningobjects.cpxp.util.HttpUtils
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse.SC_OK
@@ -16,7 +17,7 @@ import java.net.URI
 import java.nio.charset.StandardCharsets
 
 @Service
-class LocalProxy(environment: ComponentEnvironment):
+class LocalProxy(environment: ComponentEnvironment, mws: MimeWebService):
   import LocalProxy.*
 
   def proxyRequest(
@@ -61,7 +62,7 @@ class LocalProxy(environment: ComponentEnvironment):
             strings.toString
           else replaced
           val mediaType =
-            MediaType.parse(rsp.getEntity.getContentType.getValue).withCharset(StandardCharsets.UTF_8)
+            MediaType.parse(Option(rsp.getEntity.getContentType).fold(mws.getMimeType(path))(_.getValue)).withCharset(StandardCharsets.UTF_8)
           TextResponse.of(rendered, mediaType)
         else
           StreamResponse(rsp.getEntity.getContent, SC_OK, Map("Content-Type" -> rsp.getEntity.getContentType.getValue))

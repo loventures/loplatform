@@ -22,11 +22,11 @@ import com.learningobjects.cpxp.dto.DataTransfer;
 import com.learningobjects.cpxp.dto.FacadeData;
 import com.learningobjects.cpxp.service.data.Data;
 import com.learningobjects.cpxp.service.data.DataFormat;
-import com.learningobjects.cpxp.util.ObjectUtils;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Handler for a facade method that removes a field.
@@ -49,7 +49,7 @@ class DataRemoveHandler extends FacadeValueHandler implements UserDefinedMethodH
             }
             for (Data data : DataTransfer.findRawData(handler.getItem(), _dataType)) {
                 for (Object singleValue : valuesToRemove) {
-                    if (ObjectUtils.equals(singleValue, data.getValue(BaseOntology.getOntology()))) {
+                    if (Objects.equals(singleValue, data.getValue(BaseOntology.getOntology()))) {
                         handler.getContext().getDataService().remove(data);
                     }
                 }

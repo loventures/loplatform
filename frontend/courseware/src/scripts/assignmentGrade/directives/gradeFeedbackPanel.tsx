@@ -19,6 +19,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { FeedbackFileList } from '../../assignmentFeedback/directives/feedbackFileList.tsx';
 import { FeedbackTools } from '../../assignmentFeedback/directives/feedbackTools.tsx';
+import { notifyGraderChanged } from '../../assignmentGrader/notifyGraderChanged.ts';
 import { useTranslation } from '../../i18n/translationContext';
 
 interface GradeFeedbackPanelProps {
@@ -74,6 +75,8 @@ export const GradeFeedbackPanel: React.FC<GradeFeedbackPanelProps> = ({ grade, d
     const value = e.target.value;
     setFeedback(value);
     if (outgoing) outgoing.feedback = value;
+    // Re-render siblings (Save enablement reads grade.isDirty, which includes feedback).
+    notifyGraderChanged();
   };
 
   if (!grade) return null;

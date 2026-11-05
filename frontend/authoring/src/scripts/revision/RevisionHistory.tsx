@@ -20,7 +20,7 @@ import * as React from 'react';
 import { MutableRefObject, useEffect, useMemo, useRef } from 'react';
 import { IoGitCompareOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { trackNarrativeNavHandler } from '../analytics/AnalyticsEvents';
 import { formatFullDate } from '../dateUtil';

@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This strategy builds the actual QL for evaluating against generated entities.
@@ -125,7 +126,7 @@ class EntityConjunctionBuilder extends AbstractConjunctionBuilder {
 
             buffer.append(QuerySyntax.L_PAREN);
 
-            final String language = StringUtils.defaultString(condition.getLanguage(), "english");
+            final String language = Objects.toString(condition.getLanguage(), "english");
 
             if (isSearch && (BaseOntology.getOntology().getDataFormat(dataType) != DataFormat.tsvector)) {
                 buffer.append("to_tsvector('").append(language).append("',LOWER(").append(lhExpression).append("))");

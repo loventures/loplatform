@@ -17,7 +17,6 @@
 
 package loi.cp.web;
 
-import com.google.common.base.Throwables;
 import com.google.common.net.HttpHeaders;
 import com.learningobjects.cpxp.component.annotation.Service;
 import com.learningobjects.cpxp.component.query.*;
@@ -107,7 +106,7 @@ public class DefaultWebRequestFactory implements WebRequestFactory {
                     new URL(scheme, serverName, port, "/api/v" + version);
             builder.requestUriApiHost(requestUriApiHost.toString());
         } catch (final MalformedURLException e) {
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
 
         builder.version(version);
@@ -426,7 +425,7 @@ public class DefaultWebRequestFactory implements WebRequestFactory {
     }
 
     private int convertInteger(final String source, final String name) {
-        if (!NumberUtils.isNumber(source)) {
+        if (!NumberUtils.isCreatable(source)) {
             throw new TypeMismatchException(source, name, Long.class);
         } else {
             return Integer.parseInt(source);

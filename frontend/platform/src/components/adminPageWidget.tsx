@@ -16,14 +16,9 @@
  */
 
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { clearSavedTableState } from './reactTable/ReactTable';
-
-// @types/react-router-dom resolves a nested @types/react (v19) whose ReactNode
-// (incl. bigint) does not unify with the project's @types/react 18, so the
-// router components are not seen as valid JSX. Treat them as loose components.
-const Link = RouterLink as unknown as React.ComponentType<any>;
 
 interface AdminPageWidgetProps {
   identifier: string;

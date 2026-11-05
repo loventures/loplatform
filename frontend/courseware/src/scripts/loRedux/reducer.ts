@@ -58,6 +58,7 @@ import { chatReducer } from '../landmarks/chat/chatReducer';
 import { scormReducer } from '../scorm/reducer';
 import { tutorialPlayerReducer } from '../tutorial/tutorialSlice';
 import { columnsReducer } from './columnsReducer';
+import { graderTickReducer } from './graderTickReducer';
 import { contentOverlayUpdateReducer } from './contentOverlayUpdateReducer';
 import { contentsReducer } from './contentsReducer';
 import { enrollmentCountReducer } from './enrollmentCountReducer';
@@ -413,6 +414,7 @@ const reducer = combineReducers({
   actualUserRights: actualUserRightsReducer,
   api: apiReducer,
   ui: uiReducer,
+  graderTick: graderTickReducer,
   courseCustomizations: customizationsReducer,
   router: createRouterReducer(history.location, history.action),
   events: eventsReducer,

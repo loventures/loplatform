@@ -19,7 +19,7 @@ import axios, { AxiosResponse } from 'axios';
 import moment from 'moment/moment';
 import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 
 import ReactTable from '../components/reactTable/ReactTable';

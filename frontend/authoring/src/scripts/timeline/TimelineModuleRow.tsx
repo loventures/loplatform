@@ -20,7 +20,7 @@ import React, { useState } from 'react';
 import { useCollapse } from 'react-collapsed';
 import NumericInput from 'react-numeric-input2';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button } from 'reactstrap';
 
 import {

@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router';
 
 import App from './components/ComponentsPage';
 import useRouteBasePath from '../components/useRouteBasePath';

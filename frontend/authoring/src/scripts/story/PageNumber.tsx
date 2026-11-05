@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import React, { useEffect, useMemo } from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { HiArrowUturnLeft, HiArrowUturnRight } from 'react-icons/hi2';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 import { CONTAINER_AND_ELEMENT_TYPES } from '../editor/EdgeRuleConstants';
 import {

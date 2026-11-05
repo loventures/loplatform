@@ -23,7 +23,7 @@ import {
 } from '../../resources/LearningPathResource';
 import qs from 'qs';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 export type SearchHighlights = Record<string, string[]>;
 

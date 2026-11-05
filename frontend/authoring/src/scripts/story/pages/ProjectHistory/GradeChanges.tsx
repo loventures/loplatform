@@ -16,7 +16,7 @@
  */
 
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { useBranchId, useDcmSelector } from '../../../hooks';
 import { CreateLineItem, DeleteLineItem, UpdateLineItem } from './PublishAnalysis';

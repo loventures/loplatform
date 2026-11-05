@@ -17,7 +17,6 @@
 
 package com.learningobjects.cpxp.util.net;
 
-import com.google.common.base.Throwables;
 
 import javax.annotation.Nullable;
 import java.io.UnsupportedEncodingException;
@@ -46,7 +45,7 @@ public class URLUtils {
             return URLDecoder.decode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             // never going to happen; UTF-8 is supported
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -59,7 +58,7 @@ public class URLUtils {
             return URLEncoder.encode(str, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             // never going to happen; UTF-8 is supported
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
     }
 

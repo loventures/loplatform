@@ -17,7 +17,6 @@
 
 package com.learningobjects.cpxp.component;
 
-import com.google.common.base.Throwables;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -33,6 +32,7 @@ import com.learningobjects.cpxp.util.StringUtils;
 
 import java.lang.reflect.Proxy;
 import java.util.Optional;
+import org.apache.commons.lang3.Strings;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -120,7 +120,7 @@ public class ComponentInstanceImpl implements ComponentInstance {
         String name = evalI18n(_component.getComponentAnnotation().name());
         if (name == null) {
             Class<?> clas = _component.getComponentClass();
-            name = evalI18n(StringUtils.toSeparateWords(StringUtils.removeEnd(clas.getSimpleName(), "Impl")));
+            name = evalI18n(StringUtils.toSeparateWords(Strings.CS.removeEnd(clas.getSimpleName(), "Impl")));
         }
         return name;
     }
@@ -259,7 +259,7 @@ public class ComponentInstanceImpl implements ComponentInstance {
             instance.init(this, function);
             return instance;
         } catch (InstantiationException | IllegalAccessException ex) {
-            throw Throwables.propagate(ex);
+            throw new RuntimeException(ex);
         }
     }
 

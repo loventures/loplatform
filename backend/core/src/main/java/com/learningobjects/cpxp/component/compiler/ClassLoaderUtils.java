@@ -94,12 +94,12 @@ public class ClassLoaderUtils {
         } else if (file.getName().endsWith(".class")) {
             String fileName = file.getPath().substring(1 + prefix.length());
             String className = getClassNameFromFileName(fileName);
-            map.put(className, new ClassFileObjectImpl(file.toURI(), file.toURL(), className));
+            map.put(className, new ClassFileObjectImpl(file.toURI(), file.toURI().toURL(), className));
         }
     }
 
     private static void findJarClasses(File file, Map<String, JavaFileObject> map) throws Exception {
-        URL base = new URL("jar:" + file.toURL().toExternalForm() + "!/");
+        URL base = new URL("jar:" + file.toURI().toURL().toExternalForm() + "!/");
         ZipFile zip = new ZipFile(file);
         try {
             for (Enumeration<? extends ZipEntry> entries = zip.entries(); entries.hasMoreElements();) {

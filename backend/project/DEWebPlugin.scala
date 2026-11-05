@@ -16,7 +16,7 @@
  */
 
 import com.learningobjects.sbt.DECommonSettings
-import sbt.Defaults.{bgRunMainTask, bgRunTask}
+import sbt.internal.RunUtil.{bgRunMainTask, bgRunTask}
 import sbt.Keys.*
 import sbt.plugins.JvmPlugin
 import sbt.{Def, *}
@@ -67,7 +67,7 @@ object DEWebPlugin extends AutoPlugin {
       ),
       fork                        := true,
       bgCopyClasspath             := false,
-      Compile / run / forkOptions := {
+      Compile / run / forkOptions := Def.uncached {
         val options = (Compile / run / forkOptions).value
         val suspend = if (detomcatDebugSuspend.value) "y" else "n"
         options
@@ -80,15 +80,17 @@ object DEWebPlugin extends AutoPlugin {
                 .getOrElse(Vector.empty) ++
               options.runJVMOptions
           )
-          .withWorkingDirectory(target.value)
+          // sbt 2 relocates target.value under target/out/...; keep detomcat's working directory at deploy/target
+          .withWorkingDirectory(baseDirectory.value / "target")
       },
-      killAll                     := {
-        val service = (bgJobService in Global).value
+      // Def.uncached: sbt 2 caches task results by default; these are pure side effects
+      killAll                     := Def.uncached {
+        val service = (Global / bgJobService).value
         val jobs    = service.jobs
         jobs.foreach(service.stop)
         jobs
       },
-      waitOneSec                  := {
+      waitOneSec                  := Def.uncached {
         Thread.sleep(1000)
       }
     )

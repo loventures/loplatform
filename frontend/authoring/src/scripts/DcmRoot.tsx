@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router';
 
 import DcmReady from './DcmReady';
 import { basename, dcmStore, history } from './dcmStore';

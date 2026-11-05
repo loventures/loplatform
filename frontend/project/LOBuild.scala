@@ -30,14 +30,21 @@ object LOBuild {
   lazy val baseYarnBuild: Seq[Def.Setting[_]] = {
     Seq(
       scalaVersion := "3.8.4",
-      Compile / products := target.value / s"${name.value}.zip" :: Nil,
+      // scripts/buildCar.js writes <project>/target/<name>.zip; sbt 2 relocates target.value under the build's
+      // target/out/..., so anchor on baseDirectory to keep pointing at what yarn actually produced.
+      Compile / products := Def.uncached(baseDirectory.value / "target" / s"${name.value}.zip" :: Nil),
 
-      packagedCar := target.value / s"${name.value}.zip",
+      packagedCar := baseDirectory.value / "target" / s"${name.value}.zip",
 
-      packagedArtifacts += (Artifact(name = name.value) -> packagedCar.value),
+      // sbt 2 maps artifacts to virtual file refs rather than java.io.File
+      packagedArtifacts += Def.uncached(
+        Artifact(name = name.value) -> (fileConverter.value.toVirtualFile(packagedCar.value.toPath): xsbti.HashedVirtualFileRef)
+      ),
       artifacts += Artifact(name = name.value),
 
-      Compile / compile := {
+      // Def.uncached throughout: sbt 2 caches task results by default, but these shell out to yarn, whose inputs sbt
+      // does not track, so a cache hit would silently skip the build.
+      Compile / compile := Def.uncached {
         (yarnRun toTask " package").value
         val globalOutput = (Global / carAggregationDirectory).value
         val packagedCar = LOBuild.packagedCar.value
@@ -47,11 +54,14 @@ object LOBuild {
         inc.Analysis.Empty
       },
 
-      Compile / compile := { (Compile / compile) dependsOn yarnInstall }.value,
+      Compile / compile := Def.uncached { ((Compile / compile) dependsOn yarnInstall).value },
 
-      clean := { clean.value; (baseDirectory.value / "node_modules").delete(); () },
+      clean := Def.uncached { clean.value; (baseDirectory.value / "node_modules").delete(); () },
 
-      Test / test := { (yarnRun toTask " test") dependsOn yarnInstall }.value,
+      // sbt 2 makes test an input task yielding a TestResult; yarn test failing throws, so reaching the map means passed.
+      Test / test := Def.inputTaskDyn {
+        ((yarnRun toTask " test") dependsOn yarnInstall).map(_ => sbt.protocol.testing.TestResult.Passed)
+      }.evaluated,
 
       // disable publishing the main jar produced by `package`
       compile / packageBin / publishArtifact := false,

@@ -29,10 +29,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.connector.ResponseFacade;
-import org.apache.commons.lang3.CharEncoding;
 
 import javax.inject.Inject;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +73,7 @@ public class LogFilter extends AbstractFilter {
         // I log the request parameters. IE and FF send using the same encoding
         // as the page was rendered in so hopefully this is always safe.. May
         // need to extend it to check whethr a char encoding was actually specified..
-        request.setCharacterEncoding(CharEncoding.UTF_8);
+        request.setCharacterEncoding(StandardCharsets.UTF_8.name());
         if ("POST".equals(request.getMethod()) && MimeUtils.MIME_TYPE_APPLICATION_X_WWW_FORM_URLENCODED.equals(request.getContentType())) {
             request.getParameterNames(); // preload the request body so logging does not stall...
         }

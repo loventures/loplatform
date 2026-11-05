@@ -25,7 +25,7 @@ import { selectForLearner } from '../../utilities/rootSelectors';
 import { useCourseSelector } from '../../loRedux';
 import { useTranslation } from '../../i18n/translationContext';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { SingleValue } from 'react-select';
 import AsyncSelect from 'react-select/async';
 

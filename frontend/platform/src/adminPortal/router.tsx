@@ -21,7 +21,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import DocumentTytle from 'react-document-title';
 import { IIdleTimer, useIdleTimer } from 'react-idle-timer';
 import { useDispatch, useStore } from 'react-redux';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 import { Navbar } from 'reactstrap';
 import { isEqual } from 'underscore';
 

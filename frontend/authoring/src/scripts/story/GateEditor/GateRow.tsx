@@ -20,7 +20,7 @@ import React from 'react';
 import { GiCheckMark } from 'react-icons/gi';
 import { IoClose } from 'react-icons/io5';
 import NumericInput from 'react-numeric-input2';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button } from 'reactstrap';
 
 import {

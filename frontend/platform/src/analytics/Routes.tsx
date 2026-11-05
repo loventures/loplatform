@@ -18,7 +18,7 @@
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 
 import Crumb from '../components/crumbRoute';
 import NavigationBar from '../components/navigationBar';

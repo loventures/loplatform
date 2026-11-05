@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { MdOpenInFull } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { useBranchId, usePolyglot } from '../../hooks';
 import { NodeName, TypeId } from '../../types/asset';

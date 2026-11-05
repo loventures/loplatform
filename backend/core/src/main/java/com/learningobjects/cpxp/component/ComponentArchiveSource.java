@@ -23,6 +23,7 @@ import com.learningobjects.cpxp.service.facade.FacadeService;
 import com.learningobjects.cpxp.service.script.ComponentArchiveFacade;
 import com.learningobjects.cpxp.util.NumberUtils;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -76,7 +77,7 @@ public class ComponentArchiveSource implements ComponentSource {
 
     @Override
     public Optional<Path> getResource(String name) throws IOException {
-        String path = _prefix + StringUtils.removeStart(name, _strip);
+        String path = _prefix + Strings.CS.removeStart(name, _strip);
         return Optional.of(_attachmentWebService.getZipAttachmentFile(getAttachmentId(), path).toPath());
     }
 
@@ -84,7 +85,7 @@ public class ComponentArchiveSource implements ComponentSource {
     public Map<String, Path> getResources() throws IOException {
         Map<String, Path> resources = new HashMap<>();
         _attachmentWebService.getZipAttachmentFiles(getAttachmentId()).forEach((name, file) -> {
-            resources.put(_strip + StringUtils.removeStart(name, _prefix), file.toPath());
+            resources.put(_strip + Strings.CS.removeStart(name, _prefix), file.toPath());
         });
         return resources;
     }

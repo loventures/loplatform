@@ -26,6 +26,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +38,7 @@ import java.io.OutputStream;
 import java.lang.management.ManagementFactory;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.zip.GZIPOutputStream;
 
@@ -150,7 +152,7 @@ public class SendFileFilter extends AbstractFilter {
     // text/css text/javascript etc.
     private boolean isCompressable(FileInfo fileInfo) {
         String contentType = fileInfo.getContentType();
-        return StringUtils.startsWith(contentType, MimeUtils.MIME_PREFIX_TEXT) && !StringUtils.equals(contentType, MimeUtils.MIME_TYPE_TEXT_PDF);
+        return Strings.CS.startsWith(contentType, MimeUtils.MIME_PREFIX_TEXT) && !Strings.CS.equals(contentType, MimeUtils.MIME_TYPE_TEXT_PDF);
     }
 
     private void sendFile(HttpServletRequest request,
@@ -215,7 +217,7 @@ public class SendFileFilter extends AbstractFilter {
 
         if (gzipped != null) {
             String acceptEncoding = request.getHeader(HttpUtils.HTTP_HEADER_ACCEPT_ENCODING);
-            String encoding = StringUtils.containsIgnoreCase(acceptEncoding, HttpUtils.ENCODING_X_GZIP) ? HttpUtils.ENCODING_X_GZIP : HttpUtils.ENCODING_GZIP;
+            String encoding = Strings.CI.contains(acceptEncoding, HttpUtils.ENCODING_X_GZIP) ? HttpUtils.ENCODING_X_GZIP : HttpUtils.ENCODING_GZIP;
             response.setHeader(HttpUtils.HTTP_HEADER_CONTENT_ENCODING, encoding);
             // Internet Explorer will not cache anything with a Vary header.
             // http://www.ilikespam.com/blog/internet-explorer-meets-the-vary-header
@@ -246,7 +248,7 @@ public class SendFileFilter extends AbstractFilter {
     }
 
     private void setupHeaders(HttpServletResponse response, FileInfo fileInfo, long lastModified) {
-        response.setContentType(StringUtils.defaultString(fileInfo
+        response.setContentType(Objects.toString(fileInfo
                 .getContentType(), MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN));
         response.setDateHeader(HttpUtils.HTTP_HEADER_LAST_MODIFIED,
                 lastModified);
@@ -287,7 +289,7 @@ public class SendFileFilter extends AbstractFilter {
             return false;
         }
         // because Quicktime doesn't like Direct URLs. TODO: FIXME: KILLME: NONONONO.
-        return fileInfo.supportsDirectUrl() && !fileInfo.getNoRedirect() && !StringUtils.endsWith(request.getPathInfo(), ".mov"); // Temporary hack
+        return fileInfo.supportsDirectUrl() && !fileInfo.getNoRedirect() && !Strings.CS.endsWith(request.getPathInfo(), ".mov"); // Temporary hack
     }
 
     private static boolean __nio, __nioSet;
@@ -300,7 +302,7 @@ public class SendFileFilter extends AbstractFilter {
                 assert !names.isEmpty();
                 ObjectName connector = names.toArray(new ObjectName[0])[0];
                 String name = (String) mbs.getAttribute(connector, "protocolHandlerClassName");
-                __nio = StringUtils.contains(name, "Nio") || StringUtils.contains(name, "DEProtocol");
+                __nio = Strings.CS.contains(name, "Nio") || Strings.CS.contains(name, "DEProtocol");
             } catch (Exception ex) {
                 throw new RuntimeException("Nio check error", ex);
             }

@@ -16,7 +16,7 @@
  */
 
 import { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router';
 
 interface LoNavLinkProps {
   to: any;

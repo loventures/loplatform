@@ -18,8 +18,8 @@
 package com.learningobjects.cpxp.filter;
 
 import com.learningobjects.cpxp.util.TomcatUtils;
-import io.prometheus.client.Counter;
-import io.prometheus.client.Gauge;
+import io.prometheus.metrics.core.metrics.Counter;
+import io.prometheus.metrics.core.metrics.Gauge;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,27 +42,27 @@ public class AccessFilter extends AbstractFilter {
     }
 
     private static Counter responseBytesGauge = Counter
-      .build()
+      .builder()
       .name("cp_response_bytes_total")
       .help("total bytes transmitted")
       .register();
     private static Counter responseCountCounter = Counter
-      .build()
+      .builder()
       .name("cp_response_total")
       .help("the total number of responses")
       .register();
     private static Gauge responseAvgTimeGauge = Gauge
-      .build()
+      .builder()
       .name("cp_response_time_millis")
       .help("the average response time in millis")
       .register();
     private static Gauge responseSlaTimeGauge = Gauge
-      .build()
+      .builder()
       .name("cp_response_slatime_millis")
       .help("average sla time in millis")
       .register();
     private static Counter responseTypeGauge = Counter
-      .build()
+      .builder()
       .name("cp_response_type_total")
       .help("the total number of responses by class of response")
       .labelNames("class")
@@ -131,7 +131,7 @@ public class AccessFilter extends AbstractFilter {
 
             responseCountCounter.inc();
             responseBytesGauge.inc(bytes);
-            responseTypeGauge.labels((statusCode / 100 + "xx")).inc();
+            responseTypeGauge.labelValues((statusCode / 100 + "xx")).inc();
             responseAvgTimeGauge.set(_responseTime.getAverage());
         }
 

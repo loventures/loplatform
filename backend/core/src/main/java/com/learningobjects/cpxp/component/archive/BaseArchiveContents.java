@@ -64,9 +64,9 @@ public class BaseArchiveContents implements ArchiveContents {
                         libraries.add(path.toUri().toURL());
                     } else if (suffix.equals("jar")) {
                         File jar = path.toFile();
-                        libraries.add(jar.toURL());
+                        libraries.add(jar.toURI().toURL());
                         // TODO: I'd like to only scan inside component jars; flag them somehow
-                        URL base = new URL("jar:" + jar.toURL().toExternalForm() + "!/");
+                        URL base = new URL("jar:" + jar.toURI().toURL().toExternalForm() + "!/");
                         try (InputStream in = FileUtils.openInputStream(jar)) {
                             ZipInputStream zip = new ZipInputStream(in);
                             ZipEntry entry;

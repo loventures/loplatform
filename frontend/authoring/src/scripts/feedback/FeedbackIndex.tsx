@@ -18,7 +18,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { BsChatLeftText } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { Button, Table } from 'reactstrap';
 
 import {

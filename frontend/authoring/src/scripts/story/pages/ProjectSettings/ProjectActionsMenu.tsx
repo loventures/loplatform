@@ -19,7 +19,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../../../analytics';

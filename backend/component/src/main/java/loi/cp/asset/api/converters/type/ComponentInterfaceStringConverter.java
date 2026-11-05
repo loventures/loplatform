@@ -43,7 +43,7 @@ public class ComponentInterfaceStringConverter extends AbstractComponent impleme
         ComponentInterface component = null;
 
         try {
-            if (NumberUtils.isNumber(input.value()))  {
+            if (NumberUtils.isCreatable(input.value()))  {
                 component = _facadeService.getComponent(Long.valueOf(input.value()), type);
             }
         }

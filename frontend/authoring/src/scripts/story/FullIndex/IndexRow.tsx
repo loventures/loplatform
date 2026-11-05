@@ -18,7 +18,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { RiKeyLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { accessRightI18n, accessRightsMap } from '../../components/AccessRightEditor';
 import { TreeAsset } from '../../graphEdit';

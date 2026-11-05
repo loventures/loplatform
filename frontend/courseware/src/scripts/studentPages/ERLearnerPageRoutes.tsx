@@ -27,7 +27,7 @@ import ERStudentDashboard from '../studentPages/ERStudentDashboard';
 import { redirectPreserveParams } from '../utils/linkUtils';
 import { contentSearch } from '../utilities/preferences';
 import React from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 
 // Paths are relative to the /student/* mount in ERAppRoutes. The content-player and search
 // routes need location.search/state, which v6 exposes via useLocation rather than a render prop.

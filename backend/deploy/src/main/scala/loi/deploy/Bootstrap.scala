@@ -26,6 +26,7 @@ import cats.syntax.functor.*
 import cats.syntax.parallel.*
 import cats.instances.list.*
 import javax.ejb.Local
+import com.learningobjects.cpxp.CpxpClasspath
 import com.learningobjects.cpxp.listener.CpxpListener
 import com.learningobjects.cpxp.service.ServiceContext
 import com.learningobjects.cpxp.service.bootstrap.BootstrapService
@@ -53,7 +54,7 @@ object Bootstrap:
     def listeners: F[ServiceLoader[CpxpListener]] = F.delay(ServiceLoader.load(classOf[CpxpListener]))
 
     override def services(cg: ScanResult): F[Unit] = F.delay {
-      cg.getClassesWithAnnotation(classOf[Local]).loadClasses().asScala foreach { cls =>
+      CpxpClasspath.loadClasses(cg.getClassesWithAnnotation(classOf[Local])).asScala foreach { cls =>
         ManagedUtils.getService(cls)
       }
     }

@@ -18,7 +18,7 @@
 import axios from 'axios';
 import classnames from 'classnames';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   Dropdown,
   DropdownItem,
@@ -69,9 +69,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ nonAdmin, domainApp, noFa
     rights.indexOf('loi.authoring.security.right$AccessAuthoringAppRight') >= 0;
   const isAdmin = !!platform.adminLink;
   const yeahNo = T.t('APP_HEADER_ADMIN').length < 6 ? 'wut-no' : '';
-  // Link's element type comes from @types/react-router-dom (React 19 ReactNode),
-  // which does not unify with the project's @types/react 18 — treat it loosely.
-  const DomainLink = (domainApp ? Link : 'a') as unknown as React.ElementType;
+  // Either a router <Link to> or a plain <a href>; cast loose so both prop sets are accepted.
+  const DomainLink = (domainApp ? Link : 'a') as unknown as React.ComponentType<any>;
 
   return Object.keys(platform).length > 0 && Object.keys(T).length > 0 ? (
     <div id="main-nav-bar">

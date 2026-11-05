@@ -89,12 +89,12 @@ public class ScheduledTask {
             delay = calendar.getTime().getTime() - now;
         } else if (initial) {
             // Schedule the task randomly within its scheduling period
-            delay = RandomUtils.nextInt(0, (int) _schedule);
+            delay = RandomUtils.insecure().randomInt(0, (int) _schedule);
         } else {
-            delay = _schedule + RandomUtils.nextInt(0, (int) JITTER) - JITTER / 2;
+            delay = _schedule + RandomUtils.insecure().randomInt(0, (int) JITTER) - JITTER / 2;
         }
         if (delay < MINIMUM) {
-            delay = MINIMUM / 2 + RandomUtils.nextInt(0, (int) MINIMUM);
+            delay = MINIMUM / 2 + RandomUtils.insecure().randomInt(0, (int) MINIMUM);
         }
         return delay;
     }

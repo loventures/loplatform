@@ -17,9 +17,7 @@
 
 package com.learningobjects.cpxp.controller.upload;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import com.google.common.io.CharSource;
 import com.google.common.io.Files;
 import com.google.common.net.MediaType;
@@ -27,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
@@ -58,9 +57,9 @@ public enum UploadInfos {
         try {
             file = File.createTempFile("UploadInfos", ".tmp");
             file.deleteOnExit();
-            charSource.copyTo(Files.asCharSink(file, Charsets.UTF_8));
+            charSource.copyTo(Files.asCharSink(file, StandardCharsets.UTF_8));
         } catch (IOException e) {
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
 
         return new UploadInfo(fileName, mediaType.toString(), file, true);

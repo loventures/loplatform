@@ -26,7 +26,7 @@ import { IoAdd, IoSearchOutline, IoTrashOutline } from 'react-icons/io5';
 import { RiChatNewLine } from 'react-icons/ri';
 import { TfiClose } from 'react-icons/tfi';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button } from 'reactstrap';
 
 import { SurveyFeedbackComponent } from '../assetSidePanel/SurveyFeedbackPanelBody';

@@ -348,12 +348,12 @@ public class AttachmentServiceBean extends BasicServiceBean implements Attachmen
             AttachmentProvider p = getProvider(providerName);
             String blobName = getAttachmentBlobName(p, attachment, digest);
             String name = DataTransfer.getStringData(attachment, AttachmentConstants.DATA_TYPE_ATTACHMENT_FILE_NAME);
-            name = StringUtils.defaultString(name, digest);
+            name = Objects.toString(name, digest);
             Long size = DataTransfer.getNumberData(attachment, AttachmentConstants.DATA_TYPE_ATTACHMENT_SIZE);
             blobInfo = new BlobInfo(null, p, name, blobName, size);
             String contentType = typed ? _mimeWebService.getMimeType(name) : // ack
                     null;
-            blobInfo.setContentType(StringUtils.defaultString(contentType, // ack
+            blobInfo.setContentType(Objects.toString(contentType, // ack
                     MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN));
         }
 
@@ -364,12 +364,12 @@ public class AttachmentServiceBean extends BasicServiceBean implements Attachmen
             for(AttachmentProvider p: _providers.values()) {
                 String blobName = getAttachmentBlobName(p, attachment, digest);
                 String name = DataTransfer.getStringData(attachment, AttachmentConstants.DATA_TYPE_ATTACHMENT_FILE_NAME);
-                name = StringUtils.defaultString(name, digest);
+                name = Objects.toString(name, digest);
                 Long size = DataTransfer.getNumberData(attachment, AttachmentConstants.DATA_TYPE_ATTACHMENT_SIZE);
                 blobInfo = new BlobInfo(null, p, name, blobName, size);
                 String contentType = typed ? _mimeWebService.getMimeType(name) : // ack
                   null;
-                blobInfo.setContentType(StringUtils.defaultString(contentType, // ack
+                blobInfo.setContentType(Objects.toString(contentType, // ack
                   MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN));
             }
         }
@@ -922,10 +922,10 @@ public class AttachmentServiceBean extends BasicServiceBean implements Attachmen
             } catch (UnknownHostException ex) {
                 testName += "unknownHost";
             }
-            testName += "-" + RandomUtils.nextInt(0, 65536) + ".tst";
+            testName += "-" + RandomUtils.insecure().randomInt(0, 65536) + ".tst";
             final String blobName = getBlobName(p, overlordDomainId, testName);
             BlobBuilder testBlobBuilder = bs.blobBuilder(blobName);
-            final String testPayloadIn = testName + ": " + RandomUtils.nextInt(0, 65536);
+            final String testPayloadIn = testName + ": " + RandomUtils.insecure().randomInt(0, 65536);
             final ByteSource byteSource = ByteSource.wrap(testPayloadIn.getBytes());
             testBlobBuilder = testBlobBuilder.payload(byteSource);
             final Blob testBlob = testBlobBuilder.build();

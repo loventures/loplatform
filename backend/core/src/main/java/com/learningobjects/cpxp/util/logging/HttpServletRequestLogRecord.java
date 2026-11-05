@@ -21,7 +21,6 @@ import com.learningobjects.cpxp.util.MimeUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.ClassUtils;
-import org.apache.commons.lang3.SystemUtils;
 
 import java.util.Collection;
 import java.util.Enumeration;
@@ -60,7 +59,7 @@ public class HttpServletRequestLogRecord extends LogRecord {
                 if (!"POST".equals(_request.getMethod()) || (_request.getContentType() != null && _request.getContentType().startsWith(MimeUtils.MIME_TYPE_APPLICATION_X_WWW_FORM_URLENCODED))) {
                     Enumeration e = _request.getParameterNames();
                     if (e.hasMoreElements()) {
-                        sb.append(SystemUtils.LINE_SEPARATOR);
+                        sb.append(System.lineSeparator());
                         sb.append("Request Parameters");
                         do {
                             String name = (String) e.nextElement();
@@ -73,7 +72,7 @@ public class HttpServletRequestLogRecord extends LogRecord {
                         } while (e.hasMoreElements());
                     }
                 }
-                sb.append(SystemUtils.LINE_SEPARATOR);
+                sb.append(System.lineSeparator());
                 sb.append("Request Headers");
                 Enumeration e1 = _request.getHeaderNames();
                 while (e1.hasMoreElements()) {
@@ -83,7 +82,7 @@ public class HttpServletRequestLogRecord extends LogRecord {
                         append(sb, name, ev.nextElement());
                     }
                 }
-                sb.append(SystemUtils.LINE_SEPARATOR);
+                sb.append(System.lineSeparator());
                 sb.append("Request Attributes");
                 Enumeration e2 = _request.getAttributeNames();
                 while (e2.hasMoreElements()) {
@@ -98,7 +97,7 @@ public class HttpServletRequestLogRecord extends LogRecord {
                 }
                 HttpSession session = _request.getSession(false);
                 if (session != null) {
-                    sb.append(SystemUtils.LINE_SEPARATOR);
+                    sb.append(System.lineSeparator());
                     sb.append("Session Attributes");
                     append(sb, "Id", session.getId());
                     append(sb, "Creation Time", session.getCreationTime());
@@ -123,7 +122,7 @@ public class HttpServletRequestLogRecord extends LogRecord {
                     value = ClassUtils.getShortClassName(value.getClass()) + "<" + size + ">";
                 }
             }
-            sb.append(SystemUtils.LINE_SEPARATOR);
+            sb.append(System.lineSeparator());
             sb.append(msg);
             sb.append(": ");
             sb.append(value);

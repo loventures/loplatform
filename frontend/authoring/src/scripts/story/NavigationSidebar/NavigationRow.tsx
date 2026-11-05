@@ -22,7 +22,7 @@ import { useCollapse } from 'react-collapsed';
 import { GiSandsOfTime } from 'react-icons/gi';
 import { SlNotebook } from 'react-icons/sl';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button, Input } from 'reactstrap';
 
 import edgeRules from '../../editor/EdgeRuleConstants';

@@ -19,7 +19,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { BiLink } from 'react-icons/bi';
 import { IoTrashOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Badge, Button, Label } from 'reactstrap';
 import {
   autoSaveProjectGraphEdits,

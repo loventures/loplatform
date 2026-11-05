@@ -21,7 +21,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { BsClock } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 import { Button } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../analytics';

@@ -20,6 +20,7 @@ import { findIndex, max } from 'lodash';
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 
 import { useTranslation } from '../../../i18n/translationContext';
+import { notifyGraderChanged } from '../../../assignmentGrader/notifyGraderChanged.ts';
 import settings from '../../../utilities/settingsService';
 
 interface RubricSectionEditableProps {
@@ -89,11 +90,13 @@ export const RubricSectionEditable: React.FC<RubricSectionEditableProps> = ({ se
     if (section.feedbackStatus) feedbackRef.current?.focus();
   }, [section.feedbackStatus]);
 
-  // Mutating the `RubricSection` happens in React-land; re-render here so this criterion card reflects
-  // the change. The still-Angular grading panel's running points-awarded total re-evaluates via the
-  // GraderProvider 150ms poll.
+  // Mutating the `RubricSection` happens in React-land. `forceRender` repaints this one card immediately;
+  // `notifyGraderChanged` bumps the grader tick so the rest of the panel (running points-awarded total,
+  // Save/Post enablement) re-renders too — selection/manual already funnel through `rubric.onChange` →
+  // `grade.rubricChanged()` (which also notifies), but feedback/status edits below don't, so signal here.
   const sync = () => {
     forceRender();
+    notifyGraderChanged();
   };
 
   const setSelection = (index: number) => {

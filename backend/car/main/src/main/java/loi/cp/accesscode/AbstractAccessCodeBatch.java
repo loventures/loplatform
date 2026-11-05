@@ -33,6 +33,7 @@ import com.learningobjects.de.web.MediaType;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Strings;
 import scala.Tuple2;
 import scala.jdk.javaapi.CollectionConverters;
 
@@ -295,7 +296,7 @@ public abstract class AbstractAccessCodeBatch extends AbstractComponent implemen
     }
 
     protected List<String> loadCsv(final UploadInfo uploadInfo, Boolean skipHeader) {
-        if (!StringUtils.endsWithIgnoreCase(uploadInfo.getFileName(), ".csv")) { // should use mime type
+        if (!Strings.CI.endsWith(uploadInfo.getFileName(), ".csv")) { // should use mime type
             throw new RuntimeException("Not a CSV");
         }
         try {

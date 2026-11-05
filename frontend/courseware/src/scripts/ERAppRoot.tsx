@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router';
 import { AnnouncementsProvider } from './components/announcements/Announcements';
 import ClientScriptingContext from './components/ClientScriptingContext';
 import StickiesManager from './components/stickies/StickiesManager';

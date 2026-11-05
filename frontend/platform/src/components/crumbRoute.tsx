@@ -29,7 +29,7 @@
 
 import React, { useState } from 'react';
 import DocumentTitle from 'react-document-title';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { Breadcrumb } from './breadcrumbs';
 import useRouteBasePath from './useRouteBasePath';

@@ -17,7 +17,7 @@
 
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { TreeAsset } from '../../graphEdit';
 import { useBranchId } from '../../hooks';

@@ -25,6 +25,7 @@ import com.learningobjects.cpxp.component.util.ScriptToken;
 import com.learningobjects.cpxp.util.JsonUtils;
 import com.learningobjects.cpxp.util.StringUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Strings;
 
 import java.util.concurrent.Callable;
 
@@ -128,7 +129,7 @@ public abstract class AbstractComponentElement implements ComponentElement {
         AbstractComponentElement element;
         if (name.startsWith("@")) {
             element = new AttributeElement();
-        } else if (StringUtils.contains(name, ":")) {
+        } else if (Strings.CS.contains(name, ":")) {
             element = new TagElement();
         } else {
             element = new HtmlElement();

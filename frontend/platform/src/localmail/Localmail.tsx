@@ -17,7 +17,7 @@
 
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Alert, Col, Row } from 'reactstrap';
 import _ from 'underscore';
 

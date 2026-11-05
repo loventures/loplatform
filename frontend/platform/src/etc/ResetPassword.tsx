@@ -18,7 +18,7 @@
 import axios from 'axios';
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Col, Form, FormGroup, Row } from 'reactstrap';
 
 import Error from '../components/Error';

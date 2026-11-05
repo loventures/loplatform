@@ -49,7 +49,7 @@ import {
 } from 'reactstrap';
 
 import AppLogout from './AppLogout';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 const adminLink = window.lo_platform.adminLink;
 const authoringLink = window.lo_platform.authoringLink;

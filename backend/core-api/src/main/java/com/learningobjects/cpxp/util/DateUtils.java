@@ -17,6 +17,8 @@
 
 package com.learningobjects.cpxp.util;
 
+import org.apache.commons.lang3.Strings;
+
 import javax.annotation.Nullable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -220,7 +222,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
                 unit = Unit.millisecond;
             } else {
                 for (Unit unitEnum : Unit.values()) {
-                    if (StringUtils.startsWithIgnoreCase(unitName, unitEnum.name()) || unitName.equals(unitEnum.getSuffix())) {
+                    if (Strings.CI.startsWith(unitName, unitEnum.name()) || unitName.equals(unitEnum.getSuffix())) {
                         unit = unitEnum;
                         break;
                     }

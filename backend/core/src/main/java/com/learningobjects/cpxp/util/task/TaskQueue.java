@@ -20,8 +20,8 @@ package com.learningobjects.cpxp.util.task;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+import java.time.Duration;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,7 +30,7 @@ public class TaskQueue<T extends Task>  {
     private final TreeSet<ScheduledTask<T>> _tasks = new TreeSet<>();
     private final EnumMap<Priority, RunQueue<T>> _running = new EnumMap<Priority, RunQueue<T>>(Priority.class);
     private final Map<String, Progress> _progress = new HashMap<>();
-    private final Cache<String, Progress> _errors = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES).build();
+    private final Cache<String, Progress> _errors = CacheBuilder.newBuilder().expireAfterWrite(Duration.ofMinutes(5)).build();
     private int _threads;
 
     public TaskQueue() {

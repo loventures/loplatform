@@ -47,7 +47,6 @@ public class ServiceContext  {
      * @return a usable reference if one is mapped into the context or throws an
      *         unchecked exception with an explanation
      */
-    @Deprecated // outside of framework, ask for the service explicitly
     @SuppressWarnings("unchecked")
     public <T> T getService(Class<T> serviceInterface) {
         return ManagedUtils.getService(serviceInterface);

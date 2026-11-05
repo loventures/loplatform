@@ -42,7 +42,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.CloseShieldOutputStream;
-import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.PostConstruct;
 import javax.crypto.*;
@@ -61,6 +61,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.DigestInputStream;
 import java.security.DigestOutputStream;
 import java.security.Key;
@@ -185,7 +186,7 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
             InputStream in = openDumpStream(files, dumpEntry, ci);
             try {
                 XMLInputFactory fac = XMLInputFactory.newInstance();
-                XMLStreamReader xr = fac.createXMLStreamReader(in, CharEncoding.UTF_8);
+                XMLStreamReader xr = fac.createXMLStreamReader(in, StandardCharsets.UTF_8.name());
                 while (xr.hasNext()) {
                     if ((xr.next() == XMLStreamReader.START_ELEMENT) && ((xr.getNamespaceURI() == null) || "Item".equals(xr.getLocalName()))) {
                         ++ total;
@@ -199,7 +200,7 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
         InputStream in = openDumpStream(files, dumpEntry, ci);
         try {
             XMLInputFactory fac = XMLInputFactory.newInstance();
-            XMLStreamReader xr = fac.createXMLStreamReader(in, CharEncoding.UTF_8);
+            XMLStreamReader xr = fac.createXMLStreamReader(in, StandardCharsets.UTF_8.name());
             RestoreHandler handler = new RestoreHandler(files, prefix, item, url, into, wipe);
             handler.initPercentage("Restore", total);
             handler.parse(xr);
@@ -291,7 +292,7 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
 
     private String generateAttachmentFilename(final Item item) {
         final String itemName = com.google.common.collect.Iterables.getFirst(DataTransfer.findStringData(item, DataTypes.DATA_TYPE_NAME), null);
-        final String suffix = StringUtils.defaultString(FilenameUtils.getExtension(itemName), "att");
+        final String suffix = Objects.toString(FilenameUtils.getExtension(itemName), "att");
         final String attachmentFilename = "attach/attachment-" + item.getId() + "." + suffix;
         return attachmentFilename;
     }
@@ -563,7 +564,7 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
             switch (ontology.getDataFormat(type)) {
               case string: {
                   String string = xr.getAttributeValue(null, isRaw ? typeName : "String");
-                  if ("url".equals(type) && StringUtils.isNotEmpty(_urlMatch) && StringUtils.isNotEmpty(_url) && StringUtils.startsWith(string, _urlMatch)) { // hack
+                  if ("url".equals(type) && StringUtils.isNotEmpty(_urlMatch) && StringUtils.isNotEmpty(_url) && Strings.CS.startsWith(string, _urlMatch)) { // hack
                       string = _url + string.substring(_urlMatch.length());
                   }
                   _dataService.createString(item, type, string);
@@ -730,7 +731,7 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
                     qb.addCondition(mDataType, "eq", mDataValue);
                     for (Item integration : qb.getItems()) {
                         Item parent = integration.getParent();
-                        if (StringUtils.equals(m.group(4), parent.getType())) {
+                        if (Strings.CS.equals(m.group(4), parent.getType())) {
                             return parent;
                         }
                     }
@@ -961,12 +962,12 @@ public class DumpServiceBean extends BasicServiceBean implements DumpService {
 
             XMLOutputFactory fac = XMLOutputFactory.newInstance();
 
-            OutputStream out = new CloseShieldOutputStream(_md);
+            OutputStream out = CloseShieldOutputStream.wrap(_md);
             if (_encrypt) {
                 out =  new GZIPOutputStream(new CipherOutputStream(out, _cipher));
             }
 
-            XMLStreamWriter xw = fac.createXMLStreamWriter(out, CharEncoding.UTF_8);
+            XMLStreamWriter xw = fac.createXMLStreamWriter(out, StandardCharsets.UTF_8.name());
 
             xw.writeStartDocument();
             xw.setDefaultNamespace(XMLNS);

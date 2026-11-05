@@ -34,7 +34,7 @@ import { selectContentItems } from '../selectors/contentItemSelectors';
 import { selectCurrentUser } from '../utilities/rootSelectors';
 import React, { useEffect, useState } from 'react';
 import { IoInformationCircleOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useDebounce } from 'react-use';
 import { Card, CardBody, Input, Spinner, UncontrolledTooltip } from 'reactstrap';
 

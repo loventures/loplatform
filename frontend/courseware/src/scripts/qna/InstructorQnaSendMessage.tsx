@@ -19,7 +19,7 @@ import { AxiosError } from 'axios';
 import { find } from 'lodash';
 import { RichTextEditor } from '../contentEditor/directives/richTextEditor';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 
 import { IoFile } from '../api/fileUploadApi';
@@ -29,7 +29,7 @@ import { RecipientPicker } from '../messaging/directives/recipientPicker';
 import { QnaPageLink } from '../utils/pageLinks';
 import { multicast } from './qnaApi';
 import QnaAttachments from './QnaAttachments';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { updateQnaQuery } from '../qna/qnaActions';
 import { useDispatch } from 'react-redux';
 import { QnaSentFilter } from '../qna/qnaReducer';

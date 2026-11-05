@@ -25,7 +25,7 @@ import 'codemirror/addon/hint/show-hint.css'; // without this css hints won't sh
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import CodeMirrorImpl from 'react-codemirror';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 import {
   Button,
   ButtonGroup,

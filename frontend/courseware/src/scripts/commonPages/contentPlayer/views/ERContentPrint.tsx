@@ -36,7 +36,7 @@ import { timeoutEffect } from '../../../utilities/effectUtils';
 import { printService } from '../../../utilities/printService.ts';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiPrinter, FiX } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Button, Spinner } from 'reactstrap';
 
 const ERPrintOverlay: React.FC<{ loaded: boolean; printable: boolean; onClose: () => void }> = ({

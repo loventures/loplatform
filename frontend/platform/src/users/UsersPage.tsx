@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useParams } from 'react-router';
 
 import Crumb, { SetLastCrumb } from '../components/crumbRoute';
 import CourseSections from '../groups/courseSections/CourseSectionsPage';

@@ -19,7 +19,7 @@ import axios from 'axios';
 import { get } from 'lodash';
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Col, Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 import Octo from '../components/Octo';

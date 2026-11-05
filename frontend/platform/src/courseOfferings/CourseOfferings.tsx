@@ -19,7 +19,7 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Button, Form, Input } from 'reactstrap';
 
 import ReactTable from '../components/reactTable/ReactTable';

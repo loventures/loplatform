@@ -21,6 +21,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.Nullable;
 import java.text.Normalizer;
@@ -92,7 +93,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         @Nullable
         @Override
         public String apply(@Nullable final String string) {
-            return StringUtils.replace(string, "_", "");
+            return Strings.CS.replace(string, "_", "");
         }
     };
 
@@ -291,9 +292,9 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     public static String escapeSqlLike(String s) {
-        s = StringUtils.replace(s, "\\", "\\\\");
-        s = StringUtils.replace(s, "%", "\\%");
-        s = StringUtils.replace(s, "_", "\\_");
+        s = Strings.CS.replace(s, "\\", "\\\\");
+        s = Strings.CS.replace(s, "%", "\\%");
+        s = Strings.CS.replace(s, "_", "\\_");
         return s;
     }
 

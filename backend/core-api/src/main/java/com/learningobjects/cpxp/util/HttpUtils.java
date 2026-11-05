@@ -22,8 +22,8 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.NullWriter;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.http.HttpMessage;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.HttpClient;
@@ -54,6 +54,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.security.cert.X509Certificate;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -146,7 +147,7 @@ public class HttpUtils {
     public static String getCookieValue(HttpServletRequest request, String name) {
         try {
             Cookie cookie = getCookie(request, name);
-            return (cookie == null) ? null : URLDecoder.decode(cookie.getValue(), CharEncoding.UTF_8);
+            return (cookie == null) ? null : URLDecoder.decode(cookie.getValue(), StandardCharsets.UTF_8.name());
         } catch (Exception ignored) {
             return null;
         }
@@ -404,8 +405,8 @@ public class HttpUtils {
             String query = urlParts[1];
             for (String param : query.split("&")) {
                 String[] pair = param.split("=");
-                String key = URLDecoder.decode(pair[0], CharEncoding.UTF_8);
-                String value = URLDecoder.decode((pair.length < 2) ? "" : pair[1], CharEncoding.UTF_8);
+                String key = URLDecoder.decode(pair[0], StandardCharsets.UTF_8.name());
+                String value = URLDecoder.decode((pair.length < 2) ? "" : pair[1], StandardCharsets.UTF_8.name());
                 List<String> values = params.get(key);
                 if (values == null) {
                     values = new ArrayList<String>();
@@ -419,7 +420,7 @@ public class HttpUtils {
 
     public static boolean supportsCompression(HttpServletRequest request) {
         String acceptEncoding = (request == null) ? null : request.getHeader(HttpUtils.HTTP_HEADER_ACCEPT_ENCODING);
-        return StringUtils.containsIgnoreCase(acceptEncoding, HttpUtils.ENCODING_GZIP);
+        return Strings.CI.contains(acceptEncoding, HttpUtils.ENCODING_GZIP);
     }
 
     private static Boolean __gzipResponse;
@@ -434,20 +435,20 @@ public class HttpUtils {
 
     public static Writer getWriter(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if ("HEAD".equals(request.getMethod())) {
-            return new NullWriter();
+            return NullWriter.INSTANCE;
         }
-        return new BufferedWriter(new OutputStreamWriter(getOutputStream(request, response), CharEncoding.UTF_8));
+        return new BufferedWriter(new OutputStreamWriter(getOutputStream(request, response), StandardCharsets.UTF_8.name()));
     }
 
     public static OutputStream getOutputStream(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if ("HEAD".equals(request.getMethod())) {
-            return new NullOutputStream();
+            return NullOutputStream.INSTANCE;
         }
         OutputStream out = response.getOutputStream();
         if (gzipResponse()) {
             String acceptEncoding = request.getHeader(HTTP_HEADER_ACCEPT_ENCODING);
-            if (StringUtils.containsIgnoreCase(acceptEncoding, ENCODING_GZIP)) {
-                String encoding = StringUtils.containsIgnoreCase(acceptEncoding, ENCODING_X_GZIP) ? ENCODING_X_GZIP : ENCODING_GZIP;
+            if (Strings.CI.contains(acceptEncoding, ENCODING_GZIP)) {
+                String encoding = Strings.CI.contains(acceptEncoding, ENCODING_X_GZIP) ? ENCODING_X_GZIP : ENCODING_GZIP;
                 response.setHeader(HTTP_HEADER_CONTENT_ENCODING, encoding);
                 // response.addHeader(HTTP_HEADER_VARY, HTTP_HEADER_ACCEPT_ENCODING); // to be pedantic but we don't currently cache these responses
                 out = new GZIPOutputStream(out);
@@ -560,11 +561,11 @@ public class HttpUtils {
     }
 
     public static boolean isAjax(HttpServletRequest request) {
-        return WITH_XML_HTTP_REQUEST.equals(request.getHeader(HTTP_HEADER_X_REQUESTED_WITH)) || StringUtils.startsWith(request.getContentType(), MimeUtils.MIME_TYPE_APPLICATION_JSON) || StringUtils.contains(request.getHeader(HTTP_HEADER_ACCEPT), MimeUtils.MIME_TYPE_APPLICATION_JSON);
+        return WITH_XML_HTTP_REQUEST.equals(request.getHeader(HTTP_HEADER_X_REQUESTED_WITH)) || Strings.CS.startsWith(request.getContentType(), MimeUtils.MIME_TYPE_APPLICATION_JSON) || Strings.CS.contains(request.getHeader(HTTP_HEADER_ACCEPT), MimeUtils.MIME_TYPE_APPLICATION_JSON);
     }
 
     public static boolean isFirefox(HttpServletRequest request) {
-        return StringUtils.containsIgnoreCase(request.getHeader(HTTP_HEADER_USER_AGENT), "Firefox");
+        return Strings.CI.contains(request.getHeader(HTTP_HEADER_USER_AGENT), "Firefox");
     }
 
     public static List<org.apache.http.cookie.Cookie> parseCookies(URI uri, List<String> cookieHeaders, CookieSpec cookieSpec) {

@@ -18,7 +18,7 @@
 import queryString from 'query-string';
 import React from 'react';
 import { IoLibraryOutline } from 'react-icons/io5';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 
 import { AdminPage, PageInfo } from '../adminPortal/types';
 import Announcements from '../announcements';

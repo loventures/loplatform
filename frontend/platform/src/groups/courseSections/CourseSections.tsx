@@ -19,7 +19,7 @@ import axios from 'axios';
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, Label } from 'reactstrap';
 
 import useRouteBasePath from '../../components/useRouteBasePath';

@@ -39,6 +39,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import loi.cp.attachment.AttachmentComponent;
 import loi.cp.right.RightService;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.Strings;
 import scala.Option;
 
 import javax.annotation.Nonnull;
@@ -162,7 +163,7 @@ public class ZipSiteImpl extends AbstractComponent implements ZipSite {
     @Rpc(method = Method.GET)
     @Direct
     public void notFound(@Infer HttpServletRequest request) throws Exception {
-        String path = StringUtils.removeStart(URLDecoder.decode(request.getRequestURI(), "UTF-8"), _site.getUrl());
+        String path = Strings.CS.removeStart(URLDecoder.decode(request.getRequestURI(), "UTF-8"), _site.getUrl());
         AttachmentFacade attachment = _site.getActiveAttachment();
         serve(attachment, path, false);
     }
@@ -173,7 +174,7 @@ public class ZipSiteImpl extends AbstractComponent implements ZipSite {
             return;
         }
         final String prefix = attachment.asFacade(ZipAttachmentFacade.class).getPathPrefix().orElse("");
-        String relative = prefix + StringUtils.removeStart(path, "/");
+        String relative = prefix + Strings.CS.removeStart(path, "/");
         if ("".equals(relative) || relative.endsWith("/")) {
             relative = relative + "index.html";
         }
@@ -186,14 +187,14 @@ public class ZipSiteImpl extends AbstractComponent implements ZipSite {
             HtmlWriter out = wc.getHtmlWriter();
             if (out != null) { // TODO: KILL ME, exists now for the renderSite version
                 RenderContext context = new RenderContext(getComponentDescriptor(), null, out, null, null);
-                LohtmlTemplate.getInstance(file.toURL()).render(context);
+                LohtmlTemplate.getInstance(file.toURI().toURL()).render(context);
             } else {
                 response.setContentType(MimeUtils.MIME_TYPE_TEXT_HTML + MimeUtils.CHARSET_SUFFIX_UTF_8);
                 out = new BaseHtmlWriter(response.getWriter());
                 wc.setHtmlWriter(out);
                 try {
                     RenderContext context = new RenderContext(getComponentDescriptor(), null, out, null, null);
-                    LohtmlTemplate.getInstance(file.toURL()).render(context);
+                    LohtmlTemplate.getInstance(file.toURI().toURL()).render(context);
                     out.close();
                 } finally {
                     wc.setHtmlWriter(null);

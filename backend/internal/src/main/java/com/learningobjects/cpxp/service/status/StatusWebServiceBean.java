@@ -25,7 +25,6 @@ import com.learningobjects.cpxp.service.query.QueryBuilder;
 import com.learningobjects.cpxp.util.NumberUtils;
 import com.typesafe.config.Config;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.RandomUtils;
 
 import javax.ejb.Stateless;
@@ -35,6 +34,7 @@ import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,10 +76,10 @@ public class StatusWebServiceBean extends BasicServiceBean implements StatusWebS
     private void testFile(File dir) {
         try {
             String hostName = InetAddress.getLocalHost().getHostName();
-            String fileName = hostName + "-" + RandomUtils.nextInt(0, 65536) + ".tst";
+            String fileName = hostName + "-" + RandomUtils.insecure().randomInt(0, 65536) + ".tst";
             File file = new File(dir, fileName);
-            FileUtils.writeStringToFile(file, fileName, CharEncoding.UTF_8);
-            String result = FileUtils.readFileToString(file, CharEncoding.UTF_8);
+            FileUtils.writeStringToFile(file, fileName, StandardCharsets.UTF_8.name());
+            String result = FileUtils.readFileToString(file, StandardCharsets.UTF_8.name());
             FileUtils.forceDelete(file);
             if (!result.equals(fileName)) {
                 throw new RuntimeException("File write/read error: " + fileName + " / " + result);

@@ -22,7 +22,7 @@ import React, { useEffect, useState } from 'react';
 import ContentEditableModule from 'react-contenteditable';
 const ContentEditable = (ContentEditableModule as any).default ?? ContentEditableModule;
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { Col, FormFeedback, FormGroup, Label } from 'reactstrap';
 
 import { AdminFormCheck, AdminFormDateTime, AdminFormSelect } from '../components/adminForm';
@@ -108,6 +108,7 @@ const Announcements: React.FC<AnnouncementsProps> = ({ setLastCrumb, controllerV
           value={row[field]}
           entity="announcements"
           invalid={validationErrors[field]}
+          defaultTime={field === 'endTime' ? '23:59' : undefined}
           T={T}
         />
       );

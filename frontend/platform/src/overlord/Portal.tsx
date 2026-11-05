@@ -19,7 +19,7 @@ import axios from 'axios';
 import classNames from 'classnames';
 import Polyglot from 'node-polyglot';
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Row } from 'reactstrap';
 
 import { clearSavedTableState } from '../components/reactTable/ReactTable';

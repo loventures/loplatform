@@ -26,12 +26,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.Strings;
 
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 public class Uploader implements Closeable {
@@ -84,7 +85,7 @@ public class Uploader implements Closeable {
             if (part.getSubmittedFileName() == null) {
                 String value;
                 try (InputStream in = part.getInputStream()) {
-                    value = IOUtils.toString(in, CharEncoding.UTF_8);
+                    value = IOUtils.toString(in, StandardCharsets.UTF_8.name());
                 }
                 _parameters.put(part.getName(), value);
             } else {
@@ -128,7 +129,7 @@ public class Uploader implements Closeable {
     public static Uploader parse(HttpServletRequest request) throws Exception {
         Uploader uploader = null;
         try {
-            if (!StringUtils.startsWithIgnoreCase(request.getContentType(), "multipart/")) {
+            if (!Strings.CI.startsWith(request.getContentType(), "multipart/")) {
                 uploader = new Uploader(true);
                 uploader.parseSinglepart(request);
             } else {
@@ -145,7 +146,7 @@ public class Uploader implements Closeable {
     }
 
     public static void populateDimensions(UploadInfo upload) {
-        if (StringUtils.startsWith(upload.getMimeType(), "image/") && !upload.getFileName().endsWith(".ico")) {
+        if (Strings.CS.startsWith(upload.getMimeType(), "image/") && !upload.getFileName().endsWith(".ico")) {
             try {
                 ImageUtils.Dim dimensions = ImageUtils.getImageDimensions(upload.getFile());
                 upload.setWidth(Long.valueOf(dimensions.getWidth()));

@@ -30,7 +30,7 @@ object CpxpEvaluators:
 
   private lazy val EvaluatorMap: Map[Class[? <: Annotation], Class[? <: Evaluator]] =
     (for
-      annotated <- CpxpClasspath.classGraph.getClassesWithAnnotation(classOf[Evaluates]).loadClasses().asScala
+      annotated <- CpxpClasspath.loadClasses(CpxpClasspath.classGraph.getClassesWithAnnotation(classOf[Evaluates])).asScala
       target    <- annotated.getAnnotation(classOf[Evaluates]).value()
       if classOf[Evaluator].isAssignableFrom(annotated)
     yield target -> annotated.asSubclass(classOf[Evaluator])).toMap

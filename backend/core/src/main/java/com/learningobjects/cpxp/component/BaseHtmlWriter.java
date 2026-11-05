@@ -17,7 +17,6 @@
 
 package com.learningobjects.cpxp.component;
 
-import com.google.common.base.Throwables;
 import com.learningobjects.cpxp.component.element.AbstractComponentElement;
 import com.learningobjects.cpxp.component.element.ComponentElement;
 
@@ -88,7 +87,7 @@ public class BaseHtmlWriter implements HtmlWriter {
             try {
                 _writer.flush();
             } catch (IOException ioe) {
-                throw Throwables.propagate(ioe);
+                throw new RuntimeException(ioe);
             }
         }
     }
@@ -105,7 +104,7 @@ public class BaseHtmlWriter implements HtmlWriter {
             try {
                 _writer.flush();
             } catch (IOException ioe) {
-                throw Throwables.propagate(ioe);
+                throw new RuntimeException(ioe);
             }
         }
     }
@@ -186,7 +185,7 @@ public class BaseHtmlWriter implements HtmlWriter {
                 _count += text.length();
                 _writer.write(text);
             } catch (IOException ioe) {
-                throw Throwables.propagate(ioe);
+                throw new RuntimeException(ioe);
             }
         }
     }
@@ -211,7 +210,7 @@ public class BaseHtmlWriter implements HtmlWriter {
             _writer.flush();
             _writer.close();
         } catch (IOException ioe) {
-            throw Throwables.propagate(ioe);
+            throw new RuntimeException(ioe);
         }
     }
 

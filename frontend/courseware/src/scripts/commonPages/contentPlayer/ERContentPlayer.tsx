@@ -33,7 +33,7 @@ import { selectActualUser, selectCurrentUser } from '../../utilities/rootSelecto
 import { getRoleSegment } from '../../utils/linkUtils';
 import React from 'react';
 import { useCollapse } from 'react-collapsed';
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router';
 import { Alert } from 'reactstrap';
 import { ErrorBoundary } from 'react-error-boundary';
 

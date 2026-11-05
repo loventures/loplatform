@@ -44,7 +44,7 @@ import {
   qnaEnabled,
 } from '../utilities/preferences';
 import React from 'react';
-import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router';
 
 import InstructorMulticastPage from '../qna/InstructorMulticastPage';
 

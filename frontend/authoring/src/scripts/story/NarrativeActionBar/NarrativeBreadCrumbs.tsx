@@ -17,7 +17,7 @@
 
 import React, { useEffect } from 'react';
 import { IoSchoolOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { trackNarrativeNavHandler } from '../../analytics/AnalyticsEvents';
 import { useEpicScreen } from '../../feedback/feedback';

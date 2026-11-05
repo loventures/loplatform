@@ -59,18 +59,22 @@ public class BootstrapServiceBean extends BasicServiceBean implements
         logger.info("Schedule tasks");
 
         // upgrade and timer tasks may be taken on by any node
-        CpxpClasspath.classGraph().getClassesWithMethodAnnotation(Scheduled.class).forEach(ci ->
-          ci.getMethodInfo().forEach(mi -> {
-              if (mi.hasAnnotation(Scheduled.class) && ci.hasAnnotation(Stateless.class)) {
-                  var method = mi.loadClassAndGetMethod();
+        CpxpClasspath.classGraph().getClassesWithMethodAnnotation(Scheduled.class).forEach(ci -> {
+          if (!ci.hasAnnotation(Stateless.class)) {
+              return;
+          }
+          // declared methods only, so a subclass doesn't schedule its parent's tasks again
+          for (Method method : CpxpClasspath.loadClass(ci).getDeclaredMethods()) {
+              if (method.isAnnotationPresent(Scheduled.class) && !method.isBridge()) {
                   Scheduled scheduled = method.getAnnotation(Scheduled.class);
                   Class<?> service = method.getDeclaringClass().getInterfaces()[0];
                   String taskName = service.getName() + "." + method.getName();
+                  logger.info("Schedule task " + taskName);
                   ScheduledServiceMethod task = new ScheduledServiceMethod(ManagedUtils.getService(service), method, scheduled.singleton());
                   Scheduler.getScheduler().schedule(task, taskName, scheduled.value());
               }
-          })
-        );
+          }
+        });
     }
 
     private static class ScheduledServiceMethod implements Runnable {

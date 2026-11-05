@@ -18,7 +18,7 @@
 import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { IoHomeOutline, IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button, Modal, ModalHeader } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../analytics';

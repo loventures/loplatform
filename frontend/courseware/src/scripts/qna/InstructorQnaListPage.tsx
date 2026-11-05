@@ -31,7 +31,7 @@ import {
 import { useTranslation } from '../i18n/translationContext';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useDebounce } from 'react-use';
 import {
   DropdownItem,

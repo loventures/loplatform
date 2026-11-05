@@ -15,27 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-libraryDependencies += "org.slf4j" % "slf4j-simple" % "2.0.18"
+libraryDependencies += "org.slf4j" % "slf4j-simple" % "2.0.20"
 
 //https://github.com/sbt/sbt-multi-jvm
-addSbtPlugin("com.github.sbt" % "sbt-multi-jvm" % "0.6.0")
+addSbtPlugin("com.github.sbt" % "sbt-multi-jvm" % "0.7.0")
 
 //https://github.com/sbt/sbt-buildinfo
-addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.13.1")
+addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.13.2")
 
 //https://github.com/scalameta/scalafmt
-addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.1")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt" % "2.6.2")
 
 addSbtPlugin("com.github.sbt" % "sbt-release" % "1.5.0")
 
 //https://github.com/sbt/sbt-native-packager
-addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.11.7")
+addSbtPlugin("com.github.sbt" % "sbt-native-packager" % "1.13.0")
 
-addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.10.0-RC1")
 
 //https://github.com/rtimush/sbt-updates
-addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.7.0")
+addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.7.1")
 
 //https://github.com/sbt/sbt-git
-//addSbtPlugin("com.github.sbt" % "sbt-git" % "2.1.0")
-addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "1.0.2")
+addSbtPlugin("com.github.sbt" % "sbt-git" % "2.2.0")

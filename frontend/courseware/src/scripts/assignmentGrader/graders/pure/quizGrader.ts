@@ -51,6 +51,8 @@ import { Roles } from '../../../utilities/pure/roles.ts';
 import { quizGraderLoader as QuizGraderLoader } from './quizGraderLoader.ts';
 import { BaseGrader } from './baseGrader.ts';
 
+import { notifyGraderChanged } from '../../notifyGraderChanged.ts';
+
 /**
  * Pure-TS port of the Angular `lo.QuizGrader.QuizGrader` factory (graders/QuizGrader.js): the
  * instructor quiz grader — container for all users who have submitted anything. Prototype-chains
@@ -151,6 +153,7 @@ QuizGrader.prototype.userAttemptsUpdated = function (updatedAttempt: any, userId
       ...updatedAttempt,
     };
   }
+  notifyGraderChanged();
   return this.calculateUnpostedCount(true);
 };
 
@@ -191,6 +194,7 @@ QuizGrader.prototype.changeUser = function (userId: any, attemptId: any, qIndex:
   this.gradableQuestionList = null;
   this.displayedQuestionList = null;
   this.activeGrade = null;
+  notifyGraderChanged();
 
   return this.loadGradableUsers().then((users: any) => {
     if (!users.length) {
@@ -212,6 +216,7 @@ QuizGrader.prototype.changeAttempt = function (attemptId: any, qIndex: any) {
   this.gradableQuestionList = null;
   this.displayedQuestionList = null;
   this.activeGrade = null;
+  notifyGraderChanged();
   return this.loadUserOrderedAttempts().then((attempts: any) => {
     if (!attempts.length) {
       return $q.reject();
@@ -230,6 +235,7 @@ QuizGrader.prototype.changeQuestion = function (qIndex: any) {
   this.gradableQuestionList = null;
   this.displayedQuestionList = null;
   this.activeGrade = null;
+  notifyGraderChanged();
   return this.loadAttemptGradableQuestions().then((questions: any) => {
     setTimeout(() => {
       if (questions.length) {
@@ -257,6 +263,7 @@ QuizGrader.prototype.changeToViewAllQuestions = function () {
         info.gradebookPointsPossible
       );
       this.calcItemsToGrade();
+      notifyGraderChanged();
     });
 };
 
@@ -289,6 +296,7 @@ QuizGrader.prototype.recreateGradedActiveGrade = function () {
       question,
       info.gradebookPointsPossible
     );
+    notifyGraderChanged();
   });
 };
 
@@ -410,6 +418,7 @@ QuizGrader.prototype.calculateUnpostedCount = function (forceReload: any) {
       },
       0
     );
+    notifyGraderChanged();
   });
 };
 

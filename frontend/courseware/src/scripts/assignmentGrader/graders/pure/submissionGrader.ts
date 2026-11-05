@@ -36,6 +36,7 @@ import { submissionGraderLoader as SubmissionGraderLoader } from './submissionGr
 
 import { BaseGrader } from './baseGrader.ts';
 
+import { notifyGraderChanged } from '../../notifyGraderChanged.ts';
 import { Roles } from '../../../utilities/pure/roles.ts';
 
 import { DRIVER_LEARNER } from '../../../utilities/assessmentSettings.js';
@@ -153,6 +154,7 @@ SubmissionGrader.prototype.userAttemptsUpdated = function (updatedAttempt: any, 
   }
   this.canUserEditGrade =
     this.activeAttempt && this.activeAttempt.valid && this.isUserInstructor;
+  notifyGraderChanged();
   return this.calculateUnpostedCount(true);
 };
 
@@ -191,6 +193,7 @@ SubmissionGrader.prototype.changeUser = function (userId: any, attemptId: any) {
   this.activeAttempt = null;
   this.activeGrade = null;
   this.inProgressAttempt = null;
+  notifyGraderChanged();
 
   return this.loadGradableUsers().then((users: any) => {
     if (!users.length) {
@@ -219,6 +222,7 @@ SubmissionGrader.prototype.changeUser = function (userId: any, attemptId: any) {
 SubmissionGrader.prototype.changeAttempt = function (attemptId: any) {
   this.activeAttempt = null;
   this.activeGrade = null;
+  notifyGraderChanged();
 
   return this.loadUserOrderedAttempts().then((attempts: any) => {
     if (!this.isStudentDriven && !this.inProgressAttempt) {
@@ -232,6 +236,7 @@ SubmissionGrader.prototype.changeAttempt = function (attemptId: any) {
     this.canUserEditGrade =
       this.activeAttempt && this.activeAttempt.valid && this.isUserInstructor;
     this.calcItemsToGrade();
+    notifyGraderChanged();
 
     if (this.activeAttempt) {
       this.loadInfo().then((info: any) => {
@@ -240,6 +245,7 @@ SubmissionGrader.prototype.changeAttempt = function (attemptId: any) {
           this.rubric,
           info.gradebookPointsPossible
         );
+        notifyGraderChanged();
       });
     }
   });
@@ -253,6 +259,7 @@ SubmissionGrader.prototype.startAttempt = function () {
       this.userAttemptsUpdated(newAttempt, this.activeUser.id);
       this.calculateUnpostedCount(true);
       this.inProgressAttempt = newAttempt;
+      notifyGraderChanged();
       return newAttempt;
     }
   );
@@ -356,6 +363,7 @@ SubmissionGrader.prototype.calculateUnpostedCount = function (forceReload: any) 
         0
       );
     }
+    notifyGraderChanged();
   });
 };
 

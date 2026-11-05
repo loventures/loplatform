@@ -16,7 +16,7 @@
  */
 
 import { useContext } from 'react';
-import { UNSAFE_RouteContext as RouteContext } from 'react-router-dom';
+import { UNSAFE_RouteContext as RouteContext } from 'react-router';
 
 /**
  * The pathname where the current route is mounted, excluding the current route's own splat (`*`) —

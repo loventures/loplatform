@@ -195,6 +195,7 @@ const EditAddForm: EditAddFormComponent = props => {
               onChange={d => {
                 if (field === 'endDate') setEndDate(d as string);
               }}
+              defaultTime={field === 'startDate' ? undefined : '23:59'}
               T={T}
               required={col.required}
             />

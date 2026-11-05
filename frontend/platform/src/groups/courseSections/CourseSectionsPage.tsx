@@ -17,7 +17,7 @@
 
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 
 import { AdminPage } from '../../adminPortal/types';
 import Announcements from '../../announcements';

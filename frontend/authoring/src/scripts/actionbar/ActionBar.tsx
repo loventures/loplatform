@@ -16,7 +16,7 @@
  */
 
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 
 import DropboxActionBar from '../dropbox/DropboxActionBar';
 import FeedbackDetailActionBar from '../feedback/FeedbackDetailActionBar';

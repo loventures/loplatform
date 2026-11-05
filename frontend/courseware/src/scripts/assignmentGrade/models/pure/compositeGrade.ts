@@ -17,6 +17,7 @@
 
 import { Rubric } from './rubric.ts';
 import { FeedbackManager } from '../../../assignmentFeedback/FeedbackManager.js';
+import { notifyGraderChanged } from '../../../assignmentGrader/notifyGraderChanged.ts';
 import { attachmentService as AttachmentService } from '../../../services/pure/attachmentService.ts';
 import { nativeQ as $q } from '../../../utilities/nativeQ.ts';
 
@@ -55,6 +56,7 @@ export const CompositeGrade = function (this: any, config: any) {
 
 CompositeGrade.prototype.setReleaseStatus = function (releaseStatus: any) {
   this.outgoing.releaseStatus = releaseStatus;
+  notifyGraderChanged();
 };
 
 CompositeGrade.prototype.resetGrade = function () {
@@ -72,6 +74,7 @@ CompositeGrade.prototype.resetGrade = function () {
     feedbackManager: new (FeedbackManager as any)(this.initial.attachments),
     releaseStatus: this.initial.releaseStatus,
   };
+  notifyGraderChanged();
 };
 
 CompositeGrade.prototype.rubricChanged = function () {
@@ -82,6 +85,7 @@ CompositeGrade.prototype.rubricChanged = function () {
     this.outgoing.pointsAwarded =
       (score.pointsAwarded / score.pointsPossible) * this.pointsPossible;
   }
+  notifyGraderChanged();
 };
 
 CompositeGrade.prototype.isComplete = function () {
@@ -155,6 +159,7 @@ CompositeGrade.prototype.afterSaveGrade = function (savedGrade: any) {
 
 CompositeGrade.prototype.saveChanges = function (isReleasing: any) {
   this.isSubmitting = true;
+  notifyGraderChanged();
   return this.beforeSaveGrade()
     .then(
       function (this: any) {
@@ -168,7 +173,10 @@ CompositeGrade.prototype.saveChanges = function (isReleasing: any) {
       }.bind(this)
     )
     .then(this.afterSaveGrade.bind(this))
-    .finally(() => (this.isSubmitting = false));
+    .finally(() => {
+      this.isSubmitting = false;
+      notifyGraderChanged();
+    });
 };
 
 export const ViewCompositeGrade = function (this: any, config: any) {

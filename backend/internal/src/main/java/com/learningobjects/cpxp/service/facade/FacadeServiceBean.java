@@ -135,7 +135,7 @@ public class FacadeServiceBean extends BasicServiceBean implements FacadeService
     }
 
     public <T extends ComponentInterface> T getComponent(String id, Class<T> componentClass) {
-        if (NumberUtils.isNumber(id)) {
+        if (NumberUtils.isCreatable(id)) {
             logger.log(Level.WARNING,"Passed id of digits (" + id + ") into getComponent(String, Class), maybe you wanted getComponent(Long, Class) ?");
         }
 

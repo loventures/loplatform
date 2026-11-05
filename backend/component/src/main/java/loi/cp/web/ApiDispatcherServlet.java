@@ -51,6 +51,7 @@ import loi.cp.web.handler.SequencedMethodResult;
 import loi.cp.web.handler.SequencedMethodScope;
 import loi.cp.web.handler.impl.ComponentFrameworkSequencedMethodScope;
 import loi.cp.web.handler.impl.SequenceContext;
+import org.apache.commons.lang3.Strings;
 import org.apache.http.HttpStatus;
 import scala.Option;
 import scala.jdk.javaapi.CollectionConverters;
@@ -240,8 +241,8 @@ public class ApiDispatcherServlet extends AbstractComponent implements ServletCo
 
     private void collectRightsFromRequestAuthorization(final WebRequest request, final SecurityContext securityContext, final CollectedRights rights) {
         String authorization = StringUtils.trim(request.getRawRequest().getHeader(HttpHeaders.AUTHORIZATION));
-        if (StringUtils.startsWith(authorization, BEARER_PREFIX)) {
-            String key = StringUtils.removeStart(authorization, BEARER_PREFIX).trim();
+        if (Strings.CS.startsWith(authorization, BEARER_PREFIX)) {
+            String key = Strings.CS.removeStart(authorization, BEARER_PREFIX).trim();
             ApiKeySystem system = ComponentSupport.lookupService(IntegrationService.class)
               .getApiKeyBySecret(key, request.getRawRequest().getRemoteAddr());
             if (system != null) {

@@ -41,6 +41,9 @@ interface AdminFormDateTimeProps {
   required?: boolean;
   autoFocus?: boolean;
   disabled?: boolean;
+  // "HH:mm" time to apply when a date is first picked, instead of react-datepicker's
+  // default of midnight (12:00 AM). e.g. "23:59" for end-date fields.
+  defaultTime?: string;
   onChange?: (date: Moment | string | null) => void;
   T: Polyglot;
 }
@@ -61,6 +64,7 @@ const AdminFormDateTime: React.FC<AdminFormDateTimeProps> = ({
   help,
   required,
   placeholder,
+  defaultTime,
   onChange,
   T,
 }) => {
@@ -73,7 +77,14 @@ const AdminFormDateTime: React.FC<AdminFormDateTimeProps> = ({
   }, [value]);
 
   const setDate = (d: Date | null) => {
-    const m = d ? moment(d) : null;
+    let m = d ? moment(d) : null;
+    // react-datepicker returns a fresh calendar-day click at midnight. On the first
+    // selection (no prior date) substitute defaultTime instead of 12:00 AM; once a date
+    // exists, day-clicks preserve its time and time-input edits are respected.
+    if (m && defaultTime && !date && m.hour() === 0 && m.minute() === 0 && m.second() === 0) {
+      const [h = 0, min = 0] = defaultTime.split(':').map(Number);
+      m = m.hour(h).minute(min);
+    }
     setLocalDate(m);
     onChange && onChange(m);
   };

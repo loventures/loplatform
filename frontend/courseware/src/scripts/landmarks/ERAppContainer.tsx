@@ -32,7 +32,7 @@ import { qnaEnabled, smeFeedbackEnabled } from '../utilities/preferences';
 import { selectPrintView, selectRouter } from '../utilities/rootSelectors';
 import React, { useContext, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router';
 
 import { toggleQnaSideBar } from '../qna/qnaActions';
 

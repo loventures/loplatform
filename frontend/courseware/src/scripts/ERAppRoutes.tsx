@@ -26,7 +26,7 @@ import { history } from './utilities/history';
 import { allowDirectMessaging } from './utilities/preferences';
 import { selectActualUser, selectCurrentUser } from './utilities/rootSelectors';
 import React, { Suspense, useEffect } from 'react';
-import { Navigate, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router';
 
 const ERInstructorPageRoutes = React.lazy(
   () =>

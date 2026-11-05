@@ -23,6 +23,7 @@ import com.learningobjects.cpxp.component.internal.DelegateDescriptor;
 import com.learningobjects.cpxp.component.transform.JsonDecoder;
 import com.learningobjects.cpxp.util.MimeUtils;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 
@@ -82,7 +83,7 @@ public class JsonBodyEvaluator extends AbstractEvaluator {
     }
 
     protected boolean isJson(HttpServletRequest request) {
-        return StringUtils.startsWith(request.getContentType(), MimeUtils.MIME_TYPE_APPLICATION_JSON);
+        return Strings.CS.startsWith(request.getContentType(), MimeUtils.MIME_TYPE_APPLICATION_JSON);
     }
 
     @Override

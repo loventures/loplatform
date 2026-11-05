@@ -34,6 +34,7 @@ import loi.cp.domain.GenericDomain;
 import loi.cp.localProxy.LocalProxy;
 import loi.cp.session.SessionComponent;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.inject.Inject;
 import jakarta.servlet.http.HttpServletRequest;
@@ -66,7 +67,7 @@ public class GenericServlet extends AbstractComponentServlet {
     @Override
     public void get(HttpServletRequest request, HttpServletResponse response) throws Exception {
         final ServletBinding binding = getDelegateDescriptor().getBinding(ServletComponent.class);
-        String pi = StringUtils.removeStart(request.getPathInfo(), binding.path());
+        String pi = Strings.CS.removeStart(request.getPathInfo(), binding.path());
         if ("".equals(pi)) {
             String queryString = request.getQueryString();
             HttpUtils.sendRedirect(response, binding.path() + "/" + (queryString != null ? "?" + queryString : ""));

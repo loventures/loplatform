@@ -16,7 +16,7 @@
  */
 
 import Dependencies.*
-import com.typesafe.sbt.SbtGit.GitKeys.*
+import com.github.sbt.git.SbtGit.GitKeys.*
 
 lazy val frontendArchiveDir = settingKey[Option[File]]("directory containing frontend archives")
 lazy val frontendArchives   = TaskKey.local[List[File]]
@@ -74,6 +74,10 @@ lazy val deploy = project
       "-Jjava.base/java.lang=ALL-UNNAMED", // for ancient jaxb in the lti outcomes parsers
     ),
     Rpm / serviceAutostart  := false,
+    // sbt 2 relocates target.value under backend/target/out/...; keep the packages where CI uploads them from
+    // (deploy/target/*.deb, deploy/target/rpm/RPMS/...) so the artifacts stay flat for setup-de's dpkg -i detomcat_*.deb.
+    Debian / target         := baseDirectory.value / "target" / (Debian / target).value.getName,
+    Rpm / target            := baseDirectory.value / "target" / "rpm",
     // default is List(LinuxSymlink(/usr/bin/detomcat.sh,/usr/share/detomcat/bin/detomcat.sh), LinuxSymlink(/etc/detomcat,/usr/share/detomcat/conf), LinuxSymlink(/usr/share/detomcat/logs,/var/log/detomcat))
     // but the bogus sbt-native-packager scripts remove the symlinks after upgrade and installs them destructively up front
     linuxPackageSymlinks    := List.empty,
@@ -104,15 +108,22 @@ lazy val deploy = project
           "lo.ventures" % "authoring"  % version,
           "lo.ventures" % "courseware" % version,
           "lo.ventures" % "platform"   % version,
-        ) map (_.intransitive)
+        ) map (_.intransitive())
       else Nil
     },
     dependencyUpdatesFilter -= moduleFilter(organization = "lo.ventures"),
-    frontendArchives   := frontendArchiveDir.value.toList
-      .flatMap(dir => (dir * ("*.zip" || "*.jar")).get),
-    Universal / mappings ++= frontendArchives.value.map {
-      // there is a good way to do this, and a bad way. we choose the bad.
-      f => f -> s"lib/${f.getName}"
+    // Def.uncached: File is not a cacheable task output in sbt 2, and the directory listing must be live
+    frontendArchives   := Def.uncached(
+      frontendArchiveDir.value.toList
+        .flatMap(dir => (dir * ("*.zip" || "*.jar")).get())
+    ),
+    Universal / mappings ++= {
+      // sbt 2 mappings are keyed by virtual file refs rather than java.io.File
+      val conv = fileConverter.value
+      frontendArchives.value.map {
+        // there is a good way to do this, and a bad way. we choose the bad.
+        f => (conv.toVirtualFile(f.toPath): HashedVirtualFileRef) -> s"lib/${f.getName}"
+      }
     },
     // you need this as well so that the above get noticed
     scriptClasspath ++= frontendArchives.value.map(_.getName),

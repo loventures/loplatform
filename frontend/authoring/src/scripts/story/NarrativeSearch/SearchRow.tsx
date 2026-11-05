@@ -17,7 +17,7 @@
 
 import { take } from 'lodash';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { usePolyglot } from '../../hooks';
 import { SearchWebHit } from '../../modals/narrative/types';

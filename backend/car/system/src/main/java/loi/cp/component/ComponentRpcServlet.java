@@ -28,6 +28,7 @@ import com.learningobjects.cpxp.component.web.*;
 import com.learningobjects.cpxp.util.StringUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.Strings;
 
 import java.util.logging.Logger;
 
@@ -49,7 +50,7 @@ public class ComponentRpcServlet extends AbstractComponent implements ServletCom
     public WebResponse service(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ServletBinding binding = _delegate.getBinding(ServletComponent.class);
-        String pathInfo = StringUtils.removeStart(request.getRequestURI(), binding.path() + "/");
+        String pathInfo = Strings.CS.removeStart(request.getRequestURI(), binding.path() + "/");
         int i0 = pathInfo.indexOf('/'), i1 = pathInfo.indexOf('/', i0 + 1);
         if (i0 < 0) {
             return ErrorResponse.notFound();

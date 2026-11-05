@@ -28,6 +28,7 @@ import com.learningobjects.cpxp.util.DigestUtils;
 import com.learningobjects.cpxp.util.NumberUtils;
 import com.learningobjects.cpxp.util.PasswordUtils;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -80,7 +81,7 @@ public class LoginWebServiceBean extends BasicServiceBean implements LoginWebSer
         UserState state = (user == null) ? null : user.getUserState();
         Long userId = (user == null) ? null : user.getId();
         boolean validPassword = validatePassword(password, encPassword);
-        boolean externalPassword = StringUtils.startsWith(encPassword, EXTERNAL_PREFIX);
+        boolean externalPassword = Strings.CS.startsWith(encPassword, EXTERNAL_PREFIX);
 
         // Authenticate first in order to not leak user state to anonymous users.
         if (!validPassword) {
@@ -131,7 +132,7 @@ public class LoginWebServiceBean extends BasicServiceBean implements LoginWebSer
         UserFacade user = _userWebService.getUserByUserName(userName);
         UserState state = (user == null) ? null : user.getUserState();
         String encPassword = (user == null) ? null : user.getPassword();
-        boolean externalPassword = StringUtils.startsWith(encPassword, LoginWebService.EXTERNAL_PREFIX);
+        boolean externalPassword = Strings.CS.startsWith(encPassword, LoginWebService.EXTERNAL_PREFIX);
         boolean validPassword = validatePassword(password, encPassword);
 
         Login login = new Login();
@@ -176,7 +177,7 @@ public class LoginWebServiceBean extends BasicServiceBean implements LoginWebSer
         String[] split = splitPassword(encoded);
         String salt = split[0], remainder = split[1];
         String digested = PasswordUtils.digest(salt, password);
-        return StringUtils.equalsIgnoreCase(digested, remainder);
+        return Strings.CI.equals(digested, remainder);
     }
 
     private static final String FAKE_ENCODED_PASSWORD = "XYZ:0123456789abcdef0123456789abcdef012345678";

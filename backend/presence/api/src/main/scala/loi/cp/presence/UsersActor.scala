@@ -22,7 +22,7 @@ import org.apache.pekko.actor.{Actor, ActorRef, Cancellable, Props, Terminated}
 import com.learningobjects.cpxp.scala.actor.TaggedActors.*
 import com.learningobjects.cpxp.scala.actor.{ClusterActors, CpxpActorSystem}
 import com.learningobjects.cpxp.util.Box
-import io.prometheus.client.Gauge
+import io.prometheus.metrics.core.metrics.Gauge
 import loi.apm.Apm
 import loi.cp.presence.UserActor.LastActive
 import scaloi.misc.TimeSource
@@ -244,9 +244,9 @@ object UsersActor:
   private val LogStatisticsInterval = 1.minute
 
   private val presenceTotalUsers: Gauge  =
-    Gauge.build.name("cp_presence_users").help("the number of presence users").register
+    Gauge.builder.name("cp_presence_users").help("the number of presence users").register
   private val presenceActiveUsers: Gauge =
-    Gauge.build.name("cp_presence_active_users").help("the number of active presence users").register
+    Gauge.builder.name("cp_presence_active_users").help("the number of active presence users").register
   private val presenceRecentUsers: Gauge =
-    Gauge.build.name("cp_presence_recent_users").help("the number of presence recent users").register
+    Gauge.builder.name("cp_presence_recent_users").help("the number of presence recent users").register
 end UsersActor

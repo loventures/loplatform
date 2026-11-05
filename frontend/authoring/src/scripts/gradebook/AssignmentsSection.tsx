@@ -19,7 +19,7 @@ import { groupBy, mapValues, sumBy } from 'lodash';
 import React, { useMemo, useState } from 'react';
 import { GiCheckMark } from 'react-icons/gi';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   Col,
   Input,

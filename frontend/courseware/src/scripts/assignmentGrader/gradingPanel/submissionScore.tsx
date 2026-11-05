@@ -19,6 +19,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { grade as gradeFormat, makeGradeDisplayMethods } from '../../filters/pure/grade.ts';
 import { useTranslation } from '../../i18n/translationContext';
+import { notifyGraderChanged } from '../notifyGraderChanged.ts';
 
 interface SubmissionScoreProps {
   /** The grade model (stays Angular); the direct grade is `grade.outgoing.pointsAwarded`. */
@@ -51,12 +52,13 @@ export const SubmissionScore: React.FC<SubmissionScoreProps> = ({ grade, invalid
   const pointsPossible = grade?.pointsPossible;
   const pointsAwarded = grade?.outgoing?.pointsAwarded;
 
-  // The direct-grade input is UNCONTROLLED. The grading panel's 150ms re-render poll (the consolidated
-  // GraderProvider, #1552) fires constantly while grading and a controlled `value` would be re-asserted
-  // mid-entry — racing Selenide's clear+type so the value gets clobbered/appended (the GradingPanelTest
-  // "post a score with a decimal value" flake: value="7.5-75" instead of "-75"). With no `value` prop the
-  // poll can't touch the DOM value; we only push EXTERNAL model changes (rubric scoring / undo / nav) into
-  // the DOM via the ref, and `lastUserWriteRef` distinguishes those from the user's own keystroke.
+  // The direct-grade input is UNCONTROLLED. The grading panel re-renders on every grade mutation (the
+  // GraderProvider, now store-driven via #1512) — including this field's own keystroke — and a controlled
+  // `value` would be re-asserted mid-entry, racing Selenide's clear+type so the value gets
+  // clobbered/appended (the GradingPanelTest "post a score with a decimal value" flake: value="7.5-75"
+  // instead of "-75"). With no `value` prop the re-render can't touch the DOM value; we only push EXTERNAL
+  // model changes (rubric scoring / undo / nav) into the DOM via the ref, and `lastUserWriteRef`
+  // distinguishes those from the user's own keystroke.
   const inputRef = useRef<HTMLInputElement>(null);
   const lastUserWriteRef = useRef<any>(pointsAwarded);
 
@@ -77,6 +79,8 @@ export const SubmissionScore: React.FC<SubmissionScoreProps> = ({ grade, invalid
     const modelVal = valid ? n : undefined;
     if (grade?.outgoing) grade.outgoing.pointsAwarded = modelVal;
     lastUserWriteRef.current = modelVal;
+    // Re-render siblings (gradingPanelControls Save/Post enablement reads grade.isDirty/isComplete).
+    notifyGraderChanged();
   };
 
   // The grader can briefly hand us a null grade while navigating (e.g. QuizGrader nulls activeGrade

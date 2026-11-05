@@ -20,7 +20,7 @@ package com.learningobjects.sbt
 import java.io.FileInputStream
 import java.util.Properties
 
-import com.typesafe.sbt.GitPlugin
+import com.github.sbt.git.GitPlugin
 import sbt.Keys._
 import sbt._
 import sbt.plugins.JvmPlugin
@@ -34,6 +34,12 @@ object DECommonSettings extends AutoPlugin {
   object autoImport {
     lazy val forkOptions    = taskKey[ForkOptions]("Jvm Options used for forking new test Processes.")
     lazy val readProperties = inputKey[Map[String, String]]("Read the given properties file.")
+
+    /** sbt 2 removed the built-in IntegrationTest configuration; this recreates the sbt 1 definition (sources under
+      * src/it, reports under it-reports). The root project lacks the config, so aggregate commands from the root must
+      * use the capitalized config name: `It/test`, not `IntegrationTest/test`.
+      */
+    lazy val IntegrationTest: Configuration = config("it").extend(Runtime)
   }
 
   import autoImport._
@@ -76,7 +82,9 @@ object DECommonSettings extends AutoPlugin {
       parallelExecution := false,
       logBuffered       := false // see Buffered Output at https://www.scalatest.org/user_guide/using_scalatest_with_sbt
     )
-  ) ++ testSettings(IntegrationTest) ++ org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings(IntegrationTest)
+  ) ++ testSettings(IntegrationTest) ++ org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings(IntegrationTest) ++
+    // sbt 1's JUnitXmlReportPlugin wired the built-in IntegrationTest config; sbt 2 only wires Test, so restore it-reports
+    inConfig(IntegrationTest)(sbt.plugins.JUnitXmlReportPlugin.autoImport.testReportSettings)
 
   lazy val DbTest: Configuration               = config("dbtest") extend Test
   lazy val dbTestSettings: Seq[Def.Setting[_]] = inConfig(DbTest)(
@@ -90,6 +98,10 @@ object DECommonSettings extends AutoPlugin {
     baseProjectSettings
 
   override def buildSettings: Seq[Def.Setting[_]] = Seq(
+    // sbt 2 defaults exportJars to true, putting jars rather than class directories on the internal and test
+    // classpaths; tests that resolve fixtures via Paths.get(getResource(...).toURI) then fail inside the jar
+    // (FileSystemNotFoundException). Restore the sbt 1 default.
+    exportJars           := false,
     updateOptions        := updateOptions.value.withCachedResolution(true),
     organization         := "lo.ventures",
     organizationName     := "LO Ventures LLC",

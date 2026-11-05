@@ -28,14 +28,42 @@ object CpxpClasspath:
 
   private var cg: Option[ScanResult] = None
 
+  /** ClassGraph 6 no longer loads classes, so we keep the loader to load them with. */
+  @volatile private var loader: ClassLoader = getClass.getClassLoader
+
   def classGraph: ScanResult =
     cg.getOrElse(throw new IllegalStateException("No class graph"))
 
   def reflect(): ScanResult =
     if cg.isDefined then throw new IllegalStateException("Reflecteded already")
     logger info packages.mkString("Reflecting on ", ", ", ".")
-    cg = Some(new ClassGraph().acceptPackages(packages*).enableAllInfo().scan())
+    Option(Thread.currentThread.getContextClassLoader).foreach(loader = _)
+    cg = Some(scan(new ClassGraph().acceptPackages(packages*)))
     cg.get
+
+  /** Scans the classpath and visible module layers with everything enabled, as ClassGraph 4's `enableAllInfo()` did.
+    */
+  def scan(classGraph: ClassGraph): ScanResult =
+    classGraph
+      .enableClasspath()
+      .enableNonSystemModules()
+      .enableClassInfo()
+      .enableFieldInfo()
+      .enableMethodInfo()
+      .enableAnnotationInfo()
+      .enableStaticFinalFieldConstantInitializerValues()
+      .ignoreClassVisibility()
+      .ignoreFieldVisibility()
+      .ignoreMethodVisibility()
+      .scan()
+
+  /** Loads a scanned class, without initializing it. */
+  def loadClass(classInfo: ClassInfo): Class[?] =
+    Class.forName(classInfo.getName, false, loader)
+
+  /** Loads scanned classes, without initializing them. */
+  def loadClasses(classInfos: ClassInfoList): java.util.List[Class[?]] =
+    classInfos.asScala.map(loadClass).asJava
 
   lazy val packages: Array[String] = // for truth and unity!
     getClass.getClassLoader

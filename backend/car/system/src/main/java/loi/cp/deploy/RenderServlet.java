@@ -78,7 +78,7 @@ public class RenderServlet extends AbstractComponentServlet {
                 try (OutputStream out = FileUtils.openOutputStream(file.getFile())) {
                     IOUtils.copy(request.getInputStream(), out);
                 }
-                LohtmlTemplate.getInstance(file.getFile().toURL()).render(context);
+                LohtmlTemplate.getInstance(file.getFile().toURI().toURL()).render(context);
             }
         } catch(Exception e){
             DeployUtils.sendError(response, pw, e);

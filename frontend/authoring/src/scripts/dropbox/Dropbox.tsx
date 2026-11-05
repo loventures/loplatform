@@ -20,7 +20,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Dropzone from 'react-dropzone';
 import { IoFolderOpenOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useSet } from 'react-use';
 import {
   Alert,

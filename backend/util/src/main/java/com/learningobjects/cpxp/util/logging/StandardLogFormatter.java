@@ -23,6 +23,7 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class StandardLogFormatter extends Formatter {
@@ -54,7 +55,7 @@ public class StandardLogFormatter extends Formatter {
         sb.append(record.getThreadID()).append(NVPAIR_SEPARATOR);
         sb.append(Thread.currentThread().getName()).append(FIELD_SEPARATOR);
 
-        sb.append(StringUtils.removeStart(record.getLoggerName(), "com.learningobjects.")).append(FIELD_SEPARATOR);
+        sb.append(Strings.CS.removeStart(record.getLoggerName(), "com.learningobjects.")).append(FIELD_SEPARATOR);
 
         sb.append(formatMessage(record));
 

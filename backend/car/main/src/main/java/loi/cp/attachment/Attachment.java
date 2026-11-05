@@ -36,11 +36,13 @@ import com.learningobjects.de.web.MediaType;
 import loi.cp.right.RightService;
 import loi.cp.user.Profile;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -132,7 +134,7 @@ public class Attachment extends AbstractComponent implements AttachmentComponent
     private static final String DOMAIN_PREFIX = "/Domain/";
 
     private boolean isDomainMedium() {
-        return StringUtils.startsWith(_self.getUrl(), DOMAIN_PREFIX);
+        return Strings.CS.startsWith(_self.getUrl(), DOMAIN_PREFIX);
     }
 
     @Override
@@ -263,7 +265,7 @@ public class Attachment extends AbstractComponent implements AttachmentComponent
         String contentType = _mimeWebService.getMimeType(attachment.getFileName());
         final var isSafe = safe || MimeUtils.isSafe(contentType);
         final var safeContentType = isSafe ? contentType : MediaType.TEXT_PLAIN_VALUE;
-        fileInfo.setContentType(StringUtils.defaultString(safeContentType, MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN));
+        fileInfo.setContentType(Objects.toString(safeContentType, MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN));
         String disposition = doScale ? null : view; // arse
         if ((disposition == null) && (attachment.getDisposition() != null)) {
             disposition = attachment.getDisposition().name();

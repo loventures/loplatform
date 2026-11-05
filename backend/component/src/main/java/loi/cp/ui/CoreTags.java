@@ -26,6 +26,7 @@ import com.learningobjects.cpxp.service.name.UrlFacade;
 import com.learningobjects.cpxp.util.FormattingUtils;
 import com.learningobjects.cpxp.util.StringUtils;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.Strings;
 
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -163,7 +164,7 @@ public interface CoreTags extends ComponentInterface {
         if (url != null) {
             url = url + StringUtils.defaultString(action);
         }
-        if (StringUtils.contains(label, "<a>")) {
+        if (Strings.CS.contains(label, "<a>")) {
             out.write(StringUtils.substringBefore(label, "<a>"));
             out.startElement("a");
             out.startAttribute("id");

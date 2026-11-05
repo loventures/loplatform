@@ -232,13 +232,13 @@ public class BaseComponentEnvironment implements ComponentEnvironment {
 
     @Override
     public boolean hasComponent(String identifier) {
-        String key = StringUtils.defaultString(_aliases.get(identifier), identifier);
+        String key = Objects.toString(_aliases.get(identifier), identifier);
         return _components.containsKey(key);
     }
 
     @Override
     public ComponentDescriptor getComponent(String identifier) {
-        String key = StringUtils.defaultString(_aliases.get(identifier), identifier);
+        String key = Objects.toString(_aliases.get(identifier), identifier);
         return _components.get(key);
     }
 

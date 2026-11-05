@@ -17,7 +17,7 @@
 
 import Polyglot from 'node-polyglot';
 import { useDispatch } from 'react-redux';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router';
 
 import Crumb from '../components/crumbRoute';
 import { setPortalAlertStatus } from '../redux/actions/MainActions';

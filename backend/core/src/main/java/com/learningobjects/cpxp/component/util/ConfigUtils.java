@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Throwables;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Array;
@@ -180,7 +181,7 @@ public class ConfigUtils {
     }
 
     private static String escapeConfig(String value) {
-        return StringUtils.replace(StringUtils.replace(value, "\\", "\\\\"), "\n", "\\n");
+        return Strings.CS.replace(Strings.CS.replace(value, "\\", "\\\\"), "\n", "\\n");
     }
 
     /**

@@ -92,7 +92,7 @@ public class CoalesceTag implements CustomTag {
                 }
             }
             base = base.substring(0, 1 + base.lastIndexOf('/')); // in case foo/barone.js, foo/bartwo.js
-            writeScript(base + StringUtils.replace(StringUtils.join(_urls, "%7C"), base, "").replace("/", "%5E"));
+            writeScript(base + org.apache.commons.lang3.Strings.CS.replace(StringUtils.join(_urls, "%7C"), base, "").replace("/", "%5E"));
         }
         return EmptyHtml.instance(); // meh
     }

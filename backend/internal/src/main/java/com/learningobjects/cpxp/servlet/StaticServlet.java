@@ -31,7 +31,7 @@ import com.learningobjects.de.style.LibSassStyleCompiler;
 import com.learningobjects.de.style.StyleCompiler;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -42,6 +42,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystem;
 import java.nio.file.*;
 import java.util.*;
@@ -289,8 +290,8 @@ public class StaticServlet extends AbstractServlet {
         // rename them to .lo.js...
         if (localize && (component != null) && resource.endsWith(".js")) {
             try (InputStream in = Files.newInputStream(path)) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in, CharEncoding.UTF_8));
-                localize = StringUtils.contains(reader.readLine(), "LOJS");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8.name()));
+                localize = Strings.CS.contains(reader.readLine(), "LOJS");
             }
         }
 
@@ -410,8 +411,8 @@ public class StaticServlet extends AbstractServlet {
 
     private void localize(HttpServletRequest request, Path src, ComponentDescriptor component, OutputStream out) throws IOException {
         try (InputStream in = Files.newInputStream(src)) {
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CharEncoding.UTF_8));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, CharEncoding.UTF_8));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8.name()));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8.name()));
             String line;
             StringBuffer sb = new StringBuffer();
             while ((line = reader.readLine()) != null) {
@@ -540,8 +541,8 @@ public class StaticServlet extends AbstractServlet {
         }
 
         private void rewriteCss(String resource, InputStream in, OutputStream out) throws IOException {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, CharEncoding.UTF_8));
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, CharEncoding.UTF_8));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8.name()));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, StandardCharsets.UTF_8.name()));
             String[] path = resource.split("/"); // [ alpha, beta, gamma.css ]
             String line;
             StringBuffer sb = new StringBuffer();

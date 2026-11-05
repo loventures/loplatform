@@ -19,7 +19,7 @@ import { Omit } from '../../types/omit';
 import navBlockerService from '../../services/navBlockerService';
 import { FromApp, LoLocationDescriptor } from '../../utils/linkUtils';
 import React, { AnchorHTMLAttributes, RefObject } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router';
 
 export type LoLinkProps = {
   to: string | LoLocationDescriptor<FromApp>;

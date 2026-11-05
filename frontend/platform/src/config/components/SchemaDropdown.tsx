@@ -16,7 +16,7 @@
  */
 
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Nav, NavItem } from 'reactstrap';
 
 import { Schemata } from '../configApi';

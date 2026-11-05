@@ -41,7 +41,7 @@ import {
 import { selectCurrentUser } from '../../utilities/rootSelectors';
 import React from 'react';
 import { IoLeafOutline, IoSearchOutline } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import PageHeaderSendMessageLink from '../pageHeader/parts/PageHeaderSendMessageLink';
 import AppNavUserDropdown from './AppNavUserDropdown';

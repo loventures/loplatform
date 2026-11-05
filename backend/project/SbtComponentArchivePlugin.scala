@@ -19,8 +19,8 @@ package com.learningobjects.sbt
 
 import java.util.Date
 
-import com.typesafe.sbt.GitPlugin
-import com.typesafe.sbt.SbtGit.git
+import com.github.sbt.git.GitPlugin
+import com.github.sbt.git.SbtGit.git
 import sbt.Keys._
 import sbt._
 import sbt.internal.BuildDependencies
@@ -51,7 +51,8 @@ object SbtComponentArchivePlugin extends AutoPlugin {
   override lazy val projectSettings = Seq[Def.Setting[_]](
     ThisBuild / componentProjects += thisProjectRef.value,
     Compile / carJson     := (Compile / resourceManaged).value / "car.json",
-    Compile / packageJson := {
+    // Def.uncached: writes car.json as a side effect, stamped from the compiled classes
+    Compile / packageJson := Def.uncached {
       val buildDeps = (Compile / buildDependencies).value
       val impls     = carImplements.value
       val proj      = thisProjectRef.value
@@ -142,7 +143,7 @@ object SbtComponentArchivePlugin extends AutoPlugin {
 
     /* This feels weird, but Analysis is large and confusing,
      * and we get called non-incrementally every time, so... */
-    val stamps = classes.**("*.class").get.map(_.lastModified)
+    val stamps = classes.**("*.class").get().map(_.lastModified)
     val stamp  = if (stamps.isEmpty) new Date(0) else new Date(stamps.max)
 
     val carInfo = CarJson(

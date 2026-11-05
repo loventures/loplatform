@@ -16,7 +16,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { useTranslations } from '../redux/state';

@@ -19,31 +19,39 @@ package loi.cp.prometheus.collector
 
 import com.learningobjects.cpxp.filter.SendFileFilter
 import com.learningobjects.cpxp.{BaseServiceMeta, ServiceMeta}
-import io.prometheus.client.Collector.MetricFamilySamples
-import io.prometheus.client.{Collector, GaugeMetricFamily}
+import io.prometheus.metrics.model.registry.MultiCollector
+import io.prometheus.metrics.model.snapshots.GaugeSnapshot.GaugeDataPointSnapshot
+import io.prometheus.metrics.model.snapshots.{GaugeSnapshot, Labels, MetricSnapshots}
 
-import java.util
-import scala.jdk.CollectionConverters.*
+object ServiceMetaCollector extends MultiCollector:
+  val serviceMeta: ServiceMeta = BaseServiceMeta.getServiceMeta
 
-object ServiceMetaCollector extends Collector:
-  val serviceMeta: ServiceMeta                           = BaseServiceMeta.getServiceMeta
-  override def collect(): util.List[MetricFamilySamples] =
-
-    List[MetricFamilySamples](
-      new GaugeMetricFamily(
-        "cp_info",
-        "DE version info",
-        util.List.of("name", "host", "build", "version", "cluster", "nio_enabled")
-      ).addMetric(
-        util.List.of(
-          serviceMeta.getNode,
-          serviceMeta.getLocalHost,
-          serviceMeta.getBuild,
-          serviceMeta.getVersion,
-          serviceMeta.getCluster,
-          SendFileFilter.isNioAvailable.toString
-        ),
-        1L
-      )
-    ).asJava
+  override def collect(): MetricSnapshots =
+    MetricSnapshots.of(
+      GaugeSnapshot.builder
+        .name("cp_info")
+        .help("DE version info")
+        .dataPoint(
+          GaugeDataPointSnapshot.builder
+            .labels(
+              Labels.of(
+                "name",
+                serviceMeta.getNode,
+                "host",
+                serviceMeta.getLocalHost,
+                "build",
+                serviceMeta.getBuild,
+                "version",
+                serviceMeta.getVersion,
+                "cluster",
+                serviceMeta.getCluster,
+                "nio_enabled",
+                SendFileFilter.isNioAvailable.toString
+              )
+            )
+            .value(1L)
+            .build
+        )
+        .build
+    )
 end ServiceMetaCollector

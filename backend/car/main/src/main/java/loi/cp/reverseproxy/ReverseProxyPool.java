@@ -17,7 +17,6 @@
 
 package loi.cp.reverseproxy;
 
-import com.google.common.base.Charsets;
 import com.learningobjects.cpxp.BaseServiceMeta;
 import com.learningobjects.cpxp.component.annotation.PostLoad;
 import com.learningobjects.cpxp.component.annotation.PreUnload;
@@ -32,6 +31,7 @@ import jakarta.servlet.AsyncContext;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -54,6 +54,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -244,7 +245,7 @@ public class ReverseProxyPool {
                 Header contentTypeHeader = entity.getContentType();
                 ContentType contentType = (contentTypeHeader == null) ? null : ContentType.parse(contentTypeHeader.getValue());
                 Charset charset = (contentType == null) ? null : contentType.getCharset();
-                charset = (charset == null) ? Charsets.UTF_8 : charset;
+                charset = (charset == null) ? StandardCharsets.UTF_8 : charset;
                 // InputStreamReader does buffer the input stream, but buffering the ISR appears to provide
                 // substantial gains for by-character reading operations.
                 BufferedReader in = new BufferedReader(new InputStreamReader(entity.getContent(), charset));
@@ -335,7 +336,7 @@ public class ReverseProxyPool {
     private CookieStore deproxyCookies(List<jakarta.servlet.http.Cookie> cookies, String cookiePrefix, String path) {
         CookieStore cookieStore = new BasicCookieStore();
         for(jakarta.servlet.http.Cookie servletCookie : cookies) {
-                if (StringUtils.startsWith(servletCookie.getName(), cookiePrefix)) {
+                if (Strings.CS.startsWith(servletCookie.getName(), cookiePrefix)) {
                     Cookie deproxiedCookie = toApacheCookie(servletCookie, Optional.of(cookiePrefix), Optional.of(path));
                     cookieStore.addCookie(deproxiedCookie);
                 } else {

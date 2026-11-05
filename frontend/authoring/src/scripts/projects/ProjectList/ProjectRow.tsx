@@ -21,7 +21,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import { IoBookmarkOutline, IoSchoolOutline } from 'react-icons/io5';
 import { VscHistory } from 'react-icons/vsc';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   Badge,
   DropdownItem,

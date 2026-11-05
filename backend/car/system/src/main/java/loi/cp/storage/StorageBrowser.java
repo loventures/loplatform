@@ -44,6 +44,7 @@ import com.learningobjects.cpxp.shale.JsonMap;
 import com.learningobjects.cpxp.util.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.Strings;
 
 import javax.inject.Inject;
 import java.io.Writer;
@@ -246,7 +247,7 @@ public class StorageBrowser extends AbstractRpcServlet {
                 Current.setDomainDTO(_domainWebService.getDomainDTO(domain));
                 item = ObjectUtils.getFirstNonNullIn(_queryService.query(decoded.getFile()));
             } else {
-                item = _nameService.getItem(_itemService.get(domain), StringUtils.removeEnd(decoded.getFile(), "/"));
+                item = _nameService.getItem(_itemService.get(domain), Strings.CS.removeEnd(decoded.getFile(), "/"));
             }
         }
         if (!getIsOverlord() && isCrossDomain(item)) {

@@ -32,7 +32,7 @@ import { MdHistory, MdOutlineToc } from 'react-icons/md';
 import { PiUser } from 'react-icons/pi';
 import { VscHistory, VscListTree } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import {
   Button,
   ButtonGroup,

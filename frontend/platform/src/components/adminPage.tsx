@@ -18,7 +18,7 @@
 import React, { useEffect, useState } from 'react';
 import DocumentTitle from 'react-document-title';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 import { setPortalAlertStatus } from '../redux/actions/MainActions';
 import { useTypedSelector } from '../redux/state';

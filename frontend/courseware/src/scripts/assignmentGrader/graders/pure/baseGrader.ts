@@ -19,6 +19,7 @@ import { get, set, isFunction } from 'lodash';
 
 import { Roles } from '../../../utilities/pure/roles.ts';
 import navBlockerService from '../../../services/navBlockerService.ts';
+import { notifyGraderChanged } from '../../notifyGraderChanged.ts';
 import { nativeQ as $q } from '../../../utilities/nativeQ.ts';
 
 /**
@@ -127,12 +128,14 @@ BaseGrader.prototype.calcItemsToGrade = function () {
       ...prev,
       text: 'GRADER_CONTROL_PREV_' + prev.key,
     };
+    notifyGraderChanged();
   });
   this.findNext(1).then((next: any) => {
     this.nextItemToGrade = next && {
       ...next,
       text: 'GRADER_CONTROL_NEXT_' + next.key,
     };
+    notifyGraderChanged();
   });
 };
 

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import MessageFormat from 'messageformat';
+import MessageFormat from '@messageformat/core';
 
 import { getI18n, type I18n } from '../../api/i18nApi.ts';
 import { formatDayjs } from '../../filters/pure/formatDayjs.ts';
@@ -79,7 +79,8 @@ const interpolateDouble = (msg: string, params: any): string =>
  *
  *  - LOADER: `getI18n(locale, component)` (the same pure axios call angular-translate's loader used),
  *    where `locale = window.lo_platform.i18n.locale` and `component = window.lo_platform.identifier`.
- *  - INTERPOLATION: `$translateMessageFormatInterpolation` — i.e. the `messageformat` package. We
+ *  - INTERPOLATION: `$translateMessageFormatInterpolation` — i.e. the `@messageformat/core` package (the
+ *    ICU "MF1" compiler; the unscoped `messageformat` package became an unrelated MF2 library at v4). We
  *    instantiate `new MessageFormat(locale)` once and `mf.compile(msg)` on demand, caching the compiled
  *    fn per message string (matching angular-translate's `'mf:' + string` cache). Before compiling we
  *    coerce integer-string params to numbers, exactly as the interpolator does (so plural/select rules

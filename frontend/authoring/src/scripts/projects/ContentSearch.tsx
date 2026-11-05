@@ -22,7 +22,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { GiAllSeeingEye } from 'react-icons/gi';
 import { IoChevronBack, IoChevronForward, IoSearchOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Button, Input, InputGroup, Spinner } from 'reactstrap';
 
 import { trackAuthoringEvent } from '../analytics';

@@ -50,6 +50,7 @@ lazy val util = (project in file("util"))
       Misc.findbugsJsr305,
       Misc.guava,
       Misc.classGraph,
+      Prometheus.metricsCore,
       Prometheus.simpleclient,
       ScalaExtensions.Enumeratum.core,
       ScalaExtensions.java8Compat,

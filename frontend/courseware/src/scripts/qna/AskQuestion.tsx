@@ -30,7 +30,7 @@ import { selectCurrentUser } from '../utilities/rootSelectors';
 import React, { useState } from 'react';
 import { FiSend } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import { Button, FormGroup, Label } from 'reactstrap';
 
 import { ContentLite } from '../api/contentsApi';

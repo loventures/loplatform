@@ -46,7 +46,7 @@ import {
 import React from 'react';
 import { BsChatRightQuote, BsTrash } from 'react-icons/bs';
 import { SlLink, SlMagnifier } from 'react-icons/sl';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 import ERNonContentTitle from '../../commonPages/contentPlayer/ERNonContentTitle';
 
 // Paths are relative to the /instructor/controls/* mount in ERInstructorPageRoutes.

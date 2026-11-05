@@ -26,7 +26,6 @@ import com.learningobjects.cpxp.service.user.UserFacade;
 import com.learningobjects.cpxp.util.FormattingUtils;
 import com.learningobjects.cpxp.util.MimeUtils;
 import com.learningobjects.cpxp.util.StringUtils;
-import org.apache.commons.lang3.CharEncoding;
 import org.apache.commons.lang3.ObjectUtils;
 import scala.Function1;
 
@@ -38,6 +37,7 @@ import javax.inject.Inject;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -128,7 +128,7 @@ public class EmailServiceBean extends BasicServiceBean implements EmailService {
         MimeMessage message = createEmail(null);
         message.setFrom(sender);
         message.addRecipients(Message.RecipientType.TO, new InternetAddress[] { recipient });
-        message.setSubject(subject, CharEncoding.UTF_8);
+        message.setSubject(subject, StandardCharsets.UTF_8.name());
         String mimeType = html ? MimeUtils.MIME_TYPE_TEXT_HTML : MimeUtils.MIME_TYPE_TEXT_PLAIN;
         message.setContent(body, mimeType + MimeUtils.CHARSET_SUFFIX_UTF_8);
 

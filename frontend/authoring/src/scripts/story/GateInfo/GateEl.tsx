@@ -17,7 +17,7 @@
 
 import { round } from 'lodash';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 import { useEditedAssetContextPath, useEditedAssetTitle } from '../../graphEdit';
 import { FakeEdge } from '../../graphEdit/graphEditReducer';

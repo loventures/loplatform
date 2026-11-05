@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ItemSiteRegistry<T> implements Registry<ItemSiteBinding, T> {
     private final Map<String, T> _registry = new HashMap<>();
@@ -43,7 +44,7 @@ public class ItemSiteRegistry<T> implements Registry<ItemSiteBinding, T> {
 
     @Override
     public T lookup(Object[] keys) {
-        String type = (String) keys[0], subtype = (String) keys[1], action = StringUtils.defaultString((String) keys[2], "view");
+        String type = (String) keys[0], subtype = (String) keys[1], action = Objects.toString((String) keys[2], "view");
         T object = null;
         if (subtype != null) {
             object = _registry.get(type + '/' + subtype + '!' + action);

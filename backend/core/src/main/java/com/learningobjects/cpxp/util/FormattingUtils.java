@@ -42,6 +42,7 @@ import com.learningobjects.cpxp.util.message.MessageMap;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.IOException;
@@ -85,7 +86,7 @@ public class FormattingUtils {
     }
 
     public static Boolean isFirst(Object o, Collection c) {
-        return !c.isEmpty() && ObjectUtils.equals(o, c.iterator().next());
+        return !c.isEmpty() && Objects.equals(o, c.iterator().next());
     }
 
     public static Boolean isMinimal(Date date) {
@@ -406,14 +407,14 @@ public class FormattingUtils {
         try {
             URI uri = new URI(url);
             String host = uri.getHost();
-            return !StringUtils.isEmpty(host) && !StringUtils.equalsIgnoreCase(host, getRequest().getServerName());
+            return !StringUtils.isEmpty(host) && !Strings.CI.equals(host, getRequest().getServerName());
         } catch (Exception ex) {
             return false;
         }
     }
 
     private static boolean equalsIgnoreCaseAndWhitespace(String a, String b) {
-        return StringUtils.equalsIgnoreCase(StringUtils.deleteWhitespace(a), StringUtils.deleteWhitespace(b));
+        return Strings.CI.equals(StringUtils.deleteWhitespace(a), StringUtils.deleteWhitespace(b));
     }
 
     public static String groupStr(Facade facade) {
@@ -684,7 +685,7 @@ public class FormattingUtils {
 
     public static String mimeType(String fileName) {
         MimeWebService mimeWebService = ServiceContext.getContext().getService(MimeWebService.class);
-        return StringUtils.defaultString(mimeWebService.getMimeType(fileName), MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN);
+        return Objects.toString(mimeWebService.getMimeType(fileName), MimeUtils.MIME_TYPE_APPLICATION_UNKNOWN);
     }
 
     // supports parsing and application of certain string modification commands

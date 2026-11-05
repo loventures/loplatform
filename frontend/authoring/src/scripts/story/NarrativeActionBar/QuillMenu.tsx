@@ -20,7 +20,7 @@ import React from 'react';
 import { GiNinjaVelociraptor, GiQuillInk } from 'react-icons/gi';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { Link, useMatch } from 'react-router-dom';
+import { Link, useMatch } from 'react-router';
 import {
   Button,
   DropdownItem,

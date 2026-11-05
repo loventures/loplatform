@@ -187,7 +187,7 @@ public class MStatusServlet extends AbstractComponentServlet {
         String mimeType = json ? MimeUtils.MIME_TYPE_APPLICATION_JSON : MimeUtils.MIME_TYPE_TEXT_PLAIN;
         response.setContentType(mimeType + MimeUtils.CHARSET_SUFFIX_UTF_8);
         Writer writer = Method.HEAD.name().equals(request.getMethod())
-          ? new NullWriter() : response.getWriter();
+          ? NullWriter.INSTANCE : response.getWriter();
 
         if (json) {
             writer.write(JsonUtils.toJson(status));

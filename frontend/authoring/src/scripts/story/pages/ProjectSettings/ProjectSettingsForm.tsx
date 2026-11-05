@@ -18,7 +18,7 @@
 import { sortBy } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import CreatableSelect from 'react-select/creatable';
 import { Button, Col, Input, Label, Row, Spinner } from 'reactstrap';
 

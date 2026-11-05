@@ -38,6 +38,7 @@ import com.learningobjects.cpxp.util.*;
 import com.learningobjects.cpxp.util.logging.HttpServletRequestLogRecord;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
 import java.io.FileNotFoundException;
@@ -64,7 +65,7 @@ public class AbstractRpcServlet extends AbstractComponent implements ServletComp
     public static WebResponse service(DelegateDescriptor delegate, ComponentInstance instance, HttpServletRequest request, HttpServletResponse response, Logger logger) throws Exception {
 
         ServletBinding binding = delegate.getBinding(ServletComponent.class);
-        String rel = StringUtils.removeStart(request.getPathInfo(), binding.path() + "/");
+        String rel = Strings.CS.removeStart(request.getPathInfo(), binding.path() + "/");
         String fragment = StringUtils.substringBefore(rel, "/");
         RpcInstance rpc = instance.getFunctionInstance(RpcInstance.class, request.getMethod(), fragment, rel);
         if (rpc == null) {

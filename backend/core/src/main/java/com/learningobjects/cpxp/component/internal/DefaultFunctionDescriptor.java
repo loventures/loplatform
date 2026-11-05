@@ -151,7 +151,7 @@ public class DefaultFunctionDescriptor extends AbstractDescriptor implements Fun
         try {
             return BytecodeEngineer.getParameterNames(_method.getDeclaringClass());
         } catch (IOException e) {
-            throw Throwables.propagate(e);
+            throw new RuntimeException(e);
         }
     }
 

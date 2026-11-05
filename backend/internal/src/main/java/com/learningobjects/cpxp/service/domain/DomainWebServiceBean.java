@@ -48,6 +48,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
 import org.hibernate.SessionFactory;
 import org.hibernate.stat.EntityStatistics;
 import org.hibernate.stat.Statistics;
@@ -327,7 +328,7 @@ public class DomainWebServiceBean extends BasicServiceBean implements DomainWebS
                 _dataService.setItem(getCurrentDomain(),
                        DATA_TYPE_CSS_FILE, item);
             }
-            if (DATA_TYPE_FAVICON.equals(type) && StringUtils.endsWithIgnoreCase(fileName, ".ico") && (file != null)) { // also update the intrinsic /favicon.ico
+            if (DATA_TYPE_FAVICON.equals(type) && Strings.CI.endsWith(fileName, ".ico") && (file != null)) { // also update the intrinsic /favicon.ico
                 Item favicon = getDomainItemById(ID_FAVICON);
                 if (favicon != null) {
                     _attachmentService.storeAttachment(favicon, file);

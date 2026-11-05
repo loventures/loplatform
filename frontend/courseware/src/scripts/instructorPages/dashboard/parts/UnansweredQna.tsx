@@ -27,7 +27,7 @@ import { QnaPageLink } from '../../../utils/pageLinks';
 import LoadingSpinner from '../../../directives/loadingSpinner';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 
 type UnansweredRow = {

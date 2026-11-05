@@ -17,7 +17,6 @@
 
 package com.learningobjects.cpxp.util.lang;
 
-import com.google.common.base.Throwables;
 import com.google.common.reflect.TypeToken;
 import scala.collection.Seq;
 
@@ -67,7 +66,7 @@ public class TypeTokens {
                 /*
                  * can only happen if #getMethod above is called with bad args (because iterableType's type is checked)
                  */
-                throw Throwables.propagate(ex);
+                throw new RuntimeException(ex);
             }
         }
         return Optional.empty();
@@ -87,7 +86,7 @@ public class TypeTokens {
                 final TypeToken<?> resolvedType = declaringType.resolveType(elementType.getType());
                 return Optional.of(resolvedType);
             } catch (NoSuchMethodException ex) {
-                throw Throwables.propagate(ex);
+                throw new RuntimeException(ex);
             }
         }
 
@@ -105,7 +104,7 @@ public class TypeTokens {
                 /*
                  * can only happen if #getMethod above is called with bad args (because mapType's type is checked)
                  */
-                throw Throwables.propagate(ex);
+                throw new RuntimeException(ex);
             }
         }
         return Optional.empty();
@@ -123,7 +122,7 @@ public class TypeTokens {
                 /*
                  * can only happen if #getMethod above is called with bad args (because optionalType's type is checked)
                  */
-                throw Throwables.propagate(ex);
+                throw new RuntimeException(ex);
             }
         }
         return Optional.empty();

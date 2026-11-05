@@ -19,6 +19,8 @@ package com.learningobjects.cpxp.util
 
 import org.hibernate.property.access.spi.*
 
+import scala.annotation.nowarn
+
 /** Support for finding the Scala-var accessor/mutator for a hibernate entity..
   *
   * You must place this on an entity class PK field if it uses Scala vars for attributes. Doing so makes Hibernate
@@ -38,7 +40,11 @@ class ScalaPropertyAccessStrategy extends PropertyAccessStrategy:
 
       override def getPropertyAccessStrategy: PropertyAccessStrategy = ScalaPropertyAccessStrategy.this
 
+      // Getter and Setter are deprecated for removal in Hibernate 8 with no replacement SPI yet, but
+      // PropertyAccess is still defined in terms of them so we have no choice but to implement them.
+      @nowarn("cat=deprecation")
       override val getGetter: Getter = new GetterMethodImpl(containerJavaType, propertyName, getter)
 
+      @nowarn("cat=deprecation")
       override val getSetter: Setter = new SetterMethodImpl(containerJavaType, propertyName, setter)
 end ScalaPropertyAccessStrategy

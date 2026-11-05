@@ -49,7 +49,7 @@ import {
   TbQuestionMark,
 } from 'react-icons/tb';
 import { useDispatch } from 'react-redux';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavigateFunction, useNavigate } from 'react-router';
 import { Button, Tooltip } from 'reactstrap';
 
 import { fromNow } from '../dateUtil';

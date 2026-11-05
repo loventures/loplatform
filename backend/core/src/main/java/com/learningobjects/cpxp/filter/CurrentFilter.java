@@ -65,6 +65,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import loi.apm.Apm;
+import org.apache.commons.lang3.Strings;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -666,7 +667,7 @@ public class CurrentFilter extends AbstractFilter {
         String binding = rpc.getBinding();
         if (binding.endsWith("*")) {
             final String requestURI = request.getRequestURI();
-            final String pathInfo = StringUtils.removeStart(requestURI, binding.substring(0, binding.length() - 1));
+            final String pathInfo = Strings.CS.removeStart(requestURI, binding.substring(0, binding.length() - 1));
             request.setAttribute(PathInfoEvaluator.REQUEST_ATTRIBUTE_PATH_INFO, pathInfo);
         }
         /// TODO: Put APM instrumentation around this so the rpc doesn't show up as time spent in a filter
@@ -688,7 +689,7 @@ public class CurrentFilter extends AbstractFilter {
         }
         try {
             final String requestURI = request.getRequestURI();
-            final String pathInfo = StringUtils.removeStart(requestURI, binding.path());
+            final String pathInfo = Strings.CS.removeStart(requestURI, binding.path());
             request.setAttribute(PathInfoEvaluator.REQUEST_ATTRIBUTE_PATH_INFO, pathInfo);
             Apm.setTransactionName("servlet", ComponentSupport.getComponent(servlet).getIdentifier());
             WebResponse webResponse = servlet.service(request, response);
@@ -703,7 +704,7 @@ public class CurrentFilter extends AbstractFilter {
     }
 
     private boolean bypassMaintenance(HttpServletRequest request) {
-        return StringUtils.startsWith(request.getHeader(HttpUtils.HTTP_HEADER_AUTHORIZATION), HttpUtils.AUTHORIZATION_BEARER)
+        return Strings.CS.startsWith(request.getHeader(HttpUtils.HTTP_HEADER_AUTHORIZATION), HttpUtils.AUTHORIZATION_BEARER)
           || "true".equals(HttpUtils.getCookieValue(request, HTTP_COOKIE_MAINTENANCE_BYPASS))
           || Boolean.TRUE.equals(request.getAttribute(CdnUtils.CdnRequestAttribute()));
     }

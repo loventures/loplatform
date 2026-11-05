@@ -19,7 +19,7 @@ import axios from 'axios';
 import moment from 'moment/moment';
 import Polyglot from 'node-polyglot';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import ReactTable, { clearSavedTableState } from '../components/reactTable/ReactTable';
 import { LoPlatform } from '../types/loPlatform';

@@ -18,10 +18,12 @@
 package com.learningobjects.cpxp.util;
 
 import com.google.common.base.Function;
+import org.apache.commons.lang3.Strings;
 
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.security.SecureRandom;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -143,7 +145,7 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
         BigDecimal dividend = BigDecimal.valueOf(a);
         BigDecimal divisor = BigDecimal.valueOf(b);
         BigDecimal result = dividend.divide(divisor, scale,
-                BigDecimal.ROUND_HALF_UP);
+                RoundingMode.HALF_UP);
         return result.doubleValue();
     }
 
@@ -446,7 +448,7 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils {
                 unit = Unit.bytes;
             } else {
                 for (Unit unitEnum : Unit.values()) {
-                    if (unitName.equalsIgnoreCase(unitEnum.name()) || StringUtils.startsWithIgnoreCase(unitEnum.name(), unitName)) {
+                    if (unitName.equalsIgnoreCase(unitEnum.name()) || Strings.CI.startsWith(unitEnum.name(), unitName)) {
                         unit = unitEnum;
                         break;
                     }

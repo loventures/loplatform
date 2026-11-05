@@ -24,10 +24,10 @@ import com.learningobjects.cpxp.service.ServiceContext;
 import com.learningobjects.cpxp.service.data.Data;
 import com.learningobjects.cpxp.service.data.DataFormat;
 import com.learningobjects.cpxp.service.data.DataUtil;
-import com.learningobjects.cpxp.util.ObjectUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Handler for a facade method that gets a data-mapped field.
@@ -54,7 +54,7 @@ class DataSetHandler extends FacadeSetHandler implements UserDefinedMethodHandle
         for (int i = 0; i < datas.length; i++) {
             // Yucko this should be done with sets.. As it stands, its 'better' behaviour is nondeterministic.
             if (i < newValues.length) {
-                if (!ObjectUtils.equals(newValues[i], (newValues[i] == null) ? null : datas[i].getValue(BaseOntology.getOntology()))) {
+                if (!Objects.equals(newValues[i], (newValues[i] == null) ? null : datas[i].getValue(BaseOntology.getOntology()))) {
                     DataUtil.setValue(datas[i], newValues[i], BaseOntology.getOntology(), ServiceContext.getContext().getItemService());
                     modifiedSome = true;
                 }

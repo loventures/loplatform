@@ -18,7 +18,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { VscHistory } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import VisibilitySensor from '../VisibilitySensor';
 import { Spinner } from 'reactstrap';
 

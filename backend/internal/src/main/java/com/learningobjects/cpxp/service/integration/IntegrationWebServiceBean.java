@@ -27,6 +27,7 @@ import com.learningobjects.cpxp.service.query.QueryBuilder;
 import com.learningobjects.cpxp.service.relationship.RelationshipWebService;
 import com.learningobjects.cpxp.service.relationship.RoleFacade;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -62,15 +63,15 @@ public class IntegrationWebServiceBean extends BasicServiceBean implements Integ
             externalRole.setName(role.roleName);
 
             RoleFacade mappedRole = null;
-            if (StringUtils.equals("Domain", role.roleType)) {
+            if (Strings.CS.equals("Domain", role.roleType)) {
                 mappedRole = findMappedRole(__domainRoleMapping, role.roleId);
-            } else if (StringUtils.equals("Course", role.roleType)) {
+            } else if (Strings.CS.equals("Course", role.roleType)) {
                 mappedRole = findMappedRole(__localRoleMapping, StringUtils.lowerCase(role.roleId));
             }
 
             if (mappedRole != null) {
                 RoleMappingFacade roleMapping = system.addRoleMapping();
-                roleMapping.setType(StringUtils.equals(role.roleType, "Domain") ? RoleMappingType.Domain : RoleMappingType.Group);
+                roleMapping.setType(Strings.CS.equals(role.roleType, "Domain") ? RoleMappingType.Domain : RoleMappingType.Group);
                 roleMapping.setRoleId(role.roleId);
                 roleMapping.setMappedRole(mappedRole.getId());
             }

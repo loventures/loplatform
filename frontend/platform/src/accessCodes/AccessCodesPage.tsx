@@ -17,7 +17,7 @@
 
 import React from 'react';
 import { IoKeyOutline } from 'react-icons/io5';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router';
 
 import { AdminPage } from '../adminPortal/types';
 import Crumb from '../components/crumbRoute';

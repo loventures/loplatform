@@ -24,6 +24,7 @@ import com.learningobjects.cpxp.service.data.DataFormat;
 import com.learningobjects.cpxp.service.data.DataTypes;
 import com.learningobjects.cpxp.service.item.Item;
 import com.learningobjects.cpxp.util.StringUtils;
+import org.apache.commons.lang3.Strings;
 import jakarta.persistence.Query;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -529,7 +530,7 @@ class QueryDescription {
             return s;
         }
         // Prevents duplicate alias errors
-        return (!StringUtils.contains(field, s)) ? field + ", " + s : field;
+        return (!Strings.CS.contains(field, s)) ? field + ", " + s : field;
     }
 
     boolean isItemProjection() {

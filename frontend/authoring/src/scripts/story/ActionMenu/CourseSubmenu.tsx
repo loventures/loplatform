@@ -16,7 +16,7 @@
  */
 
 import React, { Dispatch, SetStateAction, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { DropdownItem } from 'reactstrap';
 
 import { useBranchId, useRouterPathVariable } from '../../hooks';

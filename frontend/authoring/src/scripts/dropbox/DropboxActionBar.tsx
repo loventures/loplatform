@@ -17,7 +17,7 @@
 
 import React, { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { FormGroup, Input, Label } from 'reactstrap';
 
 import {

@@ -41,7 +41,6 @@ import com.learningobjects.cpxp.service.query.Comparison;
 import com.learningobjects.cpxp.service.query.QueryService;
 import com.learningobjects.cpxp.util.*;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.CharEncoding;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -51,6 +50,7 @@ import javax.inject.Provider;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -263,7 +263,7 @@ public class ScriptServiceBean extends BasicServiceBean implements ScriptService
             }
 
             InputStream in = zip.getInputStream(carJsonEntry);
-            String json = IOUtils.toString(in, CharEncoding.UTF_8);
+            String json = IOUtils.toString(in, StandardCharsets.UTF_8.name());
             in.close();
 
             JsonNode node = ComponentUtils.getObjectMapper().readTree(json);
